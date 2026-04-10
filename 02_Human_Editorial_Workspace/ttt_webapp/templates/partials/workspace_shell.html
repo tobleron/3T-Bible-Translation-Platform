@@ -102,6 +102,38 @@
     {% endif %}
   </section>
 
+  {% if activity_items or jobs or flash_messages %}
+  <section class="workspace-card activity-ribbon">
+    <div class="activity-ribbon-group">
+      <span class="activity-ribbon-label">Activity</span>
+      {% for item in activity_items %}
+      <span class="activity-pill {% if item.accent == 'red' %}is-error{% endif %}">
+        <strong>{{ item.title }}</strong>
+        <span>{{ item.summary }}</span>
+      </span>
+      {% else %}
+      <span class="activity-pill is-muted">No recent notes yet.</span>
+      {% endfor %}
+    </div>
+    {% if jobs %}
+    <div class="activity-ribbon-group">
+      <span class="activity-ribbon-label">Jobs</span>
+      {% for job in jobs %}
+      <span class="activity-pill"><strong>{{ job.label }}</strong><span>{{ job.status }} · {{ job.elapsed }}</span></span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if flash_messages %}
+    {% for message in flash_messages %}
+    <span class="activity-pill flash-{{ message.accent }}">
+      <strong>{{ message.title }}</strong>
+      <span>{{ message.body|truncate(120) }}</span>
+    </span>
+    {% endfor %}
+    {% endif %}
+  </section>
+  {% endif %}
+
   {% if flash_messages %}
   <div class="flash-stack compact-flash-stack">
     {% for message in flash_messages %}
@@ -232,24 +264,6 @@
             </label>
           </div>
         </div>
-
-        {% if activity_items or jobs %}
-        <div class="activity-bar">
-          {% for item in activity_items %}
-          <span class="activity-pill {% if item.accent == 'red' %}is-error{% endif %}">
-            <strong>{{ item.title }}</strong>
-            <span>{{ item.summary }}</span>
-          </span>
-          {% else %}
-          <span class="activity-pill is-muted">No recent notes.</span>
-          {% endfor %}
-          {% if jobs %}
-          {% for job in jobs %}
-          <span class="activity-pill"><strong>{{ job.label }}</strong><span>{{ job.status }} · {{ job.elapsed }}</span></span>
-          {% endfor %}
-          {% endif %}
-        </div>
-        {% endif %}
 
         <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#workspace-shell" hx-swap="outerHTML">
           <div class="source-chip-grid">
