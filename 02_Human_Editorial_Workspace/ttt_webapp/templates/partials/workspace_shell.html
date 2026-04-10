@@ -374,41 +374,72 @@ document.addEventListener('keydown', function(e) {
 
 // Gloss tooltip + copy
 var glossTipEl = null;
+var glossTipTimer = null;
+var glossTipHideTimer = null;
+
 function initGlossTooltips() {
   document.querySelectorAll('.gloss-word').forEach(function(el) {
-    el.removeEventListener('mouseenter', showGlossTooltip);
-    el.removeEventListener('mouseleave', hideGlossTooltip);
-    el.addEventListener('mouseenter', showGlossTooltip);
-    el.addEventListener('mouseleave', hideGlossTooltip);
+    el.removeEventListener('mouseenter', onGlossEnter);
+    el.removeEventListener('mouseleave', onGlossLeave);
+    el.addEventListener('mouseenter', onGlossEnter);
+    el.addEventListener('mouseleave', onGlossLeave);
   });
 }
-function showGlossTooltip(e) {
+
+function onGlossEnter(e) {
+  clearTimeout(glossTipHideTimer);
+  if (glossTipTimer) return; // already showing
   var el = e.target.closest('.gloss-word');
   if (!el) return;
+  glossTipTimer = setTimeout(function() {
+    glossTipTimer = null;
+    showGlossTooltip(el, e);
+  }, 350); // 350ms delay before appearing
+}
+
+function onGlossLeave() {
+  clearTimeout(glossTipTimer);
+  glossTipTimer = null;
+  // Grace period before hiding so user can move mouse to tooltip
+  glossTipHideTimer = setTimeout(hideGlossTooltip, 600);
+}
+
+function showGlossTooltip(el, e) {
   hideGlossTooltip();
   var surface = el.dataset.surface || '';
   var gloss = el.dataset.gloss || '';
-  var kind = el.closest('.chunk-block-body')?.classList.contains('hebrew') ? 'hebrew' : '';
+  var isHeb = el.closest('.chunk-block-body')?.classList.contains('hebrew');
   glossTipEl = document.createElement('div');
   glossTipEl.className = 'gloss-tooltip';
   glossTipEl.innerHTML =
-    '<div class="gloss-tooltip-surface ' + kind + '">' + surface + '</div>' +
-    '<div class="gloss-tooltip-gloss">' + gloss + '</div>' +
-    '<button class="gloss-tooltip-copy" onclick="copyGlossWord(this, \'' + surface.replace(/'/g, "\\'") + '\')">Copy</button>';
+    '<div class="gloss-tooltip-surface' + (isHeb ? ' hebrew' : '') + '">' + surface + '</div>' +
+    '<div class="gloss-tooltip-meta">' +
+      '<span class="gloss-tooltip-gloss">' + gloss + '</span>' +
+      '<button class="gloss-tooltip-copy" onclick="copyGlossWord(this, \'' + surface.replace(/'/g, "\\'") + '\')">Copy</button>' +
+    '</div>';
+  // Keep alive while hovering tooltip itself
+  glossTipEl.addEventListener('mouseenter', function() { clearTimeout(glossTipHideTimer); });
+  glossTipEl.addEventListener('mouseleave', function() {
+    glossTipHideTimer = setTimeout(hideGlossTooltip, 300);
+  });
   document.body.appendChild(glossTipEl);
-  positionGlossTooltip(e);
+  positionGlossTooltip(el);
 }
+
 function hideGlossTooltip() {
+  clearTimeout(glossTipHideTimer);
   if (glossTipEl) { glossTipEl.remove(); glossTipEl = null; }
 }
-function positionGlossTooltip(e) {
+
+function positionGlossTooltip(el) {
   if (!glossTipEl) return;
-  var rect = glossTipEl.getBoundingClientRect();
-  var x = e.clientX + 10;
-  var y = e.clientY - 10;
-  if (x + rect.width > window.innerWidth) x = e.clientX - rect.width - 10;
-  if (y + rect.height > window.innerHeight) y = window.innerHeight - rect.height - 10;
-  if (y < 0) y = 10;
+  var rect = el.getBoundingClientRect();
+  var tipRect = glossTipEl.getBoundingClientRect();
+  var x = rect.left;
+  var y = rect.bottom + 6;
+  if (x + tipRect.width > window.innerWidth - 10) x = window.innerWidth - tipRect.width - 10;
+  if (y + tipRect.height > window.innerHeight - 10) y = rect.top - tipRect.height - 6;
+  if (y < 10) y = 10;
   glossTipEl.style.left = x + 'px';
   glossTipEl.style.top = y + 'px';
 }
