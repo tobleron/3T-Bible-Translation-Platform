@@ -286,8 +286,13 @@
               {% endif %}
             </div>
             <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
-            {% if block.gloss %}
-            <div class="chunk-block-gloss">{{ block.gloss }}</div>
+            {% if block.gloss_tokens %}
+            <div class="chunk-block-gloss">
+              {% for gt in block.gloss_tokens %}
+              <span class="gloss-word" data-surface="{{ gt.surface }}" data-gloss="{{ gt.gloss }}">{{ gt.gloss }}</span>
+              {% if not loop.last %}<span class="gloss-sep"> | </span>{% endif %}
+              {% endfor %}
+            </div>
             {% endif %}
           </div>
           {% endfor %}
@@ -319,6 +324,7 @@ document.addEventListener('htmx:afterSettle', function() {
     var sel = document.getElementById('study-font-size');
     if (sel) sel.value = fontSize;
   }
+  initGlossTooltips();
 });
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.verse-editor-textarea').forEach(function(el) { autoResize(el); });
@@ -326,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
   applyStudyFontSize(fontSize);
   var sel = document.getElementById('study-font-size');
   if (sel) sel.value = fontSize;
+  initGlossTooltips();
 });
 function autoResize(el) {
   el.style.height = 'auto';
@@ -362,6 +369,55 @@ function hideJsonPreview(e) {
   document.getElementById('jsonModal').style.display = 'none';
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') hideJsonPreview();
+  if (e.key === 'Escape') { hideJsonPreview(); hideGlossTooltip(); }
 });
+
+// Gloss tooltip + copy
+var glossTipEl = null;
+function initGlossTooltips() {
+  document.querySelectorAll('.gloss-word').forEach(function(el) {
+    el.removeEventListener('mouseenter', showGlossTooltip);
+    el.removeEventListener('mouseleave', hideGlossTooltip);
+    el.addEventListener('mouseenter', showGlossTooltip);
+    el.addEventListener('mouseleave', hideGlossTooltip);
+  });
+}
+function showGlossTooltip(e) {
+  var el = e.target.closest('.gloss-word');
+  if (!el) return;
+  hideGlossTooltip();
+  var surface = el.dataset.surface || '';
+  var gloss = el.dataset.gloss || '';
+  var kind = el.closest('.chunk-block-body')?.classList.contains('hebrew') ? 'hebrew' : '';
+  glossTipEl = document.createElement('div');
+  glossTipEl.className = 'gloss-tooltip';
+  glossTipEl.innerHTML =
+    '<div class="gloss-tooltip-surface ' + kind + '">' + surface + '</div>' +
+    '<div class="gloss-tooltip-gloss">' + gloss + '</div>' +
+    '<button class="gloss-tooltip-copy" onclick="copyGlossWord(this, \'' + surface.replace(/'/g, "\\'") + '\')">Copy</button>';
+  document.body.appendChild(glossTipEl);
+  positionGlossTooltip(e);
+}
+function hideGlossTooltip() {
+  if (glossTipEl) { glossTipEl.remove(); glossTipEl = null; }
+}
+function positionGlossTooltip(e) {
+  if (!glossTipEl) return;
+  var rect = glossTipEl.getBoundingClientRect();
+  var x = e.clientX + 10;
+  var y = e.clientY - 10;
+  if (x + rect.width > window.innerWidth) x = e.clientX - rect.width - 10;
+  if (y + rect.height > window.innerHeight) y = window.innerHeight - rect.height - 10;
+  if (y < 0) y = 10;
+  glossTipEl.style.left = x + 'px';
+  glossTipEl.style.top = y + 'px';
+}
+function copyGlossWord(btn, text) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
+  }).catch(function() {
+    btn.textContent = 'Failed';
+  });
+}
 </script>

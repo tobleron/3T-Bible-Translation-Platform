@@ -419,6 +419,64 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   padding-top: 0.35rem;
   border-top: 1px solid rgba(255,255,255,0.04);
 }
+.gloss-word {
+  cursor: pointer;
+  position: relative;
+  border-bottom: 1px dashed rgba(226,192,110,0.4);
+  padding-bottom: 1px;
+}
+.gloss-word:hover {
+  color: #f0d080;
+}
+.gloss-sep {
+  color: rgba(226,192,110,0.35);
+  user-select: none;
+}
+
+/* Gloss tooltip */
+.gloss-tooltip {
+  position: fixed;
+  z-index: 2000;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 140px;
+  max-width: 300px;
+  pointer-events: auto;
+}
+.gloss-tooltip-surface {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.gloss-tooltip-surface.hebrew {
+  font-family: var(--hebrew);
+  direction: rtl;
+  text-align: right;
+}
+.gloss-tooltip-gloss {
+  font-size: 0.82rem;
+  color: #e2c06e;
+}
+.gloss-tooltip-copy {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  cursor: pointer;
+  align-self: flex-end;
+}
+.gloss-tooltip-copy:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
 
 /* JSON preview modal */
 .json-modal-overlay {

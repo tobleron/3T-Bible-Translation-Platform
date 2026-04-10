@@ -23,17 +23,7 @@
   "pending_verse_updates": [],
   "pending_title_updates": [],
   "pending_justification_updates": [],
-  "pending_repairs": [
-    {
-      "kind": "justification",
-      "book": "Exodus",
-      "chapter": 2,
-      "path": "/Users/r2/Desktop/TTT_Bible/03_EPUB_Production/_HOLY_BIBLE_JUSTIFICATIONS/_1_Old_Testament/_2_Exodus/1_OT_Exodus_002_justifications.json",
-      "notes": [
-        "Created a new justification file scaffold."
-      ]
-    }
-  ],
+  "pending_repairs": [],
   "justify_draft": null,
   "notifications": [],
   "undo_stack": [],
