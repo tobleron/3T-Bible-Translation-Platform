@@ -316,7 +316,35 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   color: var(--bg);
 }
 
-/* JSON preview modal */
+/* Commit + action buttons */
+.commit-button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.65rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  background: var(--success);
+  color: #171310;
+  font-size: 0.92rem;
+}
+.commit-button:hover {
+  filter: brightness(1.1);
+}
+
+.clear-msg-btn {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.clear-msg-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
 .json-preview-btn {
   width: 100%;
   margin-top: 0.5rem;

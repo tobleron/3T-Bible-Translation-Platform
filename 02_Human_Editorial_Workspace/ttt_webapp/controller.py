@@ -623,7 +623,8 @@ class BrowserWorkbench(WorkbenchApp):
                 if surfaces:
                     has_hebrew = True
                     heb_surface_parts.append(" ".join(surfaces))
-                    heb_english_parts.append(" / ".join(english_glosses) if english_glosses else "")
+                    # Join glosses with spaces (sequential, NOT alternatives)
+                    heb_english_parts.append(" ".join(english_glosses) if english_glosses else "")
                 else:
                     fallback = self._fallback_verse_text(verse)
                     if fallback:
@@ -658,7 +659,7 @@ class BrowserWorkbench(WorkbenchApp):
                 if surfaces:
                     has_lxx = True
                     lxx_surface_parts.append(" ".join(surfaces))
-                    lxx_english_parts.append(" / ".join(english_glosses) if english_glosses else "")
+                    lxx_english_parts.append(" ".join(english_glosses) if english_glosses else "")
                 else:
                     lxx_surface_parts.append("")
                     lxx_english_parts.append("")
@@ -698,7 +699,7 @@ class BrowserWorkbench(WorkbenchApp):
                     if greek_lexicon.get(t.get("strong_id", ""), "")
                 ]
                 greek_surface_parts.append(" ".join(surfaces) if surfaces else "[no data]")
-                greek_english_parts.append(" / ".join(english_glosses) if english_glosses else "")
+                greek_english_parts.append(" ".join(english_glosses) if english_glosses else "")
 
             blocks.append({
                 "label": "SBLGNT Greek",
