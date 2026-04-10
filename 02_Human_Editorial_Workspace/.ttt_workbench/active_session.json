@@ -1,7 +1,7 @@
 {
   "session_id": "358e4d40",
-  "mode": "CHAT",
-  "screen": "CHAT",
+  "mode": "COMMAND",
+  "screen": "STUDY",
   "book": "Exodus",
   "chapter": 1,
   "wizard_testament": "old",

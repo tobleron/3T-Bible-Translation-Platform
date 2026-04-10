@@ -241,7 +241,7 @@
 
     <aside class="right-workspace">
       {# Study panel #}
-      <article class="workspace-card context-panel">
+      <article class="workspace-card context-panel" id="context-panel">
         <div class="panel-head">
           <div>
             <p class="eyebrow">Study</p>
@@ -260,7 +260,7 @@
           </div>
         </div>
 
-        <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#workspace-shell" hx-swap="outerHTML">
+        <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#context-panel" hx-swap="outerHTML">
           <div class="source-chip-grid">
             {% for option in comparison_source_options %}
             <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
