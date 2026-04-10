@@ -7,14 +7,9 @@
   </div>
 
   <section class="study-toolbar" aria-label="Study controls">
-    <div class="study-toolbar-head">
-      <div class="study-toolbar-copy">
-        <span class="context-meta">Display controls</span>
-        <p>Tune the reading size and choose which comparison sources appear below.</p>
-      </div>
+    <div class="study-toolbar-row">
       <label class="font-size-control compact-field">
-        <span class="font-size-control-label">Font</span>
-        <select id="study-font-size">
+        <select id="study-font-size" aria-label="Study font size">
           <option value="12">12px</option>
           <option value="14">14px</option>
           <option value="16" selected>16px</option>
@@ -23,20 +18,7 @@
       </label>
     </div>
 
-    {% set selected_count = namespace(value=0) %}
-    {% for option in comparison_source_options %}
-      {% if option.selected %}
-        {% set selected_count.value = selected_count.value + 1 %}
-      {% endif %}
-    {% endfor %}
     <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#context-panel" hx-swap="outerHTML">
-      <div class="study-filter-head">
-        <div class="study-filter-copy">
-          <span class="context-meta">Selected sources</span>
-          <p>Comparison translations displayed beneath the lexical notes.</p>
-        </div>
-        <span class="study-filter-count">{{ selected_count.value }} active</span>
-      </div>
       <div class="source-chip-grid" role="group" aria-label="Comparison sources">
         {% for option in comparison_source_options %}
         <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
