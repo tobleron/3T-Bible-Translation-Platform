@@ -23,8 +23,21 @@
       </label>
     </div>
 
+    {% set selected_count = namespace(value=0) %}
+    {% for option in comparison_source_options %}
+      {% if option.selected %}
+        {% set selected_count.value = selected_count.value + 1 %}
+      {% endif %}
+    {% endfor %}
     <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#context-panel" hx-swap="outerHTML">
-      <div class="source-chip-grid">
+      <div class="study-filter-head">
+        <div class="study-filter-copy">
+          <span class="context-meta">Selected sources</span>
+          <p>Comparison translations displayed beneath the lexical notes.</p>
+        </div>
+        <span class="study-filter-count">{{ selected_count.value }} active</span>
+      </div>
+      <div class="source-chip-grid" role="group" aria-label="Comparison sources">
         {% for option in comparison_source_options %}
         <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
           <input type="checkbox" name="selected_sources" value="{{ option.alias }}" {% if option.selected %}checked{% endif %} {% if option.disabled %}disabled{% endif %}>
