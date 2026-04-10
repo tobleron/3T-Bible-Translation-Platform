@@ -348,12 +348,18 @@ class BrowserWorkbench(WorkbenchApp):
         return deduped
 
     def _dedup_activity_items(self) -> list[dict[str, str]]:
-        """Return last 3 history entries with duplicates collapsed."""
+        """Return last 3 history entries with duplicates and system noise collapsed."""
         items = list(self.history_entries[-8:])
+        _SYSTEM_TITLES = {"notice", "chunk opened", "notice ────────"}
         deduped: list[dict[str, str]] = []
         for item in items:
+            title = (item.get("title") or "").strip().lower()
             summary = (item.get("summary") or "").strip()
-            if not summary or summary.lower() in {"notice", "notice ────────"}:
+            # Skip pure system noise
+            if not summary or title in _SYSTEM_TITLES:
+                continue
+            # Skip entries that are just file path announcements
+            if "ready" in summary.lower() and ".json" in summary:
                 continue
             if deduped:
                 prev = deduped[-1]
@@ -1407,13 +1413,12 @@ User message:
             return
 
         self.load_workspace(testament, book, chapter, chunk_key)
-        if announce:
-            self.emit_chunk_opened(
-                book,
-                chapter,
-                self.state.chunk_start or 1,
-                self.state.chunk_end or 1,
-            )
+        # Browser UI shows chunk in banner — skip terminal-style announcement
+        return
+
+    def emit_chunk_opened(self, *args, **kwargs) -> None:
+        """Suppress terminal-style chunk-opened announcements in the browser."""
+        pass
 
     def merge_chapter_chunks(
         self,

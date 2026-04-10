@@ -1,19 +1,10 @@
 {
   "old|exodus|1|1-7": {
-    "messages": [
-      {
-        "role": "user",
-        "content": "Evaluate the draft."
-      },
-      {
-        "role": "assistant",
-        "content": "Verse 1 is accurate and clear. The LXX adds 'whole household' (\u03c0\u03b1\u03bd\u03bf\u03b9\u03ba\u03af\u1fb3) which reinforces 'each with his family'. No changes needed for this verse."
-      }
-    ],
+    "messages": [],
     "context_loaded": false,
     "context_snapshot": "",
     "focus_start": 1,
-    "focus_end": 1
+    "focus_end": 7
   },
   "old|genesis|1|1-5": {
     "messages": [],
@@ -21,5 +12,19 @@
     "context_snapshot": "",
     "focus_start": 1,
     "focus_end": 5
+  },
+  "old|exodus|2|1-10": {
+    "messages": [],
+    "context_loaded": false,
+    "context_snapshot": "",
+    "focus_start": 1,
+    "focus_end": 10
+  },
+  "old|exodus|2|11-15": {
+    "messages": [],
+    "context_loaded": false,
+    "context_snapshot": "",
+    "focus_start": 11,
+    "focus_end": 15
   }
 }

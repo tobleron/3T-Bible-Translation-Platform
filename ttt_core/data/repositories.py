@@ -793,6 +793,11 @@ class LexicalRepository:
             "greek_nt": "greek_bible",
             "greek_ot_lxx": "greek_bible",
         }
+        # Grammatical/artifact glosses that should be filtered out
+        _SKIP_GLOSSES = frozenset({
+            "[obj.]", "[obj]", "[dir.]", "[dir]", "[?]", "[-]", "[.]", "[ ]",
+            "[¶]", "[emph.?]", "[emph]", "[the]", "[to]",
+        })
         lex_corpus = lexicon_map.get(corpus, corpus.replace("_ot", "_bible").replace("_nt", "_bible"))
         if not strong_ids:
             return {}
@@ -817,7 +822,8 @@ class LexicalRepository:
                         # Take first sense (before first semicolon or slash)
                         clean = clean.split(';')[0].split('/')[0].strip()
                         clean = _re.sub(r'\s+', ' ', clean)
-                        if clean:
+                        # Filter out grammatical artifacts (no real English meaning)
+                        if clean and clean.lower() not in _SKIP_GLOSSES:
                             result[sid] = clean
         except sqlite3.Error:
             pass
