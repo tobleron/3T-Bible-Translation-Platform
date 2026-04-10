@@ -285,7 +285,9 @@
               <span class="context-meta">{{ block.caption }}</span>
               {% endif %}
             </div>
+            {% if block.text %}
             <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
+            {% endif %}
             {% if block.gloss_tokens %}
             <div class="chunk-block-gloss">
               {% for gt in block.gloss_tokens %}

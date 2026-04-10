@@ -748,7 +748,6 @@ class BrowserWorkbench(WorkbenchApp):
                 {
                     "label": f"{alias}",
                     "caption": "",
-                    "text": self._chunk_join(verse_texts),
                     "verse_texts": verse_texts,
                     "kind": "translation",
                 }

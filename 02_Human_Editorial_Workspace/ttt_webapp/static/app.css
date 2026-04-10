@@ -521,7 +521,7 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
 }
 .translation-verse-text {
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   color: var(--muted);
 }
