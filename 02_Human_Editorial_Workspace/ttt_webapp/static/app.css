@@ -41,6 +41,13 @@ button, input, textarea { font: inherit; }
 .top-actions { display: flex; gap: 1rem; }
 .top-link { color: var(--muted); }
 .top-link:hover { color: var(--text); }
+.gloss-copied-indicator {
+  display: none;
+  color: var(--success);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
 
 .page-shell { padding: 1.2rem; }
 .home-shell, .settings-shell, .epub-shell { max-width: 1500px; margin: 0 auto; }

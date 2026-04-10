@@ -325,6 +325,12 @@ document.addEventListener('htmx:afterSettle', function() {
     if (sel) sel.value = fontSize;
   }
   initGlossTooltips();
+  // Restore last copied indicator after HTMX swap
+  var lastCopied = sessionStorage.getItem('lastGlossCopied');
+  if (lastCopied) {
+    showGlossCopiedIndicator(lastCopied);
+    sessionStorage.removeItem('lastGlossCopied');
+  }
 });
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.verse-editor-textarea').forEach(function(el) { autoResize(el); });
@@ -333,6 +339,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var sel = document.getElementById('study-font-size');
   if (sel) sel.value = fontSize;
   initGlossTooltips();
+  // Restore last copied indicator from session storage
+  var lastCopied = sessionStorage.getItem('lastGlossCopied');
+  if (lastCopied) {
+    showGlossCopiedIndicator(lastCopied);
+    sessionStorage.removeItem('lastGlossCopied');
+  }
 });
 function autoResize(el) {
   el.style.height = 'auto';
@@ -445,10 +457,26 @@ function positionGlossTooltip(el) {
 }
 function copyGlossWord(btn, text) {
   navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = 'Copied';
+    btn.textContent = '✓';
+    sessionStorage.setItem('lastGlossCopied', text);
+    showGlossCopiedIndicator(text);
     setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
   }).catch(function() {
     btn.textContent = 'Failed';
   });
+}
+function showGlossCopiedIndicator(text) {
+  var indicator = document.getElementById('gloss-copied-indicator');
+  if (!indicator) {
+    indicator = document.createElement('span');
+    indicator.id = 'gloss-copied-indicator';
+    indicator.className = 'gloss-copied-indicator';
+    var actions = document.querySelector('.top-actions');
+    if (actions) actions.prepend(indicator);
+  }
+  if (!indicator) return;
+  indicator.style.display = 'inline';
+  indicator.textContent = 'Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : '');
+  setTimeout(function() { indicator.style.display = 'none'; }, 3000);
 }
 </script>
