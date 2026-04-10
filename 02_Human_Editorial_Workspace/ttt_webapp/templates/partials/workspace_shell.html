@@ -416,11 +416,15 @@ function copyGlossWord(btn, text) {
   });
 }
 function showGlossCopiedIndicator(text) {
+  showWorkspaceIndicator('Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : ''));
+}
+function showWorkspaceIndicator(message) {
   var indicator = document.getElementById('gloss-copied-indicator');
   if (!indicator) return;
   indicator.style.display = 'inline';
-  indicator.textContent = 'Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : '');
-  setTimeout(function() { indicator.style.display = 'none'; }, 3000);
+  indicator.textContent = message;
+  clearTimeout(showWorkspaceIndicator._timer);
+  showWorkspaceIndicator._timer = setTimeout(function() { indicator.style.display = 'none'; }, 3000);
 }
 function copyTranslationVerse(btn, text) {
   navigator.clipboard.writeText(text).then(function() {
@@ -434,5 +438,42 @@ function copyTranslationVerse(btn, text) {
   }).catch(function() {
     btn.textContent = 'Failed';
   });
+}
+function applyStudyTranslationToDraft(btn) {
+  var alias = btn.dataset.translationAlias || '';
+  var block = btn.closest('.translation-block');
+  var form = document.getElementById('draft-form');
+  if (!alias || !block || !form) return;
+  if (!window.confirm('Overwrite the current draft verses with ' + alias + ' for this chunk?')) return;
+  var rows = block.querySelectorAll('.translation-verse-row[data-verse]');
+  if (!rows.length) return;
+
+  var scrollLeft = window.scrollX || window.pageXOffset;
+  var scrollTop = window.scrollY || window.pageYOffset;
+  var applied = 0;
+
+  rows.forEach(function(row) {
+    var verse = row.dataset.verse || '';
+    if (!verse) return;
+    var target = form.querySelector('textarea[name="verse_' + verse + '"]');
+    if (!target) return;
+    var textEl = row.querySelector('.translation-verse-text');
+    var nextText = textEl ? textEl.textContent : '';
+    if (nextText === '[no text]') nextText = '';
+    target.value = nextText;
+    target.dispatchEvent(new Event('input', { bubbles: true }));
+    applied += 1;
+  });
+
+  window.scrollTo(scrollLeft, scrollTop);
+  if (!applied) return;
+
+  btn.textContent = 'Applied';
+  btn.classList.add('applied');
+  showWorkspaceIndicator('Loaded ' + alias + ' into ' + applied + ' draft verse' + (applied === 1 ? '' : 's') + '.');
+  setTimeout(function() {
+    btn.textContent = 'Use In Draft';
+    btn.classList.remove('applied');
+  }, 1600);
 }
 </script>

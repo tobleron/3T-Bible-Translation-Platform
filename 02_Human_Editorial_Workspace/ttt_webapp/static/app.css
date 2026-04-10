@@ -260,7 +260,14 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
+  align-items: center;
+}
+.chunk-block-heading {
+  display: flex;
+  gap: 0.45rem;
   align-items: baseline;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 .chunk-block-body {
   font-size: 14px;
@@ -503,6 +510,26 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   display: grid;
   gap: 0.18rem;
   margin-top: 0.18rem;
+}
+.translation-apply-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0;
+  font-size: 0.64rem;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 120ms ease, opacity 120ms ease;
+}
+.translation-apply-btn:hover,
+.translation-apply-btn:focus-visible {
+  color: var(--text);
+}
+.translation-apply-btn.applied {
+  color: var(--success);
 }
 .translation-verse-row {
   display: grid;

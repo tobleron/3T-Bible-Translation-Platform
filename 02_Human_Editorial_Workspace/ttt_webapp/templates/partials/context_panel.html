@@ -30,11 +30,18 @@
   <section class="study-article" aria-label="Study article">
     <div class="chunk-block-sheet" id="study-blocks" data-font-size="16">
       {% for block in study_blocks %}
-      <div class="chunk-block">
+      <div class="chunk-block{% if block.kind == 'translation' %} translation-block{% endif %}"{% if block.kind == 'translation' %} data-translation-alias="{{ block.label }}"{% endif %}>
         <div class="chunk-block-head">
-          <span class="verse-tag">{{ block.label }}</span>
-          {% if block.caption %}
-          <span class="context-meta">{{ block.caption }}</span>
+          <div class="chunk-block-heading">
+            <span class="verse-tag">{{ block.label }}</span>
+            {% if block.caption %}
+            <span class="context-meta">{{ block.caption }}</span>
+            {% endif %}
+          </div>
+          {% if block.kind == 'translation' %}
+          <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label }}" onclick="applyStudyTranslationToDraft(this)" title="Overwrite the draft verses with {{ block.label }}">
+            Use In Draft
+          </button>
           {% endif %}
         </div>
         {% if block.text %}
@@ -52,7 +59,7 @@
         <div class="translation-verses">
           {% for verse_text in block.verse_texts %}
           {% set v = loop.index0 + (state.chunk_start or 1) %}
-          <div class="translation-verse-row">
+          <div class="translation-verse-row" data-verse="{{ v }}">
             <span class="translation-verse-num">{{ v }}</span>
             <span class="translation-verse-text">{{ verse_text or "[no text]" }}</span>
             <button class="translation-copy-btn" type="button" onclick="copyTranslationVerse(this, '{{ verse_text.replace("'", "\\'")|e }}')" title="Copy verse {{ v }}">Copy</button>
