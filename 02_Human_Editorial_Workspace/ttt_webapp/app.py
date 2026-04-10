@@ -243,7 +243,12 @@ async def study_sources(
         wb.set_selected_sources(selected)
         wb.activate_tab("study")
         wb.save_state()
-        return render_workspace(request, wb, active_tab="study", partial=True)
+        payload = wb.workspace_payload(active_tab="study")
+        return templates.TemplateResponse(
+            request,
+            "partials/context_panel.html",
+            {"request": request, **payload},
+        )
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="study")
 
