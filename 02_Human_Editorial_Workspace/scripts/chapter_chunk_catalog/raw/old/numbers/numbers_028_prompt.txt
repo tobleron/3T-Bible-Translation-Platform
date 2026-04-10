@@ -1,0 +1,80 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Numbers 28:1-31
+
+Chapter text:
+1. Then Yahweh spoke to Moses, saying,
+2. “Command the sons of Israel and say to them, ‘You shall be careful to bring near My offering, My food for My offerings by fire, of a soothing aroma to Me, at their appointed time.’
+3. And you shall say to them, ‘This is the offering by fire which you shall bring near to Yahweh: two male lambs one year old without blemish as a continual burnt offering every day.
+4. You shall offer the one lamb in the morning, and the other lamb you shall offer at twilight,
+5. also a tenth of an ephah of fine flour for a grain offering, mixed with a fourth of a hin of beaten oil.
+6. It is a continual burnt offering which was ordained in Mount Sinai as a soothing aroma, an offering by fire to Yahweh.
+7. Then the drink offering with it shall be a fourth of a hin for each lamb, in the holy place you shall pour out a drink offering of strong drink to Yahweh.
+8. And the other lamb you shall offer at twilight; as the grain offering of the morning and as its drink offering, you shall offer it, an offering by fire, a soothing aroma to Yahweh.
+9. ‘Then on the sabbath day two male lambs one year old without blemish, and two-tenths of an ephah of fine flour mixed with oil as a grain offering, and its drink offering:
+10. This is the burnt offering of every sabbath in addition to the continual burnt offering and its drink offering.
+11. ‘Then at the beginning of each of your months you shall bring near a burnt offering to Yahweh: two bulls from the herd and one ram, seven male lambs one year old without blemish;
+12. and three-tenths of an ephah of fine flour mixed with oil for a grain offering, for each bull; and two-tenths of fine flour mixed with oil for a grain offering, for the one ram;
+13. and a tenth of an ephah of fine flour mixed with oil for a grain offering for each lamb, for a burnt offering of a soothing aroma, an offering by fire to Yahweh.
+14. And their drink offerings shall be half a hin of wine for a bull and a third of a hin for the ram and a fourth of a hin for a lamb; this is the burnt offering of each month throughout the months of the year.
+15. And one male goat for a sin offering to Yahweh; it shall be offered with its drink offering in addition to the continual burnt offering.
+16. ‘Then on the fourteenth day of the first month shall be the Passover of Yahweh.
+17. And on the fifteenth day of this month shall be a feast; unleavened bread shall be eaten for seven days.
+18. On the first day shall be a holy convocation; you shall do no laborious work.
+19. And you shall bring near an offering by fire, a burnt offering to Yahweh: two bulls from the herd and one ram and seven male lambs one year old; they shall be for you without blemish.
+20. Now as for their grain offering, you shall offer fine flour mixed with oil: three-tenths of an ephah for a bull and two-tenths for the ram.
+21. A tenth of an ephah you shall offer for each of the seven lambs;
+22. and one male goat for a sin offering to make atonement for you.
+23. You shall offer these besides the burnt offering of the morning, which is for a continual burnt offering.
+24. After this manner you shall offer daily, for seven days, the food of the offering by fire, of a soothing aroma to Yahweh; it shall be offered with its drink offering in addition to the continual burnt offering.
+25. Now on the seventh day you shall have a holy convocation; you shall do no laborious work.
+26. ‘Also on the day of the first fruits, when you bring near a new grain offering to Yahweh in your Feast of Weeks, you shall have a holy convocation; you shall do no laborious work.
+27. And you shall bring near a burnt offering for a soothing aroma to Yahweh: two bulls from the herd, one ram, seven male lambs one year old;
+28. and their grain offering, fine flour mixed with oil: three-tenths of an ephah for each bull, two-tenths for the one ram,
+29. a tenth for each of the seven lambs;
+30. also one male goat to make atonement for you.
+31. Besides the continual burnt offering and its grain offering, you shall offer them with their drink offerings. They shall be without blemish.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 29:1-29
+
+Chapter text:
+1. These are the words of the covenant which Yahweh commanded Moses to cut with the sons of Israel in the land of Moab, besides the covenant which He had cut with them at Horeb.
+2. And Moses summoned all Israel and said to them, “You have seen all that Yahweh did before your eyes in the land of Egypt to Pharaoh and all his servants and all his land;
+3. the great trials which your eyes have seen, those great signs and wonders.
+4. Yet to this day Yahweh has not given you a heart to know, nor eyes to see, nor ears to hear.
+5. And I have led you forty years in the wilderness; your clothes have not worn out on you, and your sandal has not worn out on your foot.
+6. You have not eaten bread, nor have you drunk wine or strong drink, in order that you might know that I am Yahweh your God.
+7. Then you came to this place, and Sihon the king of Heshbon and Og the king of Bashan came out to meet us for battle, but we struck them down;
+8. and we took their land and gave it as an inheritance to the Reubenites, the Gadites, and the half-tribe of the Manassites.
+9. So you shall keep the words of this covenant to do them, that you may prosper in all that you do.
+10. “You stand today, all of you, before Yahweh your God: your heads, your tribes, your elders, and your officers, even all the men of Israel,
+11. your little ones, your wives, and the sojourner who is within your camps, from the one who chops your wood to the one who draws your water,
+12. that you may enter into the covenant with Yahweh your God and into His oath, which Yahweh your God is cutting with you today,
+13. in order that He may establish you today as His people and that He may be your God, just as He spoke to you and as He swore to your fathers, to Abraham, to Isaac, and to Jacob.
+14. “Now not with you alone am I cutting this covenant and this oath,
+15. but both with those who stand here with us today in the presence of Yahweh our God and with those who are not with us here today—
+16. for you know how we lived in the land of Egypt, and how we came through the midst of the nations through which you passed;
+17. moreover, you have seen their detestable things and their idols of wood, stone, silver, and gold, which they had with them—
+18. lest there be among you a man or woman, or family or tribe, whose heart turns away today from Yahweh our God, to go to serve the gods of those nations; lest there be among you a root bearing poisonous fruit and wormwood.
+19. And it will be when he hears the words of this curse, that he will bless himself in his heart, saying, ‘I have peace though I walk in the stubbornness of my heart in order to sweep away the watered land with the dry.’
+20. Yahweh shall not be willing to pardon him, but rather the anger of Yahweh and His jealousy will burn against that man, and every curse which is written in this book will rest on him, and Yahweh will blot out his name from under heaven.
+21. Then Yahweh will separate him out for adversity from all the tribes of Israel, according to all the curses of the covenant which are written in this book of the law.
+22. “And the generation to come, your sons who rise up after you and the foreigner who comes from a distant land, shall see the plagues of the land and the diseases with which Yahweh has afflicted it, and they will say,
+23. ‘All its land is brimstone and salt, a burning waste, unsown and nothing sprouting, and no grass grows in it, like the overthrow of Sodom and Gomorrah, Admah and Zeboiim, which Yahweh overthrew in His anger and in His wrath.’
+24. And all the nations will say, ‘Why has Yahweh done thus to this land? Why this great burning anger?’
+25. Then men will say, ‘Because they forsook the covenant of Yahweh, the God of their fathers, which He cut with them when He brought them out of the land of Egypt.
+26. And they went and served other gods and worshiped them, gods whom they have not known and whom He had not apportioned to them.
+27. Therefore, the anger of Yahweh was kindled against that land, to bring upon it every curse which is written in this book;
+28. and Yahweh uprooted them from their land in anger and in fury and in great wrath, and He cast them into another land, as it is this day.’
+29. “The secret things belong to Yahweh our God, but the things revealed belong to us and to our sons forever, that we may do all the words of this law.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

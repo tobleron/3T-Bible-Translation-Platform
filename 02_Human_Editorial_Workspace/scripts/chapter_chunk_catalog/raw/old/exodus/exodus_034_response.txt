@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Moses prepares the tablets",
+      "reason": "Narrative account of Moses carving new stone tablets and ascending Mount Sinai."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "dialogue",
+      "title": "God reveals His name and Moses worships",
+      "reason": "Divine self-revelation followed by Moses' prayerful response."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 26,
+      "type": "law",
+      "title": "The Covenant Code",
+      "reason": "Divine instructions regarding the covenant, conquest of Canaan, and religious festivals."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Writing the covenant",
+      "reason": "Narrative transition where Moses writes the words and fasts for forty days."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Moses' radiant face",
+      "reason": "Description of Moses' shining countenance and the use of the veil."
+    }
+  ]
+}

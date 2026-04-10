@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Assembly at Mizpah and the Levite's Report",
+      "reason": "The gathering of Israel and the Levite's detailed account of the crime in Gibeah."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "argument",
+      "title": "Israel's Vow and Demand to Benjamin",
+      "reason": "The unified response of Israel to the report and their ultimatum to the tribe of Benjamin."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "list_or_catalog",
+      "title": "Mobilization and Troop Counts",
+      "reason": "The gathering of Benjamite forces and the numerical listing of soldiers from both sides."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 25,
+      "type": "story",
+      "title": "First Two Battles and Divine Inquiry",
+      "reason": "The first two days of battle where Israel suffers defeat but seeks God's guidance each time."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Third Day Strategy and Victory",
+      "reason": "The final day of battle involving the ambush, the smoke signal, and the decisive defeat of Benjamin."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 48,
+      "type": "story",
+      "title": "Pursuit and Destruction of Gibeah",
+      "reason": "The rout of the Benjamites, the slaughter at Rimmon, and the burning of the city."
+    }
+  ]
+}

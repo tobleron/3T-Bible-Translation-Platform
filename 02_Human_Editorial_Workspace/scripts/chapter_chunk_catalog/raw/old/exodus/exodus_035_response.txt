@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "law",
+      "title": "Sabbath Command",
+      "reason": "Moses establishes the Sabbath law with specific penalties and prohibitions."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 29,
+      "type": "exhortation",
+      "title": "Call for Contributions",
+      "reason": "Moses calls for materials and the people respond with generous offerings."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 35,
+      "type": "speech",
+      "title": "Appointment of Bezalel and Oholiab",
+      "reason": "Moses announces the divine selection and gifting of specific craftsmen."
+    }
+  ]
+}

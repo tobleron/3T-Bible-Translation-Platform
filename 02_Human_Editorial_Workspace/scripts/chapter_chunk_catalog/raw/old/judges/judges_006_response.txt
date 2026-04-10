@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Israel's Oppression and Cry for Help",
+      "reason": "Describes the seven-year oppression by Midian and Israel's subsequent cry to Yahweh."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "The Prophet's Oracle of Rebuke",
+      "reason": "A prophet delivers a message from Yahweh recounting past deliverance and current disobedience."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Gideon's Call and the Sign of Fire",
+      "reason": "The angel calls Gideon, who requests a sign with fire from the rock before building an altar."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 32,
+      "type": "story",
+      "title": "Gideon Destroys the Altar of Baal",
+      "reason": "Gideon destroys his father's altar by night and earns the name Jerubbaal after a confrontation."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 35,
+      "type": "story",
+      "title": "The Enemy Assembles and Gideon Rallies Troops",
+      "reason": "Midianite forces camp in Jezreel while the Spirit of Yahweh empowers Gideon to gather an army."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 40,
+      "type": "dialogue",
+      "title": "Gideon's Fleece Tests",
+      "reason": "Gideon speaks with God twice to confirm the promise of victory using a wool fleece."
+    }
+  ]
+}

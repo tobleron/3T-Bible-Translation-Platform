@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Numbers 17:1-13
+
+Chapter text:
+1. Then Yahweh spoke to Moses, saying,
+2. “Speak to the sons of Israel, and get from them a rod for each father’s household: twelve rods from all their leaders according to their fathers’ households. You shall write each name on his rod,
+3. and write Aaron’s name on the rod of Levi; for there is one rod for the head of each of their fathers’ households.
+4. You shall then deposit them in the tent of meeting in front of the testimony, where I meet with you.
+5. And it will come about that the rod of the man whom I choose will sprout. Thus I will rid Myself of the grumblings of the sons of Israel, who are grumbling against you.”
+6. Moses therefore spoke to the sons of Israel, and all their leaders gave him a rod apiece, for each leader according to their fathers’ households, twelve rods, with the rod of Aaron among their rods.
+7. So Moses deposited the rods before Yahweh in the tent of the testimony.
+8. Now it happened on the next day Moses went into the tent of the testimony; and behold, the rod of Aaron for the house of Levi had sprouted and put forth buds and produced flowers, and it bore ripe almonds.
+9. Moses then brought out all the rods from the presence of Yahweh to all the sons of Israel; and they looked, and each man took his rod.
+10. But Yahweh said to Moses, “Put back the rod of Aaron before the testimony to be kept as a sign against the rebels, that you may put an end to their grumblings against Me, so that they will not die.”
+11. Thus Moses did; just as Yahweh had commanded him, so he did.
+12. Then the sons of Israel spoke to Moses, saying, “Behold, we are breathing our last breath, we are perishing, we are all perishing!
+13. Everyone who comes near, who comes near to the tabernacle of Yahweh, must die. Are we to breathe our utter last?”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Introduction to the Covenant in Moab",
+      "reason": "Moses summarizes past deliverance and commands obedience to the new covenant."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 29,
+      "type": "speech",
+      "title": "The Covenant Ceremony and Warning",
+      "reason": "Moses addresses the assembly, defines the scope of the covenant, warns against apostasy, and concludes with a statement on revealed truth."
+    }
+  ]
+}

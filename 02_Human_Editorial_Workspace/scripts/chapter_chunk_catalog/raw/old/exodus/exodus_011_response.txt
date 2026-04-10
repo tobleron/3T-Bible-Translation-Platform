@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Instruction to Moses",
+      "reason": "Yahweh instructs Moses about the final plague and the request for silver and gold."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Moses' Prophecy to Pharaoh",
+      "reason": "Moses delivers Yahweh's oracle regarding the death of the firstborn and the departure of Israel."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Hardening of Pharaoh's Heart",
+      "reason": "Narrative conclusion describing Moses' actions and the hardening of Pharaoh's heart."
+    }
+  ]
+}

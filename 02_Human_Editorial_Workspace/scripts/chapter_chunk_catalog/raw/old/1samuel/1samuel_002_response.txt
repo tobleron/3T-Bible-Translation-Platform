@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "psalm",
+      "title": "Hannah's Song of Praise",
+      "reason": "A complete poetic prayer celebrating God's sovereignty and justice."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Samuel's Early Ministry",
+      "reason": "Narrative covering Samuel's service, Eli's sons' corruption, and Hannah's subsequent children."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 36,
+      "type": "oracle",
+      "title": "Prophecy Against Eli",
+      "reason": "A formal divine judgment delivered by a man of God against the house of Eli."
+    }
+  ]
+}

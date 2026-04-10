@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Instructions to Aaron and the Levites",
+      "reason": "Yahweh defines the distinct roles of the priests and Levites regarding the sanctuary service."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 19,
+      "type": "law",
+      "title": "Priestly Portions and Offerings",
+      "reason": "Detailed regulations concerning the holy gifts, tithes, and firstborn animals given to Aaron's household."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 24,
+      "type": "speech",
+      "title": "Levites as Inheritance",
+      "reason": "Yahweh explains that the Levites receive the tithe as their inheritance instead of land."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 32,
+      "type": "law",
+      "title": "Tithe of the Tithe",
+      "reason": "Instructions for the Levites to offer a portion of their tithe to Aaron as a contribution."
+    }
+  ]
+}

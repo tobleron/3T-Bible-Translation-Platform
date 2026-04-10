@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Laws on Bread and Lamp",
+      "reason": "Divine instructions regarding the perpetual lamp and showbread."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "story",
+      "title": "The Blasphemer Brought to Moses",
+      "reason": "Narrative account of a specific incident leading to judicial inquiry."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 22,
+      "type": "law",
+      "title": "Laws on Retribution and Blasphemy",
+      "reason": "Divine decrees concerning the punishment for cursing God and striking others."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Execution of the Law",
+      "reason": "Narrative conclusion describing the fulfillment of the command."
+    }
+  ]
+}

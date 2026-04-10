@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 1 Samuel 23:1-29
+
+Chapter text:
+1. Then they told David, saying, “Behold, the Philistines are fighting against Keilah and are pillaging the threshing floors.”
+2. So David asked of Yahweh, saying, “Shall I go and strike these Philistines?” And Yahweh said to David, “Go and strike the Philistines and save Keilah.”
+3. But David’s men said to him, “Behold, we are afraid here in Judah. How much more then if we go to Keilah against the battle lines of the Philistines?”
+4. Then David asked of Yahweh once more. And Yahweh answered him and said, “Arise, go down to Keilah, for I will give the Philistines into your hand.”
+5. So David and his men went to Keilah and fought with the Philistines; and he led away their livestock and struck them with a great slaughter. Thus David saved the inhabitants of Keilah.
+6. Now it happened when Abiathar the son of Ahimelech fled to David at Keilah, that he came down with an ephod in his hand.
+7. Then it was told to Saul that David had come to Keilah, so Saul said, “God has delivered him into my hand, for he shut himself in by entering a city with double gates and bars.”
+8. Then Saul summoned all the people for battle, to go down to Keilah to besiege David and his men.
+9. But David knew that Saul was plotting evil against him; so he said to Abiathar the priest, “Bring the ephod here.”
+10. Then David said, “O Yahweh, the God of Israel, Your slave has heard for certain that Saul is seeking to come to Keilah to make the city a ruin on my account.
+11. Will the men of Keilah surrender me into his hand? Will Saul come down just as Your slave has heard? O Yahweh, the God of Israel, I pray, tell Your slave.” And Yahweh said, “He will come down.”
+12. Then David said, “Will the men of Keilah surrender me and my men into the hand of Saul?” And Yahweh said, “They will surrender you.”
+13. Then David and his men, about six hundred, arose and departed from Keilah, and they went wherever they could go. Now it was told to Saul that David had escaped from Keilah, so he ceased going out in pursuit.
+14. And David stayed in the wilderness in the strongholds and remained in the hill country in the wilderness of Ziph. And Saul sought him every day, but God did not give him into his hand.
+15. Then David saw that Saul had come out to seek his life. Now David was in the wilderness of Ziph at Horesh.
+16. So Jonathan, Saul’s son, arose and went to David at Horesh and strengthened his hand in God.
+17. And he said to him, “Do not be afraid, because the hand of Saul my father will not find you, and you will be king over Israel, and I will be second to you; and Saul my father knows that also.”
+18. So the two of them cut a covenant before Yahweh; and David stayed at Horesh while Jonathan went to his house.
+19. Then Ziphites came up to Saul at Gibeah, saying, “Is David not hiding with us in the strongholds at Horesh, on the hill of Hachilah, which is on the south of Jeshimon?
+20. So now, O king, according to all the desire of your soul to come down, come down here; and our part shall be to surrender him into the king’s hand.”
+21. And Saul said, “May you be blessed of Yahweh, for you have had compassion on me.
+22. Go now, make more sure, and know and see his place—where his very foot is—and who has seen him there; for I am told that he is very crafty.
+23. So see and know about all the hiding places where he hides himself and return to me with certainty, and I will go with you; and if he is in the land, I will search him out among all the thousands of Judah.”
+24. Then they arose and went to Ziph before Saul. Now David and his men were in the wilderness of Maon, in the Arabah to the south of Jeshimon.
+25. So Saul and his men went to seek him, and they told David, and he came down to the rock and stayed in the wilderness of Maon. And Saul heard it and pursued David in the wilderness of Maon.
+26. And Saul went on one side of the mountain, and David and his men on the other side of the mountain; and David was hurrying to get away from Saul, but Saul and his men were surrounding David and his men to seize them.
+27. But a messenger came to Saul, saying, “Hurry and come, for the Philistines have made a raid on the land.”
+28. So Saul returned from pursuing David and went to meet the Philistines; therefore they called that place the Rock of Escape.
+29. Then David went up from there and stayed in the strongholds of Engedi.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

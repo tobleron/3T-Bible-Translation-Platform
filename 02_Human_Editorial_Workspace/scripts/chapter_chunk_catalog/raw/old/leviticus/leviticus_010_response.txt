@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Death of Nadab and Abihu",
+      "reason": "Narrative account of the priests' death and Moses' instructions to Aaron."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Wine Prohibition for Priests",
+      "reason": "Divine command regarding wine and distinguishing holy from profane."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Priestly Food Portions",
+      "reason": "Regulations on where and how priests must eat the grain and peace offerings."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "dialogue",
+      "title": "Moses and Aaron Discuss Sin Offering",
+      "reason": "Dialogue concerning the missing sin offering goat and Aaron's explanation."
+    }
+  ]
+}

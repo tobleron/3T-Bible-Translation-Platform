@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:24:35Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 22,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 41,
+  "verse_count": 41,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Balak Sends for Balaam",
+      "reason": "Describes the political situation and Balak's initial mission to hire Balaam."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "First Divine Refusal",
+      "reason": "Contains the first interaction where God forbids Balaam from going."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Second Invitation and Permission",
+      "reason": "Balak sends better messengers and God grants conditional permission."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 35,
+      "type": "story",
+      "title": "The Donkey and the Angel",
+      "reason": "Narrates the journey where the donkey sees the angel and speaks."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 41,
+      "type": "story",
+      "title": "Arrival at Moab",
+      "reason": "Describes Balaam's arrival, meeting with Balak, and the feast preparation."
+    }
+  ]
+}

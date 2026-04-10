@@ -1,0 +1,1882 @@
+{
+  "created_at": "2026-04-09T16:29:49Z",
+  "updated_at": "2026-04-10T16:12:29Z",
+  "prompt_version": "chapter_chunk_batch_v1",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "chapters": {
+    "genesis:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:01:16Z"
+    },
+    "genesis:24": {
+      "status": "completed",
+      "testament": "old",
+      "book": "Genesis",
+      "chapter": 24,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 7,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_024_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_024_response.txt",
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:25": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_025_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:26": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_026_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:27": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_027_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:28": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_028_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:29": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_029_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:30": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_030_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:31": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_031_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:32": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_032_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:33": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_033_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:34": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_034_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:35": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_035_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:36": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_036_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:37": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_037_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:38": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_038_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:39": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_039_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:40": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_040_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:41": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_041_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:42": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_042_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:43": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_043_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:44": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_044_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:45": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_045_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:46": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_046_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:47": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_047_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:48": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_048_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:49": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_049_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "genesis:50": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_050_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:24": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_024_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:25": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_025_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:26": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_026_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:27": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_027_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:28": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_028_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:29": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_029_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:30": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_030_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:31": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_031_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:32": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_032_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:33": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_033_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:34": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_034_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:35": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_035_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:36": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_036_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:37": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_037_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:38": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_038_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:39": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_039_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "exodus:40": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_040_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:24": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_024_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:25": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_025_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:26": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_026_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "leviticus:27": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_027_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:03:17Z"
+    },
+    "numbers:7": {
+      "status": "failed",
+      "testament": "old",
+      "book": "Numbers",
+      "chapter": 7,
+      "error": "Chunk 3 has an empty title.",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/generate_chapter_chunks.py\", line 467, in run\n    self.generate_one(target)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/generate_chapter_chunks.py\", line 415, in generate_one\n    normalized_chunks = self.validate_payload(payload, target)\n  File \"/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/generate_chapter_chunks.py\", line 322, in validate_payload\n    raise ValueError(f\"Chunk {index} has an empty title.\")\nValueError: Chunk 3 has an empty title.\n",
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:24": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_024_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:25": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_025_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:26": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_026_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:27": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_027_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:28": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_028_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:29": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_029_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:30": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_030_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:31": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_031_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:32": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_032_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:33": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_033_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:34": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_034_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:35": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_035_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "numbers:36": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_036_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:24": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_024_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:25": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_025_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:26": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_026_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:27": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_027_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:28": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_028_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:29": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_029_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:30": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_030_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:31": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_031_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:32": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_032_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:33": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_033_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "deuteronomy:34": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_034_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "joshua:24": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_024_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "judges:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "ruth:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "ruth:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "ruth:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "ruth:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:1": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_001_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:2": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_002_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:3": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_003_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:4": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_004_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:5": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_005_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:6": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_006_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:7": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_007_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:8": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_008_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:9": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_009_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:10": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_010_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:11": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_011_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:12": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_012_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:13": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_013_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:14": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_014_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:15": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_015_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:16": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_016_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:17": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_017_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:18": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_018_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:19": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_019_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:20": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_020_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:21": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_021_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:22": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_022_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:23": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_023_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:24": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_024_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:25": {
+      "status": "completed",
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_025_chunks.json",
+      "skipped_existing": true,
+      "updated_at": "2026-04-10T12:05:02Z"
+    },
+    "1samuel:26": {
+      "status": "completed",
+      "testament": "old",
+      "book": "1 Samuel",
+      "chapter": 26,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 4,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_026_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_026_response.txt",
+      "updated_at": "2026-04-10T12:06:26Z"
+    },
+    "1samuel:27": {
+      "status": "completed",
+      "testament": "old",
+      "book": "1 Samuel",
+      "chapter": 27,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_027_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_027_response.txt",
+      "updated_at": "2026-04-10T12:07:49Z"
+    },
+    "1samuel:28": {
+      "status": "completed",
+      "testament": "old",
+      "book": "1 Samuel",
+      "chapter": 28,
+      "attempts_used": 1,
+      "repaired_json": false,
+      "chunk_count": 4,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_028_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_028_response.txt",
+      "updated_at": "2026-04-10T12:08:13Z"
+    },
+    "1samuel:29": {
+      "status": "completed",
+      "testament": "old",
+      "book": "1 Samuel",
+      "chapter": 29,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 4,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_029_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_029_response.txt",
+      "updated_at": "2026-04-10T12:09:41Z"
+    },
+    "1samuel:30": {
+      "status": "completed",
+      "testament": "old",
+      "book": "1 Samuel",
+      "chapter": 30,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 5,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_030_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_030_response.txt",
+      "updated_at": "2026-04-10T12:11:17Z"
+    },
+    "1samuel:31": {
+      "status": "completed",
+      "testament": "old",
+      "book": "1 Samuel",
+      "chapter": 31,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_031_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_031_response.txt",
+      "updated_at": "2026-04-10T12:12:42Z"
+    },
+    "2samuel:1": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 1,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 2,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_001_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_001_response.txt",
+      "updated_at": "2026-04-10T12:14:06Z"
+    },
+    "2samuel:2": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 2,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_002_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_002_response.txt",
+      "updated_at": "2026-04-10T12:30:20Z"
+    },
+    "2samuel:3": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 3,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 4,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_003_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_003_response.txt",
+      "updated_at": "2026-04-10T12:32:02Z"
+    },
+    "2samuel:4": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 4,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_004_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_004_response.txt",
+      "updated_at": "2026-04-10T12:33:28Z"
+    },
+    "2samuel:5": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 5,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 4,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_005_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_005_response.txt",
+      "updated_at": "2026-04-10T12:34:56Z"
+    },
+    "2samuel:6": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 6,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_006_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_006_response.txt",
+      "updated_at": "2026-04-10T12:36:25Z"
+    },
+    "2samuel:7": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 7,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_007_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_007_response.txt",
+      "updated_at": "2026-04-10T12:37:54Z"
+    },
+    "2samuel:8": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 8,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_008_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_008_response.txt",
+      "updated_at": "2026-04-10T12:39:20Z"
+    },
+    "2samuel:9": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 9,
+      "attempts_used": 3,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_009_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_009_response.txt",
+      "updated_at": "2026-04-10T13:47:18Z"
+    },
+    "2samuel:10": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 10,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_010_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_010_response.txt",
+      "updated_at": "2026-04-10T14:20:43Z"
+    },
+    "2samuel:11": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 11,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 4,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_011_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_011_response.txt",
+      "updated_at": "2026-04-10T14:52:48Z"
+    },
+    "2samuel:12": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 12,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 7,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_012_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_012_response.txt",
+      "updated_at": "2026-04-10T16:02:52Z"
+    },
+    "2samuel:13": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 13,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_013_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_013_response.txt",
+      "updated_at": "2026-04-10T16:04:27Z"
+    },
+    "2samuel:14": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 14,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 7,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_014_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_014_response.txt",
+      "updated_at": "2026-04-10T16:06:10Z"
+    },
+    "2samuel:15": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 15,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 5,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_015_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_015_response.txt",
+      "updated_at": "2026-04-10T16:07:48Z"
+    },
+    "2samuel:16": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 16,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 3,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_016_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_016_response.txt",
+      "updated_at": "2026-04-10T16:09:15Z"
+    },
+    "2samuel:17": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 17,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 5,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_017_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_017_response.txt",
+      "updated_at": "2026-04-10T16:10:50Z"
+    },
+    "2samuel:18": {
+      "status": "completed",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 18,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 6,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_018_chunks.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_018_response.txt",
+      "updated_at": "2026-04-10T16:12:29Z"
+    },
+    "2samuel:19": {
+      "status": "running",
+      "testament": "old",
+      "book": "2 Samuel",
+      "chapter": 19,
+      "verse_start": 1,
+      "verse_end": 43,
+      "prompt_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_019_prompt.txt",
+      "updated_at": "2026-04-10T16:12:29Z"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Nahash besieges Jabesh-gilead",
+      "reason": "The Ammonite siege and the elders' plea for a seven-day delay."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Saul's call to arms",
+      "reason": "Saul receives the news, is filled with the Spirit, and gathers the army."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 11,
+      "type": "story",
+      "title": "The battle against Ammon",
+      "reason": "The messengers deliver Saul's ultimatum and the decisive victory."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Saul confirmed as king",
+      "reason": "The people demand execution of doubters, Saul shows mercy, and the kingdom is renewed at Gilgal."
+    }
+  ]
+}

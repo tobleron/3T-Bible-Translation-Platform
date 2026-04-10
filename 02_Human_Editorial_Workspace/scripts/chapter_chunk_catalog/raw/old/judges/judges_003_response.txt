@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "mixed",
+      "title": "Introduction to the Nations and Israel's Sin",
+      "reason": "Establishes the purpose of remaining nations and describes Israel's initial apostasy."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Othniel Delivers Israel",
+      "reason": "First cycle of oppression and deliverance through Othniel."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 30,
+      "type": "story",
+      "title": "Ehud Delivers Israel from Moab",
+      "reason": "Second cycle of oppression and deliverance through Ehud's assassination of Eglon."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Shamgar Delivers Israel",
+      "reason": "Brief account of Shamgar's victory over the Philistines."
+    }
+  ]
+}

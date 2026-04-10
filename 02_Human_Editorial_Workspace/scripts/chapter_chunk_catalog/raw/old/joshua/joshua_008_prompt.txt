@@ -1,0 +1,84 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Joshua 8:1-35
+
+Chapter text:
+1. Now Yahweh said to Joshua, “Do not fear or be dismayed. Take all the people of war with you and arise, go up to Ai; see, I have given into your hand the king of Ai, his people, his city, and his land.
+2. So you shall do to Ai and its king just as you did to Jericho and its king; you shall take only its spoil and its cattle as plunder for yourselves. Set an ambush for the city behind it.”
+3. So Joshua rose with all the people of war to go up to Ai; and Joshua chose 30,000 men, valiant warriors, and sent them out at night.
+4. And he commanded them, saying, “See, you are going to ambush the city from behind it. Do not go very far from the city, but all of you be ready.
+5. Then I and all the people who are with me will come near the city. And it will be that when they come out to meet us as at the first, we will flee before them.
+6. And they will come out after us until we have drawn them away from the city, for they will say, ‘They are fleeing before us as at the first.’ So we will flee before them.
+7. And you shall rise from your ambush and take possession of the city, for Yahweh your God will give it into your hand.
+8. Then it will be that when you have seized the city, that you shall set the city on fire. You shall do it according to the word of Yahweh. See, I have commanded you.”
+9. So Joshua sent them away, and they went to the place of ambush and remained between Bethel and Ai, on the west side of Ai; but Joshua spent that night among the people.
+10. Now Joshua rose early in the morning and mustered the people, and he went up with the elders of Israel before the people to Ai.
+11. Then all the people of war who were with him went up and drew near and arrived in front of the city and camped on the north side of Ai. Now there was a valley between him and Ai.
+12. And he took about 5,000 men and set them in ambush between Bethel and Ai, on the west side of the city.
+13. So they set the people, all the army that was on the north side of the city, and its rear guard on the west side of the city, and Joshua went that night into the midst of the valley.
+14. Now it happened that when the king of Ai saw it, the men of the city hurried and rose up early and went out to meet Israel in battle, he and all his people at the appointed place before the desert plain. But he did not know that there was an ambush against him behind the city.
+15. And Joshua and all Israel pretended to be beaten before them and fled by the way of the wilderness.
+16. And all the people who were in the city were called together to pursue them, and they pursued Joshua and were drawn away from the city.
+17. So not a man remained in Ai or Bethel who had not gone out after Israel, and they forsook the city, leaving it open, and pursued Israel.
+18. Then Yahweh said to Joshua, “Stretch out the javelin that is in your hand toward Ai, for I will give it into your hand.” So Joshua stretched out the javelin that was in his hand toward the city.
+19. Then the men in ambush rose quickly from their place, and when he had stretched out his hand, they ran and entered the city and captured it, and they quickly set the city on fire.
+20. Then the men of Ai turned back and looked, and behold, the smoke of the city ascended to the sky, and they had no place to flee this way or that, for the people who had been fleeing to the wilderness turned against the pursuers.
+21. But Joshua and all Israel saw that the men in ambush had captured the city and that the smoke of the city ascended. So they turned back and struck down the men of Ai.
+22. And the others came out from the city to meet them, so that they were trapped in the midst of Israel, some on this side and some on that side; and they struck them down until there was no one remaining for him who survived or escaped.
+23. But they seized the king of Ai alive and brought him to Joshua.
+24. Now it happened that when Israel had finished killing all the inhabitants of Ai in the field in the wilderness where they pursued them, and all of them fell by the edge of the sword until they were completely destroyed, then all Israel turned back to Ai and struck it with the edge of the sword.
+25. So all who fell that day, both men and women, were 12,000—all the people of Ai.
+26. For Joshua did not withdraw his hand with which he stretched out the javelin until he had devoted to destruction all the inhabitants of Ai.
+27. Israel took only the cattle and the spoil of that city as plunder for themselves, according to the word of Yahweh which He had commanded Joshua.
+28. So Joshua burned Ai and made it a heap forever, a desolation until this day.
+29. And he hanged the king of Ai on a tree until evening; and at sunset Joshua gave a command, and they took his body down from the tree and threw it at the entrance of the city gate and raised over it a great heap of stones that stands to this day.
+30. Then Joshua built an altar to Yahweh, the God of Israel, on Mount Ebal,
+31. just as Moses the servant of Yahweh had commanded the sons of Israel, as it is written in the book of the law of Moses, an altar of uncut stones on which no man had wielded an iron tool; and they offered burnt offerings on it to Yahweh and sacrificed peace offerings.
+32. And he wrote there on the stones a copy of the law of Moses, which he had written, in the presence of the sons of Israel.
+33. And all Israel with their elders and officers and their judges were standing on both sides of the ark before the Levitical priests who carried the ark of the covenant of Yahweh, the sojourner as well as the native. Half of them stood in front of Mount Gerizim and half of them in front of Mount Ebal, just as Moses the servant of Yahweh had given a command at first to bless the people of Israel.
+34. Then afterward he read all the words of the law, the blessing and the curse, according to all that is written in the book of the law.
+35. There was not a word of all that Moses had commanded which Joshua did not read before all the assembly of Israel with the women and the little ones and the sojourners who were going among them.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

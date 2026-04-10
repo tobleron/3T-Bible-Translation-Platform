@@ -1,0 +1,86 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 2:1-37
+
+Chapter text:
+1. “Then we turned and set out for the wilderness by the way to the Red Sea, as Yahweh spoke to me, and circled Mount Seir for many days.
+2. And Yahweh spoke to me, saying,
+3. ‘You have circled this mountain long enough. Now turn north,
+4. and command the people, saying, “You are going to pass through the territory of your brothers the sons of Esau who live in Seir; and they will be afraid of you. So be very careful;
+5. do not provoke them, for I will not give you any of their land, even as little as a footstep because I have given Mount Seir to Esau as a possession.
+6. You shall buy food from them with money so that you may eat, and you shall also bargain with them for water with money so that you may drink.
+7. For Yahweh your God has blessed you in all the work of your hand; He has known your wanderings through this great wilderness. These forty years Yahweh your God has been with you; you have not lacked a thing.”’
+8. “So we passed beyond our brothers the sons of Esau, who live in Seir, away from the Arabah road, away from Elath and from Ezion-geber. And we turned and passed through by the way of the wilderness of Moab.
+9. Then Yahweh said to me, ‘Do not harass Moab, nor provoke them to war, for I will not give you any of their land as a possession because I have given Ar to the sons of Lot as a possession.’
+10. (The Emim lived there formerly, a people as great, numerous, and tall as the Anakim.
+11. Like the Anakim, they are also regarded as Rephaim, but the Moabites call them Emim.
+12. Now the Horites formerly lived in Seir, but the sons of Esau dispossessed them and destroyed them from before them and settled in their place, just as Israel would do to the land of their possession which Yahweh gave to them.)
+13. ‘Now arise and cross over the brook Zered yourselves.’ So we crossed over the brook Zered.
+14. Now the time that it took for us to come from Kadesh-barnea until we crossed over the brook Zered was thirty-eight years, until all the generation of the men of war came to an end from within the camp, as Yahweh had sworn to them.
+15. Moreover the hand of Yahweh was against them, to bring them into confusion from within the camp until they all came to an end.
+16. “So it happened when all the men of war had come to an end in death from among the people,
+17. that Yahweh spoke to me, saying,
+18. ‘Today you are about to cross over Ar, the border of Moab.
+19. And you will come opposite the sons of Ammon. Do not harass them nor provoke them, for I will not give you any of the land of the sons of Ammon as a possession because I have given it to the sons of Lot as a possession.’
+20. (It is also regarded as the land of the Rephaim, for Rephaim formerly lived in it, but the Ammonites call them Zamzummin,
+21. a people as great, numerous, and tall as the Anakim, but Yahweh destroyed them before them. And they dispossessed them and settled in their place,
+22. just as He did for the sons of Esau, who live in Seir, when He destroyed the Horites from before them; they dispossessed them and settled in their place even to this day.
+23. And the Avvim, who lived in villages as far as Gaza, the Caphtorim who came from Caphtor, destroyed them and lived in their place.)
+24. ‘Arise, set out, and pass through the valley of Arnon. Look! I have given Sihon the Amorite, king of Heshbon, and his land into your hand; begin to take possession and provoke him to battle.
+25. This day I will begin to put the dread and fear of you upon the peoples everywhere under the heavens, who, when they hear the report of you, will tremble and be in anguish because of you.’
+26. “So I sent messengers from the wilderness of Kedemoth to Sihon king of Heshbon with words of peace, saying,
+27. ‘Let me pass through your land, I will go only on the highway; I will not turn aside to the right or to the left.
+28. You will sell me food for money so that I may eat, and give me water for money so that I may drink; only let me pass through on foot,
+29. just as the sons of Esau who live in Seir and the Moabites who live in Ar did for me, until I cross over the Jordan into the land which Yahweh our God is giving to us.’
+30. But Sihon king of Heshbon was not willing for us to pass through his land, for Yahweh your God stiffened his spirit and made his heart obstinate, in order to give him over into your hand, as he is today.
+31. And Yahweh said to me, ‘See, I have begun to give Sihon and his land over to you. Begin to possess, so that you may fully possess his land.’
+32. “Then Sihon with all his people came out to meet us in battle at Jahaz.
+33. But Yahweh our God gave him over to us, and we struck him down with his sons and all his people.
+34. So we captured all his cities at that time and devoted to destruction the men, women, and little ones of every city. We left no survivor remaining.
+35. We took only the animals as our plunder and the spoil of the cities which we had captured.
+36. From Aroer which is on the edge of the valley of Arnon and from the city which is in the valley, even to Gilead, there was not a town that was too high for us; Yahweh our God gave all over to us.
+37. Only you did not go near to the land of the sons of Ammon, all along the river Jabbok and the cities of the hill country, and wherever Yahweh our God had commanded us.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

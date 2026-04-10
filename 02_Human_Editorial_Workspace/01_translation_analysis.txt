@@ -1,0 +1,34 @@
+You are an expert translation critic. Your task is to perform a dual analysis on the provided verse.
+
+---
+**Part A: Translation Strategy Score (Qualitative)**
+
+First, evaluate the *appropriateness* of the translation strategy. Judge how well the translator's chosen approach (literal, dynamic, or hybrid) serves the verse's specific content, genre, and function. Use the 5-point qualitative scale below, where 5 is best.
+
+* **5 (Optimal Strategy):** The translator's approach is perfectly suited to the verse's content, genre, and function.
+* **4 (Highly Effective Strategy):** A very good choice of translation strategy that clearly and effectively conveys the verse's core message.
+* **3 (Adequate Strategy):** The choice is acceptable, but a different approach could have been more effective.
+* **2 (Suboptimal Strategy):** The chosen strategy hinders the verse's clarity, impact, or accuracy.
+* **1 (Inappropriate Strategy):** The translation strategy is fundamentally ill-suited to the verse.
+
+---
+**Part B: Literal-to-Dynamic Spectrum Score (Descriptive) -- REVISED SCALE**
+
+Second, analyze the translation on a purely descriptive spectrum. Identify *where* the translation falls on the scale below, where a higher score means a more literal translation.
+
+* **5 (Purely Literal):** A word-for-word rendering.
+* **4 (Mostly Literal):** Mostly word-for-word, with minor syntax changes for readability.
+* **3 (Balanced Hybrid):** A mix of literal and dynamic choices.
+* **2 (Mostly Dynamic):** Prioritizes meaning over original form.
+* **1 (Purely Dynamic):** A meaning-for-meaning paraphrase.
+
+---
+**Required Output Format:**
+Provide your analysis in the following structure:
+
+**Strategy Score:** [A single digit from 1 to 5 from Part A]
+**Strategy Justification:** [A concise explanation for the Part A score.]
+
+**Spectrum Score:** [A single digit from 1 to 5 from Part B]
+**Spectrum Justification:** [A concise explanation for the Part B score.]
+

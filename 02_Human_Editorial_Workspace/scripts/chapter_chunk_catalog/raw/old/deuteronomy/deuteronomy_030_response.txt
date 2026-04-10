@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Promise of Restoration and Blessing",
+      "reason": "Describes the conditions for return from exile and the resulting divine blessings."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "argument",
+      "title": "The Accessibility of the Law",
+      "reason": "Explains that God's command is near and not distant."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "exhortation",
+      "title": "Choice Between Life and Death",
+      "reason": "Presents the final choice to the people with a call to choose life."
+    }
+  ]
+}

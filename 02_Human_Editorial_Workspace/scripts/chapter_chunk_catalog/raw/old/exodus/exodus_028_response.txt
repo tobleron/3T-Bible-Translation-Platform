@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Call to Consecrate Priests and Garments",
+      "reason": "God commands Moses to bring Aaron and his sons and instructs the making of holy garments using specific materials."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "list_or_catalog",
+      "title": "Construction of the Ephod",
+      "reason": "Detailed instructions for crafting the ephod, including shoulder stones with engraved names of Israel's sons."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 30,
+      "type": "list_or_catalog",
+      "title": "Construction of the Breastpiece of Judgment",
+      "reason": "Specifications for the breastpiece with twelve stones representing tribes, including Urim and Thummim."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 35,
+      "type": "list_or_catalog",
+      "title": "The Robe of the Ephod",
+      "reason": "Description of the blue robe with pomegranates and bells to ensure the priest's life while ministering."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 38,
+      "type": "list_or_catalog",
+      "title": "The Gold Plate of the Turban",
+      "reason": "Instructions for the gold plate engraved with 'Holy to Yahweh' to bear the iniquity of holy gifts."
+    },
+    {
+      "start_verse": 39,
+      "end_verse": 43,
+      "type": "speech",
+      "title": "Garments for Aaron's Sons and Final Consecration",
+      "reason": "Commands to make tunics, sashes, and caps for the sons, undergarments, and the final ordination ritual."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "law",
+      "title": "Inner Curtains of the Tabernacle",
+      "reason": "Detailed instructions for constructing the ten linen curtains with cherubim and their joining mechanism."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 14,
+      "type": "law",
+      "title": "Outer Coverings of the Tabernacle",
+      "reason": "Instructions for the goat hair tent and the protective coverings of ram and porpoise skins."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Boards and Bars of the Tabernacle",
+      "reason": "Specifications for the acacia wood boards, silver bases, and gold overlay bars forming the structure."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 35,
+      "type": "law",
+      "title": "The Veil and Interior Arrangement",
+      "reason": "Directions for the separating veil, pillars, ark placement, and positioning of the table and lampstand."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 37,
+      "type": "law",
+      "title": "Screen for the Tent Doorway",
+      "reason": "Final instructions for the woven screen and its five pillars at the entrance."
+    }
+  ]
+}

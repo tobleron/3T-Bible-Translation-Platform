@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Death of Sarah",
+      "reason": "Narrative introduction of Sarah's age and death in Hebron."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 19,
+      "type": "dialogue",
+      "title": "Purchase of the Cave",
+      "reason": "Extended negotiation between Abraham and the sons of Heth regarding the burial site."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Completion of Purchase",
+      "reason": "Final legal confirmation and transfer of title for the field and cave."
+    }
+  ]
+}

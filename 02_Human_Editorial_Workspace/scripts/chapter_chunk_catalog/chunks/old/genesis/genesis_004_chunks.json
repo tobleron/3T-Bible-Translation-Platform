@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T16:35:21Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 26,
+  "verse_count": 26,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Cain and Abel Narrative",
+      "reason": "Complete narrative of the first murder, judgment, and exile."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 24,
+      "type": "genealogy",
+      "title": "Lineage of Cain",
+      "reason": "Genealogical record of Cain's descendants including Lamech's speech."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Birth of Seth and Enosh",
+      "reason": "Narrative conclusion introducing the line of Seth and worship."
+    }
+  ]
+}

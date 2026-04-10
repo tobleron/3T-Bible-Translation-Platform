@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T09:27:32Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Joshua",
+  "chapter": 11,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "The Northern Alliance Assembles",
+      "reason": "Describes the gathering of northern kings and their armies at Merom."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "mixed",
+      "title": "Divine Command and Battle Victory",
+      "reason": "Contains Yahweh's oracle to Joshua followed by the execution of the battle."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Destruction of Hazor and Cities",
+      "reason": "Details the capture of Hazor, the destruction of its inhabitants, and the taking of plunder."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Summary of Conquest and Divine Hardening",
+      "reason": "Summarizes the extent of the land taken and explains the theological reason for the total destruction."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Elimination of Anakim and Final Rest",
+      "reason": "Describes the removal of the Anakim and concludes with the land being given to Israel."
+    }
+  ]
+}

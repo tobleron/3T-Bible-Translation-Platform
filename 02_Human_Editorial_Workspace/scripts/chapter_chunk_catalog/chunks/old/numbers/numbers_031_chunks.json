@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:38:32Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 31,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 54,
+  "verse_count": 54,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "story",
+      "title": "War Against Midian and Return",
+      "reason": "Narrative of the battle command, execution, and return of the army with spoils."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 24,
+      "type": "dialogue",
+      "title": "Moses' Rebuke and Purification Laws",
+      "reason": "Dialogue between Moses and the officers regarding the women, followed by instructions on ritual purification."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 31,
+      "type": "law",
+      "title": "Distribution of Spoils",
+      "reason": "Divine command and execution regarding the division of loot between warriors and the congregation."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 47,
+      "type": "list_or_catalog",
+      "title": "Inventory of Spoils and Levies",
+      "reason": "Detailed numerical breakdown of the livestock and people captured and the specific levies given to the priest and Levites."
+    },
+    {
+      "start_verse": 48,
+      "end_verse": 54,
+      "type": "story",
+      "title": "Officers' Gold Offering",
+      "reason": "Narrative of the army officers presenting gold to Moses as an offering for atonement."
+    }
+  ]
+}

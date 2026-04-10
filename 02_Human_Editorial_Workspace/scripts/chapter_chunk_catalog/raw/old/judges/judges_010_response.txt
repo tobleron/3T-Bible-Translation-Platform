@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Judges Tola and Jair",
+      "reason": "Narrative summary of two judges' reigns and deaths."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Israel's Apostasy and Oppression",
+      "reason": "Description of Israel's sin and subsequent military defeat by Philistines and Ammonites."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Israel's Repentance and Yahweh's Rebuke",
+      "reason": "Exchange of dialogue between Israel and Yahweh regarding their sin and deliverance."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Mobilization in Gilead",
+      "reason": "Narrative of armies gathering and the princes seeking a leader."
+    }
+  ]
+}

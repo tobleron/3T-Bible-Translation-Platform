@@ -1,0 +1,74 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 23:1-25
+
+Chapter text:
+1. “No one who is emasculated or has his male organ cut off shall enter the assembly of Yahweh.
+2. No one of illegitimate birth shall enter the assembly of Yahweh; even to the tenth generation, none of his seed shall enter the assembly of Yahweh.
+3. No Ammonite or Moabite shall enter the assembly of Yahweh; even to the tenth generation, none of their seed shall ever enter the assembly of Yahweh,
+4. because they did not meet you with food and water on the way when you came out of Egypt, and because they hired against you Balaam the son of Beor from Pethor of Mesopotamia, to curse you.
+5. Nevertheless, Yahweh your God was not willing to listen to Balaam, but Yahweh your God turned the curse into a blessing for you because Yahweh your God loves you.
+6. You shall never seek their peace or their prosperity all your days.
+7. “You shall not abhor an Edomite, for he is your brother; you shall not abhor an Egyptian, for you were a sojourner in his land.
+8. The sons of the third generation who are born to them may enter the assembly of Yahweh.
+9. “When you go out as an army against your enemies, you shall keep yourself from every evil thing.
+10. “If there is among you any man who is unclean because of a nocturnal emission, then he must go outside the camp; he may not reenter the camp.
+11. But it shall be when evening approaches, he shall bathe himself with water, and at sundown he may reenter the camp.
+12. “You shall also have a place outside the camp and go out there,
+13. and you shall have a spade among your tools, and it shall be when you sit down outside, you shall dig with it and shall turn to cover up your excrement.
+14. Since Yahweh your God walks in the midst of your camp to deliver you and to give your enemies over to you, therefore your camp must be holy; and He must not see anything indecent among you, or He will turn away from you.
+15. “You shall not hand over to his master a slave who has escaped from his master to you.
+16. He shall live with you in your midst, in the place which he shall choose in one of your gates of the towns where it pleases him; you shall not mistreat him.
+17. “None of the daughters of Israel shall be a cult prostitute, nor shall any of the sons of Israel be a cult prostitute.
+18. You shall not bring the hire of a harlot or the wages of a dog into the house of Yahweh your God for any votive offering, for both of these are an abomination to Yahweh your God.
+19. “You shall not charge interest to your brother: interest on money, food, or anything that may be loaned at interest.
+20. You may charge interest to a foreigner, but to your brother you shall not charge interest, so that Yahweh your God may bless you in all that you send forth your hand to do in the land which you are about to enter to possess.
+21. “When you make a vow to Yahweh your God, you shall not delay to pay it, for Yahweh your God will surely require it of you; and it will be a sin in you.
+22. However, if you refrain from vowing, it will not be a sin in you.
+23. You shall be careful and do what goes out from your lips, just as you have voluntarily vowed to Yahweh your God that which you spoke with your mouth.
+24. “When you enter your neighbor’s vineyard, then you may eat grapes until you are fully satisfied, but you shall not put any in your basket.
+25. “When you enter your neighbor’s standing grain, then you may pluck the heads with your hand, but you shall not wield a sickle in your neighbor’s standing grain.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

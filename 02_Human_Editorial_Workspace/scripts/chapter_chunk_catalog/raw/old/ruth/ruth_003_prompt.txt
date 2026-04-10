@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ruth 3:1-18
+
+Chapter text:
+1. Then Naomi her mother-in-law said to her, “My daughter, shall I not seek a state of rest for you, that it may be well with you?
+2. And now, is not Boaz our kinsman, with whose young women you were? Behold, he is winnowing barley at the threshing floor tonight.
+3. So you shall wash yourself and anoint yourself and put on your best clothes, and you shall go down to the threshing floor; but do not make yourself known to the man until he has finished eating and drinking.
+4. Let it be that when he lies down, you shall know the place where he lies, and you shall go and uncover his feet and lie down; then he will tell you what you shall do.”
+5. She said to her, “All that you say I will do.”
+6. So she went down to the threshing floor and did according to all that her mother-in-law had commanded her.
+7. And Boaz ate and drank and his heart was merry, and he went to lie down at the end of the heap of grain; and she came secretly and uncovered his feet and lay down.
+8. Then it happened in the middle of the night that the man was startled and bent forward; and behold, a woman was lying at his feet.
+9. And he said, “Who are you?” And she answered, “I am Ruth your maidservant. So spread your wing over your maidservant, for you are a kinsman redeemer.”
+10. Then he said, “May you be blessed of Yahweh, my daughter. You have shown your last lovingkindness to be better than the first by not going after young men, whether poor or rich.
+11. So now, my daughter, do not fear. All that you say, I will do for you; for all my people within the gates of the city know that you are a woman of excellence.
+12. But now it is true I am a kinsman redeemer; however, there is a kinsman redeemer closer than I.
+13. Stay this night, and it will be in the morning that, if he will redeem you, good; let him redeem you. But if he does not desire to redeem you, then I will redeem you, as Yahweh lives. Lie down until morning.”
+14. So she lay at his feet until morning and rose before one could recognize another; and he said, “Let it not be known that the woman came to the threshing floor.”
+15. And he said, “Give me the cloak that is on you and hold it.” So she held it, and he measured six measures of barley and placed it on her. Then she went into the city.
+16. Then she came to her mother-in-law, and she said, “How did it go, my daughter?” And she told her all that the man had done for her.
+17. She said, “These six measures of barley he gave to me, for he said, ‘Do not go to your mother-in-law empty.’”
+18. Then she said, “Sit, then, my daughter, until you know how the matter falls into place; for the man will not remain quiet until he has finished the matter today.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

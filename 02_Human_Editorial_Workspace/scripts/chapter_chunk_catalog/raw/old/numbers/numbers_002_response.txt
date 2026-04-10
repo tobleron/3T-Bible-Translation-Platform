@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Camp of Judah",
+      "reason": "Divine instruction on the eastern camp arrangement and military count."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 16,
+      "type": "law",
+      "title": "Camp of Reuben",
+      "reason": "Divine instruction on the southern camp arrangement and military count."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 17,
+      "type": "law",
+      "title": "Levites in Midst",
+      "reason": "Instruction regarding the placement of the Levites and the tent of meeting."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 24,
+      "type": "law",
+      "title": "Camp of Ephraim",
+      "reason": "Divine instruction on the western camp arrangement and military count."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 31,
+      "type": "law",
+      "title": "Camp of Dan",
+      "reason": "Divine instruction on the northern camp arrangement and military count."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 34,
+      "type": "list_or_catalog",
+      "title": "Summary of Camps",
+      "reason": "Total census count and narrative conclusion of the Israelites' obedience."
+    }
+  ]
+}

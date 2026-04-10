@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:51:05Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 35,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 29,
+  "verse_count": 29,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Jacob goes to Bethel",
+      "reason": "Narrative of Jacob's journey to Bethel, purification of the household, and building an altar."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 15,
+      "type": "blessing_or_prayer",
+      "title": "God renames Jacob",
+      "reason": "Divine appearance where God blesses Jacob and changes his name to Israel."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Death of Rachel",
+      "reason": "Narrative of Rachel's difficult birth, death, and burial near Bethlehem."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 26,
+      "type": "mixed",
+      "title": "Reuben's sin and sons listed",
+      "reason": "Brief account of Reuben's sin followed by a complete list of Jacob's twelve sons."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Death of Isaac",
+      "reason": "Narrative of Jacob returning to Isaac and the death and burial of Isaac."
+    }
+  ]
+}

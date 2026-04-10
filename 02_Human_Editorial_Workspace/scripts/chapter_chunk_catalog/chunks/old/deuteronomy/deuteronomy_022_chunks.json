@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T05:39:27Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 22,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 30,
+  "verse_count": 30,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "law",
+      "title": "Lost Property and Fallen Beasts",
+      "reason": "Laws regarding the return of lost livestock and helping fallen animals."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 12,
+      "type": "law",
+      "title": "Various Statutes on Clothing and Agriculture",
+      "reason": "Laws concerning mixed garments, gender-specific clothing, bird nests, roof parapets, and agricultural mixtures."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 21,
+      "type": "law",
+      "title": "Cases of Virginity Disputes",
+      "reason": "Legal procedures for a husband accusing his wife of non-virginity and the consequences if true or false."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Adultery and Fiancee Cases",
+      "reason": "Laws regarding adultery with a married woman and the distinction between forced and voluntary relations with an engaged virgin."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Unmarried Virgin and Father's Wife",
+      "reason": "Laws concerning a man seizing an unmarried virgin and the prohibition against taking a father's wife."
+    }
+  ]
+}

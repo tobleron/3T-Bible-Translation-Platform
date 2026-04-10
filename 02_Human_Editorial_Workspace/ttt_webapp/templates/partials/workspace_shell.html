@@ -1,0 +1,513 @@
+{% set book_items = navigator.get(selected_testament, []) %}
+{% set nav_state = namespace(selected_item=None) %}
+{% for item in book_items %}
+  {% if item.name == selected_book and (item.chapters or item.first_ready_chapter) %}
+    {% set nav_state.selected_item = item %}
+  {% endif %}
+{% endfor %}
+{% if nav_state.selected_item is none %}
+  {% for item in book_items %}
+    {% if nav_state.selected_item is none and (item.chapters or item.first_ready_chapter) %}
+      {% set nav_state.selected_item = item %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% set chapter_options = nav_state.selected_item.chapters if nav_state.selected_item and nav_state.selected_item.chapters else ([nav_state.selected_item.first_ready_chapter] if nav_state.selected_item and nav_state.selected_item.first_ready_chapter else []) %}
+
+<div class="compact-workspace">
+  <section class="workspace-card navigator-bar">
+    <div class="navigator-bar-head">
+      <div>
+        <p class="eyebrow">Workspace</p>
+        <h1>Chat-First Editing Surface</h1>
+      </div>
+      {% if chunk_summary.chunk %}
+      <div class="chunk-banner">
+        <strong>{{ chunk_summary.chunk.title }}</strong>
+        <span class="inline-badge">{{ chunk_summary.chunk.type }}</span>
+        <span class="inline-badge">{{ model_label }} thinking model</span>
+        <span class="muted-line">{{ chunk_summary.range_label }}</span>
+      </div>
+      {% elif selected_book and selected_chapter %}
+      <div class="chunk-banner is-muted">
+        <strong>{{ selected_book }} {{ selected_chapter }}</strong>
+        <span class="muted-line">Choose a chunk from the compact selector to start editing.</span>
+      </div>
+      {% endif %}
+    </div>
+
+    {# HTMX-powered navigator: no full-page refresh #}
+    <div class="compact-nav-form">
+      <label class="compact-select">
+        <span>Testament</span>
+        <select
+          name="testament"
+          hx-get="/workspace/navigate"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+          hx-trigger="change"
+          hx-include="closest .compact-nav-form"
+        >
+          {% for testament_name in ("old", "new") %}
+          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>
+            {{ testament_name.title() }} Testament
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="compact-select">
+        <span>Book</span>
+        <select
+          name="book"
+          hx-get="/workspace/navigate"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+          hx-trigger="change"
+          hx-include="closest .compact-nav-form"
+        >
+          {% for item in book_items %}
+          {% if item.chapters or item.first_ready_chapter %}
+          <option value="{{ item.name }}" {% if item.name == selected_book %}selected{% endif %}>
+            {{ item.name }}
+          </option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </label>
+      <label class="compact-select">
+        <span>Chapter</span>
+        <select
+          name="chapter"
+          hx-get="/workspace/navigate"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+          hx-trigger="change"
+          hx-include="closest .compact-nav-form"
+        >
+          {% for chapter_value in chapter_options %}
+          <option value="{{ chapter_value }}" {% if chapter_value == selected_chapter %}selected{% endif %}>
+            {{ chapter_value }}
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="compact-select chunk-select">
+        <span>Chunk</span>
+        <select
+          name="chunk"
+          hx-get="/workspace/navigate"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+          hx-trigger="change"
+          hx-include="closest .compact-nav-form"
+        >
+          <option value="">Chapter overview</option>
+          {% for chunk in chapter_chunks %}
+          {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
+          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>
+            {{ loop.index }}. {{ chunk.start_verse }}-{{ chunk.end_verse }} | {{ chunk.title }}
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+
+    {% if chapter_chunks %}
+    <div class="chunk-outline">
+      {% for chunk in chapter_chunks %}
+      {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
+      <a
+        class="chunk-outline-item {% if key == current_chunk_key %}is-active{% endif %}"
+        hx-get="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ key }}"
+        hx-target="#workspace-shell"
+        hx-swap="outerHTML"
+      >
+        <span class="chunk-outline-index">#{{ loop.index }}</span>
+        <span>{{ chunk.start_verse }}-{{ chunk.end_verse }}</span>
+        <strong>{{ chunk.title }}</strong>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if chapter_chunks|length >= 2 %}
+    <form
+      class="merge-bar"
+      hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge"
+      hx-target="#workspace-shell"
+      hx-swap="outerHTML"
+    >
+      <label class="compact-field tiny-field">
+        <span>Merge from</span>
+        <input type="text" name="start_index" value="1">
+      </label>
+      <label class="compact-field tiny-field">
+        <span>to</span>
+        <input type="text" name="end_index" value="2">
+      </label>
+      <label class="compact-field">
+        <span>New title</span>
+        <input type="text" name="title" placeholder="Merged section title">
+      </label>
+      <label class="compact-field">
+        <span>Type</span>
+        <input type="text" name="chunk_type" placeholder="Optional">
+      </label>
+      <label class="compact-field wide-field">
+        <span>Reason</span>
+        <input type="text" name="reason" placeholder="Optional merge note">
+      </label>
+      <button class="secondary-button" type="submit">Merge chunks</button>
+    </form>
+    {% endif %}
+  </section>
+
+  {% if activity_items or jobs %}
+  <section class="workspace-card activity-ribbon">
+    <div class="activity-ribbon-group">
+      <span class="activity-ribbon-label">Activity</span>
+      {% for item in activity_items %}
+      <span class="activity-pill {% if item.accent == 'red' %}is-error{% endif %}">
+        <strong>{{ item.title }}</strong>
+        <span>{{ item.summary }}</span>
+      </span>
+      {% else %}
+      <span class="activity-pill is-muted">No recent notes yet.</span>
+      {% endfor %}
+    </div>
+    {% if jobs %}
+    <div class="activity-ribbon-group">
+      <span class="activity-ribbon-label">Jobs</span>
+      {% for job in jobs %}
+      <span class="activity-pill">
+        <strong>{{ job.label }}</strong>
+        <span>{{ job.status }} · {{ job.elapsed }}</span>
+      </span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if flash_messages %}
+  <div class="flash-stack compact-flash-stack">
+    {% for message in flash_messages %}
+    <article class="flash flash-{{ message.accent }}">
+      <h3>{{ message.title }}</h3>
+      <pre>{{ message.body }}</pre>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if not current_chunk_key %}
+  <section class="workspace-card chapter-overview-card">
+    <p class="eyebrow">Chapter</p>
+    <h2>{{ selected_book }} {{ selected_chapter }}</h2>
+    {% if chapter_chunks %}
+    <p class="lede">This chapter already has {{ chapter_chunks|length }} saved chunks. Pick one from the top selector to open the draft and chat workspace.</p>
+    {% else %}
+    <p class="lede">No saved chunk titles are available for this chapter yet.</p>
+    {% endif %}
+  </section>
+  {% else %}
+  <div class="compact-columns">
+    <section class="left-workspace">
+      <article class="workspace-card chat-panel panel-focus">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Draft</p>
+            <h2>Range editor and model chat</h2>
+          </div>
+          <div class="panel-summary">
+            <span class="inline-badge">{{ chunk_summary.chunk.type if chunk_summary.chunk else "chunk" }}</span>
+            <span class="muted-line">{{ chunk_summary.range_label }}</span>
+          </div>
+        </div>
+
+        <div class="editor-range-bar">
+          <div class="editor-range-head">
+            <span class="eyebrow">Draft Range</span>
+            <span class="muted-line">Each verse has its own auto-expanding text area.</span>
+          </div>
+          <form
+            class="editor-range-form"
+            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/range"
+            hx-target="#workspace-shell"
+            hx-swap="outerHTML"
+          >
+            <label class="compact-field tiny-field">
+              <span>From</span>
+              <select name="editor_target_start" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/range" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .editor-range-form">
+                {% for verse in editor_range_options %}
+                <option value="{{ verse }}" {% if verse == editor_range_start %}selected{% endif %}>{{ verse }}</option>
+                {% endfor %}
+              </select>
+            </label>
+            <label class="compact-field tiny-field">
+              <span>To</span>
+              <select name="editor_target_end" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/range" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .editor-range-form">
+                {% for verse in editor_range_options %}
+                <option value="{{ verse }}" {% if verse == editor_range_end %}selected{% endif %}>{{ verse }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          </form>
+        </div>
+
+        <form
+          id="draft-form"
+          class="compact-editor-form"
+          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+        >
+          <label class="compact-field title-field">
+            <span>Draft title</span>
+            <input type="text" name="draft_title" value="{{ state.draft_title or (chunk_summary.chunk.title if chunk_summary.chunk else '') }}">
+          </label>
+
+          <input type="hidden" name="draft_range_start" value="{{ editor_range_start }}">
+          <input type="hidden" name="draft_range_end" value="{{ editor_range_end }}">
+
+          {% if state.title_alternatives %}
+          <div class="title-alternatives">
+            {% for option in state.title_alternatives[:4] %}
+            <span class="inline-badge">{{ option }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {# Per-verse auto-expanding textareas #}
+          <div class="verse-editor-stack">
+            {% for v in draft_editor_verses %}
+            <div class="verse-editor-row">
+              <span class="verse-editor-label">{{ v.verse }}</span>
+              <textarea
+                class="verse-editor-textarea"
+                name="verse_{{ v.verse }}"
+                rows="1"
+                hx-trigger="input changed delay:300ms"
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
+                hx-target="#workspace-shell"
+                hx-swap="outerHTML"
+                hx-include="#draft-form"
+              >{{ v.text }}</textarea>
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="editor-actions">
+            <button class="secondary-button" type="submit">Save draft</button>
+            <span class="muted-line">This box updates only the selected verse range inside the current chunk.</span>
+          </div>
+        </form>
+
+        <div class="chat-divider"></div>
+
+        {% if state.chat_messages %}
+        <div class="chat-log chat-log-large">
+          {% for item in state.chat_messages[-8:] %}
+          <div class="chat-entry chat-{{ item.role }}">
+            <strong>{{ "You" if item.role == "user" else "Model" }}</strong>
+            <p>{{ item.content }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="chat-empty">
+          <p>Ask for a first draft, tighten wording, unify terminology, smooth rhythm, or revise the currently selected verse range.</p>
+        </div>
+        {% endif %}
+
+        <form
+          class="compact-chat-form"
+          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+          hx-include="#draft-form"
+        >
+          <textarea name="message" rows="4" placeholder="Example: Tighten this draft for verses {{ editor_range_start }}-{{ editor_range_end }}, keep it literal, and preserve the title unless it clearly needs improvement."></textarea>
+          <div class="chat-actions">
+            <button class="primary-button" type="submit">Send to model</button>
+            <span class="muted-line">The current draft title and selected range are included automatically.</span>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <aside class="right-workspace">
+      {# Study panel: entire chunk blocks, not per-verse #}
+      <article class="workspace-card context-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Study</p>
+            <h2>Comparison sources and lexical context</h2>
+          </div>
+        </div>
+
+        <form
+          class="source-picks"
+          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources"
+          hx-trigger="change delay:120ms from:input"
+          hx-target="#workspace-shell"
+          hx-swap="outerHTML"
+        >
+          <div class="source-chip-grid">
+            {% for option in comparison_source_options %}
+            <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
+              <input
+                type="checkbox"
+                name="selected_sources"
+                value="{{ option.alias }}"
+                {% if option.selected %}checked{% endif %}
+                {% if option.disabled %}disabled{% endif %}
+              >
+              <span>{{ option.label }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </form>
+
+        {# Chunk-level study blocks #}
+        <div class="chunk-block-sheet">
+          {% for block in study_blocks %}
+          <div class="chunk-block">
+            <div class="chunk-block-head">
+              <span class="verse-tag">{{ block.label }}</span>
+              <span class="context-meta">{{ block.caption }}</span>
+            </div>
+            <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+
+      {# Session management panel #}
+      <article class="workspace-card session-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Sessions</p>
+            <h2>Saved chunk chat sessions</h2>
+          </div>
+          <div class="panel-summary">
+            <span class="inline-badge">{{ chunk_sessions|length }} session{{ "" if chunk_sessions|length == 1 else "s" }}</span>
+          </div>
+        </div>
+
+        {% if chunk_sessions %}
+        <div class="session-list">
+          {% for session in chunk_sessions %}
+          <div class="session-row {% if session.testament == selected_testament and session.book|lower|replace(' ', '') == selected_book|lower|replace(' ', '') and session.chapter == selected_chapter and session.chunk_range == current_chunk_key %}is-current{% endif %}">
+            <div class="session-info">
+              <strong>{{ session.book }} {{ session.chapter }}:{{ session.chunk_range }}</strong>
+              <span class="muted-line">{{ session.message_count }} messages</span>
+            </div>
+            {% if session.testament == selected_testament and session.book|lower|replace(' ', '') == selected_book|lower|replace(' ', '') and session.chapter == selected_chapter and session.chunk_range == current_chunk_key %}
+            <form
+              class="session-clear-form"
+              hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
+              hx-target="#workspace-shell"
+              hx-swap="outerHTML"
+            >
+              <button class="tiny-danger-button" type="submit" title="Clear this session's chat history">Clear</button>
+            </form>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="muted-line">No saved sessions yet. Chat history is persisted automatically per chunk.</p>
+        {% endif %}
+      </article>
+
+      <article class="workspace-card commit-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Commit</p>
+            <h2>Write or roll back this chunk</h2>
+          </div>
+          <div class="panel-summary">
+            <span class="inline-badge">{{ pending_writes|length }} pending file{{ "" if pending_writes|length == 1 else "s" }}</span>
+          </div>
+        </div>
+
+        <div class="commit-actions">
+          <form
+            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply"
+            hx-target="#workspace-shell"
+            hx-swap="outerHTML"
+            hx-include="#draft-form"
+          >
+            <button class="primary-button" type="submit">Commit current draft</button>
+          </form>
+          <form
+            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/rollback"
+            hx-target="#workspace-shell"
+            hx-swap="outerHTML"
+          >
+            <button class="secondary-button" type="submit" {% if not commit_history %}disabled{% endif %}>Rollback latest commit</button>
+          </form>
+          <form
+            hx-post="/epub/generate-download"
+            hx-target="#workspace-shell"
+            hx-swap="outerHTML"
+          >
+            <button class="secondary-button" type="submit">Generate EPUB</button>
+          </form>
+        </div>
+
+        <div class="pending-write-block">
+          <h3>Pending writes</h3>
+          <ul class="compact-list">
+            {% for path, old_text, new_text, notes in pending_writes %}
+            <li>
+              <strong>{{ path.name }}</strong>
+              <span>{{ "; ".join(notes) if notes else "pending change" }}</span>
+            </li>
+            {% else %}
+            <li>No pending file writes. The current draft matches the committed JSON.</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="pending-write-block">
+          <h3>Rollback history</h3>
+          <ul class="compact-list">
+            {% for item in commit_history %}
+            <li>
+              <strong>{{ item.name }}</strong>
+              <span>{{ "Latest rollback point" if item.latest else "Earlier snapshot" }}</span>
+            </li>
+            {% else %}
+            <li>No rollback snapshot is available yet.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </article>
+    </aside>
+  </div>
+  {% endif %}
+</div>
+
+{# Auto-resize textareas#}
+<script>
+document.addEventListener('htmx:afterSettle', function() {
+  document.querySelectorAll('.verse-editor-textarea').forEach(function(el) {
+    autoResize(el);
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.verse-editor-textarea').forEach(function(el) {
+    autoResize(el);
+  });
+});
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = (el.scrollHeight + 4) + 'px';
+  el.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight + 4) + 'px';
+  });
+}
+</script>

@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Numbers 27:1-23
+
+Chapter text:
+1. Then the daughters of Zelophehad, the son of Hepher, the son of Gilead, the son of Machir, the son of Manasseh, of the families of Manasseh the son of Joseph, came near; and these are the names of his daughters: Mahlah, Noah and Hoglah and Milcah and Tirzah.
+2. And they stood before Moses and before Eleazar the priest and before the leaders and all the congregation, at the doorway of the tent of meeting, saying,
+3. “Our father died in the wilderness, yet he was not among the congregation of those who gathered themselves together against Yahweh in the congregation of Korah; but he died in his own sin, and he had no sons.
+4. Why should the name of our father be withdrawn from among his family because he had no son? Give us a possession among our father’s brothers.”
+5. So Moses brought their case near before Yahweh.
+6. Then Yahweh spoke to Moses, saying,
+7. “The daughters of Zelophehad are right in their statements. You shall surely give them a possession for an inheritance among their father’s brothers, and you shall have the inheritance of their father pass on to them.
+8. Further, you shall speak to the sons of Israel, saying, ‘If a man dies and has no son, then you shall have his inheritance pass on to his daughter.
+9. And if he has no daughter, then you shall give his inheritance to his brothers.
+10. And if he has no brothers, then you shall give his inheritance to his father’s brothers.
+11. And if his father has no brothers, then you shall give his inheritance to his blood relative in his own family, and he shall possess it; and it shall be a statutory judgment to the sons of Israel, just as Yahweh commanded Moses.’”
+12. Then Yahweh said to Moses, “Go up to this mountain of Abarim, and see the land which I have given to the sons of Israel.
+13. So when you have seen it, you too will be gathered to your people, as Aaron your brother was,
+14. for in the wilderness of Zin, during the strife of the congregation, you rebelled against My command to treat Me as holy before their eyes at the water.” (These are the waters of Meribah of Kadesh in the wilderness of Zin.)
+15. Then Moses spoke to Yahweh, saying,
+16. “May Yahweh, the God of the spirits of all flesh, appoint a man over the congregation,
+17. who will go out and come in before them, and who will lead them out and bring them in, so that the congregation of Yahweh will not be like sheep which have no shepherd.”
+18. So Yahweh said to Moses, “Take Joshua the son of Nun, a man in whom is the Spirit, and lay your hand on him;
+19. and have him stand before Eleazar the priest and before all the congregation, and commission him in their sight.
+20. And you shall put some of your splendor on him, in order that all the congregation of the sons of Israel may obey him.
+21. Moreover, he shall stand before Eleazar the priest, who shall inquire for him by the judgment of the Urim before Yahweh. At his command they shall go out, and at his command they shall come in, both he and the sons of Israel with him, even all the congregation.”
+22. So Moses did just as Yahweh commanded him; and he took Joshua and had him stand before Eleazar the priest and before all the congregation.
+23. Then he laid his hands on him and commissioned him, just as Yahweh had spoken by the hand of Moses.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

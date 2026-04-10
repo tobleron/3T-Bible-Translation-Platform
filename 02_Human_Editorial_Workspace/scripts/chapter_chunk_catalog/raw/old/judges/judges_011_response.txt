@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Jephthah's Exile",
+      "reason": "Introduces Jephthah's background and his expulsion from his family."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 11,
+      "type": "dialogue",
+      "title": "Jephthah Called to Leadership",
+      "reason": "The elders recruit Jephthah and he negotiates his terms of command."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 28,
+      "type": "argument",
+      "title": "Jephthah's Diplomatic Note",
+      "reason": "A detailed historical and legal argument presented to the Ammonite king."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 33,
+      "type": "story",
+      "title": "The Battle with Ammon",
+      "reason": "Jephthah is empowered by the Spirit and defeats the enemy."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 40,
+      "type": "story",
+      "title": "The Vow Fulfilled",
+      "reason": "Jephthah returns home, meets his daughter, and fulfills his vow."
+    }
+  ]
+}

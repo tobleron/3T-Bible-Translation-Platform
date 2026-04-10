@@ -1,0 +1,32 @@
+{
+  "testament": "XX",
+  "book": "BookName",
+  "chapter": 1,
+  "sections": [
+    {
+      "headline": "Sample Title",
+      "verses": [
+        {
+          "verse": 1,
+          "text": "Someone said: “I am the alpha and the omega. The beginning and the end.”"
+        },
+        {
+          "verse": 2,
+          "text": "Someone else said: “It was said in the ancient times: ‘Do not comit adultery’. Use single curly quotes when quotation is nested inside a double quotation.”"
+        }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "verse": 1,
+      "letter": "",
+      "content": "Footnote sample"
+    },
+    {
+      "verse": 2,
+      "letter": "",
+      "content": "Footnote sample"
+    }
+  ]
+}

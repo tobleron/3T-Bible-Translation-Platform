@@ -1,0 +1,73 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "story",
+      "title": "The Philistine and Israelian Camps",
+      "reason": "Describes the positioning of armies and Goliath's challenge."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "story",
+      "title": "David Sent to the Camp",
+      "reason": "Introduces David and his mission to bring supplies."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 27,
+      "type": "story",
+      "title": "David Arrives at the Battle Line",
+      "reason": "David arrives, sees Goliath, and inquires about rewards."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 31,
+      "type": "dialogue",
+      "title": "Eliab Rebukes David",
+      "reason": "David's brother questions his motives before Saul is notified."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 37,
+      "type": "dialogue",
+      "title": "David Volunteers to Fight",
+      "reason": "David speaks to Saul and recounts his past victories."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 40,
+      "type": "story",
+      "title": "David Prepares for Battle",
+      "reason": "Saul clothes David, who then chooses his own weapons."
+    },
+    {
+      "start_verse": 41,
+      "end_verse": 47,
+      "type": "dialogue",
+      "title": "Confrontation with Goliath",
+      "reason": "Goliath and David exchange words before the fight."
+    },
+    {
+      "start_verse": 48,
+      "end_verse": 54,
+      "type": "story",
+      "title": "David Defeats Goliath",
+      "reason": "The battle occurs and the Philistines flee."
+    },
+    {
+      "start_verse": 55,
+      "end_verse": 58,
+      "type": "dialogue",
+      "title": "Saul Questions David's Identity",
+      "reason": "Saul asks Abner and David about his lineage."
+    }
+  ]
+}

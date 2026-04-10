@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Moses Introduces the Law on Vows",
+      "reason": "Moses addresses the tribal heads to introduce Yahweh's command regarding vows."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "law",
+      "title": "Vows of a Young Woman in Her Father's House",
+      "reason": "Details the conditions under which a father can confirm or annul his daughter's vows."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Vows of a Married Woman and Widow",
+      "reason": "Describes how a husband or widow's status affects the validity of her vows."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Vows Made in a Husband's House",
+      "reason": "Explains the husband's authority to annul vows made by his wife and the consequences of silence."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 16,
+      "type": "speech",
+      "title": "Conclusion of the Statutes",
+      "reason": "Summarizes the chapter as statutes commanded by Yahweh to Moses regarding family relationships."
+    }
+  ]
+}

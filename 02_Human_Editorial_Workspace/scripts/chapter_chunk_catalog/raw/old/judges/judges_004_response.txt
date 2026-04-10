@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Israel's Oppression under Jabin",
+      "reason": "Establishes the historical context of Israel's sin and oppression by King Jabin and Sisera."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 9,
+      "type": "dialogue",
+      "title": "Deborah Summons Barak",
+      "reason": "Introduces Deborah as judge and records the dialogue where she calls Barak to battle."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Mobilization of Forces",
+      "reason": "Describes the gathering of troops and Sisera's response to the threat."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 16,
+      "type": "story",
+      "title": "The Battle at Mount Tabor",
+      "reason": "Depicts the divine intervention and military victory over Sisera's army."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Death of Sisera by Jael",
+      "reason": "Narrates the flight of Sisera and his assassination by Jael in her tent."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Final Subjugation of Canaan",
+      "reason": "Concludes the account with the total defeat of King Jabin."
+    }
+  ]
+}

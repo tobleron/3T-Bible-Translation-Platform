@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "law",
+      "title": "Centralization of Worship",
+      "reason": "Establishes the command to destroy local shrines and worship only at the chosen place."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 28,
+      "type": "law",
+      "title": "Regulations on Meat and Tithes",
+      "reason": "Distinguishes between eating meat locally versus bringing tithes to the central sanctuary."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 31,
+      "type": "exhortation",
+      "title": "Warning Against Idolatry",
+      "reason": "Admonishes the people to avoid adopting the religious practices of the conquered nations."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 32,
+      "type": "exhortation",
+      "title": "Final Charge",
+      "reason": "Concludes the chapter with a summary command to observe the statutes precisely."
+    }
+  ]
+}

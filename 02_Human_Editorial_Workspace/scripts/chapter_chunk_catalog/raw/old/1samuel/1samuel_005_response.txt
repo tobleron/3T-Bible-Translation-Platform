@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Dagon Falls Before the Ark in Ashdod",
+      "reason": "Describes the arrival of the ark in Ashdod and the repeated humiliation of the god Dagon."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "story",
+      "title": "The Plague of Tumors in Ashdod",
+      "reason": "Details the divine judgment on the city and the Philistines' decision to move the ark."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The Ark Moves to Gath",
+      "reason": "Records the transfer of the ark to Gath and the subsequent plague there."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "story",
+      "title": "The Ark Moves to Ekron",
+      "reason": "Describes the panic in Ekron and the final decision to send the ark away."
+    }
+  ]
+}

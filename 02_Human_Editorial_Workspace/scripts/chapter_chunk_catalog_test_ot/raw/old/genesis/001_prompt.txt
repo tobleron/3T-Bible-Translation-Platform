@@ -1,0 +1,160 @@
+/no_think
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting an Old Testament chapter window into practical translation chunks.
+
+Primary source:
+- Hebrew text first.
+
+Comparison witness:
+- LXX Greek may be used as a supporting witness, but it must not override Hebrew as the default basis.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, law, oracle, psalm, vision, genealogy, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+
+Preferred chunk types for OT:
+- story
+- speech
+- dialogue
+- genealogy
+- law
+- oracle
+- psalm
+- vision
+- list_or_catalog
+- mixed
+
+Be conservative and practical. The translator should be able to study and draft one chunk at a time without losing context.
+
+
+Chapter to segment: Genesis 1:1-31
+
+Original-language context:
+1 Hebrew: בְּ/רֵאשִׁ֖ית בָּרָ֣א אֱלֹהִ֑ים אֵ֥ת הַ/שָּׁמַ֖יִם וְ/אֵ֥ת הָ/אָֽרֶץ\׃
+1 Hebrew literal: beginning / ba.Ra' / 'E.lo.Him / 'et / ha./sha.Ma.yim / ve./'Et / country;_planet
+1 LXX: ἐν ἀρχῇ ἐποίησεν ὁ θεὸς τὸν οὐρανὸν καὶ τὴν γῆν
+2 Hebrew: וְ/הָ/אָ֗רֶץ הָיְתָ֥ה תֹ֙הוּ֙ וָ/בֹ֔הוּ וְ/חֹ֖שֶׁךְ עַל\־ פְּנֵ֣י תְה֑וֹם וְ/ר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל\־ פְּנֵ֥י הַ/מָּֽיִם\׃
+2 Hebrew literal: country;_planet / ha.ye.Tah / to.hu / va./Vo.hu / ve./Cho.shekh / 'al- / surface / te.Hom / spirit / 'E.lo.Him / me.ra.Che.fet / 'al- / surface / ha./Ma.yim
+2 LXX: ἡ δὲ γῆ ἦν ἀόρατος καὶ ἀκατασκεύαστος καὶ σκότος ἐπάνω τῆς ἀβύσσου καὶ πνεῦμα θεοῦ ἐπεφέρετο ἐπάνω τοῦ ὕδατος
+3 Hebrew: וַ/יֹּ֥אמֶר אֱלֹהִ֖ים יְהִ֣י א֑וֹר וַֽ/יְהִי\־ אֽוֹר\׃
+3 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / ye.Hi / 'or / va/y.hi- / 'or
+3 LXX: καὶ εἶπεν ὁ θεός γενηθήτω φῶς καὶ ἐγένετο φῶς
+4 Hebrew: וַ/יַּ֧רְא אֱלֹהִ֛ים אֶת\־ הָ/א֖וֹר כִּי\־ ט֑וֹב וַ/יַּבְדֵּ֣ל אֱלֹהִ֔ים בֵּ֥ין הָ/א֖וֹר וּ/בֵ֥ין הַ/חֹֽשֶׁךְ\׃
+4 Hebrew literal: see / 'E.lo.Him / 'et- / ha./'Or / ki- / Tov / va/i.yav.Del / 'E.lo.Him / between / ha./'Or / between / ha./Cho.shekh
+4 LXX: καὶ εἶδεν ὁ θεὸς τὸ φῶς ὅτι καλόν καὶ διεχώρισεν ὁ θεὸς ἀνὰ μέσον τοῦ φωτὸς καὶ ἀνὰ μέσον τοῦ σκότους
+5 Hebrew: וַ/יִּקְרָ֨א אֱלֹהִ֤ים\׀ לָ/אוֹר֙ י֔וֹם וְ/לַ/חֹ֖שֶׁךְ קָ֣רָא לָ֑יְלָה וַֽ/יְהִי\־ עֶ֥רֶב וַֽ/יְהִי\־ בֹ֖קֶר י֥וֹם אֶחָֽד\׃\ \פ
+5 Hebrew literal: call_by / 'E.lo.Him / la./'Or / day / ve./la./Cho.shekh / call_by / Lai.lah / va/y.hi- / 'E.rev / va/y.hi- / Vo.ker / day / 'e.Chad
+5 LXX: καὶ ἐκάλεσεν ὁ θεὸς τὸ φῶς ἡμέραν καὶ τὸ σκότος ἐκάλεσεν νύκτα καὶ ἐγένετο ἑσπέρα καὶ ἐγένετο πρωί ἡμέρα μία
+6 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֔ים יְהִ֥י רָקִ֖יעַ בְּ/ת֣וֹךְ הַ/מָּ֑יִם וִ/יהִ֣י מַבְדִּ֔יל בֵּ֥ין מַ֖יִם לָ/מָֽיִם\׃
+6 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / ye.Hi / ra.Ki.a' / be./Tokh / ha./Ma.yim / vi./Hi / mav.Dil / between / Ma.yim / la./Ma.yim
+6 LXX: καὶ εἶπεν ὁ θεός γενηθήτω στερέωμα ἐν μέσῳ τοῦ ὕδατος καὶ ἔστω διαχωρίζον ἀνὰ μέσον ὕδατος καὶ ὕδατος καὶ ἐγένετο οὕτως
+7 Hebrew: וַ/יַּ֣עַשׂ אֱלֹהִים֮ אֶת\־ הָ/רָקִיעַ֒ וַ/יַּבְדֵּ֗ל בֵּ֤ין הַ/מַּ֙יִם֙ אֲשֶׁר֙ מִ/תַּ֣חַת לָ/רָקִ֔יעַ וּ/בֵ֣ין הַ/מַּ֔יִם אֲשֶׁ֖ר מֵ/עַ֣ל לָ/רָקִ֑יעַ וַֽ/יְהִי\־ כֵֽן\׃
+7 Hebrew literal: make(OBJECT) / 'E.lo.Him / 'et- / ha./ra.ki.a' / va/i.yav.Del / between / ha./Ma.yim / 'a.Sher / under / la./ra.Ki.a' / between / ha./Ma.yim / 'a.Sher / me./'Al / la./ra.Ki.a' / va/y.hi- / Khen
+7 LXX: καὶ ἐποίησεν ὁ θεὸς τὸ στερέωμα καὶ διεχώρισεν ὁ θεὸς ἀνὰ μέσον τοῦ ὕδατος ὃ ἦν ὑποκάτω τοῦ στερεώματος καὶ ἀνὰ μέσον τοῦ ὕδατος τοῦ ἐπάνω τοῦ στερεώματος
+8 Hebrew: וַ/יִּקְרָ֧א אֱלֹהִ֛ים לָֽ/רָקִ֖יעַ שָׁמָ֑יִם וַֽ/יְהִי\־ עֶ֥רֶב וַֽ/יְהִי\־ בֹ֖קֶר י֥וֹם שֵׁנִֽי\׃\ \פ
+8 Hebrew literal: call_by / 'E.lo.Him / la./ra.Ki.a' / sha.Ma.yim / va/y.hi- / 'E.rev / va/y.hi- / Vo.ker / day / she.Ni
+8 LXX: καὶ ἐκάλεσεν ὁ θεὸς τὸ στερέωμα οὐρανόν καὶ εἶδεν ὁ θεὸς ὅτι καλόν καὶ ἐγένετο ἑσπέρα καὶ ἐγένετο πρωί ἡμέρα δευτέρα
+9 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֗ים יִקָּו֨וּ הַ/מַּ֜יִם מִ/תַּ֤חַת הַ/שָּׁמַ֙יִם֙ אֶל\־ מָק֣וֹם אֶחָ֔ד וְ/תֵרָאֶ֖ה הַ/יַּבָּשָׁ֑ה וַֽ/יְהִי\־ כֵֽן\׃
+9 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / yi.ka.Vu / ha./Ma.yim / under / ha./sha.Ma.yim / 'El- / ma.Kom / 'e.Chad / see / hai./ya.ba.Shah / va/y.hi- / Khen
+9 LXX: καὶ εἶπεν ὁ θεός συναχθήτω τὸ ὕδωρ τὸ ὑποκάτω τοῦ οὐρανοῦ εἰς συναγωγὴν μίαν καὶ ὀφθήτω ἡ ξηρά καὶ ἐγένετο οὕτως καὶ συνήχθη τὸ ὕδωρ τὸ ὑποκάτω τοῦ οὐρανοῦ εἰς τὰς συναγωγὰς αὐτῶν καὶ ὤφθη ἡ ξηρά
+10 Hebrew: וַ/יִּקְרָ֨א אֱלֹהִ֤ים\׀ לַ/יַּבָּשָׁה֙ אֶ֔רֶץ וּ/לְ/מִקְוֵ֥ה הַ/מַּ֖יִם קָרָ֣א יַמִּ֑ים וַ/יַּ֥רְא אֱלֹהִ֖ים כִּי\־ טֽוֹב\׃
+10 Hebrew literal: call_by / 'E.lo.Him / la/i.ya.ba.Shah / country;_planet / u./le./mik.Veh / ha./Ma.yim / call_by / sea / see / 'E.lo.Him / ki- / Tov
+10 LXX: καὶ ἐκάλεσεν ὁ θεὸς τὴν ξηρὰν γῆν καὶ τὰ συστήματα τῶν ὑδάτων ἐκάλεσεν θαλάσσας καὶ εἶδεν ὁ θεὸς ὅτι καλόν
+11 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֗ים תַּֽדְשֵׁ֤א הָ/אָ֙רֶץ֙ דֶּ֔שֶׁא עֵ֚שֶׂב מַזְרִ֣יעַ זֶ֔רַע עֵ֣ץ פְּרִ֞י עֹ֤שֶׂה פְּרִי֙ לְ/מִינ֔/וֹ אֲשֶׁ֥ר זַרְע/וֹ\־ ב֖/וֹ עַל\־ הָ/אָ֑רֶץ וַֽ/יְהִי\־ כֵֽן\׃
+11 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / tad.She' / country;_planet / De.she' / 'E.sev / maz.Ri.a' / seed / tree / pe.Ri / make(OBJECT) / pe.Ri / le./mi.N/o / 'a.Sher / seed / v/o / 'al- / country;_planet / va/y.hi- / Khen
+11 LXX: καὶ εἶπεν ὁ θεός βλαστησάτω ἡ γῆ βοτάνην χόρτου σπεῖρον σπέρμα κατὰ γένος καὶ καθ᾿ ὁμοιότητα καὶ ξύλον κάρπιμον ποιοῦν καρπόν οὗ τὸ σπέρμα αὐτοῦ ἐν αὐτῷ κατὰ γένος ἐπὶ τῆς γῆς καὶ ἐγένετο οὕτως
+12 Hebrew: וַ/תּוֹצֵ֨א הָ/אָ֜רֶץ דֶּ֠שֶׁא עֵ֣שֶׂב מַזְרִ֤יעַ זֶ֙רַע֙ לְ/מִינֵ֔/הוּ וְ/עֵ֧ץ עֹֽשֶׂה\־ פְּרִ֛י אֲשֶׁ֥ר זַרְע/וֹ\־ ב֖/וֹ לְ/מִינֵ֑/הוּ וַ/יַּ֥רְא אֱלֹהִ֖ים כִּי\־ טֽוֹב\׃
+12 Hebrew literal: produce / country;_planet / De.she' / 'E.sev / maz.Ri.a' / seed / le./mi.Ne./hu / tree / make(OBJECT) / pe.Ri / 'a.Sher / seed / v/o / le./mi.Ne./hu / see / 'E.lo.Him / ki- / Tov
+12 LXX: καὶ ἐξήνεγκεν ἡ γῆ βοτάνην χόρτου σπεῖρον σπέρμα κατὰ γένος καὶ καθ᾿ ὁμοιότητα καὶ ξύλον κάρπιμον ποιοῦν καρπόν οὗ τὸ σπέρμα αὐτοῦ ἐν αὐτῷ κατὰ γένος ἐπὶ τῆς γῆς καὶ εἶδεν ὁ θεὸς ὅτι καλόν
+13 Hebrew: וַֽ/יְהִי\־ עֶ֥רֶב וַֽ/יְהִי\־ בֹ֖קֶר י֥וֹם שְׁלִישִֽׁי\׃\ \פ
+13 Hebrew literal: va/y.hi- / 'E.rev / va/y.hi- / Vo.ker / day / she.li.Shi
+13 LXX: καὶ ἐγένετο ἑσπέρα καὶ ἐγένετο πρωί ἡμέρα τρίτη
+14 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֗ים יְהִ֤י מְאֹרֹת֙ בִּ/רְקִ֣יעַ הַ/שָּׁמַ֔יִם לְ/הַבְדִּ֕יל בֵּ֥ין הַ/יּ֖וֹם וּ/בֵ֣ין הַ/לָּ֑יְלָה וְ/הָי֤וּ לְ/אֹתֹת֙ וּ/לְ/מ֣וֹעֲדִ֔ים וּ/לְ/יָמִ֖ים וְ/שָׁנִֽים\׃
+14 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / ye.Hi / me.'o.Rot / bi/r.Ki.a' / ha./sha.Ma.yim / le./hav.Dil / between / day / between / ha./La.ye.lah / ve./ha.Yu / indicator / time_appointed / day / ve./sha.Nim
+14 LXX: καὶ εἶπεν ὁ θεός γενηθήτωσαν φωστῆρες ἐν τῷ στερεώματι τοῦ οὐρανοῦ εἰς φαῦσιν τῆς γῆς τοῦ διαχωρίζειν ἀνὰ μέσον τῆς ἡμέρας καὶ ἀνὰ μέσον τῆς νυκτὸς καὶ ἔστωσαν εἰς σημεῖα καὶ εἰς καιροὺς καὶ εἰς ἡμέρας καὶ εἰς ἐνιαυτοὺς
+15 Hebrew: וְ/הָי֤וּ לִ/מְאוֹרֹת֙ בִּ/רְקִ֣יעַ הַ/שָּׁמַ֔יִם לְ/הָאִ֖יר עַל\־ הָ/אָ֑רֶץ וַֽ/יְהִי\־ כֵֽן\׃
+15 Hebrew literal: ve./ha.Yu / li/m.'o.Rot / bi/r.Ki.a' / ha./sha.Ma.yim / le./ha.'Ir / 'al- / country;_planet / va/y.hi- / Khen
+15 LXX: καὶ ἔστωσαν εἰς φαῦσιν ἐν τῷ στερεώματι τοῦ οὐρανοῦ ὥστε φαίνειν ἐπὶ τῆς γῆς καὶ ἐγένετο οὕτως
+16 Hebrew: וַ/יַּ֣עַשׂ אֱלֹהִ֔ים אֶת\־ שְׁנֵ֥י הַ/מְּאֹרֹ֖ת הַ/גְּדֹלִ֑ים אֶת\־ הַ/מָּא֤וֹר הַ/גָּדֹל֙ לְ/מֶמְשֶׁ֣לֶת הַ/יּ֔וֹם וְ/אֶת\־ הַ/מָּא֤וֹר הַ/קָּטֹן֙ לְ/מֶמְשֶׁ֣לֶת הַ/לַּ֔יְלָה וְ/אֵ֖ת הַ/כּוֹכָבִֽים\׃
+16 Hebrew literal: make(OBJECT) / 'E.lo.Him / 'et- / she.Nei / ha./me.'o.Rot / large / 'et- / ha./ma.'or / large / le./mem.She.let / day / ve./'Et / ha./ma.'or / small / le./mem.She.let / ha./Lay.lah / ve./'Et / ha./ko.kha.Vim
+16 LXX: καὶ ἐποίησεν ὁ θεὸς τοὺς δύο φωστῆρας τοὺς μεγάλους τὸν φωστῆρα τὸν μέγαν εἰς ἀρχὰς τῆς ἡμέρας καὶ τὸν φωστῆρα τὸν ἐλάσσω εἰς ἀρχὰς τῆς νυκτός καὶ τοὺς ἀστέρας
+17 Hebrew: וַ/יִּתֵּ֥ן אֹתָ֛/ם אֱלֹהִ֖ים בִּ/רְקִ֣יעַ הַ/שָּׁמָ֑יִם לְ/הָאִ֖יר עַל\־ הָ/אָֽרֶץ\׃
+17 Hebrew literal: put / 'o.Ta/m / 'E.lo.Him / bi/r.Ki.a' / ha./sha.Ma.yim / le./ha.'Ir / 'al- / country;_planet
+17 LXX: καὶ ἔθετο αὐτοὺς ὁ θεὸς ἐν τῷ στερεώματι τοῦ οὐρανοῦ ὥστε φαίνειν ἐπὶ τῆς γῆς
+18 Hebrew: וְ/לִ/מְשֹׁל֙ בַּ/יּ֣וֹם וּ/בַ/לַּ֔יְלָה וּֽ/לֲ/הַבְדִּ֔יל בֵּ֥ין הָ/א֖וֹר וּ/בֵ֣ין הַ/חֹ֑שֶׁךְ וַ/יַּ֥רְא אֱלֹהִ֖ים כִּי\־ טֽוֹב\׃
+18 Hebrew literal: ve./li/m.Shol / day / u./va./Lay.lah / u./la./hav.Dil / between / ha./'Or / between / ha./Cho.shekh / see / 'E.lo.Him / ki- / Tov
+18 LXX: καὶ ἄρχειν τῆς ἡμέρας καὶ τῆς νυκτὸς καὶ διαχωρίζειν ἀνὰ μέσον τοῦ φωτὸς καὶ ἀνὰ μέσον τοῦ σκότους καὶ εἶδεν ὁ θεὸς ὅτι καλόν
+19 Hebrew: וַֽ/יְהִי\־ עֶ֥רֶב וַֽ/יְהִי\־ בֹ֖קֶר י֥וֹם רְבִיעִֽי\׃\ \פ
+19 Hebrew literal: va/y.hi- / 'E.rev / va/y.hi- / Vo.ker / day / re.vi.'I
+19 LXX: καὶ ἐγένετο ἑσπέρα καὶ ἐγένετο πρωί ἡμέρα τετάρτη
+20 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֔ים יִשְׁרְצ֣וּ הַ/מַּ֔יִם שֶׁ֖רֶץ נֶ֣פֶשׁ חַיָּ֑ה וְ/עוֹף֙ יְעוֹפֵ֣ף עַל\־ הָ/אָ֔רֶץ עַל\־ פְּנֵ֖י רְקִ֥יעַ הַ/שָּׁמָֽיִם\׃
+20 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / yish.re.Tzu / ha./Ma.yim / She.retz / animal / chai.Yah / ve./'Of / ye.'o.Fef / 'al- / country;_planet / 'al- / surface / re.Ki.a' / ha./sha.Ma.yim
+20 LXX: καὶ εἶπεν ὁ θεός ἐξαγαγέτω τὰ ὕδατα ἑρπετὰ ψυχῶν ζωσῶν καὶ πετεινὰ πετόμενα ἐπὶ τῆς γῆς κατὰ τὸ στερέωμα τοῦ οὐρανοῦ καὶ ἐγένετο οὕτως
+21 Hebrew: וַ/יִּבְרָ֣א אֱלֹהִ֔ים אֶת\־ הַ/תַּנִּינִ֖ם הַ/גְּדֹלִ֑ים וְ/אֵ֣ת כָּל\־ נֶ֣פֶשׁ הַֽ/חַיָּ֣ה\׀ הָֽ/רֹמֶ֡שֶׂת אֲשֶׁר֩ שָׁרְצ֨וּ הַ/מַּ֜יִם לְ/מִֽינֵ/הֶ֗ם וְ/אֵ֨ת כָּל\־ ע֤וֹף כָּנָף֙ לְ/מִינֵ֔/הוּ וַ/יַּ֥רְא אֱלֹהִ֖ים כִּי\־ טֽוֹב\׃
+21 Hebrew literal: va/i.yiv.Ra' / 'E.lo.Him / 'et- / monster / large / ve./'Et / kol- / animal / ha./chai.Yah / ha./ro.Me.set / 'a.Sher / sha.re.Tzu / ha./Ma.yim / le./mi.ne./Hem / ve./'Et / kol- / of / ka.Naf / le./mi.Ne./hu / see / 'E.lo.Him / ki- / Tov
+21 LXX: καὶ ἐποίησεν ὁ θεὸς τὰ κήτη τὰ μεγάλα καὶ πᾶσαν ψυχὴν ζῴων ἑρπετῶν ἃ ἐξήγαγεν τὰ ὕδατα κατὰ γένη αὐτῶν καὶ πᾶν πετεινὸν πτερωτὸν κατὰ γένος καὶ εἶδεν ὁ θεὸς ὅτι καλά
+22 Hebrew: וַ/יְבָ֧רֶךְ אֹתָ֛/ם אֱלֹהִ֖ים לֵ/אמֹ֑ר פְּר֣וּ וּ/רְב֗וּ וּ/מִלְא֤וּ אֶת\־ הַ/מַּ֙יִם֙ בַּ/יַּמִּ֔ים וְ/הָ/ע֖וֹף יִ֥רֶב בָּ/אָֽרֶץ\׃
+22 Hebrew literal: va/y.Va.rekh / 'o.Ta/m / 'E.lo.Him / le./Mor / pe.Ru / u./re.Vu / u./mil.'U / 'et- / ha./Ma.yim / sea / ve./ha./'of / Yi.rev / country;_planet
+22 LXX: καὶ ηὐλόγησεν αὐτὰ ὁ θεὸς λέγων αὐξάνεσθε καὶ πληθύνεσθε καὶ πληρώσατε τὰ ὕδατα ἐν ταῖς θαλάσσαις καὶ τὰ πετεινὰ πληθυνέσθωσαν ἐπὶ τῆς γῆς
+23 Hebrew: וַֽ/יְהִי\־ עֶ֥רֶב וַֽ/יְהִי\־ בֹ֖קֶר י֥וֹם חֲמִישִֽׁי\׃\ \פ
+23 Hebrew literal: va/y.hi- / 'E.rev / va/y.hi- / Vo.ker / day / cha.mi.Shi
+23 LXX: καὶ ἐγένετο ἑσπέρα καὶ ἐγένετο πρωί ἡμέρα πέμπτη
+24 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֗ים תּוֹצֵ֨א הָ/אָ֜רֶץ נֶ֤פֶשׁ חַיָּה֙ לְ/מִינָ֔/הּ בְּהֵמָ֥ה וָ/רֶ֛מֶשׂ וְ/חַֽיְתוֹ\־ אֶ֖רֶץ לְ/מִינָ֑/הּ וַֽ/יְהִי\־ כֵֽן\׃
+24 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / produce / soil / animal / chai.Yah / le./mi.Na/h / be.he.Mah / va./Re.mes / ve./chay.tov- / soil / le./mi.Na/h / va/y.hi- / Khen
+24 LXX: καὶ εἶπεν ὁ θεός ἐξαγαγέτω ἡ γῆ ψυχὴν ζῶσαν κατὰ γένος τετράποδα καὶ ἑρπετὰ καὶ θηρία τῆς γῆς κατὰ γένος καὶ ἐγένετο οὕτως
+25 Hebrew: וַ/יַּ֣עַשׂ אֱלֹהִים֩ אֶת\־ חַיַּ֨ת הָ/אָ֜רֶץ לְ/מִינָ֗/הּ וְ/אֶת\־ הַ/בְּהֵמָה֙ לְ/מִינָ֔/הּ וְ/אֵ֛ת כָּל\־ רֶ֥מֶשׂ הָֽ/אֲדָמָ֖ה לְ/מִינֵ֑/הוּ וַ/יַּ֥רְא אֱלֹהִ֖ים כִּי\־ טֽוֹב\׃
+25 Hebrew literal: make(OBJECT) / 'E.lo.Him / 'et- / chai.Yat / country;_planet / le./mi.Na/h / ve./'Et / ha./be.he.Mah / le./mi.Na/h / ve./'Et / kol- / Re.mes / soil / le./mi.Ne./hu / see / 'E.lo.Him / ki- / Tov
+25 LXX: καὶ ἐποίησεν ὁ θεὸς τὰ θηρία τῆς γῆς κατὰ γένος καὶ τὰ κτήνη κατὰ γένος καὶ πάντα τὰ ἑρπετὰ τῆς γῆς κατὰ γένος αὐτῶν καὶ εἶδεν ὁ θεὸς ὅτι καλά
+26 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֔ים נַֽעֲשֶׂ֥ה אָדָ֛ם בְּ/צַלְמֵ֖/נוּ כִּ/דְמוּתֵ֑/נוּ וְ/יִרְדּוּ֩ בִ/דְגַ֨ת הַ/יָּ֜ם וּ/בְ/ע֣וֹף הַ/שָּׁמַ֗יִם וּ/בַ/בְּהֵמָה֙ וּ/בְ/כָל\־ הָ/אָ֔רֶץ וּ/בְ/כָל\־ הָ/רֶ֖מֶשׂ הָֽ/רֹמֵ֥שׂ עַל\־ הָ/אָֽרֶץ\׃
+26 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / make(OBJECT) / 'a.Dam / be./tzal.Me./nu / ki/d.mu.Te./nu / ve./yir.Du / vi/d.Gat / sea / u./ve./'of / ha./sha.Ma.yim / u./va./be.he.Mah / u./ve./Khol- / country;_planet / u./ve./Khol- / ha./Re.mes / ha./ro.Mes / 'al- / soil
+26 LXX: καὶ εἶπεν ὁ θεός ποιήσωμεν ἄνθρωπον κατ᾿ εἰκόνα ἡμετέραν καὶ καθ᾿ ὁμοίωσιν καὶ ἀρχέτωσαν τῶν ἰχθύων τῆς θαλάσσης καὶ τῶν πετεινῶν τοῦ οὐρανοῦ καὶ τῶν κτηνῶν καὶ πάσης τῆς γῆς καὶ πάντων τῶν ἑρπετῶν τῶν ἑρπόντων ἐπὶ τῆς γῆς
+27 Hebrew: וַ/יִּבְרָ֨א אֱלֹהִ֤ים\׀ אֶת\־ הָֽ/אָדָם֙ בְּ/צַלְמ֔/וֹ בְּ/צֶ֥לֶם אֱלֹהִ֖ים בָּרָ֣א אֹת֑/וֹ זָכָ֥ר וּ/נְקֵבָ֖ה בָּרָ֥א אֹתָֽ/ם\׃
+27 Hebrew literal: va/i.yiv.Ra' / 'E.lo.Him / 'et- / ha./'a.Dam / be./tzal.M/o / be./Tze.lem / 'E.lo.Him / ba.Ra' / 'o.T/o / za.Khar / u./ne.ke.Vah / ba.Ra' / 'o.Ta/m
+27 LXX: καὶ ἐποίησεν ὁ θεὸς τὸν ἄνθρωπον κατ᾿ εἰκόνα θεοῦ ἐποίησεν αὐτόν ἄρσεν καὶ θῆλυ ἐποίησεν αὐτούς
+28 Hebrew: וַ/יְבָ֣רֶךְ אֹתָ/ם֮ אֱלֹהִים֒ וַ/יֹּ֨אמֶר לָ/הֶ֜ם אֱלֹהִ֗ים פְּר֥וּ וּ/רְב֛וּ וּ/מִלְא֥וּ אֶת\־ הָ/אָ֖רֶץ וְ/כִבְשֻׁ֑/הָ וּ/רְד֞וּ בִּ/דְגַ֤ת הַ/יָּם֙ וּ/בְ/ע֣וֹף הַ/שָּׁמַ֔יִם וּ/בְ/כָל\־ חַיָּ֖ה הָֽ/רֹמֶ֥שֶׂת עַל\־ הָ/אָֽרֶץ\׃
+28 Hebrew literal: va/y.Va.rekh / 'o.Ta/m / 'E.lo.Him / va/i.Yo.mer / la./Hem / 'E.lo.Him / pe.Ru / u./re.Vu / u./mil.'U / 'et- / country;_planet / ve./khiv.Shu./ha / u./re.Du / bi/d.Gat / sea / u./ve./'of / ha./sha.Ma.yim / u./ve./Khol- / chai.Yah / ha./ro.Me.set / 'al- / soil
+28 LXX: καὶ ηὐλόγησεν αὐτοὺς ὁ θεὸς λέγων αὐξάνεσθε καὶ πληθύνεσθε καὶ πληρώσατε τὴν γῆν καὶ κατακυριεύσατε αὐτῆς καὶ ἄρχετε τῶν ἰχθύων τῆς θαλάσσης καὶ τῶν πετεινῶν τοῦ οὐρανοῦ καὶ πάντων τῶν κτηνῶν καὶ πάσης τῆς γῆς καὶ πάντων τῶν ἑρπετῶν τῶν ἑρπόντων ἐπὶ τῆς γῆς
+29 Hebrew: וַ/יֹּ֣אמֶר אֱלֹהִ֗ים הִנֵּה֩ נָתַ֨תִּי לָ/כֶ֜ם אֶת\־ כָּל\־ עֵ֣שֶׂב\׀ זֹרֵ֣עַ זֶ֗רַע אֲשֶׁר֙ עַל\־ פְּנֵ֣י כָל\־ הָ/אָ֔רֶץ וְ/אֶת\־ כָּל\־ הָ/עֵ֛ץ אֲשֶׁר\־ בּ֥/וֹ פְרִי\־ עֵ֖ץ זֹרֵ֣עַ זָ֑רַע לָ/כֶ֥ם יִֽהְיֶ֖ה לְ/אָכְלָֽה\׃
+29 Hebrew literal: va/i.Yo.mer / 'E.lo.Him / hi.Neh / give / la./Khem / 'et- / kol- / 'E.sev / zo.Re.a' / seed / 'a.Sher / 'al- / surface / khol- / country;_planet / ve./'Et / kol- / tree / 'a.Sher- / b/o / fe.ri- / tree / zo.Re.a' / seed / la./Khem / yih.Yeh / le./'okh.Lah
+29 LXX: καὶ εἶπεν ὁ θεός ἰδοὺ δέδωκα ὑμῖν πᾶν χόρτον σπόριμον σπεῖρον σπέρμα ὅ ἐστιν ἐπάνω πάσης τῆς γῆς καὶ πᾶν ξύλον ὃ ἔχει ἐν ἑαυτῷ καρπὸν σπέρματος σπορίμου ὑμῖν ἔσται εἰς βρῶσιν
+30 Hebrew: וּֽ/לְ/כָל\־ חַיַּ֣ת הָ֠/אָרֶץ וּ/לְ/כָל\־ ע֨וֹף הַ/שָּׁמַ֜יִם וּ/לְ/כֹ֣ל\׀ רוֹמֵ֣שׂ עַל\־ הָ/אָ֗רֶץ אֲשֶׁר\־ בּ/וֹ֙ נֶ֣פֶשׁ חַיָּ֔ה אֶת\־ כָּל\־ יֶ֥רֶק עֵ֖שֶׂב לְ/אָכְלָ֑ה וַֽ/יְהִי\־ כֵֽן\׃
+30 Hebrew literal: u./le./khol- / chai.Yat / soil / u./le./khol- / of / ha./sha.Ma.yim / u./le./Khol / ro.Mes / 'al- / soil / 'a.Sher- / b/o / life / chai.Yah / 'et- / kol- / Ye.rek / 'E.sev / le./'okh.Lah / va/y.hi- / Khen
+30 LXX: καὶ πᾶσι τοῖς θηρίοις τῆς γῆς καὶ πᾶσι τοῖς πετεινοῖς τοῦ οὐρανοῦ καὶ παντὶ ἑρπετῷ τῷ ἕρποντι ἐπὶ τῆς γῆς ὃ ἔχει ἐν ἑαυτῷ ψυχὴν ζωῆς πάντα χόρτον χλωρὸν εἰς βρῶσιν καὶ ἐγένετο οὕτως
+31 Hebrew: וַ/יַּ֤רְא אֱלֹהִים֙ אֶת\־ כָּל\־ אֲשֶׁ֣ר עָשָׂ֔ה וְ/הִנֵּה\־ ט֖וֹב מְאֹ֑ד וַֽ/יְהִי\־ עֶ֥רֶב וַֽ/יְהִי\־ בֹ֖קֶר י֥וֹם הַ/שִּׁשִּֽׁי\׃\ \פ
+31 Hebrew literal: see / 'E.lo.Him / 'et- / kol- / 'a.Sher / make(OBJECT) / ve./hi.neh- / Tov / me.'Od / va/y.hi- / 'E.rev / va/y.hi- / Vo.ker / day / ha./shi.Shi
+31 LXX: καὶ εἶδεν ὁ θεὸς τὰ πάντα ὅσα ἐποίησεν καὶ ἰδοὺ καλὰ λίαν καὶ ἐγένετο ἑσπέρα καὶ ἐγένετο πρωί ἡμέρα ἕκτη
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full window from start to end.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

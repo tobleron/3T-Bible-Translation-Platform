@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Famine and Family Deaths in Moab",
+      "reason": "Establishes the setting of famine and the deaths of Elimelech and his two sons."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Naomi's Departure and Daughters-in-Law's Response",
+      "reason": "Describes the journey back to Judah and Naomi's initial attempt to send them away."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Ruth's Vow of Loyalty",
+      "reason": "Contains the pivotal speech where Ruth commits to Naomi and her God."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Arrival in Bethlehem and Naomi's Lament",
+      "reason": "Concludes with their arrival, the town's reaction, and Naomi's renaming to Mara."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Introduction and Passover Feast",
+      "reason": "Establishes the holy convocations framework and details the Passover and Unleavened Bread."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 22,
+      "type": "law",
+      "title": "First Fruits and Weeks Feast",
+      "reason": "Describes the wave sheaf offering, the counting to Pentecost, and the harvest gleaning laws."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 32,
+      "type": "law",
+      "title": "Feast of Trumpets and Day of Atonement",
+      "reason": "Outlines the seventh month festivals including the trumpet blast and the solemn day of atonement."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 44,
+      "type": "law",
+      "title": "Feast of Booths and Conclusion",
+      "reason": "Details the seven-day feast of tabernacles, its rituals, and concludes with Moses delivering the instructions."
+    }
+  ]
+}

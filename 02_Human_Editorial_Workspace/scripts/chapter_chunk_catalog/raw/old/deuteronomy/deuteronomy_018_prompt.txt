@@ -1,0 +1,71 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 18:1-22
+
+Chapter text:
+1. “The Levitical priests, the whole tribe of Levi, shall have no portion or inheritance with Israel; they shall eat of the offerings to Yahweh by fire and of His inheritance.
+2. And they shall have no inheritance among their brothers; Yahweh is their inheritance, as He promised them.
+3. “Now this shall be the legal judgment for the priests taken from the people, from those who offer a sacrifice, either an ox or a sheep: they shall give to the priest the shoulder and the two cheeks and the stomach.
+4. You shall give him the first fruits of your grain, your new wine and your oil and the first shearing of your sheep.
+5. For Yahweh your God has chosen him and his sons from all your tribes, to stand to minister in the name of Yahweh all the days.
+6. “Now if a Levite comes from any of your gates of the towns throughout Israel where he sojourns and comes whenever he desires to the place which Yahweh chooses,
+7. then he shall minister in the name of Yahweh his God like all his brothers the Levites who stand there before Yahweh.
+8. They shall eat equal portions, except what they receive from the sale of their fathers’ estates.
+9. “When you enter the land which Yahweh your God gives you, you shall not learn to imitate the abominations of those nations.
+10. There shall not be found among you anyone who makes his son or his daughter pass through the fire, one who uses divination, one who practices soothsaying or one who interprets omens or a sorcerer,
+11. or one who is an enchanter or a medium or a spiritist or one who inquires of the dead.
+12. For whoever does these things is an abomination to Yahweh; and because of these abominations Yahweh your God will dispossess them from before you.
+13. You shall be blameless before Yahweh your God.
+14. For those nations, which you shall dispossess, listen to those who practice soothsaying and to diviners, but as for you, Yahweh your God has not allowed you to do so.
+15. “Yahweh your God will raise up for you a prophet like me from among you, from your brothers; you shall listen to him.
+16. This is according to all that you asked of Yahweh your God in Horeb on the day of the assembly, saying, ‘Let me not hear again the voice of Yahweh my God; let me not see this great fire anymore, or I will die.’
+17. And Yahweh said to me, ‘They have spoken well.
+18. I will raise up a prophet from among their brothers like you, and I will put My words in his mouth, and he shall speak to them all that I command him.
+19. And it will be that whoever will not listen to My words which he shall speak in My name, I Myself will require it of him.
+20. But the prophet who speaks a word presumptuously in My name which I have not commanded him to speak, or which he speaks in the name of other gods, that prophet shall die.’
+21. Now you may say in your heart, ‘How will we know the word which Yahweh has not spoken?’
+22. When a prophet speaks in the name of Yahweh, if the thing does not come about or come true, that is the thing which Yahweh has not spoken. The prophet has spoken it presumptuously; you shall not be afraid of him.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

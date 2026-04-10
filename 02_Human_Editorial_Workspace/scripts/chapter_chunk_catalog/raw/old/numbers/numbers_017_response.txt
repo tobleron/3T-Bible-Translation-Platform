@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "law",
+      "title": "Instruction for Rods",
+      "reason": "Yahweh commands Moses to gather rods and deposit them in the tent."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Aaron's Rod Sprouts",
+      "reason": "The narrative describes the miracle of Aaron's rod blooming and Yahweh's command to preserve it."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 13,
+      "type": "dialogue",
+      "title": "Israel's Fear",
+      "reason": "Moses obeys the command and the people respond with fear and questioning."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Construction of the Ark and Mercy Seat",
+      "reason": "Describes the making of the ark and mercy seat as a continuous narrative unit."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Construction of the Table and Utensils",
+      "reason": "Details the creation of the table for showbread and its associated vessels."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Construction of the Lampstand",
+      "reason": "Narrates the crafting of the golden lampstand and its components."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Construction of the Incense Altar",
+      "reason": "Records the building of the altar of incense and its carrying poles."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 29,
+      "type": "list_or_catalog",
+      "title": "Preparation of Oil and Incense",
+      "reason": "Lists the final items prepared by Bezalel for the tabernacle service."
+    }
+  ]
+}

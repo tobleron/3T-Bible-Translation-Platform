@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "vision",
+      "title": "Moses Sees the Promised Land",
+      "reason": "Describes Moses viewing the land and God's declaration that he will not enter it."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Death and Burial of Moses",
+      "reason": "Narrates the death, burial, age, and mourning period for Moses."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "exhortation",
+      "title": "Succession of Joshua and Praise of Moses",
+      "reason": "Details Joshua's appointment and concludes with a summary of Moses' unique prophetic status."
+    }
+  ]
+}

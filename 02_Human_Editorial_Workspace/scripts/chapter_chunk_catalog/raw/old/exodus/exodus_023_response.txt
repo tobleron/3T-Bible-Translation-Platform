@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Judicial and Social Laws",
+      "reason": "A cohesive unit of legal instructions regarding witnesses, justice, and treatment of others."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "law",
+      "title": "Sabbatical Year and Rest",
+      "reason": "Instructions on agricultural cycles and the weekly Sabbath rest."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "law",
+      "title": "Feast Regulations",
+      "reason": "Detailed commands concerning the three annual feasts and sacrificial offerings."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 33,
+      "type": "oracle",
+      "title": "Promise of Conquest",
+      "reason": "A divine oracle promising guidance, victory over enemies, and the boundaries of the land."
+    }
+  ]
+}

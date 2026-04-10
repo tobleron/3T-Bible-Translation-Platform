@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "David flees to Gath",
+      "reason": "Narrative of David's decision and arrival at Achish."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "Request for Ziklag",
+      "reason": "Dialogue between David and Achish regarding residence."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Raids and deception",
+      "reason": "Account of military raids and the strategy to deceive Achish."
+    }
+  ]
+}

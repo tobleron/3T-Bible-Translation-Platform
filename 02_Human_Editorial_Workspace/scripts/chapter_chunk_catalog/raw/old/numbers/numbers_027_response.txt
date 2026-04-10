@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Daughters of Zelophehad Present Case",
+      "reason": "Narrative introduction of the daughters and their petition to Moses."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Inheritance Law for Daughters",
+      "reason": "Divine ruling establishing inheritance succession when a man dies without sons."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Moses to See the Land",
+      "reason": "God commands Moses to view the Promised Land before his death."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 17,
+      "type": "blessing_or_prayer",
+      "title": "Moses Prays for a Successor",
+      "reason": "Moses petitions God to appoint a leader for the congregation."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "dialogue",
+      "title": "Appointment of Joshua",
+      "reason": "God instructs Moses on how to commission Joshua as leader."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Joshua Commissioned",
+      "reason": "Narrative conclusion of Moses fulfilling God's command to install Joshua."
+    }
+  ]
+}

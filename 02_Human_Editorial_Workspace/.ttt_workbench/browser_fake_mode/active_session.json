@@ -1,0 +1,81 @@
+{
+  "session_id": "cdc44b87",
+  "mode": "COMMAND",
+  "screen": "STUDY",
+  "book": "Genesis",
+  "chapter": 1,
+  "wizard_testament": "old",
+  "wizard_book": "Genesis",
+  "wizard_chapter": 1,
+  "chunk_start": 1,
+  "chunk_end": 5,
+  "focus_start": 3,
+  "focus_end": 5,
+  "menu_index": 0,
+  "history_panel_open": false,
+  "draft_chunk": {
+    "1": "Refined verse 1.",
+    "2": "Refined verse 2.",
+    "3": "Refined verse 3.",
+    "4": "Refined verse 4.",
+    "5": "Refined verse 5."
+  },
+  "draft_title": "Creation of Light and Day One",
+  "title_alternatives": [],
+  "chat_messages": [
+    {
+      "role": "user",
+      "content": "Revise the chunk for a smoother but still literal English flow."
+    },
+    {
+      "role": "assistant",
+      "content": "Draft revised for the current focus."
+    }
+  ],
+  "analysis_cache": {},
+  "analysis_meta": {},
+  "last_review": null,
+  "pending_verse_updates": [
+    {
+      "book": "Genesis",
+      "chapter": 1,
+      "verses": {
+        "1": "Refined verse 1.",
+        "2": "Refined verse 2.",
+        "3": "Refined verse 3.",
+        "4": "Refined verse 4.",
+        "5": "Refined verse 5."
+      },
+      "start_verse": 1,
+      "end_verse": 5
+    }
+  ],
+  "pending_title_updates": [
+    {
+      "book": "Genesis",
+      "chapter": 1,
+      "start_verse": 1,
+      "end_verse": 5,
+      "title": "Creation of Light and Day One"
+    }
+  ],
+  "pending_justification_updates": [],
+  "pending_repairs": [],
+  "justify_draft": null,
+  "notifications": [],
+  "undo_stack": [],
+  "chunk_suggestion_window_start": null,
+  "chunk_suggestion_window_end": null,
+  "chunk_suggestions": [],
+  "command_history": [
+    {
+      "command": "commit",
+      "status": "success",
+      "duration_seconds": 0.0,
+      "message": "Wrote 1 file(s) successfully",
+      "timestamp": 1775844735.1006641
+    }
+  ],
+  "terminology_ledger": {},
+  "review_history": []
+}

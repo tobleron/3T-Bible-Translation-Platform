@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T19:31:08Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 15,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 21,
+      "type": "psalm",
+      "title": "Song of Moses and Miriam",
+      "reason": "A unified poetic song celebrating the deliverance at the Red Sea, including the refrain by Miriam."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 27,
+      "type": "story",
+      "title": "Journey to Marah and Elim",
+      "reason": "A continuous narrative account of the Israelites traveling through the wilderness, finding bitter water, and arriving at a place of rest."
+    }
+  ]
+}

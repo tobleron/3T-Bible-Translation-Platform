@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Jonathan's Victory",
+      "reason": "Describes Jonathan's surprise attack on the Philistine garrison and the resulting confusion in their camp."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 35,
+      "type": "story",
+      "title": "The Oath and the Honey",
+      "reason": "Details Saul's rash oath, Jonathan's tasting of honey, and the people eating meat with blood."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 45,
+      "type": "story",
+      "title": "Saul's Oath on Jonathan",
+      "reason": "Narrates Saul seeking God's will, casting lots to find the sinner, and the people saving Jonathan."
+    },
+    {
+      "start_verse": 46,
+      "end_verse": 52,
+      "type": "list_or_catalog",
+      "title": "Saul's Reign Summary",
+      "reason": "Summarizes Saul's military campaigns, family members, and his method of recruiting soldiers."
+    }
+  ]
+}

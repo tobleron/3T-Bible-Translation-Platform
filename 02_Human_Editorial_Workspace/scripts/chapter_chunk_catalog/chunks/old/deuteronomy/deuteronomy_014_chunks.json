@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T23:22:35Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 14,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 29,
+  "verse_count": 29,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "exhortation",
+      "title": "Identity and Holiness",
+      "reason": "Establishes the people's status as God's treasured possession."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 21,
+      "type": "list_or_catalog",
+      "title": "Dietary Laws",
+      "reason": "Covers clean and unclean animals, birds, and water creatures."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Tithing Instructions",
+      "reason": "Details the annual tithe, consumption at the sanctuary, and provisions for distance."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 29,
+      "type": "law",
+      "title": "Triennial Tithe",
+      "reason": "Describes the third-year tithe for the Levite and poor."
+    }
+  ]
+}

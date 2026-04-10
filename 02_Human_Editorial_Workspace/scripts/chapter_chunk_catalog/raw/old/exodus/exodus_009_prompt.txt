@@ -1,0 +1,84 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 9:1-35
+
+Chapter text:
+1. Then Yahweh said to Moses, “Come to Pharaoh and speak to him, ‘Thus says Yahweh, the God of the Hebrews, “Let My people go, that they may serve Me.
+2. For if you refuse to let them go and continue to hold them,
+3. behold, the hand of Yahweh will come with a very heavy pestilence on your livestock which are in the field, on the horses, on the donkeys, on the camels, on the herds, and on the flocks.
+4. But Yahweh will make a distinction between the livestock of Israel and the livestock of Egypt, so that nothing will die of all that belongs to the sons of Israel.”’”
+5. Yahweh also set a definite time, saying, “Tomorrow Yahweh will do this thing in the land.”
+6. So Yahweh did this thing on the next day, and all the livestock of Egypt died; but of the livestock of the sons of Israel, not one died.
+7. And Pharaoh sent, and behold, there was not even one of the livestock of Israel dead. But the heart of Pharaoh was hardened with firmness, and he did not let the people go.
+8. Then Yahweh said to Moses and Aaron, “Take for yourselves handfuls of soot from a kiln, and let Moses toss it toward the sky in the sight of Pharaoh.
+9. And it will become fine dust over all the land of Egypt, and it will become boils breaking out with sores on man and beast through all the land of Egypt.”
+10. So they took the soot from the kiln and stood before Pharaoh; and Moses tossed it toward the sky, and it became boils breaking out with sores on man and beast.
+11. And the magicians could not stand before Moses because of the boils, for the boils were on the magicians as well as on all the Egyptians.
+12. And Yahweh hardened Pharaoh’s heart with strength, and he did not listen to them, just as Yahweh had spoken to Moses.
+13. And Yahweh said to Moses, “Rise up early in the morning and stand before Pharaoh, and you shall say to him, ‘Thus says Yahweh, the God of the Hebrews, “Let My people go, that they may serve Me.
+14. For this time I will send all My plagues against your heart and amongst your servants and your people, so that you may know that there is no one like Me in all the earth.
+15. For if by now I had sent forth My hand and struck you and your people with pestilence, you would then have been wiped out from the earth.
+16. But, indeed, for this reason I have caused you to stand, in order to show you My power and in order to recount My name through all the earth.
+17. Still you exalt yourself against My people by not letting them go.
+18. Behold, about this time tomorrow, I will rain down very heavy hail, such as has not been seen in Egypt from the day it was founded until now.
+19. So now, send, bring your livestock and whatever you have in the field to safety. Every man and beast that is found in the field and is not brought home, the hail will come down on them, and they will die.”’”
+20. The one among the servants of Pharaoh who feared the word of Yahweh made his servants and his livestock flee into the houses;
+21. but he who did not consider in his heart the word of Yahweh left his servants and his livestock in the field.
+22. Now Yahweh said to Moses, “Stretch out your hand toward the sky, that there may be hail on all the land of Egypt, on man and on beast and on every plant of the field, throughout the land of Egypt.”
+23. So Moses stretched out his staff toward the sky, and Yahweh gave forth thunder and hail, and fire went down to the earth. And Yahweh rained down hail on the land of Egypt.
+24. So there was hail, and fire flashing continually in the midst of the hail, very heavy, such as had not been in all the land of Egypt since it became a nation.
+25. And the hail struck all that was in the field through all the land of Egypt, from man to beast; the hail also struck every plant of the field and shattered every tree of the field.
+26. Only in the land of Goshen, where the sons of Israel were, there was no hail.
+27. Then Pharaoh sent and called for Moses and Aaron and said to them, “I have sinned this time; Yahweh is the righteous one, and I and my people are the wicked ones.
+28. Entreat Yahweh, for God’s thunder and hail are too much; and I will let you go, and you shall stay no longer.”
+29. And Moses said to him, “As soon as I go out of the city, I will spread out my hands to Yahweh; the thunder will cease, and there will be hail no longer, that you may know that the earth is Yahweh’s.
+30. But as for you and your servants, I know that you do not yet fear Yahweh God.”
+31. (Now the flax and the barley were struck down, for the barley was in the ear and the flax was in bud.
+32. But the wheat and the spelt were not struck down, for they are late-ripening.)
+33. And Moses went out of the city from Pharaoh and spread out his hands to Yahweh; and the thunder and the hail ceased, and rain no longer poured on the earth.
+34. But Pharaoh saw that the rain and the hail and the thunder had ceased. So he sinned again and hardened his heart with firmness, he and his servants.
+35. And Pharaoh’s heart was hardened with strength, and he did not let the sons of Israel go, just as Yahweh had spoken by the hand of Moses.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

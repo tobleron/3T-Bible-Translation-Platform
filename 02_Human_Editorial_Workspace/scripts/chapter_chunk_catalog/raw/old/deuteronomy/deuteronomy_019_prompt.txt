@@ -1,0 +1,70 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 19:1-21
+
+Chapter text:
+1. “When Yahweh your God cuts off the nations, whose land Yahweh your God gives you, and you dispossess them and settle in their cities and in their houses,
+2. you shall set apart three cities for yourself in the midst of your land, which Yahweh your God gives you to possess.
+3. You shall prepare the roads for yourself, and divide into three parts the territory of your land which Yahweh your God will give you to inherit, so that any manslayer may flee there.
+4. “Now this is the case of the manslayer who may flee there and live: when he strikes down his friend without premeditation, not hating him previously—
+5. as when a man goes into the forest with his friend to cut wood, and his hand swings the axe to cut down the tree, and the iron head slips off the handle and strikes his friend so that he dies—he may flee to one of these cities and live;
+6. lest the avenger of blood pursue the manslayer when his heart is angry, and overtake him, because the way is long, and strike down his life, though he was not deserving of death, since he had not hated him previously.
+7. Therefore, I am commanding you, saying, ‘You shall set apart three cities for yourself.’
+8. “Now if Yahweh your God enlarges your territory, just as He has sworn to your fathers, and gives you all the land which He promised to give to your fathers—
+9. if you be careful to do all this commandment which I am commanding you today, to love Yahweh your God and to walk in His ways all your days—then you shall add three more cities for yourself, besides these three.
+10. So innocent blood will not be shed in the midst of your land which Yahweh your God gives you as an inheritance, and bloodguiltiness be on you.
+11. “But if there is a man who hates his neighbor and lies in wait for him and rises up against him and strikes down his life so that he dies, and he flees to one of these cities,
+12. then the elders of his city shall send and take him from there and give him over into the hand of the avenger of blood, that he may die.
+13. You shall not pity him, but you shall purge the blood of the innocent from Israel, that it may go well with you.
+14. “You shall not move your neighbor’s boundary mark, which the ancestors have set, in your inheritance which you will inherit in the land that Yahweh your God gives you to possess.
+15. “A single witness shall not rise up against a man on account of any iniquity or any sin which he has committed; at the mouth of two or three witnesses a matter shall be established.
+16. If a malicious witness rises up against a man to accuse him of wrongdoing,
+17. then both the men who have the dispute shall stand before Yahweh, before the priests and the judges who will be in office in those days.
+18. And the judges shall inquire thoroughly, and behold, if the witness is a false witness and he has accused his brother falsely,
+19. then you shall do to him just as he had intended to do to his brother. Thus you shall purge the evil from among you.
+20. And the rest will hear and be afraid and will never again do such an evil thing among you.
+21. Thus your eye shall not show pity: life for life, eye for eye, tooth for tooth, hand for hand, foot for foot.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

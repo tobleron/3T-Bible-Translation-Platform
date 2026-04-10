@@ -1,0 +1,74 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 2:1-25
+
+Chapter text:
+1. And a man from the house of Levi went and took a daughter of Levi as a wife.
+2. And the woman conceived and bore a son; and she saw that he was beautiful, so she hid him for three months.
+3. But she could not hide him any longer. So she took for him an ark of papyrus reeds and covered it over with tar and pitch. Then she put the child into it and put it among the reeds by the bank of the Nile.
+4. And his sister stood at a distance to know what would be done to him.
+5. And the daughter of Pharaoh came down to bathe at the Nile, with her young women walking alongside the Nile; and she saw the ark among the reeds and sent her maidservant, and she took it to her.
+6. Then she opened it and saw the child. And behold, the boy was crying. And she had pity on him and said, “This is one of the Hebrews’ children.”
+7. Then his sister said to Pharaoh’s daughter, “Shall I go and call a nurse for you from the Hebrew women that she may nurse the child for you?”
+8. And Pharaoh’s daughter said to her, “Go.” So the girl went and called the child’s mother.
+9. Then Pharaoh’s daughter said to her, “Take this child away and nurse him for me, and I will give you your wages.” So the woman took the child and nursed him.
+10. And the child grew, and she brought him to Pharaoh’s daughter, and he became her son. And she named him Moses and said, “Because I drew him out of the water.”
+11. Now it happened in those days, that Moses had grown up. And he went out to his brothers and looked on their hard labors. And he saw an Egyptian striking a Hebrew, one of his brothers.
+12. So he turned this way and that, and he saw that there was no one around. So he struck down the Egyptian and hid him in the sand.
+13. Then he went out the next day, and behold, two Hebrews were struggling with each other; and he said to the wicked one, “Why are you striking your companion?”
+14. But he said, “Who made you a ruler or a judge over us? Are you intending to kill me as you killed the Egyptian?” Then Moses was afraid and said, “Surely the matter has become known.”
+15. And Pharaoh heard of this matter, so he sought to kill Moses. But Moses fled from the presence of Pharaoh and settled in the land of Midian, and he sat down by a well.
+16. Now the priest of Midian had seven daughters; and they came and drew water and filled the troughs to give water to their father’s flock to drink.
+17. Then the shepherds came and drove them away, but Moses rose up and saved them and gave water to their flock to drink.
+18. Then they came to Reuel their father, and he said, “Why have you come back so soon today?”
+19. So they said, “An Egyptian delivered us from the hand of the shepherds, and he actually even drew the water for us and gave water to the flock to drink.”
+20. And he said to his daughters, “Where is he then? Why is it that you have left the man behind? Call him so that he may eat bread.”
+21. And Moses was willing to settle down with the man, and he gave his daughter Zipporah to Moses.
+22. Then she gave birth to a son, and he named him Gershom, for he said, “I have been a sojourner in a foreign land.”
+23. Now it happened in the course of those many days that the king of Egypt died. And the sons of Israel sighed because of the slavery, and they cried out; and their cry for help because of their slavery rose up to God.
+24. So God heard their groaning; and God remembered His covenant with Abraham, Isaac, and Jacob.
+25. And God saw the sons of Israel, and God knew them.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

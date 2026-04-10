@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T20:58:15Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 49,
+  "verse_count": 49,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 20,
+      "type": "law",
+      "title": "Service of the Kohathites",
+      "reason": "Divine instruction detailing the duties and census criteria for the Kohathite clan regarding the holy objects."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 28,
+      "type": "law",
+      "title": "Service of the Gershonites",
+      "reason": "Divine instruction detailing the duties and census criteria for the Gershonite clan regarding the tabernacle coverings."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 33,
+      "type": "law",
+      "title": "Service of the Merarites",
+      "reason": "Divine instruction detailing the duties and census criteria for the Merarite clan regarding the structural elements."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 49,
+      "type": "list_or_catalog",
+      "title": "Census Results of the Levites",
+      "reason": "Narrative record of the census execution and final tallies for all three Levitical families."
+    }
+  ]
+}

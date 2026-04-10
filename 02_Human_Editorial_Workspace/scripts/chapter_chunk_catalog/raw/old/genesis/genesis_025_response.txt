@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Abraham's Later Years and Keturah",
+      "reason": "Describes Abraham taking Keturah as a wife, her sons, and the distribution of his estate between Isaac and the other sons."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Death and Burial of Abraham",
+      "reason": "Records the lifespan of Abraham, his death, and the burial by Isaac and Ishmael in the cave of Machpelah."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 18,
+      "type": "genealogy",
+      "title": "Generations of Ishmael",
+      "reason": "Lists the twelve sons of Ishmael and describes their settlement and lifespan after Abraham's death."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Birth of Jacob and Esau",
+      "reason": "Details Isaac's marriage to Rebekah, her pregnancy, the oracle regarding the twins, and their birth."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 34,
+      "type": "story",
+      "title": "Jacob and Esau as Adults",
+      "reason": "Contrasts the characters of the brothers and narrates the sale of Esau's birthright for a bowl of stew."
+    }
+  ]
+}

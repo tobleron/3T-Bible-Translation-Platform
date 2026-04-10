@@ -1,0 +1,51 @@
+# ------------------ Directory Settings ------------------
+# The folder where all chat session folders will be stored.
+sessions_directory: "sessions"
+
+# The folder where you will store your static prompt files.
+static_prompts_directory: "static_prompts"
+
+# The folder where responses saved with the /save command will be stored.
+saved_responses_directory: "saved_responses"
+
+# Cleanup
+cleanup_temp_files: true
+
+# ------------------ UI Color Settings ------------------
+# You can use standard color names (e.g., "red", "green", "blue", "yellow", "magenta", "cyan")
+# Full list: https://rich.readthedocs.io/en/latest/appendix/colors.html
+
+# Color for your input prompts and text.
+user_color: "yellow"
+
+# Color for the AI's response panel border.
+ai_panel_color: "bright_green"
+
+# Color for system messages indicating success.
+success_color: "green"
+
+# Color for system messages indicating an error or deletion.
+error_color: "red"
+
+# Color for general informational messages.
+info_color: "yellow"
+
+# Color for the horizontal rule that separates turns.
+rule_color: "grey50"
+
+# ------------------ OpenAI Settings (NEW) ------------------
+# It's recommended to set an environment variable named OPENAI_API_KEY.
+# If not found, the script will use the key specified here.
+openai:
+  api_key: "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" # Replace with your key
+
+ # You can add or remove any models you have access to here.
+  available_models:
+    - "gpt-4o"
+    - "gpt-4.1"
+    - "gpt-4.1-mini"
+    - "gpt-4.1-nano"
+  # NEW: Add model names here that DO NOT support the 'temperature' parameter.
+  # This will prevent errors with models that only support the default value.
+  models_without_temperature:
+    - "o4-mini"

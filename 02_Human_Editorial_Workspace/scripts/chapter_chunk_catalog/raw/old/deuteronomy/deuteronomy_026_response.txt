@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Firstfruits Offering Ritual",
+      "reason": "Describes the procedure for bringing firstfruits and includes the declaration of faith."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Third Year Tithe Declaration",
+      "reason": "Details the distribution of tithes to the needy and the accompanying confession."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 19,
+      "type": "exhortation",
+      "title": "Covenant Commitment",
+      "reason": "Summarizes the mutual commitment between God and Israel regarding statutes and blessings."
+    }
+  ]
+}

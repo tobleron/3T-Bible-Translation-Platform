@@ -1,0 +1,66 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 1 Samuel 7:1-17
+
+Chapter text:
+1. And the men of Kiriath-jearim came and brought the ark of Yahweh up and brought it into the house of Abinadab on the hill and set apart Eleazar his son as holy in order to keep the ark of Yahweh.
+2. Now it happened from the day when the ark remained at Kiriath-jearim, that the time was long; it was twenty years. And all the house of Israel lamented after Yahweh.
+3. Then Samuel spoke to all the house of Israel, saying, “If you are to return to Yahweh with all your heart, then remove the foreign gods and the Ashtaroth from among you and set your hearts toward Yahweh and serve Him alone; and He will deliver you from the hand of the Philistines.”
+4. So the sons of Israel removed the Baals and the Ashtaroth and served Yahweh alone.
+5. Then Samuel said, “Gather all Israel to Mizpah, and I will pray to Yahweh for you.”
+6. And they gathered to Mizpah and drew water and poured it out before Yahweh and fasted on that day and said there, “We have sinned against Yahweh.” And Samuel judged the sons of Israel at Mizpah.
+7. Then the Philistines heard that the sons of Israel had gathered to Mizpah. And the lords of the Philistines went up against Israel. Then the sons of Israel heard it and were afraid of the Philistines.
+8. So the sons of Israel said to Samuel, “Do not cease to cry out to Yahweh our God for us, that He may save us from the hand of the Philistines.”
+9. And Samuel took a suckling lamb and offered it for a whole burnt offering to Yahweh; and Samuel cried out to Yahweh for Israel, and Yahweh answered him.
+10. Now Samuel was offering up the burnt offering, and the Philistines drew near to battle against Israel. But Yahweh thundered with a great thunder on that day against the Philistines and confused them, so that they were defeated before Israel.
+11. So the men of Israel went out of Mizpah and pursued the Philistines and struck them down as far as below Beth-car.
+12. Then Samuel took a stone and set it between Mizpah and Shen, and he named it Ebenezer. And he said, “Thus far Yahweh has helped us.”
+13. So the Philistines were subdued, and they did not come anymore within the border of Israel. And the hand of Yahweh was against the Philistines all the days of Samuel.
+14. And the cities which the Philistines had taken from Israel were restored to Israel, from Ekron even to Gath; and Israel delivered their territory from the hand of the Philistines. So there was peace between Israel and the Amorites.
+15. Thus Samuel judged Israel all the days of his life.
+16. And he used to go annually on circuit to Bethel and Gilgal and Mizpah, and he judged Israel in all these places.
+17. But his return would be to Ramah, for his house was there, and there he judged Israel; and he built there an altar to Yahweh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

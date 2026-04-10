@@ -1,0 +1,269 @@
+Step 1: Generate the literal English rendering directly from the Greek Majority Text for the assigned verse range. Each verse should appear on a new, numbered line.
+
+Step 2: Categorize each verse in the chunk according to tone, for use in a later step in our translation:
+   a. Neutral: Purpose is informative—be concise and convey only the message.
+   b. Emotional or Spiritual: Emphasize significance for maximum reading impact.
+   c. Mindful: Clarify and elaborate ideas to guarantee comprehension.
+
+Step 3: Generate a comprehensive interpretation report for the entire chunk, referencing biblical sources and theological evidence, including early church fathers’ interpretations. Then, based on all known aspects of Jesus’ personality, justify whether He would have approved this interpretation, ranking it from 1 to 10. If the ranking is below 7, explain possible reasons for disapproval and mention the lower probability interpretation as justification for the low ranking.
+
+Step 4: Generate a concise section title for the entire chunk, accurately describing its core message.
+
+Step 5: For each translation variation (i.e., each chunk listed below), analyze and score the core significant words for contextual accuracy.
+
+- For each translation, create a compact table for all verses in the chunk, scoring each verse’s main subject, main action (verb), direct object, and modifiers, using a 1–10 scale for contextual accuracy.
+- Reference your scores and justifications against:
+  (A) The interpretation from Step 3,
+  (B) Each verse’s tone from Step 2,
+  (C) Known biblical, cultural, and historical facts.
+
+- For each score below 10, briefly justify the loss or distortion (e.g., missing word, weakened verb, omitted modifier) in the table notes column.
+- At the end of each translation’s table, total all scores and provide the contextual accuracy percentage for that translation (out of the maximum possible score).
+- Repeat this for every translation chunk (e.g., NIV, ESV, CSB, etc.) before moving to Step 6.
+
+- Format Example (for each translation):
+
+| Verse | Main Subject | Score | Main Action | Score | Direct Object | Score | Modifiers | Score | Notes (if any scores < 10) |
+|-------|--------------|-------|-------------|-------|--------------|-------|-----------|-------|----------------------------|
+|   1   | Jesus Christ | 10    | genealogy   | 10    | —            | —     | "the Son of David, Son of Abraham" | 9 | Modifier order less clear |
+| ...   | ...          | ...   | ...         | ...   | ...          | ...   | ...       | ...   | ...                        |
+| Total/Max |          |       |             |       |              |       |           |       |                            |
+| Accuracy %|           |       |             |       |              |       |           |       |                            |
+
+- Do not summarize or combine translations; keep the tables separate for each chunk.
+- Do not move to Step 6 until all translation tables are presented.
+
+Step 6: After generating a table of performance scores for each chunk variation, generate a table ranking all word variations between different chunk translations from highest to lowest scores.
+
+Step 7: Assemble a completely new translation for DRAFT 1 (with verse numbers, one per line) using the highest-ranking words from the table in step 6.
+
+Step 8: Use the assembled translation in step 7 to generate an enhanced translation based on the following weighted metrics for DRAFT 2:
+
+   1. Theological Precision and Contextual Integrity (Weight: 40%)
+      A) Key Elements:
+      * Doctrinal Fidelity: Use critical theological terms without dilution.
+      * Global Biblical Context: Ensure consistency across books and alignment with overall biblical themes.
+      * Situational Context: Maintain coherence within the passage and thematic flow.
+      * Precision in Theological Tone: Apply appropriate tone based on context (judgment, mercy, instruction).
+
+      B) Metrics:
+      * Use traditional biblical terms if they promote rich theology and do not conflict with modern language readability.
+      * Thematic Integrity: Ensure tone and theological depth reflect surrounding passages.
+      * Consider cross-reference consistency, but prioritize direct contextual meaning (cross-reference: 35% priority).
+
+   2. Clear Readability and Structural Elegance (Weight: 40%)
+      A) Modern, clear phrasing: Ensure immediate comprehension without archaisms.
+      B) Economy of expression: Be concise yet deep, without losing detail.
+      C) Genre-specific tone: Match tone to narratives, parables, and discourses.
+      D) Structural balance: Use parallel structures, rhythmic flow, and balanced phrasing.
+      E) Poetic devices: Use metaphor, alliteration, and cadence effectively.
+      F) Gender inclusivity: Apply where appropriate without altering original intent.
+      G) Capitalize pronouns for God; use lowercase for Jesus to emphasize His humanity, but capitalize “Son of Man” and “Christ.”
+
+   3. Poetic Resonance and Literary Depth (Weight: 20%)
+      A) Metaphorical integrity: Retain imagery and symbolic meaning only if it does not sacrifice immediate comprehension.
+      B) Rhythmic and poetic flow: Preserve natural musicality and cadence, unless Greek fidelity would be severely harmed.
+      C) Parallelism and balance: Reflect the original’s natural structures.
+
+Step 9: Proofread the newly assembled DRAFT 2 translation as a professional English editor. Ensure smooth, natural transitions between verses and point out problems or errors clearly preparing for the next step.
+
+Step 10: Generate the perfectly edited chunk translation based on the improvement suggestions of step 9 and present the final translation in numbered verse lines in plain text code block.
+---
+chunk_id_656MBQEMT
+1. The book of the genealogy of Jesus Christ, the Son of David, the Son of Abraham:
+2. Abraham fathered Isaac, Isaac fathered Jacob, and Jacob fathered Judah and his brothers.
+3. Judah fathered Perez and Zerah by Tamar, Perez fathered Hezron, and Hezron fathered Ram.
+4. Ram fathered Amminadab, Amminadab fathered Nahshon, and Nahshon fathered Salmon.
+5. Salmon fathered Boaz by Rahab, Boaz fathered Obed by Ruth, Obed fathered Jesse,
+6. and Jesse fathered David the king. David the king fathered Solomon [by her who had been] the [wife of] Uriah.
+7. Solomon fathered Rehoboam, Rehoboam fathered Abijah, and Abijah fathered Asa.
+8. Asa fathered Jehoshaphat, Jehoshaphat fathered Joram, and Joram fathered Uzziah.
+9. Uzziah fathered Jotham, Jotham fathered Ahaz, and Ahaz fathered Hezekiah.
+10. Hezekiah fathered Manasseh, Manasseh fathered Amon, and Amon fathered Josiah.
+11. Josiah fathered Jeconiah and his brothers at the time of the captivity in Babylon.
+12. And after the captivity in Babylon, Jeconiah fathered Shealtiel, and Shealtiel fathered Zerubbabel.
+13. Zerubbabel fathered Abiud, Abiud fathered Eliakim, and Eliakim fathered Azor.
+14. Azor fathered Zadok, Zadok fathered Achim, and Achim fathered Eliud.
+15. Eliud fathered Eleazar, Eleazar fathered Matthan, and Matthan fathered Jacob.
+16. And Jacob fathered Joseph the husband of Mary, of whom was born Jesus who is called Christ.
+17. So all the generations from Abraham till David [were] fourteen generations, from David until the captivity in Babylon [were] fourteen generations, and from the captivity in Babylon until the Christ [were] fourteen generations.
+
+chunk_id_008HPABSB
+1. This is the record of the genealogy of Jesus Christ, the son of David, the son of Abraham:
+2. Abraham was the father of Isaac, Isaac the father of Jacob, and Jacob the father of Judah and his brothers.
+3. Judah was the father of Perez and Zerah by Tamar, Perez the father of Hezron, and Hezron the father of Ram.
+4. Ram was the father of Amminadab, Amminadab the father of Nahshon, and Nahshon the father of Salmon.
+5. Salmon was the father of Boaz by Rahab, Boaz the father of Obed by Ruth, Obed the father of Jesse,
+6. and Jesse the father of David the king. Next: David was the father of Solomon by Uriah’s wife,
+7. Solomon the father of Rehoboam, Rehoboam the father of Abijah, and Abijah the father of Asa.
+8. Asa was the father of Jehoshaphat, Jehoshaphat the father of Joram, and Joram the father of Uzziah.
+9. Uzziah was the father of Jotham, Jotham the father of Ahaz, and Ahaz the father of Hezekiah.
+10. Hezekiah was the father of Manasseh, Manasseh the father of Amon, Amon the father of Josiah,
+11. and Josiah the father of Jeconiah and his brothers at the time of the exile to Babylon.
+12. After the exile to Babylon: Jeconiah was the father of Shealtiel, Shealtiel the father of Zerubbabel,
+13. Zerubbabel the father of Abiud, Abiud the father of Eliakim, and Eliakim the father of Azor.
+14. Azor was the father of Zadok, Zadok the father of Achim, and Achim the father of Eliud.
+15. Eliud was the father of Eleazar, Eleazar the father of Matthan, Matthan the father of Jacob,
+16. and Jacob the father of Joseph, the husband of Mary, of whom was born Jesus, who is called Christ.
+17. In all, then, there were fourteen generations from Abraham to David, fourteen from David to the exile to Babylon, and fourteen from the exile to the Christ.
+
+chunk_id_488VLSCSB
+1. An account of the genealogy of Jesus Christ, the Son of David, the Son of Abraham:
+2. Abraham fathered Isaac, Isaac fathered Jacob, Jacob fathered Judah and his brothers,
+3. Judah fathered Perez and Zerah by Tamar, Perez fathered Hezron, Hezron fathered Aram,
+4. Aram fathered Amminadab, Amminadab fathered Nahshon, Nahshon fathered Salmon,
+5. Salmon fathered Boaz by Rahab, Boaz fathered Obed by Ruth, Obed fathered Jesse,
+6. and Jesse fathered King David. David fathered Solomon by Uriah’s wife,
+7. Solomon fathered Rehoboam, Rehoboam fathered Abijah, Abijah fathered Asa,
+8. Asa fathered Jehoshaphat, Jehoshaphat fathered Joram, Joram fathered Uzziah,
+9. Uzziah fathered Jotham, Jotham fathered Ahaz, Ahaz fathered Hezekiah,
+10. Hezekiah fathered Manasseh, Manasseh fathered Amon, Amon fathered Josiah,
+11. and Josiah fathered Jeconiah and his brothers at the time of the exile to Babylon.
+12. After the exile to Babylon Jeconiah fathered Shealtiel, Shealtiel fathered Zerubbabel,
+13. Zerubbabel fathered Abiud, Abiud fathered Eliakim, Eliakim fathered Azor,
+14. Azor fathered Zadok, Zadok fathered Achim, Achim fathered Eliud,
+15. Eliud fathered Eleazar, Eleazar fathered Matthan, Matthan fathered Jacob,
+16. and Jacob fathered Joseph the husband of Mary, who gave birth to Jesus who is called the Christ.
+17. So all the generations from Abraham to David were fourteen generations; and from David until the exile to Babylon, fourteen generations; and from the exile to Babylon until the Christ, fourteen generations.
+
+chunk_id_439IFLESV
+1. The book of the genealogy of Jesus Christ, the son of David, the son of Abraham.
+2. Abraham was the father of Isaac, and Isaac the father of Jacob, and Jacob the father of Judah and his brothers,
+3. and Judah the father of Perez and Zerah by Tamar, and Perez the father of Hezron, and Hezron the father of Ram,
+4. and Ram the father of Amminadab, and Amminadab the father of Nahshon, and Nahshon the father of Salmon,
+5. and Salmon the father of Boaz by Rahab, and Boaz the father of Obed by Ruth, and Obed the father of Jesse,
+6. and Jesse the father of David the king.
+And David was the father of Solomon by the wife of Uriah,
+7. and Solomon the father of Rehoboam, and Rehoboam the father of Abijah, and Abijah the father of Asaph,
+8. and Asaph the father of Jehoshaphat, and Jehoshaphat the father of Joram, and Joram the father of Uzziah,
+9. and Uzziah the father of Jotham, and Jotham the father of Ahaz, and Ahaz the father of Hezekiah,
+10. and Hezekiah the father of Manasseh, and Manasseh the father of Amos, and Amos the father of Josiah,
+11. and Josiah the father of Jechoniah and his brothers, at the time of the deportation to Babylon.
+12. And after the deportation to Babylon: Jechoniah was the father of Shealtiel, and Shealtiel the father of Zerubbabel,
+13. and Zerubbabel the father of Abiud, and Abiud the father of Eliakim, and Eliakim the father of Azor,
+14. and Azor the father of Zadok, and Zadok the father of Achim, and Achim the father of Eliud,
+15. and Eliud the father of Eleazar, and Eleazar the father of Matthan, and Matthan the father of Jacob,
+16. and Jacob the father of Joseph the husband of Mary, of whom Jesus was born, who is called Christ.
+17. So all the generations from Abraham to David were fourteen generations, and from David to the deportation to Babylon fourteen generations, and from the deportation to Babylon to the Christ fourteen generations.
+
+chunk_id_539VQRNIV
+1. This is the genealogy of Jesus the Messiah the son of David, the son of Abraham:
+2. Abraham was the father of Isaac,
+Isaac the father of Jacob,
+Jacob the father of Judah and his brothers,
+3. Judah the father of Perez and Zerah, whose mother was Tamar,
+Perez the father of Hezron,
+Hezron the father of Ram,
+4. Ram the father of Amminadab,
+Amminadab the father of Nahshon,
+Nahshon the father of Salmon,
+5. Salmon the father of Boaz, whose mother was Rahab,
+Boaz the father of Obed, whose mother was Ruth,
+Obed the father of Jesse,
+6. and Jesse the father of King David.
+David was the father of Solomon, whose mother had been Uriah’s wife,
+7. Solomon the father of Rehoboam,
+Rehoboam the father of Abijah,
+Abijah the father of Asa,
+8. Asa the father of Jehoshaphat,
+Jehoshaphat the father of Jehoram,
+Jehoram the father of Uzziah,
+9. Uzziah the father of Jotham,
+Jotham the father of Ahaz,
+Ahaz the father of Hezekiah,
+10. Hezekiah the father of Manasseh,
+Manasseh the father of Amon,
+Amon the father of Josiah,
+11. and Josiah the father of Jeconiah and his brothers at the time of the exile to Babylon.
+12. After the exile to Babylon:
+Jeconiah was the father of Shealtiel,
+Shealtiel the father of Zerubbabel,
+13. Zerubbabel the father of Abihud,
+Abihud the father of Eliakim,
+Eliakim the father of Azor,
+14. Azor the father of Zadok,
+Zadok the father of Akim,
+Akim the father of Elihud,
+15. Elihud the father of Eleazar,
+Eleazar the father of Matthan,
+Matthan the father of Jacob,
+16. and Jacob the father of Joseph, the husband of Mary, and Mary was the mother of Jesus who is called the Messiah.
+17. Thus there were fourteen generations in all from Abraham to David, fourteen from David to the exile to Babylon, and fourteen from the exile to the Messiah.
+
+chunk_id_104NQXNJB
+1. Roll of the genealogy of Jesus Christ, son of David, son of Abraham:
+2. Abraham fathered Isaac, Isaac fathered Jacob, Jacob fathered Judah and his brothers,
+3. Judah fathered Perez and Zerah, whose mother was Tamar, Perez fathered Hezron, Hezron fathered Ram,
+4. Ram fathered Amminadab, Amminadab fathered Nahshon, Nahshon fathered Salmon,
+5. Salmon fathered Boaz, whose mother was Rahab, Boaz fathered Obed, whose mother was Ruth, Obed fathered Jesse;
+6. and Jesse fathered King David. David fathered Solomon, whose mother had been Uriah's wife,
+7. Solomon fathered Rehoboam, Rehoboam fathered Abijah, Abijah fathered Asa,
+8. Asa fathered Jehoshaphat, Jehoshaphat fathered Joram, Joram fathered Uzziah,
+9. Uzziah fathered Jotham, Jotham fathered Ahaz, Ahaz fathered Hezekiah,
+10. Hezekiah fathered Manasseh, Manasseh fathered Amon, Amon fathered Josiah;
+11. and Josiah fathered Jechoniah and his brothers. Then the deportation to Babylon took place.
+12. After the deportation to Babylon: Jechoniah fathered Shealtiel, Shealtiel fathered Zerubbabel,
+13. Zerubbabel fathered Abiud, Abiud fathered Eliakim, Eliakim fathered Azor,
+14. Azor fathered Zadok, Zadok fathered Achim, Achim fathered Eliud,
+15. Eliud fathered Eleazar, Eleazar fathered Matthan, Matthan fathered Jacob;
+16. and Jacob fathered Joseph the husband of Mary; of her was born Jesus who is called Christ.
+17. The sum of generations is therefore: fourteen from Abraham to David; fourteen from David to the Babylonian deportation; and fourteen from the Babylonian deportation to Christ.
+
+chunk_id_790UPINKJ
+1. The book of the genealogy of Jesus Christ, the Son of David, the Son of Abraham:
+2. Abraham begot Isaac, Isaac begot Jacob, and Jacob begot Judah and his brothers.
+3. Judah begot Perez and Zerah by Tamar, Perez begot Hezron, and Hezron begot Ram.
+4. Ram begot Amminadab, Amminadab begot Nahshon, and Nahshon begot Salmon.
+5. Salmon begot Boaz by Rahab, Boaz begot Obed by Ruth, Obed begot Jesse,
+6. and Jesse begot David the king.
+David the king begot Solomon by her who had been the wife of Uriah.
+7. Solomon begot Rehoboam, Rehoboam begot Abijah, and Abijah begot Asa.
+8. Asa begot Jehoshaphat, Jehoshaphat begot Joram, and Joram begot Uzziah.
+9. Uzziah begot Jotham, Jotham begot Ahaz, and Ahaz begot Hezekiah.
+10. Hezekiah begot Manasseh, Manasseh begot Amon, and Amon begot Josiah.
+11. Josiah begot Jeconiah and his brothers about the time they were carried away to Babylon.
+12. And after they were brought to Babylon, Jeconiah begot Shealtiel, and Shealtiel begot Zerubbabel.
+13. Zerubbabel begot Abiud, Abiud begot Eliakim, and Eliakim begot Azor.
+14. Azor begot Zadok, Zadok begot Achim, and Achim begot Eliud.
+15. Eliud begot Eleazar, Eleazar begot Matthan, and Matthan begot Jacob.
+16. And Jacob begot Joseph the husband of Mary, of whom was born Jesus who is called Christ.
+17. So all the generations from Abraham to David are fourteen generations, from David until the captivity in Babylon are fourteen generations, and from the captivity in Babylon until the Christ are fourteen generations.
+
+chunk_id_024NAALSB
+1. The book of the genealogy of Jesus Christ, the son of David, the son of Abraham:
+2. Abraham was the father of Isaac, and Isaac was the father of Jacob, and Jacob was the father of Judah and his brothers.
+3. And Judah was the father of Perez and Zerah by Tamar, and Perez was the father of Hezron, and Hezron was the father of Ram.
+4. And Ram was the father of Amminadab, and Amminadab was the father of Nahshon, and Nahshon was the father of Salmon.
+5. And Salmon was the father of Boaz by Rahab, and Boaz was the father of Obed by Ruth, and Obed was the father of Jesse.
+6. And Jesse was the father of David the king. And David was the father of Solomon by the wife of Uriah.
+7. And Solomon was the father of Rehoboam, and Rehoboam was the father of Abijah, and Abijah was the father of Asa.
+8. And Asa was the father of Jehoshaphat, and Jehoshaphat was the father of Joram, and Joram was the father of Uzziah.
+9. And Uzziah was the father of Jotham, and Jotham was the father of Ahaz, and Ahaz was the father of Hezekiah.
+10. And Hezekiah was the father of Manasseh, and Manasseh was the father of Amon, and Amon was the father of Josiah.
+11. And Josiah was the father of Jeconiah and his brothers, at the time of the deportation to Babylon.
+12. And after the deportation to Babylon: Jeconiah was the father of Shealtiel, and Shealtiel was the father of Zerubbabel.
+13. And Zerubbabel was the father of Abihud, and Abihud was the father of Eliakim, and Eliakim was the father of Azor.
+14. And Azor was the father of Zadok, and Zadok was the father of Achim, and Achim was the father of Eliud.
+15. And Eliud was the father of Eleazar, and Eleazar was the father of Matthan, and Matthan was the father of Jacob.
+16. And Jacob was the father of Joseph the husband of Mary, by whom Jesus was born, who is called Christ.
+17. Therefore all the generations from Abraham to David are fourteen generations; and from David to the deportation to Babylon, fourteen generations; and from the deportation to Babylon to the Christ, fourteen generations.
+
+chunk_id_385MPYNET
+1. This is the record of the genealogy of Jesus Christ, the son of David, the son of Abraham.
+2. Abraham was the father of Isaac, Isaac the father of Jacob, Jacob the father of Judah and his brothers,
+3. Judah the father of Perez and Zerah (by Tamar), Perez the father of Hezron, Hezron the father of Ram,
+4. Ram the father of Amminadab, Amminadab the father of Nahshon, Nahshon the father of Salmon,
+5. Salmon the father of Boaz (by Rahab), Boaz the father of Obed (by Ruth), Obed the father of Jesse,
+6. and Jesse the father of David the king.
+David was the father of Solomon (by the wife of Uriah),
+7. Solomon the father of Rehoboam, Rehoboam the father of Abijah, Abijah the father of Asa,
+8. Asa the father of Jehoshaphat, Jehoshaphat the father of Joram, Joram the father of Uzziah,
+9. Uzziah the father of Jotham, Jotham the father of Ahaz, Ahaz the father of Hezekiah,
+10. Hezekiah the father of Manasseh, Manasseh the father of Amon, Amon the father of Josiah,
+11. and Josiah the father of Jeconiah and his brothers, at the time of the deportation to Babylon.
+12. After the deportation to Babylon, Jeconiah became the father of Shealtiel, Shealtiel the father of Zerubbabel,
+13. Zerubbabel the father of Abiud, Abiud the father of Eliakim, Eliakim the father of Azor,
+14. Azor the father of Zadok, Zadok the father of Achim, Achim the father of Eliud,
+15. Eliud the father of Eleazar, Eleazar the father of Matthan, Matthan the father of Jacob,
+16. and Jacob the father of Joseph, the husband of Mary, by whom Jesus was born, who is called Christ.
+17. So all the generations from Abraham to David are fourteen generations, and from David to the deportation to Babylon, fourteen generations, and from the deportation to Babylon to Christ, fourteen generations.

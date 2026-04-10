@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T19:54:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 31,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 18,
+  "verse_count": 18,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Appointment of Bezalel and Oholiab",
+      "reason": "Yahweh speaks to Moses appointing artisans for the tabernacle."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "law",
+      "title": "Command to Keep the Sabbath",
+      "reason": "Yahweh commands Israel to observe the Sabbath as a covenant sign."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Giving of the Tablets",
+      "reason": "Narrative conclusion describing Moses receiving the stone tablets."
+    }
+  ]
+}

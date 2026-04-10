@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "First Passover in Sinai",
+      "reason": "Narrative account of the initial celebration of Passover."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "law",
+      "title": "Passover for the Unclean and Sojourners",
+      "reason": "Dialogue leading to a legal statute regarding delayed Passover observance."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Guidance by the Cloud",
+      "reason": "Description of the cloud's movement directing the camp's travel."
+    }
+  ]
+}

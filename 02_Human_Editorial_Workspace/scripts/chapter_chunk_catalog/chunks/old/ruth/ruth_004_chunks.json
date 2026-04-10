@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:24:27Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ruth",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Boaz Redeems the Land and Ruth",
+      "reason": "Narrative of the legal transaction at the gate involving Boaz, the kinsman redeemer, and the elders."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Birth of Obed and Naomi's Restoration",
+      "reason": "Narrative of Ruth bearing a son, the women's blessing to Naomi, and the naming of Obed."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 22,
+      "type": "genealogy",
+      "title": "Genealogy from Perez to David",
+      "reason": "List of generations tracing the lineage from Perez through Boaz and Obed to King David."
+    }
+  ]
+}

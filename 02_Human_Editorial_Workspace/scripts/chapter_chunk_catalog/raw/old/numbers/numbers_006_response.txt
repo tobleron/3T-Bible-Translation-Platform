@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 21,
+      "type": "law",
+      "title": "Law of the Nazirite Vow",
+      "reason": "A complete legal section detailing the vows, restrictions, and offerings for a Nazirite."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 27,
+      "type": "blessing_or_prayer",
+      "title": "The Priestly Blessing",
+      "reason": "A distinct speech where God instructs Moses to give a specific blessing formula to Aaron and his sons."
+    }
+  ]
+}

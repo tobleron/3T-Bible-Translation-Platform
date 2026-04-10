@@ -1,0 +1,65 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:40:14Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 32,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 42,
+  "verse_count": 42,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "dialogue",
+      "title": "Request for Land East of Jordan",
+      "reason": "The sons of Reuben and Gad propose receiving land east of the Jordan as their inheritance."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Moses' Rebuke and Warning",
+      "reason": "Moses confronts the tribes with a historical parallel to their fathers' failure at Kadesh-barnea."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 19,
+      "type": "dialogue",
+      "title": "Proposed Compromise",
+      "reason": "The tribes offer to fight alongside Israel while keeping their families and livestock in the east."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 24,
+      "type": "speech",
+      "title": "Moses' Conditions",
+      "reason": "Moses sets specific conditions for their request and warns of the consequences if they fail."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 30,
+      "type": "dialogue",
+      "title": "Agreement and Final Terms",
+      "reason": "The tribes accept Moses' terms, and he instructs the leaders to formalize the agreement."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 32,
+      "type": "dialogue",
+      "title": "Final Oath of Loyalty",
+      "reason": "The tribes reaffirm their commitment to cross the Jordan armed before Yahweh."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 42,
+      "type": "story",
+      "title": "Granting of Land and Settlement",
+      "reason": "Moses grants the land to the tribes, followed by a list of cities built by Gad, Reuben, Manasseh, Jair, and Nobah."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "The Plague on Livestock",
+      "reason": "Narrative unit covering the warning, execution, and result of the first plague."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "story",
+      "title": "The Plague of Boils",
+      "reason": "Narrative unit covering the preparation, execution, and result of the second plague."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Warning of Hail",
+      "reason": "Oracle containing Yahweh's warning and the distinction made by Pharaoh's servants."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 35,
+      "type": "story",
+      "title": "The Plague of Hail",
+      "reason": "Narrative unit covering the execution of the hail, the partial relief, and Pharaoh's final hardening."
+    }
+  ]
+}

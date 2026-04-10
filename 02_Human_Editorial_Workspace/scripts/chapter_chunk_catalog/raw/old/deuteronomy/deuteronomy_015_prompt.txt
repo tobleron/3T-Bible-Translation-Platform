@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 15:1-23
+
+Chapter text:
+1. “At the end of every seven years you shall grant a remission of debts.
+2. And this is the manner of remission: every creditor shall release what he has loaned to his neighbor; he shall not exact it of his neighbor and his brother because the remission from Yahweh has been proclaimed.
+3. From a foreigner you may exact it, but your hand shall release whatever of yours is with your brother.
+4. However, there will be no needy one among you, since Yahweh will surely bless you in the land which Yahweh your God is giving you as an inheritance to possess,
+5. if only you listen obediently to the voice of Yahweh your God, to be careful to do all this commandment which I am commanding you today.
+6. For Yahweh your God will bless you as He has promised you, and you will lend to many nations, but you will not borrow; and you will rule over many nations, but they will not rule over you.
+7. “If there is a needy one among you, one of your brothers, in any of your gates of the towns in your land which Yahweh your God is giving you, you shall not harden your heart nor close your hand from your needy brother;
+8. but you shall freely open your hand to him and shall generously lend him sufficient for his need in whatever he lacks.
+9. Beware lest there be a vile thought in your heart, saying, ‘The seventh year, the year of the remission of debts, is near,’ and your eye is hostile toward your needy brother, and you give him nothing; then he may cry to Yahweh against you, and it will be a sin in you.
+10. You shall generously give to him, and your heart shall not be grieved when you give to him, because for this thing Yahweh your God will bless you in all your work and in all that you send forth your hand to do.
+11. For the needy will never cease to be in the land; therefore I am commanding you, saying, ‘You shall freely open your hand to your brother, to your afflicted and needy in your land.’
+12. “If your brother, a Hebrew man or woman, is sold to you, then he shall serve you six years, but in the seventh year you shall let him go to be free from you.
+13. When you let him go to be free from you, you shall not let him go empty-handed.
+14. You shall furnish him generously from your flock and from your threshing floor and from your wine vat; you shall give to him as Yahweh your God has blessed you.
+15. And you shall remember that you were a slave in the land of Egypt, and Yahweh your God redeemed you; therefore I am commanding you this today.
+16. And it will be that, if he says to you, ‘I will not go out from you,’ because he loves you and your household, since he fares well with you;
+17. then you shall take an awl and pierce it through his ear into the door, and he shall be your servant forever. Also you shall do likewise to your maidservant.
+18. “It shall not seem hard in your sight when you let him go to be free from you, for he has given you six years with double the service of a hired man; so Yahweh your God will bless you in whatever you do.
+19. “You shall set apart as holy to Yahweh your God all the firstborn males that are born of your herd and of your flock; you shall not work with the firstborn of your herd nor shear the firstborn of your flock.
+20. You and your household shall eat it every year before Yahweh your God in the place which Yahweh chooses.
+21. But if it has any defect, such as lameness or blindness, or any serious defect, you shall not sacrifice it to Yahweh your God.
+22. You shall eat it within your gates; the unclean and the clean alike may eat it, as a gazelle or a deer.
+23. Only you shall not eat its blood; you are to pour it out on the ground like water.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

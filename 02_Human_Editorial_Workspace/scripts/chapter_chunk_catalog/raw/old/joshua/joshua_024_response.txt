@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 28,
+      "type": "speech",
+      "title": "Joshua's Covenant Speech at Shechem",
+      "reason": "A continuous speech by Joshua recounting history and calling for covenant renewal, including the people's response."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Deaths of Joshua, Joseph, and Eleazar",
+      "reason": "Narrative account of the deaths and burials of key leaders concluding the chapter."
+    }
+  ]
+}

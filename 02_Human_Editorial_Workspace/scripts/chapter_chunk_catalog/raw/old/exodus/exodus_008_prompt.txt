@@ -1,0 +1,81 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 8:1-32
+
+Chapter text:
+1. Then Yahweh said to Moses, “Come to Pharaoh and say to him, ‘Thus says Yahweh, “Let My people go, that they may serve Me.
+2. But if you refuse to let them go, behold, I will smite your whole territory with frogs.
+3. And the Nile will swarm with frogs, and they will go up and come into your house and into your bedroom and on your bed and into the houses of your servants and on your people and into your ovens and into your kneading bowls.
+4. So the frogs will come up on you and on your people and on all your servants.”’”
+5. Then Yahweh said to Moses, “Say to Aaron, ‘Stretch out your hand with your staff over the rivers, over the streams and over the pools, and cause the frogs to come up on the land of Egypt.’”
+6. So Aaron stretched out his hand over the waters of Egypt, and the frogs came up and covered the land of Egypt.
+7. And the magicians did the same with their secret arts; they caused the frogs to come up on the land of Egypt.
+8. Then Pharaoh called for Moses and Aaron and said, “Entreat Yahweh that He may cause the frogs to depart from me and from my people; and I will let the people go, that they may sacrifice to Yahweh.”
+9. And Moses said to Pharaoh, “May the honor be yours to tell me: when shall I entreat for you and for your servants and for your people, that the frogs be cut off from you and your houses, that they may remain only in the Nile?”
+10. Then he said, “Tomorrow.” So he said, “May it be according to your word, that you may know that there is no one like Yahweh our God.
+11. And the frogs will depart from you and your houses and your servants and your people; they will remain only in the Nile.”
+12. Then Moses and Aaron went out from Pharaoh, and Moses cried out to Yahweh concerning the frogs which He had set upon Pharaoh.
+13. So Yahweh did according to the word of Moses, and the frogs died out of the houses, the courts, and the fields.
+14. So they piled them in heaps, and the land became foul.
+15. Then Pharaoh saw that there was relief, and he hardened his heart with firmness and did not listen to them, as Yahweh had spoken.
+16. Then Yahweh said to Moses, “Say to Aaron, ‘Stretch out your staff and strike the dust of the earth, that it may become gnats through all the land of Egypt.’”
+17. And they did so; and Aaron stretched out his hand with his staff and struck the dust of the earth, and there were gnats on man and beast. All the dust of the earth became gnats through all the land of Egypt.
+18. Then the magicians did the same with their secret arts in order to bring forth gnats, but they could not; so there were gnats on man and beast.
+19. And the magicians said to Pharaoh, “This is the finger of God.” But Pharaoh’s heart was hardened with strength, and he did not listen to them, as Yahweh had spoken.
+20. And Yahweh said to Moses, “Rise early in the morning and stand before Pharaoh as he comes out to the water, and you shall say to him, ‘Thus says Yahweh, “Let My people go, that they may serve Me.
+21. For if you do not let My people go, behold, I will send swarms of flies on you and on your servants and on your people and into your houses; and the houses of the Egyptians will be full of swarms of flies, and also the ground on which they stand.
+22. But on that day I will make a distinction for the land of Goshen, where My people are living, so that no swarms of flies will be there, that you may know that I, Yahweh, am in the midst of the land.
+23. And I will put a division between My people and your people. Tomorrow this sign will happen.”’”
+24. Then Yahweh did so. And there came heavy swarms of flies into the house of Pharaoh and the houses of his servants, and the land was laid waste because of the swarms of flies in all the land of Egypt.
+25. And Pharaoh called for Moses and Aaron and said, “Go, sacrifice to your God within the land.”
+26. But Moses said, “It is not right to do so, for we will sacrifice to Yahweh our God what is an abomination to the Egyptians. If we sacrifice what is an abomination to the Egyptians before their eyes, will they not then stone us?
+27. We must go a three days’ journey into the wilderness and sacrifice to Yahweh our God as He says to us.”
+28. And Pharaoh said, “I will let you go, that you may sacrifice to Yahweh your God in the wilderness; only you shall not go very far away. Entreat for me.”
+29. Then Moses said, “Behold, I am going out from you, and I shall entreat Yahweh that the swarms of flies may depart from Pharaoh, from his servants, and from his people tomorrow; only may Pharaoh not deal deceitfully again in not letting the people go to sacrifice to Yahweh.”
+30. So Moses went out from Pharaoh and entreated Yahweh.
+31. And Yahweh did according to the word of Moses and caused the swarms of flies to depart from Pharaoh, from his servants, and from his people; not one remained.
+32. Then Pharaoh hardened his heart with firmness this time also, and he did not let the people go.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

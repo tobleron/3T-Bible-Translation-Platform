@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Fear of the Kings and Circumcision Command",
+      "reason": "Narrative introduction of enemy reaction followed by divine instruction to Joshua."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Circumcision at Gibeath-haaraloth and Gilgal",
+      "reason": "Execution of the command with historical explanation and renaming of the place."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Passover and Cessation of Manna",
+      "reason": "Chronological account of the first Passover in Canaan and the end of manna."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 15,
+      "type": "vision",
+      "title": "Appearance of the Commander of Yahweh",
+      "reason": "Joshua encounters a divine figure who commands him to remove his sandals."
+    }
+  ]
+}

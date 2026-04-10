@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 15:1-27
+
+Chapter text:
+1. Then Moses and the sons of Israel sang this song to Yahweh and said, “I will sing to Yahweh, for He is highly exalted; The horse and its rider He has hurled into the sea.
+2. Yah is my strength and song, And He has become my salvation; This is my God, and I will praise Him; My father’s God, and I will extol Him.
+3. Yahweh is a warrior; Yahweh is His name.
+4. Pharaoh’s chariots and his army He has cast into the sea; And the choicest of his officers are sunk in the Red Sea.
+5. The deeps cover them; They went down into the depths like a stone.
+6. Your right hand, O Yahweh, is majestic in power, Your right hand, O Yahweh, shatters the enemy.
+7. And in the greatness of Your exaltation You pull down those who rise up against You; You send forth Your burning anger, and it devours them as chaff.
+8. And at the blast of Your nostrils the waters were piled up, The flowing waters stood up like a heap; The deeps were congealed in the heart of the sea.
+9. The enemy said, ‘I will pursue, I will overtake, I will divide the spoil; My desire shall be fulfilled against them; I will draw out my sword, my hand will dispossess them.’
+10. You blew with Your wind, the sea covered them; They sank like lead in the mighty waters.
+11. Who is like You among the gods, O Yahweh? Who is like You, majestic in holiness, Fearsome in praises, working wonders?
+12. You stretched out Your right hand, The earth swallowed them.
+13. In Your lovingkindness You have guided the people whom You have redeemed; In Your strength You have led them to Your holy habitation.
+14. The peoples have heard, they tremble; Anguish has seized the inhabitants of Philistia.
+15. Then the chiefs of Edom were dismayed; The leaders of Moab, trembling seizes them; All the inhabitants of Canaan have melted away.
+16. Terror and dread fall upon them; By the greatness of Your arm they are still as stone; Until Your people pass over, O Yahweh, Until the people pass over whom You have purchased.
+17. You will bring them and plant them in the mountain of Your inheritance, The place, O Yahweh, which You have made for You to inhabit, The sanctuary, O Lord, which Your hands have established.
+18. Yahweh shall reign forever and ever.”
+19. For the horses of Pharaoh with his chariots and his horsemen went into the sea, and Yahweh brought back the waters of the sea on them, but the sons of Israel walked on dry land through the midst of the sea.
+20. And Miriam the prophetess, Aaron’s sister, took the tambourine in her hand, and all the women went out after her with tambourines and with dancing.
+21. And Miriam answered them, “Sing to Yahweh, for He is highly exalted; The horse and his rider He has hurled into the sea.”
+22. Then Moses had Israel set out from the Red Sea, and they went out into the wilderness of Shur; and they went three days in the wilderness and found no water.
+23. And they came to Marah, but they could not drink the waters of Marah, for they were bitter; therefore it was named Marah.
+24. So the people grumbled at Moses, saying, “What shall we drink?”
+25. Then he cried out to Yahweh, and Yahweh showed him a tree; and he threw it into the waters, and the waters became sweet. There He set for them a statute and a judgment, and there He tested them.
+26. And He said, “If you will earnestly listen to the voice of Yahweh your God, and do what is right in His sight, and give ear to His commandments, and keep all His statutes, I will put none of the diseases on you which I have put on the Egyptians; for I, Yahweh, am your healer.”
+27. Then they came to Elim where there were twelve springs of water and seventy date palms, and they camped there beside the waters.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

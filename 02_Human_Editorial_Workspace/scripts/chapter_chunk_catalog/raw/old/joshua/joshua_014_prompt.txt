@@ -1,0 +1,64 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Joshua 14:1-15
+
+Chapter text:
+1. Now these are the territories which the sons of Israel inherited in the land of Canaan, which Eleazar the priest and Joshua the son of Nun and the heads of the households of the tribes of the sons of Israel apportioned to them for an inheritance,
+2. by the lot of their inheritance, as Yahweh commanded by the hand of Moses, for the nine tribes and the half-tribe.
+3. For Moses had given the inheritance of the two tribes and the half-tribe beyond the Jordan; but he did not give an inheritance to the Levites among them.
+4. For the sons of Joseph were two tribes, Manasseh and Ephraim, and they did not give a portion to the Levites in the land, except cities to live in, with their pasture lands for their livestock and for their property.
+5. Thus the sons of Israel did just as Yahweh had commanded Moses, and they divided the land.
+6. Then the sons of Judah drew near to Joshua in Gilgal, and Caleb the son of Jephunneh the Kenizzite said to him, “You know the word which Yahweh spoke to Moses the man of God concerning you and me in Kadesh-barnea.
+7. I was forty years old when Moses the servant of Yahweh sent me from Kadesh-barnea to spy out the land, and I brought word back to him as it was in my heart.
+8. Nevertheless, my brothers who went up with me made the heart of the people melt with fear; but I followed Yahweh my God fully.
+9. So Moses swore on that day, saying, ‘Surely the land on which your foot has trodden will be an inheritance to you and to your children forever because you have followed Yahweh my God fully.’
+10. So now behold, Yahweh has let me live, just as He spoke, these forty-five years, from the time that Yahweh spoke this word to Moses, when Israel walked in the wilderness; so now behold, I am eighty-five years old today.
+11. I am still as strong today as I was in the day Moses sent me; as my strength was then, so my strength is now, for war and for going out and coming in.
+12. So now, give me this hill country about which Yahweh spoke on that day, for you heard on that day that Anakim were there, with great fortified cities; perhaps Yahweh will be with me, and I will dispossess them as Yahweh has spoken.”
+13. So Joshua blessed him and gave Hebron to Caleb the son of Jephunneh for an inheritance.
+14. Therefore, Hebron became the inheritance of Caleb the son of Jephunneh the Kenizzite until this day because he fully followed Yahweh, the God of Israel.
+15. Now the name of Hebron was formerly Kiriath-arba; for Arba was the greatest man among the Anakim. Then the land was quiet from war.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

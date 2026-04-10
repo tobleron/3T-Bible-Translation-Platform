@@ -1,0 +1,57 @@
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Wise Men's Journey to Bethlehem",
+      "reason": "Narrative of the Magi's arrival and their inquiry about the Messiah."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 6,
+      "type": "dialogue",
+      "title": "Herod's Inquiry and the Prophecy",
+      "reason": "Herod's consultation with religious leaders and their response citing Micah's prophecy."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Herod's Instructions to the Magi",
+      "reason": "Continuation of the narrative with Herod's directive to the Magi."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "story",
+      "title": "The Magi Find the Child",
+      "reason": "Describes the Magi's arrival at the house, their worship, and gift-giving."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Joseph's Flight to Egypt",
+      "reason": "Narrative of Joseph's obedience to the angel's warning and the fulfillment of prophecy."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 18,
+      "type": "vision",
+      "title": "The Massacre of the Innocents and Rachel's Lament",
+      "reason": "Describes Herod's massacre and the prophetic lamentation from Ramah."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Return from Egypt and Settlement in Nazareth",
+      "reason": "Narrative of Joseph's return to Israel and settlement in Nazareth, fulfilling prophecy."
+    }
+  ],
+  "prompt_version": "v1",
+  "window_start": 1,
+  "window_end": 23,
+  "generated_at": "ui-test"
+}

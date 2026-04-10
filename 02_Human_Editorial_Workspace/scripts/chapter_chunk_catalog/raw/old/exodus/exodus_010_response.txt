@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Yahweh's Instruction and Moses' Warning",
+      "reason": "Moses delivers a unified warning to Pharaoh about the coming locust plague."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "dialogue",
+      "title": "Negotiation with Pharaoh",
+      "reason": "A back-and-forth exchange between Pharaoh's servants, Pharaoh, and Moses regarding who will go."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 20,
+      "type": "story",
+      "title": "The Plague of Locusts",
+      "reason": "Narrative account of the locusts arriving, consuming the land, and Pharaoh's temporary plea."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Plague of Darkness",
+      "reason": "Narrative account of the three days of darkness and the distinction for Israel."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 29,
+      "type": "dialogue",
+      "title": "Final Negotiation and Departure",
+      "reason": "The final negotiation over livestock and Moses' declaration to leave Pharaoh."
+    }
+  ]
+}

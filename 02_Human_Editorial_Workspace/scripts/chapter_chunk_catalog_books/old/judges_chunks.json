@@ -1,0 +1,793 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-10T11:02:43Z",
+  "testament": "old",
+  "book": "Judges",
+  "book_key": "judges",
+  "chapters": [
+    {
+      "chapter": 1,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "story",
+          "title": "Judah's Victory at Bezek",
+          "reason": "Narrative of Judah and Simeon's campaign against the Canaanites and the defeat of Adoni-bezek."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 15,
+          "type": "story",
+          "title": "Capture of Jerusalem and Debir",
+          "reason": "Account of Judah taking Jerusalem and Caleb's reward to Othniel for capturing Debir."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 20,
+          "type": "story",
+          "title": "Kenites and Final Conquests of Judah",
+          "reason": "Description of the Kenites joining Judah and the completion of Judah's territorial gains."
+        },
+        {
+          "start_verse": 21,
+          "end_verse": 36,
+          "type": "list_or_catalog",
+          "title": "Tribal Successes and Failures",
+          "reason": "Catalog of the remaining tribes' partial successes or failures in driving out the Canaanites."
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "dialogue",
+          "title": "The Angel's Rebuke at Bochim",
+          "reason": "A continuous narrative unit containing the angel's speech and the people's immediate reaction."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 10,
+          "type": "story",
+          "title": "Death of Joshua and a New Generation",
+          "reason": "A complete narrative section describing the transition from Joshua's leadership to a generation that forgot God."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 23,
+          "type": "argument",
+          "title": "The Cycle of Sin and Judgment",
+          "reason": "A cohesive theological argument detailing the pattern of Israel's apostasy, Yahweh's judgment, the raising of judges, and the final conclusion regarding the remaining nations."
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "mixed",
+          "title": "Introduction to the Nations and Israel's Sin",
+          "reason": "Establishes the purpose of remaining nations and describes Israel's initial apostasy."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 11,
+          "type": "story",
+          "title": "Othniel Delivers Israel",
+          "reason": "First cycle of oppression and deliverance through Othniel."
+        },
+        {
+          "start_verse": 12,
+          "end_verse": 30,
+          "type": "story",
+          "title": "Ehud Delivers Israel from Moab",
+          "reason": "Second cycle of oppression and deliverance through Ehud's assassination of Eglon."
+        },
+        {
+          "start_verse": 31,
+          "end_verse": 31,
+          "type": "story",
+          "title": "Shamgar Delivers Israel",
+          "reason": "Brief account of Shamgar's victory over the Philistines."
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 3,
+          "type": "story",
+          "title": "Israel's Oppression under Jabin",
+          "reason": "Establishes the historical context of Israel's sin and oppression by King Jabin and Sisera."
+        },
+        {
+          "start_verse": 4,
+          "end_verse": 9,
+          "type": "dialogue",
+          "title": "Deborah Summons Barak",
+          "reason": "Introduces Deborah as judge and records the dialogue where she calls Barak to battle."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 13,
+          "type": "story",
+          "title": "Mobilization of Forces",
+          "reason": "Describes the gathering of troops and Sisera's response to the threat."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 16,
+          "type": "story",
+          "title": "The Battle at Mount Tabor",
+          "reason": "Depicts the divine intervention and military victory over Sisera's army."
+        },
+        {
+          "start_verse": 17,
+          "end_verse": 22,
+          "type": "story",
+          "title": "Death of Sisera by Jael",
+          "reason": "Narrates the flight of Sisera and his assassination by Jael in her tent."
+        },
+        {
+          "start_verse": 23,
+          "end_verse": 24,
+          "type": "story",
+          "title": "Final Subjugation of Canaan",
+          "reason": "Concludes the account with the total defeat of King Jabin."
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "psalm",
+          "title": "Opening Praise to Yahweh",
+          "reason": "Deborah and Barak begin the song with a call to praise God for His majestic intervention in history."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 11,
+          "type": "speech",
+          "title": "Description of Israel's Distress and Call to Action",
+          "reason": "The singer describes the chaos before the victory and invites the people to remember God's deeds."
+        },
+        {
+          "start_verse": 12,
+          "end_verse": 18,
+          "type": "list_or_catalog",
+          "title": "Call to Arms and Tribal Roll Call",
+          "reason": "A direct address to Deborah and Barak followed by a detailed list of which tribes participated and which hesitated."
+        },
+        {
+          "start_verse": 19,
+          "end_verse": 23,
+          "type": "story",
+          "title": "The Battle at Megiddo",
+          "reason": "A narrative account of the military conflict, divine intervention through nature, and the cursing of Meroz."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 30,
+          "type": "story",
+          "title": "The Death of Sisera by Jael",
+          "reason": "A detailed narrative focusing on Jael's hospitality and her killing of the enemy commander."
+        },
+        {
+          "start_verse": 31,
+          "end_verse": 31,
+          "type": "blessing_or_prayer",
+          "title": "Final Benediction",
+          "reason": "The song concludes with a prayer for God's enemies to perish and His lovers to shine like the sun."
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "story",
+          "title": "Israel's Oppression and Cry for Help",
+          "reason": "Describes the seven-year oppression by Midian and Israel's subsequent cry to Yahweh."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 10,
+          "type": "speech",
+          "title": "The Prophet's Oracle of Rebuke",
+          "reason": "A prophet delivers a message from Yahweh recounting past deliverance and current disobedience."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 24,
+          "type": "story",
+          "title": "Gideon's Call and the Sign of Fire",
+          "reason": "The angel calls Gideon, who requests a sign with fire from the rock before building an altar."
+        },
+        {
+          "start_verse": 25,
+          "end_verse": 32,
+          "type": "story",
+          "title": "Gideon Destroys the Altar of Baal",
+          "reason": "Gideon destroys his father's altar by night and earns the name Jerubbaal after a confrontation."
+        },
+        {
+          "start_verse": 33,
+          "end_verse": 35,
+          "type": "story",
+          "title": "The Enemy Assembles and Gideon Rallies Troops",
+          "reason": "Midianite forces camp in Jezreel while the Spirit of Yahweh empowers Gideon to gather an army."
+        },
+        {
+          "start_verse": 36,
+          "end_verse": 40,
+          "type": "dialogue",
+          "title": "Gideon's Fleece Tests",
+          "reason": "Gideon speaks with God twice to confirm the promise of victory using a wool fleece."
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "story",
+          "title": "Selection of the Army",
+          "reason": "Describes Gideon reducing his army from 32,000 to 300 men based on Yahweh's instructions at the spring."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 15,
+          "type": "story",
+          "title": "Gideon's Night Visit",
+          "reason": "Narrates Gideon going to the Midianite camp with Purah and hearing a dream that confirms victory."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 22,
+          "type": "story",
+          "title": "The Battle at Harod",
+          "reason": "Details the tactical deployment of the 300 men, their surprise attack with trumpets and pitchers, and the resulting rout."
+        },
+        {
+          "start_verse": 23,
+          "end_verse": 25,
+          "type": "story",
+          "title": "Pursuit and Capture of Princes",
+          "reason": "Describes the pursuit by Israelite tribes and the capture of the Midianite princes Oreb and Zeeb."
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 3,
+          "type": "dialogue",
+          "title": "Ephraim's Complaint and Gideon's Reply",
+          "reason": "A complete dialogue unit where Ephraim confronts Gideon and he responds with a diplomatic argument that resolves the tension."
+        },
+        {
+          "start_verse": 4,
+          "end_verse": 17,
+          "type": "story",
+          "title": "Pursuit of Midian Kings and Retribution at Succoth and Penuel",
+          "reason": "A continuous narrative sequence covering the pursuit across the Jordan, the interaction with Succoth and Penuel, the battle at Karkor, and the subsequent vengeance."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 21,
+          "type": "dialogue",
+          "title": "Execution of Zebah and Zalmunna",
+          "reason": "A focused dialogue scene between Gideon and the captured kings regarding their victims at Tabor, culminating in their execution."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 28,
+          "type": "mixed",
+          "title": "Offer of Kingship and the Ephod",
+          "reason": "A mixed unit containing a speech offering kingship, Gideon's argument rejecting it, his request for gold, and the narrative result of the ephod becoming a snare."
+        },
+        {
+          "start_verse": 29,
+          "end_verse": 35,
+          "type": "story",
+          "title": "Gideon's Death and Israel's Apostasy",
+          "reason": "A concluding narrative block covering Gideon's family details, his death, burial, and the immediate spiritual decline of Israel after his passing."
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "story",
+          "title": "Abimelech Becomes King",
+          "reason": "Narrative of Abimelech's rise to power through his mother's relatives and the killing of his brothers."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 21,
+          "type": "speech",
+          "title": "Jotham's Parable and Curse",
+          "reason": "Jotham delivers a parable of the trees followed by a prophetic curse on Shechem and Abimelech."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 25,
+          "type": "story",
+          "title": "God's Judgment Begins",
+          "reason": "Narrative describing God sending an evil spirit to cause conflict between Abimelech and the Shechemites."
+        },
+        {
+          "start_verse": 26,
+          "end_verse": 41,
+          "type": "dialogue",
+          "title": "Gaal vs. Zebul",
+          "reason": "Dialogue and confrontation between Gaal and the city ruler Zebul regarding Abimelech's rule."
+        },
+        {
+          "start_verse": 42,
+          "end_verse": 45,
+          "type": "story",
+          "title": "Siege of Shechem",
+          "reason": "Narrative of Abimelech's military campaign to capture and destroy the city of Shechem."
+        },
+        {
+          "start_verse": 46,
+          "end_verse": 49,
+          "type": "story",
+          "title": "The Tower of Shechem",
+          "reason": "Narrative of the lords of the tower seeking refuge and their subsequent destruction by fire."
+        },
+        {
+          "start_verse": 50,
+          "end_verse": 54,
+          "type": "story",
+          "title": "Death of Abimelech",
+          "reason": "Narrative of the siege of Thebez and Abimelech's death by a millstone."
+        },
+        {
+          "start_verse": 55,
+          "end_verse": 57,
+          "type": "exhortation",
+          "title": "Conclusion of the Story",
+          "reason": "Narrative conclusion summarizing God's judgment on Abimelech and the men of Shechem."
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "Judges Tola and Jair",
+          "reason": "Narrative summary of two judges' reigns and deaths."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 9,
+          "type": "story",
+          "title": "Israel's Apostasy and Oppression",
+          "reason": "Description of Israel's sin and subsequent military defeat by Philistines and Ammonites."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 16,
+          "type": "dialogue",
+          "title": "Israel's Repentance and Yahweh's Rebuke",
+          "reason": "Exchange of dialogue between Israel and Yahweh regarding their sin and deliverance."
+        },
+        {
+          "start_verse": 17,
+          "end_verse": 18,
+          "type": "story",
+          "title": "Mobilization in Gilead",
+          "reason": "Narrative of armies gathering and the princes seeking a leader."
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 3,
+          "type": "story",
+          "title": "Jephthah's Exile",
+          "reason": "Introduces Jephthah's background and his expulsion from his family."
+        },
+        {
+          "start_verse": 4,
+          "end_verse": 11,
+          "type": "dialogue",
+          "title": "Jephthah Called to Leadership",
+          "reason": "The elders recruit Jephthah and he negotiates his terms of command."
+        },
+        {
+          "start_verse": 12,
+          "end_verse": 28,
+          "type": "argument",
+          "title": "Jephthah's Diplomatic Note",
+          "reason": "A detailed historical and legal argument presented to the Ammonite king."
+        },
+        {
+          "start_verse": 29,
+          "end_verse": 33,
+          "type": "story",
+          "title": "The Battle with Ammon",
+          "reason": "Jephthah is empowered by the Spirit and defeats the enemy."
+        },
+        {
+          "start_verse": 34,
+          "end_verse": 40,
+          "type": "story",
+          "title": "The Vow Fulfilled",
+          "reason": "Jephthah returns home, meets his daughter, and fulfills his vow."
+        }
+      ]
+    },
+    {
+      "chapter": 12,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "story",
+          "title": "Conflict with Ephraim",
+          "reason": "A complete narrative unit covering the dispute, battle, and execution at the Jordan fords."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 15,
+          "type": "list_or_catalog",
+          "title": "Succession of Judges",
+          "reason": "A structured list detailing the reigns and deaths of Jephthah, Ibzan, Elon, and Abdon."
+        }
+      ]
+    },
+    {
+      "chapter": 13,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 2,
+          "type": "story",
+          "title": "Israel's Oppression and Manoah's Family",
+          "reason": "Sets the historical context of Philistine oppression and introduces the barren couple."
+        },
+        {
+          "start_verse": 3,
+          "end_verse": 7,
+          "type": "vision",
+          "title": "Angel Appears to the Woman",
+          "reason": "Records the first divine announcement of Samson's birth and his Nazirite vows to the mother."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 14,
+          "type": "dialogue",
+          "title": "Manoah Prays and Receives Instruction",
+          "reason": "Describes Manoah's prayer for clarification and the angel's reiteration of the dietary laws."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 23,
+          "type": "story",
+          "title": "The Sacrifice and Divine Revelation",
+          "reason": "Narrates the meal preparation, the miraculous ascent of the angel, and the couple's realization of God's presence."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 25,
+          "type": "story",
+          "title": "Birth and Empowerment of Samson",
+          "reason": "Concludes the narrative with the birth of the child and the initial stirring of the Spirit."
+        }
+      ]
+    },
+    {
+      "chapter": 14,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 4,
+          "type": "story",
+          "title": "Samson's Choice of Wife",
+          "reason": "Describes Samson's decision to marry a Philistine woman and the divine purpose behind it."
+        },
+        {
+          "start_verse": 5,
+          "end_verse": 9,
+          "type": "story",
+          "title": "The Lion and the Honey",
+          "reason": "Narrates Samson killing a lion and discovering honey in its carcass."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 14,
+          "type": "dialogue",
+          "title": "The Riddle at the Feast",
+          "reason": "Details the wedding feast where Samson proposes a riddle to the Philistines."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 18,
+          "type": "story",
+          "title": "The Riddle Solved",
+          "reason": "Describes the wife's pressure on Samson and the Philistines solving the riddle."
+        },
+        {
+          "start_verse": 19,
+          "end_verse": 20,
+          "type": "story",
+          "title": "Samson's Vengeance",
+          "reason": "Concludes with Samson striking down thirty men and his wife being given to another."
+        }
+      ]
+    },
+    {
+      "chapter": 15,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "story",
+          "title": "Samson's Revenge on the Philistines",
+          "reason": "A complete narrative unit covering Samson's conflict with his father-in-law and his subsequent retaliation against the Philistines."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 17,
+          "type": "story",
+          "title": "Samson Delivered at Lehi",
+          "reason": "A continuous narrative describing the Judahites binding Samson, his release by the Spirit, and his victory with the jawbone."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 20,
+          "type": "story",
+          "title": "Samson's Thirst and Final Years",
+          "reason": "A concluding narrative segment detailing Samson's prayer for water, the miracle at En-hakkore, and his period of judging Israel."
+        }
+      ]
+    },
+    {
+      "chapter": 16,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 3,
+          "type": "story",
+          "title": "Samson at Gaza",
+          "reason": "A complete narrative unit describing Samson's first visit to Gaza and his feat of carrying the city gates."
+        },
+        {
+          "start_verse": 4,
+          "end_verse": 17,
+          "type": "story",
+          "title": "Samson and Delilah",
+          "reason": "A continuous narrative block detailing the repeated attempts by Delilah to discover the source of Samson's strength."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 22,
+          "type": "story",
+          "title": "Samson Captured",
+          "reason": "The climax of the Delilah narrative where Samson is finally shaved, his strength leaves him, and he is blinded and imprisoned."
+        },
+        {
+          "start_verse": 23,
+          "end_verse": 30,
+          "type": "story",
+          "title": "Samson's Final Act",
+          "reason": "A complete dramatic sequence covering the Philistine sacrifice, Samson's prayer for strength, and his death by collapsing the temple."
+        },
+        {
+          "start_verse": 31,
+          "end_verse": 31,
+          "type": "story",
+          "title": "Samson's Burial",
+          "reason": "A concluding narrative unit describing Samson's burial and the summary of his judgeship."
+        }
+      ]
+    },
+    {
+      "chapter": 17,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "story",
+          "title": "Micah's Idolatry and the State of Israel",
+          "reason": "Narrative establishing Micah's background, his mother's blessing, the creation of idols, and the thematic statement about the lack of a king."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 13,
+          "type": "story",
+          "title": "The Levite Joins Micah",
+          "reason": "Narrative describing the arrival of the wandering Levite, his hiring by Micah, and Micah's conclusion that Yahweh will prosper him."
+        }
+      ]
+    },
+    {
+      "chapter": 18,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "story",
+          "title": "Danites Seek Land and Priest",
+          "reason": "Introduction of the tribe of Dan seeking territory and their encounter with Micah's Levite priest."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 10,
+          "type": "story",
+          "title": "Scouts Report on Laish",
+          "reason": "The five spies discover the security of Laish and report back to encourage the tribe."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 14,
+          "type": "story",
+          "title": "Danites March to Ephraim",
+          "reason": "The main force of 600 men sets out and arrives at Micah's house."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 20,
+          "type": "dialogue",
+          "title": "The Priest is Recruited",
+          "reason": "The spies reveal the idols to their kin and persuade the Levite priest to join them."
+        },
+        {
+          "start_verse": 21,
+          "end_verse": 26,
+          "type": "story",
+          "title": "Flight from Micah",
+          "reason": "The Danites flee with the idols and priest while Micah confronts them but yields to their strength."
+        },
+        {
+          "start_verse": 27,
+          "end_verse": 31,
+          "type": "story",
+          "title": "Conquest of Laish and Establishment of Dan",
+          "reason": "The tribe destroys Laish, rebuilds it as Dan, and establishes the idolatrous priesthood."
+        }
+      ]
+    },
+    {
+      "chapter": 19,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 10,
+          "type": "story",
+          "title": "The Levite's Journey Begins",
+          "reason": "Introduces the characters and the initial journey to retrieve the concubine."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 21,
+          "type": "story",
+          "title": "Arrival in Gibeah",
+          "reason": "Describes the travelers' arrival at night and their reception by an old man."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 26,
+          "type": "story",
+          "title": "The Vile Men Attack",
+          "reason": "Details the mob's arrival and the abuse of the concubine."
+        },
+        {
+          "start_verse": 27,
+          "end_verse": 30,
+          "type": "story",
+          "title": "The Levite's Reaction",
+          "reason": "Concludes with the discovery of the body and the cutting of the concubine."
+        }
+      ]
+    },
+    {
+      "chapter": 20,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "speech",
+          "title": "Assembly at Mizpah and the Levite's Report",
+          "reason": "The gathering of Israel and the Levite's detailed account of the crime in Gibeah."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 13,
+          "type": "argument",
+          "title": "Israel's Vow and Demand to Benjamin",
+          "reason": "The unified response of Israel to the report and their ultimatum to the tribe of Benjamin."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 17,
+          "type": "list_or_catalog",
+          "title": "Mobilization and Troop Counts",
+          "reason": "The gathering of Benjamite forces and the numerical listing of soldiers from both sides."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 25,
+          "type": "story",
+          "title": "First Two Battles and Divine Inquiry",
+          "reason": "The first two days of battle where Israel suffers defeat but seeks God's guidance each time."
+        },
+        {
+          "start_verse": 26,
+          "end_verse": 35,
+          "type": "story",
+          "title": "Third Day Strategy and Victory",
+          "reason": "The final day of battle involving the ambush, the smoke signal, and the decisive defeat of Benjamin."
+        },
+        {
+          "start_verse": 36,
+          "end_verse": 48,
+          "type": "story",
+          "title": "Pursuit and Destruction of Gibeah",
+          "reason": "The rout of the Benjamites, the slaughter at Rimmon, and the burning of the city."
+        }
+      ]
+    },
+    {
+      "chapter": 21,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "story",
+          "title": "The Oath and the Crisis",
+          "reason": "Describes the oath at Mizpah and the Israelites' distress over the missing tribe of Benjamin."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 14,
+          "type": "story",
+          "title": "War on Jabesh-gilead",
+          "reason": "Narrates the search for a tribe that missed the oath and the subsequent slaughter of Jabesh-gilead to find wives."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 23,
+          "type": "story",
+          "title": "The Shiloh Solution",
+          "reason": "Details the elders' plan for the remaining Benjamites to seize wives during a feast at Shiloh."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 25,
+          "type": "story",
+          "title": "Conclusion and Epilogue",
+          "reason": "Summarizes the dispersal of the tribes and states the theological observation about the lack of a king."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Land Animals: Clean and Unclean",
+      "reason": "Introduction to dietary laws for land animals with specific examples of unclean creatures."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "law",
+      "title": "Aquatic Animals: Clean and Unclean",
+      "reason": "Criteria for edible water creatures based on fins and scales."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 23,
+      "type": "list_or_catalog",
+      "title": "Birds and Flying Swarming Things",
+      "reason": "Catalog of detestable birds followed by specific edible flying insects."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 38,
+      "type": "law",
+      "title": "Purity Regulations for Swarming Things",
+      "reason": "Rules regarding contact with carcasses of swarming things and their effect on vessels and food."
+    },
+    {
+      "start_verse": 39,
+      "end_verse": 40,
+      "type": "law",
+      "title": "Unclean Food Animals",
+      "reason": "Specific regulations for animals that die naturally."
+    },
+    {
+      "start_verse": 41,
+      "end_verse": 45,
+      "type": "exhortation",
+      "title": "Call to Holiness",
+      "reason": "Summary of the swarming laws linked to the theological command for holiness."
+    },
+    {
+      "start_verse": 46,
+      "end_verse": 47,
+      "type": "speech",
+      "title": "Conclusion of the Law",
+      "reason": "Formal summary statement defining the scope and purpose of the preceding laws."
+    }
+  ]
+}

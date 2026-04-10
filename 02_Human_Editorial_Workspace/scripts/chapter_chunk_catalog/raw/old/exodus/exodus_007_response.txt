@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Moses and Aaron Commissioned",
+      "reason": "Yahweh instructs Moses and Aaron on their roles before Pharaoh."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "story",
+      "title": "The Staff Becomes a Serpent",
+      "reason": "Narrative of the first miracle and Pharaoh's reaction."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 25,
+      "type": "story",
+      "title": "The Plague of Blood",
+      "reason": "Narrative of the second sign and the resulting plague."
+    }
+  ]
+}

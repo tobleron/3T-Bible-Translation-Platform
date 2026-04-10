@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Isaac's Plan to Bless Esau",
+      "reason": "Establishes the setting and Isaac's request for game before his death."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "Rebekah's Scheme with Jacob",
+      "reason": "Contains the conversation between Rebekah and Jacob and their preparation for the deception."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Jacob Deceives Isaac and Receives Blessing",
+      "reason": "Narrates the encounter where Jacob impersonates Esau and receives the patriarchal blessing."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 41,
+      "type": "story",
+      "title": "Esau's Return and Lament",
+      "reason": "Describes Esau's arrival, Isaac's reaction, the second blessing for Esau, and Esau's anger."
+    },
+    {
+      "start_verse": 42,
+      "end_verse": 46,
+      "type": "exhortation",
+      "title": "Rebekah Sends Jacob to Haran",
+      "reason": "Concludes with Rebekah's instruction for Jacob to flee and her complaint about the local women."
+    }
+  ]
+}

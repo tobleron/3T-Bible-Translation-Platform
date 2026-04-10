@@ -1,0 +1,70 @@
+# TTT Bible Translation Project – Unified Configuration
+#
+# Environment variables with TTT_ prefix override these values.
+#   TTT_LLAMA_CPP_BASE_URL  – llama.cpp server endpoint
+#   TTT_OPENAI_API_KEY      – OpenAI API key (recommended over storing here)
+
+# ---------------------------------------------------------------------------
+# LLM Providers
+# ---------------------------------------------------------------------------
+llama_cpp:
+  base_url: "http://192.168.1.186:8080"
+
+openai:
+  # Recommended: export OPENAI_API_KEY=sk-...
+  api_key: ""
+  available_models:
+    - "gpt-4o"
+    - "gpt-4.1"
+    - "gpt-4.1-mini"
+    - "gpt-4.1-nano"
+  models_without_temperature:
+    - "o4-mini"
+
+# ---------------------------------------------------------------------------
+# Workbench UI
+# ---------------------------------------------------------------------------
+workbench:
+  sessions_directory: "sessions"
+  static_prompts_directory: "static_prompts"
+  saved_responses_directory: "saved_responses"
+  cleanup_temp_files: true
+
+  # UI colours (rich color names: https://rich.readthedocs.io/en/latest/appendix/colors.html)
+  user_color: "yellow"
+  ai_panel_color: "bright_green"
+  success_color: "green"
+  error_color: "red"
+  info_color: "yellow"
+  rule_color: "grey50"
+
+# ---------------------------------------------------------------------------
+# EPUB Output
+# ---------------------------------------------------------------------------
+epub:
+  meta:
+    epub_title: "The Holy Bible"
+    version_number: "0.5"
+    publication_date: "May 2025"
+    bible_edition: "TTT"
+    creator: "TTT Translation Team"
+    publisher: "TTT Project"
+    rights: "All rights reserved"
+    subject: "Bible"
+
+  formatting:
+    verse_font_size: "1em"
+    line_spacing: "1.5"
+    epub_title_font_size: "2em"
+    book_title_font_size: "1.6em"
+    chapter_title_font_size: "1.3em"
+    superscript_font_size: "0.7em"
+    edition_info_font_size: "1em"
+
+  footnotes:
+    footnotes_title: "Translation Notes"
+    footnote_font_size: "0.8em"
+    footnotes_title_font_size: "1em"
+
+  output:
+    include_toc_page: true

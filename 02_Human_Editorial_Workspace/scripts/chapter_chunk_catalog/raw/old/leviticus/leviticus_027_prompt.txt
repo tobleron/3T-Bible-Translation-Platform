@@ -1,0 +1,83 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Leviticus 27:1-34
+
+Chapter text:
+1. Then Yahweh spoke to Moses, saying,
+2. “Speak to the sons of Israel and say to them, ‘When a man makes a difficult vow, he shall be valued according to your valuation of persons belonging to Yahweh.
+3. If your valuation is of the male from twenty years even to sixty years old, then your valuation shall be fifty shekels of silver, according to the shekel of the sanctuary.
+4. Or if it is a female, then your valuation shall be thirty shekels.
+5. If it be from five years even to twenty years old then your valuation for the male shall be twenty shekels and for the female ten shekels.
+6. But if they are from a month even up to five years old, then your valuation shall be five shekels of silver for the male, and for the female your valuation shall be three shekels of silver.
+7. If they are from sixty years old and upward, if it is a male, then your valuation shall be fifteen shekels, and for the female ten shekels.
+8. But if he is poorer than your valuation, then he shall be presented before the priest, and the priest shall value him; according to the means of the one who vowed, the priest shall value him.
+9. ‘Now if it is an animal of the kind which men can bring near as an offering to Yahweh, any such that one gives to Yahweh shall be holy.
+10. He shall not replace it or exchange it, a good for a bad, or a bad for a good; or if he does exchange animal for animal, then both it and its substitute shall become holy.
+11. If, however, it is any unclean animal of the kind which men do not bring near as an offering to Yahweh, then he shall present the animal before the priest.
+12. And the priest shall value it as either good or bad; as you, the priest, value it, so it shall be.
+13. But if he should ever wish to redeem it, then he shall add one-fifth of it to your valuation.
+14. ‘Now if a man sets his house apart as holy to Yahweh, then the priest shall value it as either good or bad; as the priest values it, so it shall stand.
+15. Yet if the one who sets it apart as holy should wish to redeem his house, then he shall add one-fifth of your valuation price to it, so that it may be his.
+16. ‘Again, if a man sets apart as holy to Yahweh a portion of the fields of his own possession, then your valuation shall be proportionate to the seed needed for it: a homer of barley seed at fifty shekels of silver.
+17. If he sets apart his field as holy from the year of jubilee, according to your valuation it shall stand.
+18. If he sets apart his field as holy after the jubilee, however, then the priest shall calculate the price for him proportionate to the years that are left until the year of jubilee; and it shall be deducted from your valuation.
+19. If the one who sets it apart as holy should ever wish to redeem the field, then he shall add one-fifth of your valuation price to it so that it may stand as his own.
+20. Yet if he will not redeem the field, but has sold the field to another man, it may no longer be redeemed;
+21. and it will be that when it reverts in the jubilee, the field shall be holy to Yahweh, like a field that is devoted; it shall be for the priest as his possession.
+22. Or if he sets apart as holy to Yahweh a field which he has bought, which is not a portion of the field of his own possession,
+23. then the priest shall calculate for him the amount of your valuation up to the year of jubilee; and he shall on that day give your valuation as holy to Yahweh.
+24. In the year of jubilee the field shall return to the one from whom he bought it, to whom the possession of the land belongs.
+25. Every valuation of yours, moreover, shall be according to the shekel of the sanctuary. The shekel shall be twenty gerahs.
+26. ‘However, a firstborn among animals, which as a firstborn belongs to Yahweh, no man may set it apart as holy; whether ox or sheep, it is Yahweh’s.
+27. But if it is among the unclean animals, then he shall ransom it according to your valuation and add to it one-fifth of it; and if it is not redeemed, then it shall be sold according to your valuation.
+28. ‘Nevertheless, anything which a man devotes to Yahweh out of all that he has, of man or animal or of the fields of his own possession, shall not be sold or redeemed. Anything devoted to destruction is most holy to Yahweh.
+29. No one who may have been devoted among men shall be ransomed; he shall surely be put to death.
+30. ‘Thus all the tithe of the land, of the seed of the land or of the fruit of the tree, belongs to Yahweh; it is holy to Yahweh.
+31. If, therefore, a man wishes to redeem part of his tithe, he shall add to it one-fifth of it.
+32. For every tenth part of herd or flock, whatever passes under the rod, the tenth one shall be holy to Yahweh.
+33. He shall not inquire whether it is good or bad, nor shall he exchange it; or if he does exchange it, then both it and its substitute shall become holy. It shall not be redeemed.’”
+34. These are the commandments which Yahweh commanded Moses for the sons of Israel at Mount Sinai.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

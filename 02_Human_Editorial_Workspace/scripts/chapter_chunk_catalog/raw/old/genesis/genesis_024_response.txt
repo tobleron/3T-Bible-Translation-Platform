@@ -1,0 +1,59 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Abraham Sends the Servant",
+      "reason": "Narrative introduction and commissioning of the servant to find a wife for Isaac."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 27,
+      "type": "story",
+      "title": "The Servant's Prayer and Rebekah's Arrival",
+      "reason": "The servant prays for a sign and meets Rebekah at the well."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Rebekah's Family Responds",
+      "reason": "Rebekah informs her family and Laban invites the servant to their home."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 49,
+      "type": "speech",
+      "title": "The Servant's Report to Laban",
+      "reason": "Detailed speech recounting the journey and the sign given by God."
+    },
+    {
+      "start_verse": 50,
+      "end_verse": 54,
+      "type": "dialogue",
+      "title": "Laban's Agreement and Gifts",
+      "reason": "Family accepts the proposal and the servant gives gifts to Rebekah."
+    },
+    {
+      "start_verse": 55,
+      "end_verse": 61,
+      "type": "dialogue",
+      "title": "Rebekah's Departure",
+      "reason": "Negotiation over timing and Rebekah's consent to leave."
+    },
+    {
+      "start_verse": 62,
+      "end_verse": 67,
+      "type": "story",
+      "title": "Isaac Meets Rebekah",
+      "reason": "Conclusion of the narrative with Isaac and Rebekah's marriage."
+    }
+  ]
+}

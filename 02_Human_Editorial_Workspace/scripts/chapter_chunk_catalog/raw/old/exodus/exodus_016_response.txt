@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Arrival and Complaint",
+      "reason": "Describes the arrival at Sinai and the people's grumbling about hunger."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "dialogue",
+      "title": "Promise of Provision",
+      "reason": "Moses and Aaron speak to the people followed by Yahweh's direct instruction."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 21,
+      "type": "story",
+      "title": "The Manna Appears",
+      "reason": "Narrative of the quails arriving and the first gathering of manna."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Instructions for the Sabbath",
+      "reason": "Details regarding the double portion on the sixth day and the rest on the seventh."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 36,
+      "type": "story",
+      "title": "Naming and Preservation",
+      "reason": "Describes the appearance of manna, its storage in a jar, and duration of consumption."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Isaac goes to Gerar",
+      "reason": "Narrative introduction of Isaac moving to Gerar and receiving God's initial instruction."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Isaac's deception revealed",
+      "reason": "The story of Isaac claiming Rebekah as his sister and Abimelech discovering the truth."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Isaac's prosperity and departure",
+      "reason": "Description of Isaac's wealth, the Philistines' jealousy, and his move to the valley."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Dug wells and God's appearance",
+      "reason": "The narrative of digging wells named Esek, Sitnah, and Rehoboth, followed by a vision at Beersheba."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 31,
+      "type": "dialogue",
+      "title": "Covenant with Abimelech",
+      "reason": "Dialogue and agreement between Isaac and Abimelech establishing a peace treaty."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Naming of Beersheba and Esau's wives",
+      "reason": "The discovery of the final well leading to the city name and the introduction of Esau's marriages."
+    }
+  ]
+}

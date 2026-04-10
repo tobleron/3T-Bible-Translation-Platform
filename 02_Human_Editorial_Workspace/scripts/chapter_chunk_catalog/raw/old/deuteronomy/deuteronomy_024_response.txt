@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "law",
+      "title": "Law on Remarriage after Divorce",
+      "reason": "A complete legal case regarding a woman divorced twice."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Laws on Newlyweds and Leapers",
+      "reason": "Distinct legal statutes regarding new wives, millstones, and leprosy."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Laws on Loans and Wages",
+      "reason": "A coherent unit covering the treatment of debtors and hired workers."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "law",
+      "title": "Laws on Justice and Harvest",
+      "reason": "Legal instructions on judicial accountability, social justice, and agricultural charity."
+    }
+  ]
+}

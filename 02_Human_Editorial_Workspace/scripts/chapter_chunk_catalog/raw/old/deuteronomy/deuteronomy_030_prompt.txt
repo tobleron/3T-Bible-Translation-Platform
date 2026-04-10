@@ -1,0 +1,69 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 30:1-20
+
+Chapter text:
+1. “So it will be, when all of these things have come upon you, the blessing and the curse which I have set before you, and you cause these things to return to your heart in all the nations where Yahweh your God has banished you,
+2. and you return to Yahweh your God and listen to His voice with all your heart and soul according to all that I am commanding you today, you and your sons,
+3. then Yahweh your God will return you from captivity and return His compassion on you, and He will gather you again from all the peoples where Yahweh your God has scattered you.
+4. If those of you who are banished are at the ends of the sky, from there Yahweh your God will gather you, and from there He will take you back.
+5. And Yahweh your God will bring you into the land which your fathers possessed, and you shall possess it; and He will prosper you and multiply you more than your fathers.
+6. “Moreover Yahweh your God will circumcise your heart and the heart of your seed, to love Yahweh your God with all your heart and with all your soul, so that you may live.
+7. And Yahweh your God will inflict all these curses on your enemies and on those who hate you, who persecuted you.
+8. And you shall return and listen to the voice of Yahweh, and you shall do all His commandments which I am commanding you today.
+9. Then Yahweh your God will prosper you abundantly in all the work of your hand, in the offspring of your body and in the offspring of your cattle and in the produce of your ground, for Yahweh will return to rejoice over you for good, just as He rejoiced over your fathers,
+10. when you listen to the voice of Yahweh your God to keep His commandments and His statutes which are written in this book of the law, when you return to Yahweh your God with all your heart and soul.
+11. “For this commandment which I am commanding you today is not too difficult for you, nor is it far from you.
+12. It is not in heaven, that you should say, ‘Who will go up to heaven for us and get it for us and make us hear it, that we may do it?’
+13. Nor is it beyond the sea, that you should say, ‘Who will cross the sea for us and get it for us and make us hear it, that we may do it?’
+14. But the word is very near you, in your mouth and in your heart, that you may do it.
+15. “See, I have set before you today life and prosperity, and death and calamity;
+16. in that I am commanding you today to love Yahweh your God, to walk in His ways, and to keep His commandments and His statutes and His judgments, that you may live and multiply, and that Yahweh your God may bless you in the land where you are entering to possess it.
+17. But if your heart turns away and you will not listen, but are drawn away and worship other gods and serve them,
+18. I declare to you today that you shall surely perish. You will not prolong your days in the land where you are crossing the Jordan to enter and possess it.
+19. I call heaven and earth to witness against you today, that I have set before you life and death, the blessing and the curse. So choose life in order that you may live, you and your seed,
+20. by loving Yahweh your God, by listening to His voice, and by holding fast to Him; for this is your life and the length of your days, that you may live in the land which Yahweh swore to your fathers, to Abraham, to Isaac, and to Jacob, to give them.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

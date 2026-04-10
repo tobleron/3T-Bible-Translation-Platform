@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Assembly at Shiloh and Land Survey",
+      "reason": "Describes the gathering of Israel, Joshua's command to survey the land, and the casting of lots."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Territory of Benjamin",
+      "reason": "Details the geographical borders of the tribe of Benjamin as assigned by lot."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 28,
+      "type": "list_or_catalog",
+      "title": "Cities of Benjamin",
+      "reason": "Lists the specific cities and villages belonging to the tribe of Benjamin."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Israel Defeated and the Ark Taken to Camp",
+      "reason": "Describes the initial battle loss and the decision to bring the ark from Shiloh."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 11,
+      "type": "story",
+      "title": "The Second Battle and Ark Captured",
+      "reason": "Covers the Philistines' reaction to the ark's arrival, the second defeat, and the capture of the ark."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 18,
+      "type": "story",
+      "title": "The Messenger Arrives at Shiloh",
+      "reason": "Narrates the runner's arrival and Eli's death upon hearing the news."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Death of Phinehas's Wife and Naming of Ichabod",
+      "reason": "Details the wife's death in childbirth and her naming of the son to signify the departure of glory."
+    }
+  ]
+}

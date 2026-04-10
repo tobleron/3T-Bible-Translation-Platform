@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:38:32Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Samuel",
+  "chapter": 10,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Anointing and Signs for Saul",
+      "reason": "Samuel anoints Saul and gives him prophetic signs to confirm his calling."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Saul Prophesies Among the Prophets",
+      "reason": "The narrative describes Saul's transformation and the people's reaction."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Saul Hides the Kingdom from His Uncle",
+      "reason": "A brief conversation where Saul conceals his anointing from his uncle."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Selection of Saul at Mizpah",
+      "reason": "Samuel gathers the tribes to select Saul as king through a lot."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 27,
+      "type": "mixed",
+      "title": "Establishment of the Kingdom and Opposition",
+      "reason": "Samuel establishes legal judgments while Saul faces initial opposition from vile men."
+    }
+  ]
+}

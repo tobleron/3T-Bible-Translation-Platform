@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Conquest of Bashan and Land Distribution",
+      "reason": "Narrative account of the battle with Og and the allocation of territory to Reuben, Gad, and Manasseh."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 20,
+      "type": "law",
+      "title": "Command to the Transjordan Tribes",
+      "reason": "Moses instructs the tribes on their duty to cross the Jordan while their families remain behind."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "Encouragement to Joshua",
+      "reason": "Moses speaks directly to Joshua about God's power and the upcoming conquest."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 29,
+      "type": "mixed",
+      "title": "Moses' Plea and Final Commission",
+      "reason": "Combines Moses' prayer to enter the land, God's response, and the final instruction to Joshua."
+    }
+  ]
+}

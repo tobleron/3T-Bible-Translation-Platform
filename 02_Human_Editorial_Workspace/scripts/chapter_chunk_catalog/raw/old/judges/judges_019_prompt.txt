@@ -1,0 +1,79 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Judges 19:1-30
+
+Chapter text:
+1. Now it happened in those days, when there was no king in Israel, that there was a certain Levite sojourning in the remote part of the hill country of Ephraim, who took a concubine for himself from Bethlehem in Judah.
+2. But his concubine played the harlot against him, and she went away from him to her father’s house in Bethlehem in Judah and was there for a period of four months.
+3. Then her husband arose and went after her to speak to her heart in order to bring her back, and his young man was with him as well as a pair of donkeys. So she brought him into her father’s house, and the girl’s father saw him and was glad to meet him.
+4. And his father-in-law, the girl’s father, prevailed upon him; and he remained with him three days. So they ate and drank and spent the night there.
+5. Now it happened on the fourth day that they got up early in the morning, and he arose to go; and the girl’s father said to his son-in-law, “Sustain yourself with a piece of bread, and afterward you may go.”
+6. So both of them sat down and ate and drank together; and the girl’s father said to the man, “Please be willing to spend the night, and let your heart be merry.”
+7. Then the man arose to go, but his father-in-law pressed him so that he turned back and spent the night there.
+8. And on the fifth day he arose to go early in the morning, and the girl’s father said, “Please sustain yourself and wait until afternoon”; so both of them ate.
+9. Then the man arose to go along with his concubine and young man, and his father-in-law, the girl’s father, said to him, “Behold now, the day has drawn to a close; please spend the night. Behold, the day is coming to an end; spend the night here that your heart may be merry. Then tomorrow you may arise early for your journey so that you may go to your tent.”
+10. But the man was not willing to spend the night, so he arose and went and came to a place before Jebus (that is, Jerusalem). And there were with him a pair of saddled donkeys; his concubine also was with him.
+11. They were alongside of Jebus, and the day was almost gone. And the young man said to his master, “Come, please, and let us turn aside into this city of the Jebusites and spend the night in it.”
+12. However, his master said to him, “We will not turn aside into the city of foreigners who are not of the sons of Israel; but we will pass on by until Gibeah.”
+13. Then he said to his young man, “Come and let us draw near to one of these places; and we will spend the night in Gibeah or Ramah.”
+14. So they passed along and went their way, and the sun set on them near Gibeah which belongs to Benjamin.
+15. Then they turned aside there in order to enter and to spend the night in Gibeah. So they entered and sat down in the open square of the city. Now no one was taking them into his house to spend the night.
+16. But behold, an old man was coming from his work, from the field, at evening. Now the man was from the hill country of Ephraim, and he was sojourning in Gibeah, but the men of the place were Benjamites.
+17. And he lifted up his eyes and saw the traveler in the open square of the city; and the old man said, “Where are you going, and where do you come from?”
+18. And he said to him, “We are passing from Bethlehem in Judah to the remote part of the hill country of Ephraim. I am from there, and I went to Bethlehem in Judah. But I am now going to the house of Yahweh, and no man is taking me into his house.
+19. Yet there is both straw and fodder for our donkeys, and also bread and wine for me, your maidservant, and the young man who is with your servants; there is no lack of anything.”
+20. Then the old man said, “Peace be to you. Only let me take care of all that you lack; however, do not spend the night in the open square.”
+21. So he brought him into his house and gave the donkeys fodder, and they washed their feet and ate and drank.
+22. They were making their hearts merry, and behold, the men of the city, certain vile fellows, surrounded the house, pounding the door; and they spoke to the owner of the house, the old man, saying, “Bring out the man who came into your house that we may know him.”
+23. Then the man, the owner of the house, went out to them and said to them, “No, my brothers, please do not do evil. Since this man has come into my house, do not commit this disgraceful act.
+24. Behold, my daughter who is a virgin, and his concubine—please let me bring them out that you may violate them and do to them whatever is good in your eyes. But do not commit such a disgraceful act against this man.”
+25. But the men were not willing to listen to him. So the man took hold of his concubine and brought her out to them; and they knew her and abused her all night until morning, and they let her go at the breaking of dawn.
+26. As the day began to dawn, the woman came and fell down at the doorway of the man’s house where her master was, until full daylight.
+27. Then her master arose in the morning and opened the doors of the house and went out to go on his way, and behold, the woman, his concubine, was lying at the doorway of the house with her hands on the threshold.
+28. And he said to her, “Get up and let us go,” but there was no answer. Then he took her on the donkey; and the man arose and went to his home.
+29. Then he entered his house and took a knife and took hold of his concubine and cut her in twelve pieces, limb by limb, and sent her throughout the territory of Israel.
+30. And all who saw it said, “Nothing like this has ever happened or been seen from the day when the sons of Israel came up from the land of Egypt to this day. Consider it; take counsel and speak up!”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

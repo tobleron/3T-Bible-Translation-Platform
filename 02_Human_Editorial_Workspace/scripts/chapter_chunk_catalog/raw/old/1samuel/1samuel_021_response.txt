@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "dialogue",
+      "title": "David at Nob",
+      "reason": "A continuous dialogue between David and Ahimelech involving the exchange of bread and Goliath's sword."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "story",
+      "title": "David at Gath",
+      "reason": "A narrative sequence describing David's flight to Gath and his feigned madness before King Achish."
+    }
+  ]
+}

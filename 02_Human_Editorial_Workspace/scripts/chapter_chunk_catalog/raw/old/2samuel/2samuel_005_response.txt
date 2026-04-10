@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David Anointed King Over Israel",
+      "reason": "Narrative of the tribes' request and David's anointing."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Capture of Jerusalem and Establishment of Kingdom",
+      "reason": "Account of taking Zion, building the city, and Hiram's recognition."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 16,
+      "type": "list_or_catalog",
+      "title": "Children Born in Jerusalem",
+      "reason": "Catalog of David's sons born after moving to Jerusalem."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Two Battles Against the Philistines",
+      "reason": "Narrative of two military campaigns with divine instructions."
+    }
+  ]
+}

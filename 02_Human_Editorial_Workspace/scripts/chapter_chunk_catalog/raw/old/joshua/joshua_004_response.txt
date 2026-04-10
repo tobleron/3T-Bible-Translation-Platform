@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Gathering Stones and Crossing Completion",
+      "reason": "Narrative of Joshua's command to gather stones, the completion of the crossing, and the arrival at Gilgal."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "dialogue",
+      "title": "Priests Exit the Jordan",
+      "reason": "Direct exchange between Yahweh and Joshua regarding the priests coming up from the river."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 24,
+      "type": "exhortation",
+      "title": "Setting Up Stones at Gilgal",
+      "reason": "Account of setting up stones and Joshua's speech explaining the miracle to future generations."
+    }
+  ]
+}

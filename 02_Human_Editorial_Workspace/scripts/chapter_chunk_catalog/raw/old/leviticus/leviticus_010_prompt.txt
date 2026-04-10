@@ -1,0 +1,69 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Leviticus 10:1-20
+
+Chapter text:
+1. Then Nadab and Abihu, the sons of Aaron, took their respective firepans and put fire in them. Then they placed incense on it and offered strange fire before Yahweh, which He had not commanded them.
+2. And fire came out from the presence of Yahweh and consumed them, and they died before Yahweh.
+3. Then Moses said to Aaron, “It is what Yahweh spoke, saying, ‘By those who come near Me I will be treated as holy, And before all the people I will be glorified.’” So Aaron kept silent.
+4. Then Moses called to Mishael and Elzaphan, the sons of Aaron’s uncle Uzziel, and said to them, “Come near, carry your relatives away from the front of the sanctuary to the outside of the camp.”
+5. So they came near and carried them still in their tunics to the outside of the camp, as Moses had said.
+6. Then Moses said to Aaron and to his sons Eleazar and Ithamar, “Do not uncover your heads nor tear your clothes, so that you will not die and that He will not become wrathful against all the congregation. But your relatives, the whole house of Israel, shall weep over the burning which Yahweh has brought about.
+7. You shall not even go out from the doorway of the tent of meeting, lest you die; for the anointing oil of Yahweh is upon you.” So they did according to the word of Moses.
+8. Yahweh then spoke to Aaron, saying,
+9. “Do not drink wine or strong drink, neither you nor your sons with you, when you come into the tent of meeting, so that you will not die—it is a perpetual statute throughout your generations—
+10. and so as to separate between the holy and the profane, and between the unclean and the clean,
+11. and so as to instruct the sons of Israel in all the statutes which Yahweh has spoken to them through Moses.”
+12. Then Moses spoke to Aaron and to his remaining sons, Eleazar and Ithamar, “Take the remaining grain offering from the offerings to Yahweh by fire and eat it unleavened beside the altar, for it is most holy.
+13. And you shall eat it in a holy place because it is a statute for you and a statute for your sons taken out of the offerings of Yahweh by fire; for thus I have been commanded.
+14. The breast of the wave offering, however, and the thigh of the contribution offering you may eat in a clean place, you and your sons and your daughters with you; for they have been given as a statute for you and a statute for your sons taken out of the sacrifices of the peace offerings of the sons of Israel.
+15. The thigh contributed by raising up and the breast offered by waving they shall bring along with the offerings by fire of the portions of fat, to wave as a wave offering before Yahweh; so it shall be a perpetual statute for you and your sons with you, just as Yahweh has commanded.”
+16. But Moses searched carefully for the goat of the sin offering, and behold, it had been burned up! So he was angry with Aaron’s remaining sons Eleazar and Ithamar, saying,
+17. “Why did you not eat the sin offering at the holy place? For it is most holy, and He gave it to you to bear away the guilt of the congregation, to make atonement for them before Yahweh.
+18. Behold, since its blood had not been brought inside, into the sanctuary, you should certainly have eaten it in the sanctuary, just as I commanded.”
+19. But Aaron spoke to Moses, “Behold, this very day they brought near their sin offering and their burnt offering before Yahweh. Then things like these happened to me. So if I had eaten a sin offering today, would it have been good in the sight of Yahweh?”
+20. So Moses heard this, and it was good in his sight.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

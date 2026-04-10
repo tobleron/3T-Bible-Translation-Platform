@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Journey through Seir and Moab",
+      "reason": "Narrative of the Israelites circling Mount Seir and entering Moabite territory."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 15,
+      "type": "mixed",
+      "title": "Instructions for Moab and Zered Crossing",
+      "reason": "Divine commands regarding Moab combined with the narrative of crossing the brook Zered."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Transition to Ammonite Territory",
+      "reason": "Completion of the forty-year wandering and historical notes on the land of Ammon."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 37,
+      "type": "story",
+      "title": "Conquest of Sihon King of Heshbon",
+      "reason": "Divine command to take land from Sihon, the diplomatic attempt, and the subsequent military victory."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Water from the Rock at Rephidim",
+      "reason": "A complete narrative unit describing the people's thirst, Moses' intercession, and God providing water from the rock."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Victory over Amalek",
+      "reason": "A continuous narrative covering the battle with Amalek, Moses' raised hands supported by Aaron and Hur, and the subsequent altar dedication."
+    }
+  ]
+}

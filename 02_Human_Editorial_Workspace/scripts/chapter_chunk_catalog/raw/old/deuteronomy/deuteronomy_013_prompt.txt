@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 13:1-18
+
+Chapter text:
+1. “If a prophet or a dreamer of dreams arises among you and gives you a sign or a wonder,
+2. and the sign or the wonder comes true, concerning which he spoke to you, saying, ‘Let us walk after other gods (whom you have not known) and let us serve them,’
+3. you shall not listen to the words of that prophet or that dreamer of dreams; for Yahweh your God is testing you to find out if you love Yahweh your God with all your heart and with all your soul.
+4. You shall walk after Yahweh your God and fear Him; and you shall keep His commandments, listen to His voice, serve Him, and cling to Him.
+5. But that prophet or that dreamer of dreams shall be put to death because he has counseled rebellion against Yahweh your God who brought you from the land of Egypt and redeemed you from the house of slavery, to drive you from the way in which Yahweh your God commanded you to walk. So you shall purge the evil from among you.
+6. “If your brother, your mother’s son, or your son or daughter, or the wife you cherish, or your friend who is as your own soul, entices you secretly, saying, ‘Let us go and serve other gods’ (whom neither you nor your fathers have known,
+7. of the gods of the peoples who are around you, near you or far from you, from one end of the earth to the other end),
+8. you shall not be willing to accept him or listen to him; and your eye shall not pity him; and you shall not spare him or conceal him.
+9. But you shall surely kill him; your hand shall be first against him to put him to death, and afterwards the hand of all the people.
+10. So you shall stone him to death because he has sought to drive you from Yahweh your God who brought you out from the land of Egypt, out of the house of slavery.
+11. Thus all Israel will hear and be afraid and will never again do such an evil thing among you.
+12. “If you hear in one of your cities, which Yahweh your God is giving you to live in, anyone saying that
+13. some vile men have gone out from among you and have driven the inhabitants of their city astray, saying, ‘Let us go and serve other gods’ (whom you have not known),
+14. then you shall inquire and search out and ask thoroughly. Behold, if it is true and the matter is confirmed, that this abomination has been done among you,
+15. you shall surely strike the inhabitants of that city with the edge of the sword, devoting it to destruction and all that is in it and its cattle with the edge of the sword.
+16. Then you shall gather all its spoil into the middle of its open square and burn the city and all its spoil with fire as a whole burnt offering to Yahweh your God; and it shall be a ruin forever. It shall never be rebuilt.
+17. Now nothing from that which is devoted to destruction shall cling to your hand, in order that Yahweh may turn from His burning anger and grant compassion to you and show compassion to you and make you multiply, just as He has sworn to your fathers,
+18. if you will listen to the voice of Yahweh your God, keeping all His commandments which I am commanding you today, and doing what is right in the sight of Yahweh your God.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

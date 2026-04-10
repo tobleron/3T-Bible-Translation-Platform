@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Numbers 36:1-13
+
+Chapter text:
+1. And the heads of the fathers’ households of the family of the sons of Gilead, the son of Machir, the son of Manasseh, of the families of the sons of Joseph, came near and spoke before Moses and before the leaders, the heads of the fathers’ households of the sons of Israel,
+2. and they said, “Yahweh commanded my lord to give the land by lot to the sons of Israel as an inheritance, and my lord was commanded by Yahweh to give the inheritance of Zelophehad our brother to his daughters.
+3. But if they marry one of the sons of the other tribes of the sons of Israel, their inheritance will be withdrawn from the inheritance of our fathers and will be added to the inheritance of the tribe to which they belong; thus it will be withdrawn from our allotted inheritance.
+4. And when the jubilee of the sons of Israel comes, then their inheritance will be added to the inheritance of the tribe to which they belong; so their inheritance will be withdrawn from the inheritance of the tribe of our fathers.”
+5. Then Moses commanded the sons of Israel according to the word of Yahweh, saying, “The tribe of the sons of Joseph are right in their statements.
+6. This is what Yahweh has commanded concerning the daughters of Zelophehad, saying, ‘Let them marry whoever is good in their sight; only they must marry within the family of the tribe of their father.’
+7. Thus no inheritance of the sons of Israel shall be transferred from tribe to tribe, for the sons of Israel shall each hold to the inheritance of the tribe of his fathers.
+8. And every daughter who comes into possession of an inheritance of any tribe of the sons of Israel shall be wife to one of the family of the tribe of her father, so that the sons of Israel each may possess the inheritance of his fathers.
+9. Thus no inheritance shall be transferred from one tribe to another tribe, for the tribes of the sons of Israel shall each hold to his own inheritance.”
+10. Just as Yahweh had commanded Moses, so the daughters of Zelophehad did:
+11. And Mahlah, Tirzah, Hoglah, Milcah, and Noah, the daughters of Zelophehad married their uncles’ sons.
+12. They married those from the families of the sons of Manasseh the son of Joseph, and their inheritance remained with the tribe of the family of their father.
+13. These are the commandments and the judgments which Yahweh commanded to the sons of Israel by the hand of Moses in the plains of Moab by the Jordan opposite Jericho.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

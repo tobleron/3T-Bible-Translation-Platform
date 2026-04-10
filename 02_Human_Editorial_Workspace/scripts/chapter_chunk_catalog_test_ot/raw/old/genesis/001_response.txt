@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Creation of Light and Day One",
+      "reason": "Describes the initial creation event, separation of light from darkness, and the conclusion of the first day."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Creation of the Sky and Day Two",
+      "reason": "Details the formation of the expanse to separate waters and the conclusion of the second day."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Gathering Waters and Vegetation on Day Three",
+      "reason": "Covers the separation of land and sea followed by the command for vegetation to grow."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Creation of Celestial Bodies on Day Four",
+      "reason": "Describes the making of lights to govern day and night and the conclusion of the fourth day."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Creation of Sea Creatures and Birds on Day Five",
+      "reason": "Narrates the filling of waters and skies with living creatures and the conclusion of the fifth day."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Creation of Land Animals and Humans on Day Six",
+      "reason": "Encompasses the creation of land animals, humanity in God's image, the blessing given to them, and the final evaluation of all creation."
+    }
+  ]
+}

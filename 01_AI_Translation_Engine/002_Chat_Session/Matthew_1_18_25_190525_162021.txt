@@ -1,0 +1,151 @@
+Holy Bible Translation Workflow:
+
+Step 1: Render Literal Majority‑Text Rendering and assign tone for each verse in a table.
+Tone definition:
+* Neutral: For verses that are informative or factual.
+* Warm: For verses with emotional or spiritual emphasis.
+* Mindful: For verses requiring additional reasoning or explanation for reader understanding.
+* Controversial: For theologically debatable verses throughout history.
+
+
+Step 2: Neutral Verses Analysis: Extract word variation differences from all chunks for the neutral toned verses and after analyzing them list the most concise version for each verse that does not impact ease of readability and understanding. List choice justification and improve on it if necessary.
+
+Step 3: Warm Verses Analysis: Extract word variation differences for all chunks for the warm toned verses and after analyzing them list the most emotionally or spiritually impactful phrasing. List choice justification and improve on it if necessary.
+
+Step 4: Mindful Verses Analysis: Extract word variation differences for all chunks for the mindful toned verses and after analyzing select the most clear, simple and reasonably understandable phrasing for the modern reader. List choice justification and improve on it if necessary.
+
+Step 5: Controversial Verses Analysis: Extract word variation differences for all chunks for the debatable toned verses and after analyzing select the most contextually relevant phrasing. List choice justification and improve on it if necessary.
+
+Step 6: Provide an interpretation from early church fathers and popular theology for the warm, mindful and controversial toned verses and summarize the findings of the analysis from Step 2 to Step 6 in a table to conclude briefly which word choices will be used in the final rendering of the translation.
+
+Step 7: Generate the DRAFT 1 of a completely new translation rendering using all the summarized findings in verse numbered list.
+
+Step 8: Analyze DRAFT 1 for these criteria to output recommendations:
+A) Theological accuracy to global biblical context and chunk context (weight 35%).
+B) High modern readability and understanding (weight 35%).
+C) Poetic English elegance and phrasing structure (weight 15%).
+D) Adherence to original text structure (weight 15%).
+
+Mention highly suggested recommendations for the final rendering in bullet points.
+
+Step 9: Generate a concise and description title for the chunk based on all previous analysis that conveys the core message to the reader.
+
+Step 10: Render Final translation by approving recommendations in Step 8 and following the following formatting rules:
+* Use double smart quotes (“ ”) for direct speech or dialogue.
+* Use single smart quotes (‘ ’) for quotations or words nested inside double quotes.
+* Use straight apostrophes (') for possessives and contractions (e.g., Jesus').
+* Keep the JSON formatting as recommended between " " straight double quotes.
+
+```final_translation_json
+{
+  "chunk": "[Your Passage Reference]",
+  "chunk_title": "[Section Title]",
+  "verses": [
+    {"verse": 1, "text": "Verse one..."},
+    {"verse": 2, "text": "Verse two..."},
+    ...
+  ]
+}
+```
+
+Step 11: Concise Justification Report as Markdown Table  
+For each key word/phrase, concisely summarize the justification for its selection, referencing prior steps analysis. Synthesize all session data for each decision.
+
+Output as a markdown table:
+
+| Word/Phrase   | Justification                      |
+|---------------|------------------------------------|
+| ...           | [summary based on analysis]        |
+| ...           | ...                                |
+---
+chunk_id_669HEIEMT
+18. Now the birth of Jesus Christ was like this: After His mother Mary had been betrothed to Joseph, before they came together, she was found pregnant by the Holy Spirit.
+19. Then Joseph her husband, being righteous and not wanting to disgrace her, purposed to put her away secretly.
+20. But while he was thinking about these things, behold, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, do not fear to take unto [you] Mary your wife, for that which is begotten in her is of the Holy Spirit.
+21. And she shall bring forth a Son, and you shall call His name Jesus, for He shall save His people from their sins.”
+22. Now all this came to pass that the thing spoken by the Lord through the prophet might be fulfilled, saying,
+23. “Behold, the virgin shall be with child, and shall bring forth a Son, and they shall call His name Immanuel,” which is translated, “God with us.”
+24. Then Joseph, having been aroused from sleep, did as the angel of the Lord had ordered him and took to [him] his wife,
+25. but did not know her till she brought forth her firstborn Son. And he called His name Jesus.
+
+chunk_id_150HHYBSB
+18. This is how the birth of Jesus Christ came about: His mother Mary was pledged in marriage to Joseph, but before they came together, she was found to be with child through the Holy Spirit.
+19. Because Joseph her husband was a righteous man and was unwilling to disgrace her publicly, he resolved to divorce her quietly.
+20. But after he had pondered these things, an angel of the Lord appeared to him in a dream and said, “Joseph, son of David, do not be afraid to embrace Mary as your wife, for the One conceived in her is from the Holy Spirit.
+21. She will give birth to a Son, and you are to give Him the name Jesus, because He will save His people from their sins.”
+22. All this took place to fulfill what the Lord had said through the prophet:
+23. “Behold, the virgin will be with child and will give birth to a son, and they will call Him Immanuel” (which means, “God with us”).
+24. When Joseph woke up, he did as the angel of the Lord had commanded him and embraced Mary as his wife.
+25. But he had no union with her until she gave birth to a Son. And he gave Him the name Jesus.
+
+chunk_id_779YYJCSB
+18. The birth of Jesus Christ came about this way: After his mother Mary had been engaged to Joseph, it was discovered before they came together that she was pregnant from the Holy Spirit.
+19. So her husband Joseph, being a righteous man, and not wanting to disgrace her publicly, decided to divorce her secretly.
+20. But after he had considered these things, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, don’t be afraid to take Mary as your wife, because what has been conceived in her is from the Holy Spirit.
+21. She will give birth to a son, and you are to name him Jesus, because he will save his people from their sins.”
+22. Now all this took place to fulfill what was spoken by the Lord through the prophet:
+23. See, the virgin will become pregnant and give birth to a son, and they will name him Immanuel, which is translated “God is with us.”
+24. When Joseph woke up, he did as the Lord’s angel had commanded him. He married her
+25. but did not have sexual relations with her until she gave birth to a son. And he named him Jesus.
+
+chunk_id_896YQBESV
+18. Now the birth of Jesus Christ took place in this way. When his mother Mary had been betrothed to Joseph, before they came together she was found to be with child from the Holy Spirit.
+19. And her husband Joseph, being a just man and unwilling to put her to shame, resolved to divorce her quietly.
+20. But as he considered these things, behold, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, do not fear to take Mary as your wife, for that which is conceived in her is from the Holy Spirit.
+21. She will bear a son, and you shall call his name Jesus, for he will save his people from their sins.”
+22. All this took place to fulfill what the Lord had spoken by the prophet:
+23. “Behold, the virgin shall conceive and bear a son,
+    and they shall call his name Immanuel”
+(which means, God with us).
+24. When Joseph woke from sleep, he did as the angel of the Lord commanded him: he took his wife,
+25. but knew her not until she had given birth to a son. And he called his name Jesus.
+
+chunk_id_773AHXNIV
+18. This is how the birth of Jesus the Messiah came about: His mother Mary was pledged to be married to Joseph, but before they came together, she was found to be pregnant through the Holy Spirit.
+19. Because Joseph her husband was faithful to the law, and yet did not want to expose her to public disgrace, he had in mind to divorce her quietly.
+20. But after he had considered this, an angel of the Lord appeared to him in a dream and said, “Joseph son of David, do not be afraid to take Mary home as your wife, because what is conceived in her is from the Holy Spirit.
+21. She will give birth to a son, and you are to give him the name Jesus, because he will save his people from their sins.”
+22. All this took place to fulfill what the Lord had said through the prophet:
+23. “The virgin will conceive and give birth to a son, and they will call him Immanuel” (which means “God with us”).
+24. When Joseph woke up, he did what the angel of the Lord had commanded him and took Mary home as his wife.
+25. But he did not consummate their marriage until she gave birth to a son. And he gave him the name Jesus.
+
+chunk_id_155RTFNJB
+18. This is how Jesus Christ came to be born. His mother Mary was betrothed to Joseph; but before they came to live together she was found to be with child through the Holy Spirit.
+19. Her husband Joseph, being an upright man and wanting to spare her disgrace, decided to divorce her informally.
+20. He had made up his mind to do this when suddenly the angel of the Lord appeared to him in a dream and said, 'Joseph son of David, do not be afraid to take Mary home as your wife, because she has conceived what is in her by the Holy Spirit.
+21. She will give birth to a son and you must name him Jesus, because he is the one who is to save his people from their sins.'
+22. Now all this took place to fulfil what the Lord had spoken through the prophet:
+23. Look! the virgin is with child and will give birth to a son whom they will call Immanuel, a name which means 'God-is-with-us'.
+24. When Joseph woke up he did what the angel of the Lord had told him to do: he took his wife to his home;
+25. he had not had intercourse with her when she gave birth to a son; and he named him Jesus.
+
+chunk_id_024PYXNKJ
+18. Now the birth of Jesus Christ was as follows: After His mother Mary was betrothed to Joseph, before they came together, she was found with child of the Holy Spirit.
+19. Then Joseph her husband, being a just man, and not wanting to make her a public example, was minded to put her away secretly.
+20. But while he thought about these things, behold, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, do not be afraid to take to you Mary your wife, for that which is conceived in her is of the Holy Spirit.
+21. And she will bring forth a Son, and you shall call His name Jesus, for He will save His people from their sins.”
+22. So all this was done that it might be fulfilled which was spoken by the Lord through the prophet, saying:
+23. “Behold, the virgin shall be with child, and bear a Son, and they shall call His name Immanuel,” which is translated, “God with us.”
+24. Then Joseph, being aroused from sleep, did as the angel of the Lord commanded him and took to him his wife,
+25. and did not know her till she had brought forth her firstborn Son. And he called His name Jesus.
+
+chunk_id_972PYRLSB
+18. Now the birth of Jesus Christ was as follows: when His mother Mary had been betrothed to Joseph, before they came together she was found to be with child by the Holy Spirit.
+19. And Joseph her husband, being a righteous man and not wanting to disgrace her, planned to send her away secretly.
+20. But when he had considered this, behold, an angel of the Lord appeared to him in a dream, saying, “Joseph, son of David, do not be afraid to take Mary as your wife; for the One who has been conceived in her is of the Holy Spirit.
+21. And she will bear a Son; and you shall call His name Jesus, for He will save His people from their sins.”
+22. Now all this took place in order that what was spoken by the Lord through the prophet would be fulfilled, saying,
+23. “Behold, the virgin shall be with child and shall bear a Son, and they shall call His name Immanuel,” which translated means, “God with us.”
+24. And Joseph got up from his sleep and did as the angel of the Lord commanded him, and took Mary as his wife,
+25. but kept her a virgin until she gave birth to a Son; and he called His name Jesus.
+
+chunk_id_974JIDNET
+18. Now the birth of Jesus Christ happened this way. While his mother Mary was engaged to Joseph, but before they came together, she was found to be pregnant through the Holy Spirit.
+19. Because Joseph, her husband to be, was a righteous man, and because he did not want to disgrace her, he intended to divorce her privately.
+20. When he had contemplated this, an angel of the Lord appeared to him in a dream and said, “Joseph, son of David, do not be afraid to take Mary as your wife, because the child conceived in her is from the Holy Spirit.
+21. She will give birth to a son and you will name him Jesus, because he will save his people from their sins.”
+22. This all happened so that what was spoken by the Lord through the prophet would be fulfilled:
+23. “Look! The virgin will conceive and give birth to a son, and they will name him Emmanuel,” which means “God with us.”
+24. When Joseph awoke from sleep he did what the angel of the Lord told him. He took his wife,
+25. but did not have marital relations with her until she gave birth to a son, whom he named Jesus.

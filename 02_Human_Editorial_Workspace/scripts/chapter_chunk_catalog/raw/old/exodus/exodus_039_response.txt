@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Making the Ephod and Shoulder Stones",
+      "reason": "Describes the creation of the ephod and the placement of the onyx stones."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Making the Breastpiece",
+      "reason": "Details the construction of the breastpiece, its stones, chains, and attachment to the ephod."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Making the Robe and Priestly Headgear",
+      "reason": "Covers the robe with pomegranates and bells, tunics, and the golden plate for the turban."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 41,
+      "type": "list_or_catalog",
+      "title": "Inventory of Tabernacle Furnishings",
+      "reason": "Lists all the completed items brought to Moses including the tent, ark, altar, and garments."
+    },
+    {
+      "start_verse": 42,
+      "end_verse": 43,
+      "type": "story",
+      "title": "Completion and Blessing",
+      "reason": "Summarizes the completion of the work according to command and Moses' blessing."
+    }
+  ]
+}

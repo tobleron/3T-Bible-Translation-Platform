@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "The Ark at Kiriath-jearim",
+      "reason": "Narrative account of the ark's placement and the twenty-year period of Israel's lament."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 6,
+      "type": "mixed",
+      "title": "Call to Repentance at Mizpah",
+      "reason": "Samuel's exhortation to remove idols followed by the people's gathering and confession."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Victory over the Philistines",
+      "reason": "The battle narrative where God intervenes through thunder and Israel pursues the enemy."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Samuel's Annual Circuit",
+      "reason": "Summary of Samuel's judicial ministry and his return to Ramah."
+    }
+  ]
+}

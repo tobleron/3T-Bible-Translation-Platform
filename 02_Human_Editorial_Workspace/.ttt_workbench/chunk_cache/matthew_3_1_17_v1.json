@@ -1,0 +1,15 @@
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "story",
+      "title": "John the Baptist's Ministry and Jesus' Baptism",
+      "reason": "This section forms a continuous narrative about John's preaching, baptism of repentance, his interaction with Pharisees and Sadducees, and the account of Jesus' baptism and the heavenly voice."
+    }
+  ],
+  "prompt_version": "v1",
+  "window_start": 1,
+  "window_end": 17,
+  "generated_at": "ui-test"
+}

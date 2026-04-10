@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Laws on Hebrew Slaves",
+      "reason": "Covers regulations for male and female Hebrew servants."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "law",
+      "title": "Laws on Personal Injury",
+      "reason": "Details penalties for death, injury, and cursing parents."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Laws on Contention and Servants",
+      "reason": "Addresses disputes, pregnancy injuries, and slave treatment."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 36,
+      "type": "law",
+      "title": "Laws on Oxen and Pits",
+      "reason": "Outlines liability for goring oxen and uncovered pits."
+    }
+  ]
+}

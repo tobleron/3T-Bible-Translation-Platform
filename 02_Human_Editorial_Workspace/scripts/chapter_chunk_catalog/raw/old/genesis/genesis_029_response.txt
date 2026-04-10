@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Jacob Arrives at Haran",
+      "reason": "Narrative of Jacob's arrival, meeting the shepherds, and reunion with Laban."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 30,
+      "type": "dialogue",
+      "title": "Jacob's Service for Rachel",
+      "reason": "Dialogue between Jacob and Laban regarding wages and the wedding deception."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Birth of Leah's Sons",
+      "reason": "Narrative of God opening Leah's womb and the birth of her four sons."
+    }
+  ]
+}

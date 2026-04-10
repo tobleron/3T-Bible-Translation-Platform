@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "law",
+      "title": "Instructions for Silver Trumpets",
+      "reason": "A complete legal instruction regarding the making and usage of trumpets for assembly, travel, war, and feasts."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 28,
+      "type": "list_or_catalog",
+      "title": "Order of March from Sinai",
+      "reason": "A detailed catalog describing the sequence in which the tribes and Levitical families set out from the wilderness."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 32,
+      "type": "dialogue",
+      "title": "Moses Invites Hobab",
+      "reason": "A dialogue exchange between Moses and his father-in-law Hobab regarding their journey to the Promised Land."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 36,
+      "type": "story",
+      "title": "The Ark Leads the Way",
+      "reason": "A narrative account of the journey beginning with the ark leading and Moses reciting two short prayers."
+    }
+  ]
+}

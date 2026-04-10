@@ -1,0 +1,91 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 1 Samuel 20:1-42
+
+Chapter text:
+1. Then David fled from Naioth in Ramah and came and said before Jonathan, “What have I done? What is my iniquity? And what is my sin before your father, that he is seeking my life?”
+2. And he said to him, “Far from it, you shall not die. Behold, my father does nothing either great or small without revealing it in my ear. So why should my father hide this thing from me? It is not so!”
+3. Yet David swore again, saying, “Your father knows well that I have found favor in your sight, and he has said, ‘Do not let Jonathan know this, lest he be grieved.’ But truly as Yahweh lives and as your soul lives, there is hardly a step between me and death.”
+4. Then Jonathan said to David, “Whatever your soul says, I will do for you.”
+5. So David said to Jonathan, “Behold, tomorrow is the new moon, and I ought to sit down to eat with the king. But let me go, that I may hide myself in the field until the third evening.
+6. If your father misses me at all, then say, ‘David earnestly asked leave of me to run to Bethlehem his city because it is the yearly sacrifice there for the whole family.’
+7. If he says, ‘It is good,’ your servant will have peace; but if he is very angry, know that he has decided on evil.
+8. Therefore show lovingkindness to your servant, for you have brought your servant into a covenant of Yahweh with you. But if there is iniquity in me, put me to death yourself; for why then should you bring me to your father?”
+9. And Jonathan said, “Far be it from you! For if I should indeed come to know that evil has been decided by my father to come upon you, then would I not tell you about it?”
+10. Then David said to Jonathan, “Who will tell me if your father answers you harshly?”
+11. And Jonathan said to David, “Come, and let us go out into the field.” So both of them went out to the field.
+12. Then Jonathan said to David, “Yahweh, the God of Israel, be witness! When I have examined my father about this time tomorrow, or the third day, behold, if there is good feeling toward David, shall I not then send to you and reveal it in your ear?
+13. If it please my father to do you harm, may Yahweh do so to Jonathan and more also, if I do not reveal it in your ear and send you away, that you may go in peace. And may Yahweh be with you as He has been with my father.
+14. And if I am still alive, will you not show me the lovingkindness of Yahweh, that I may not die?
+15. You shall not cut off your lovingkindness from my house forever, not even when Yahweh cuts off every one of the enemies of David from the face of the earth.”
+16. So Jonathan cut a covenant with the house of David, saying, “May Yahweh require it at the hands of David’s enemies.”
+17. And Jonathan made David swear again because of his love for him, because he loved him as he loved his own soul.
+18. Then Jonathan said to him, “Tomorrow is the new moon, and you will be missed because your seat will be missing.
+19. When you have stayed for three days, you shall go down quickly and come to the place where you hid yourself on that eventful day, and you shall remain by the stone Ezel.
+20. And I will shoot three arrows to the side, as though I sent them towards a target.
+21. And behold, I will send the young man, saying, ‘Go, find the arrows.’ If I specifically say to the young man, ‘Behold, the arrows are on this side of you, get them,’ then come, for there is peace for you and no harm, as Yahweh lives.
+22. But if I say to the youth, ‘Behold, the arrows are beyond you,’ go, for Yahweh has sent you away.
+23. As for the agreement of which you and I have spoken, behold, Yahweh is between you and me forever.”
+24. So David hid in the field; and when the new moon came, the king sat down to eat food.
+25. And the king sat on his seat as usual, the seat by the wall; then Jonathan rose up, and Abner sat down by Saul’s side, but David’s place was missing.
+26. Nevertheless Saul did not speak anything that day, for he said, “It is an accident; he is not clean; surely he is not clean.”
+27. Now it happened the next day, the second day of the new moon, that David’s place was missing; so Saul said to Jonathan his son, “Why has the son of Jesse not come to the meal, either yesterday or today?”
+28. Jonathan then answered Saul, “David earnestly asked leave of me to go to Bethlehem,
+29. and he said, ‘Please send me on my way, since our family has a sacrifice in the city, and my brother has commanded me to attend. So now, if I have found favor in your sight, please let me get away that I may see my brothers.’ For this reason he has not come to the king’s table.”
+30. Then Saul’s anger burned against Jonathan, and he said to him, “You son of a perverse, rebellious woman! Do I not know that you are choosing the son of Jesse to your own shame and to the shame of your mother’s nakedness?
+31. For as long as the son of Jesse lives on the earth, neither you nor your kingdom will be established. So now, send and bring him to me, for he must surely die.”
+32. But Jonathan answered Saul his father and said to him, “Why should he be put to death? What has he done?”
+33. Then Saul hurled his spear at him to strike him down; so Jonathan knew that his father had decided to put David to death.
+34. Then Jonathan arose from the table in burning anger and did not eat food on the second day of the new moon, for he was grieved over David because his father had dishonored him.
+35. Now it happened in the morning that Jonathan went out into the field for the appointment with David, and a very young man was with him.
+36. And he said to his young man, “Run, find now the arrows which I am about to shoot.” As the young man was running, he shot an arrow past him.
+37. When the young man reached the place of the arrow which Jonathan had shot, Jonathan called after the lad and said, “Is not the arrow beyond you?”
+38. And Jonathan called after the young man, “Hurry, be quick, do not stay!” And Jonathan’s young man gathered up the arrow and came to his master.
+39. But the young man did not know of anything; only Jonathan and David knew about the matter.
+40. Then Jonathan gave his weapons to his young man and said to him, “Go, bring them to the city.”
+41. When the young man was gone, David rose from the south side and fell on his face to the ground and bowed three times. And they kissed each other and wept together, but David wept more.
+42. And Jonathan said to David, “Go in peace, inasmuch as we have sworn to each other in the name of Yahweh, saying, ‘Yahweh will be between me and you, and between my seed and your seed forever.’” Then he rose and departed, while Jonathan went into the city.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

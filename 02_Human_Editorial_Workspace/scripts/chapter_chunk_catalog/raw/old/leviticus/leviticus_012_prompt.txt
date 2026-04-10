@@ -1,0 +1,57 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Leviticus 12:1-8
+
+Chapter text:
+1. Then Yahweh spoke to Moses, saying,
+2. “Speak to the sons of Israel, saying: ‘When a woman gives birth and bears a male child, then she shall be unclean for seven days, as in the days of her menstruation she shall be unclean.
+3. Now on the eighth day the flesh of his foreskin shall be circumcised.
+4. Then she shall remain in the blood of her cleansing for thirty-three days; she shall not touch any holy thing; and she shall not enter the sanctuary until the days of her cleansing are fulfilled.
+5. But if she bears a female child, then she shall be unclean for two weeks, as in her menstruation; and she shall remain in the blood of her cleansing for sixty-six days.
+6. ‘When the days of her cleansing are fulfilled, for a son or for a daughter, she shall bring to the priest at the doorway of the tent of meeting a one year old lamb for a burnt offering and a young pigeon or a turtledove for a sin offering.
+7. Then he shall bring it near before Yahweh and make atonement for her, and she shall be cleansed from the flow of her blood. This is the law for her who bears a child, whether a male or a female.
+8. But if she cannot afford a lamb, then she shall take two turtledoves or two young pigeons, the one for a burnt offering and the other for a sin offering; and the priest shall make atonement for her, and she will be clean.’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

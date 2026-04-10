@@ -1,0 +1,787 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-10T11:02:43Z",
+  "testament": "old",
+  "book": "Joshua",
+  "book_key": "joshua",
+  "chapters": [
+    {
+      "chapter": 1,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 9,
+          "type": "exhortation",
+          "title": "Yahweh's Charge to Joshua",
+          "reason": "Divine commission and encouragement for leadership."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 15,
+          "type": "mixed",
+          "title": "Joshua's Orders to the Officers and Tribes",
+          "reason": "Narrative of Joshua instructing officers and addressing the Reubenites, Gadites, and half-tribe of Manasseh."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 18,
+          "type": "dialogue",
+          "title": "The Tribes' Response to Joshua",
+          "reason": "Verbal agreement and oath of loyalty from the tribes."
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "story",
+          "title": "Spies Enter Jericho and Hide",
+          "reason": "Describes the arrival of the spies, their lodging with Rahab, and her initial deception of the king's men."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 14,
+          "type": "dialogue",
+          "title": "Rahab's Confession and Request",
+          "reason": "Contains Rahab's speech declaring faith in Yahweh and her plea for the safety of her family."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 21,
+          "type": "story",
+          "title": "The Agreement and Escape Plan",
+          "reason": "Details the physical escape via the window, the terms of the scarlet cord, and the spies' departure."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 24,
+          "type": "story",
+          "title": "Return to Joshua",
+          "reason": "Concludes the narrative with the spies hiding for three days and reporting back to Joshua."
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "story",
+          "title": "Crossing the Jordan Begins",
+          "reason": "Describes the movement of Israel to the Jordan and Joshua's initial commands to the people and priests."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 13,
+          "type": "mixed",
+          "title": "God's Promise and Instructions",
+          "reason": "Combines Yahweh's oracle to Joshua with Joshua's exhortation and specific instructions regarding the miracle."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 17,
+          "type": "story",
+          "title": "The Waters Divide",
+          "reason": "Narrates the fulfillment of the promise as the priests enter the water and the people cross on dry ground."
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 14,
+          "type": "story",
+          "title": "Gathering Stones and Crossing Completion",
+          "reason": "Narrative of Joshua's command to gather stones, the completion of the crossing, and the arrival at Gilgal."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 18,
+          "type": "dialogue",
+          "title": "Priests Exit the Jordan",
+          "reason": "Direct exchange between Yahweh and Joshua regarding the priests coming up from the river."
+        },
+        {
+          "start_verse": 19,
+          "end_verse": 24,
+          "type": "exhortation",
+          "title": "Setting Up Stones at Gilgal",
+          "reason": "Account of setting up stones and Joshua's speech explaining the miracle to future generations."
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 2,
+          "type": "story",
+          "title": "Fear of the Kings and Circumcision Command",
+          "reason": "Narrative introduction of enemy reaction followed by divine instruction to Joshua."
+        },
+        {
+          "start_verse": 3,
+          "end_verse": 9,
+          "type": "story",
+          "title": "Circumcision at Gibeath-haaraloth and Gilgal",
+          "reason": "Execution of the command with historical explanation and renaming of the place."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 12,
+          "type": "story",
+          "title": "Passover and Cessation of Manna",
+          "reason": "Chronological account of the first Passover in Canaan and the end of manna."
+        },
+        {
+          "start_verse": 13,
+          "end_verse": 15,
+          "type": "vision",
+          "title": "Appearance of the Commander of Yahweh",
+          "reason": "Joshua encounters a divine figure who commands him to remove his sandals."
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "God's Instructions for Jericho",
+          "reason": "Describes the initial divine command and specific tactical instructions given to Joshua."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 14,
+          "type": "story",
+          "title": "The Six Days of Marching",
+          "reason": "Narrates the execution of the first six days where the army marched around the city once daily."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 21,
+          "type": "story",
+          "title": "The Seventh Day and Conquest",
+          "reason": "Covers the climax of the event with seven marches, the shout, the wall falling, and the city's destruction."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 25,
+          "type": "story",
+          "title": "Rahab and Her Family Saved",
+          "reason": "Details the specific rescue of Rahab's household and the burning of the city."
+        },
+        {
+          "start_verse": 26,
+          "end_verse": 27,
+          "type": "law",
+          "title": "The Curse on Jericho",
+          "reason": "Records Joshua's oath regarding the future rebuilding of the city and concludes with Yahweh's presence."
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "Achan's Sin and the Defeat at Ai",
+          "reason": "Narrative unit describing the cause of defeat and the immediate military loss."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 9,
+          "type": "blessing_or_prayer",
+          "title": "Joshua's Lament",
+          "reason": "Joshua's emotional response and prayer to God regarding the defeat."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 15,
+          "type": "oracle",
+          "title": "God's Response and Instructions",
+          "reason": "Divine oracle explaining the cause of failure and prescribing the method of judgment."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 23,
+          "type": "story",
+          "title": "Identification of Achan",
+          "reason": "Narrative sequence of the tribal selection process and discovery of the culprit."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 26,
+          "type": "story",
+          "title": "Judgment and Resolution",
+          "reason": "Conclusion of the narrative with the execution of Achan and restoration of God's favor."
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 9,
+          "type": "speech",
+          "title": "Yahweh's Command and Joshua's Preparation",
+          "reason": "Divine instruction followed by the strategic deployment of troops."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 17,
+          "type": "story",
+          "title": "The Ambush Strategy Unfolds",
+          "reason": "Narrative description of the army positioning and the enemy's pursuit."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 29,
+          "type": "story",
+          "title": "The Capture and Destruction of Ai",
+          "reason": "Climactic battle action, the city's burning, and the execution of the king."
+        },
+        {
+          "start_verse": 30,
+          "end_verse": 35,
+          "type": "law",
+          "title": "The Covenant Ceremony at Mount Ebal",
+          "reason": "Ritual observance involving altar construction, sacrifice, and the reading of the Law."
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 2,
+          "type": "story",
+          "title": "Kings Gather to Fight Israel",
+          "reason": "Describes the political reaction of surrounding kings to Joshua's victories."
+        },
+        {
+          "start_verse": 3,
+          "end_verse": 15,
+          "type": "story",
+          "title": "Gibeonites Deceive Israel",
+          "reason": "Narrates the Gibeonites' strategy to appear as distant travelers and secure a covenant."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 21,
+          "type": "story",
+          "title": "Discovery of Deception and Resolution",
+          "reason": "Details the discovery of the Gibeonites' proximity and the leaders' decision to spare them."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 27,
+          "type": "dialogue",
+          "title": "Joshua Confronts the Gibeonites",
+          "reason": "Contains Joshua's questioning and the Gibeonites' explanation of their motive."
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "The Five Kings Alliance",
+          "reason": "Describes the gathering of five Amorite kings to attack Gibeon."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 15,
+          "type": "story",
+          "title": "Joshua's Victory and the Sun Stands Still",
+          "reason": "Covers Gibeon's plea, Joshua's march, divine intervention, and the miraculous day."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 27,
+          "type": "story",
+          "title": "The Five Kings Captured",
+          "reason": "Details the hiding of kings in a cave and their subsequent execution."
+        },
+        {
+          "start_verse": 28,
+          "end_verse": 39,
+          "type": "list_or_catalog",
+          "title": "Conquest of Southern Cities",
+          "reason": "Lists the sequential capture and destruction of Makkedah, Libnah, Lachish, Eglon, Hebron, and Debir."
+        },
+        {
+          "start_verse": 40,
+          "end_verse": 43,
+          "type": "story",
+          "title": "Summary of the Campaign",
+          "reason": "Summarizes the total conquest of the land and return to Gilgal."
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "The Northern Alliance Assembles",
+          "reason": "Describes the gathering of northern kings and their armies at Merom."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 9,
+          "type": "mixed",
+          "title": "Divine Command and Battle Victory",
+          "reason": "Contains Yahweh's oracle to Joshua followed by the execution of the battle."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 15,
+          "type": "story",
+          "title": "Destruction of Hazor and Cities",
+          "reason": "Details the capture of Hazor, the destruction of its inhabitants, and the taking of plunder."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 20,
+          "type": "story",
+          "title": "Summary of Conquest and Divine Hardening",
+          "reason": "Summarizes the extent of the land taken and explains the theological reason for the total destruction."
+        },
+        {
+          "start_verse": 21,
+          "end_verse": 23,
+          "type": "story",
+          "title": "Elimination of Anakim and Final Rest",
+          "reason": "Describes the removal of the Anakim and concludes with the land being given to Israel."
+        }
+      ]
+    },
+    {
+      "chapter": 12,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "list_or_catalog",
+          "title": "Kings East of Jordan",
+          "reason": "Catalog of kings defeated by Moses east of the Jordan River."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 24,
+          "type": "list_or_catalog",
+          "title": "Kings West of Jordan",
+          "reason": "Catalog of kings defeated by Joshua west of the Jordan River."
+        }
+      ]
+    },
+    {
+      "chapter": 13,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "speech",
+          "title": "Yahweh's Charge to Joshua",
+          "reason": "Divine instruction regarding remaining land and the command to apportion it."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 14,
+          "type": "list_or_catalog",
+          "title": "Inheritance of Reuben, Gad, and Levi",
+          "reason": "Summary of the eastern territories given by Moses and the specific case of Levi."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 23,
+          "type": "list_or_catalog",
+          "title": "Territory of Reuben",
+          "reason": "Detailed boundaries and cities for the tribe of Reuben."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 28,
+          "type": "list_or_catalog",
+          "title": "Territory of Gad",
+          "reason": "Detailed boundaries and cities for the tribe of Gad."
+        },
+        {
+          "start_verse": 29,
+          "end_verse": 32,
+          "type": "list_or_catalog",
+          "title": "Territory of Manasseh",
+          "reason": "Detailed boundaries and cities for the half-tribe of Manasseh."
+        },
+        {
+          "start_verse": 33,
+          "end_verse": 33,
+          "type": "speech",
+          "title": "Conclusion on Levi",
+          "reason": "Final statement confirming the Levitical inheritance as Yahweh Himself."
+        }
+      ]
+    },
+    {
+      "chapter": 14,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "list_or_catalog",
+          "title": "Overview of Land Division",
+          "reason": "Introductory summary describing the apportionment process and tribal allocations."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 12,
+          "type": "speech",
+          "title": "Caleb's Request for Hebron",
+          "reason": "A continuous speech by Caleb recounting his history and requesting the hill country."
+        },
+        {
+          "start_verse": 13,
+          "end_verse": 15,
+          "type": "story",
+          "title": "Grant of Hebron to Caleb",
+          "reason": "Narrative conclusion detailing Joshua's blessing and the historical context of Hebron."
+        }
+      ]
+    },
+    {
+      "chapter": 15,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 12,
+          "type": "list_or_catalog",
+          "title": "Border of Judah",
+          "reason": "Describes the geographical boundaries of the tribe of Judah."
+        },
+        {
+          "start_verse": 13,
+          "end_verse": 20,
+          "type": "story",
+          "title": "Caleb's Inheritance and Othniel",
+          "reason": "Narrative of Caleb receiving Hebron and Othniel capturing Debir."
+        },
+        {
+          "start_verse": 21,
+          "end_verse": 32,
+          "type": "list_or_catalog",
+          "title": "Southern Cities",
+          "reason": "Catalog of cities in the southern region of Judah."
+        },
+        {
+          "start_verse": 33,
+          "end_verse": 47,
+          "type": "list_or_catalog",
+          "title": "Shephelah Cities",
+          "reason": "Catalog of cities in the lowland region of Judah."
+        },
+        {
+          "start_verse": 48,
+          "end_verse": 60,
+          "type": "list_or_catalog",
+          "title": "Hill Country Cities",
+          "reason": "Catalog of cities in the mountainous region of Judah."
+        },
+        {
+          "start_verse": 61,
+          "end_verse": 63,
+          "type": "mixed",
+          "title": "Wilderness and Jerusalem Note",
+          "reason": "List of wilderness cities followed by the note on the Jebusites."
+        }
+      ]
+    },
+    {
+      "chapter": 16,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 4,
+          "type": "list_or_catalog",
+          "title": "Lot for Joseph",
+          "reason": "Describes the geographical boundaries of the inheritance for the sons of Joseph."
+        },
+        {
+          "start_verse": 5,
+          "end_verse": 10,
+          "type": "story",
+          "title": "Territory of Ephraim",
+          "reason": "Details the specific borders of Ephraim's inheritance and notes the remaining Canaanite population."
+        }
+      ]
+    },
+    {
+      "chapter": 17,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "genealogy",
+          "title": "Inheritance of Manasseh and Zelophehad's Daughters",
+          "reason": "Describes the allotment of land to Manasseh and the specific case of daughters receiving inheritance."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 13,
+          "type": "list_or_catalog",
+          "title": "Boundaries and Cities of Manasseh",
+          "reason": "Details the geographical borders and lists specific cities held by the tribe."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 18,
+          "type": "dialogue",
+          "title": "Joshua's Instruction to Joseph",
+          "reason": "Records a conversation between the sons of Joseph and Joshua regarding their inheritance."
+        }
+      ]
+    },
+    {
+      "chapter": 18,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 10,
+          "type": "story",
+          "title": "Assembly at Shiloh and Land Survey",
+          "reason": "Describes the gathering of Israel, Joshua's command to survey the land, and the casting of lots."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 20,
+          "type": "story",
+          "title": "Territory of Benjamin",
+          "reason": "Details the geographical borders of the tribe of Benjamin as assigned by lot."
+        },
+        {
+          "start_verse": 21,
+          "end_verse": 28,
+          "type": "list_or_catalog",
+          "title": "Cities of Benjamin",
+          "reason": "Lists the specific cities and villages belonging to the tribe of Benjamin."
+        }
+      ]
+    },
+    {
+      "chapter": 19,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 9,
+          "type": "list_or_catalog",
+          "title": "Inheritance of Simeon",
+          "reason": "Describes the allocation of cities and villages to the tribe of Simeon within Judah's territory."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 16,
+          "type": "list_or_catalog",
+          "title": "Inheritance of Zebulun",
+          "reason": "Details the borders and specific cities assigned to the tribe of Zebulun."
+        },
+        {
+          "start_verse": 17,
+          "end_verse": 23,
+          "type": "list_or_catalog",
+          "title": "Inheritance of Issachar",
+          "reason": "Lists the territory and cities given to the tribe of Issachar."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 31,
+          "type": "list_or_catalog",
+          "title": "Inheritance of Asher",
+          "reason": "Describes the coastal borders and cities assigned to the tribe of Asher."
+        },
+        {
+          "start_verse": 32,
+          "end_verse": 39,
+          "type": "list_or_catalog",
+          "title": "Inheritance of Naphtali",
+          "reason": "Outlines the northern borders and fortified cities for the tribe of Naphtali."
+        },
+        {
+          "start_verse": 40,
+          "end_verse": 48,
+          "type": "story",
+          "title": "Inheritance of Dan",
+          "reason": "Lists initial cities and includes a narrative about the tribe's expansion to Leshem."
+        },
+        {
+          "start_verse": 49,
+          "end_verse": 51,
+          "type": "story",
+          "title": "Completion of Land Division",
+          "reason": "Concludes the distribution process and notes Joshua's specific inheritance."
+        }
+      ]
+    },
+    {
+      "chapter": 20,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "speech",
+          "title": "Command to Designate Cities of Refuge",
+          "reason": "Yahweh's direct instruction to Joshua regarding the establishment and function of cities of refuge."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 8,
+          "type": "list_or_catalog",
+          "title": "Designation of Specific Cities",
+          "reason": "A catalog listing the six specific cities assigned to their respective tribes."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 9,
+          "type": "law",
+          "title": "Summary of Purpose",
+          "reason": "Concluding statement defining the scope and purpose of the appointed cities for all Israelites."
+        }
+      ]
+    },
+    {
+      "chapter": 21,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "story",
+          "title": "Levites Request Cities",
+          "reason": "Narrative introduction of the Levites requesting cities and the initial allocation by lot."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 19,
+          "type": "list_or_catalog",
+          "title": "Cities for Aaron's Sons",
+          "reason": "Detailed list of thirteen cities given to the priestly families from Judah, Simeon, and Benjamin."
+        },
+        {
+          "start_verse": 20,
+          "end_verse": 26,
+          "type": "list_or_catalog",
+          "title": "Cities for Kohathite Families",
+          "reason": "List of ten cities allotted to the remaining Kohathite families from Ephraim, Dan, and Manasseh."
+        },
+        {
+          "start_verse": 27,
+          "end_verse": 33,
+          "type": "list_or_catalog",
+          "title": "Cities for Gershonites",
+          "reason": "List of thirteen cities given to the Gershonite families from Manasseh, Issachar, Asher, and Naphtali."
+        },
+        {
+          "start_verse": 34,
+          "end_verse": 40,
+          "type": "list_or_catalog",
+          "title": "Cities for Merari Families",
+          "reason": "List of twelve cities assigned to the Merari families from Zebulun, Reuben, and Gad."
+        },
+        {
+          "start_verse": 41,
+          "end_verse": 45,
+          "type": "exhortation",
+          "title": "Summary of Completion",
+          "reason": "Concluding summary of the total cities given and the fulfillment of God's promises to Israel."
+        }
+      ]
+    },
+    {
+      "chapter": 22,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 9,
+          "type": "story",
+          "title": "Dismissal of the Eastern Tribes",
+          "reason": "Joshua sends the Reubenites, Gadites, and half-tribe of Manasseh back to their land with blessings."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 20,
+          "type": "story",
+          "title": "The Altar and the Accusation",
+          "reason": "The tribes build an altar causing Israel to assemble for war, followed by Phinehas's delegation delivering an accusation."
+        },
+        {
+          "start_verse": 21,
+          "end_verse": 34,
+          "type": "dialogue",
+          "title": "The Explanation and Resolution",
+          "reason": "The eastern tribes explain the altar's purpose as a witness, leading to Phinehas's acceptance and the end of the conflict."
+        }
+      ]
+    },
+    {
+      "chapter": 23,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "Joshua's Call and Inheritance",
+          "reason": "Narrative introduction of Joshua's age and the distribution of remaining lands."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 13,
+          "type": "exhortation",
+          "title": "Call to Faithfulness",
+          "reason": "Direct instructions to keep the law and warnings against intermarriage."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 16,
+          "type": "speech",
+          "title": "Covenant Warning",
+          "reason": "Joshua's final testimony regarding God's faithfulness and future judgment."
+        }
+      ]
+    },
+    {
+      "chapter": 24,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 28,
+          "type": "speech",
+          "title": "Joshua's Covenant Speech at Shechem",
+          "reason": "A continuous speech by Joshua recounting history and calling for covenant renewal, including the people's response."
+        },
+        {
+          "start_verse": 29,
+          "end_verse": 33,
+          "type": "story",
+          "title": "Deaths of Joshua, Joseph, and Eleazar",
+          "reason": "Narrative account of the deaths and burials of key leaders concluding the chapter."
+        }
+      ]
+    }
+  ]
+}

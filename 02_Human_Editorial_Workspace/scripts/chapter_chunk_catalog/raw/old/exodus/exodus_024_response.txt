@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "The Covenant Ratification Ceremony",
+      "reason": "Describes the complete ritual of blood sprinkling and verbal agreement establishing the covenant."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "vision",
+      "title": "The Elders See God",
+      "reason": "Records the specific vision of the nobles seeing God and eating in His presence."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Moses Called to the Mountain",
+      "reason": "Contains Yahweh's command and Moses' instructions to the elders before ascending."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Moses Enters the Cloud",
+      "reason": "Narrates the cloud covering the mountain and Moses entering for forty days."
+    }
+  ]
+}

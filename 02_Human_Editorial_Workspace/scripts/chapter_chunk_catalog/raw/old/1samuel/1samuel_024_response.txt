@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "David Spares Saul in the Cave",
+      "reason": "Narrative of Saul entering the cave and David cutting his robe without killing him."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "dialogue",
+      "title": "David's Speech to Saul",
+      "reason": "David confronts Saul, explains his mercy, and contrasts their positions."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Saul's Repentance and Oath",
+      "reason": "Saul weeps, acknowledges David's righteousness, and they make a covenant."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T09:54:34Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Judges",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 40,
+  "verse_count": 40,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Israel's Oppression and Cry for Help",
+      "reason": "Describes the seven-year oppression by Midian and Israel's subsequent cry to Yahweh."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "The Prophet's Oracle of Rebuke",
+      "reason": "A prophet delivers a message from Yahweh recounting past deliverance and current disobedience."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Gideon's Call and the Sign of Fire",
+      "reason": "The angel calls Gideon, who requests a sign with fire from the rock before building an altar."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 32,
+      "type": "story",
+      "title": "Gideon Destroys the Altar of Baal",
+      "reason": "Gideon destroys his father's altar by night and earns the name Jerubbaal after a confrontation."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 35,
+      "type": "story",
+      "title": "The Enemy Assembles and Gideon Rallies Troops",
+      "reason": "Midianite forces camp in Jezreel while the Spirit of Yahweh empowers Gideon to gather an army."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 40,
+      "type": "dialogue",
+      "title": "Gideon's Fleece Tests",
+      "reason": "Gideon speaks with God twice to confirm the promise of victory using a wool fleece."
+    }
+  ]
+}

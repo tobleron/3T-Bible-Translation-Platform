@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 20,
+      "type": "law",
+      "title": "Instructions for the Passover and Unleavened Bread",
+      "reason": "Contains Yahweh's direct commands to Moses and Aaron regarding the timing, selection, preparation, and consumption of the Passover lamb and the Feast of Unleavened Bread."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Moses Instructs the Elders and Execution",
+      "reason": "Describes Moses relaying the instructions to the elders, the people's obedience in preparing the lamb, and the execution of the plague."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 36,
+      "type": "story",
+      "title": "The Plague and Pharaoh's Decree",
+      "reason": "Narrates the striking of the firstborn at midnight, Pharaoh's reaction, his command for Israel to leave, and the Egyptians pressing them out."
+    },
+    {
+      "start_verse": 37,
+      "end_verse": 42,
+      "type": "story",
+      "title": "The Departure from Egypt",
+      "reason": "Details the journey from Rameses to Succoth, the departure with livestock and a mixed multitude, and the historical note on the 430-year sojourn."
+    },
+    {
+      "start_verse": 43,
+      "end_verse": 51,
+      "type": "law",
+      "title": "Statutes for the Passover Celebration",
+      "reason": "Concludes with further regulations regarding who may eat the Passover, specific rules for foreigners and slaves, and a final summary of the people's obedience."
+    }
+  ]
+}

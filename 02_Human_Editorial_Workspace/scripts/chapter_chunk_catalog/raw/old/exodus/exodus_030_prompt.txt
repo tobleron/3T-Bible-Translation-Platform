@@ -1,0 +1,87 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 30:1-38
+
+Chapter text:
+1. “Moreover, you shall make an altar as a place for burning incense; you shall make it of acacia wood.
+2. Its length shall be a cubit, and its width a cubit; it shall be square. And its height shall be two cubits; its horns shall be of the same piece.
+3. You shall overlay it with pure gold, its top and its sides all around, and its horns; and you shall make a gold molding all around for it.
+4. You shall make two gold rings for it under its molding; you shall make them on its two side walls—on opposite sides—and they shall be holders for poles with which to carry it.
+5. You shall make the poles of acacia wood and overlay them with gold.
+6. You shall put this altar in front of the veil that is near the ark of the testimony, in front of the mercy seat that is over the testimony, where I will meet with you.
+7. Aaron shall burn fragrant incense on it; he shall burn it every morning when he trims the lamps.
+8. When Aaron trims the lamps at twilight, he shall burn incense. There shall be continual incense before Yahweh throughout your generations.
+9. You shall not offer any strange incense on this altar or burnt offering or grain offering; and you shall not pour out a drink offering on it.
+10. Aaron shall make atonement on its horns once a year; he shall make atonement on it with the blood of the sin offering of atonement once a year throughout your generations. It is most holy to Yahweh.”
+11. Yahweh also spoke to Moses, saying,
+12. “When you take a census of the sons of Israel to number them, then each one of them shall give a price of atonement for himself to Yahweh when you number them, so that there will be no plague among them when you number them.
+13. This is what everyone who is numbered shall give: half a shekel according to the shekel of the sanctuary (the shekel is twenty gerahs), half a shekel as a contribution to Yahweh.
+14. Everyone who is numbered, from twenty years old and over, shall give the contribution to Yahweh.
+15. The rich shall not pay more and the poor shall not pay less than the half shekel when you give the contribution to Yahweh to make atonement for your souls.
+16. And you shall take the atonement money from the sons of Israel and shall give it for the service of the tent of meeting, that it may be a remembrance for the sons of Israel before Yahweh, to make atonement for your souls.”
+17. And Yahweh spoke to Moses, saying,
+18. “You shall also make a laver of bronze, with its stand of bronze, for washing; and you shall put it between the tent of meeting and the altar, and you shall put water in it.
+19. And Aaron and his sons shall wash their hands and their feet from it;
+20. when they come into the tent of meeting, they shall wash with water, so that they will not die; or when they approach the altar to minister, by offering up in smoke a fire sacrifice to Yahweh.
+21. So they shall wash their hands and their feet, so that they will not die; and it shall be a perpetual statute for them, for Aaron and his seed throughout their generations.”
+22. Moreover, Yahweh spoke to Moses, saying,
+23. “But as for you, take for yourself the finest of spices: of flowing myrrh 500 shekels, and of fragrant cinnamon half as much, 250, and of fragrant cane 250,
+24. and of cassia 500, according to the shekel of the sanctuary, and of olive oil a hin.
+25. And you shall make of these a holy anointing oil, a perfume mixture, the work of a perfumer; it shall be a holy anointing oil.
+26. And with it you shall anoint the tent of meeting and the ark of the testimony,
+27. and the table and all its utensils, and the lampstand and its utensils, and the altar of incense,
+28. and the altar of burnt offering and all its utensils, and the laver and its stand.
+29. You shall also set them apart as holy, that they may be most holy; whatever touches them shall be holy.
+30. And you shall anoint Aaron and his sons, and you shall set them apart as holy, that they may minister as priests to Me.
+31. And you shall speak to the sons of Israel, saying, ‘This shall be a holy anointing oil to Me throughout your generations.
+32. It shall not be poured on anyone’s body, nor shall you make any like it in the same specifications; it is holy, and it shall be holy to you.
+33. Whoever shall mix any like it or whoever puts any of it on a layman shall be cut off from his people.’”
+34. Then Yahweh said to Moses, “Take for yourself fragrances, stacte and onycha and galbanum, fragrances with pure frankincense; there shall be an equal part of each.
+35. With it you shall make incense, a perfume, the work of a perfumer, salted, pure, and holy.
+36. You shall beat some of it very fine, and you shall put part of it before the testimony in the tent of meeting where I will meet with you; it shall be most holy to you.
+37. The incense which you shall make, you shall not make in the same specifications for yourselves; it shall be holy to you for Yahweh.
+38. Whoever shall make any like it, to use as perfume, shall be cut off from his people.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

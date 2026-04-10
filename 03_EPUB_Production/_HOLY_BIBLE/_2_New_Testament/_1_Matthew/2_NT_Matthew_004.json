@@ -1,0 +1,139 @@
+{
+  "testament": "NT",
+  "book": "Matthew",
+  "chapter": 4,
+  "sections": [
+    {
+      "headline": "The Devil Tempts Jesus",
+      "verses": [
+        {
+          "verse": 1,
+          "text": "Then Jesus was led by the Spirit into the wilderness to be tempted by the devil."
+        },
+        {
+          "verse": 2,
+          "text": "After fasting forty days and forty nights, he became hungry."
+        },
+        {
+          "verse": 3,
+          "text": "The tempter approached and said to him: “If you are the Son of God, command these stones to become bread.”"
+        },
+        {
+          "verse": 4,
+          "text": "Jesus answered, “It is written: ‘Man will not live on bread alone, but on every word coming from the mouth of God.’”"
+        },
+        {
+          "verse": 5,
+          "text": "Then the devil took him to the holy city and set him on the pinnacle of the temple."
+        },
+        {
+          "verse": 6,
+          "text": "“If you are the Son of God,” he said, “throw yourself down, for it is written: ‘He will command His angels concerning you,’ and ‘on their hands they will lift you up lest you strike your foot against a stone.’”"
+        },
+        {
+          "verse": 7,
+          "text": "Jesus answered, “It is also written: ‘You are not to put the Lord your God to the test.’”"
+        },
+        {
+          "verse": 8,
+          "text": "Again the devil took him to a very high mountain, showed him all the kingdoms of the world and their splendor."
+        },
+        {
+          "verse": 9,
+          "text": "He said to him: “All these I will give to you if bowing down you worship me.”"
+        },
+        {
+          "verse": 10,
+          "text": "Jesus replied, “Go away Satan! For it is written: ‘You will worship the Lord your God, and Him only you will serve.’”"
+        }, 
+        {
+          "verse": 11,
+          "text": "Then the devil departed from him, and angels approached and served him."
+        }
+      ]
+    },
+    {
+      "headline": "The Rising Light Prophecy",
+      "verses": [
+        {
+          "verse": 12,
+          "text": "When Jesus heard that John had been arrested, he withdrew into Galilee."
+        },
+        {
+          "verse": 13,
+          "text": "He left Nazareth and settled in Capernaum by the sea, around the borders of Zebulun and Naphtali."
+        },
+        {
+          "verse": 14,
+          "text": "To fulfill what was spoken through the prophet Isaiah saying,"
+        },
+        {
+          "verse": 15,
+          "text": "“Land of Zebulun and land of Naphtali, way of the sea, beyond the Jordan, Galilee of the Gentiles."
+        },
+        {
+          "verse": 16,
+          "text": "The people sitting in darkness have seen a great light; on those sitting in the shadow of death, a light has dawned.”"
+        }
+      ]
+    },
+    {
+      "headline": "The Master’s Chosen",
+      "verses": [
+        {
+          "verse": 17,
+          "text": "Since then Jesus began to preach saying, “Repent, for the kingdom of heaven has come near.”"
+        },
+        {
+          "verse": 18,
+          "text": "Walking by the Sea of Galilee, he saw two brothers: Simon (the one called Peter), and Andrew his brother, casting a net into the sea, for they were fishermen."
+        },
+        {
+          "verse": 19,
+          "text": "He said to them: “Come, follow me, and I will make you fishers of humans.”"
+        },
+        {
+          "verse": 20,
+          "text": "At once, they left their nets and followed him."
+        },
+        {
+          "verse": 21,
+          "text": "Going further, he saw two brothers, James the son of Zebedee and his brother John, in the boat with their father Zebedee, mending their nets and he called them."
+        },
+        {
+          "verse": 22,
+          "text": "At once, they left the boat and their father and followed him."
+        },
+        {
+          "verse": 23,
+          "text": "He was going around Galilee, teaching in their synagogues, proclaiming the gospel of the kingdom, and healing every disease and sickness in the people."
+        },
+        {
+          "verse": 24,
+          "text": "His fame spread throughout Syria, and they brought to him all the sick, those afflicted by various diseases and torments, the demon-possessed, lunatics, and paralytics, and he healed them."
+        },
+        {
+          "verse": 25,
+          "text": "Large crowds followed him from Galilee, the Decapolis, Jerusalem, Judea, and beyond the Jordan."
+        }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "verse": 18,
+      "letter": "",
+      "content": "The name 'Peter' (Cephas in Aramaic) means 'rock' and is a new identity given to Simon by Jesus (cf. Matthew 16:18). This name change symbolizes his role as a foundational figure in God’s kingdom."
+    },
+    {
+      "verse": 24,
+      "letter": "",
+      "content": "'Demon-possessed, epileptics, and paralytics' reflect the breadth of Jesus’ healing ministry in first-century society. These conditions were often associated with spiritual or physical impurity, and His miracles demonstrated authority over both."
+    },
+    {
+      "verse": 25,
+      "letter": "",
+      "content": "The Decapolis was a Gentile region beyond the Jordan, highlighting the inclusivity of Jesus’ ministry reaching diverse groups in Galilee, Judea, and beyond."
+    }
+  ]
+}

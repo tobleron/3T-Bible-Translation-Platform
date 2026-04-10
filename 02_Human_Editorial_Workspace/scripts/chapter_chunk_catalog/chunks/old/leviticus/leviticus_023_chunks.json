@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T20:41:23Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Leviticus",
+  "chapter": 23,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 44,
+  "verse_count": 44,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Introduction and Passover Feast",
+      "reason": "Establishes the holy convocations framework and details the Passover and Unleavened Bread."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 22,
+      "type": "law",
+      "title": "First Fruits and Weeks Feast",
+      "reason": "Describes the wave sheaf offering, the counting to Pentecost, and the harvest gleaning laws."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 32,
+      "type": "law",
+      "title": "Feast of Trumpets and Day of Atonement",
+      "reason": "Outlines the seventh month festivals including the trumpet blast and the solemn day of atonement."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 44,
+      "type": "law",
+      "title": "Feast of Booths and Conclusion",
+      "reason": "Details the seven-day feast of tabernacles, its rituals, and concludes with Moses delivering the instructions."
+    }
+  ]
+}

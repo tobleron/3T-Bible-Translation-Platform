@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Laws on Postpartum Purity",
+      "reason": "A complete legal unit detailing the purification process for a woman after childbirth."
+    }
+  ]
+}

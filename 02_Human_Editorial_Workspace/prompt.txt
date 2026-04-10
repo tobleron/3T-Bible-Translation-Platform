@@ -1,0 +1,137 @@
+Create a fully functioning Python script named `ttt_consistency.py`.
+
+The script must:
+- Accept two required arguments: `greek_hb.json` and `english_hb.json`
+- Accept one optional flag: `--consistent`, which when provided, outputs a file named `consistent_map.json`
+
+These JSON files contain Bible verses, keyed by book, chapter, and verse. The Greek file contains raw Greek NT text. The English file is a translation. Both are in similar structure.
+
+### Functional Requirements:
+
+1. **Input Handling**
+   - Parse command-line arguments with `argparse`
+   - Load `greek_hb.json` and `english_hb.json` as lists of dictionaries
+   - Match verses by `book`, `chapter`, and `verse`
+
+2. **Greek Text Processing**
+   - For each verse:
+     - Tokenize and lemmatize the Greek text using an existing Greek morphological analyzer or a fallback dictionary
+     - Associate each Greek word with its Strong's number
+     - Normalize accents and punctuation for stable comparison
+
+3. **English Text Processing**
+   - Tokenize and normalize the English translation text (lowercase, strip punctuation)
+
+4. **Strong’s Lexicon Integration**
+   - Load a Greek Strong’s dictionary (JSON/dict), mapping lemmas or Strong’s numbers to most common English equivalents
+   - Each lemma should include: lemma, Strong’s number, and one or more suggested English glosses
+
+5. **Comparison Logic**
+   - For each verse, compare Greek lemmas (via Strong’s) with English words in the corresponding verse
+   - Determine whether the English rendering matches any of the expected English words for each lemma
+   - Log discrepancies per verse
+
+6. **Output: Inconsistency Report**
+   - Output a `consistency_report.json` file:
+     - Group by verse
+     - For each inconsistency, show: Greek word, lemma, Strong’s number, expected translation(s), actual translation found
+   - Print a terminal summary:
+     - Total lemmas
+     - Number and percent consistent
+     - Top inconsistent verses
+
+7. **Output: Consistent Translation Map (`--consistent`)**
+   - Output two files:
+     - `consistent_map.json`: detailed map of key Greek lemmas to most common English renderings
+     - `consistency_map.txt`: a simple plain text file where each line is `lemma → english`, suitable for AI parsing with no JSON decoding
+   - Example `consistency_map.txt`:
+     ```
+     γεννάω → fathered
+     Χριστός → Christ
+     Ἰησοῦς → Jesus
+     υἱός → Son
+     ```
+
+   - If `--consistent` flag is passed:
+     - Generate `consistent_map.json`
+     - For each key lemma:
+       - Include lemma, Strong’s number, most common consistent English rendering, and how many times it appears
+     - Only include:
+       - Verbs (main actions)
+       - Proper nouns (names)
+       - Theologically important terms (e.g., Χριστός, σωτηρία, υἱός)
+       - Nouns related to identity/relationship
+
+8. **Assumptions**
+   - Use hardcoded fallback lexicon/dictionary if no external lemmatizer is available
+   - Assume verse text has no deep markup, only plain strings
+   - Gracefully skip unmatched verses
+   - Use `re`, `collections.Counter`, and `unicodedata` for normalization and frequency handling
+
+### Output Format Examples:
+
+**consistency_report.json**
+```json
+{
+  "Matthew 1:3": [
+    {
+      "greek_word": "ἐγέννησεν",
+      "lemma": "γεννάω",
+      "strongs": "G1080",
+      "expected": ["fathered"],
+      "found": "begot",
+      "status": "inconsistent"
+    }
+  ]
+}
+```
+
+**consistent_map.json**
+```json
+{
+  "γεννάω": {
+    "strongs": "G1080",
+    "english": "fathered",
+    "count": 18
+  },
+  "Χριστός": {
+    "strongs": "G5547",
+    "english": "Christ",
+    "count": 14
+  }
+}
+```
+
+### Technical Requirements
+- Use only standard libraries + any open-source Greek lexicon/dictionary (mention placeholder if not available)
+- Write clean, modular code with comments
+- Organize code into functions: `load_json`, `lemmatize_greek`, `compare_verse`, `generate_report`, etc.
+
+The script must work from terminal like:
+
+```bash
+python ttt_consistency.py greek_hb.json english_hb.json --consistent
+```
+
+Return both JSON reports in the working directory and print a readable summary in terminal.
+
+### End.
+
+
+9. **Verse Range Filtering**
+   - Add an optional command-line argument `--range` (e.g., `"Matthew 1:1-25"`)
+   - If provided, only process verses within this range:
+     - Same book
+     - Chapter must match
+     - Verse must fall within the inclusive range
+   - Apply this filtering to:
+     - consistency comparison
+     - consistency_report.json
+     - consistent_map.json
+     - consistency_map.txt
+   - If `--range` is not provided, process the entire text.
+
+The script must now be callable like:
+```bash
+python ttt_consistency.py greek_hb.json english_hb.json --consistent --range "Matthew 1:1-25"
+```

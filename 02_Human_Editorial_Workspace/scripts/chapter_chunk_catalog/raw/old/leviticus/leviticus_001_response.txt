@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "law",
+      "title": "Instructions for the Burnt Offering",
+      "reason": "This section contains a continuous legal instruction from Yahweh to Moses regarding the procedures for three types of burnt offerings: herd, flock, and birds."
+    }
+  ]
+}

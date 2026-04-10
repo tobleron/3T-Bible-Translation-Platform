@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Ziba's Gift to David",
+      "reason": "A complete narrative unit where Ziba meets David and receives Mephibosheth's estate."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Shimei Curses David",
+      "reason": "A continuous narrative of Shimei cursing David and David's response to Abishai."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Absalom Enters Jerusalem",
+      "reason": "The conclusion of the chapter covering Absalom's arrival and Ahithophel's counsel."
+    }
+  ]
+}

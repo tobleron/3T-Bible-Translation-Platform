@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Death of Samuel and David in the Wilderness",
+      "reason": "Narrative introduction setting the scene for the main story."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 13,
+      "type": "story",
+      "title": "David's Request and Nabal's Rejection",
+      "reason": "Complete narrative unit covering the initial interaction and David's angry reaction."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Abigail's Intervention",
+      "reason": "The turning point where Abigail learns of the crisis and prepares provisions."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 35,
+      "type": "dialogue",
+      "title": "Abigail Meets David and Pleads for Mercy",
+      "reason": "The core dramatic encounter featuring Abigail's speech and David's acceptance."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 44,
+      "type": "story",
+      "title": "Nabal's Death and Abigail Marries David",
+      "reason": "Resolution of the conflict and the conclusion of the narrative arc."
+    }
+  ]
+}

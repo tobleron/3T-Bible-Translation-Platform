@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="page-shell home-shell">
+  <section class="hero-card">
+    <div>
+      <p class="eyebrow">Workspace</p>
+      <h1>Desktop-first translation editing in the browser.</h1>
+      <p class="lede">Use the navigator-backed workspace for study, drafting, review, JSON commit, and EPUB generation.</p>
+    </div>
+    <div class="hero-actions">
+      {% if state.book and state.chapter and current_chunk_key %}
+      <a class="primary-button" href="/workspace/{{ state.wizard_testament or 'new' }}/{{ state.book|lower|replace(' ', '') }}/{{ state.chapter }}/{{ current_chunk_key }}">Resume {{ state.book }} {{ state.chapter }}:{{ current_chunk_key }}</a>
+      {% endif %}
+      <a class="secondary-button" href="/settings">Open settings</a>
+    </div>
+  </section>
+
+  {% if flash_messages %}
+  <section class="flash-stack">
+    {% for message in flash_messages %}
+    <article class="flash flash-{{ message.accent }}">
+      <h3>{{ message.title }}</h3>
+      <pre>{{ message.body }}</pre>
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="dashboard-grid">
+    <article class="dashboard-card">
+      <h2>Recent EPUB files</h2>
+      <ul class="link-list">
+        {% for path in recent_epubs %}
+        <li>{{ path.name }}</li>
+        {% else %}
+        <li>No EPUB outputs yet.</li>
+        {% endfor %}
+      </ul>
+    </article>
+    <article class="dashboard-card">
+      <h2>Available books</h2>
+      <div class="navigator-columns compact">
+        {% for testament in ("old", "new") %}
+        <div>
+          <h3>{{ testament.title() }} Testament</h3>
+          <ul class="book-list compact">
+            {% for item in navigator[testament][:14] %}
+            <li>
+              {% set browse_chapter = item.first_ready_chapter or item.first_chapter %}
+              {% if browse_chapter %}
+              <a class="book-link-row" href="/workspace/{{ testament }}/{{ item.name|lower|replace(' ', '') }}/{{ browse_chapter }}">
+                <span>{{ item.name }}</span>
+                <span>
+                  {% if item.first_ready_chapter %}
+                  {{ item.chunk_counts|length }} ready ch.
+                  {% else %}
+                  {{ item.chapters|length }} ch.
+                  {% endif %}
+                </span>
+              </a>
+              {% else %}
+              <span class="book-link-row is-disabled">
+                <span>{{ item.name }}</span>
+                <span>no chapters</span>
+              </span>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </article>
+  </section>
+</main>
+{% endblock %}

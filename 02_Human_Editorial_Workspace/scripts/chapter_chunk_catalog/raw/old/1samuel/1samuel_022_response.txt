@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David gathers followers and seeks refuge",
+      "reason": "Narrative of David moving to Adullam and Mizpah with his family."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Saul discovers David's location",
+      "reason": "Saul learns of David and Doeg reports the visit to Nob."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "Saul interrogates Ahimelech",
+      "reason": "Dialogue between Saul and the priest followed by the king's judgment."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Massacre at Nob and David's comfort",
+      "reason": "Doeg kills the priests and Abiathar reports to David."
+    }
+  ]
+}

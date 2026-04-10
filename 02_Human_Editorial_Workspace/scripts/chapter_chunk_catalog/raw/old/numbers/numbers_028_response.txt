@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Daily Burnt Offering",
+      "reason": "Establishes the routine morning and evening sacrifice instructions."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 10,
+      "type": "law",
+      "title": "Sabbath Offerings",
+      "reason": "Specifies the additional sacrifices required for the weekly Sabbath."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Monthly Offerings",
+      "reason": "Details the burnt and sin offerings for the beginning of each month."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 25,
+      "type": "law",
+      "title": "Feast of Unleavened Bread",
+      "reason": "Outlines the sacrifices for Passover and the seven-day feast."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 31,
+      "type": "law",
+      "title": "Feast of Weeks",
+      "reason": "Describes the offerings for the Feast of Weeks and its holy convocation."
+    }
+  ]
+}

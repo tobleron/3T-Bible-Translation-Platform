@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Ahithophel's First Counsel",
+      "reason": "Ahithophel proposes a night attack on David to Absalom and the elders."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Hushai's Counter-Counsel",
+      "reason": "Absalom consults Hushai who offers a different strategy that is accepted."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Message to David and Ahithophel's Death",
+      "reason": "Hushai warns David via spies while Ahithophel commits suicide."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 26,
+      "type": "story",
+      "title": "David and Absalom Camp in Gilead",
+      "reason": "Both armies cross the Jordan and set up camp in Gilead."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 29,
+      "type": "list_or_catalog",
+      "title": "Provisions from Mahanaim",
+      "reason": "Three men bring a detailed list of food and supplies to David."
+    }
+  ]
+}

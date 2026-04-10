@@ -1,0 +1,61 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Samuel 4:1-12
+
+Chapter text:
+1. Then Ish-bosheth, Saul’s son heard that Abner had died in Hebron. And he lost courage, and all Israel was dismayed.
+2. Now Saul’s son had two men who were commanders of bands: the name of the one was Baanah and the name of the other Rechab, sons of Rimmon the Beerothite, of the sons of Benjamin (for Beeroth is also considered part of Benjamin,
+3. and the Beerothites fled to Gittaim and have been sojourners there until this day).
+4. Now Jonathan, Saul’s son, had a son crippled in his feet. He was five years old when the report of Saul and Jonathan came from Jezreel, and his nurse took him up and fled. And it happened that in her hurry to flee, he fell and became lame. And his name was Mephibosheth.
+5. So the sons of Rimmon the Beerothite, Rechab and Baanah, went forth and came to the house of Ish-bosheth in the heat of the day while he was taking his midday rest.
+6. They came to the middle of the house as if to get wheat, and they struck him in the belly; and Rechab and Baanah his brother escaped.
+7. Thus they came into the house, as he was lying on his bed in his bedroom, and they struck him and put him to death and beheaded him. And they took his head and went on the way leading to the Arabah all night.
+8. Then they brought the head of Ish-bosheth to David at Hebron and said to the king, “Behold, the head of Ish-bosheth the son of Saul, your enemy, who sought your life; thus Yahweh has given my lord the king vengeance this day on Saul and his seed.”
+9. And David answered Rechab and Baanah his brother, sons of Rimmon the Beerothite, and said to them, “As Yahweh lives, who has redeemed my life from all distress,
+10. when one told me, saying, ‘Behold, Saul is dead,’ and thought he was bringing good news, I seized him and killed him in Ziklag, which was the reward I gave him for his news.
+11. How much more, when wicked men have killed a righteous man in his own house on his bed, shall I not now require his blood from your hand and purge you from the earth?”
+12. Then David commanded the young men, and they killed them and cut off their hands and feet and hung them up beside the pool in Hebron. But they took the head of Ish-bosheth and buried it in the grave of Abner in Hebron.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

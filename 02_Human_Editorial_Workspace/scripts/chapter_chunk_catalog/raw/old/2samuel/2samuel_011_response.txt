@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David and Bathsheba",
+      "reason": "Introduces the setting and describes David seeing Bathsheba and taking her."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 13,
+      "type": "dialogue",
+      "title": "David and Uriah",
+      "reason": "Describes David's attempts to hide the pregnancy through dialogue with Uriah."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Death of Uriah",
+      "reason": "Details the letter sent to Joab and the subsequent report from the messenger."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 27,
+      "type": "story",
+      "title": "Marriage and Conclusion",
+      "reason": "Describes Bathsheba's mourning, her marriage to David, and the narrative conclusion."
+    }
+  ]
+}

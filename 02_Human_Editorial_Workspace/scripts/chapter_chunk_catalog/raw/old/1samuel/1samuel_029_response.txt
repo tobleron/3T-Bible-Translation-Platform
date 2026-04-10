@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Philistine and Israelite Camps",
+      "reason": "Sets the scene for the narrative with troop movements."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "dialogue",
+      "title": "Philistine Commanders Question David",
+      "reason": "Contains the commanders' inquiry and Achish's defense of David."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "dialogue",
+      "title": "Achish Sends David Away",
+      "reason": "Achish explains the decision to David and gives instructions."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 11,
+      "type": "story",
+      "title": "David Returns to Ziklag",
+      "reason": "Describes the execution of the plan and the movement of armies."
+    }
+  ]
+}

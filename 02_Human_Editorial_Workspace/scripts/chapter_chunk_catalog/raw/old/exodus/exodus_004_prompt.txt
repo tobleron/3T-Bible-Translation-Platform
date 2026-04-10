@@ -1,0 +1,80 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 4:1-31
+
+Chapter text:
+1. Then Moses answered and said, “What if they will not believe me and will not listen to my voice? For they may say, ‘Yahweh has not appeared to you.’”
+2. And Yahweh said to him, “What is this in your hand?” And he said, “A staff.”
+3. Then He said, “Throw it on the ground.” So he threw it on the ground, and it became a serpent; and Moses fled from it.
+4. And Yahweh said to Moses, “Stretch out your hand and grasp it by its tail”—so he stretched out his hand and took hold of it, and it became a staff in his hand—
+5. “that they may believe that Yahweh, the God of their fathers, the God of Abraham, the God of Isaac, and the God of Jacob, has appeared to you.”
+6. And Yahweh furthermore said to him, “Now put your hand into your bosom.” So he put his hand into his bosom; then he took it out, and behold, his hand was leprous like snow.
+7. Then He said, “Return your hand into your bosom.” So he returned his hand into his bosom, and when he took it out of his bosom, behold, it returned to being like the rest of his flesh.
+8. “And so it will be, if they will not believe you or listen to the witness of the first sign, they may believe the witness of this last sign.
+9. But if it will be that they will not believe even these two signs and that they will not listen to your voice, then you shall take some water from the Nile and pour it on the dry land; and the water which you take from the Nile will become blood on the dry land.”
+10. Then Moses said to Yahweh, “Please, Lord, I have never been a man of words, neither recently nor in time past, nor since You have spoken to Your slave; for I am one with a hard mouth and a hard tongue.”
+11. And Yahweh said to him, “Who has made man’s mouth? Or who makes him mute or deaf, or seeing or blind? Is it not I, Yahweh?
+12. So now, go, and I, even I, will be with your mouth and will instruct you what you shall speak.”
+13. But he said, “Please, Lord, send now the message by whomever You will.”
+14. Then the anger of Yahweh burned against Moses, and He said, “Is there not your brother Aaron the Levite? I know that he can certainly speak. And moreover, behold, he is coming out to meet you. And he will see you and be glad in his heart.
+15. And you are to speak to him and put the words in his mouth; and I, even I, will be with your mouth and with his mouth, and I will instruct you in what you shall do.
+16. Moreover, he shall speak for you to the people; and he will become as a mouth for you, and you will become as God to him.
+17. And you shall take in your hand this staff, with which you shall do the signs.”
+18. Then Moses went and returned to Jethro his father-in-law and said to him, “Please, let me go, that I may return to my brothers who are in Egypt and see if they are still alive.” And Jethro said to Moses, “Go in peace.”
+19. And Yahweh said to Moses in Midian, “Go, return to Egypt, for all the men who were seeking your life are dead.”
+20. So Moses took his wife and his sons and mounted them on a donkey and returned to the land of Egypt. Moses also took the staff of God in his hand.
+21. And Yahweh said to Moses, “When you go to return to Egypt, see to it that all the miraculous wonders which I have put in your hand, that you do them before Pharaoh; but as for Me, I will harden his heart with strength so that he will not let the people go.
+22. Then you shall say to Pharaoh, ‘Thus says Yahweh, “Israel is My son, My firstborn.
+23. So I said to you, ‘Let My son go that he may serve Me’; but you have refused to let him go. Behold, I will kill your son, your firstborn.”’”
+24. Now it happened at the lodging place on the way that Yahweh encountered him and sought to put him to death.
+25. Then Zipporah took a flint and cut off her son’s foreskin and touched his feet with it, and she said, “You are indeed a bridegroom of blood to me!”
+26. So He let him alone. At that time she said, “You are a bridegroom of blood” with reference to the circumcision.
+27. Then Yahweh said to Aaron, “Go to meet Moses in the wilderness.” So he went and encountered him at the mountain of God and kissed him.
+28. And Moses told Aaron all the words of Yahweh with which He had sent him, and all the signs that He had commanded him to do.
+29. Then Moses and Aaron went and gathered all the elders of the sons of Israel;
+30. and Aaron spoke all the words which Yahweh had spoken to Moses. He then did the signs in the sight of the people.
+31. So the people believed; and they heard that Yahweh cared about the sons of Israel and that He had seen their affliction. So they bowed low and worshiped.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

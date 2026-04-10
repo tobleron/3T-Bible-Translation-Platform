@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T20:51:37Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Leviticus",
+  "chapter": 27,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 34,
+  "verse_count": 34,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Valuation of Persons",
+      "reason": "Introduction and specific silver valuations for men, women, and children based on age."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "law",
+      "title": "Valuation of Animals",
+      "reason": "Rules for consecrating clean and unclean animals and their redemption."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 25,
+      "type": "law",
+      "title": "Valuation of Houses and Fields",
+      "reason": "Procedures for consecrating houses and fields of possession or purchase."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 33,
+      "type": "law",
+      "title": "Firstborns, Devoted Items, and Tithes",
+      "reason": "Specific laws regarding firstborn animals, devoted things, and the tithe of land and livestock."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 34,
+      "type": "speech",
+      "title": "Chapter Conclusion",
+      "reason": "Final summary statement attributing the commandments to Moses at Sinai."
+    }
+  ]
+}

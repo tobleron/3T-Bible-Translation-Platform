@@ -1,0 +1,80 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "genealogy",
+      "title": "Genealogy of Aaron and Moses",
+      "reason": "Introduces the sons of Aaron and notes the death of Nadab and Abihu."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "law",
+      "title": "Appointment of Levites to Aaron",
+      "reason": "Divine command to set apart the tribe of Levi for priestly service."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 13,
+      "type": "argument",
+      "title": "Theological Basis for Levites",
+      "reason": "Explains the substitution of Levites for the firstborn based on the Exodus."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Enumeration of Levi's Sons",
+      "reason": "Lists the three main families and their sub-families."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 26,
+      "type": "list_or_catalog",
+      "title": "Gershonites Census and Duties",
+      "reason": "Details the count, camp location, leader, and specific responsibilities of the Gershonites."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 32,
+      "type": "list_or_catalog",
+      "title": "Kohathites Census and Duties",
+      "reason": "Details the count, camp location, leader, and specific responsibilities of the Kohathites."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 37,
+      "type": "list_or_catalog",
+      "title": "Merarites Census and Duties",
+      "reason": "Details the count, camp location, leader, and specific responsibilities of the Merarites."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 39,
+      "type": "mixed",
+      "title": "Camp Arrangement and Total Count",
+      "reason": "Describes the placement of Moses and Aaron and summarizes the total number of Levites."
+    },
+    {
+      "start_verse": 40,
+      "end_verse": 43,
+      "type": "story",
+      "title": "Census of Firstborns",
+      "reason": "Narrates the counting of Israel's firstborn males to compare with the Levites."
+    },
+    {
+      "start_verse": 44,
+      "end_verse": 51,
+      "type": "law",
+      "title": "Redemption of Firstborns",
+      "reason": "Establishes the redemption price for excess firstborns and records the payment."
+    }
+  ]
+}

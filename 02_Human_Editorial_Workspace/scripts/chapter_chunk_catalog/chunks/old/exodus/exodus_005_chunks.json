@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T18:32:44Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 5,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "dialogue",
+      "title": "Moses and Aaron Confront Pharaoh",
+      "reason": "The initial request for release and Pharaoh's skeptical response."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Pharaoh Increases the Burden",
+      "reason": "The decree to remove straw and the taskmasters enforcing the quota."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "dialogue",
+      "title": "Foremen Complain to Pharaoh and Moses",
+      "reason": "The foremen's appeal to Pharaoh followed by their confrontation with Moses."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Moses' Complaint to Yahweh",
+      "reason": "Moses questioning God regarding the increased hardship on the people."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "law",
+      "title": "Feast of Trumpets Offerings",
+      "reason": "Describes the specific sacrifices for the first day of the seventh month."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Day of Atonement Offerings",
+      "reason": "Details the sacrifices for the tenth day of the seventh month."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 38,
+      "type": "list_or_catalog",
+      "title": "Feast of Tabernacles Offerings",
+      "reason": "Catalogs the daily sacrifices for the seven days of the feast and the eighth day."
+    },
+    {
+      "start_verse": 39,
+      "end_verse": 40,
+      "type": "exhortation",
+      "title": "Summary and Conclusion",
+      "reason": "Summarizes the offerings and records Moses speaking to Israel."
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "testament": "NT",
+  "book": "Matthew",
+  "chapter": 5,
+  "sections": [
+    {
+      "headline": "The Beatitudes",
+      "verses": [
+        { "verse": 1, "text": "Seeing the crowds, Jesus went up the mountain. When he sat down, his disciples came to him." },
+        { "verse": 2, "text": "He opened his mouth and began to teach them, saying," },
+        { "verse": 3, "text": "“Blessed are the poor in spirit, for theirs is the kingdom of heaven." },
+        { "verse": 4, "text": "Blessed are those who mourn, for they will be comforted." },
+        { "verse": 5, "text": "Blessed are the meek, for they will inherit the earth." },
+        { "verse": 6, "text": "Blessed are those who hunger and thirst for righteousness, for they will be fulfilled." },
+        { "verse": 7, "text": "Blessed are the merciful, for they will be shown mercy." },
+        { "verse": 8, "text": "Blessed are the pure in heart, for they will see God." },
+        { "verse": 9, "text": "Blessed are the peacemakers, for they will be called sons of God." },
+        { "verse": 10, "text": "Blessed are those persecuted for the sake of righteousness, for theirs is the kingdom of heaven." },
+        { "verse": 11, "text": "Blessed are you when people revile you, persecute you, and speak all kinds of evil against you because of me." },
+        { "verse": 12, "text": "Rejoice and exult, for great is your reward in heaven because in the same way they persecuted the prophets before you.”" }
+      ]
+    },
+    {
+      "headline": "Salt and Light",
+      "verses": [
+        { "verse": 13, "text": "“You are the salt of the earth, but if the salt dulls out, what will restore its saltiness? It is good for nothing but to be thrown out and trampled underfoot by people." },
+        { "verse": 14, "text": "You are the light of the world. A city set on a hill cannot be hidden." },
+        { "verse": 15, "text": "No one lights a lamp and puts it under a basket, but on a lampstand, and it shines for all who are in the house." },
+        { "verse": 16, "text": "Therefore, let your light shine before people, so they may see your good works and glorify your Father who is in heaven.”"}
+      ]
+    },
+    {
+      "headline": "Christ Fulfills the Law",
+      "verses": [
+        { "verse": 17, "text": "Do not think I have come to abolish the Law or the Prophets. I have not come to abolish them, but to fulfill them." },
+        { "verse": 18, "text": "Amen I tell you, until heaven and earth pass away, not one stroke or one letter will pass away from the law, until all things are accomplished." },
+        { "verse": 19, "text": "Therefore, whoever breaks one of the least of these commandments and teaches others to do the same will be called least in the kingdom of heaven. But whoever does and teaches them, this one will be called great in the kingdom of heaven." },
+        { "verse": 20, "text": "I tell you, unless your righteousness surpasses that of the scribes and Pharisees, you will by no means enter the kingdom of heaven." }
+      ]
+    },
+    {
+      "headline": "Anger and Reconciliation",
+      "verses": [
+        { "verse": 21, "text": "You have heard it said to the ancients: “Do not murder. Whoever murders will be liable to judgment.”" },
+        { "verse": 22, "text": "But I tell you, whoever is angry with a brother in faith is liable to judgment. Whoever says to a sister in faith ‘You Fool!’ is liable to the court, and whoever says, ‘You godless one!’ is liable to the fire of Gehenna." },
+        { "verse": 23, "text": "If you are offering your gift at the altar and remember that a brother or sister in faith holds something against you," },
+        { "verse": 24, "text": "leave your gift there, go be reconciled with them, then come offer your gift." },
+        { "verse": 25, "text": "Settle quickly with your accuser while you are on the way, lest they hand you to the judge, and the judge to the officer, and you will be thrown into prison." },
+        { "verse": 26, "text": "Amen I tell you, you will by no means get out until you have paid the last quadrans.”" }
+      ]
+    },
+    {
+      "headline": "Lust and Inner Purity",
+      "verses": [
+        { "verse": 27, "text": "You have heard that it was said, “Do not commit adultery.”" },
+        { "verse": 28, "text": "But I tell you, anyone who looks at a woman to lust for her has already committed adultery with her in his heart." },
+        { "verse": 29, "text": "If your right eye causes you to sin, pluck it out and throw it away from you. For it is better for you to lose one part of your body than for your whole body to be thrown into Gehenna." },
+        { "verse": 30, "text": "And if your right hand causes you to sin, cut it off and throw it away from you. For it is better for you to lose one part of your body than for your whole body to perish in Gehenna." }
+      ]
+    },
+    {
+      "headline": "On Divorce and Oaths",
+      "verses": [
+        { "verse": 31, "text": "“It was said, ‘Any man who divorces his wife must give her a certificate of divorce.’" },
+        { "verse": 32, "text": "But I tell you, any man who divorces his wife except for sexual covenant treachery makes her commit adultery. And any man who marries a divorced woman commits adultery."},
+        { "verse": 33, "text": "You have heard it said to the ancients, “Do not swear falsely, but fulfill your oaths to the Lord." },
+        { "verse": 34, "text": "But I tell you, do not swear at all, either by heaven, for it is the throne of God;" },
+        { "verse": 35, "text": "or by the earth, for it is the footstool of His feet; or by Jerusalem, for it is the city of the Great King." },
+        { "verse": 36, "text": "And do not swear by your head, because you cannot make one hair white or black." },
+        { "verse": 37, "text": "Let your final word be ‘Yes’ or ‘No’ for anything more comes from the evil one.”" }
+      ]
+    },
+    {
+      "headline": "On Retaliation and Unconditional Love",
+      "verses": [
+        { "verse": 38, "text": "“You have heard that it was said, ‘An eye for an eye and a tooth for a tooth.’" },
+        { "verse": 39, "text": "But I tell you, do not resist evil; whoever slaps you on the right cheek, turn to them the other also." },
+        { "verse": 40, "text": "If anyone sues you to have your tunic, give them your cloak also." },
+        { "verse": 41, "text": "If anyone forces you to go one mile, go with them two." },
+        { "verse": 42, "text": "Give to the one who asks you, and do not turn away from the one who wants to borrow from you." },
+        { "verse": 43, "text": "You have heard that it was said, ‘Love your neighbor and hate your enemy.’" },
+        { "verse": 44, "text": "But I tell you, love your enemies and pray for those who persecute you." },
+        { "verse": 45, "text": "So you may become the children of your Father who is in heaven, because he makes his sun rise on the evil and the good, and sends rain on the righteous and the unrighteous." },
+        { "verse": 46, "text": "For if you love those who love you, what reward will you have? Do not even tax-collectors do the same?" },
+        { "verse": 47, "text": "If you greet only your own, what extraordinary thing are you doing? Do not even the Gentiles do the same?" },
+        { "verse": 48, "text": "Therefore, be perfect as your heavenly Father is perfect.”" }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "verse": 5,
+      "letter": "",
+      "content": "Greek <i>gē</i> can refer to the land (as in the promised land of Israel) or to the whole earth, depending on context. Jesus draws from Psalm 37 (especially vv. 9, 11, 29), where the meek are promised inheritance of the land as a covenant blessing. In this Beatitude, He reinterprets the promise universally: the meek—those who submit to God—will inherit the earth in the coming kingdom, fulfilling and surpassing Old Testament expectations."
+    },
+    {
+      "verse": 6,
+      "letter": "",
+      "content": "The word “fulfilled” was chosen over the traditional “filled” to reflect the unmistakably spiritual nature of Jesus' promise. The Greek verb <i>chortazō</i> refers to being fed or satisfied, but in this context, it transcends physical nourishment and speaks to the deep spiritual hunger for righteousness. The hunger and thirst described here are not bodily cravings, but inner longings for God's justice, holiness, and presence to be made real in the soul and in the world. While “filled” might suggest momentary relief, “fulfilled” communicates a lasting, transformative completion. This aligns with the biblical theme of God satisfying the righteous not with food or drink, but with truth, restoration, and divine presence (cf. Isaiah 55:1–2; Psalm 107:9). This rendering captures the eschatological and spiritual intent behind Jesus' words: not temporary comfort, but the ultimate realization of righteousness in the life of the believer and in the kingdom to come."
+    },
+    {
+      "verse": 13,
+      "letter": "",
+      "content": "Salt in ancient times was valued primarily for its ability to preserve—not to flavor. Jesus uses this image to reveal the disciple's calling: to slow the world's moral decay and uphold the integrity of God's truth amid corruption. The phrase “loses its preserving power” conveys this responsibility more clearly than “loses its flavor,” which risks reducing the metaphor to mere taste. In Jesus' view, a disciple who no longer preserves truth becomes spiritually useless—cast out, not for lack of passion, but for lack of purpose."
+    },
+    {
+      "verse": 14,
+      "letter": "",
+      "content": "The word “shines” was chosen instead of “gives light” to preserve both the poetic weight and the original intent of the metaphor. The Greek verb <i>lampei</i> means “to shine” or “to beam forth.” While “gives light” emphasizes the function of a lamp, it lacks the spiritual resonance intended in Jesus' metaphor. He was not merely describing usefulness, but radiance—one who lives in truth, revealing the divine through their very presence. “Shines” conveys purity, visibility, and the natural outflow of a transformed life. It evokes the image of a soul that illuminates its surroundings not merely by purpose, but by nature."
+    },
+    {
+      "verse": 19,
+      "letter": "",
+      "content": "The word “breaks” translates the Greek verb <i>lyō</i>, meaning “to loosen” or “to release.” In legal contexts, it came to mean relaxing or violating a commandment—whether by dismissing its importance or undermining its binding force. Jesus warns not only against defying God's commandments but also against treating even the least of them as negligible, especially when teaching others. The phrase “lives by them” reflects the Greek verb <i>poieō</i>, often rendered “to do” or “to practice.” Here, it implies more than surface-level obedience; it suggests a life genuinely shaped by God's will. The contrast sets a clear standard: greatness in the kingdom is measured not by knowledge, but by wholehearted practice and faithful instruction."
+    },
+    {
+      "verse": 20,
+      "letter": "",
+      "content": "The scribes were educated experts in the Jewish Law (Torah), responsible for copying, interpreting, and teaching Scripture. They held influential religious roles, often aligned with the Pharisees, and were viewed as the spiritual authorities of their time. However, Jesus frequently challenged their outward piety and legalism, exposing a lack of inward righteousness."
+    },
+    {
+      "verse": 22,
+      "letter": "",
+      "content": "This translation more faithfully reflects the Greek structure and the rising severity of Jesus' warning. “Worthless” renders the Aramaic <i>raca</i>, a culturally charged insult implying emptiness or contempt. While many versions retain <i>Raca</i> untranslated, we clarify its meaning for modern readers to preserve its original sting. The second insult in the verse, “you godless one,” translates the Greek word <i>moros</i>. This is not a simple attack on intelligence but a spiritually escalated accusation—denoting one who is morally perverse or spiritually rebellious toward God, as echoed in Psalm 14:1: “The fool says in his heart, ‘There is no God.’”"
+    },
+    {
+      "verse": 24,
+      "letter": "",
+      "content": "The phrase “to God” is added at the end of the verse for the sake of modern clarity, even though it does not appear explicitly in the original Greek. In the context of first-century Judaism, presenting a gift at the altar clearly and universally implied an offering to God, and no further specification was needed. However, in modern English—especially for readers unfamiliar with ancient sacrificial practices—the word “offering” may seem vague or transactional. Adding “to God” clarifies the purpose without altering the meaning."
+    },
+    {
+      "verse": 25,
+      "letter": "",
+      "content": "The phrase “to court” is added for clarity, though it does not appear explicitly in the Greek. The original expression, using the word <i>hōdō</i> (meaning “on the way”), reads “while you are on the way with them,” but the context—adversary, judge, officer, and prison—clearly implies a legal proceeding. In first-century Jewish culture, it was common for disputes to be resolved privately while traveling to court, often to avoid harsher legal outcomes. This addition helps modern readers recognize that the warning is not about casual disagreement, but about settling a legal or moral conflict before formal judgment is passed. It preserves the original meaning while making the implied legal setting explicit."
+    },
+    {
+      "verse": 26,
+      "letter": "",
+      "content": "The quadrans was the smallest Roman copper coin, worth one-fourth of an as (a basic unit of Roman currency) and approximately 1/64th of a denarius (a day’s wage for a laborer). By referencing this minuscule denomination, Jesus underscores the necessity of resolving even the most trivial debts or disputes before facing divine judgment, highlighting the importance of moral integrity and urgency in reconciliation (cf. 2 Chronicles 22–25 for broader themes of accountability). The metaphor stresses completeness and finality: until every obligation—no matter how small—is settled, one remains under the judgment of the court (or God’s justice)."
+    },
+    {
+      "verse": 29,
+      "letter": "",
+      "content": "Jesus' command to “pluck out” the eye is not meant literally but reflects a well-known rabbinic metaphor highlighting the radical seriousness of sin. The “eye” symbolizes a gateway of temptation, and the call to remove it dramatizes the need to cut off sin at its root—even if it feels essential or deeply ingrained. This hyperbolic language is meant to awaken the conscience, underscoring that no personal cost is too great if it protects the soul from spiritual ruin. The phrase “thrown into <i>Gehenna</i> (torment of spiritual desolation)” refers to the Greek word <i>geenna</i>, originally linked to the Valley of Hinnom—a site of prophetic judgment and condemnation (cf. Jeremiah 7:31). For a fuller theological and emotional exploration of what <i>Gehenna</i> represents, see the footnote on Matthew 5:22."
+    },
+    {
+      "verse": 30,
+      "letter": "",
+      "content": "This verse echoes the warning of verse 29, using hyperbolic language to emphasize the urgency of cutting off sin at its source. The Greek verb <i>blēthēnai</i> (“to be thrown”) conveys a decisive and forceful removal—not a gentle departure, but the severity of divine judgment. The phrase “thrown into <i>Gehenna</i> (torment of spiritual desolation)” expresses not physical torment but spiritual exile—the soul's separation from the Source of life. <i>Gehenna</i> represents ultimate spiritual ruin: the place of severed relationship with God. For a fuller theological and emotional exploration of what <i>Gehenna</i> signifies, see the footnote on Matthew 5:22."
+    },
+    {
+      "verse": 32,
+      "letter": "",
+      "content": "The Greek word <i>porneia</i> is often rendered “sexual immorality,” “unchastity,” or “fornication.” However, such translations can sound either vague or culturally disconnected from the biblical context. The phrase “sexual covenant treachery” was chosen to highlight the heart of what <i>porneia</i> implies within the framework of marriage: a willful betrayal of the sacred covenant through sexual unfaithfulness. It captures both the physical act and the spiritual violation, emphasizing not just misconduct, but the relational breach that makes divorce permissible in Jesus' teaching. While more interpretive than “whoredom” or “sexual immorality,” this phrase conveys the theological and emotional significance that best reflects the intent of the original term."
+    },
+    {
+      "verse": 35,
+      "letter": "",
+      "content": "The term “footstool,” from the Greek <i>hupopodion</i>, refers to a low platform on which a ruler would rest his feet while seated on a throne. In biblical language, it symbolizes dominion and subordination. Jesus echoes Isaiah 66:1, where God declares, “Heaven is my throne, and the earth is my footstool,” affirming his sovereign rule over creation. The phrase “the great King,” from the Greek <i>tou megalou basileōs</i>, is drawn from Psalm 48:2, referring to YHWH, whose presence sanctified Jerusalem as his royal city. By calling it “the city of the great King,” Jesus underscores that even swearing by sacred places is ultimately swearing by God himself, making oath-taking an inescapably divine matter."
+    },
+    {
+      "verse": 36,
+      "letter": "",
+      "content": "Jesus draws attention to something as ordinary as the color of hair to reveal something extraordinary about human limitation. The Greek emphasizes inability—“you are not able” (<i>ou dynasai</i>)—to change even the smallest detail of your own being. In biblical thought, hair often symbolizes identity or divine distinction (cf. Luke 12:7, “even the hairs of your head are all numbered”). By saying one cannot make a single hair white or black, Jesus underscores that we do not even possess full command over our own bodies—let alone the moral or spiritual weight to guarantee truth through an oath. Swearing “by your head,” then, is not only ineffective but presumptuous. The deeper message is that truth does not draw its credibility from human authority, but from alignment with divine reality—where one's word stands simply because it is true."
+    },
+    {
+      "verse": 37,
+      "letter": "",
+      "content": "The phrase “Yes for yes” and “No for no” reflects the intended meaning of the Greek idiom <i>nai nai, ou ou</i>, which emphasizes sincerity and clarity in speech. Rather than prescribing a ritual formula, Jesus is calling for truthfulness that stands without the need for oaths or exaggerated assurances. In first-century usage, the repetition of <i>nai</i> (yes) or <i>ou</i> (no) served to affirm one's words as trustworthy and resolute. This rendering preserves the spirit of Jesus' teaching—that integrity requires no external reinforcement—while helping modern readers recognize that genuine affirmation or denial should be sufficient for a disciple of the kingdom."
+    },
+    {
+      "verse": 40,
+      "letter": "",
+      "content": "Jesus' command to give up even one's cloak goes beyond legal obligation, modeling a radical posture of non-retaliation and voluntary self-sacrifice. This hyperbolic instruction is not about enabling injustice but about exposing it—disarming the oppressor by surrendering what they demand and refusing to enter the power struggle. It teaches that spiritual integrity is more powerful than personal rights."
+    },
+	{
+	  "verse": 41,
+      "letter": "",
+      "content": "Roman authorities could legally require civilians to carry burdens for a mile. Jesus teaches going beyond what is required."
+    },
+    {
+      "verse": 43,
+      "letter": "",
+      "content": "The command to 'love your neighbor' comes directly from Leviticus 19:18 and is rightly attributed to the Law. However, the phrase “and will hate your enemy” does not appear in the Old Testament. It reflects a common interpretive tradition in Second Temple Judaism, likely influenced by Israel's historical posture toward national enemies and reinforced by certain imprecatory psalms. Some sectarian groups, such as the Qumran community (Dead Sea Scrolls), explicitly taught to “love the sons of light and hate the sons of darkness.” Jesus challenges this distortion by expanding the command of love beyond tribal, ethnic, and religious boundaries. His correction restores the true spirit of the Law, revealing that love is not reserved for allies but is to be extended even to enemies—those who oppose, injure, or persecute us."
+    },
+    {
+      "verse": 46,
+      "letter": "",
+      "content": "In first-century Jewish society, tax collectors were widely despised as collaborators with the Roman occupiers and were often associated with corruption and extortion. Jesus invokes them here not to condone their behavior, but to make a sharp contrast: even those considered morally compromised love those who love them. By comparing this to mere reciprocal affection, Jesus reveals that kingdom love must exceed common social behavior—it must be rooted in grace, not merit."
+    },
+    {
+      "verse": 47,
+      "letter": "",
+      "content": "The term “Gentiles” translates the Greek ethnē, referring to non-Jewish peoples. In this context, Jesus uses it not to demean other nations, but to emphasize that even those outside God's covenant with Israel naturally love those who love them. His point is that true righteousness goes beyond cultural norms and extends love even to enemies—mirroring the character of God Himself."
+    }
+  ]
+}

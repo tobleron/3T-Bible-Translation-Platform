@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T19:40:19Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 22,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Laws on Property and Restitution",
+      "reason": "A continuous section detailing specific legal penalties for theft, grazing damage, fire, bailment, and borrowing."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "law",
+      "title": "Laws on Social Relations and Worship",
+      "reason": "A distinct group of laws covering seduction, sorcery, animal sacrifice, and idolatry."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 27,
+      "type": "exhortation",
+      "title": "Care for the Vulnerable and Poor",
+      "reason": "A cohesive unit focusing on social justice regarding sojourners, widows, orphans, and financial loans."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 31,
+      "type": "law",
+      "title": "Laws on Worship and Holiness",
+      "reason": "The final section combines commands regarding God's name, harvest offerings, firstborns, and dietary purity."
+    }
+  ]
+}

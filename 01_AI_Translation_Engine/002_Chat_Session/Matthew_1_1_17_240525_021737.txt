@@ -1,0 +1,147 @@
+Holy Bible Passage Reference: Matthew:1:1-17
+/think
+
+Objective: Extract most literal bible translation words to produce most literal translation.
+Definition of Data presented: Each chunk is a verse range from the Holy Bible.
+Execution rules: Produce the output of Step 1 and then Step 2 in order, and do not proceed into Step 3 before until you finish Step 1 and Step 2.
+
+Step 1: Provide an ultra concise title for the chunk verse range.
+
+Step 2: Find the delta between the chunks to provide a conclusive table of words used that are the most literal to the original scripture source and rank the literalness by % of accuracy.
+
+Step 3: Use the findings from step 2 to generate the most literal translation that is concise and follows the following rules:
+A) Proper English sentence structure.
+B) Modern terminology preferred for readability.
+C) No contractions.
+D) Retain theological terms such as Hades and Gehenna if existing.
+E) Avoid using Em-dashes at all costs.
+F) Use smart quotes.
+
+```
+---begin final_translation_json---
+{
+  "ultra_concise_title": "[chunk title generated in step 1]",
+  "verses": [
+    {"verse": 1, "text": "Verse one..."},
+    {"verse": 2, "text": "Verse two..."},
+    ...
+  ]
+}
+---end final_translation_json---
+```
+---
+chunk_id_247RALEMT
+1. The book of the genealogy of Jesus Christ, the Son of David, the Son of Abraham:
+2. Abraham fathered Isaac, Isaac fathered Jacob, and Jacob fathered Judah and his brothers.
+3. Judah fathered Perez and Zerah by Tamar, Perez fathered Hezron, and Hezron fathered Ram.
+4. Ram fathered Amminadab, Amminadab fathered Nahshon, and Nahshon fathered Salmon.
+5. Salmon fathered Boaz by Rahab, Boaz fathered Obed by Ruth, Obed fathered Jesse,
+6. and Jesse fathered David the king. David the king fathered Solomon [by her who had been] the [wife of] Uriah.
+7. Solomon fathered Rehoboam, Rehoboam fathered Abijah, and Abijah fathered Asa.
+8. Asa fathered Jehoshaphat, Jehoshaphat fathered Joram, and Joram fathered Uzziah.
+9. Uzziah fathered Jotham, Jotham fathered Ahaz, and Ahaz fathered Hezekiah.
+10. Hezekiah fathered Manasseh, Manasseh fathered Amon, and Amon fathered Josiah.
+11. Josiah fathered Jeconiah and his brothers at the time of the captivity in Babylon.
+12. And after the captivity in Babylon, Jeconiah fathered Shealtiel, and Shealtiel fathered Zerubbabel.
+13. Zerubbabel fathered Abiud, Abiud fathered Eliakim, and Eliakim fathered Azor.
+14. Azor fathered Zadok, Zadok fathered Achim, and Achim fathered Eliud.
+15. Eliud fathered Eleazar, Eleazar fathered Matthan, and Matthan fathered Jacob.
+16. And Jacob fathered Joseph the husband of Mary, of whom was born Jesus who is called Christ.
+17. So all the generations from Abraham till David [were] fourteen generations, from David until the captivity in Babylon [were] fourteen generations, and from the captivity in Babylon until the Christ [were] fourteen generations.
+
+chunk_id_763EYRLSV
+1. [The] scroll of the birth of Jesus Christ, Son of David, Son of Abraham.
+2. Abraham begot Isaac, and Isaac begot Jacob, and Jacob begot Judah and his brothers,
+3. and Judah begot Perez and Zerah of Tamar, and Perez begot Hezron, and Hezron begot Ram,
+4. and Ram begot Amminadab, and Amminadab begot Nahshon, and Nahshon begot Salmon,
+5. and Salmon begot Boaz of Rahab, and Boaz begot Obed of Ruth, and Obed begot Jesse,
+6. and Jesse begot David the king. And David the king begot Solomon, of her [who had been] Uriah’s,
+7. and Solomon begot Rehoboam, and Rehoboam begot Abijah, and Abijah begot Asa,
+8. and Asa begot Jehoshaphat, and Jehoshaphat begot Joram, and Joram begot Uzziah,
+9. and Uzziah begot Jotham, and Jotham begot Ahaz, and Ahaz begot Hezekiah,
+10. and Hezekiah begot Manasseh, and Manasseh begot Amon, and Amon begot Josiah,
+11. and Josiah begot Jeconiah and his brothers, at the Babylonian removal.
+12. And after the Babylonian removal, Jeconiah begot Shealtiel, and Shealtiel begot Zerubbabel,
+13. and Zerubbabel begot Abiud, and Abiud begot Eliakim, and Eliakim begot Azor,
+14. and Azor begot Sadok, and Sadok begot Achim, and Achim begot Eliud,
+15. and Eliud begot Eleazar, and Eleazar begot Matthan, and Matthan begot Jacob,
+16. and Jacob begot Joseph, the husband of Mary, of whom was begotten Jesus, who is named Christ.
+17. All the generations, therefore, from Abraham to David [are] fourteen generations, and from David to the Babylonian removal fourteen generations, and from the Babylonian removal to the Christ, fourteen generations.
+
+chunk_id_310QLYMLV
+1. <TS>{NOTES: If your plans are to read the entire N.T., start in Mark. You should read the 'Definitions' Section and other non-bible sections. In this translation Old Testament names will be in their Old Testament form.}<Ts><i>The</i> book of lineage of Jesus Christ, <i>the</i> son of David, <i>the</i> son of Abraham:
+2. Abraham fathered Isaac; and Isaac fathered Jacob; and Jacob fathered Judah and his brethren;
+3. and Judah fathered Perez and Zerah from Tamar; and Perez fathered Hezron; and Hezron fathered Ram;
+4. and Ram fathered Amminadab; and Amminadab fathered Nahshon; and Nahshon fathered Salmon;
+5. and Salmon fathered Boaz from Rahab; and Boaz fathered Obed from Ruth; and Obed fathered Jesse;
+6. and Jesse fathered David, the king.<CM> And David, the king, fathered Solomon from the <i>widow</i> of Uriah;
+7. and Solomon fathered Rehoboam; and Rehoboam fathered Abijah; and Abijah fathered Asa;
+8. and Asa fathered Jehoshaphat; and Jehoshaphat fathered Jehoram; and Jehoram fathered Uzziah;
+9. and Uzziah fathered Jotham; and Jotham fathered Ahaz; and Ahaz fathered Hezekiah;
+10. and Hezekiah fathered Manasseh; and Manasseh fathered Amon; and Amon fathered Josiah;
+11. and Josiah fathered Jechoniah and his brethren, at <i>the time of</i> the exile of Babylon.<CM>
+12. And after the exile of Babylon, Jechoniah fathered Shealtiel; and Shealtiel fathered Zerubbabel;
+13. and Zerubbabel fathered Abiud; and Abiud fathered Eliakim; and Eliakim fathered Azor;
+14. and Azor fathered Sadoc; and Sadoc fathered Achim; and Achim fathered Eliud;
+15. and Eliud fathered Eleazar; and Eleazar fathered Matthan; and Matthan fathered Jacob;
+16. and Jacob fathered Joseph, the husband of Mary, out-of whom was born Jesus, who is called<sup>*</sup> the Christ.<CM>
+17. <TS><br> {<a class='xref' href='bMat 1:1-17'>Mat 1:1-17</a> & <a class='xref' href='bLuk 3:23-28'>Luk 3:23-28</a> Mary’s Genealogy.}<Ts> Therefore, all the generations from Abraham until David <i>were</i> fourteen generations; and from David until the exile of Babylon, <i>were</i> fourteen generations; and from the exile of Babylon until the Christ, <i>were</i> fourteen generations.<CM>
+
+chunk_id_536HENLEB
+1. The book of the genealogy of Jesus Christ, the son of David, the son of Abraham.
+2. Abraham became the father of Isaac, and Isaac became the father of Jacob, and Jacob became the father of Judah and his brothers,
+3. and Judah became the father of Perez and Zerah by Tamar, and Perez became the father of Hezron, and Hezron became the father of Aram,
+4. and Aram became the father of Amminadab, and Amminadab became the father of Nahshon, and Nahshon became the father of Salmon,
+5. and Salmon became the father of Boaz by Rahab, and Boaz became the father of Obed by Ruth, and Obed became the father of Jesse,
+6. and Jesse became the father of David the king.
+And David became the father of Solomon by the wife of Uriah,
+7. and Solomon became the father of Rehoboam, and Rehoboam became the father of Abijah, and Abijah became the father of Asa,
+8. and Asa became the father of Jehoshaphat, and Jehoshaphat became the father of Joram, and Joram became the father of Uzziah,
+9. and Uzziah became the father of Jotham, and Jotham became the father of Ahaz, and Ahaz became the father of Hezekiah,
+10. and Hezekiah became the father of Manasseh, and Manasseh became the father of Amon, and Amon became the father of Josiah,
+11. and Josiah became the father of Jechoniah and his brothers, at the time of the deportation to Babylon.
+12. And after the deportation to Babylon, Jechoniah became the father of Shealtiel, and Shealtiel became the father of Zerubbabel,
+13. and Zerubbabel became the father of Abiud, and Abiud became the father of Eliakim, and Eliakim became the father of Azor,
+14. and Azor became the father of Zadok, and Zadok became the father of Achim, and Achim became the father of Eliud,
+15. and Eliud became the father of Eleazar, and Eleazar became the father of Matthan, and Matthan became the father of Jacob,
+16. and Jacob became the father of Joseph, the husband of Mary by whom was born Jesus, who is called Christ.
+17. Therefore all the generations from Abraham to David are fourteen generations, and from David to the deportation to Babylon are fourteen generations, and from the deportation to Babylon to the Christ are fourteen generations.
+
+chunk_id_025MCXLSB
+1. The book of the genealogy of Jesus Christ, the son of David, the son of Abraham:
+2. Abraham was the father of Isaac, and Isaac was the father of Jacob, and Jacob was the father of Judah and his brothers.
+3. And Judah was the father of Perez and Zerah by Tamar, and Perez was the father of Hezron, and Hezron was the father of Ram.
+4. And Ram was the father of Amminadab, and Amminadab was the father of Nahshon, and Nahshon was the father of Salmon.
+5. And Salmon was the father of Boaz by Rahab, and Boaz was the father of Obed by Ruth, and Obed was the father of Jesse.
+6. And Jesse was the father of David the king. And David was the father of Solomon by the wife of Uriah.
+7. And Solomon was the father of Rehoboam, and Rehoboam was the father of Abijah, and Abijah was the father of Asa.
+8. And Asa was the father of Jehoshaphat, and Jehoshaphat was the father of Joram, and Joram was the father of Uzziah.
+9. And Uzziah was the father of Jotham, and Jotham was the father of Ahaz, and Ahaz was the father of Hezekiah.
+10. And Hezekiah was the father of Manasseh, and Manasseh was the father of Amon, and Amon was the father of Josiah.
+11. And Josiah was the father of Jeconiah and his brothers, at the time of the deportation to Babylon.
+12. And after the deportation to Babylon: Jeconiah was the father of Shealtiel, and Shealtiel was the father of Zerubbabel.
+13. And Zerubbabel was the father of Abihud, and Abihud was the father of Eliakim, and Eliakim was the father of Azor.
+14. And Azor was the father of Zadok, and Zadok was the father of Achim, and Achim was the father of Eliud.
+15. And Eliud was the father of Eleazar, and Eleazar was the father of Matthan, and Matthan was the father of Jacob.
+16. And Jacob was the father of Joseph the husband of Mary, by whom Jesus was born, who is called Christ.
+17. Therefore all the generations from Abraham to David are fourteen generations; and from David to the deportation to Babylon, fourteen generations; and from the deportation to Babylon to the Christ, fourteen generations.
+
+chunk_id_847IZRNKJ
+1. The book of the genealogy of Jesus Christ, the Son of David, the Son of Abraham:
+2. Abraham begot Isaac, Isaac begot Jacob, and Jacob begot Judah and his brothers.
+3. Judah begot Perez and Zerah by Tamar, Perez begot Hezron, and Hezron begot Ram.
+4. Ram begot Amminadab, Amminadab begot Nahshon, and Nahshon begot Salmon.
+5. Salmon begot Boaz by Rahab, Boaz begot Obed by Ruth, Obed begot Jesse,
+6. and Jesse begot David the king.
+David the king begot Solomon by her who had been the wife of Uriah.
+7. Solomon begot Rehoboam, Rehoboam begot Abijah, and Abijah begot Asa.
+8. Asa begot Jehoshaphat, Jehoshaphat begot Joram, and Joram begot Uzziah.
+9. Uzziah begot Jotham, Jotham begot Ahaz, and Ahaz begot Hezekiah.
+10. Hezekiah begot Manasseh, Manasseh begot Amon, and Amon begot Josiah.
+11. Josiah begot Jeconiah and his brothers about the time they were carried away to Babylon.
+12. And after they were brought to Babylon, Jeconiah begot Shealtiel, and Shealtiel begot Zerubbabel.
+13. Zerubbabel begot Abiud, Abiud begot Eliakim, and Eliakim begot Azor.
+14. Azor begot Zadok, Zadok begot Achim, and Achim begot Eliud.
+15. Eliud begot Eleazar, Eleazar begot Matthan, and Matthan begot Jacob.
+16. And Jacob begot Joseph the husband of Mary, of whom was born Jesus who is called Christ.
+17. So all the generations from Abraham to David are fourteen generations, from David until the captivity in Babylon are fourteen generations, and from the captivity in Babylon until the Christ are fourteen generations.

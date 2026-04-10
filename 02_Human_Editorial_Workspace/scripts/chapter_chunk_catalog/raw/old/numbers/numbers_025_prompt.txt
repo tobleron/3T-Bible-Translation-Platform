@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Numbers 25:1-18
+
+Chapter text:
+1. And Israel remained at Shittim, and the people began to play the harlot with the daughters of Moab.
+2. Indeed they called the people to the sacrifices of their gods, and the people ate and bowed down to their gods.
+3. So Israel joined themselves to Baal of Peor, and the anger of Yahweh burned against Israel.
+4. And Yahweh said to Moses, “Take all who are the heads of the people and execute them in broad daylight before Yahweh, so that the burning anger of Yahweh may turn away from Israel.”
+5. So Moses said to the judges of Israel, “Each of you kill his men who have joined themselves to Baal of Peor.”
+6. Then behold, one of the sons of Israel came and brought near to his brothers a Midianite woman, in the sight of Moses and in the sight of all the congregation of the sons of Israel, while they were weeping at the doorway of the tent of meeting.
+7. And Phinehas the son of Eleazar, the son of Aaron the priest, saw it, so he arose from the midst of the congregation and took a spear in his hand,
+8. and he went after the man of Israel into the tent and pierced both of them through, the man of Israel and the woman, through the body. Then the plague on the sons of Israel was checked.
+9. So those who died by the plague were 24,000.
+10. Then Yahweh spoke to Moses, saying,
+11. “Phinehas the son of Eleazar, the son of Aaron the priest, has turned away My wrath from the sons of Israel in that he was jealous with My jealousy among them, so that I did not consume the sons of Israel in My jealousy.
+12. Therefore say, ‘Behold, I give him My covenant of peace;
+13. and it shall be for him and his seed after him, a covenant of a perpetual priesthood, because he was jealous for his God and made atonement for the sons of Israel.’”
+14. Now the name of the slain man of Israel who was slain with the Midianite woman, was Zimri the son of Salu, a leader of a father’s household among the Simeonites.
+15. And the name of the Midianite woman, who was struck down, was Cozbi the daughter of Zur, who was head of the people of a father’s household in Midian.
+16. Then Yahweh spoke to Moses, saying,
+17. “Be hostile to the Midianites and strike them,
+18. for they have been hostile to you with their deceptive tricks, with which they have deceived you in the affair of Peor and in the affair of Cozbi, the daughter of the leader of Midian, their sister who was slain on the day of the plague because of Peor.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

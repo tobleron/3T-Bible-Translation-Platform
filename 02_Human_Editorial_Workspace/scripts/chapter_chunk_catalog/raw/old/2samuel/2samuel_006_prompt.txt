@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Samuel 6:1-23
+
+Chapter text:
+1. Then David again gathered all the chosen men of Israel, thirty thousand.
+2. And David arose and went with all the people who were with him from Baale-judah, to bring up from there the ark of God which is called by the Name, the very name of Yahweh of hosts who is enthroned above the cherubim.
+3. And they drove the ark of God on a new cart that they might bring it from the house of Abinadab which was on the hill; and Uzzah and Ahio, the sons of Abinadab, were leading the new cart.
+4. So they brought it with the ark of God from the house of Abinadab, which was on the hill; and Ahio was walking ahead of the ark.
+5. Now David and all the house of Israel were celebrating before Yahweh with all kinds of instruments made of fir wood, and with lyres, harps, tambourines, castanets, and cymbals.
+6. Then they came to the threshing floor of Nacon. And Uzzah reached out toward the ark of God and took hold of it, because the oxen nearly upset it.
+7. And the anger of Yahweh burned against Uzzah, and God struck him down there for his irreverence; and he died there by the ark of God.
+8. And David became angry because of Yahweh’s breaking out against Uzzah; and that place is called Perez-uzzah to this day.
+9. So David was afraid of Yahweh that day; and he said, “How can the ark of Yahweh come to me?”
+10. And David was unwilling to move the ark of Yahweh into the city of David with him; but David took it aside to the house of Obed-edom the Gittite.
+11. Thus the ark of Yahweh remained in the house of Obed-edom the Gittite three months, and Yahweh blessed Obed-edom and all his household.
+12. Then it was told to King David, saying, “Yahweh has blessed the house of Obed-edom and all that belongs to him, on account of the ark of God.” So David went and brought up the ark of God from the house of Obed-edom into the city of David with gladness.
+13. And so it happened, that when those who were carrying the ark of Yahweh had gone six paces, he sacrificed an ox and a fatling.
+14. And David was dancing before Yahweh with all his strength, and David was girded with a linen ephod.
+15. So David and all the house of Israel were bringing up the ark of Yahweh with shouting and the sound of the trumpet.
+16. Then it happened as the ark of Yahweh came into the city of David, that Michal the daughter of Saul looked out of the window and saw King David leaping and dancing before Yahweh; and she despised him in her heart.
+17. And they brought in the ark of Yahweh and placed it in its place inside the tent which David had pitched for it; and David offered burnt offerings and peace offerings before Yahweh.
+18. Then David completed offering the burnt offerings and the peace offerings. And he blessed the people in the name of Yahweh of hosts.
+19. And he apportioned to all the people, to all the multitude of Israel, both to men and women, a cake of bread and one of dates and one of raisins to each one. Then all the people went each to his house.
+20. But David returned to bless his household, and Michal the daughter of Saul came out to meet David and said, “How the king of Israel has glorified himself today! He uncovered himself today in the eyes of his servants’ maids as one of the worthless ones shamelessly uncovers himself!”
+21. So David said to Michal, “It was before Yahweh, who chose me above your father and above all his house, to appoint me ruler over the people of Yahweh, over Israel; therefore I will celebrate before Yahweh.
+22. And I will be esteemed even more lightly than this and will be humble in my own eyes, but with the maids of whom you have spoken, with them I will be glorified.”
+23. And Michal the daughter of Saul had no child to the day of her death.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

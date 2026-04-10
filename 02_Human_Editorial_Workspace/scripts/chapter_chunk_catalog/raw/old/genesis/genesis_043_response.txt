@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Judah's Plea and Israel's Instructions",
+      "reason": "A continuous exchange of dialogue between the brothers and their father regarding the journey to Egypt."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Arrival in Egypt and Preparation",
+      "reason": "Narrative sequence describing the brothers' arrival, Joseph's command to the steward, and the men's preparation."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 34,
+      "type": "story",
+      "title": "Joseph's Reunion with His Brothers",
+      "reason": "The narrative climax where Joseph meets his brothers, reveals emotion over Benjamin, and serves the meal."
+    }
+  ]
+}

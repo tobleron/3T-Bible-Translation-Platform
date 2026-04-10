@@ -1,0 +1,70 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 27:1-21
+
+Chapter text:
+1. “And you shall make the altar of acacia wood, five cubits long and five cubits wide; the altar shall be square, and its height shall be three cubits.
+2. You shall make its horns on its four corners; its horns shall be of the same piece, and you shall overlay it with bronze.
+3. You shall make its pots for removing its ashes, and its shovels and its bowls and its flesh hooks and its firepans; you shall make all its utensils of bronze.
+4. You shall make for it a grating, a network of bronze, and on the net you shall make four bronze rings at its four corners.
+5. You shall put it beneath, under the ledge of the altar, so that the net will reach halfway down the altar.
+6. You shall make poles for the altar, poles of acacia wood, and overlay them with bronze.
+7. Its poles shall be inserted into the rings, so that the poles shall be on the two sides of the altar when it is carried.
+8. You shall make it hollow with planks; as it was shown to you in the mountain, so they shall make it.
+9. “You shall make the court of the tabernacle. On the south side there shall be hangings for the court of fine twisted linen one hundred cubits long for one side;
+10. and its pillars shall be twenty, with their twenty bases of bronze; the hooks of the pillars and their bands shall be of silver.
+11. Likewise for the north side in length there shall be hangings one hundred cubits long, and its twenty pillars with their twenty bases of bronze; the hooks of the pillars and their bands shall be of silver.
+12. For the width of the court on the west side shall be hangings of fifty cubits with their ten pillars and their ten bases.
+13. The width of the court on the east side toward the sunrise shall be fifty cubits.
+14. The hangings for the one side of the gate shall be fifteen cubits with their three pillars and their three bases.
+15. And for the other side shall be hangings of fifteen cubits with their three pillars and their three bases.
+16. And as for the gate of the court there shall be a screen of twenty cubits, of blue and purple and scarlet material and fine twisted linen, the work of a weaver, with their four pillars and their four bases.
+17. All the pillars around the court shall be furnished with silver bands with their hooks of silver and their bases of bronze.
+18. The length of the court shall be one hundred cubits, and the width fifty throughout, and the height five cubits of fine twisted linen, and their bases of bronze.
+19. All the utensils of the tabernacle used in all its service, and all its pegs, and all the pegs of the court, shall be of bronze.
+20. “And you shall command the sons of Israel, that they bring you clear oil of beaten olives for the light, to make a lamp burn continually.
+21. In the tent of meeting, outside the veil which is before the testimony, Aaron and his sons shall keep it in order from evening to morning before Yahweh; it shall be a perpetual statute throughout their generations for the sons of Israel.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

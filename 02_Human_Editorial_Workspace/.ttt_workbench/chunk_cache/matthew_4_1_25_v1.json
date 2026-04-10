@@ -1,0 +1,22 @@
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Jesus Tempted in the Wilderness",
+      "reason": "Narrative of Jesus' temptation by the devil, including the three specific temptations and their resolution."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Jesus Begins His Ministry in Galilee",
+      "reason": "Continuation of the narrative describing Jesus' return from the wilderness, his ministry in Galilee, calling of the first disciples, and the spread of his reputation."
+    }
+  ],
+  "prompt_version": "v1",
+  "window_start": 1,
+  "window_end": 25,
+  "generated_at": "ui-test"
+}

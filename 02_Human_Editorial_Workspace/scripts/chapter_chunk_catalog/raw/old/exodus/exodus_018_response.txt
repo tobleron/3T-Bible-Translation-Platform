@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Jethro Visits Moses",
+      "reason": "Describes Jethro's arrival, the reunion with Moses, and the sacrificial meal."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 27,
+      "type": "mixed",
+      "title": "Jethro's Counsel on Leadership",
+      "reason": "Contains dialogue where Jethro advises Moses and the subsequent implementation of the judicial system."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Law on Male Discharge",
+      "reason": "Establishes the uncleanness of a male discharge and the required purification rituals."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 18,
+      "type": "law",
+      "title": "Law on Seminal Emission",
+      "reason": "Defines the uncleanness resulting from a seminal emission for men and women."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 24,
+      "type": "law",
+      "title": "Law on Menstrual Impurity",
+      "reason": "Details the uncleanness of a woman during her menstrual period and its transmission."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Law on Irregular Female Discharge",
+      "reason": "Describes the regulations for a woman with a prolonged blood discharge."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 33,
+      "type": "exhortation",
+      "title": "Summary and Conclusion",
+      "reason": "Summarizes the purpose of these laws to preserve the tabernacle and lists the covered cases."
+    }
+  ]
+}

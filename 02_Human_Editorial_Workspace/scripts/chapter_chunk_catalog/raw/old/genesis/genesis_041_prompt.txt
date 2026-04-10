@@ -1,0 +1,106 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Genesis 41:1-57
+
+Chapter text:
+1. Now it happened at the end of two full years that Pharaoh had a dream, and behold, he was standing by the Nile.
+2. And behold, from the Nile there came up seven cows, sleek and fat; and they grazed in the reeds.
+3. Then behold, seven other cows came up after them from the Nile, ugly and thin, and they stood by the other cows on the bank of the Nile.
+4. And the ugly and thin cows ate up the seven sleek and fat cows. Then Pharaoh awoke.
+5. He again fell asleep and dreamed a second time; and behold, seven ears of grain came up on a single stalk, plump and good.
+6. And behold, seven ears, thin and scorched by the east wind, sprouted up after them.
+7. And the thin ears swallowed up the seven plump and full ears. Then Pharaoh awoke, and behold, it was a dream.
+8. Now it happened that in the morning his spirit was troubled, so he sent and called for all the magicians of Egypt and all its wise men. And Pharaoh recounted to them his dream, but there was no one who could interpret them to Pharaoh.
+9. Then the chief cupbearer spoke to Pharaoh, saying, “I would bring to remembrance today my own offenses.
+10. Pharaoh was furious with his servants, and he put me in confinement in the house of the captain of the bodyguard, both me and the chief baker.
+11. And we had a dream on the same night, he and I; each of us dreamed according to the interpretation of his own dream.
+12. Now there was with us a Hebrew youth, a slave of the captain of the bodyguard, and we recounted them to him, and he interpreted our dreams for us. To each one he interpreted according to his own dream.
+13. And just as he interpreted for us, so it happened; he restored me in my office, but he hanged him.”
+14. Then Pharaoh sent and called for Joseph, and they rushed him out of the pit; and he shaved himself and changed his clothes, and he came to Pharaoh.
+15. And Pharaoh said to Joseph, “I have had a dream, but no one can interpret it; yet I have heard it said about you, that you hear a dream and that you can interpret it.”
+16. Joseph then answered Pharaoh, saying, “It is not in me; God will answer concerning the welfare of Pharaoh.”
+17. So Pharaoh spoke to Joseph, “In my dream, behold, I was standing on the bank of the Nile;
+18. and behold, seven cows, fat and sleek came up out of the Nile, and they grazed in the reeds.
+19. And behold, seven other cows came up after them, poor and very ugly and lean, such as I had never seen in all the land of Egypt, in regard to ugliness;
+20. and the lean and ugly cows ate up the first seven fat cows.
+21. But they devoured them, and yet it could not be known that they had devoured them. For they were just as ugly as before. Then I awoke.
+22. Then I saw also in my dream, and behold, seven ears, full and good, came up on a single stalk;
+23. and behold, seven ears, withered, thin, and scorched by the east wind, sprouted up after them;
+24. and the thin ears swallowed the seven good ears. So I told it to the magicians, but there was no one who could declare it to me.”
+25. Then Joseph said to Pharaoh, “Pharaoh’s dreams are one and the same; God has declared to Pharaoh what He is about to do.
+26. The seven good cows are seven years; and the seven good ears are seven years; the dreams are one and the same.
+27. And the seven lean and ugly cows that came up after them are seven years, and the seven lean ears scorched by the east wind will be seven years of famine.
+28. It is as I have spoken to Pharaoh: God has shown to Pharaoh what He is about to do.
+29. Behold, seven years of great abundance are coming in all the land of Egypt;
+30. and after them seven years of famine will arise, and all the abundance will be forgotten in the land of Egypt, and the famine will ravage the land,
+31. so that the abundance will be unknown in the land because of that subsequent famine; for it will be very heavy.
+32. Now as for the repeating of the dream to Pharaoh twice, it means that the matter is confirmed by God, and God will quickly bring it about.
+33. So now let Pharaoh look for a man understanding and wise, and set him over the land of Egypt.
+34. Let Pharaoh take action and appoint overseers over the land, and let him exact a fifth of the produce of the land of Egypt in the seven years of abundance.
+35. Then let them gather all the food of these good years that are coming, and let them store up the grain for food in the cities under Pharaoh’s authority, and let them keep watch over it.
+36. And let the food be appointed for the land for the seven years of famine which will happen in the land of Egypt, so that the land will not be cut off during the famine.”
+37. And the proposal seemed good to Pharaoh and to all his servants.
+38. Then Pharaoh said to his servants, “Can we find a man like this, in whom is a divine spirit?”
+39. So Pharaoh said to Joseph, “Since God has made you know all of this, there is no one so understanding and wise as you are.
+40. You shall be over my house, and according to your command all my people shall do homage; only in the throne I will be greater than you.”
+41. And Pharaoh said to Joseph, “See, I have set you over all the land of Egypt.”
+42. Then Pharaoh removed his signet ring from his hand and put it on Joseph’s hand and clothed him in garments of fine linen and put the gold necklace around his neck.
+43. And he had him ride in his second chariot; and they called out before him, “Bow the knee!” And he set him over all the land of Egypt.
+44. Moreover, Pharaoh said to Joseph, “Though I am Pharaoh, yet without your permission no one shall raise his hand or foot in all the land of Egypt.”
+45. Then Pharaoh named Joseph Zaphenath-paneah; and he gave him Asenath, the daughter of Potiphera priest of On, as a wife. And Joseph went forth over the land of Egypt.
+46. Now Joseph was thirty years old when he stood before Pharaoh, king of Egypt. And Joseph went out from the presence of Pharaoh and passed through all the land of Egypt.
+47. And during the seven years of plenty the land brought forth abundantly.
+48. So he gathered all the food of these seven years which happened in the land of Egypt and placed the food in the cities; he placed in every city the food from its own surrounding fields.
+49. Thus Joseph stored up grain in great abundance like the sand of the sea, until he stopped measuring it, for it was beyond measure.
+50. Now before the year of famine came, two sons were born to Joseph, whom Asenath, the daughter of Potiphera priest of On, bore to him.
+51. And Joseph named the firstborn Manasseh, “For,” he said, “God has made me forget all my trouble and all my father’s household.”
+52. And he named the second Ephraim, “For,” he said, “God has made me fruitful in the land of my affliction.”
+53. Then the seven years of plenty which had been in the land of Egypt came to an end,
+54. and the seven years of famine began to come, just as Joseph had said. So there was famine in all the lands, but in all the land of Egypt there was bread.
+55. Then all the land of Egypt was famished, and the people cried out to Pharaoh for bread; and Pharaoh said to all the Egyptians, “Go to Joseph; whatever he says to you, you shall do.”
+56. Now the famine was over all the face of the land. And Joseph opened all the storehouses and sold to the Egyptians; and the famine was severe in the land of Egypt.
+57. Now all the earth also came to Egypt to buy grain from Joseph because the famine was severe in all the earth.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

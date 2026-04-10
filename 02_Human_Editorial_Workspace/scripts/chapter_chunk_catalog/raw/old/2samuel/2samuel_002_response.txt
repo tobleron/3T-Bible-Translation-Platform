@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "David becomes King in Hebron",
+      "reason": "Narrative of David's move to Hebron and his blessing to the men of Jabesh-gilead."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Ish-bosheth becomes King in Israel",
+      "reason": "Narrative of Abner establishing Ish-bosheth as king and the summary of the two reigns."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 32,
+      "type": "story",
+      "title": "Battle at Gibeon",
+      "reason": "The full account of the confrontation between Joab and Abner, including Asahel's death and the battle's conclusion."
+    }
+  ]
+}

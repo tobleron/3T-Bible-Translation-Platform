@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "list_or_catalog",
+      "title": "David's Sons Born at Hebron",
+      "reason": "A list of David's sons born during his time in Hebron."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Abner's Defection to David",
+      "reason": "The narrative of Abner's conflict with Ish-bosheth and his alliance with David."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 30,
+      "type": "story",
+      "title": "Joab Kills Abner",
+      "reason": "The account of Joab's revenge against Abner after David sent him away."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 39,
+      "type": "mixed",
+      "title": "David's Lament and Reaction",
+      "reason": "David's public mourning, oath, and reflection on the political situation."
+    }
+  ]
+}

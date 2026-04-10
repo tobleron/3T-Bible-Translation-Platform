@@ -1,0 +1,71 @@
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "exhortation",
+      "title": "Do Not Judge",
+      "reason": "Teaching on judgment and hypocrisy."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 8,
+      "type": "exhortation",
+      "title": "Give and Receive",
+      "reason": "Instruction on giving and receiving blessings."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Good and Evil",
+      "reason": "Parable about the goodness of giving and the father's generosity."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 12,
+      "type": "exhortation",
+      "title": "The Golden Rule",
+      "reason": "Summary of ethical behavior as a single principle."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 14,
+      "type": "parable",
+      "title": "The Narrow Gate",
+      "reason": "Metaphor about the path to life and its difficulty."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "exhortation",
+      "title": "Watch for False Prophets",
+      "reason": "Warning about identifying false prophets by their fruit."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "exhortation",
+      "title": "The Importance of Deeds",
+      "reason": "Teaching on the necessity of actions over words."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 27,
+      "type": "parable",
+      "title": "The Wise and Foolish Builders",
+      "reason": "Parable contrasting wise and foolish foundations."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Jesus' Teaching and the Crowd's Reaction",
+      "reason": "Narrative of Jesus' teaching and the crowd's response."
+    }
+  ],
+  "prompt_version": "v1",
+  "window_start": 1,
+  "window_end": 29,
+  "generated_at": "ui-test"
+}

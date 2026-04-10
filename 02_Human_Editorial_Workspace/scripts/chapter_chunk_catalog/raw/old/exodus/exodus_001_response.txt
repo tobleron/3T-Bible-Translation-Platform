@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "genealogy",
+      "title": "Israelites in Egypt",
+      "reason": "Lists the sons of Jacob and notes their growth in number."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Oppression by Pharaoh",
+      "reason": "Describes the new king's rise and the harsh labor imposed on Israel."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "dialogue",
+      "title": "The Hebrew Midwives",
+      "reason": "Records the interaction between Pharaoh and the midwives regarding the newborn boys."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 22,
+      "type": "law",
+      "title": "Pharaoh's Decree",
+      "reason": "States the final command to cast all Hebrew sons into the Nile."
+    }
+  ]
+}

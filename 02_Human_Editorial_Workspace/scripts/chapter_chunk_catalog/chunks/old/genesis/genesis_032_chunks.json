@@ -1,0 +1,65 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:46:39Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 32,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 32,
+  "verse_count": 32,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Jacob meets the angels at Mahanaim",
+      "reason": "Describes Jacob's arrival and naming of the place after seeing God's camp."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Jacob sends messengers to Esau",
+      "reason": "Narrates the sending of envoys and Jacob's reaction to their report."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "blessing_or_prayer",
+      "title": "Jacob's prayer for deliverance",
+      "reason": "Contains Jacob's direct address to God recalling promises and asking for safety."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Jacob prepares the present for Esau",
+      "reason": "Details the inventory of gifts and instructions given to servants."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Jacob crosses the Jabbok",
+      "reason": "Describes the movement of his family and possessions across the stream."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 30,
+      "type": "story",
+      "title": "Jacob wrestles with God",
+      "reason": "Narrates the wrestling match, name change to Israel, and naming of Peniel."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 32,
+      "type": "story",
+      "title": "Jacob's limp and the dietary law",
+      "reason": "Concludes the narrative with Jacob's physical state and the resulting custom."
+    }
+  ]
+}

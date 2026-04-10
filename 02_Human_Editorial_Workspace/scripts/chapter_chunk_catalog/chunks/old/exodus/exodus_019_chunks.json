@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T19:35:53Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 19,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 25,
+  "verse_count": 25,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Arrival at Sinai",
+      "reason": "Describes the Israelites' journey and encampment before the mountain."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 8,
+      "type": "dialogue",
+      "title": "Covenant Proposal and Acceptance",
+      "reason": "Contains God's offer of covenant status and the people's verbal agreement."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Preparation Instructions",
+      "reason": "Details the specific commands for purification and boundaries before the event."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Theophany on Sinai",
+      "reason": "Narrates the dramatic arrival of God with sensory details and Moses ascending."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 25,
+      "type": "dialogue",
+      "title": "Warning to the People",
+      "reason": "Records the exchange regarding the boundaries between God, Moses, and the people."
+    }
+  ]
+}

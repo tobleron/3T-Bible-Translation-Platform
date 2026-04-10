@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Miriam and Aaron challenge Moses",
+      "reason": "Describes the complaint against Moses regarding his Cushite wife and introduces Moses' humility."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 9,
+      "type": "dialogue",
+      "title": "Yahweh's judgment on Miriam and Aaron",
+      "reason": "Records the divine summons, Yahweh's speech distinguishing Moses from other prophets, and the resulting anger."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Miriam struck with leprosy and Aaron pleads",
+      "reason": "Narrates the physical manifestation of Miriam's disease and Aaron's intercession to Moses."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 16,
+      "type": "mixed",
+      "title": "Moses' prayer and resolution",
+      "reason": "Contains Moses' prayer for healing, Yahweh's decree of seven days isolation, and the conclusion of the event."
+    }
+  ]
+}

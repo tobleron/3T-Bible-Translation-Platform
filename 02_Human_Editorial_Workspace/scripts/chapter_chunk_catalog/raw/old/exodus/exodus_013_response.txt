@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 16,
+      "type": "law",
+      "title": "Law on Firstborns and Unleavened Bread",
+      "reason": "A continuous legal instruction regarding the consecration of firstborns and the observance of the Feast of Unleavened Bread."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "story",
+      "title": "The Journey to the Red Sea",
+      "reason": "A narrative account of God guiding Israel out of Egypt through the wilderness."
+    }
+  ]
+}

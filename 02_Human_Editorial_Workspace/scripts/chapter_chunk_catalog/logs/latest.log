@@ -1,0 +1,1410 @@
+[2026-04-09T16:29:50Z] Run start: 1189 chapters | model=Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf | endpoint=http://192.168.1.186:8080
+[2026-04-09T16:29:50Z] START Genesis 1 (1-31)
+[2026-04-09T16:29:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_001_prompt.txt
+[2026-04-09T16:31:12Z] DONE Genesis 1: 6 chunks | attempts=2
+[2026-04-09T16:31:12Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_001_chunks.json
+[2026-04-09T16:31:12Z] START Genesis 2 (1-25)
+[2026-04-09T16:31:12Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_002_prompt.txt
+[2026-04-09T16:32:38Z] DONE Genesis 2: 3 chunks | attempts=2
+[2026-04-09T16:32:38Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_002_chunks.json
+[2026-04-09T16:32:38Z] START Genesis 3 (1-24)
+[2026-04-09T16:32:38Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_003_prompt.txt
+[2026-04-09T16:34:06Z] DONE Genesis 3: 4 chunks | attempts=2
+[2026-04-09T16:34:06Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_003_chunks.json
+[2026-04-09T16:34:06Z] START Genesis 4 (1-26)
+[2026-04-09T16:34:06Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_004_prompt.txt
+[2026-04-09T16:35:21Z] DONE Genesis 4: 3 chunks | attempts=1
+[2026-04-09T16:35:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_004_chunks.json
+[2026-04-09T16:35:21Z] START Genesis 5 (1-32)
+[2026-04-09T16:35:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_005_prompt.txt
+[2026-04-09T16:36:51Z] DONE Genesis 5: 5 chunks | attempts=2
+[2026-04-09T16:36:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_005_chunks.json
+[2026-04-09T16:36:51Z] START Genesis 6 (1-22)
+[2026-04-09T16:36:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_006_prompt.txt
+[2026-04-09T16:38:18Z] DONE Genesis 6: 4 chunks | attempts=2
+[2026-04-09T16:38:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_006_chunks.json
+[2026-04-09T16:38:18Z] START Genesis 7 (1-24)
+[2026-04-09T16:38:18Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_007_prompt.txt
+[2026-04-09T16:39:46Z] DONE Genesis 7: 4 chunks | attempts=2
+[2026-04-09T16:39:46Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_007_chunks.json
+[2026-04-09T16:39:46Z] START Genesis 8 (1-22)
+[2026-04-09T16:39:46Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_008_prompt.txt
+[2026-04-09T16:41:14Z] DONE Genesis 8: 4 chunks | attempts=2
+[2026-04-09T16:41:14Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_008_chunks.json
+[2026-04-09T16:41:14Z] START Genesis 9 (1-29)
+[2026-04-09T16:41:14Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_009_prompt.txt
+[2026-04-09T16:42:43Z] DONE Genesis 9: 5 chunks | attempts=2
+[2026-04-09T16:42:43Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_009_chunks.json
+[2026-04-09T16:42:43Z] START Genesis 10 (1-32)
+[2026-04-09T16:42:43Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_010_prompt.txt
+[2026-04-09T16:44:11Z] DONE Genesis 10: 4 chunks | attempts=2
+[2026-04-09T16:44:11Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_010_chunks.json
+[2026-04-09T16:44:11Z] START Genesis 11 (1-32)
+[2026-04-09T16:44:11Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_011_prompt.txt
+[2026-04-09T16:45:39Z] DONE Genesis 11: 3 chunks | attempts=2
+[2026-04-09T16:45:39Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_011_chunks.json
+[2026-04-09T16:45:39Z] START Genesis 12 (1-20)
+[2026-04-09T16:45:39Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_012_prompt.txt
+[2026-04-09T16:47:01Z] DONE Genesis 12: 2 chunks | attempts=2
+[2026-04-09T16:47:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_012_chunks.json
+[2026-04-09T16:47:01Z] START Genesis 13 (1-18)
+[2026-04-09T16:47:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_013_prompt.txt
+[2026-04-09T16:48:27Z] DONE Genesis 13: 4 chunks | attempts=2
+[2026-04-09T16:48:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_013_chunks.json
+[2026-04-09T16:48:27Z] START Genesis 14 (1-24)
+[2026-04-09T16:48:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_014_prompt.txt
+[2026-04-09T16:48:49Z] DONE Genesis 14: 4 chunks | attempts=1
+[2026-04-09T16:48:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_014_chunks.json
+[2026-04-09T16:48:49Z] START Genesis 15 (1-21)
+[2026-04-09T16:48:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_015_prompt.txt
+[2026-04-09T16:50:16Z] DONE Genesis 15: 3 chunks | attempts=2
+[2026-04-09T16:50:16Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_015_chunks.json
+[2026-04-09T16:50:16Z] START Genesis 16 (1-16)
+[2026-04-09T16:50:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_016_prompt.txt
+[2026-04-09T16:51:41Z] DONE Genesis 16: 3 chunks | attempts=2
+[2026-04-09T16:51:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_016_chunks.json
+[2026-04-09T16:51:41Z] START Genesis 17 (1-27)
+[2026-04-09T16:51:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_017_prompt.txt
+[2026-04-09T16:56:21Z] DONE Genesis 17: 4 chunks | attempts=2
+[2026-04-09T16:56:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_017_chunks.json
+[2026-04-09T16:56:21Z] START Genesis 18 (1-33)
+[2026-04-09T16:56:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_018_prompt.txt
+[2026-04-09T16:57:46Z] DONE Genesis 18: 3 chunks | attempts=2
+[2026-04-09T16:57:46Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_018_chunks.json
+[2026-04-09T16:57:46Z] START Genesis 19 (1-38)
+[2026-04-09T16:57:46Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_019_prompt.txt
+[2026-04-09T16:59:15Z] DONE Genesis 19: 3 chunks | attempts=2
+[2026-04-09T16:59:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_019_chunks.json
+[2026-04-09T16:59:15Z] START Genesis 20 (1-18)
+[2026-04-09T16:59:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_020_prompt.txt
+[2026-04-09T17:00:41Z] DONE Genesis 20: 3 chunks | attempts=2
+[2026-04-09T17:00:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_020_chunks.json
+[2026-04-09T17:00:41Z] START Genesis 21 (1-34)
+[2026-04-09T17:00:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_021_prompt.txt
+[2026-04-09T17:02:10Z] DONE Genesis 21: 3 chunks | attempts=2
+[2026-04-09T17:02:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_021_chunks.json
+[2026-04-09T17:02:10Z] START Genesis 22 (1-24)
+[2026-04-09T17:02:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_022_prompt.txt
+[2026-04-09T17:03:29Z] DONE Genesis 22: 3 chunks | attempts=2
+[2026-04-09T17:03:29Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_022_chunks.json
+[2026-04-09T17:03:29Z] START Genesis 23 (1-20)
+[2026-04-09T17:03:29Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_023_prompt.txt
+[2026-04-09T17:04:55Z] DONE Genesis 23: 3 chunks | attempts=2
+[2026-04-09T17:04:55Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_023_chunks.json
+[2026-04-09T17:04:55Z] START Genesis 24 (1-67)
+[2026-04-09T17:04:55Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_024_prompt.txt
+[2026-04-09T17:32:05Z] FAIL Genesis 24: Model did not return valid JSON after retry/repair. | consecutive_failures=1
+[2026-04-09T17:32:05Z] START Genesis 25 (1-34)
+[2026-04-09T17:32:05Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_025_prompt.txt
+[2026-04-09T17:32:33Z] DONE Genesis 25: 5 chunks | attempts=1
+[2026-04-09T17:32:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_025_chunks.json
+[2026-04-09T17:32:33Z] START Genesis 26 (1-35)
+[2026-04-09T17:32:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_026_prompt.txt
+[2026-04-09T17:34:10Z] DONE Genesis 26: 6 chunks | attempts=2
+[2026-04-09T17:34:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_026_chunks.json
+[2026-04-09T17:34:10Z] START Genesis 27 (1-46)
+[2026-04-09T17:34:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_027_prompt.txt
+[2026-04-09T17:35:46Z] DONE Genesis 27: 5 chunks | attempts=2
+[2026-04-09T17:35:46Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_027_chunks.json
+[2026-04-09T17:35:46Z] START Genesis 28 (1-22)
+[2026-04-09T17:35:46Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_028_prompt.txt
+[2026-04-09T17:37:11Z] DONE Genesis 28: 3 chunks | attempts=2
+[2026-04-09T17:37:11Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_028_chunks.json
+[2026-04-09T17:37:11Z] START Genesis 29 (1-35)
+[2026-04-09T17:37:11Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_029_prompt.txt
+[2026-04-09T17:38:38Z] DONE Genesis 29: 3 chunks | attempts=2
+[2026-04-09T17:38:38Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_029_chunks.json
+[2026-04-09T17:38:38Z] START Genesis 30 (1-43)
+[2026-04-09T17:38:38Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_030_prompt.txt
+[2026-04-09T17:40:16Z] DONE Genesis 30: 6 chunks | attempts=2
+[2026-04-09T17:40:16Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_030_chunks.json
+[2026-04-09T17:40:16Z] START Genesis 31 (1-55)
+[2026-04-09T17:40:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_031_prompt.txt
+[2026-04-09T17:45:02Z] DONE Genesis 31: 6 chunks | attempts=2
+[2026-04-09T17:45:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_031_chunks.json
+[2026-04-09T17:45:02Z] START Genesis 32 (1-32)
+[2026-04-09T17:45:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_032_prompt.txt
+[2026-04-09T17:46:39Z] DONE Genesis 32: 7 chunks | attempts=2
+[2026-04-09T17:46:39Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_032_chunks.json
+[2026-04-09T17:46:39Z] START Genesis 33 (1-20)
+[2026-04-09T17:46:39Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_033_prompt.txt
+[2026-04-09T17:48:00Z] DONE Genesis 33: 2 chunks | attempts=2
+[2026-04-09T17:48:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_033_chunks.json
+[2026-04-09T17:48:00Z] START Genesis 34 (1-31)
+[2026-04-09T17:48:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_034_prompt.txt
+[2026-04-09T17:49:34Z] DONE Genesis 34: 5 chunks | attempts=2
+[2026-04-09T17:49:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_034_chunks.json
+[2026-04-09T17:49:34Z] START Genesis 35 (1-29)
+[2026-04-09T17:49:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_035_prompt.txt
+[2026-04-09T17:51:05Z] DONE Genesis 35: 5 chunks | attempts=2
+[2026-04-09T17:51:05Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_035_chunks.json
+[2026-04-09T17:51:05Z] START Genesis 36 (1-43)
+[2026-04-09T17:51:05Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_036_prompt.txt
+[2026-04-09T17:52:40Z] DONE Genesis 36: 5 chunks | attempts=2
+[2026-04-09T17:52:40Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_036_chunks.json
+[2026-04-09T17:52:40Z] START Genesis 37 (1-36)
+[2026-04-09T17:52:40Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_037_prompt.txt
+[2026-04-09T17:54:16Z] DONE Genesis 37: 6 chunks | attempts=2
+[2026-04-09T17:54:16Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_037_chunks.json
+[2026-04-09T17:54:16Z] START Genesis 38 (1-30)
+[2026-04-09T17:54:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_038_prompt.txt
+[2026-04-09T17:55:41Z] DONE Genesis 38: 3 chunks | attempts=2
+[2026-04-09T17:55:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_038_chunks.json
+[2026-04-09T17:55:41Z] START Genesis 39 (1-23)
+[2026-04-09T17:55:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_039_prompt.txt
+[2026-04-09T17:57:11Z] DONE Genesis 39: 4 chunks | attempts=2
+[2026-04-09T17:57:11Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_039_chunks.json
+[2026-04-09T17:57:11Z] START Genesis 40 (1-23)
+[2026-04-09T17:57:11Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_040_prompt.txt
+[2026-04-09T17:58:34Z] DONE Genesis 40: 3 chunks | attempts=2
+[2026-04-09T17:58:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_040_chunks.json
+[2026-04-09T17:58:34Z] START Genesis 41 (1-57)
+[2026-04-09T17:58:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_041_prompt.txt
+[2026-04-09T18:00:15Z] DONE Genesis 41: 7 chunks | attempts=2
+[2026-04-09T18:00:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_041_chunks.json
+[2026-04-09T18:00:15Z] START Genesis 42 (1-38)
+[2026-04-09T18:00:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_042_prompt.txt
+[2026-04-09T18:01:48Z] DONE Genesis 42: 5 chunks | attempts=2
+[2026-04-09T18:01:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_042_chunks.json
+[2026-04-09T18:01:48Z] START Genesis 43 (1-34)
+[2026-04-09T18:01:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_043_prompt.txt
+[2026-04-09T18:03:15Z] DONE Genesis 43: 3 chunks | attempts=2
+[2026-04-09T18:03:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_043_chunks.json
+[2026-04-09T18:03:15Z] START Genesis 44 (1-34)
+[2026-04-09T18:03:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_044_prompt.txt
+[2026-04-09T18:04:44Z] DONE Genesis 44: 3 chunks | attempts=2
+[2026-04-09T18:04:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_044_chunks.json
+[2026-04-09T18:04:44Z] START Genesis 45 (1-28)
+[2026-04-09T18:04:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_045_prompt.txt
+[2026-04-09T18:10:21Z] DONE Genesis 45: 3 chunks | attempts=2
+[2026-04-09T18:10:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_045_chunks.json
+[2026-04-09T18:10:21Z] START Genesis 46 (1-34)
+[2026-04-09T18:10:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_046_prompt.txt
+[2026-04-09T18:11:51Z] DONE Genesis 46: 4 chunks | attempts=2
+[2026-04-09T18:11:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_046_chunks.json
+[2026-04-09T18:11:51Z] START Genesis 47 (1-31)
+[2026-04-09T18:11:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_047_prompt.txt
+[2026-04-09T18:13:21Z] DONE Genesis 47: 3 chunks | attempts=2
+[2026-04-09T18:13:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_047_chunks.json
+[2026-04-09T18:13:21Z] START Genesis 48 (1-22)
+[2026-04-09T18:13:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_048_prompt.txt
+[2026-04-09T18:14:50Z] DONE Genesis 48: 4 chunks | attempts=2
+[2026-04-09T18:14:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_048_chunks.json
+[2026-04-09T18:14:50Z] START Genesis 49 (1-33)
+[2026-04-09T18:14:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_049_prompt.txt
+[2026-04-09T18:16:22Z] DONE Genesis 49: 5 chunks | attempts=2
+[2026-04-09T18:16:22Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_049_chunks.json
+[2026-04-09T18:16:22Z] START Genesis 50 (1-26)
+[2026-04-09T18:16:22Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_050_prompt.txt
+[2026-04-09T18:17:47Z] DONE Genesis 50: 3 chunks | attempts=2
+[2026-04-09T18:17:47Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_050_chunks.json
+[2026-04-09T18:17:47Z] START Exodus 1 (1-22)
+[2026-04-09T18:17:47Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_001_prompt.txt
+[2026-04-09T18:19:13Z] DONE Exodus 1: 4 chunks | attempts=2
+[2026-04-09T18:19:13Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_001_chunks.json
+[2026-04-09T18:19:13Z] START Exodus 2 (1-25)
+[2026-04-09T18:19:13Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_002_prompt.txt
+[2026-04-09T18:19:34Z] DONE Exodus 2: 4 chunks | attempts=1
+[2026-04-09T18:19:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_002_chunks.json
+[2026-04-09T18:19:34Z] START Exodus 3 (1-22)
+[2026-04-09T18:19:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_003_prompt.txt
+[2026-04-09T18:21:01Z] DONE Exodus 3: 3 chunks | attempts=2
+[2026-04-09T18:21:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_003_chunks.json
+[2026-04-09T18:21:01Z] START Exodus 4 (1-31)
+[2026-04-09T18:21:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_004_prompt.txt
+[2026-04-09T18:31:15Z] DONE Exodus 4: 6 chunks | attempts=2
+[2026-04-09T18:31:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_004_chunks.json
+[2026-04-09T18:31:15Z] START Exodus 5 (1-23)
+[2026-04-09T18:31:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_005_prompt.txt
+[2026-04-09T18:32:44Z] DONE Exodus 5: 4 chunks | attempts=2
+[2026-04-09T18:32:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_005_chunks.json
+[2026-04-09T18:32:44Z] START Exodus 6 (1-30)
+[2026-04-09T18:32:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_006_prompt.txt
+[2026-04-09T18:34:15Z] DONE Exodus 6: 4 chunks | attempts=2
+[2026-04-09T18:34:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_006_chunks.json
+[2026-04-09T18:34:15Z] START Exodus 7 (1-25)
+[2026-04-09T18:34:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_007_prompt.txt
+[2026-04-09T18:35:39Z] DONE Exodus 7: 3 chunks | attempts=2
+[2026-04-09T18:35:39Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_007_chunks.json
+[2026-04-09T18:35:39Z] START Exodus 8 (1-32)
+[2026-04-09T18:35:39Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_008_prompt.txt
+[2026-04-09T18:37:09Z] DONE Exodus 8: 3 chunks | attempts=2
+[2026-04-09T18:37:09Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_008_chunks.json
+[2026-04-09T18:37:09Z] START Exodus 9 (1-35)
+[2026-04-09T18:37:09Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_009_prompt.txt
+[2026-04-09T18:38:41Z] DONE Exodus 9: 4 chunks | attempts=2
+[2026-04-09T18:38:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_009_chunks.json
+[2026-04-09T18:38:41Z] START Exodus 10 (1-29)
+[2026-04-09T18:38:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_010_prompt.txt
+[2026-04-09T19:23:32Z] DONE Exodus 10: 5 chunks | attempts=3
+[2026-04-09T19:23:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_010_chunks.json
+[2026-04-09T19:23:32Z] START Exodus 11 (1-10)
+[2026-04-09T19:23:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_011_prompt.txt
+[2026-04-09T19:24:57Z] DONE Exodus 11: 3 chunks | attempts=2
+[2026-04-09T19:24:57Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_011_chunks.json
+[2026-04-09T19:24:57Z] START Exodus 12 (1-51)
+[2026-04-09T19:24:57Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_012_prompt.txt
+[2026-04-09T19:26:40Z] DONE Exodus 12: 5 chunks | attempts=2
+[2026-04-09T19:26:40Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_012_chunks.json
+[2026-04-09T19:26:40Z] START Exodus 13 (1-22)
+[2026-04-09T19:26:40Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_013_prompt.txt
+[2026-04-09T19:28:05Z] DONE Exodus 13: 2 chunks | attempts=2
+[2026-04-09T19:28:05Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_013_chunks.json
+[2026-04-09T19:28:05Z] START Exodus 14 (1-31)
+[2026-04-09T19:28:05Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_014_prompt.txt
+[2026-04-09T19:29:42Z] DONE Exodus 14: 6 chunks | attempts=2
+[2026-04-09T19:29:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_014_chunks.json
+[2026-04-09T19:29:42Z] START Exodus 15 (1-27)
+[2026-04-09T19:29:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_015_prompt.txt
+[2026-04-09T19:31:08Z] DONE Exodus 15: 2 chunks | attempts=2
+[2026-04-09T19:31:08Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_015_chunks.json
+[2026-04-09T19:31:08Z] START Exodus 16 (1-36)
+[2026-04-09T19:31:08Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_016_prompt.txt
+[2026-04-09T19:31:34Z] DONE Exodus 16: 5 chunks | attempts=1
+[2026-04-09T19:31:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_016_chunks.json
+[2026-04-09T19:31:34Z] START Exodus 17 (1-16)
+[2026-04-09T19:31:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_017_prompt.txt
+[2026-04-09T19:33:00Z] DONE Exodus 17: 2 chunks | attempts=2
+[2026-04-09T19:33:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_017_chunks.json
+[2026-04-09T19:33:00Z] START Exodus 18 (1-27)
+[2026-04-09T19:33:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_018_prompt.txt
+[2026-04-09T19:34:24Z] DONE Exodus 18: 2 chunks | attempts=2
+[2026-04-09T19:34:24Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_018_chunks.json
+[2026-04-09T19:34:24Z] START Exodus 19 (1-25)
+[2026-04-09T19:34:24Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_019_prompt.txt
+[2026-04-09T19:35:53Z] DONE Exodus 19: 5 chunks | attempts=2
+[2026-04-09T19:35:53Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_019_chunks.json
+[2026-04-09T19:35:53Z] START Exodus 20 (1-26)
+[2026-04-09T19:35:53Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_020_prompt.txt
+[2026-04-09T19:37:19Z] DONE Exodus 20: 3 chunks | attempts=2
+[2026-04-09T19:37:19Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_020_chunks.json
+[2026-04-09T19:37:19Z] START Exodus 21 (1-36)
+[2026-04-09T19:37:19Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_021_prompt.txt
+[2026-04-09T19:38:49Z] DONE Exodus 21: 4 chunks | attempts=2
+[2026-04-09T19:38:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_021_chunks.json
+[2026-04-09T19:38:49Z] START Exodus 22 (1-31)
+[2026-04-09T19:38:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_022_prompt.txt
+[2026-04-09T19:40:19Z] DONE Exodus 22: 4 chunks | attempts=2
+[2026-04-09T19:40:19Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_022_chunks.json
+[2026-04-09T19:40:19Z] START Exodus 23 (1-33)
+[2026-04-09T19:40:19Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_023_prompt.txt
+[2026-04-09T19:41:47Z] DONE Exodus 23: 4 chunks | attempts=2
+[2026-04-09T19:41:47Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_023_chunks.json
+[2026-04-09T19:41:47Z] START Exodus 24 (1-18)
+[2026-04-09T19:41:47Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_024_prompt.txt
+[2026-04-09T19:43:13Z] DONE Exodus 24: 4 chunks | attempts=2
+[2026-04-09T19:43:13Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_024_chunks.json
+[2026-04-09T19:43:13Z] START Exodus 25 (1-40)
+[2026-04-09T19:43:13Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_025_prompt.txt
+[2026-04-09T19:44:41Z] DONE Exodus 25: 4 chunks | attempts=2
+[2026-04-09T19:44:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_025_chunks.json
+[2026-04-09T19:44:41Z] START Exodus 26 (1-37)
+[2026-04-09T19:44:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_026_prompt.txt
+[2026-04-09T19:46:18Z] DONE Exodus 26: 5 chunks | attempts=2
+[2026-04-09T19:46:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_026_chunks.json
+[2026-04-09T19:46:18Z] START Exodus 27 (1-21)
+[2026-04-09T19:46:18Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_027_prompt.txt
+[2026-04-09T19:47:44Z] DONE Exodus 27: 3 chunks | attempts=2
+[2026-04-09T19:47:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_027_chunks.json
+[2026-04-09T19:47:44Z] START Exodus 28 (1-43)
+[2026-04-09T19:47:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_028_prompt.txt
+[2026-04-09T19:49:26Z] DONE Exodus 28: 6 chunks | attempts=2
+[2026-04-09T19:49:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_028_chunks.json
+[2026-04-09T19:49:26Z] START Exodus 29 (1-46)
+[2026-04-09T19:49:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_029_prompt.txt
+[2026-04-09T19:51:15Z] DONE Exodus 29: 9 chunks | attempts=2
+[2026-04-09T19:51:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_029_chunks.json
+[2026-04-09T19:51:15Z] START Exodus 30 (1-38)
+[2026-04-09T19:51:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_030_prompt.txt
+[2026-04-09T19:52:48Z] DONE Exodus 30: 5 chunks | attempts=2
+[2026-04-09T19:52:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_030_chunks.json
+[2026-04-09T19:52:48Z] START Exodus 31 (1-18)
+[2026-04-09T19:52:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_031_prompt.txt
+[2026-04-09T19:54:10Z] DONE Exodus 31: 3 chunks | attempts=2
+[2026-04-09T19:54:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_031_chunks.json
+[2026-04-09T19:54:10Z] START Exodus 32 (1-35)
+[2026-04-09T19:54:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_032_prompt.txt
+[2026-04-09T19:54:38Z] DONE Exodus 32: 5 chunks | attempts=1
+[2026-04-09T19:54:38Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_032_chunks.json
+[2026-04-09T19:54:38Z] START Exodus 33 (1-23)
+[2026-04-09T19:54:38Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_033_prompt.txt
+[2026-04-09T19:56:07Z] DONE Exodus 33: 4 chunks | attempts=2
+[2026-04-09T19:56:07Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_033_chunks.json
+[2026-04-09T19:56:07Z] START Exodus 34 (1-35)
+[2026-04-09T19:56:07Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_034_prompt.txt
+[2026-04-09T19:57:43Z] DONE Exodus 34: 5 chunks | attempts=2
+[2026-04-09T19:57:43Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_034_chunks.json
+[2026-04-09T19:57:43Z] START Exodus 35 (1-35)
+[2026-04-09T19:57:43Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_035_prompt.txt
+[2026-04-09T19:59:12Z] DONE Exodus 35: 3 chunks | attempts=2
+[2026-04-09T19:59:12Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_035_chunks.json
+[2026-04-09T19:59:12Z] START Exodus 36 (1-38)
+[2026-04-09T19:59:12Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_036_prompt.txt
+[2026-04-09T20:00:43Z] DONE Exodus 36: 4 chunks | attempts=2
+[2026-04-09T20:00:43Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_036_chunks.json
+[2026-04-09T20:00:43Z] START Exodus 37 (1-29)
+[2026-04-09T20:00:43Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_037_prompt.txt
+[2026-04-09T20:02:13Z] DONE Exodus 37: 5 chunks | attempts=2
+[2026-04-09T20:02:13Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_037_chunks.json
+[2026-04-09T20:02:13Z] START Exodus 38 (1-31)
+[2026-04-09T20:02:13Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_038_prompt.txt
+[2026-04-09T20:03:39Z] DONE Exodus 38: 3 chunks | attempts=2
+[2026-04-09T20:03:39Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_038_chunks.json
+[2026-04-09T20:03:39Z] START Exodus 39 (1-43)
+[2026-04-09T20:03:39Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_039_prompt.txt
+[2026-04-09T20:05:16Z] DONE Exodus 39: 5 chunks | attempts=2
+[2026-04-09T20:05:16Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_039_chunks.json
+[2026-04-09T20:05:16Z] START Exodus 40 (1-38)
+[2026-04-09T20:05:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/exodus/exodus_040_prompt.txt
+[2026-04-09T20:06:45Z] DONE Exodus 40: 3 chunks | attempts=2
+[2026-04-09T20:06:45Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/exodus/exodus_040_chunks.json
+[2026-04-09T20:06:45Z] START Leviticus 1 (1-17)
+[2026-04-09T20:06:45Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_001_prompt.txt
+[2026-04-09T20:08:02Z] DONE Leviticus 1: 1 chunks | attempts=2
+[2026-04-09T20:08:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_001_chunks.json
+[2026-04-09T20:08:02Z] START Leviticus 2 (1-16)
+[2026-04-09T20:08:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_002_prompt.txt
+[2026-04-09T20:09:29Z] DONE Leviticus 2: 4 chunks | attempts=2
+[2026-04-09T20:09:29Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_002_chunks.json
+[2026-04-09T20:09:29Z] START Leviticus 3 (1-17)
+[2026-04-09T20:09:29Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_003_prompt.txt
+[2026-04-09T20:10:51Z] DONE Leviticus 3: 3 chunks | attempts=2
+[2026-04-09T20:10:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_003_chunks.json
+[2026-04-09T20:10:51Z] START Leviticus 4 (1-35)
+[2026-04-09T20:10:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_004_prompt.txt
+[2026-04-09T20:12:26Z] DONE Leviticus 4: 5 chunks | attempts=2
+[2026-04-09T20:12:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_004_chunks.json
+[2026-04-09T20:12:26Z] START Leviticus 5 (1-19)
+[2026-04-09T20:12:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_005_prompt.txt
+[2026-04-09T20:13:50Z] DONE Leviticus 5: 2 chunks | attempts=2
+[2026-04-09T20:13:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_005_chunks.json
+[2026-04-09T20:13:50Z] START Leviticus 6 (1-30)
+[2026-04-09T20:13:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_006_prompt.txt
+[2026-04-09T20:15:26Z] DONE Leviticus 6: 5 chunks | attempts=2
+[2026-04-09T20:15:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_006_chunks.json
+[2026-04-09T20:15:26Z] START Leviticus 7 (1-38)
+[2026-04-09T20:15:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_007_prompt.txt
+[2026-04-09T20:17:02Z] DONE Leviticus 7: 5 chunks | attempts=2
+[2026-04-09T20:17:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_007_chunks.json
+[2026-04-09T20:17:02Z] START Leviticus 8 (1-36)
+[2026-04-09T20:17:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_008_prompt.txt
+[2026-04-09T20:18:42Z] DONE Leviticus 8: 7 chunks | attempts=2
+[2026-04-09T20:18:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_008_chunks.json
+[2026-04-09T20:18:42Z] START Leviticus 9 (1-24)
+[2026-04-09T20:18:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_009_prompt.txt
+[2026-04-09T20:20:10Z] DONE Leviticus 9: 4 chunks | attempts=2
+[2026-04-09T20:20:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_009_chunks.json
+[2026-04-09T20:20:10Z] START Leviticus 10 (1-20)
+[2026-04-09T20:20:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_010_prompt.txt
+[2026-04-09T20:21:37Z] DONE Leviticus 10: 4 chunks | attempts=2
+[2026-04-09T20:21:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_010_chunks.json
+[2026-04-09T20:21:37Z] START Leviticus 11 (1-47)
+[2026-04-09T20:21:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_011_prompt.txt
+[2026-04-09T20:23:20Z] DONE Leviticus 11: 7 chunks | attempts=2
+[2026-04-09T20:23:20Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_011_chunks.json
+[2026-04-09T20:23:20Z] START Leviticus 12 (1-8)
+[2026-04-09T20:23:20Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_012_prompt.txt
+[2026-04-09T20:24:36Z] DONE Leviticus 12: 1 chunks | attempts=2
+[2026-04-09T20:24:36Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_012_chunks.json
+[2026-04-09T20:24:36Z] START Leviticus 13 (1-59)
+[2026-04-09T20:24:36Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_013_prompt.txt
+[2026-04-09T20:26:28Z] DONE Leviticus 13: 8 chunks | attempts=2
+[2026-04-09T20:26:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_013_chunks.json
+[2026-04-09T20:26:28Z] START Leviticus 14 (1-57)
+[2026-04-09T20:26:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_014_prompt.txt
+[2026-04-09T20:28:02Z] DONE Leviticus 14: 2 chunks | attempts=2
+[2026-04-09T20:28:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_014_chunks.json
+[2026-04-09T20:28:02Z] START Leviticus 15 (1-33)
+[2026-04-09T20:28:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_015_prompt.txt
+[2026-04-09T20:29:36Z] DONE Leviticus 15: 5 chunks | attempts=2
+[2026-04-09T20:29:36Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_015_chunks.json
+[2026-04-09T20:29:36Z] START Leviticus 16 (1-34)
+[2026-04-09T20:29:36Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_016_prompt.txt
+[2026-04-09T20:31:02Z] DONE Leviticus 16: 2 chunks | attempts=2
+[2026-04-09T20:31:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_016_chunks.json
+[2026-04-09T20:31:02Z] START Leviticus 17 (1-16)
+[2026-04-09T20:31:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_017_prompt.txt
+[2026-04-09T20:32:27Z] DONE Leviticus 17: 3 chunks | attempts=2
+[2026-04-09T20:32:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_017_chunks.json
+[2026-04-09T20:32:27Z] START Leviticus 18 (1-30)
+[2026-04-09T20:32:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_018_prompt.txt
+[2026-04-09T20:33:56Z] DONE Leviticus 18: 4 chunks | attempts=2
+[2026-04-09T20:33:56Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_018_chunks.json
+[2026-04-09T20:33:56Z] START Leviticus 19 (1-37)
+[2026-04-09T20:33:56Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_019_prompt.txt
+[2026-04-09T20:35:19Z] DONE Leviticus 19: 1 chunks | attempts=2
+[2026-04-09T20:35:19Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_019_chunks.json
+[2026-04-09T20:35:19Z] START Leviticus 20 (1-27)
+[2026-04-09T20:35:19Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_020_prompt.txt
+[2026-04-09T20:36:53Z] DONE Leviticus 20: 5 chunks | attempts=2
+[2026-04-09T20:36:53Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_020_chunks.json
+[2026-04-09T20:36:53Z] START Leviticus 21 (1-24)
+[2026-04-09T20:36:53Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_021_prompt.txt
+[2026-04-09T20:38:19Z] DONE Leviticus 21: 4 chunks | attempts=2
+[2026-04-09T20:38:19Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_021_chunks.json
+[2026-04-09T20:38:19Z] START Leviticus 22 (1-33)
+[2026-04-09T20:38:19Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_022_prompt.txt
+[2026-04-09T20:39:48Z] DONE Leviticus 22: 3 chunks | attempts=2
+[2026-04-09T20:39:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_022_chunks.json
+[2026-04-09T20:39:48Z] START Leviticus 23 (1-44)
+[2026-04-09T20:39:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_023_prompt.txt
+[2026-04-09T20:41:23Z] DONE Leviticus 23: 4 chunks | attempts=2
+[2026-04-09T20:41:23Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_023_chunks.json
+[2026-04-09T20:41:23Z] START Leviticus 24 (1-23)
+[2026-04-09T20:41:23Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_024_prompt.txt
+[2026-04-09T20:46:44Z] DONE Leviticus 24: 4 chunks | attempts=2
+[2026-04-09T20:46:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_024_chunks.json
+[2026-04-09T20:46:44Z] START Leviticus 25 (1-55)
+[2026-04-09T20:46:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_025_prompt.txt
+[2026-04-09T20:48:29Z] DONE Leviticus 25: 7 chunks | attempts=2
+[2026-04-09T20:48:29Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_025_chunks.json
+[2026-04-09T20:48:29Z] START Leviticus 26 (1-46)
+[2026-04-09T20:48:29Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_026_prompt.txt
+[2026-04-09T20:50:04Z] DONE Leviticus 26: 5 chunks | attempts=2
+[2026-04-09T20:50:04Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_026_chunks.json
+[2026-04-09T20:50:04Z] START Leviticus 27 (1-34)
+[2026-04-09T20:50:04Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/leviticus/leviticus_027_prompt.txt
+[2026-04-09T20:51:37Z] DONE Leviticus 27: 5 chunks | attempts=2
+[2026-04-09T20:51:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/leviticus/leviticus_027_chunks.json
+[2026-04-09T20:51:37Z] START Numbers 1 (1-54)
+[2026-04-09T20:51:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_001_prompt.txt
+[2026-04-09T20:53:18Z] DONE Numbers 1: 6 chunks | attempts=2
+[2026-04-09T20:53:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_001_chunks.json
+[2026-04-09T20:53:18Z] START Numbers 2 (1-34)
+[2026-04-09T20:53:18Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_002_prompt.txt
+[2026-04-09T20:54:50Z] DONE Numbers 2: 6 chunks | attempts=2
+[2026-04-09T20:54:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_002_chunks.json
+[2026-04-09T20:54:50Z] START Numbers 3 (1-51)
+[2026-04-09T20:54:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_003_prompt.txt
+[2026-04-09T20:56:41Z] DONE Numbers 3: 10 chunks | attempts=2
+[2026-04-09T20:56:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_003_chunks.json
+[2026-04-09T20:56:41Z] START Numbers 4 (1-49)
+[2026-04-09T20:56:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_004_prompt.txt
+[2026-04-09T20:58:15Z] DONE Numbers 4: 4 chunks | attempts=2
+[2026-04-09T20:58:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_004_chunks.json
+[2026-04-09T20:58:15Z] START Numbers 5 (1-31)
+[2026-04-09T20:58:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_005_prompt.txt
+[2026-04-09T20:59:45Z] DONE Numbers 5: 3 chunks | attempts=2
+[2026-04-09T20:59:45Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_005_chunks.json
+[2026-04-09T20:59:45Z] START Numbers 6 (1-27)
+[2026-04-09T20:59:45Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_006_prompt.txt
+[2026-04-09T21:01:10Z] DONE Numbers 6: 2 chunks | attempts=2
+[2026-04-09T21:01:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_006_chunks.json
+[2026-04-09T21:01:10Z] START Numbers 7 (1-89)
+[2026-04-09T21:01:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_007_prompt.txt
+[2026-04-09T21:02:57Z] FAIL Numbers 7: Chunk 4 has an empty title. | consecutive_failures=1
+[2026-04-09T21:02:57Z] START Numbers 8 (1-26)
+[2026-04-09T21:02:57Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_008_prompt.txt
+[2026-04-09T21:04:24Z] DONE Numbers 8: 3 chunks | attempts=2
+[2026-04-09T21:04:24Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_008_chunks.json
+[2026-04-09T21:04:24Z] START Numbers 9 (1-23)
+[2026-04-09T21:04:24Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_009_prompt.txt
+[2026-04-09T21:05:49Z] DONE Numbers 9: 3 chunks | attempts=2
+[2026-04-09T21:05:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_009_chunks.json
+[2026-04-09T21:05:49Z] START Numbers 10 (1-36)
+[2026-04-09T21:05:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_010_prompt.txt
+[2026-04-09T21:07:20Z] DONE Numbers 10: 4 chunks | attempts=2
+[2026-04-09T21:07:20Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_010_chunks.json
+[2026-04-09T21:07:20Z] START Numbers 11 (1-35)
+[2026-04-09T21:07:20Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_011_prompt.txt
+[2026-04-09T21:08:57Z] DONE Numbers 11: 6 chunks | attempts=2
+[2026-04-09T21:08:57Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_011_chunks.json
+[2026-04-09T21:08:57Z] START Numbers 12 (1-16)
+[2026-04-09T21:08:57Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_012_prompt.txt
+[2026-04-09T21:09:17Z] DONE Numbers 12: 4 chunks | attempts=1
+[2026-04-09T21:09:17Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_012_chunks.json
+[2026-04-09T21:09:17Z] START Numbers 13 (1-33)
+[2026-04-09T21:09:17Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_013_prompt.txt
+[2026-04-09T21:10:50Z] DONE Numbers 13: 5 chunks | attempts=2
+[2026-04-09T21:10:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_013_chunks.json
+[2026-04-09T21:10:50Z] START Numbers 14 (1-45)
+[2026-04-09T21:10:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_014_prompt.txt
+[2026-04-09T21:12:27Z] DONE Numbers 14: 5 chunks | attempts=2
+[2026-04-09T21:12:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_014_chunks.json
+[2026-04-09T21:12:27Z] START Numbers 15 (1-41)
+[2026-04-09T21:12:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_015_prompt.txt
+[2026-04-09T21:14:04Z] DONE Numbers 15: 5 chunks | attempts=2
+[2026-04-09T21:14:04Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_015_chunks.json
+[2026-04-09T21:14:04Z] START Numbers 16 (1-50)
+[2026-04-09T21:14:04Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_016_prompt.txt
+[2026-04-09T21:15:47Z] DONE Numbers 16: 7 chunks | attempts=2
+[2026-04-09T21:15:47Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_016_chunks.json
+[2026-04-09T21:15:47Z] START Numbers 17 (1-13)
+[2026-04-09T21:15:47Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_017_prompt.txt
+[2026-04-09T21:17:08Z] DONE Numbers 17: 3 chunks | attempts=2
+[2026-04-09T21:17:08Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_017_chunks.json
+[2026-04-09T21:17:08Z] START Numbers 18 (1-32)
+[2026-04-09T21:17:08Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_018_prompt.txt
+[2026-04-09T21:18:39Z] DONE Numbers 18: 4 chunks | attempts=2
+[2026-04-09T21:18:39Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_018_chunks.json
+[2026-04-09T21:18:39Z] START Numbers 19 (1-22)
+[2026-04-09T21:18:39Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_019_prompt.txt
+[2026-04-09T21:20:01Z] DONE Numbers 19: 2 chunks | attempts=2
+[2026-04-09T21:20:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_019_chunks.json
+[2026-04-09T21:20:01Z] START Numbers 20 (1-29)
+[2026-04-09T21:20:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_020_prompt.txt
+[2026-04-09T21:21:26Z] DONE Numbers 20: 3 chunks | attempts=2
+[2026-04-09T21:21:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_020_chunks.json
+[2026-04-09T21:21:26Z] START Numbers 21 (1-35)
+[2026-04-09T21:21:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_021_prompt.txt
+[2026-04-09T21:23:00Z] DONE Numbers 21: 5 chunks | attempts=2
+[2026-04-09T21:23:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_021_chunks.json
+[2026-04-09T21:23:00Z] START Numbers 22 (1-41)
+[2026-04-09T21:23:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_022_prompt.txt
+[2026-04-09T21:24:35Z] DONE Numbers 22: 5 chunks | attempts=2
+[2026-04-09T21:24:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_022_chunks.json
+[2026-04-09T21:24:35Z] START Numbers 23 (1-30)
+[2026-04-09T21:24:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_023_prompt.txt
+[2026-04-09T21:26:01Z] DONE Numbers 23: 3 chunks | attempts=2
+[2026-04-09T21:26:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_023_chunks.json
+[2026-04-09T21:26:01Z] START Numbers 24 (1-25)
+[2026-04-09T21:26:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_024_prompt.txt
+[2026-04-09T21:27:32Z] DONE Numbers 24: 5 chunks | attempts=2
+[2026-04-09T21:27:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_024_chunks.json
+[2026-04-09T21:27:32Z] START Numbers 25 (1-18)
+[2026-04-09T21:27:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_025_prompt.txt
+[2026-04-09T21:28:58Z] DONE Numbers 25: 3 chunks | attempts=2
+[2026-04-09T21:28:58Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_025_chunks.json
+[2026-04-09T21:28:58Z] START Numbers 26 (1-65)
+[2026-04-09T21:28:58Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_026_prompt.txt
+[2026-04-09T21:30:49Z] DONE Numbers 26: 8 chunks | attempts=2
+[2026-04-09T21:30:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_026_chunks.json
+[2026-04-09T21:30:49Z] START Numbers 27 (1-23)
+[2026-04-09T21:30:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_027_prompt.txt
+[2026-04-09T21:32:20Z] DONE Numbers 27: 6 chunks | attempts=2
+[2026-04-09T21:32:20Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_027_chunks.json
+[2026-04-09T21:32:20Z] START Numbers 28 (1-31)
+[2026-04-09T21:32:20Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_028_prompt.txt
+[2026-04-09T21:33:51Z] DONE Numbers 28: 5 chunks | attempts=2
+[2026-04-09T21:33:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_028_chunks.json
+[2026-04-09T21:33:51Z] START Numbers 29 (1-40)
+[2026-04-09T21:33:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_029_prompt.txt
+[2026-04-09T21:35:24Z] DONE Numbers 29: 4 chunks | attempts=2
+[2026-04-09T21:35:24Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_029_chunks.json
+[2026-04-09T21:35:24Z] START Numbers 30 (1-16)
+[2026-04-09T21:35:24Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_030_prompt.txt
+[2026-04-09T21:36:55Z] DONE Numbers 30: 5 chunks | attempts=2
+[2026-04-09T21:36:55Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_030_chunks.json
+[2026-04-09T21:36:55Z] START Numbers 31 (1-54)
+[2026-04-09T21:36:55Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_031_prompt.txt
+[2026-04-09T21:38:32Z] DONE Numbers 31: 5 chunks | attempts=2
+[2026-04-09T21:38:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_031_chunks.json
+[2026-04-09T21:38:32Z] START Numbers 32 (1-42)
+[2026-04-09T21:38:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_032_prompt.txt
+[2026-04-09T21:40:14Z] DONE Numbers 32: 7 chunks | attempts=2
+[2026-04-09T21:40:14Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_032_chunks.json
+[2026-04-09T21:40:14Z] START Numbers 33 (1-56)
+[2026-04-09T21:40:14Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_033_prompt.txt
+[2026-04-09T21:41:42Z] DONE Numbers 33: 2 chunks | attempts=2
+[2026-04-09T21:41:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_033_chunks.json
+[2026-04-09T21:41:42Z] START Numbers 34 (1-29)
+[2026-04-09T21:41:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_034_prompt.txt
+[2026-04-09T21:43:09Z] DONE Numbers 34: 3 chunks | attempts=2
+[2026-04-09T21:43:09Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_034_chunks.json
+[2026-04-09T21:43:09Z] START Numbers 35 (1-34)
+[2026-04-09T21:43:09Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_035_prompt.txt
+[2026-04-09T21:44:34Z] DONE Numbers 35: 2 chunks | attempts=2
+[2026-04-09T21:44:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_035_chunks.json
+[2026-04-09T21:44:34Z] START Numbers 36 (1-13)
+[2026-04-09T21:44:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_036_prompt.txt
+[2026-04-09T21:46:01Z] DONE Numbers 36: 4 chunks | attempts=2
+[2026-04-09T21:46:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/numbers/numbers_036_chunks.json
+[2026-04-09T21:46:01Z] START Deuteronomy 1 (1-46)
+[2026-04-09T21:46:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_001_prompt.txt
+[2026-04-09T21:47:37Z] DONE Deuteronomy 1: 4 chunks | attempts=2
+[2026-04-09T21:47:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_001_chunks.json
+[2026-04-09T21:47:37Z] START Deuteronomy 2 (1-37)
+[2026-04-09T21:47:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_002_prompt.txt
+[2026-04-09T21:49:10Z] DONE Deuteronomy 2: 4 chunks | attempts=2
+[2026-04-09T21:49:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_002_chunks.json
+[2026-04-09T21:49:10Z] START Deuteronomy 3 (1-29)
+[2026-04-09T21:49:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_003_prompt.txt
+[2026-04-09T21:50:42Z] DONE Deuteronomy 3: 4 chunks | attempts=2
+[2026-04-09T21:50:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_003_chunks.json
+[2026-04-09T21:50:42Z] START Deuteronomy 4 (1-49)
+[2026-04-09T21:50:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_004_prompt.txt
+[2026-04-09T21:52:17Z] DONE Deuteronomy 4: 3 chunks | attempts=2
+[2026-04-09T21:52:17Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_004_chunks.json
+[2026-04-09T21:52:17Z] START Deuteronomy 5 (1-33)
+[2026-04-09T21:52:17Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_005_prompt.txt
+[2026-04-09T21:53:51Z] DONE Deuteronomy 5: 5 chunks | attempts=2
+[2026-04-09T21:53:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_005_chunks.json
+[2026-04-09T21:53:51Z] START Deuteronomy 6 (1-25)
+[2026-04-09T21:53:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_006_prompt.txt
+[2026-04-09T21:55:15Z] DONE Deuteronomy 6: 3 chunks | attempts=2
+[2026-04-09T21:55:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_006_chunks.json
+[2026-04-09T21:55:15Z] START Deuteronomy 7 (1-26)
+[2026-04-09T21:55:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_007_prompt.txt
+[2026-04-09T21:56:46Z] DONE Deuteronomy 7: 4 chunks | attempts=2
+[2026-04-09T21:56:46Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_007_chunks.json
+[2026-04-09T21:56:46Z] START Deuteronomy 8 (1-20)
+[2026-04-09T21:56:46Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_008_prompt.txt
+[2026-04-09T21:58:12Z] DONE Deuteronomy 8: 4 chunks | attempts=2
+[2026-04-09T21:58:12Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_008_chunks.json
+[2026-04-09T21:58:12Z] START Deuteronomy 9 (1-29)
+[2026-04-09T21:58:12Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_009_prompt.txt
+[2026-04-09T21:59:52Z] DONE Deuteronomy 9: 4 chunks | attempts=2
+[2026-04-09T21:59:52Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_009_chunks.json
+[2026-04-09T21:59:52Z] START Deuteronomy 10 (1-22)
+[2026-04-09T21:59:52Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_010_prompt.txt
+[2026-04-09T22:01:21Z] DONE Deuteronomy 10: 4 chunks | attempts=2
+[2026-04-09T22:01:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_010_chunks.json
+[2026-04-09T22:01:21Z] START Deuteronomy 11 (1-32)
+[2026-04-09T22:01:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_011_prompt.txt
+[2026-04-09T22:02:53Z] DONE Deuteronomy 11: 4 chunks | attempts=2
+[2026-04-09T22:02:53Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_011_chunks.json
+[2026-04-09T22:02:53Z] START Deuteronomy 12 (1-32)
+[2026-04-09T22:02:53Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_012_prompt.txt
+[2026-04-09T23:19:33Z] DONE Deuteronomy 12: 4 chunks | attempts=2
+[2026-04-09T23:19:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_012_chunks.json
+[2026-04-09T23:19:33Z] START Deuteronomy 13 (1-18)
+[2026-04-09T23:19:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_013_prompt.txt
+[2026-04-09T23:21:04Z] DONE Deuteronomy 13: 3 chunks | attempts=2
+[2026-04-09T23:21:04Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_013_chunks.json
+[2026-04-09T23:21:04Z] START Deuteronomy 14 (1-29)
+[2026-04-09T23:21:04Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_014_prompt.txt
+[2026-04-09T23:22:35Z] DONE Deuteronomy 14: 4 chunks | attempts=2
+[2026-04-09T23:22:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_014_chunks.json
+[2026-04-09T23:22:35Z] START Deuteronomy 15 (1-23)
+[2026-04-09T23:22:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_015_prompt.txt
+[2026-04-09T23:24:02Z] DONE Deuteronomy 15: 3 chunks | attempts=2
+[2026-04-09T23:24:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_015_chunks.json
+[2026-04-09T23:24:02Z] START Deuteronomy 16 (1-22)
+[2026-04-09T23:24:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_016_prompt.txt
+[2026-04-09T23:25:35Z] DONE Deuteronomy 16: 5 chunks | attempts=2
+[2026-04-09T23:25:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_016_chunks.json
+[2026-04-09T23:25:35Z] START Deuteronomy 17 (1-20)
+[2026-04-09T23:25:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_017_prompt.txt
+[2026-04-09T23:27:01Z] DONE Deuteronomy 17: 3 chunks | attempts=2
+[2026-04-09T23:27:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_017_chunks.json
+[2026-04-09T23:27:01Z] START Deuteronomy 18 (1-22)
+[2026-04-09T23:27:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_018_prompt.txt
+[2026-04-09T23:28:28Z] DONE Deuteronomy 18: 3 chunks | attempts=2
+[2026-04-09T23:28:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_018_chunks.json
+[2026-04-09T23:28:28Z] START Deuteronomy 19 (1-21)
+[2026-04-09T23:28:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_019_prompt.txt
+[2026-04-10T01:25:44Z] DONE Deuteronomy 19: 2 chunks | attempts=3
+[2026-04-10T01:25:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_019_chunks.json
+[2026-04-10T01:25:44Z] START Deuteronomy 20 (1-20)
+[2026-04-10T01:25:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_020_prompt.txt
+[2026-04-10T04:18:07Z] DONE Deuteronomy 20: 3 chunks | attempts=3
+[2026-04-10T04:18:07Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_020_chunks.json
+[2026-04-10T04:18:07Z] START Deuteronomy 21 (1-23)
+[2026-04-10T04:18:07Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_021_prompt.txt
+[2026-04-10T05:37:50Z] DONE Deuteronomy 21: 5 chunks | attempts=2
+[2026-04-10T05:37:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_021_chunks.json
+[2026-04-10T05:37:50Z] START Deuteronomy 22 (1-30)
+[2026-04-10T05:37:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_022_prompt.txt
+[2026-04-10T05:39:27Z] DONE Deuteronomy 22: 5 chunks | attempts=2
+[2026-04-10T05:39:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_022_chunks.json
+[2026-04-10T05:39:27Z] START Deuteronomy 23 (1-25)
+[2026-04-10T05:39:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_023_prompt.txt
+[2026-04-10T05:40:55Z] DONE Deuteronomy 23: 3 chunks | attempts=2
+[2026-04-10T05:40:55Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_023_chunks.json
+[2026-04-10T05:40:55Z] START Deuteronomy 24 (1-22)
+[2026-04-10T05:40:55Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_024_prompt.txt
+[2026-04-10T05:42:25Z] DONE Deuteronomy 24: 4 chunks | attempts=2
+[2026-04-10T05:42:25Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_024_chunks.json
+[2026-04-10T05:42:25Z] START Deuteronomy 25 (1-19)
+[2026-04-10T05:42:25Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_025_prompt.txt
+[2026-04-10T05:43:59Z] DONE Deuteronomy 25: 6 chunks | attempts=2
+[2026-04-10T05:43:59Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_025_chunks.json
+[2026-04-10T05:43:59Z] START Deuteronomy 26 (1-19)
+[2026-04-10T05:43:59Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_026_prompt.txt
+[2026-04-10T05:45:28Z] DONE Deuteronomy 26: 3 chunks | attempts=2
+[2026-04-10T05:45:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_026_chunks.json
+[2026-04-10T05:45:28Z] START Deuteronomy 27 (1-26)
+[2026-04-10T05:45:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_027_prompt.txt
+[2026-04-10T05:47:00Z] DONE Deuteronomy 27: 4 chunks | attempts=2
+[2026-04-10T05:47:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_027_chunks.json
+[2026-04-10T05:47:00Z] START Deuteronomy 28 (1-68)
+[2026-04-10T05:47:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_028_prompt.txt
+[2026-04-10T07:24:16Z] DONE Deuteronomy 28: 3 chunks | attempts=2
+[2026-04-10T07:24:16Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_028_chunks.json
+[2026-04-10T07:24:16Z] START Deuteronomy 29 (1-29)
+[2026-04-10T07:24:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_029_prompt.txt
+[2026-04-10T07:58:01Z] DONE Deuteronomy 29: 2 chunks | attempts=2
+[2026-04-10T07:58:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_029_chunks.json
+[2026-04-10T07:58:01Z] START Deuteronomy 30 (1-20)
+[2026-04-10T07:58:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_030_prompt.txt
+[2026-04-10T08:43:29Z] DONE Deuteronomy 30: 3 chunks | attempts=2
+[2026-04-10T08:43:29Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_030_chunks.json
+[2026-04-10T08:43:29Z] START Deuteronomy 31 (1-30)
+[2026-04-10T08:43:29Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_031_prompt.txt
+[2026-04-10T09:06:02Z] DONE Deuteronomy 31: 6 chunks | attempts=2
+[2026-04-10T09:06:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_031_chunks.json
+[2026-04-10T09:06:02Z] START Deuteronomy 32 (1-52)
+[2026-04-10T09:06:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_032_prompt.txt
+[2026-04-10T09:07:37Z] DONE Deuteronomy 32: 3 chunks | attempts=2
+[2026-04-10T09:07:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_032_chunks.json
+[2026-04-10T09:07:37Z] START Deuteronomy 33 (1-29)
+[2026-04-10T09:07:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_033_prompt.txt
+[2026-04-10T09:09:09Z] DONE Deuteronomy 33: 2 chunks | attempts=2
+[2026-04-10T09:09:09Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_033_chunks.json
+[2026-04-10T09:09:09Z] START Deuteronomy 34 (1-12)
+[2026-04-10T09:09:09Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/deuteronomy/deuteronomy_034_prompt.txt
+[2026-04-10T09:10:33Z] DONE Deuteronomy 34: 3 chunks | attempts=2
+[2026-04-10T09:10:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/deuteronomy/deuteronomy_034_chunks.json
+[2026-04-10T09:10:33Z] START Joshua 1 (1-18)
+[2026-04-10T09:10:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_001_prompt.txt
+[2026-04-10T09:12:02Z] DONE Joshua 1: 3 chunks | attempts=2
+[2026-04-10T09:12:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_001_chunks.json
+[2026-04-10T09:12:02Z] START Joshua 2 (1-24)
+[2026-04-10T09:12:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_002_prompt.txt
+[2026-04-10T09:13:35Z] DONE Joshua 2: 4 chunks | attempts=2
+[2026-04-10T09:13:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_002_chunks.json
+[2026-04-10T09:13:35Z] START Joshua 3 (1-17)
+[2026-04-10T09:13:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_003_prompt.txt
+[2026-04-10T09:15:00Z] DONE Joshua 3: 3 chunks | attempts=2
+[2026-04-10T09:15:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_003_chunks.json
+[2026-04-10T09:15:00Z] START Joshua 4 (1-24)
+[2026-04-10T09:15:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_004_prompt.txt
+[2026-04-10T09:16:28Z] DONE Joshua 4: 3 chunks | attempts=2
+[2026-04-10T09:16:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_004_chunks.json
+[2026-04-10T09:16:28Z] START Joshua 5 (1-15)
+[2026-04-10T09:16:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_005_prompt.txt
+[2026-04-10T09:17:58Z] DONE Joshua 5: 4 chunks | attempts=2
+[2026-04-10T09:17:58Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_005_chunks.json
+[2026-04-10T09:17:58Z] START Joshua 6 (1-27)
+[2026-04-10T09:17:58Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_006_prompt.txt
+[2026-04-10T09:19:33Z] DONE Joshua 6: 5 chunks | attempts=2
+[2026-04-10T09:19:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_006_chunks.json
+[2026-04-10T09:19:33Z] START Joshua 7 (1-26)
+[2026-04-10T09:19:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_007_prompt.txt
+[2026-04-10T09:21:09Z] DONE Joshua 7: 5 chunks | attempts=2
+[2026-04-10T09:21:09Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_007_chunks.json
+[2026-04-10T09:21:09Z] START Joshua 8 (1-35)
+[2026-04-10T09:21:09Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_008_prompt.txt
+[2026-04-10T09:22:44Z] DONE Joshua 8: 4 chunks | attempts=2
+[2026-04-10T09:22:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_008_chunks.json
+[2026-04-10T09:22:44Z] START Joshua 9 (1-27)
+[2026-04-10T09:22:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_009_prompt.txt
+[2026-04-10T09:24:22Z] DONE Joshua 9: 4 chunks | attempts=2
+[2026-04-10T09:24:22Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_009_chunks.json
+[2026-04-10T09:24:22Z] START Joshua 10 (1-43)
+[2026-04-10T09:24:22Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_010_prompt.txt
+[2026-04-10T09:26:00Z] DONE Joshua 10: 5 chunks | attempts=2
+[2026-04-10T09:26:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_010_chunks.json
+[2026-04-10T09:26:00Z] START Joshua 11 (1-23)
+[2026-04-10T09:26:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_011_prompt.txt
+[2026-04-10T09:27:32Z] DONE Joshua 11: 5 chunks | attempts=2
+[2026-04-10T09:27:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_011_chunks.json
+[2026-04-10T09:27:32Z] START Joshua 12 (1-24)
+[2026-04-10T09:27:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_012_prompt.txt
+[2026-04-10T09:28:58Z] DONE Joshua 12: 2 chunks | attempts=2
+[2026-04-10T09:28:58Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_012_chunks.json
+[2026-04-10T09:28:58Z] START Joshua 13 (1-33)
+[2026-04-10T09:28:58Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_013_prompt.txt
+[2026-04-10T09:30:36Z] DONE Joshua 13: 6 chunks | attempts=2
+[2026-04-10T09:30:36Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_013_chunks.json
+[2026-04-10T09:30:36Z] START Joshua 14 (1-15)
+[2026-04-10T09:30:36Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_014_prompt.txt
+[2026-04-10T09:31:59Z] DONE Joshua 14: 3 chunks | attempts=2
+[2026-04-10T09:31:59Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_014_chunks.json
+[2026-04-10T09:31:59Z] START Joshua 15 (1-63)
+[2026-04-10T09:31:59Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_015_prompt.txt
+[2026-04-10T09:33:37Z] DONE Joshua 15: 6 chunks | attempts=2
+[2026-04-10T09:33:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_015_chunks.json
+[2026-04-10T09:33:37Z] START Joshua 16 (1-10)
+[2026-04-10T09:33:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_016_prompt.txt
+[2026-04-10T09:34:58Z] DONE Joshua 16: 2 chunks | attempts=2
+[2026-04-10T09:34:58Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_016_chunks.json
+[2026-04-10T09:34:58Z] START Joshua 17 (1-18)
+[2026-04-10T09:34:58Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_017_prompt.txt
+[2026-04-10T09:36:26Z] DONE Joshua 17: 3 chunks | attempts=2
+[2026-04-10T09:36:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_017_chunks.json
+[2026-04-10T09:36:26Z] START Joshua 18 (1-28)
+[2026-04-10T09:36:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_018_prompt.txt
+[2026-04-10T09:37:53Z] DONE Joshua 18: 3 chunks | attempts=2
+[2026-04-10T09:37:53Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_018_chunks.json
+[2026-04-10T09:37:53Z] START Joshua 19 (1-51)
+[2026-04-10T09:37:53Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_019_prompt.txt
+[2026-04-10T09:39:37Z] DONE Joshua 19: 7 chunks | attempts=2
+[2026-04-10T09:39:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_019_chunks.json
+[2026-04-10T09:39:37Z] START Joshua 20 (1-9)
+[2026-04-10T09:39:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_020_prompt.txt
+[2026-04-10T09:41:01Z] DONE Joshua 20: 3 chunks | attempts=2
+[2026-04-10T09:41:01Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_020_chunks.json
+[2026-04-10T09:41:01Z] START Joshua 21 (1-45)
+[2026-04-10T09:41:01Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_021_prompt.txt
+[2026-04-10T09:42:47Z] DONE Joshua 21: 6 chunks | attempts=2
+[2026-04-10T09:42:47Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_021_chunks.json
+[2026-04-10T09:42:47Z] START Joshua 22 (1-34)
+[2026-04-10T09:42:47Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_022_prompt.txt
+[2026-04-10T09:44:23Z] DONE Joshua 22: 3 chunks | attempts=2
+[2026-04-10T09:44:23Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_022_chunks.json
+[2026-04-10T09:44:23Z] START Joshua 23 (1-16)
+[2026-04-10T09:44:23Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_023_prompt.txt
+[2026-04-10T09:45:49Z] DONE Joshua 23: 3 chunks | attempts=2
+[2026-04-10T09:45:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_023_chunks.json
+[2026-04-10T09:45:49Z] START Joshua 24 (1-33)
+[2026-04-10T09:45:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joshua/joshua_024_prompt.txt
+[2026-04-10T09:47:17Z] DONE Joshua 24: 2 chunks | attempts=2
+[2026-04-10T09:47:17Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joshua/joshua_024_chunks.json
+[2026-04-10T09:47:17Z] START Judges 1 (1-36)
+[2026-04-10T09:47:17Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_001_prompt.txt
+[2026-04-10T09:47:43Z] DONE Judges 1: 4 chunks | attempts=1
+[2026-04-10T09:47:43Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_001_chunks.json
+[2026-04-10T09:47:43Z] START Judges 2 (1-23)
+[2026-04-10T09:47:43Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_002_prompt.txt
+[2026-04-10T09:48:03Z] DONE Judges 2: 3 chunks | attempts=1
+[2026-04-10T09:48:03Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_002_chunks.json
+[2026-04-10T09:48:03Z] START Judges 3 (1-31)
+[2026-04-10T09:48:03Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_003_prompt.txt
+[2026-04-10T09:49:35Z] DONE Judges 3: 4 chunks | attempts=2
+[2026-04-10T09:49:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_003_chunks.json
+[2026-04-10T09:49:35Z] START Judges 4 (1-24)
+[2026-04-10T09:49:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_004_prompt.txt
+[2026-04-10T09:51:12Z] DONE Judges 4: 6 chunks | attempts=2
+[2026-04-10T09:51:12Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_004_chunks.json
+[2026-04-10T09:51:12Z] START Judges 5 (1-31)
+[2026-04-10T09:51:12Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_005_prompt.txt
+[2026-04-10T09:52:50Z] DONE Judges 5: 6 chunks | attempts=2
+[2026-04-10T09:52:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_005_chunks.json
+[2026-04-10T09:52:50Z] START Judges 6 (1-40)
+[2026-04-10T09:52:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_006_prompt.txt
+[2026-04-10T09:54:34Z] DONE Judges 6: 6 chunks | attempts=2
+[2026-04-10T09:54:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_006_chunks.json
+[2026-04-10T09:54:34Z] START Judges 7 (1-25)
+[2026-04-10T09:54:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_007_prompt.txt
+[2026-04-10T09:56:11Z] DONE Judges 7: 4 chunks | attempts=2
+[2026-04-10T09:56:11Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_007_chunks.json
+[2026-04-10T09:56:11Z] START Judges 8 (1-35)
+[2026-04-10T09:56:11Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_008_prompt.txt
+[2026-04-10T09:57:52Z] DONE Judges 8: 5 chunks | attempts=2
+[2026-04-10T09:57:52Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_008_chunks.json
+[2026-04-10T09:57:52Z] START Judges 9 (1-57)
+[2026-04-10T09:57:52Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_009_prompt.txt
+[2026-04-10T09:59:42Z] DONE Judges 9: 8 chunks | attempts=2
+[2026-04-10T09:59:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_009_chunks.json
+[2026-04-10T09:59:42Z] START Judges 10 (1-18)
+[2026-04-10T09:59:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_010_prompt.txt
+[2026-04-10T10:01:10Z] DONE Judges 10: 4 chunks | attempts=2
+[2026-04-10T10:01:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_010_chunks.json
+[2026-04-10T10:01:10Z] START Judges 11 (1-40)
+[2026-04-10T10:01:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_011_prompt.txt
+[2026-04-10T10:02:51Z] DONE Judges 11: 5 chunks | attempts=2
+[2026-04-10T10:02:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_011_chunks.json
+[2026-04-10T10:02:51Z] START Judges 12 (1-15)
+[2026-04-10T10:02:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_012_prompt.txt
+[2026-04-10T10:04:14Z] DONE Judges 12: 2 chunks | attempts=2
+[2026-04-10T10:04:14Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_012_chunks.json
+[2026-04-10T10:04:14Z] START Judges 13 (1-25)
+[2026-04-10T10:04:14Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_013_prompt.txt
+[2026-04-10T10:05:48Z] DONE Judges 13: 5 chunks | attempts=2
+[2026-04-10T10:05:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_013_chunks.json
+[2026-04-10T10:05:48Z] START Judges 14 (1-20)
+[2026-04-10T10:05:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_014_prompt.txt
+[2026-04-10T10:07:21Z] DONE Judges 14: 5 chunks | attempts=2
+[2026-04-10T10:07:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_014_chunks.json
+[2026-04-10T10:07:21Z] START Judges 15 (1-20)
+[2026-04-10T10:07:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_015_prompt.txt
+[2026-04-10T10:08:53Z] DONE Judges 15: 3 chunks | attempts=2
+[2026-04-10T10:08:53Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_015_chunks.json
+[2026-04-10T10:08:53Z] START Judges 16 (1-31)
+[2026-04-10T10:08:53Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_016_prompt.txt
+[2026-04-10T10:10:32Z] DONE Judges 16: 5 chunks | attempts=2
+[2026-04-10T10:10:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_016_chunks.json
+[2026-04-10T10:10:32Z] START Judges 17 (1-13)
+[2026-04-10T10:10:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_017_prompt.txt
+[2026-04-10T10:11:54Z] DONE Judges 17: 2 chunks | attempts=2
+[2026-04-10T10:11:54Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_017_chunks.json
+[2026-04-10T10:11:54Z] START Judges 18 (1-31)
+[2026-04-10T10:11:54Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_018_prompt.txt
+[2026-04-10T10:13:34Z] DONE Judges 18: 6 chunks | attempts=2
+[2026-04-10T10:13:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_018_chunks.json
+[2026-04-10T10:13:34Z] START Judges 19 (1-30)
+[2026-04-10T10:13:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_019_prompt.txt
+[2026-04-10T10:15:09Z] DONE Judges 19: 4 chunks | attempts=2
+[2026-04-10T10:15:09Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_019_chunks.json
+[2026-04-10T10:15:09Z] START Judges 20 (1-48)
+[2026-04-10T10:15:09Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_020_prompt.txt
+[2026-04-10T10:16:54Z] DONE Judges 20: 6 chunks | attempts=2
+[2026-04-10T10:16:54Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_020_chunks.json
+[2026-04-10T10:16:54Z] START Judges 21 (1-25)
+[2026-04-10T10:16:54Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/judges/judges_021_prompt.txt
+[2026-04-10T10:18:27Z] DONE Judges 21: 4 chunks | attempts=2
+[2026-04-10T10:18:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/judges/judges_021_chunks.json
+[2026-04-10T10:18:27Z] START Ruth 1 (1-22)
+[2026-04-10T10:18:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/ruth/ruth_001_prompt.txt
+[2026-04-10T10:19:59Z] DONE Ruth 1: 4 chunks | attempts=2
+[2026-04-10T10:19:59Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_001_chunks.json
+[2026-04-10T10:19:59Z] START Ruth 2 (1-23)
+[2026-04-10T10:19:59Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/ruth/ruth_002_prompt.txt
+[2026-04-10T10:21:32Z] DONE Ruth 2: 5 chunks | attempts=2
+[2026-04-10T10:21:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_002_chunks.json
+[2026-04-10T10:21:32Z] START Ruth 3 (1-18)
+[2026-04-10T10:21:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/ruth/ruth_003_prompt.txt
+[2026-04-10T10:22:57Z] DONE Ruth 3: 3 chunks | attempts=2
+[2026-04-10T10:22:57Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_003_chunks.json
+[2026-04-10T10:22:57Z] START Ruth 4 (1-22)
+[2026-04-10T10:22:57Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/ruth/ruth_004_prompt.txt
+[2026-04-10T10:24:27Z] DONE Ruth 4: 3 chunks | attempts=2
+[2026-04-10T10:24:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ruth/ruth_004_chunks.json
+[2026-04-10T10:24:27Z] START 1 Samuel 1 (1-28)
+[2026-04-10T10:24:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_001_prompt.txt
+[2026-04-10T10:24:50Z] DONE 1 Samuel 1: 4 chunks | attempts=1
+[2026-04-10T10:24:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_001_chunks.json
+[2026-04-10T10:24:50Z] START 1 Samuel 2 (1-36)
+[2026-04-10T10:24:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_002_prompt.txt
+[2026-04-10T10:26:21Z] DONE 1 Samuel 2: 3 chunks | attempts=2
+[2026-04-10T10:26:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_002_chunks.json
+[2026-04-10T10:26:21Z] START 1 Samuel 3 (1-21)
+[2026-04-10T10:26:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_003_prompt.txt
+[2026-04-10T10:27:50Z] DONE 1 Samuel 3: 4 chunks | attempts=2
+[2026-04-10T10:27:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_003_chunks.json
+[2026-04-10T10:27:50Z] START 1 Samuel 4 (1-22)
+[2026-04-10T10:27:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_004_prompt.txt
+[2026-04-10T10:29:21Z] DONE 1 Samuel 4: 4 chunks | attempts=2
+[2026-04-10T10:29:21Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_004_chunks.json
+[2026-04-10T10:29:21Z] START 1 Samuel 5 (1-12)
+[2026-04-10T10:29:21Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_005_prompt.txt
+[2026-04-10T10:30:49Z] DONE 1 Samuel 5: 4 chunks | attempts=2
+[2026-04-10T10:30:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_005_chunks.json
+[2026-04-10T10:30:49Z] START 1 Samuel 6 (1-21)
+[2026-04-10T10:30:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_006_prompt.txt
+[2026-04-10T10:32:20Z] DONE 1 Samuel 6: 4 chunks | attempts=2
+[2026-04-10T10:32:20Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_006_chunks.json
+[2026-04-10T10:32:20Z] START 1 Samuel 7 (1-17)
+[2026-04-10T10:32:20Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_007_prompt.txt
+[2026-04-10T10:33:49Z] DONE 1 Samuel 7: 4 chunks | attempts=2
+[2026-04-10T10:33:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_007_chunks.json
+[2026-04-10T10:33:49Z] START 1 Samuel 8 (1-22)
+[2026-04-10T10:33:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_008_prompt.txt
+[2026-04-10T10:35:22Z] DONE 1 Samuel 8: 5 chunks | attempts=2
+[2026-04-10T10:35:22Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_008_chunks.json
+[2026-04-10T10:35:22Z] START 1 Samuel 9 (1-27)
+[2026-04-10T10:35:22Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_009_prompt.txt
+[2026-04-10T10:36:56Z] DONE 1 Samuel 9: 5 chunks | attempts=2
+[2026-04-10T10:36:56Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_009_chunks.json
+[2026-04-10T10:36:56Z] START 1 Samuel 10 (1-27)
+[2026-04-10T10:36:56Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_010_prompt.txt
+[2026-04-10T10:38:32Z] DONE 1 Samuel 10: 5 chunks | attempts=2
+[2026-04-10T10:38:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_010_chunks.json
+[2026-04-10T10:38:32Z] START 1 Samuel 11 (1-15)
+[2026-04-10T10:38:32Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_011_prompt.txt
+[2026-04-10T10:39:59Z] DONE 1 Samuel 11: 4 chunks | attempts=2
+[2026-04-10T10:39:59Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_011_chunks.json
+[2026-04-10T10:39:59Z] START 1 Samuel 12 (1-25)
+[2026-04-10T10:39:59Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_012_prompt.txt
+[2026-04-10T10:41:33Z] DONE 1 Samuel 12: 4 chunks | attempts=2
+[2026-04-10T10:41:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_012_chunks.json
+[2026-04-10T10:41:33Z] START 1 Samuel 13 (1-23)
+[2026-04-10T10:41:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_013_prompt.txt
+[2026-04-10T10:43:02Z] DONE 1 Samuel 13: 3 chunks | attempts=2
+[2026-04-10T10:43:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_013_chunks.json
+[2026-04-10T10:43:02Z] START 1 Samuel 14 (1-52)
+[2026-04-10T10:43:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_014_prompt.txt
+[2026-04-10T10:44:42Z] DONE 1 Samuel 14: 4 chunks | attempts=2
+[2026-04-10T10:44:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_014_chunks.json
+[2026-04-10T10:44:42Z] START 1 Samuel 15 (1-35)
+[2026-04-10T10:44:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_015_prompt.txt
+[2026-04-10T10:46:23Z] DONE 1 Samuel 15: 6 chunks | attempts=2
+[2026-04-10T10:46:23Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_015_chunks.json
+[2026-04-10T10:46:23Z] START 1 Samuel 16 (1-23)
+[2026-04-10T10:46:23Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_016_prompt.txt
+[2026-04-10T10:47:48Z] DONE 1 Samuel 16: 2 chunks | attempts=2
+[2026-04-10T10:47:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_016_chunks.json
+[2026-04-10T10:47:48Z] START 1 Samuel 17 (1-58)
+[2026-04-10T10:47:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_017_prompt.txt
+[2026-04-10T10:49:41Z] DONE 1 Samuel 17: 9 chunks | attempts=2
+[2026-04-10T10:49:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_017_chunks.json
+[2026-04-10T10:49:41Z] START 1 Samuel 18 (1-30)
+[2026-04-10T10:49:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_018_prompt.txt
+[2026-04-10T10:51:19Z] DONE 1 Samuel 18: 6 chunks | attempts=2
+[2026-04-10T10:51:19Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_018_chunks.json
+[2026-04-10T10:51:19Z] START 1 Samuel 19 (1-24)
+[2026-04-10T10:51:19Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_019_prompt.txt
+[2026-04-10T10:52:48Z] DONE 1 Samuel 19: 4 chunks | attempts=2
+[2026-04-10T10:52:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_019_chunks.json
+[2026-04-10T10:52:48Z] START 1 Samuel 20 (1-42)
+[2026-04-10T10:52:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_020_prompt.txt
+[2026-04-10T10:54:24Z] DONE 1 Samuel 20: 4 chunks | attempts=2
+[2026-04-10T10:54:24Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_020_chunks.json
+[2026-04-10T10:54:24Z] START 1 Samuel 21 (1-15)
+[2026-04-10T10:54:24Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_021_prompt.txt
+[2026-04-10T10:55:44Z] DONE 1 Samuel 21: 2 chunks | attempts=2
+[2026-04-10T10:55:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_021_chunks.json
+[2026-04-10T10:55:44Z] START 1 Samuel 22 (1-23)
+[2026-04-10T10:55:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_022_prompt.txt
+[2026-04-10T10:57:16Z] DONE 1 Samuel 22: 4 chunks | attempts=2
+[2026-04-10T10:57:16Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_022_chunks.json
+[2026-04-10T10:57:16Z] START 1 Samuel 23 (1-29)
+[2026-04-10T10:57:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_023_prompt.txt
+[2026-04-10T10:57:43Z] DONE 1 Samuel 23: 5 chunks | attempts=1
+[2026-04-10T10:57:43Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_023_chunks.json
+[2026-04-10T10:57:43Z] START 1 Samuel 24 (1-22)
+[2026-04-10T10:57:43Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_024_prompt.txt
+[2026-04-10T10:59:10Z] DONE 1 Samuel 24: 3 chunks | attempts=2
+[2026-04-10T10:59:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_024_chunks.json
+[2026-04-10T10:59:10Z] START 1 Samuel 25 (1-44)
+[2026-04-10T10:59:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_025_prompt.txt
+[2026-04-10T11:00:51Z] DONE 1 Samuel 25: 5 chunks | attempts=2
+[2026-04-10T11:00:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_025_chunks.json
+[2026-04-10T11:00:51Z] START 1 Samuel 26 (1-25)
+[2026-04-10T11:00:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_026_prompt.txt
+[2026-04-10T12:01:16Z] Run start: 1189 chapters | model=Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf | endpoint=http://192.168.1.186:8080
+[2026-04-10T12:01:16Z] SKIP Genesis 1: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 2: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 3: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 4: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 5: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 6: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 7: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 8: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 9: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 10: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 11: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 12: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 13: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 14: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 15: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 16: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 17: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 18: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 19: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 20: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 21: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 22: output already exists
+[2026-04-10T12:01:16Z] SKIP Genesis 23: output already exists
+[2026-04-10T12:01:16Z] START Genesis 24 (1-67)
+[2026-04-10T12:01:16Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/genesis/genesis_024_prompt.txt
+[2026-04-10T12:03:17Z] DONE Genesis 24: 7 chunks | attempts=2
+[2026-04-10T12:03:17Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/genesis/genesis_024_chunks.json
+[2026-04-10T12:03:17Z] SKIP Genesis 25: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 26: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 27: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 28: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 29: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 30: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 31: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 32: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 33: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 34: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 35: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 36: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 37: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 38: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 39: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 40: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 41: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 42: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 43: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 44: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 45: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 46: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 47: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 48: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 49: output already exists
+[2026-04-10T12:03:17Z] SKIP Genesis 50: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 1: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 2: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 3: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 4: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 5: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 6: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 7: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 8: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 9: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 10: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 11: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 12: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 13: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 14: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 15: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 16: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 17: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 18: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 19: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 20: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 21: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 22: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 23: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 24: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 25: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 26: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 27: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 28: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 29: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 30: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 31: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 32: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 33: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 34: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 35: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 36: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 37: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 38: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 39: output already exists
+[2026-04-10T12:03:17Z] SKIP Exodus 40: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 1: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 2: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 3: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 4: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 5: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 6: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 7: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 8: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 9: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 10: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 11: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 12: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 13: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 14: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 15: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 16: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 17: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 18: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 19: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 20: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 21: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 22: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 23: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 24: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 25: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 26: output already exists
+[2026-04-10T12:03:17Z] SKIP Leviticus 27: output already exists
+[2026-04-10T12:03:17Z] SKIP Numbers 1: output already exists
+[2026-04-10T12:03:17Z] SKIP Numbers 2: output already exists
+[2026-04-10T12:03:17Z] SKIP Numbers 3: output already exists
+[2026-04-10T12:03:17Z] SKIP Numbers 4: output already exists
+[2026-04-10T12:03:17Z] SKIP Numbers 5: output already exists
+[2026-04-10T12:03:17Z] SKIP Numbers 6: output already exists
+[2026-04-10T12:03:17Z] START Numbers 7 (1-89)
+[2026-04-10T12:03:17Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/numbers/numbers_007_prompt.txt
+[2026-04-10T12:05:02Z] FAIL Numbers 7: Chunk 3 has an empty title. | consecutive_failures=1
+[2026-04-10T12:05:02Z] SKIP Numbers 8: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 9: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 10: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 11: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 12: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 13: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 14: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 15: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 16: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 17: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 18: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 19: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 20: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 21: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 22: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 23: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 24: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 25: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 26: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 27: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 28: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 29: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 30: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 31: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 32: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 33: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 34: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 35: output already exists
+[2026-04-10T12:05:02Z] SKIP Numbers 36: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 1: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 2: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 3: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 4: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 5: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 6: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 7: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 8: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 9: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 10: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 11: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 12: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 13: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 14: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 15: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 16: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 17: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 18: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 19: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 20: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 21: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 22: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 23: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 24: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 25: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 26: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 27: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 28: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 29: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 30: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 31: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 32: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 33: output already exists
+[2026-04-10T12:05:02Z] SKIP Deuteronomy 34: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 1: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 2: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 3: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 4: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 5: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 6: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 7: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 8: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 9: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 10: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 11: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 12: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 13: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 14: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 15: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 16: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 17: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 18: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 19: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 20: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 21: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 22: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 23: output already exists
+[2026-04-10T12:05:02Z] SKIP Joshua 24: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 1: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 2: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 3: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 4: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 5: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 6: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 7: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 8: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 9: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 10: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 11: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 12: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 13: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 14: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 15: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 16: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 17: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 18: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 19: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 20: output already exists
+[2026-04-10T12:05:02Z] SKIP Judges 21: output already exists
+[2026-04-10T12:05:02Z] SKIP Ruth 1: output already exists
+[2026-04-10T12:05:02Z] SKIP Ruth 2: output already exists
+[2026-04-10T12:05:02Z] SKIP Ruth 3: output already exists
+[2026-04-10T12:05:02Z] SKIP Ruth 4: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 1: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 2: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 3: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 4: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 5: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 6: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 7: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 8: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 9: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 10: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 11: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 12: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 13: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 14: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 15: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 16: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 17: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 18: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 19: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 20: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 21: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 22: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 23: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 24: output already exists
+[2026-04-10T12:05:02Z] SKIP 1 Samuel 25: output already exists
+[2026-04-10T12:05:02Z] START 1 Samuel 26 (1-25)
+[2026-04-10T12:05:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_026_prompt.txt
+[2026-04-10T12:06:26Z] DONE 1 Samuel 26: 4 chunks | attempts=2
+[2026-04-10T12:06:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_026_chunks.json
+[2026-04-10T12:06:26Z] START 1 Samuel 27 (1-12)
+[2026-04-10T12:06:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_027_prompt.txt
+[2026-04-10T12:07:49Z] DONE 1 Samuel 27: 3 chunks | attempts=2
+[2026-04-10T12:07:49Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_027_chunks.json
+[2026-04-10T12:07:49Z] START 1 Samuel 28 (1-25)
+[2026-04-10T12:07:49Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_028_prompt.txt
+[2026-04-10T12:08:13Z] DONE 1 Samuel 28: 4 chunks | attempts=1
+[2026-04-10T12:08:13Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_028_chunks.json
+[2026-04-10T12:08:13Z] START 1 Samuel 29 (1-11)
+[2026-04-10T12:08:13Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_029_prompt.txt
+[2026-04-10T12:09:41Z] DONE 1 Samuel 29: 4 chunks | attempts=2
+[2026-04-10T12:09:41Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_029_chunks.json
+[2026-04-10T12:09:41Z] START 1 Samuel 30 (1-31)
+[2026-04-10T12:09:41Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_030_prompt.txt
+[2026-04-10T12:11:17Z] DONE 1 Samuel 30: 5 chunks | attempts=2
+[2026-04-10T12:11:17Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_030_chunks.json
+[2026-04-10T12:11:17Z] START 1 Samuel 31 (1-13)
+[2026-04-10T12:11:17Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/1samuel/1samuel_031_prompt.txt
+[2026-04-10T12:12:42Z] DONE 1 Samuel 31: 3 chunks | attempts=2
+[2026-04-10T12:12:42Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/1samuel/1samuel_031_chunks.json
+[2026-04-10T12:12:42Z] START 2 Samuel 1 (1-27)
+[2026-04-10T12:12:42Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_001_prompt.txt
+[2026-04-10T12:14:06Z] DONE 2 Samuel 1: 2 chunks | attempts=2
+[2026-04-10T12:14:06Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_001_chunks.json
+[2026-04-10T12:14:06Z] START 2 Samuel 2 (1-32)
+[2026-04-10T12:14:06Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_002_prompt.txt
+[2026-04-10T12:30:20Z] DONE 2 Samuel 2: 3 chunks | attempts=2
+[2026-04-10T12:30:20Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_002_chunks.json
+[2026-04-10T12:30:20Z] START 2 Samuel 3 (1-39)
+[2026-04-10T12:30:20Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_003_prompt.txt
+[2026-04-10T12:32:02Z] DONE 2 Samuel 3: 4 chunks | attempts=2
+[2026-04-10T12:32:02Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_003_chunks.json
+[2026-04-10T12:32:02Z] START 2 Samuel 4 (1-12)
+[2026-04-10T12:32:02Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_004_prompt.txt
+[2026-04-10T12:33:28Z] DONE 2 Samuel 4: 3 chunks | attempts=2
+[2026-04-10T12:33:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_004_chunks.json
+[2026-04-10T12:33:28Z] START 2 Samuel 5 (1-25)
+[2026-04-10T12:33:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_005_prompt.txt
+[2026-04-10T12:34:56Z] DONE 2 Samuel 5: 4 chunks | attempts=2
+[2026-04-10T12:34:56Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_005_chunks.json
+[2026-04-10T12:34:56Z] START 2 Samuel 6 (1-23)
+[2026-04-10T12:34:56Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_006_prompt.txt
+[2026-04-10T12:36:25Z] DONE 2 Samuel 6: 3 chunks | attempts=2
+[2026-04-10T12:36:25Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_006_chunks.json
+[2026-04-10T12:36:25Z] START 2 Samuel 7 (1-29)
+[2026-04-10T12:36:25Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_007_prompt.txt
+[2026-04-10T12:37:54Z] DONE 2 Samuel 7: 3 chunks | attempts=2
+[2026-04-10T12:37:54Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_007_chunks.json
+[2026-04-10T12:37:54Z] START 2 Samuel 8 (1-18)
+[2026-04-10T12:37:54Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_008_prompt.txt
+[2026-04-10T12:39:20Z] DONE 2 Samuel 8: 3 chunks | attempts=2
+[2026-04-10T12:39:20Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_008_chunks.json
+[2026-04-10T12:39:20Z] START 2 Samuel 9 (1-13)
+[2026-04-10T12:39:20Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_009_prompt.txt
+[2026-04-10T13:47:18Z] DONE 2 Samuel 9: 3 chunks | attempts=3
+[2026-04-10T13:47:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_009_chunks.json
+[2026-04-10T13:47:18Z] START 2 Samuel 10 (1-19)
+[2026-04-10T13:47:18Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_010_prompt.txt
+[2026-04-10T14:20:43Z] DONE 2 Samuel 10: 3 chunks | attempts=2
+[2026-04-10T14:20:43Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_010_chunks.json
+[2026-04-10T14:20:43Z] START 2 Samuel 11 (1-27)
+[2026-04-10T14:20:43Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_011_prompt.txt
+[2026-04-10T14:52:48Z] DONE 2 Samuel 11: 4 chunks | attempts=2
+[2026-04-10T14:52:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_011_chunks.json
+[2026-04-10T14:52:48Z] START 2 Samuel 12 (1-31)
+[2026-04-10T14:52:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_012_prompt.txt
+[2026-04-10T16:02:52Z] DONE 2 Samuel 12: 7 chunks | attempts=2
+[2026-04-10T16:02:52Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_012_chunks.json
+[2026-04-10T16:02:52Z] START 2 Samuel 13 (1-39)
+[2026-04-10T16:02:52Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_013_prompt.txt
+[2026-04-10T16:04:27Z] DONE 2 Samuel 13: 3 chunks | attempts=2
+[2026-04-10T16:04:27Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_013_chunks.json
+[2026-04-10T16:04:27Z] START 2 Samuel 14 (1-33)
+[2026-04-10T16:04:27Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_014_prompt.txt
+[2026-04-10T16:06:10Z] DONE 2 Samuel 14: 7 chunks | attempts=2
+[2026-04-10T16:06:10Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_014_chunks.json
+[2026-04-10T16:06:10Z] START 2 Samuel 15 (1-37)
+[2026-04-10T16:06:10Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_015_prompt.txt
+[2026-04-10T16:07:48Z] DONE 2 Samuel 15: 5 chunks | attempts=2
+[2026-04-10T16:07:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_015_chunks.json
+[2026-04-10T16:07:48Z] START 2 Samuel 16 (1-23)
+[2026-04-10T16:07:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_016_prompt.txt
+[2026-04-10T16:09:15Z] DONE 2 Samuel 16: 3 chunks | attempts=2
+[2026-04-10T16:09:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_016_chunks.json
+[2026-04-10T16:09:15Z] START 2 Samuel 17 (1-29)
+[2026-04-10T16:09:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_017_prompt.txt
+[2026-04-10T16:10:50Z] DONE 2 Samuel 17: 5 chunks | attempts=2
+[2026-04-10T16:10:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_017_chunks.json
+[2026-04-10T16:10:50Z] START 2 Samuel 18 (1-33)
+[2026-04-10T16:10:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_018_prompt.txt
+[2026-04-10T16:12:29Z] DONE 2 Samuel 18: 6 chunks | attempts=2
+[2026-04-10T16:12:29Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/2samuel/2samuel_018_chunks.json
+[2026-04-10T16:12:29Z] START 2 Samuel 19 (1-43)
+[2026-04-10T16:12:29Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/2samuel/2samuel_019_prompt.txt

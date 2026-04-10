@@ -1,0 +1,83 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Genesis 25:1-34
+
+Chapter text:
+1. Now Abraham took another wife, whose name was Keturah.
+2. And she bore to him Zimran and Jokshan and Medan and Midian and Ishbak and Shuah.
+3. Now Jokshan was the father of Sheba and Dedan. And the sons of Dedan were Asshurim and Letushim and Leummim.
+4. And the sons of Midian were Ephah and Epher and Hanoch and Abida and Eldaah. All these were the sons of Keturah.
+5. And Abraham gave all that he had to Isaac;
+6. but to the sons of the concubines which Abraham had, Abraham gave gifts while he was still living, and he sent them away from his son Isaac eastward, to the land of the east.
+7. These are the days of the years of Abraham’s life that he lived, 175 years.
+8. And Abraham breathed his last and died in a good old age, an old man and full of days; and he was gathered to his people.
+9. Then his sons Isaac and Ishmael buried him in the cave of Machpelah, in the field of Ephron the son of Zohar the Hittite, facing Mamre,
+10. the field which Abraham bought from the sons of Heth; there Abraham was buried with Sarah his wife.
+11. Now it happened after the death of Abraham, that God blessed his son Isaac; and Isaac lived by Beer-lahai-roi.
+12. Now these are the generations of Ishmael, Abraham’s son, whom Hagar the Egyptian, Sarah’s servant-woman, bore to Abraham;
+13. and these are the names of the sons of Ishmael, by their names, in the order of their birth: Nebaioth, the firstborn of Ishmael, and Kedar and Adbeel and Mibsam
+14. and Mishma and Dumah and Massa,
+15. Hadad and Tema, Jetur, Naphish, and Kedemah.
+16. These are the sons of Ishmael and these are their names, by their villages, and by their camps; twelve princes according to their tribes.
+17. These are the years of the life of Ishmael, 137 years; and he breathed his last and died and was gathered to his people.
+18. And they dwelt from Havilah to Shur which is east of Egypt as one goes toward Assyria; he settled in the face of all his brothers.
+19. Now these are the generations of Isaac, Abraham’s son: Abraham became the father of Isaac;
+20. and Isaac was forty years old when he took Rebekah, the daughter of Bethuel the Aramean of Paddan-aram, the sister of Laban the Aramean, to be his wife.
+21. And Isaac entreated Yahweh on behalf of his wife because she was barren; and Yahweh was moved by his entreaty. So Rebekah his wife conceived.
+22. But the children struggled together within her; and she said, “If it is so, why then am I this way?” So she went to inquire of Yahweh.
+23. And Yahweh said to her, “Two nations are in your womb; And two peoples will be separated from your body; And one people shall be stronger than the other; And the older shall serve the younger.”
+24. And her days to give birth were fulfilled, and behold, there were twins in her womb.
+25. And the first came forth red, all over like a hairy garment; and they named him Esau.
+26. Afterward his brother came forth with his hand holding on to Esau’s heel, so his name was called Jacob; and Isaac was sixty years old when she gave birth to them.
+27. And the boys grew up; Esau became a skillful hunter, a man of the field, but Jacob was a peaceful man, living in tents.
+28. Isaac loved Esau because he had an appetite for hunted game, but Rebekah loved Jacob.
+29. And Jacob had cooked stew. And Esau came in from the field, and he was famished.
+30. Then Esau said to Jacob, “Please give me a swallow from the red stuff—this red stuff, for I am famished.” Therefore his name was called Edom.
+31. But Jacob said, “First sell me your birthright.”
+32. And Esau said, “Behold, I am about to die; so of what use then is the birthright to me?”
+33. And Jacob said, “First swear to me”; so he swore to him and sold his birthright to Jacob.
+34. So Jacob gave Esau bread and lentil stew; and he ate and drank and rose and went away. Thus Esau despised his birthright.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

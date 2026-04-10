@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "law",
+      "title": "The Red Heifer Ritual",
+      "reason": "Establishes the statute for preparing the red heifer and its ashes."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 22,
+      "type": "law",
+      "title": "Purification from Corpse Uncleanliness",
+      "reason": "Details the seven-day purification process and consequences for neglect."
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 1:1-46
+
+Chapter text:
+1. These are the words which Moses spoke to all Israel across the Jordan in the wilderness, in the Arabah opposite Suph, between Paran and Tophel and Laban and Hazeroth and Dizahab.
+2. It is eleven days’ journey from Horeb by the way of Mount Seir to Kadesh-barnea.
+3. Now it happened, in the fortieth year, on the first day of the eleventh month, Moses spoke to the children of Israel, according to all that Yahweh had commanded him to give to them,
+4. after he had struck down Sihon the king of the Amorites, who lived in Heshbon, and Og the king of Bashan, who lived in Ashtaroth and Edrei.
+5. Across the Jordan in the land of Moab, Moses undertook to expound this law, saying,
+6. “Yahweh our God spoke to us at Horeb, saying, ‘You have stayed long enough at this mountain.
+7. Turn and set out, and go to the hill country of the Amorites, and to all their neighbors in the Arabah, in the hill country and in the Shephelah and in the Negev and by the seacoast, the land of the Canaanites, and Lebanon, as far as the great river, the river Euphrates.
+8. See, I have given over the land before you; go in and possess the land which Yahweh swore to give to your fathers, to Abraham, to Isaac, and to Jacob, to them and to their seed after them.’
+9. “And I spoke to you at that time, saying, ‘I am not able to bear the burden of you alone.
+10. Yahweh your God has multiplied you, and behold, you are this day like the stars of heaven in number.
+11. May Yahweh, the God of your fathers, increase you a thousand-fold more than you are and bless you, just as He has promised you!
+12. How can I alone bear the load and burden of you and your strife?
+13. Choose wise and understanding and experienced men from your tribes, and I will appoint them as your heads.’
+14. Then you answered me and said, ‘The thing which you have said to do is good.’
+15. So I took the heads of your tribes, wise and experienced men, and gave them as heads over you, leaders of thousands and of hundreds, of fifties and of tens, and officers for your tribes.
+16. “Then I commanded your judges at that time, saying, ‘Hear the cases between your brothers, and judge righteously between a man and his brother or the sojourner who is with him.
+17. You shall not show partiality in judgment; you shall hear the small and the great alike. You shall not fear man, for the judgment is God’s. The case that is too hard for you, you shall bring to me, and I will hear it.’
+18. And I commanded you at that time all the things that you should do.
+19. “Then we set out from Horeb and went through all that great and fearsome wilderness which you saw on the way to the hill country of the Amorites, just as Yahweh our God had commanded us; and we came to Kadesh-barnea.
+20. And I said to you, ‘You have come to the hill country of the Amorites which Yahweh our God is about to give us.
+21. See, Yahweh your God has given over the land before you; go up, take possession, as Yahweh, the God of your fathers, has spoken to you. Do not fear or be dismayed.’
+22. “Then all of you came near to me and said, ‘Let us send men before us, that they may search out the land for us and bring back to us word of the way by which we should go up and the cities which we shall enter.’
+23. And the thing was good in my sight, and I took twelve of your men, one man for each tribe.
+24. Then they turned and went up into the hill country and came to the valley of Eshcol and spied it out.
+25. Then they took some of the fruit of the land in their hands and brought it down to us; and they brought word back to us and said, ‘It is a good land which Yahweh our God is about to give us.’
+26. “Yet you were not willing to go up, but rebelled against the command of Yahweh your God;
+27. and you grumbled in your tents and said, ‘Because Yahweh hates us, He has brought us out of the land of Egypt to give us into the hand of the Amorites to destroy us.
+28. Where can we go up? Our brothers have made our hearts melt, saying, “The people are bigger and taller than we; the cities are large and fortified to heaven. And moreover, we saw the sons of the Anakim there.”’
+29. Then I said to you, ‘Do not be in dread, nor fear them.
+30. Yahweh your God, who goes before you, will Himself fight on your behalf, just as He did for you in Egypt before your eyes,
+31. and in the wilderness where you saw how Yahweh your God carried you, just as a man carries his son, in all the way which you have walked until you came to this place.’
+32. But for all this, you did not believe Yahweh your God,
+33. who goes before you on your way, to spy out a place for you to encamp, in fire by night and cloud by day, to show you the way in which you should go.
+34. “Then Yahweh heard the sound of your words, and He was angry and swore an oath, saying,
+35. ‘Not one of these men, this evil generation, shall see the good land which I swore to give your fathers,
+36. except Caleb the son of Jephunneh; he shall see it, and to him and to his sons I will give the land on which he has set foot, because he has followed Yahweh fully.’
+37. Yahweh was angry with me also on your account, saying, ‘Not even you shall enter there.
+38. Joshua the son of Nun, who stands before you, he shall enter there; strengthen him, for he will cause Israel to inherit it.
+39. Moreover, your little ones who you said would become plunder, and your sons, who this day have no knowledge of good or evil, shall enter there, and I will give it to them, and they shall possess it.
+40. But as for you, turn around and set out for the wilderness by the way to the Red Sea.’
+41. “Then you said to me, ‘We have sinned against Yahweh; we will indeed go up and fight, just as Yahweh our God commanded us.’ And every man of you girded on his weapons of war and regarded it as easy to go up into the hill country.
+42. And Yahweh said to me, ‘Say to them, “Do not go up and do not fight—for I am not among you—so that you are not defeated before your enemies.”’
+43. So I spoke to you, but you would not listen. Instead you rebelled against the command of Yahweh and acted presumptuously and went up into the hill country.
+44. And the Amorites who lived in that hill country came out to meet you and pursued you as bees do and crushed you from Seir to Hormah.
+45. Then you returned and wept before Yahweh; but Yahweh did not listen to your voice nor give ear to you.
+46. So you remained in Kadesh many days, according to the days that you remained there.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

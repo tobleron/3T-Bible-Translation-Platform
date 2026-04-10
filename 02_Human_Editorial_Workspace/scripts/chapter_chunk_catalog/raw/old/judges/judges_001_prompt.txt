@@ -1,0 +1,85 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Judges 1:1-36
+
+Chapter text:
+1. Now it happened after the death of Joshua that the sons of Israel asked of Yahweh, saying, “Who shall go up first for us against the Canaanites, to fight against them?”
+2. And Yahweh said, “Judah shall go up; behold, I have given the land into his hand.”
+3. Then Judah said to Simeon his brother, “Come up with me into the territory allotted me, that we may fight against the Canaanites; and I in turn will go with you into the territory allotted you.” So Simeon went with him.
+4. So Judah went up, and Yahweh gave the Canaanites and the Perizzites into their hands, and they struck down 10,000 men at Bezek.
+5. Then they found Adoni-bezek in Bezek and fought against him, and they struck down the Canaanites and the Perizzites.
+6. But Adoni-bezek fled; and they pursued him and seized him and cut off his thumbs and big toes.
+7. And Adoni-bezek said, “Seventy kings with their thumbs and their big toes cut off used to gather up scraps under my table; as I have done, so God has repaid me.” So they brought him to Jerusalem, and he died there.
+8. Then the sons of Judah fought against Jerusalem and captured it and struck it with the edge of the sword and set the city on fire.
+9. And afterward the sons of Judah went down to fight against the Canaanites living in the hill country and in the Negev and in the Shephelah.
+10. So Judah went against the Canaanites who lived in Hebron (now the name of Hebron formerly was Kiriath-arba); and they struck Sheshai and Ahiman and Talmai.
+11. Then from there he went against the inhabitants of Debir (now the name of Debir formerly was Kiriath-sepher).
+12. And Caleb said, “The one who strikes Kiriath-sepher and captures it, I will even give him my daughter Achsah as a wife.”
+13. Then Othniel the son of Kenaz, Caleb’s younger brother, captured it; so he gave him his daughter Achsah as a wife.
+14. Now it happened that when she came to him, she enticed him to ask her father for the field. Then she alighted from her donkey, and Caleb said to her, “What do you want?”
+15. And she said to him, “Give me a blessing, since you have given me the land of the Negev, so you shall give me also springs of water.” So Caleb gave her the upper springs and the lower springs.
+16. Now the sons of the Kenite, Moses’ father-in-law, went up from the city of palms with the sons of Judah, to the wilderness of Judah which is in the south of Arad; and they went and lived with the people.
+17. Then Judah went with Simeon his brother, and they struck the Canaanites living in Zephath and devoted it to destruction. So the name of the city was called Hormah.
+18. And Judah captured Gaza with its territory and Ashkelon with its territory and Ekron with its territory.
+19. Now Yahweh was with Judah, and they took possession of the hill country; but they could not dispossess the inhabitants of the valley because they had iron chariots.
+20. Then they gave Hebron to Caleb, as Moses had promised; and he dispossessed from there the three sons of Anak.
+21. But the sons of Benjamin did not dispossess the Jebusites who lived in Jerusalem; so the Jebusites have lived with the sons of Benjamin in Jerusalem to this day.
+22. Likewise the house of Joseph went up against Bethel, and Yahweh was with them.
+23. And the house of Joseph spied out Bethel (now the name of the city was formerly Luz).
+24. Then the spies saw a man coming out of the city, and they said to him, “Please show us the entrance to the city, and we will treat you with lovingkindness.”
+25. So he showed them the entrance to the city, and they struck the city with the edge of the sword, but they let the man and all his family go free.
+26. So the man went into the land of the Hittites and built a city and named it Luz which is its name to this day.
+27. But Manasseh did not take possession of Beth-shean and its towns or Taanach and its towns or the inhabitants of Dor and its towns or the inhabitants of Ibleam and its towns or the inhabitants of Megiddo and its towns; so the Canaanites persisted to live in that land.
+28. And it happened when Israel became strong, that they put the Canaanites to forced labor, but they did not dispossess them completely.
+29. Also Ephraim did not dispossess the Canaanites who were living in Gezer; so the Canaanites lived in Gezer among them.
+30. Zebulun did not dispossess the inhabitants of Kitron or the inhabitants of Nahalol; so the Canaanites lived among them and became subject to forced labor.
+31. Asher did not dispossess the inhabitants of Acco or the inhabitants of Sidon, or of Ahlab or of Achzib or of Helbah or of Aphik or of Rehob.
+32. So the Asherites lived among the Canaanites, the inhabitants of the land; for they did not dispossess them.
+33. Naphtali did not dispossess the inhabitants of Beth-shemesh or the inhabitants of Beth-anath, but lived among the Canaanites, the inhabitants of the land; and the inhabitants of Beth-shemesh and Beth-anath became forced labor for them.
+34. Then the Amorites pressed the sons of Dan into the hill country, for they did not allow them to come down to the valley;
+35. and the Amorites persisted in living in Mount Heres, in Aijalon, and in Shaalbim; but the hand of the house of Joseph became heavy, and they became forced labor.
+36. Now the border of the Amorites ran from the ascent of Akrabbim, from Sela and upward.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

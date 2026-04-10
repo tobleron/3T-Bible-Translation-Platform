@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "law",
+      "title": "The Ten Commandments",
+      "reason": "Contains the direct speech of God delivering the core moral laws to Israel."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "story",
+      "title": "The People's Reaction",
+      "reason": "Describes the physical reaction of the people to the theophany and their dialogue with Moses."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 26,
+      "type": "law",
+      "title": "Instructions on Altars",
+      "reason": "God gives specific instructions to Moses regarding the construction and use of altars."
+    }
+  ]
+}

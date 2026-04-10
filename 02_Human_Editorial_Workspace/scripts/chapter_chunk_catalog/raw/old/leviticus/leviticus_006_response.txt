@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "law",
+      "title": "Law of the Guilt Offering for Deceit",
+      "reason": "A complete legal unit detailing restitution and sacrifice for specific sins against God and neighbor."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "law",
+      "title": "Law of the Burnt Offering",
+      "reason": "A distinct legal section instructing priests on the maintenance and ritual of the burnt offering."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 18,
+      "type": "law",
+      "title": "Law of the Grain Offering",
+      "reason": "A complete legal unit covering the preparation, consumption, and holiness of the grain offering."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 23,
+      "type": "law",
+      "title": "Law of the Priest's Grain Offering",
+      "reason": "A specific legal instruction regarding the daily offering brought by the anointed priest."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Law of the Sin Offering",
+      "reason": "A comprehensive legal section detailing the slaughter, consumption, and disposal of the sin offering."
+    }
+  ]
+}

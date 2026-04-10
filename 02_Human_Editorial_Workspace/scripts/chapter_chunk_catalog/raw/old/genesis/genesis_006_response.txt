@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "The Sons of God and Noah's Favor",
+      "reason": "Describes the intermarriage of divine beings and men, God's judgment on human lifespan, and introduces Noah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Noah's Righteousness and the Decree of Judgment",
+      "reason": "Establishes Noah's character contrasted with the earth's corruption and God's decision to destroy all flesh."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 21,
+      "type": "law",
+      "title": "Instructions for the Ark",
+      "reason": "Contains specific architectural details and commands given by God to Noah regarding the construction of the ark."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Noah's Obedience",
+      "reason": "Concludes the section by stating Noah's faithful execution of God's commands."
+    }
+  ]
+}

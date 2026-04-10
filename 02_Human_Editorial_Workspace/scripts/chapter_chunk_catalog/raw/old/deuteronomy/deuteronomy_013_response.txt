@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "law",
+      "title": "Law on False Prophets",
+      "reason": "Establishes the penalty for a prophet who leads Israel to other gods despite performing signs."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Law on Family Enticement",
+      "reason": "Details the strict judgment required when close relatives secretly entice others to idolatry."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 18,
+      "type": "law",
+      "title": "Law on Wicked Cities",
+      "reason": "Describes the procedure for investigating and destroying a whole city that has turned to idolatry."
+    }
+  ]
+}

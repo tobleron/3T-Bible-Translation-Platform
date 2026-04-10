@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Laws on Debt Remission",
+      "reason": "A cohesive legal unit detailing the seven-year debt release and the attitude required toward the poor."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 18,
+      "type": "law",
+      "title": "Laws on Hebrew Servants",
+      "reason": "A distinct legal section governing the release of Hebrew servants and their provision upon freedom."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 23,
+      "type": "law",
+      "title": "Laws on Firstborn Animals",
+      "reason": "A complete set of regulations concerning the consecration and consumption of firstborn livestock."
+    }
+  ]
+}

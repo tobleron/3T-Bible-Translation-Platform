@@ -1,0 +1,1697 @@
+[
+  {
+    "verse": "Matthew 18:21",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "brother",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came to Jesus and asked, “Lord, how many times shall I forgive my brother who sins against me? Up to seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "Peter",
+        "Verb": "approach",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then Peter approached him and asked, “Lord, how many times shall I forgive my brother or sister who sins against me? As many as seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "him",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came to Him and said, “Lord, how often shall my brother sin against me, and I forgive him? Up to seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then Peter came up and said to him, “Lord, how often will my brother sin against me, and I forgive him? As many as seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "times",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came up to him and said, “Lord, how many times will my brother sin against me and I will forgive him? Up to seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then Peter came and said to Him, “Lord, how often shall my brother sin against me and I forgive him? Up to seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "Peter",
+        "Verb": "say",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then Peter having come near to Him, said, “Lord, how often will my brother sin against me, and I forgive him—until seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "him",
+        "Adverbials": "near, to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came near to him and said, Lord, how-often will my brother sin against me and I will forgive him? Until seven-times?"
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "brother",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came to him and said, “Lord, how many times must I forgive my brother who sins against me? As many as seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "brother",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came to Jesus and asked, “Lord, how many times shall I forgive my brother or sister who sins against me? Up to seven times?”"
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "Peter",
+        "Verb": "go",
+        "Object": "brother",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter went up to him and said, 'Lord, how often must I forgive my brother if he wrongs me? As often as seven times?'"
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "Peter",
+        "Verb": "come",
+        "Object": "him",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then Peter came to Him and said, “Lord, how often shall my brother sin against me, and I forgive him? Up to seven times?”"
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:22",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "Jesus",
+        "Verb": "answer",
+        "Object": "you",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Jesus answered, “I tell you, not just seven times, but seventy-seven times!"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "Jesus",
+        "Verb": "reply",
+        "Object": "you",
+        "Adverbials": "seven",
+        "Modifiers": "-",
+        "FullText": "“I tell you, not as many as seven,” Jesus replied, “but seventy times seven."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "seven",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus said to him, “I do not say to you, up to seven times, but up to seventy times seven."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "-",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus said to him, “I do not say to you seven times, but seventy-seven times."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "seven",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus said to him, “I do not say to you up to seven times, but up to seventy times seven!"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "seven",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus said to him, “I do not say to you, up to seven times, but up to seventy times seven."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "-",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus says to him, “I do not say to you until seven times, but until seventy times seven."
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "-",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus says to him, I do not say to you, Until seven-times, but, until seventy-times seven."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "you",
+        "Adverbials": "to, times",
+        "Modifiers": "-",
+        "FullText": "Jesus said to him, “Not seven times, I tell you, but seventy-seven times!"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "Jesus",
+        "Verb": "answer",
+        "Object": "you",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Jesus answered, “I tell you, not seven times, but seventy-seven times."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "Jesus",
+        "Verb": "answer",
+        "Object": "seven",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Jesus answered, 'Not seven, I tell you, but seventy-seven times."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "Jesus",
+        "Verb": "say",
+        "Object": "seven",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Jesus said to him, “I do not say to you, up to seven times, but up to seventy times seven."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:23",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "kingdom",
+        "Verb": "be",
+        "Object": "accounts",
+        "Adverbials": "Because, like",
+        "Modifiers": "-",
+        "FullText": "Because of this, the kingdom of heaven is like a king who wanted to settle accounts with his servants."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "kingdom",
+        "Verb": "compare",
+        "Object": "accounts",
+        "Adverbials": "For, to",
+        "Modifiers": "-",
+        "FullText": "“For this reason, the kingdom of heaven can be compared to a king who wanted to settle accounts with his servants."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "kingdom",
+        "Verb": "be",
+        "Object": "accounts",
+        "Adverbials": "Therefore, like",
+        "Modifiers": "-",
+        "FullText": "Therefore the kingdom of heaven is like a certain king who wanted to settle accounts with his servants."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "kingdom",
+        "Verb": "compare",
+        "Object": "accounts",
+        "Adverbials": "Therefore, to",
+        "Modifiers": "-",
+        "FullText": "“Therefore the kingdom of heaven may be compared to a king who wished to settle accounts with his servants."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "kingdom",
+        "Verb": "compare",
+        "Object": "accounts",
+        "Adverbials": "For, to",
+        "Modifiers": "-",
+        "FullText": "“For this reason the kingdom of heaven may be compared to a man—a king—who wanted to settle accounts with his slaves."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "kingdom",
+        "Verb": "compare",
+        "Object": "accounts",
+        "Adverbials": "For, to",
+        "Modifiers": "-",
+        "FullText": "“For this reason the kingdom of heaven may be compared to a king who wished to settle accounts with his slaves."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "who",
+        "Verb": "be",
+        "Object": "-",
+        "Adverbials": "Because, likened",
+        "Modifiers": "-",
+        "FullText": "Because of this was the kingdom of the heavens likened to a man, a king, who willed to take reckoning with his servants,"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "kingdom",
+        "Verb": "compare",
+        "Object": "account",
+        "Adverbials": "Because, to",
+        "Modifiers": "-",
+        "FullText": "Because of this, the kingdom of the heavens was compared to a man: a king who wished to settle the account with his bondservants."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "kingdom",
+        "Verb": "be",
+        "Object": "accounts",
+        "Adverbials": "For, like",
+        "Modifiers": "-",
+        "FullText": "“For this reason, the kingdom of heaven is like a king who wanted to settle accounts with his slaves."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "kingdom",
+        "Verb": "be",
+        "Object": "accounts",
+        "Adverbials": "Therefore, like",
+        "Modifiers": "-",
+        "FullText": "“Therefore, the kingdom of heaven is like a king who wanted to settle accounts with his servants."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "kingdom",
+        "Verb": "compare",
+        "Object": "accounts",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "'And so the kingdom of Heaven may be compared to a king who decided to settle his accounts with his servants."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "kingdom",
+        "Verb": "be",
+        "Object": "accounts",
+        "Adverbials": "Therefore, like",
+        "Modifiers": "-",
+        "FullText": "Therefore the kingdom of heaven is like a certain king who wanted to settle accounts with his servants."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:24",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "debtor",
+        "Verb": "bring",
+        "Object": "settlements",
+        "Adverbials": "began, to",
+        "Modifiers": "-",
+        "FullText": "As he began the settlements, a debtor owing ten thousand talents was brought to him."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "one",
+        "Verb": "bring",
+        "Object": "accounts",
+        "Adverbials": "began, before",
+        "Modifiers": "-",
+        "FullText": "When he began to settle accounts, one who owed ten thousand talents was brought before him."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "debtor",
+        "Verb": "bring",
+        "Object": "talents",
+        "Adverbials": "began, to",
+        "Modifiers": "-",
+        "FullText": "And when he began to settle up, one debtor was brought to him ten thousand talents."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "one",
+        "Verb": "bring",
+        "Object": "talents",
+        "Adverbials": "began, to",
+        "Modifiers": "-",
+        "FullText": "When he began to settle, one was brought to him who owed him ten thousand talents."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "someone",
+        "Verb": "bring",
+        "Object": "them",
+        "Adverbials": "began, to",
+        "Modifiers": "-",
+        "FullText": "And when he began to settle them, someone was brought to him who owed ten thousand talents."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "one",
+        "Verb": "bring",
+        "Object": "them",
+        "Adverbials": "begun, to",
+        "Modifiers": "-",
+        "FullText": "When he had begun to settle them, one who owed him ten thousand talents was brought to him."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "he",
+        "Verb": "bring",
+        "Object": "debtor",
+        "Adverbials": "near, to",
+        "Modifiers": "-",
+        "FullText": "and he having begun to take account, there was brought near to him one debtor of a myriad of talents,"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "man",
+        "Verb": "bring",
+        "Object": "account",
+        "Adverbials": "begun, to",
+        "Modifiers": "-",
+        "FullText": "Now having begun to settle the account, one man was brought to him, a debtor of ten-thousand silver talants ."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "man",
+        "Verb": "bring",
+        "Object": "accounts",
+        "Adverbials": "began, to",
+        "Modifiers": "-",
+        "FullText": "As he began settling his accounts, a man who owed 10,000 talents was brought to him."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "man",
+        "Verb": "bring",
+        "Object": "settlement",
+        "Adverbials": "began, to",
+        "Modifiers": "-",
+        "FullText": "As he began the settlement, a man who owed him ten thousand bags of gold was brought to him."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "they",
+        "Verb": "bring",
+        "Object": "man",
+        "Adverbials": "began",
+        "Modifiers": "-",
+        "FullText": "When the reckoning began, they brought him a man who owed ten thousand talents;"
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "one",
+        "Verb": "bring",
+        "Object": "accounts",
+        "Adverbials": "begun, to",
+        "Modifiers": "-",
+        "FullText": "And when he had begun to settle accounts, one was brought to him who owed him ten thousand talents."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:25",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "master",
+        "Verb": "order",
+        "Object": "debt",
+        "Adverbials": "was",
+        "Modifiers": "-",
+        "FullText": "Since the man was unable to pay, the master ordered that he be sold to pay his debt, along with his wife and children and everything he owned."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "master",
+        "Verb": "command",
+        "Object": "money",
+        "Adverbials": "have",
+        "Modifiers": "-",
+        "FullText": "Since he did not have the money to pay it back, his master commanded that he, his wife, his children, and everything he had be sold to pay the debt."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "master",
+        "Verb": "command",
+        "Object": "nothing",
+        "Adverbials": "had",
+        "Modifiers": "-",
+        "FullText": "But since he had nothing with which to repay, his master commanded that he be sold, with his wife and children and everything that he had, and to be repaid."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "master",
+        "Verb": "order",
+        "Object": "him",
+        "Adverbials": "pay",
+        "Modifiers": "-",
+        "FullText": "And since he could not pay, his master ordered him to be sold, with his wife and children and all that he had, and payment to be made."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "master",
+        "Verb": "order",
+        "Object": "him",
+        "Adverbials": "have",
+        "Modifiers": "-",
+        "FullText": "And because he did not have enough to repay it, the master ordered him to be sold, and his wife and his children and everything that he had, and to be repaid."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "lord",
+        "Verb": "command",
+        "Object": "him",
+        "Adverbials": "have",
+        "Modifiers": "-",
+        "FullText": "But since he did not have the means to repay, his lord commanded him to be sold, along with his wife and children and all that he had, and repayment to be made."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "lord",
+        "Verb": "command",
+        "Object": "him",
+        "Adverbials": "having",
+        "Modifiers": "-",
+        "FullText": "and he having nothing to pay, his lord commanded him to be sold, and his wife, and the children, and all, whatever he had, and payment to be made."
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "lord",
+        "Verb": "command",
+        "Object": "him",
+        "Adverbials": "as",
+        "Modifiers": "-",
+        "FullText": "But he had nothing to repay him with, so his lord commanded him and his wife and children and all things, as many things as he was holding, to be sold* and the money to be repaid to him."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "lord",
+        "Verb": "order",
+        "Object": "him",
+        "Adverbials": "was",
+        "Modifiers": "-",
+        "FullText": "Because he was not able to repay it, the lord ordered him to be sold, along with his wife, children, and whatever he possessed, and repayment to be made."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "master",
+        "Verb": "order",
+        "Object": "that",
+        "Adverbials": "was",
+        "Modifiers": "-",
+        "FullText": "Since he was not able to pay, the master ordered that he and his wife and his children and all that he had be sold to repay the debt."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "master",
+        "Verb": "give",
+        "Object": "orders",
+        "Adverbials": "with, meet",
+        "Modifiers": "-",
+        "FullText": "he had no means of paying, so his master gave orders that he should be sold, together with his wife and children and all his possessions, to meet the debt."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "master",
+        "Verb": "command",
+        "Object": "that",
+        "Adverbials": "was",
+        "Modifiers": "-",
+        "FullText": "But as he was not able to pay, his master commanded that he be sold, with his wife and children and all that he had, and that payment be made."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:26",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "patience",
+        "Adverbials": "on, before",
+        "Modifiers": "-",
+        "FullText": "Then the servant fell on his knees before him. ‘Have patience with me,’ he begged, ‘and I will pay back everything.’"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "everything",
+        "Adverbials": "At, facedown, before",
+        "Modifiers": "-",
+        "FullText": "“At this, the servant fell facedown before him and said, ‘Be patient with me, and I will pay you everything’"
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "servant",
+        "Verb": "say",
+        "Object": "patience",
+        "Adverbials": "falling",
+        "Modifiers": "-",
+        "FullText": "Therefore falling down before him, the servant said, ‘Master, have patience with me, and I will repay everything to you.’"
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "on, imploring",
+        "Modifiers": "-",
+        "FullText": "So the servant fell on his knees, imploring him, ‘Have patience with me, and I will pay you everything.’"
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "slave",
+        "Verb": "throw",
+        "Object": "himself",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then the slave threw himself to the ground and began to do obeisance to him, saying, ‘Be patient with me, and I will pay back everything to you!’"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "slave",
+        "Verb": "fall",
+        "Object": "himself",
+        "Adverbials": "Therefore, to",
+        "Modifiers": "-",
+        "FullText": "Therefore, the slave fell to the ground and was prostrating himself before him, saying, ‘Have patience with me and I will repay you everything.’"
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "servant",
+        "Verb": "prostrate",
+        "Object": "patience",
+        "Adverbials": "fallen, to, saying",
+        "Modifiers": "-",
+        "FullText": "The servant then, having fallen down, was prostrating to him, saying, Lord, have patience with me, and I will pay you all;"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "bondservant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "Therefore",
+        "Modifiers": "-",
+        "FullText": "Therefore the bondservant having fallen down, was worshiping him, saying, Lord, have patience upon me, and I will be repaying all of it to you."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "slave",
+        "Verb": "throw",
+        "Object": "himself",
+        "Adverbials": "to, before, saying",
+        "Modifiers": "-",
+        "FullText": "Then the slave threw himself to the ground before him, saying, ‘Be patient with me, and I will repay you everything.’"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "everything",
+        "Adverbials": "At, on, before",
+        "Modifiers": "-",
+        "FullText": "“At this the servant fell on his knees before him. ‘Be patient with me,’ he begged, ‘and I will pay back everything.’"
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "servant",
+        "Verb": "throw",
+        "Object": "himself",
+        "Adverbials": "At, at, with",
+        "Modifiers": "-",
+        "FullText": "At this, the servant threw himself down at his master's feet, with the words, \"Be patient with me and I will pay the whole sum.\""
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "patience",
+        "Adverbials": "therefore, before, saying",
+        "Modifiers": "-",
+        "FullText": "The servant therefore fell down before him, saying, ‘Master, have patience with me, and I will pay you all.’"
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:27",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "master",
+        "Verb": "have",
+        "Object": "compassion",
+        "Adverbials": "on",
+        "Modifiers": "-",
+        "FullText": "His master had compassion on him, forgave his debt, and released him."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "master",
+        "Verb": "have",
+        "Object": "compassion",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then the master of that servant had compassion, released him, and forgave him the loan."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "-",
+        "Verb": "release",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "And having compassion, the master of that servant released him, and forgave him the debt."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "master",
+        "Verb": "release",
+        "Object": "him",
+        "Adverbials": "out",
+        "Modifiers": "-",
+        "FullText": "And out of pity for him, the master of that servant released him and forgave him the debt."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "master",
+        "Verb": "release",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "So the master of that slave, because he had compassion, released him and forgave him the loan."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "lord",
+        "Verb": "release",
+        "Object": "him",
+        "Adverbials": "feeling",
+        "Modifiers": "-",
+        "FullText": "And feeling compassion, the lord of that slave released him and forgave him the debt."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "lord",
+        "Verb": "move",
+        "Object": "him",
+        "Adverbials": "with, released",
+        "Modifiers": "-",
+        "FullText": "and the lord of that servant having been moved with compassion released him, and the debt he forgave him."
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "lord",
+        "Verb": "release",
+        "Object": "him",
+        "Adverbials": "having",
+        "Modifiers": "-",
+        "FullText": "But the lord of that bondservant, having compassion on him, released him and forgave him the loan."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "lord",
+        "Verb": "have",
+        "Object": "compassion",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "The lord had compassion on that slave and released him, and forgave him the debt."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "master",
+        "Verb": "take",
+        "Object": "pity",
+        "Adverbials": "on",
+        "Modifiers": "-",
+        "FullText": "The servant’s master took pity on him, canceled the debt and let him go."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "master",
+        "Verb": "feel",
+        "Object": "debt",
+        "Adverbials": "-",
+        "Modifiers": "sorry",
+        "FullText": "And the servant's master felt so sorry for him that he let him go and cancelled the debt."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "master",
+        "Verb": "move",
+        "Object": "him",
+        "Adverbials": "with",
+        "Modifiers": "-",
+        "FullText": "Then the master of that servant was moved with compassion, released him, and forgave him the debt."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:28",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "he",
+        "Verb": "find",
+        "Object": "one",
+        "Adverbials": "went",
+        "Modifiers": "-",
+        "FullText": "But when that servant went out, he found one of his fellow servants who owed him a hundred denarii. He grabbed him and began to choke him, saying, ‘Pay back what you owe me!’"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "servant",
+        "Verb": "go",
+        "Object": "one",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "“That servant went out and found one of his fellow servants who owed him a hundred denarii. He grabbed him, started choking him, and said, ‘Pay what you owe!’"
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "he",
+        "Verb": "find",
+        "Object": "one",
+        "Adverbials": "went",
+        "Modifiers": "-",
+        "FullText": "“But when that servant went out, he found one of his fellow servants who owed him a hundred denarii. And taking hold of him, he was choking him, saying, ‘Pay me what you owe!’"
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "he",
+        "Verb": "begin",
+        "Object": "one",
+        "Adverbials": "saying",
+        "Modifiers": "-",
+        "FullText": "But when that same servant went out, he found one of his fellow servants who owed him a hundred denarii, and seizing him, he began to choke him, saying, ‘Pay what you owe.’"
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "he",
+        "Verb": "begin",
+        "Object": "one",
+        "Adverbials": "went, saying",
+        "Modifiers": "-",
+        "FullText": "But that slave went out and found one of his fellow slaves who owed him a hundred denarii, and taking hold of him, he began to choke him, saying, ‘Pay back everything that you owe!’"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "slave",
+        "Verb": "go",
+        "Object": "hundred",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "But that slave went out and found one of his fellow slaves who owed him one hundred denarii; and he seized him and began to choke him, saying, ‘Pay back what you owe.’"
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "he",
+        "Verb": "take",
+        "Object": "him",
+        "Adverbials": "by, saying",
+        "Modifiers": "-",
+        "FullText": "And that servant having come forth, found one of his fellow-servants who was owing him one hundred denarii, and having laid hold, he took him by the throat, saying, Pay me that which you owe."
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "bondservant",
+        "Verb": "go",
+        "Object": "one",
+        "Adverbials": "forth",
+        "Modifiers": "-",
+        "FullText": "But that bondservant went forth and found one of his fellow bondservants who owed him a hundred denarii, and he took-hold of him, and was choking him, saying, Repay if you are owing me anything."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "slave",
+        "Verb": "find",
+        "Object": "one",
+        "Adverbials": "went",
+        "Modifiers": "-",
+        "FullText": "After he went out, that same slave found one of his fellow slaves who owed him 100 silver coins. So he grabbed him by the throat and started to choke him, saying, ‘Pay back what you owe me!’"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "he",
+        "Verb": "find",
+        "Object": "one",
+        "Adverbials": "went",
+        "Modifiers": "-",
+        "FullText": "“But when that servant went out, he found one of his fellow servants who owed him a hundred silver coins. He grabbed him and began to choke him. ‘Pay back what you owe me!’ he demanded."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "he",
+        "Verb": "happen",
+        "Object": "servant",
+        "Adverbials": "Now, went",
+        "Modifiers": "-",
+        "FullText": "Now as this servant went out, he happened to meet a fellow-servant who owed him one hundred denarii; and he seized him by the throat and began to throttle him, saying, \"Pay what you owe me.\""
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "servant",
+        "Verb": "go",
+        "Object": "one",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "“But that servant went out and found one of his fellow servants who owed him a hundred denarii; and he laid hands on him and took him by the throat, saying, ‘Pay me what you owe!’"
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:29",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "So his fellow servant fell down and begged him, ‘Have patience with me, and I will pay you back.’"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "At",
+        "Modifiers": "-",
+        "FullText": "“At this, his fellow servant fell down and began begging him, ‘Be patient with me, and I will pay you back.’"
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "at",
+        "Modifiers": "-",
+        "FullText": "So his fellow servant fell down at his feet and kept begging him, saying, ‘Have patience with me, and I will pay you back.’"
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "patience",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "So his fellow servant fell down and pleaded with him, ‘Have patience with me, and I will pay you.’"
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "slave",
+        "Verb": "throw",
+        "Object": "himself",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "Then his fellow slave threw himself to the ground and began to implore him, saying, ‘Be patient with me and I will repay you!’"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "slave",
+        "Verb": "fall",
+        "Object": "patience",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "So, his fellow slave fell to the ground and was pleading with him, saying, ‘Have patience with me and I will repay you.’"
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "servant",
+        "Verb": "call",
+        "Object": "patience",
+        "Adverbials": "fallen, on, saying",
+        "Modifiers": "-",
+        "FullText": "His fellow-servant then, having fallen down at his feet, was calling on him, saying, Have patience with me, and I will pay you all;"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "bondservant",
+        "Verb": "plead",
+        "Object": "patience",
+        "Adverbials": "Therefore, with, saying",
+        "Modifiers": "-",
+        "FullText": "Therefore his fellow bondservant, having fallen at his feet, was pleading with him, saying, Have patience upon me and I will be repaying you."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "slave",
+        "Verb": "throw",
+        "Object": "himself",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then his fellow slave threw himself down and begged him, ‘Be patient with me, and I will repay you.’"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "“His fellow servant fell to his knees and begged him, ‘Be patient with me, and I will pay it back.’"
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "you",
+        "Adverbials": "at",
+        "Modifiers": "-",
+        "FullText": "His fellow-servant fell at his feet and appealed to him, saying, \"Be patient with me and I will pay you.\""
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "servant",
+        "Verb": "fall",
+        "Object": "him",
+        "Adverbials": "at",
+        "Modifiers": "-",
+        "FullText": "So his fellow servant fell down at his feet and begged him, saying, ‘Have patience with me, and I will pay you all.’"
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:30",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "he",
+        "Verb": "refuse",
+        "Object": "debt",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "But he refused. Instead, he went and had the man thrown into prison until he could pay his debt."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "he",
+        "Verb": "be",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "willing",
+        "FullText": "But he wasn’t willing. Instead, he went and threw him into prison until he could pay what was owed."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "he",
+        "Verb": "be",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "willing",
+        "FullText": "But he was not willing, but going off, he cast him into prison till he should pay back what was owed."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "He",
+        "Verb": "refuse",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "He refused and went and put him in prison until he should pay the debt."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "he",
+        "Verb": "want",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "But he did not want to, but rather he went and threw him into prison until he would repay what was owed."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "he",
+        "Verb": "be",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "unwilling",
+        "FullText": "But he was unwilling and went and threw him in prison until he should pay back what was owed."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "he",
+        "Verb": "would",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "and he would not, but having gone away, he cast him into prison, until he might pay that which was owing."
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "he",
+        "Verb": "wish",
+        "Object": "him",
+        "Adverbials": "to",
+        "Modifiers": "-",
+        "FullText": "But he did not wish to, but having gone away he cast him into prison, until he should repay what is owed."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "he",
+        "Verb": "refuse",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "But he refused. Instead, he went out and threw him in prison until he repaid the debt."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "he",
+        "Verb": "refuse",
+        "Object": "debt",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "“But he refused. Instead, he went off and had the man thrown into prison until he could pay the debt."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "he",
+        "Verb": "have",
+        "Object": "debt",
+        "Adverbials": "on",
+        "Modifiers": "-",
+        "FullText": "But the other would not agree; on the contrary, he had him thrown into prison till he should pay the debt."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "he",
+        "Verb": "would",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "And he would not, but went and threw him into prison till he should pay the debt."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:31",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "all",
+        "Adverbials": "saw",
+        "Modifiers": "distressed",
+        "FullText": "When his fellow servants saw what had happened, they were greatly distressed, and they went and recounted all of this to their master."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "place",
+        "Adverbials": "saw",
+        "Modifiers": "distressed",
+        "FullText": "When the other servants saw what had taken place, they were deeply distressed and went and reported to their master everything that had happened."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "they",
+        "Verb": "grieve",
+        "Object": "place",
+        "Adverbials": "saw, deeply",
+        "Modifiers": "-",
+        "FullText": "So when his fellow servants saw what had been done, they were deeply grieved, and they came and narrated to their master all that had taken place."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "place",
+        "Adverbials": "saw",
+        "Modifiers": "distressed",
+        "FullText": "When his fellow servants saw what had taken place, they were greatly distressed, and they went and reported to their master all that had taken place."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "everything",
+        "Adverbials": "saw",
+        "Modifiers": "distressed",
+        "FullText": "So when his fellow slaves saw what had happened, they were extremely distressed, and went and reported to their master everything that had happened."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "they",
+        "Verb": "grieve",
+        "Object": "-",
+        "Adverbials": "saw, deeply",
+        "Modifiers": "-",
+        "FullText": "So, when his fellow slaves saw what had happened, they were deeply grieved and came and reported to their lord all that had happened."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "servants",
+        "Verb": "grieve",
+        "Object": "things",
+        "Adverbials": "seen, exceedingly",
+        "Modifiers": "-",
+        "FullText": "And his fellow-servants having seen the things that were done, were grieved exceedingly, and having come, showed fully to their lord all the things that were done;"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "bondservants",
+        "Verb": "be",
+        "Object": "things",
+        "Adverbials": "-",
+        "Modifiers": "sorrowful",
+        "FullText": "But his fellow bondservants, having seen the things which happened, were extremely sorrowful. And they came to their own lord, and they told all the things which had happened."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "everything",
+        "Adverbials": "saw",
+        "Modifiers": "upset",
+        "FullText": "When his fellow slaves saw what had happened, they were very upset and went and told their lord everything that had taken place."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "everything",
+        "Adverbials": "saw",
+        "Modifiers": "outraged",
+        "FullText": "When the other servants saw what had happened, they were outraged and went and told their master everything that had happened."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "servants",
+        "Verb": "be",
+        "Object": "affair",
+        "Adverbials": "saw",
+        "Modifiers": "distressed",
+        "FullText": "His fellow-servants were deeply distressed when they saw what had happened, and they went to their master and reported the whole affair to him."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "they",
+        "Verb": "be",
+        "Object": "master",
+        "Adverbials": "saw",
+        "Modifiers": "grieved",
+        "FullText": "So when his fellow servants saw what had been done, they were very grieved, and came and told their master all that had been done."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:32",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "master",
+        "Verb": "summon",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then the master summoned him and said, ‘You wicked servant! I forgave all your debt because you begged me."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "master",
+        "Verb": "say",
+        "Object": "servant",
+        "Adverbials": "summoned, to",
+        "Modifiers": "-",
+        "FullText": "Then, after he had summoned him, his master said to him, ‘You wicked servant! I forgave you all that debt because you begged me."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "master",
+        "Verb": "say",
+        "Object": "servant",
+        "Adverbials": "summoning, to",
+        "Modifiers": "-",
+        "FullText": "Then summoning him, his master said to him, ‘You wicked servant! I forgave you all that debt because you begged me."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "master",
+        "Verb": "summon",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then his master summoned him and said to him, ‘You wicked servant! I forgave you all that debt because you pleaded with me."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "master",
+        "Verb": "summon",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then his master summoned him and said to him, ‘Wicked slave! I forgave you all that debt because you implored me!"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "lord",
+        "Verb": "say",
+        "Object": "him",
+        "Adverbials": "summoning, to",
+        "Modifiers": "-",
+        "FullText": "Then summoning him, his lord said to him, ‘You wicked slave, I forgave you all that debt because you pleaded with me."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "lord",
+        "Verb": "say",
+        "Object": "him",
+        "Adverbials": "called, to, servant",
+        "Modifiers": "-",
+        "FullText": "then having called him, his lord says to him, Evil servant! All that debt I forgave you, seeing you called on me;"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "lord",
+        "Verb": "say",
+        "Object": "him",
+        "Adverbials": "called, to",
+        "Modifiers": "-",
+        "FullText": "Then having called him, his lord says to him, You evil bondservant, I forgave you all that debt, since you pleaded with me."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "lord",
+        "Verb": "call",
+        "Object": "slave",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Then his lord called the first slave and said to him, ‘Evil slave! I forgave you all that debt because you begged me!"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "master",
+        "Verb": "call",
+        "Object": "servant",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "“Then the master called the servant in. ‘You wicked servant,’ he said, ‘I canceled all that debt of yours because you begged me to."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "master",
+        "Verb": "send",
+        "Object": "debt",
+        "Adverbials": "for",
+        "Modifiers": "-",
+        "FullText": "Then the master sent for the man and said to him, \"You wicked servant, I cancelled all that debt of yours when you appealed to me."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "master",
+        "Verb": "say",
+        "Object": "servant",
+        "Adverbials": "called, to",
+        "Modifiers": "-",
+        "FullText": "Then his master, after he had called him, said to him, ‘You wicked servant! I forgave you all that debt because you begged me."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:33",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "mercy",
+        "Adverbials": "on, on",
+        "Modifiers": "-",
+        "FullText": "Shouldn’t you have had mercy on your fellow servant, just as I had on you?’"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "mercy",
+        "Adverbials": "also, on, had",
+        "Modifiers": "-",
+        "FullText": "Shouldn’t you also have had mercy on your fellow servant, as I had mercy on you?’"
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "compassion",
+        "Adverbials": "also, had",
+        "Modifiers": "-",
+        "FullText": "Should you not also have had compassion on your fellow servant, as I also had compassion on you?’"
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "mercy",
+        "Adverbials": "on, had",
+        "Modifiers": "-",
+        "FullText": "And should not you have had mercy on your fellow servant, as I had mercy on you?’"
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "you",
+        "Verb": "show",
+        "Object": "mercy",
+        "Adverbials": "also, showed",
+        "Modifiers": "-",
+        "FullText": "Should you not also have shown mercy to your fellow slave as I also showed mercy to you?’"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "mercy",
+        "Adverbials": "also, on, in",
+        "Modifiers": "-",
+        "FullText": "Should you not also have had mercy on your fellow slave, in the same way that I had mercy on you?’"
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "it",
+        "Verb": "seem",
+        "Object": "-",
+        "Adverbials": "to, dealt",
+        "Modifiers": "-",
+        "FullText": "did it not seem necessary to you to have dealt kindly with your fellow servant, as I also dealt kindly with you?"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "it",
+        "Verb": "be",
+        "Object": "mercy",
+        "Adverbials": "show, showed",
+        "Modifiers": "essential",
+        "FullText": "Was it not essential for you to show-mercy also on your fellow bondservant, like I also showed-mercy to you."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "you",
+        "Verb": "show",
+        "Object": "mercy",
+        "Adverbials": "showed",
+        "Modifiers": "-",
+        "FullText": "Should you not have shown mercy to your fellow slave, just as I showed it to you?’"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "mercy",
+        "Adverbials": "on, had",
+        "Modifiers": "-",
+        "FullText": "Shouldn’t you have had mercy on your fellow servant just as I had on you?’"
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "you",
+        "Verb": "bind",
+        "Object": "pity",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "Were you not bound, then, to have pity on your fellow-servant just as I had pity on you?\""
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "you",
+        "Verb": "have",
+        "Object": "compassion",
+        "Adverbials": "also, had",
+        "Modifiers": "-",
+        "FullText": "Should you not also have had compassion on your fellow servant, just as I had pity on you?’"
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:34",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "master",
+        "Verb": "turn",
+        "Object": "him",
+        "Adverbials": "In, to, tortured, repay",
+        "Modifiers": "-",
+        "FullText": "In anger his master turned him over to the jailers to be tortured, until he should repay all that he owed."
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "master",
+        "Verb": "hand",
+        "Object": "him",
+        "Adverbials": "was, to, tortured",
+        "Modifiers": "-",
+        "FullText": "And because he was angry, his master handed him over to the jailers to be tortured until he could pay everything that was owed."
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "master",
+        "Verb": "hand",
+        "Object": "him",
+        "Adverbials": "angered, to, pay",
+        "Modifiers": "-",
+        "FullText": "And being angered, his master handed him over to the tormentors until he should pay all that was owed to him."
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "master",
+        "Verb": "deliver",
+        "Object": "him",
+        "Adverbials": "in, to, pay",
+        "Modifiers": "-",
+        "FullText": "And in anger his master delivered him to the jailers, until he should pay all his debt."
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "master",
+        "Verb": "hand",
+        "Object": "him",
+        "Adverbials": "was, to, repay",
+        "Modifiers": "-",
+        "FullText": "And because he was angry, his master handed him over to the merciless jailers until he would repay everything that was owed."
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "lord",
+        "Verb": "move",
+        "Object": "him",
+        "Adverbials": "with",
+        "Modifiers": "-",
+        "FullText": "And his lord, moved with anger, handed him over to the torturers until he should repay all that was owed him."
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "lord",
+        "Verb": "deliver",
+        "Object": "him",
+        "Adverbials": "been, to, pay",
+        "Modifiers": "-",
+        "FullText": "And having been angry, his lord delivered him to the inquisitors, until he might pay all that was owing to him;"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "lord",
+        "Verb": "make",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "And his lord was made angry, and gave him to the torturers until he should repay everything which is owed to him."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "lord",
+        "Verb": "turn",
+        "Object": "him",
+        "Adverbials": "in, to, torture",
+        "Modifiers": "-",
+        "FullText": "And in anger his lord turned him over to the prison guards to torture him until he repaid all he owed."
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "master",
+        "Verb": "hand",
+        "Object": "him",
+        "Adverbials": "In, to, tortured, pay",
+        "Modifiers": "-",
+        "FullText": "In anger his master handed him over to the jailers to be tortured, until he should pay back all he owed."
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "master",
+        "Verb": "hand",
+        "Object": "him",
+        "Adverbials": "in, to, pay",
+        "Modifiers": "-",
+        "FullText": "And in his anger the master handed him over to the torturers till he should pay all his debt."
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "master",
+        "Verb": "be",
+        "Object": "him",
+        "Adverbials": "-",
+        "Modifiers": "angry",
+        "FullText": "And his master was angry, and delivered him to the torturers until he should pay all that was due to him."
+      }
+    ]
+  },
+  {
+    "verse": "Matthew 18:35",
+    "rows": [
+      {
+        "chunk_id": "chunk_id_JMBSB",
+        "Subject": "That",
+        "Verb": "be",
+        "Object": "each",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "That is how My heavenly Father will treat each of you unless you forgive your brother from your heart.”"
+      },
+      {
+        "chunk_id": "chunk_id_YTCSB",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "brother",
+        "Adverbials": "also, to, forgives",
+        "Modifiers": "-",
+        "FullText": "So also my heavenly Father will do to you unless every one of you forgives his brother or sister from your heart.”"
+      },
+      {
+        "chunk_id": "chunk_id_MNEMT",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "one",
+        "Adverbials": "Thus, also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "“Thus also My heavenly Father will do to you, if you do not forgive each one his brother their trespasses, from your hearts.”"
+      },
+      {
+        "chunk_id": "chunk_id_DFESV",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "brother",
+        "Adverbials": "also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "So also my heavenly Father will do to every one of you, if you do not forgive your brother from your heart.”"
+      },
+      {
+        "chunk_id": "chunk_id_JVLEB",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "brother",
+        "Adverbials": "also, to, forgives",
+        "Modifiers": "-",
+        "FullText": "So also my heavenly Father will do to you, unless each of you forgives his brother from your hearts!”"
+      },
+      {
+        "chunk_id": "chunk_id_NVLSB",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "same",
+        "Adverbials": "also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "My heavenly Father will also do the same to you, if each of you does not forgive his brother from your hearts.”"
+      },
+      {
+        "chunk_id": "chunk_id_SWLSV",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "one",
+        "Adverbials": "also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "so also My heavenly Father will do to you, if you may not forgive each one his brother from your hearts their trespasses.”"
+      },
+      {
+        "chunk_id": "chunk_id_LZMLV",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "*",
+        "Adverbials": "also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "So my heavenly Father will also be doing* to you°, if each of you° does not forgive his brother his trespasses from your° hearts."
+      },
+      {
+        "chunk_id": "chunk_id_KJNET",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "brother",
+        "Adverbials": "also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "So also my heavenly Father will do to you, if each of you does not forgive your brother from your heart.”"
+      },
+      {
+        "chunk_id": "chunk_id_HWNIV",
+        "Subject": "This",
+        "Verb": "be",
+        "Object": "each",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "“This is how my heavenly Father will treat each of you unless you forgive your brother or sister from your heart.”"
+      },
+      {
+        "chunk_id": "chunk_id_LMNJB",
+        "Subject": "that",
+        "Verb": "be",
+        "Object": "brother",
+        "Adverbials": "-",
+        "Modifiers": "-",
+        "FullText": "And that is how my heavenly Father will deal with you unless you each forgive your brother from your heart.'"
+      },
+      {
+        "chunk_id": "chunk_id_ZONKJ",
+        "Subject": "Father",
+        "Verb": "do",
+        "Object": "brother",
+        "Adverbials": "also, to, forgive",
+        "Modifiers": "-",
+        "FullText": "“So My heavenly Father also will do to you if each of you, from his heart, does not forgive his brother his trespasses.”"
+      }
+    ]
+  }
+]

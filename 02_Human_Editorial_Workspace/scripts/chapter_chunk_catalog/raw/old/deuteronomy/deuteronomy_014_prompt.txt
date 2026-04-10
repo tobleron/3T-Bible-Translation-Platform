@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 14:1-29
+
+Chapter text:
+1. “You are the sons of Yahweh your God; you shall not gash yourselves nor shave your forehead for the sake of the dead.
+2. For you are a holy people to Yahweh your God, and Yahweh has chosen you to be a people for His treasured possession out of all the peoples who are on the face of the earth.
+3. “You shall not eat any abominable thing.
+4. These are the animals which you may eat: the ox, the sheep, the goat,
+5. the deer, the gazelle, the roebuck, the wild goat, the ibex, the antelope, and the mountain sheep.
+6. And any animal that divides the hoof and has the hoof split in two and chews the cud, among the animals, that one you may eat.
+7. Nevertheless, you are not to eat of these among those which chew the cud or among those that divide the hoof in two: the camel and the rabbit and the shaphan, for though they chew the cud, they do not divide the hoof; they are unclean for you.
+8. And the pig, because it divides the hoof but does not chew the cud, it is unclean for you. You shall not eat any of their flesh nor touch their carcasses.
+9. “These you may eat of all that are in water: anything that has fins and scales you may eat,
+10. but anything that does not have fins and scales you shall not eat; it is unclean for you.
+11. “You may eat any clean bird.
+12. But these are the ones which you shall not eat: the eagle and the vulture and the buzzard,
+13. and the red kite, the falcon, and the kite in their kinds,
+14. and every raven in its kind,
+15. and the ostrich, the owl, the gull, and the hawk in their kinds,
+16. the little owl, the great owl, the white owl,
+17. the pelican, the carrion vulture, the cormorant,
+18. the stork, and the heron in their kinds, and the hoopoe and the bat.
+19. And all the teeming life with wings are unclean to you; they shall not be eaten.
+20. You may eat any clean bird.
+21. “You shall not eat anything which dies of itself. You may give it to the sojourner who is within your gates, so that he may eat it, or you may sell it to a foreigner, for you are a holy people to Yahweh your God. You shall not boil a young goat in its mother’s milk.
+22. “You shall surely tithe all the produce from what you sow, which comes out of the field every year.
+23. And you shall eat in the presence of Yahweh your God, at the place where He chooses for His name to dwell, the tithe of your grain, your new wine, your oil, and the firstborn of your herd and your flock, so that you may learn to fear Yahweh your God all your days.
+24. And if the distance is so great for you that you are not able to bring the tithe, since the place where Yahweh your God chooses to set His name is too far away from you when Yahweh your God blesses you,
+25. then you shall exchange it for money and bind the money in your hand and go to the place which Yahweh your God chooses.
+26. And you may spend the money for whatever your heart desires: for oxen or sheep or wine or strong drink or whatever your heart desires; and there you shall eat in the presence of Yahweh your God and be glad, you and your household.
+27. Also you shall not forsake the Levite who is within your gates, for he has no portion or inheritance among you.
+28. “At the end of every third year you shall bring out all the tithe of your produce in that year and shall deposit it within your gates.
+29. And the Levite, because he has no portion or inheritance among you, and the sojourner, the orphan, and the widow who are within your gates, shall come and eat and be satisfied, in order that Yahweh your God may bless you in all the work of your hand which you do.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

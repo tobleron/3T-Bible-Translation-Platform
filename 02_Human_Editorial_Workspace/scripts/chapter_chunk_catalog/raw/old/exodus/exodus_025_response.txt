@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Call for Contributions and Purpose",
+      "reason": "Introduction to the tabernacle project with a list of materials."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 22,
+      "type": "law",
+      "title": "Instructions for the Ark and Mercy Seat",
+      "reason": "Detailed specifications for the ark, mercy seat, and cherubim."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Instructions for the Table of Showbread",
+      "reason": "Detailed specifications for the table and its utensils."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 40,
+      "type": "law",
+      "title": "Instructions for the Lampstand",
+      "reason": "Detailed specifications for the lampstand and final reminder of the pattern."
+    }
+  ]
+}

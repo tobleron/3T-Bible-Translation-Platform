@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T16:31:12Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 1,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Creation of Light and Day One",
+      "reason": "Describes the creation of light and the first day."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Creation of the Expanse and Day Two",
+      "reason": "Describes the creation of the sky and the second day."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Creation of Land and Vegetation Day Three",
+      "reason": "Describes the gathering of waters, land, and plants."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Creation of Celestial Bodies Day Four",
+      "reason": "Describes the creation of sun, moon, and stars."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Creation of Sea Creatures and Birds Day Five",
+      "reason": "Describes the creation of aquatic life and birds."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Creation of Land Animals and Man Day Six",
+      "reason": "Describes the creation of land animals, humans, and the conclusion."
+    }
+  ]
+}

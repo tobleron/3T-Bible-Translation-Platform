@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David Organizes the Army",
+      "reason": "Describes David's preparation and command to his commanders."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Battle in Ephraim Forest",
+      "reason": "Narrates the battle, Absalom's death, and his burial."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Absalom's Monument",
+      "reason": "Provides background on Absalom's pillar."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 23,
+      "type": "dialogue",
+      "title": "Messengers Sent to David",
+      "reason": "Dialogue between Ahimaaz, Joab, and the Cushite regarding who will report."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 30,
+      "type": "story",
+      "title": "Ahimaaz Arrives First",
+      "reason": "Narrates the watchman spotting runners and Ahimaaz's report."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Cushite Arrives and David Weeps",
+      "reason": "Narrates the Cushite's report and David's grief."
+    }
+  ]
+}

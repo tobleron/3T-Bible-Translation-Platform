@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "exhortation",
+      "title": "Identity and Holiness",
+      "reason": "Establishes the people's status as God's treasured possession."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 21,
+      "type": "list_or_catalog",
+      "title": "Dietary Laws",
+      "reason": "Covers clean and unclean animals, birds, and water creatures."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Tithing Instructions",
+      "reason": "Details the annual tithe, consumption at the sanctuary, and provisions for distance."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 29,
+      "type": "law",
+      "title": "Triennial Tithe",
+      "reason": "Describes the third-year tithe for the Levite and poor."
+    }
+  ]
+}

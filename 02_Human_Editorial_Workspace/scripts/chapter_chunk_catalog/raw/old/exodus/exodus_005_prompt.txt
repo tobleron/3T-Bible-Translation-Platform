@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 5:1-23
+
+Chapter text:
+1. And afterward Moses and Aaron came and said to Pharaoh, “Thus says Yahweh, the God of Israel, ‘Let My people go that they may celebrate a feast to Me in the wilderness.’”
+2. But Pharaoh said, “Who is Yahweh that I should listen to His voice to let Israel go? I do not know Yahweh, and also, I will not let Israel go.”
+3. Then they said, “The God of the Hebrews has met with us. Please, let us go a three days’ journey into the wilderness that we may sacrifice to Yahweh our God, lest He confront us with pestilence or with the sword.”
+4. But the king of Egypt said to them, “Moses and Aaron, why do you draw the people away from their work? Get back to your hard labors!”
+5. And Pharaoh said, “Look, the people of the land are now many, and you would have them cease from their hard labors!”
+6. So on that day Pharaoh commanded the taskmasters over the people and their foremen, saying,
+7. “You are no longer to give the people straw to make brick as previously; let them go and gather straw for themselves.
+8. But the quota of bricks which they were making previously, you shall set upon them; you are not to reduce any of it. Because they are lazy, therefore they are crying out, ‘Let us go and sacrifice to our God.’
+9. Let their slavery be hard on the men, and let them work at it so that they will have no regard for false words.”
+10. So the taskmasters of the people and their foremen went out and spoke to the people, saying, “Thus says Pharaoh, ‘I am not going to give you any straw.
+11. You go and get straw for yourselves wherever you can find it, but no amount of your slave labor will be reduced.’”
+12. So the people scattered through all the land of Egypt to gather stubble for straw.
+13. And the taskmasters were pressing them, saying, “Complete your work quota, the daily amount, just as when there was straw.”
+14. Moreover, the foremen of the sons of Israel, whom Pharaoh’s taskmasters had set over them, were beaten and were asked, “Why have you not completed your required amount either yesterday or today in making brick as previously?”
+15. Then the foremen of the sons of Israel came and cried out to Pharaoh, saying, “Why do you deal this way with your slaves?
+16. There is no straw given to your slaves, yet they keep saying to us, ‘Make bricks!’ And behold, your slaves are being beaten; but it is the sin of your own people.”
+17. But he said, “You are lazy—lazy! Therefore you say, ‘Let us go and sacrifice to Yahweh.’
+18. So now, go and labor; but straw will not be given to you, yet you must deliver the quota of bricks.”
+19. Then the foremen of the sons of Israel saw that they were in trouble because they were told, “You must not reduce your daily amount of bricks.”
+20. When they left Pharaoh’s presence, they confronted Moses and Aaron, standing there to meet them.
+21. And they said to them, “May Yahweh look upon you and judge, for you have made us a foul smell in Pharaoh’s sight and in the sight of his servants, to put a sword in their hand to kill us.”
+22. Then Moses returned to Yahweh and said, “O Lord, why have You brought harm to this people? Why did You ever send me?
+23. Ever since I came to Pharaoh to speak in Your name, he has done harm to this people, and You have not delivered Your people at all.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

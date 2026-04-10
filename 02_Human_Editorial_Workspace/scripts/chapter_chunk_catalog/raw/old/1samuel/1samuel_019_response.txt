@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "Jonathan warns David",
+      "reason": "Jonathan intercedes with Saul and relays the warning to David."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "story",
+      "title": "David's victory and Saul's attack",
+      "reason": "David defeats the Philistines and Saul attempts to kill him with a spear."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Michal's escape plan",
+      "reason": "Michal helps David flee and deceives Saul's messengers."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Saul prophesies at Ramah",
+      "reason": "Saul sends messengers who prophesy, followed by Saul himself prophesying."
+    }
+  ]
+}

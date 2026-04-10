@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "mixed",
+      "title": "First Oracle and Blessing",
+      "reason": "Contains the preparation of altars, Balaam's first oracle delivered to Balak, and Balak's frustrated response."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 26,
+      "type": "mixed",
+      "title": "Second Oracle and Blessing",
+      "reason": "Describes the move to Pisgah, Balaam's second oracle emphasizing God's faithfulness, and Balak's complaint."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 30,
+      "type": "story",
+      "title": "Third Oracle Setup",
+      "reason": "Narrates the move to Peor and the final preparation of altars for a third attempt."
+    }
+  ]
+}

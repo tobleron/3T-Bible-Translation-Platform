@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Samuel 17:1-29
+
+Chapter text:
+1. Then Ahithophel said to Absalom, “Please let me choose 12,000 men that I may arise and pursue David tonight.
+2. And I will come upon him while he is weary with his hands falling limp and throw him into utter fright, so that all the people who are with him will flee. Then I will strike down the king alone,
+3. and I will cause all the people to return to you. The return of everyone depends on the man you seek; then all the people will be at peace.”
+4. And the word was right in the eyes of Absalom and all the elders of Israel.
+5. Then Absalom said, “Call now Hushai the Archite also, and let us hear what is also in his mouth.”
+6. Then Hushai came to Absalom. And Absalom spoke to him, saying, “Ahithophel has spoken thus. Shall we carry out his word? If not, you speak.”
+7. And Hushai said to Absalom, “This time the counsel that Ahithophel has counseled is not good.”
+8. Then Hushai said, “You know your father and his men, that they are mighty men and they are bitter of soul, like a bear robbed of her cubs in the field. And your father is a man of war, and will not spend the night with the people.
+9. Behold, he has now hidden himself in one of the caves or in another place; and it will be when he falls on them at the first attack, that whoever hears it will say, ‘There has been a slaughter among the people who follow Absalom.’
+10. And even the one who is a man of valor, whose heart is like the heart of a lion, will utterly melt; for all Israel knows that your father is a mighty man and those who are with him are men of valor.
+11. But I counsel that all Israel be utterly gathered to you, from Dan even to Beersheba, as the sand that is by the sea in abundance, and that you personally go into battle.
+12. So we shall come to him in one of the places where he can be found, and we will set down on him as the dew falls on the ground; and of him and of all the men who are with him, not even one will be left.
+13. If he withdraws into a city, then all Israel shall carry ropes to that city, and we will drag it into the valley until not even a small stone is found there.”
+14. Then Absalom and all the men of Israel said, “The counsel of Hushai the Archite is better than the counsel of Ahithophel.” For Yahweh had ordained to thwart the good counsel of Ahithophel, so that Yahweh might bring calamity on Absalom.
+15. Then Hushai said to Zadok and to Abiathar the priests, “This is what Ahithophel counseled Absalom and the elders of Israel, and this is what I have counseled.
+16. So now, send quickly and inform David, saying, ‘Do not spend the night at the fords of the wilderness, but by all means cross over, lest the king and all the people who are with him be swallowed up.’”
+17. Now Jonathan and Ahimaaz were staying at En-rogel, and a servant-woman would go and inform them, and they would go and inform King David, for they could not be seen entering the city.
+18. But a boy did see them and informed Absalom; so the two of them went quickly and came to the house of a man in Bahurim, who had a well in his courtyard, and they went down into it.
+19. And the woman took a covering and spread it over the well’s mouth and scattered crushed grain on it, so that nothing was known.
+20. Then Absalom’s servants came to the woman at the house and said, “Where are Ahimaaz and Jonathan?” And the woman said to them, “They have crossed the brook of water.” And when they searched and could not find them, they returned to Jerusalem.
+21. Now it happened after they went away, that they came up out of the well and went and informed King David; and they said to David, “Arise and cross over the water quickly for thus Ahithophel has counseled against you.”
+22. Then David and all the people who were with him arose and crossed the Jordan; and by dawn not even one remained who had not crossed the Jordan.
+23. Now Ahithophel saw that his counsel was not followed. So he saddled his donkey and arose and went to his home, to his city, and set his house in order, and strangled himself; thus he died and was buried in the grave of his father.
+24. Now David came to Mahanaim. And Absalom crossed the Jordan, he and all the men of Israel with him.
+25. And Absalom set Amasa over the army in place of Joab. Now Amasa was the son of a man whose name was Ithra the Israelite, who went in to Abigail the daughter of Nahash, sister of Zeruiah, Joab’s mother.
+26. And Israel and Absalom camped in the land of Gilead.
+27. Now it happened that when David had come to Mahanaim, Shobi the son of Nahash from Rabbah of the sons of Ammon, Machir the son of Ammiel from Lo-debar, and Barzillai the Gileadite from Rogelim,
+28. brought beds, basins, pottery, wheat, barley, flour, roasted grain, beans, lentils, roasted seeds,
+29. honey, curds, sheep, and cheese of the herd, for David and for the people who were with him, to eat; for they said, “The people are hungry and weary and thirsty in the wilderness.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

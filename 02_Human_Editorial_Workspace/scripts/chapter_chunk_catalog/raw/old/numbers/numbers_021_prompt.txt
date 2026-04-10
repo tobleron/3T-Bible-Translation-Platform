@@ -1,0 +1,84 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Numbers 21:1-35
+
+Chapter text:
+1. Then the Canaanite, the king of Arad, who lived in the Negev, heard that Israel was coming by the way of Atharim, and he fought against Israel and took some of them captive.
+2. So Israel made a vow to Yahweh and said, “If You will indeed give this people into my hand, then I will devote their cities to destruction.”
+3. Then Yahweh heard the voice of Israel and gave the Canaanites over; so they devoted them and their cities to destruction. Thus the name of the place was called Hormah.
+4. Then they set out from Mount Hor by the way to the Red Sea, to go around the land of Edom; and the people became impatient on the way.
+5. And the people spoke against God and against Moses, “Why have you brought us up out of Egypt to die in the wilderness? For there is no food and no water, and we loathe this miserable food.”
+6. So Yahweh sent fiery serpents among the people, and they bit the people so that many people of Israel died.
+7. Then the people came to Moses and said, “We have sinned because we have spoken against Yahweh and against you; pray to Yahweh, that He may remove the serpents from us.” And Moses prayed for the people.
+8. Then Yahweh said to Moses, “Make a fiery serpent and set it on a standard; and it will be that everyone who is bitten and looks at it, will live.”
+9. And Moses made a bronze serpent and set it on the standard; and it happened, that if a serpent bit any man, when he looked to the bronze serpent, he lived.
+10. Then the sons of Israel set out and camped in Oboth.
+11. They then set out from Oboth and camped at Iye-abarim, in the wilderness which is opposite Moab, east toward the sunrise.
+12. From there they set out and camped in Wadi Zered.
+13. From there they set out and camped on the other side of the Arnon, which is in the wilderness that comes out of the border of the Amorites, for the Arnon is the border of Moab, between Moab and the Amorites.
+14. Therefore it is said in the Book of the Wars of Yahweh, “Waheb in Suphah, And the wadis of the Arnon,
+15. And the slope of the wadis That extends to the site of Ar, And leans to the border of Moab.”
+16. And from there they continued to Beer, that is the well where Yahweh said to Moses, “Assemble the people, that I may give them water.”
+17. Then Israel sang this song: “Spring up, O well! Sing to it!
+18. The well, which the leaders dug, Which the nobles of the people carved out, With the scepter and with their staffs.” And from the wilderness they continued to Mattanah,
+19. and from Mattanah to Nahaliel, and from Nahaliel to Bamoth,
+20. and from Bamoth to the valley that is in the land of Moab, at the top of Pisgah which overlooks the wasteland.
+21. Then Israel sent messengers to Sihon, king of the Amorites, saying,
+22. “Let me pass through your land. We will not turn off into field or vineyard; we will not drink water from wells. We will go by the king’s highway until we have passed through your border.”
+23. But Sihon would not allow Israel to pass through his border. So Sihon gathered all his people and went out to meet Israel in the wilderness and came to Jahaz and fought against Israel.
+24. Then Israel struck him with the edge of the sword and took possession of his land from the Arnon to the Jabbok, as far as the sons of Ammon; for the border of the sons of Ammon was Jazer.
+25. And Israel took all these cities, and Israel lived in all the cities of the Amorites, in Heshbon, and in all her towns.
+26. For Heshbon was the city of Sihon, king of the Amorites. Now it was he who had fought against the former king of Moab and had taken all his land out of his hand, as far as the Arnon.
+27. Therefore those who use proverbs say, “Come to Heshbon! Let it be built! So let the city of Sihon be established.
+28. For a fire went forth from Heshbon, A flame from the town of Sihon; It devoured Ar of Moab, The dominant heights of the Arnon.
+29. Woe to you, O Moab! You perish, O people of Chemosh! He has given his sons as fugitives, And his daughters into captivity, To an Amorite king, Sihon.
+30. But we have cast them down, Heshbon perishes as far as Dibon, And we have made desolate even to Nophah, Which reaches to Medeba.”
+31. Thus Israel lived in the land of the Amorites.
+32. And Moses sent to spy out Jazer, and they captured its towns and dispossessed the Amorites who were there.
+33. Then they turned and went up by the way of Bashan, and Og the king of Bashan went out to meet them, he and all his people for battle at Edrei.
+34. But Yahweh said to Moses, “Do not fear him, for I have given him into your hand, and all his people and his land; and you shall do to him as you did to Sihon, king of the Amorites, who lived at Heshbon.”
+35. So they struck down him and his sons and all his people, until there was no survivor remaining for him; and they possessed his land.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Introduction to the Blessings",
+      "reason": "Jacob summons his sons and sets the context for the prophecy."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Judgment on Reuben, Simeon, and Levi",
+      "reason": "Specific oracles regarding the first three sons focusing on their character flaws."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Oracle on Judah",
+      "reason": "A distinct prophetic section concerning the lineage and future of Judah."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 27,
+      "type": "list_or_catalog",
+      "title": "Oracles on the Remaining Tribes",
+      "reason": "Sequential prophecies for Zebulun through Benjamin forming a complete catalog."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Conclusion and Death of Jacob",
+      "reason": "Narrative summary of the blessings followed by Jacob's final commands and death."
+    }
+  ]
+}

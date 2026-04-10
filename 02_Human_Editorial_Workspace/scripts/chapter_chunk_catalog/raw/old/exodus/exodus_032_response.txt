@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "The Golden Calf",
+      "reason": "Narrative of the people's idolatry and Aaron's role in making the calf."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "God's Anger and Moses' Intercession",
+      "reason": "Divine declaration of judgment followed by Moses' persuasive prayer."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Moses Descends and Breaks the Tablets",
+      "reason": "Physical descent, Joshua's report, and Moses' destruction of the idol."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 29,
+      "type": "dialogue",
+      "title": "Confrontation with Aaron and Levite Judgment",
+      "reason": "Moses questions Aaron, followed by the call to arms and execution of judgment."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 35,
+      "type": "argument",
+      "title": "Moses' Second Intercession and Final Verdict",
+      "reason": "Moses offers to be blotted out for the people and receives God's final instruction."
+    }
+  ]
+}

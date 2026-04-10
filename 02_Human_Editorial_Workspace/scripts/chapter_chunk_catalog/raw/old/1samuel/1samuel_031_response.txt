@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Death of Saul and His Sons",
+      "reason": "Describes the battle at Mount Gilboa where Saul and his sons fall in combat."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Philistine Treatment of the Dead",
+      "reason": "Details the Philistines stripping Saul's body and displaying it in Beth-shan."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Recovery of Saul's Remains",
+      "reason": "Narrates the men of Jabesh-gilead retrieving the bodies and burying them."
+    }
+  ]
+}

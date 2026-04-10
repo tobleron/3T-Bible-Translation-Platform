@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Abram and Lot Return to Canaan",
+      "reason": "Narrative of their journey back from Egypt and the resulting conflict over resources."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "dialogue",
+      "title": "Separation of Abram and Lot",
+      "reason": "Dialogue between the two men followed by Lot's choice and their separation."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "God's Promise to Abram",
+      "reason": "Divine speech promising the land and numerous descendants to Abram."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Abram Builds an Altar",
+      "reason": "Narrative conclusion describing Abram's new location and worship."
+    }
+  ]
+}

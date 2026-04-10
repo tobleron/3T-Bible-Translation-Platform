@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Achan's Sin and the Defeat at Ai",
+      "reason": "Narrative unit describing the cause of defeat and the immediate military loss."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Joshua's Lament",
+      "reason": "Joshua's emotional response and prayer to God regarding the defeat."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "God's Response and Instructions",
+      "reason": "Divine oracle explaining the cause of failure and prescribing the method of judgment."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Identification of Achan",
+      "reason": "Narrative sequence of the tribal selection process and discovery of the culprit."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Judgment and Resolution",
+      "reason": "Conclusion of the narrative with the execution of Achan and restoration of God's favor."
+    }
+  ]
+}

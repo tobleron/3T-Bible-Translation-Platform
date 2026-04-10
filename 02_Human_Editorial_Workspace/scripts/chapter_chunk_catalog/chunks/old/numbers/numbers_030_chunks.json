@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:36:55Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 30,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 16,
+  "verse_count": 16,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Moses Introduces the Law on Vows",
+      "reason": "Moses addresses the tribal heads to introduce Yahweh's command regarding vows."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "law",
+      "title": "Vows of a Young Woman in Her Father's House",
+      "reason": "Details the conditions under which a father can confirm or annul his daughter's vows."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Vows of a Married Woman and Widow",
+      "reason": "Describes how a husband or widow's status affects the validity of her vows."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Vows Made in a Husband's House",
+      "reason": "Explains the husband's authority to annul vows made by his wife and the consequences of silence."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 16,
+      "type": "speech",
+      "title": "Conclusion of the Statutes",
+      "reason": "Summarizes the chapter as statutes commanded by Yahweh to Moses regarding family relationships."
+    }
+  ]
+}

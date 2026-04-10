@@ -1,0 +1,69 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Deuteronomy 17:1-20
+
+Chapter text:
+1. “You shall not sacrifice to Yahweh your God an ox or a sheep which has a defect or any blemish, for that is an abominable thing to Yahweh your God.
+2. “If there is found in your midst, in any of your gates of the towns which Yahweh your God is giving you, a man or a woman who does what is evil in the sight of Yahweh your God, by trespassing against His covenant,
+3. and has gone and served other gods and worshiped them, or the sun or the moon or any of the heavenly host, which I have not commanded,
+4. and if it is told to you and you have heard of it, then you shall inquire thoroughly. Behold, if it is true and the matter is confirmed that this abomination has been done in Israel,
+5. then you shall bring out that man or that woman who has done this evil deed to your gates, that is, the man or the woman, and you shall stone them, and they will die.
+6. On the mouth of two witnesses or three witnesses, he who is to die shall be put to death; he shall not be put to death on the mouth of one witness.
+7. The hand of the witnesses shall be first against him to put him to death, and afterward the hand of all the people. So you shall purge the evil from your midst.
+8. “If any case is too difficult for you to judge, between one kind of homicide or another, between one kind of lawsuit or another, and between one kind of assault or another, being cases of dispute in your gates, then you shall arise and go up to the place which Yahweh your God chooses.
+9. So you shall come to the Levitical priest or the judge who is in office in those days, and you shall inquire of them, and they will declare to you the judgment in the case.
+10. And you shall do according to the terms of the judgment which they declare to you from that place which Yahweh chooses; and you shall be careful to do according to all that they teach you.
+11. According to the terms of the law which they teach you, and according to the judgment which they tell you, you shall do; you shall not turn aside from the word which they declare to you, to the right or the left.
+12. And the man who acts presumptuously by not listening to the priest who stands there to minister to Yahweh your God, or to the judge, that man shall die; thus you shall purge the evil from Israel.
+13. Then all the people will hear and be afraid and will not act presumptuously again.
+14. “When you enter the land which Yahweh your God gives you, and you possess it and live in it, and you say, ‘I will set a king over me like all the nations who are around me,’
+15. you shall surely set a king over you whom Yahweh your God chooses, one from among your brothers you shall set as king over yourselves; you may not put a foreigner over yourselves who is not your brother.
+16. Moreover, he shall not multiply horses for himself, nor shall he cause the people to return to Egypt to multiply horses. Yahweh has said to you, ‘You shall never again return that way.’
+17. And he shall not multiply wives for himself, or else his heart will turn away; nor shall he greatly increase silver and gold for himself.
+18. “Now it will be when he sits on the throne of his kingdom, that he shall write for himself a copy of this law on a scroll in the presence of the Levitical priests.
+19. And it shall be with him, and he shall read it all the days of his life, that he may learn to fear Yahweh his God, to carefully observe all the words of this law and these statutes,
+20. that his heart may not be lifted up above his brothers and that he may not turn aside from the commandment, to the right or the left, so that he may prolong his days in his kingdom, he and his sons in the midst of Israel.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

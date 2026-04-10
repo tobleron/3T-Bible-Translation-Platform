@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Samuel 7:1-29
+
+Chapter text:
+1. Now it happened when the king inhabited his house, and Yahweh had given him rest on every side from all his enemies,
+2. that the king said to Nathan the prophet, “See now, I inhabit a house of cedar, but the ark of God inhabits tent curtains.”
+3. So Nathan said to the king, “Go, do all that is in your heart, for Yahweh is with you.”
+4. Now it happened in the same night, that the word of Yahweh came to Nathan, saying,
+5. “Go and say to My servant David, ‘Thus says Yahweh, “Are you the one who would build Me a house to inhabit?
+6. For I have not inhabited a house since the day I brought up the sons of Israel from Egypt, even to this day; but I have been going about in a tent, even in a tabernacle.
+7. Wherever I have gone about with all the sons of Israel, did I speak a word with one of the tribes of Israel, which I commanded to shepherd My people Israel, saying, ‘Why have you not built Me a house of cedar?’”’
+8. So now, thus you shall say to My servant David, ‘Thus says Yahweh of hosts, “I Myself took you from the pasture, from following the sheep, to be ruler over My people Israel.
+9. And I have been with you wherever you have gone and have cut off all your enemies from before you; and I will make you a great name, like the name of the great men who are on the earth.
+10. And I will appoint a place for My people Israel and will plant them, that they may dwell in their own place and not be disturbed again; and the unrighteous will not afflict them any more as formerly,
+11. even from the day that I commanded judges to be over My people Israel; and I will give you rest from all your enemies. Yahweh also declares to you that Yahweh will make a house for you.
+12. When your days are fulfilled and you lie down with your fathers, I will raise up one of your seed after you, who will come forth from your own body, and I will establish his kingdom.
+13. He shall build a house for My name, and I will establish the throne of his kingdom forever.
+14. I will be a father to him and he will be a son to Me; when he commits iniquity, I will reprove him with the rod of men and the strikes from the sons of men,
+15. but My lovingkindness shall not be removed from him, as I removed it from Saul, whom I removed from before you.
+16. And your house and your kingdom shall endure before Me forever; your throne shall be established forever.”’”
+17. According to all these words and according to all this vision, so Nathan spoke to David.
+18. Then David the king went in and sat before Yahweh, and he said, “Who am I, O Lord Yahweh, and what is my house, that You have brought me this far?
+19. And yet this was a small thing in Your eyes, O Lord Yahweh, for You have spoken also of the house of Your slave concerning the distant future. And this is the law of man, O Lord Yahweh.
+20. And again what more can David say to You? And You know Your slave, O Lord Yahweh!
+21. For the sake of Your word, and according to Your own heart, You have done all this greatness to let Your slave know.
+22. For this reason You are great, O Lord Yahweh; for there is none like You, and there is no God besides You, according to all that we have heard with our ears.
+23. And what one nation on the earth is like Your people Israel, whom God went to redeem for Himself as a people and to make a name for Himself, and to do a great thing for You and awesome things for Your land, before Your people whom You have redeemed for Yourself from Egypt, from nations and their gods?
+24. Yet You have established for Yourself Your people Israel as Your own people forever, and You, O Yahweh, have become their God.
+25. So now, O Yahweh God, the word that You have spoken concerning Your slave and concerning his house, establish it forever, and do as You have spoken,
+26. that Your name may be magnified forever, by saying, ‘Yahweh of hosts is God over Israel’; and the house of Your servant David shall be established before You.
+27. For You, O Yahweh of hosts, the God of Israel, have revealed in the hearing of Your slave, saying, ‘I will build you a house’; therefore Your slave has found courage in his heart to pray this prayer to You.
+28. So now, O Lord Yahweh, You are God, and Your words are truth, and You have promised this good thing to Your slave.
+29. So now, be pleased and bless the house of Your slave, that it may be forever before You. For You, O Lord Yahweh, have spoken; and with Your blessing may the house of Your slave be blessed forever.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

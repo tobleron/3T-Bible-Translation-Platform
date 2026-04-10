@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Introduction to the Laws",
+      "reason": "Yahweh introduces the statutes and judgments to Moses for Israel."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 18,
+      "type": "list_or_catalog",
+      "title": "Incest Prohibitions",
+      "reason": "A detailed catalog of relatives whose nakedness is to be uncovered."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 23,
+      "type": "law",
+      "title": "Specific Sexual Laws",
+      "reason": "Laws regarding menstrual impurity, neighbor's wife, Molech, males, and animals."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 30,
+      "type": "argument",
+      "title": "Consequences and Exhortation",
+      "reason": "Explanation of the land's defilement and the warning to keep the statutes."
+    }
+  ]
+}

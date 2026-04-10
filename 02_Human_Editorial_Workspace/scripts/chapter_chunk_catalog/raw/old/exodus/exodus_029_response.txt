@@ -1,0 +1,73 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "law",
+      "title": "Preparation for Ordination",
+      "reason": "Instructions for gathering offerings and dressing the priests."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 14,
+      "type": "law",
+      "title": "The Bull Sin Offering",
+      "reason": "Ritual details for the first sacrifice and disposal of remains."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "law",
+      "title": "The Burnt Offering Ram",
+      "reason": "Instructions for the second ram offered as a whole burnt offering."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 25,
+      "type": "law",
+      "title": "The Ordination Ram Ritual",
+      "reason": "Detailed steps for the third ram including blood application and wave offering."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 30,
+      "type": "law",
+      "title": "Priestly Portions and Garments",
+      "reason": "Designation of the breast and thigh for priests and rules for priestly vestments."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 34,
+      "type": "law",
+      "title": "The Ordination Meal",
+      "reason": "Instructions on eating the sacrificial meat and bread within the holy place."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 37,
+      "type": "law",
+      "title": "Seven Days of Consecration",
+      "reason": "Summary of the seven-day purification process for the altar and priests."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 42,
+      "type": "law",
+      "title": "The Daily Sacrifice",
+      "reason": "Establishment of the continual morning and evening burnt offerings."
+    },
+    {
+      "start_verse": 43,
+      "end_verse": 46,
+      "type": "oracle",
+      "title": "Divine Promise of Presence",
+      "reason": "God's promise to meet with Israel and dwell among them."
+    }
+  ]
+}

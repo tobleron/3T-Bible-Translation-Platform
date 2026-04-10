@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 32,
+      "type": "law",
+      "title": "Law for Cleansing a Leper",
+      "reason": "A complete legal procedure detailing the ritual for cleansing a person with leprosy, including provisions for the wealthy and the poor."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 57,
+      "type": "law",
+      "title": "Law for Cleansing a Leprous House",
+      "reason": "A continuous legal section covering the diagnosis, isolation, and cleansing of a house with a leprous mark, concluding with a summary statement."
+    }
+  ]
+}

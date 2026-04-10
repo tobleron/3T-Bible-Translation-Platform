@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "law",
+      "title": "Sin Offering for the Anointed Priest",
+      "reason": "Establishes the procedure for a priest's unintentional sin."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 21,
+      "type": "law",
+      "title": "Sin Offering for the Congregation",
+      "reason": "Details the ritual when the whole assembly sins unintentionally."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 26,
+      "type": "law",
+      "title": "Sin Offering for a Leader",
+      "reason": "Prescribes the goat sacrifice for a ruler's unintentional sin."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 31,
+      "type": "law",
+      "title": "Sin Offering for Common People with Goat",
+      "reason": "Outlines the offering for an individual from the common people."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 35,
+      "type": "law",
+      "title": "Sin Offering for Common People with Lamb",
+      "reason": "Specifies the alternative offering using a female lamb."
+    }
+  ]
+}

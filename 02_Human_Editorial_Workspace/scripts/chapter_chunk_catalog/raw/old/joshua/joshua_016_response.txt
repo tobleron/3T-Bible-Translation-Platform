@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "list_or_catalog",
+      "title": "Lot for Joseph",
+      "reason": "Describes the geographical boundaries of the inheritance for the sons of Joseph."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Territory of Ephraim",
+      "reason": "Details the specific borders of Ephraim's inheritance and notes the remaining Canaanite population."
+    }
+  ]
+}

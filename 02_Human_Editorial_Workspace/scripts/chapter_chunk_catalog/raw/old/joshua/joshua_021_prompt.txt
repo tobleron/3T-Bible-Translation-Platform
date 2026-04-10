@@ -1,0 +1,94 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Joshua 21:1-45
+
+Chapter text:
+1. Then the heads of households of the Levites came near to Eleazar the priest and to Joshua the son of Nun and to the heads of households of the tribes of the sons of Israel.
+2. And they spoke to them at Shiloh in the land of Canaan, saying, “Yahweh commanded by the hand of Moses to give us cities to live in, with their pasture lands for our cattle.”
+3. So the sons of Israel gave the Levites from their inheritance these cities with their pasture lands, according to the command of Yahweh.
+4. Then the lot came out for the families of the Kohathites. And the sons of Aaron the priest, who were of the Levites, received thirteen cities by lot from the tribe of Judah and from the tribe of the Simeonites and from the tribe of Benjamin.
+5. Now the rest of the sons of Kohath received ten cities by lot from the families of the tribe of Ephraim and from the tribe of Dan and from the half-tribe of Manasseh.
+6. And the sons of Gershon received thirteen cities by lot from the families of the tribe of Issachar and from the tribe of Asher and from the tribe of Naphtali, and from the half-tribe of Manasseh in Bashan.
+7. The sons of Merari according to their families received twelve cities from the tribe of Reuben and from the tribe of Gad and from the tribe of Zebulun.
+8. So the sons of Israel gave by lot to the Levites these cities with their pasture lands, as Yahweh had commanded by the hand of Moses.
+9. They also gave from the tribe of the sons of Judah and from the tribe of the sons of Simeon these cities which are here mentioned by name;
+10. and they were for the sons of Aaron, one of the families of the Kohathites, of the sons of Levi, for the lot was theirs first.
+11. So they gave them Kiriath-arba (Arba being the father of Anak), that is, Hebron, in the hill country of Judah, with its pasture lands all around it.
+12. But the fields of the city and its villages they gave to Caleb the son of Jephunneh as his possession.
+13. Thus to the sons of Aaron the priest they gave Hebron, the city of refuge for the manslayer, with its pasture lands, Libnah also with its pasture lands,
+14. Jattir with its pasture lands, Eshtemoa with its pasture lands,
+15. Holon with its pasture lands, and Debir with its pasture lands,
+16. and Ain with its pasture lands, and Juttah with its pasture lands, and Beth-shemesh with its pasture lands; nine cities from these two tribes.
+17. From the tribe of Benjamin, Gibeon with its pasture lands, Geba with its pasture lands,
+18. Anathoth with its pasture lands and Almon with its pasture lands; four cities.
+19. All the cities of the sons of Aaron, the priests, were thirteen cities with their pasture lands.
+20. Then the cities from the tribe of Ephraim were allotted to the families of the sons of Kohath, the Levites, even to the rest of the sons of Kohath.
+21. And they gave them Shechem, the city of refuge for the manslayer, with its pasture lands, in the hill country of Ephraim, and Gezer with its pasture lands,
+22. and Kibzaim with its pasture lands, and Beth-horon with its pasture lands; four cities.
+23. From the tribe of Dan, Elteke with its pasture lands, Gibbethon with its pasture lands,
+24. Aijalon with its pasture lands, and Gath-rimmon with its pasture lands; four cities.
+25. From the half-tribe of Manasseh, they gave Taanach with its pasture lands and Gath-rimmon with its pasture lands; two cities.
+26. All the cities with their pasture lands for the families of the rest of the sons of Kohath were ten.
+27. Now to the sons of Gershon, one of the families of the Levites, from the half-tribe of Manasseh, they gave Golan in Bashan, the city of refuge for the manslayer, with its pasture lands, and Be-eshterah with its pasture lands; two cities.
+28. From the tribe of Issachar, they gave Kishion with its pasture lands, Daberath with its pasture lands,
+29. Jarmuth with its pasture lands, En-gannim with its pasture lands; four cities.
+30. From the tribe of Asher, they gave Mishal with its pasture lands, Abdon with its pasture lands,
+31. Helkath with its pasture lands and Rehob with its pasture lands; four cities.
+32. From the tribe of Naphtali, they gave Kedesh in Galilee, the city of refuge for the manslayer, with its pasture lands and Hammoth-dor with its pasture lands and Kartan with its pasture lands; three cities.
+33. All the cities of the Gershonites according to their families were thirteen cities with their pasture lands.
+34. Now to the families of the sons of Merari, the rest of the Levites, they gave from the tribe of Zebulun, Jokneam with its pasture lands and Kartah with its pasture lands.
+35. Dimnah with its pasture lands, Nahalal with its pasture lands; four cities.
+36. From the tribe of Reuben, they gave Bezer with its pasture lands and Jahaz with its pasture lands,
+37. Kedemoth with its pasture lands and Mephaath with its pasture lands; four cities.
+38. From the tribe of Gad, they gave Ramoth in Gilead, the city of refuge for the manslayer, with its pasture lands and Mahanaim with its pasture lands,
+39. Heshbon with its pasture lands, Jazer with its pasture lands; four cities in all.
+40. All these were the cities of the sons of Merari according to their families, the rest of the families of the Levites; and their lot was twelve cities.
+41. All the cities of the Levites in the midst of the possession of the sons of Israel were forty-eight cities with their pasture lands.
+42. These cities each had its surrounding pasture lands; thus it was with all these cities.
+43. So Yahweh gave Israel all the land which He had sworn to give to their fathers, and they possessed it and lived in it.
+44. And Yahweh gave them rest on every side, according to all that He had sworn to their fathers, and no one of all their enemies stood before them; Yahweh gave all their enemies into their hand.
+45. Not one promise of the good promises which Yahweh had promised to the house of Israel failed; all came to pass.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

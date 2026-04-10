@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 1 Samuel 16:1-23
+
+Chapter text:
+1. Then Yahweh said to Samuel, “How long will you be grieving over Saul? I have rejected him from being king over Israel. Fill your horn with oil and go; I will send you to Jesse the Bethlehemite, for I see among his sons a king for Me.”
+2. But Samuel said, “How can I go? Saul will hear of it and will kill me.” Then Yahweh said, “Take a heifer with you and say, ‘I have come to sacrifice to Yahweh.’
+3. And you shall invite Jesse to the sacrifice, and I will make you know what you shall do; and you shall anoint for Me the one whom I say to you.”
+4. So Samuel did what Yahweh said and came to Bethlehem. And the elders of the city came trembling to meet him and said, “Do you come in peace?”
+5. And he said, “In peace; I have come to sacrifice to Yahweh. Set yourselves apart as holy and come with me to the sacrifice.” He also set apart Jesse and his sons as holy and invited them to the sacrifice.
+6. Now it happened, when they entered, he looked at Eliab and thought, “Surely the anointed of Yahweh is before Him.”
+7. But Yahweh said to Samuel, “Do not look at his appearance or at the height of his stature, because I have rejected him; for God sees not as man sees, for man looks at the outward appearance, but Yahweh looks at the heart.”
+8. Then Jesse called Abinadab and made him pass before Samuel. And he said, “Yahweh has not chosen this one either.”
+9. Next Jesse made Shammah pass by. And he said, “Yahweh has not chosen this one either.”
+10. Thus Jesse made seven of his sons pass before Samuel. But Samuel said to Jesse, “Yahweh has not chosen these.”
+11. And Samuel said to Jesse, “Are these all the young men?” And he said, “There remains yet the youngest, and behold, he is shepherding the sheep.” Then Samuel said to Jesse, “Send and bring him, for we will not turn around until he comes here.”
+12. So he sent and brought him in. Now he was ruddy, with beautiful eyes and a handsome appearance. And Yahweh said, “Arise, anoint him, for this is he.”
+13. Then Samuel took the horn of oil and anointed him in the midst of his brothers; and the Spirit of Yahweh came mightily upon David from that day forward. And Samuel arose and went to Ramah.
+14. Now the Spirit of Yahweh departed from Saul, and an evil spirit from Yahweh terrorized him.
+15. Saul’s servants then said to him, “Behold now, an evil spirit from God is terrorizing you.
+16. Let our lord now speak to your servants who are before you. Let them seek a man who is a skillful musician on the harp; and it shall be that when the evil spirit from God is on you, he shall play the harp with his hand, and you will be well.”
+17. So Saul said to his servants, “Provide for me now a man who can play well and bring him to me.”
+18. Then one of the young men answered and said, “Behold, I have seen a son of Jesse the Bethlehemite who is a skillful musician, a mighty man of valor, a warrior, one who is understanding in speech, and man of fine form; and Yahweh is with him.”
+19. So Saul sent messengers to Jesse and said, “Send me your son David who is with the flock.”
+20. And Jesse took a donkey loaded with bread and a wineskin of wine and a young goat and sent them to Saul by David his son.
+21. Then David came to Saul and stood before him; and Saul loved him greatly, and he became his armor bearer.
+22. So Saul sent to Jesse, saying, “Let David now stand before me, for he has found favor in my sight.”
+23. Thus it happened that whenever the evil spirit from God came to Saul, David would take the harp and play it with his hand; and Saul would be refreshed and be well, and the evil spirit would depart from him.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

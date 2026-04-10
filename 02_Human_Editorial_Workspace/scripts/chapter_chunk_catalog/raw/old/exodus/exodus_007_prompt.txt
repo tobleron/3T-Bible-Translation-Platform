@@ -1,0 +1,74 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Exodus 7:1-25
+
+Chapter text:
+1. Then Yahweh said to Moses, “See, I set you as God to Pharaoh, and your brother Aaron shall be your prophet.
+2. You shall speak all that I command you, and your brother Aaron shall speak to Pharaoh that he let the sons of Israel go out of his land.
+3. But I will harden Pharaoh’s heart with stiffness that I may multiply My signs and My wonders in the land of Egypt.
+4. But Pharaoh will not listen to you. And I will set My hand upon Egypt and bring out My hosts, My people the sons of Israel, from the land of Egypt by great judgments.
+5. Then the Egyptians shall know that I am Yahweh, when I stretch out My hand against Egypt and bring out the sons of Israel from their midst.”
+6. So Moses and Aaron did it; as Yahweh commanded them, thus they did.
+7. Now Moses was eighty years old and Aaron eighty-three years old, when they spoke to Pharaoh.
+8. And Yahweh spoke to Moses and Aaron, saying,
+9. “When Pharaoh speaks to you, saying, ‘Work a miraculous wonder,’ then you shall say to Aaron, ‘Take your staff and throw it down before Pharaoh, that it may become a serpent.’”
+10. So Moses and Aaron came to Pharaoh, and thus they did just as Yahweh had commanded; and Aaron threw his staff down before Pharaoh and his servants, and it became a serpent.
+11. Then Pharaoh also called for the wise men and the sorcerers, and they also, the magicians of Egypt, did the same with their secret arts.
+12. And each one threw down his staff, and they became serpents. But Aaron’s staff swallowed up their staffs.
+13. Yet Pharaoh’s heart was hardened with strength, and he did not listen to them, as Yahweh had spoken.
+14. Then Yahweh said to Moses, “Pharaoh’s heart is hard with firmness; he refuses to let the people go.
+15. Go to Pharaoh in the morning as he is going out to the water, and station yourself to meet him on the bank of the Nile; and you shall take in your hand the staff that was turned into a serpent.
+16. And you shall say to him, ‘Yahweh, the God of the Hebrews, sent me to you, saying, “Let My people go, that they may serve Me in the wilderness. But behold, you have not listened until now.”
+17. Thus says Yahweh, “By this you shall know that I am Yahweh: behold, I am about to strike the water that is in the Nile with the staff that is in my hand, and it will be turned to blood.
+18. And the fish that are in the Nile will die, and the Nile will become foul, and the Egyptians will be weary of drinking water from the Nile.”’”
+19. Then Yahweh said to Moses, “Say to Aaron, ‘Take your staff and stretch out your hand over the waters of Egypt, over their rivers, over their streams, and over their pools and over all their reservoirs of water, that they may become blood; and there will be blood throughout all the land of Egypt, both in vessels of wood and in vessels of stone.’”
+20. So Moses and Aaron did thus, as Yahweh had commanded. And he raised up the staff and struck the water that was in the Nile, in the sight of Pharaoh and in the sight of his servants, and all the water that was in the Nile was turned to blood.
+21. And the fish that were in the Nile died, and the Nile became foul, so that the Egyptians could not drink water from the Nile. And the blood was through all the land of Egypt.
+22. Yet the magicians of Egypt did the same with their secret arts; and Pharaoh’s heart was hardened with strength, and he did not listen to them, as Yahweh had spoken.
+23. Then Pharaoh turned and went into his house, and he did not set his heart even on this.
+24. So all the Egyptians dug around the Nile for water to drink, for they could not drink of the water of the Nile.
+25. And seven full days passed after Yahweh had struck the Nile.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Joseph Introduces His Family to Pharaoh",
+      "reason": "Narrative of Joseph presenting his brothers and father to the king, receiving permission to settle in Goshen."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 26,
+      "type": "story",
+      "title": "The Famine and Joseph's Economic Reform",
+      "reason": "Account of the famine consuming resources, Egyptians selling livestock and land to Joseph for food."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Israel Settles in Goshen and Jacob's Deathbed Request",
+      "reason": "Description of Israel's prosperity in Egypt followed by Jacob's final instructions to Joseph regarding his burial."
+    }
+  ]
+}

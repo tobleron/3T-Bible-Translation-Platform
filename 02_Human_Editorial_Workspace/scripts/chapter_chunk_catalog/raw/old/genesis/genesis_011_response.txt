@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The Tower of Babel",
+      "reason": "A complete narrative unit describing the construction of the tower and God's judgment."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 26,
+      "type": "genealogy",
+      "title": "Genealogy from Shem to Terah",
+      "reason": "A continuous list of descendants tracing the line from Shem to Terah."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 32,
+      "type": "story",
+      "title": "The Generations of Terah",
+      "reason": "A narrative section detailing the family of Terah and their move to Haran."
+    }
+  ]
+}

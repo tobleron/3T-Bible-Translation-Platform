@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 37,
+      "type": "law",
+      "title": "The Holiness Code",
+      "reason": "A continuous collection of statutes and ethical commands given by Yahweh to Moses for the Israelites."
+    }
+  ]
+}

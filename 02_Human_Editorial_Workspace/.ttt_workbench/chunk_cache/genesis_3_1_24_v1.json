@@ -1,0 +1,15 @@
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 24,
+      "type": "story",
+      "title": "The Fall of Man",
+      "reason": "This section narrates a complete story with dialogue, temptation, and consequences."
+    }
+  ],
+  "prompt_version": "v1",
+  "window_start": 1,
+  "window_end": 24,
+  "generated_at": "ui-test"
+}

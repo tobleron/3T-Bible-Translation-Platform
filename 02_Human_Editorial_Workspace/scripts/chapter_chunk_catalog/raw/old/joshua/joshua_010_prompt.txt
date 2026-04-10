@@ -1,0 +1,92 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Joshua 10:1-43
+
+Chapter text:
+1. Now it happened that when Adoni-zedek king of Jerusalem heard that Joshua had captured Ai and had devoted it to destruction (just as he had done to Jericho and its king, so he had done to Ai and its king), and that the inhabitants of Gibeon had made peace with Israel and were within their land,
+2. they feared exceedingly because Gibeon was a great city, like one of the royal cities, and because it was greater than Ai, and all its men were mighty.
+3. Therefore Adoni-zedek king of Jerusalem sent word to Hoham king of Hebron and to Piram king of Jarmuth and to Japhia king of Lachish and to Debir king of Eglon, saying,
+4. “Come up to me and help me, and let us strike Gibeon, for it has made peace with Joshua and with the sons of Israel.”
+5. So the five kings of the Amorites, the king of Jerusalem, the king of Hebron, the king of Jarmuth, the king of Lachish, and the king of Eglon, gathered together and went up, they with all their armies, and camped by Gibeon and fought against it.
+6. Then the men of Gibeon sent word to Joshua to the camp at Gilgal, saying, “Do not abandon your slaves; come up to us quickly and save us and help us, for all the kings of the Amorites that live in the hill country have assembled against us.”
+7. So Joshua went up from Gilgal, he and all the people of war with him and all the valiant warriors.
+8. And Yahweh said to Joshua, “Do not fear them, for I have given them into your hands; not one of them shall stand before you.”
+9. So Joshua came upon them suddenly—he had gone up, marching all night from Gilgal.
+10. And Yahweh threw them into confusion before Israel, and He struck them with a great slaughter at Gibeon and pursued them by the way of the ascent of Beth-horon and struck them as far as Azekah and Makkedah.
+11. Now it happened as they fled from before Israel, while they were at the descent of Beth-horon, that Yahweh threw down large stones from heaven on them as far as Azekah, and they died; there were more who died from the hailstones than those whom the sons of Israel killed with the sword.
+12. Then Joshua spoke to Yahweh in the day when Yahweh gave over the Amorites before the sons of Israel, and he said in the sight of Israel, “O sun, stand still at Gibeon, And O moon in the valley of Aijalon.”
+13. So the sun stood still, and the moon stopped, Until the nation avenged themselves of their enemies. Is it not written in the book of Jashar? And the sun stood in the middle of the sky and did not hasten to go down for about a whole day.
+14. And there was no day like that before it or after it, when Yahweh listened to the voice of a man; for Yahweh fought for Israel.
+15. Then Joshua and all Israel with him returned to the camp to Gilgal.
+16. And these five kings fled and hid themselves in the cave at Makkedah.
+17. Then it was told Joshua, saying, “The five kings have been found hidden in the cave at Makkedah.”
+18. And Joshua said, “Roll large stones against the mouth of the cave and assign men by it to keep watch over them,
+19. but as for you, do not stand there; pursue your enemies and attack them in the rear. Do not allow them to enter their cities, for Yahweh your God has given them into your hand.”
+20. Now it happened when Joshua and the sons of Israel had finished striking them with a very great slaughter until they were completely destroyed, and the survivors—those of them who survived—had entered the fortified cities,
+21. that all the people returned to the camp to Joshua at Makkedah in peace. No one so much as lifted his tongue against any of the sons of Israel.
+22. Then Joshua said, “Open the mouth of the cave and bring these five kings out to me from the cave.”
+23. And they did so and brought these five kings out to him from the cave: the king of Jerusalem, the king of Hebron, the king of Jarmuth, the king of Lachish, and the king of Eglon.
+24. Now it happened that when they brought these kings out to Joshua, Joshua called for all the men of Israel and said to the chiefs of the men of war who had gone with him, “Come near, put your feet on the necks of these kings.” So they came near and put their feet on their necks.
+25. Joshua then said to them, “Do not fear or be dismayed! Be strong and courageous, for thus Yahweh will do to all your enemies with whom you fight.”
+26. So afterward Joshua struck them and put them to death, and he hanged them on five trees; and they hung on the trees until evening.
+27. Now it happened that at sunset Joshua gave a command, and they took them down from the trees and threw them down into the cave where they had hidden themselves, and they put large stones over the mouth of the cave, to this very day.
+28. Now Joshua captured Makkedah on that day and struck it and its king with the edge of the sword; he devoted it to destruction and every person who was in it. He left no survivor. Thus he did to the king of Makkedah just as he had done to the king of Jericho.
+29. Then Joshua and all Israel with him passed on from Makkedah to Libnah and fought against Libnah.
+30. And Yahweh gave it also with its king into the hands of Israel, and he struck it and every person who was in it with the edge of the sword. He left no survivor remaining in it. Thus he did to its king just as he had done to the king of Jericho.
+31. And Joshua and all Israel with him passed on from Libnah to Lachish, and they camped by it and fought against it.
+32. And Yahweh gave Lachish into the hands of Israel; and he captured it on the second day and struck it and every person who was in it with the edge of the sword, according to all that he had done to Libnah.
+33. Then Horam king of Gezer came up to help Lachish, and Joshua struck him and his people down until there was no survivor remaining for him.
+34. And Joshua and all Israel with him passed on from Lachish to Eglon, and they camped by it and fought against it.
+35. And they captured it on that day and struck it with the edge of the sword; and every person who was in it, he devoted to destruction on that day according to all that he had done to Lachish.
+36. Then Joshua and all Israel with him went up from Eglon to Hebron, and they fought against it.
+37. And they captured it and struck it and its king and all its cities and all the persons who were in it with the edge of the sword. He left no survivor remaining, according to all that he had done to Eglon. And he devoted it and every person who was in it to destruction.
+38. Then Joshua and all Israel with him returned to Debir, and they fought against it.
+39. And he captured it and its king and all its cities, and they struck them with the edge of the sword and devoted every person who was in it to destruction. He left no survivor remaining. Just as he had done to Hebron, so he did to Debir and its king, as he had also done to Libnah and its king.
+40. Thus Joshua struck all the land—the hill country and the Negev and the Shephelah and the slopes—as well as all their kings. He left no survivor remaining, but he devoted to destruction all who breathed, just as Yahweh, the God of Israel, had commanded.
+41. And Joshua struck them from Kadesh-barnea even as far as Gaza, and all the country of Goshen even as far as Gibeon.
+42. And Joshua captured all these kings and their lands at one time because Yahweh, the God of Israel, fought for Israel.
+43. So Joshua and all Israel with him returned to the camp at Gilgal.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

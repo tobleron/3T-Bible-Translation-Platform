@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Jonathan and David's Covenant",
+      "reason": "Describes the deep bond between Jonathan and David and Saul's initial acceptance of David."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Saul's Jealousy and Anger",
+      "reason": "Details the women's song comparing Saul and David, leading to Saul's rage and first attempt to kill David."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "story",
+      "title": "David's Rise and Saul's Suspicion",
+      "reason": "Describes David's promotion to commander and Saul's growing dread as David prospers."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 24,
+      "type": "dialogue",
+      "title": "The First Marriage Proposal",
+      "reason": "Contains the dialogue regarding Saul offering Merab to David and David's humble response."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 29,
+      "type": "story",
+      "title": "The Dowry of Foreskins",
+      "reason": "Narrates Saul's plan to use the Philistines to kill David through the dowry requirement and its fulfillment."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 30,
+      "type": "story",
+      "title": "David's Continued Success",
+      "reason": "Concludes with David's superior performance against the Philistines and his high esteem among the people."
+    }
+  ]
+}

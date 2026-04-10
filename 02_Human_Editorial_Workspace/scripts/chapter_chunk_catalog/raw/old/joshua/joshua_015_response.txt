@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "list_or_catalog",
+      "title": "Border of Judah",
+      "reason": "Describes the geographical boundaries of the tribe of Judah."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Caleb's Inheritance and Othniel",
+      "reason": "Narrative of Caleb receiving Hebron and Othniel capturing Debir."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 32,
+      "type": "list_or_catalog",
+      "title": "Southern Cities",
+      "reason": "Catalog of cities in the southern region of Judah."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 47,
+      "type": "list_or_catalog",
+      "title": "Shephelah Cities",
+      "reason": "Catalog of cities in the lowland region of Judah."
+    },
+    {
+      "start_verse": 48,
+      "end_verse": 60,
+      "type": "list_or_catalog",
+      "title": "Hill Country Cities",
+      "reason": "Catalog of cities in the mountainous region of Judah."
+    },
+    {
+      "start_verse": 61,
+      "end_verse": 63,
+      "type": "mixed",
+      "title": "Wilderness and Jerusalem Note",
+      "reason": "List of wilderness cities followed by the note on the Jebusites."
+    }
+  ]
+}

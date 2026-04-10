@@ -1,0 +1,87 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Leviticus 7:1-38
+
+Chapter text:
+1. ‘Now this is the law of the guilt offering; it is most holy.
+2. In the place where they slaughter the burnt offering they are to slaughter the guilt offering, and he shall splash its blood around on the altar.
+3. Then he shall bring near from it all its fat: the fat tail and the fat that covers the entrails,
+4. and the two kidneys with the fat that is on them, which is on the loins, and the lobe on the liver he shall remove with the kidneys.
+5. And the priest shall offer them up in smoke on the altar as an offering by fire to Yahweh; it is a guilt offering.
+6. Every male among the priests may eat of it. It shall be eaten in a holy place; it is most holy.
+7. The guilt offering is like the sin offering, there is one law for them; the priest who makes atonement with it shall have it.
+8. Also the priest who brings near any man’s burnt offering, that priest shall have for himself the skin of the burnt offering which he has brought near.
+9. Likewise, every grain offering that is baked in the oven and everything prepared in a pan or on a griddle shall belong to the priest who brings it near.
+10. And every grain offering, mixed with oil or dry, shall belong to all the sons of Aaron, to all alike.
+11. ‘Now this is the law of the sacrifice of peace offerings which shall be brought near to Yahweh.
+12. If he brings it near for thanksgiving, then along with the sacrifice of thanksgiving he shall bring near unleavened cakes mixed with oil and unleavened wafers spread with oil and cakes of well stirred fine flour mixed with oil.
+13. With the sacrifice of his peace offerings for thanksgiving, he shall bring near his offering with cakes of leavened bread.
+14. Of this he shall bring near, one of every offering as a contribution to Yahweh; it shall belong to the priest who splashes the blood of the peace offerings.
+15. ‘Now as for the flesh of the sacrifice of his thanksgiving peace offerings, it shall be eaten on the day of his offering; he shall not leave any of it over until morning.
+16. But if the sacrifice of his offering is a votive or a freewill offering, it shall be eaten on the day that he brings near his sacrifice, and on the next day what is left of it may be eaten;
+17. but what is left over from the flesh of the sacrifice on the third day shall be burned with fire.
+18. So if any of the flesh of the sacrifice of his peace offerings should ever be eaten on the third day, he who brings it near will not be accepted, and it will not be counted to his benefit. It shall be an offensive thing, and the person who eats of it will bear his own iniquity.
+19. ‘Also the flesh that touches anything unclean shall not be eaten; it shall be burned with fire. As for other flesh, anyone who is clean may eat such flesh.
+20. But the person who eats the flesh of the sacrifice of peace offerings which belong to Yahweh, in his uncleanness, that person shall be cut off from his people.
+21. When anyone touches anything unclean, whether human uncleanness or an unclean animal or any unclean detestable thing, and eats of the flesh of the sacrifice of peace offerings which belong to Yahweh, that person shall be cut off from his people.’”
+22. Then Yahweh spoke to Moses, saying,
+23. “Speak to the sons of Israel, saying, ‘You shall not eat any fat from an ox, a sheep, or a goat.
+24. Also the fat of an animal which dies and the fat of an animal torn by beasts may be put to any other use, but you must certainly not eat it.
+25. For whoever eats the fat of the animal from which an offering by fire is brought near to Yahweh, even the person who eats shall be cut off from his people.
+26. And you shall not eat any blood, either of bird or animal, in any of your places of habitation.
+27. Any person who eats any blood, even that person shall be cut off from his people.’”
+28. Then Yahweh spoke to Moses, saying,
+29. “Speak to the sons of Israel, saying, ‘He who brings the sacrifice of his peace offerings near to Yahweh shall bring his offering to Yahweh from the sacrifice of his peace offerings.
+30. His own hands are to bring offerings by fire to Yahweh. He shall bring the fat with the breast, that the breast may be waved as a wave offering before Yahweh.
+31. And the priest shall offer up the fat in smoke on the altar, but the breast shall belong to Aaron and his sons.
+32. And you shall give the right thigh to the priest as a contribution from the sacrifices of your peace offerings.
+33. The one among the sons of Aaron who brings near the blood of the peace offerings and the fat, the right thigh shall be his as his portion.
+34. For I have taken the breast of the wave offering and the thigh of the contribution from the sons of Israel from the sacrifices of their peace offerings, and I have given them to Aaron the priest and to his sons as a perpetual statute taken from the sons of Israel.
+35. ‘This is the share for Aaron and the share for his sons from the offerings by fire to Yahweh, in that day when he brought them near to minister as priests to Yahweh.
+36. These Yahweh had commanded to be given them from the sons of Israel in the day that He anointed them. It is a perpetual statute throughout their generations.’”
+37. This is the law of the burnt offering, the grain offering and the sin offering and the guilt offering and the ordination offering and the sacrifice of peace offerings,
+38. which Yahweh commanded Moses at Mount Sinai in the day that He commanded the sons of Israel to bring their offerings near to Yahweh in the wilderness of Sinai.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

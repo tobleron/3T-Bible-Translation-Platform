@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "The Temptation and Fall",
+      "reason": "A continuous dialogue between the serpent and the woman followed by their actions of eating the fruit."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Hiding and Confrontation",
+      "reason": "The narrative of the couple hiding from God and the subsequent questioning by Yahweh."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Judgments Pronounced",
+      "reason": "A series of divine judgments and curses pronounced against the serpent, the woman, and the man."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Clothing and Expulsion",
+      "reason": "The naming of Eve, God providing garments, and the final expulsion from the garden."
+    }
+  ]
+}

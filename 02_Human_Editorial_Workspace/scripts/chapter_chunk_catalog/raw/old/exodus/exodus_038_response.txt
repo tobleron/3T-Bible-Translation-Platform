@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Construction of the Altar and Laver",
+      "reason": "Describes the physical construction and materials of the bronze altar and the laver."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Dimensions and Materials of the Court",
+      "reason": "Provides a detailed inventory of the court's hangings, pillars, bases, and gate screen."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 31,
+      "type": "mixed",
+      "title": "Inventory Summary and Craftsmen",
+      "reason": "Lists the total materials used, names the chief craftsmen, and summarizes the allocation of resources."
+    }
+  ]
+}
