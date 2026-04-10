@@ -548,6 +548,17 @@ class BrowserWorkbench(WorkbenchApp):
     def _chunk_join(self, pieces: list[str]) -> str:
         return " ".join(piece.strip() for piece in pieces if piece and piece.strip()).strip() or "[missing]"
 
+    def _fallback_verse_text(self, verse: int) -> str:
+        """Get raw verse text from the Bible repo as fallback when lexical data is missing."""
+        if not self.state.book or not self.state.chapter:
+            return ""
+        try:
+            chapter_doc = self.bible_repo.load_chapter(self.state.book, self.state.chapter).doc
+            verse_map = self.bible_repo.verse_map(chapter_doc)
+            return verse_map.get(verse, "")
+        except Exception:
+            return ""
+
     def chunk_study_blocks(self) -> list[dict[str, str]]:
         if not self.has_open_chunk():
             return []
@@ -570,17 +581,29 @@ class BrowserWorkbench(WorkbenchApp):
                 start_verse,
                 end_verse,
             )
-            hebrew_text = self._chunk_join(
-                [
-                    " ".join(
-                        token.get("surface", "").strip()
-                        for token in hebrew.get(self.lexical_ref(verse), [])
-                        if token.get("surface", "").strip()
-                    )
-                    for verse in range(start_verse, end_verse + 1)
-                ]
-            )
-            blocks.append({"label": "Original Language 1", "caption": "Hebrew", "text": hebrew_text, "kind": "hebrew"})
+
+            # Try Hebrew lexical first, fall back to original text from Bible repo
+            hebrew_parts = []
+            has_lexical = False
+            for verse in range(start_verse, end_verse + 1):
+                tokens = hebrew.get(self.lexical_ref(verse), [])
+                surface = " ".join(
+                    t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()
+                )
+                if surface:
+                    has_lexical = True
+                    hebrew_parts.append(surface)
+                else:
+                    # Fallback: get the verse text from the Bible repo
+                    fallback = self._fallback_verse_text(verse)
+                    hebrew_parts.append(fallback if fallback else "[no data]")
+
+            hebrew_text = self._chunk_join(hebrew_parts)
+            if has_lexical:
+                blocks.append({"label": "Original Language 1", "caption": "Hebrew", "text": hebrew_text, "kind": "hebrew"})
+            elif hebrew_text != "[missing]":
+                blocks.append({"label": "Original Language 1", "caption": "Hebrew (text)", "text": hebrew_text, "kind": "hebrew"})
+
             lxx_text = self._chunk_join(
                 [
                     " ".join(
@@ -726,11 +749,12 @@ class BrowserWorkbench(WorkbenchApp):
         return list(range((self.state.chunk_start or 1), (self.state.chunk_end or 1) + 1))
 
     def draft_editor_verses(self) -> list[dict[str, Any]]:
-        """Return a list of {verse, text} dicts for the current chunk/editor range."""
+        """Return ALL verses in the current chunk (no range filtering)."""
         if not self.has_open_chunk():
             return []
         chapter_map = self.chapter_verse_map()
-        start, end = self.current_editor_range()
+        start = self.state.chunk_start or 1
+        end = self.state.chunk_end or start
         verses = []
         for verse in range(start, end + 1):
             text = self.state.draft_chunk.get(str(verse), chapter_map.get(verse, ""))
@@ -904,7 +928,11 @@ class BrowserWorkbench(WorkbenchApp):
         return "\n".join(lines).strip()
 
     def selected_range_draft_text(self) -> str:
-        start, end = self.current_editor_range()
+        """Return the full draft text for ALL verses in the current chunk."""
+        if not self.has_open_chunk():
+            return "[blank]"
+        start = self.state.chunk_start or 1
+        end = self.state.chunk_end or start
         chapter_map = self.chapter_verse_map()
         blocks = [
             self.state.draft_chunk.get(str(verse), chapter_map.get(verse, "")).strip()
@@ -917,7 +945,6 @@ class BrowserWorkbench(WorkbenchApp):
             return ""
         start = self.state.chunk_start or 1
         end = self.state.chunk_end or start
-        focus_start, focus_end = self.current_editor_range()
         history = "\n".join(
             f"{item['role'].upper()}: {item['content']}"
             for item in self.state.chat_messages[-10:]
@@ -931,7 +958,7 @@ You are assisting a Bible translator in a browser-based editorial workbench.
 
 Rules:
 - Keep the title short, usable as a section heading, and plain English.
-- Revise only the verses inside the selected focus unless the user explicitly asks for wider changes.
+- Revise only the verses inside the chunk unless the user explicitly asks for wider changes.
 - Output strict JSON only with this shape:
 {{
   "reply": "short editor-facing response",
@@ -942,12 +969,11 @@ Rules:
 }}
 
 Current chunk: {self.state.book} {self.state.chapter}:{start}-{end}
-Selected focus: verses {focus_start}-{focus_end}
 
 Current draft title:
 {self.state.draft_title or "[untitled]"}
 
-Current draft for the selected focus:
+Current draft for the full chunk (verses {start}-{end}):
 {self.selected_range_draft_text()}
 
 Approved terminology ledger:
@@ -1218,6 +1244,30 @@ User message:
             "editor_range_options": self.editor_range_options() if chunk_open else [],
             "draft_editor_verses": self.draft_editor_verses() if chunk_open else [],
             "chunk_sessions": self.chunk_session_list(),
+        }
+
+    def json_preview_payload(self) -> dict[str, Any]:
+        """Return the committed JSON as it would appear in the output file."""
+        if not self.has_open_chunk() or not self.state.book or not self.state.chapter:
+            return {"error": "No chunk open"}
+        book = self.state.book
+        chapter = self.state.chapter
+        start = self.state.chunk_start or 1
+        end = self.state.chunk_end or start
+        chapter_map = self.chapter_verse_map()
+
+        verses = {}
+        for verse in range(start, end + 1):
+            draft = self.state.draft_chunk.get(str(verse), "")
+            committed = chapter_map.get(verse, "")
+            verses[str(verse)] = draft or committed
+
+        return {
+            "book": book,
+            "chapter": chapter,
+            "chunk": f"{start}-{end}",
+            "title": self.state.draft_title or "",
+            "verses": verses,
         }
 
     def save_draft(self, title: str, verses: dict[int, str]) -> None:

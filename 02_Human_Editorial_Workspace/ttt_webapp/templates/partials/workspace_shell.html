@@ -225,36 +225,6 @@
           </div>
         </div>
 
-        <div class="editor-range-bar">
-          <div class="editor-range-head">
-            <span class="eyebrow">Draft Range</span>
-            <span class="muted-line">Each verse has its own auto-expanding text area.</span>
-          </div>
-          <form
-            class="editor-range-form"
-            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/range"
-            hx-target="#workspace-shell"
-            hx-swap="outerHTML"
-          >
-            <label class="compact-field tiny-field">
-              <span>From</span>
-              <select name="editor_target_start" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/range" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .editor-range-form">
-                {% for verse in editor_range_options %}
-                <option value="{{ verse }}" {% if verse == editor_range_start %}selected{% endif %}>{{ verse }}</option>
-                {% endfor %}
-              </select>
-            </label>
-            <label class="compact-field tiny-field">
-              <span>To</span>
-              <select name="editor_target_end" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/range" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .editor-range-form">
-                {% for verse in editor_range_options %}
-                <option value="{{ verse }}" {% if verse == editor_range_end %}selected{% endif %}>{{ verse }}</option>
-                {% endfor %}
-              </select>
-            </label>
-          </form>
-        </div>
-
         <form
           id="draft-form"
           class="compact-editor-form"
@@ -267,9 +237,6 @@
             <input type="text" name="draft_title" value="{{ state.draft_title or (chunk_summary.chunk.title if chunk_summary.chunk else '') }}">
           </label>
 
-          <input type="hidden" name="draft_range_start" value="{{ editor_range_start }}">
-          <input type="hidden" name="draft_range_end" value="{{ editor_range_end }}">
-
           {% if state.title_alternatives %}
           <div class="title-alternatives">
             {% for option in state.title_alternatives[:4] %}
@@ -278,7 +245,7 @@
           </div>
           {% endif %}
 
-          {# Per-verse auto-expanding textareas #}
+          {# Per-verse auto-expanding textareas — ALL verses in chunk, no range filter #}
           <div class="verse-editor-stack">
             {% for v in draft_editor_verses %}
             <div class="verse-editor-row">
@@ -299,7 +266,7 @@
 
           <div class="editor-actions">
             <button class="secondary-button" type="submit">Save draft</button>
-            <span class="muted-line">This box updates only the selected verse range inside the current chunk.</span>
+            <span class="muted-line">All verses in the current chunk are shown above.</span>
           </div>
         </form>
 
@@ -327,22 +294,41 @@
           hx-swap="outerHTML"
           hx-include="#draft-form"
         >
-          <textarea name="message" rows="4" placeholder="Example: Tighten this draft for verses {{ editor_range_start }}-{{ editor_range_end }}, keep it literal, and preserve the title unless it clearly needs improvement."></textarea>
+          <textarea name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title unless it clearly needs improvement."></textarea>
           <div class="chat-actions">
             <button class="primary-button" type="submit">Send to model</button>
-            <span class="muted-line">The current draft title and selected range are included automatically.</span>
+            <span class="muted-line">The current draft title and all verses are included automatically.</span>
           </div>
         </form>
       </article>
     </section>
 
     <aside class="right-workspace">
-      {# Study panel: entire chunk blocks, not per-verse #}
+      {# Study panel with font size control #}
       <article class="workspace-card context-panel">
         <div class="panel-head">
           <div>
             <p class="eyebrow">Study</p>
             <h2>Comparison sources and lexical context</h2>
+          </div>
+          <div class="panel-summary">
+            <label class="font-size-control compact-field" style="display:inline-grid;gap:0.15rem;width:100px;">
+              <span style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Font</span>
+              <select
+                id="study-font-size"
+                hx-get="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/tab"
+                hx-target="#workspace-shell"
+                hx-swap="outerHTML"
+                hx-trigger="change"
+                hx-vals='{"tab":"study"}'
+              >
+                <option value="12">12px</option>
+                <option value="13">13px</option>
+                <option value="14" selected>14px</option>
+                <option value="15">15px</option>
+                <option value="16">16px</option>
+              </select>
+            </label>
           </div>
         </div>
 
@@ -370,7 +356,7 @@
         </form>
 
         {# Chunk-level study blocks #}
-        <div class="chunk-block-sheet">
+        <div class="chunk-block-sheet" id="study-blocks" data-font-size="14">
           {% for block in study_blocks %}
           <div class="chunk-block">
             <div class="chunk-block-head">
@@ -381,6 +367,17 @@
           </div>
           {% endfor %}
         </div>
+      </article>
+
+      {# JSON preview button #}
+      <article class="workspace-card json-preview-card">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Preview</p>
+            <h2>Committed JSON</h2>
+          </div>
+        </div>
+        <button class="secondary-button json-preview-btn" type="button" onclick="showJsonPreview()">Show JSON preview</button>
       </article>
 
       {# Session management panel #}
@@ -490,17 +487,41 @@
   {% endif %}
 </div>
 
-{# Auto-resize textareas#}
+{# JSON preview modal #}
+<div class="json-modal-overlay" id="jsonModal" style="display:none;" onclick="hideJsonPreview(event)">
+  <div class="json-modal-content" onclick="event.stopPropagation()">
+    <div class="json-modal-head">
+      <h3>Committed JSON Preview</h3>
+      <button class="json-modal-close" type="button" onclick="hideJsonPreview()">&times;</button>
+    </div>
+    <pre class="json-modal-body" id="jsonPreviewBody">Loading...</pre>
+  </div>
+</div>
+
+{# Auto-resize textareas + font size control + JSON preview #}
 <script>
 document.addEventListener('htmx:afterSettle', function() {
+  // Auto-resize verse textareas
   document.querySelectorAll('.verse-editor-textarea').forEach(function(el) {
     autoResize(el);
   });
+  // Restore font size on study blocks after HTMX swap
+  var studyBlocks = document.getElementById('study-blocks');
+  if (studyBlocks) {
+    var fontSize = localStorage.getItem('studyFontSize') || '14';
+    applyStudyFontSize(fontSize);
+    var sel = document.getElementById('study-font-size');
+    if (sel) sel.value = fontSize;
+  }
 });
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.verse-editor-textarea').forEach(function(el) {
     autoResize(el);
   });
+  var fontSize = localStorage.getItem('studyFontSize') || '14';
+  applyStudyFontSize(fontSize);
+  var sel = document.getElementById('study-font-size');
+  if (sel) sel.value = fontSize;
 });
 function autoResize(el) {
   el.style.height = 'auto';
@@ -510,4 +531,42 @@ function autoResize(el) {
     this.style.height = (this.scrollHeight + 4) + 'px';
   });
 }
+
+// Font size control for study panel
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'study-font-size') {
+    var size = e.target.value;
+    localStorage.setItem('studyFontSize', size);
+    applyStudyFontSize(size);
+  }
+});
+function applyStudyFontSize(px) {
+  var el = document.getElementById('study-blocks');
+  if (el) el.style.fontSize = px + 'px';
+  var blocks = el ? el.querySelectorAll('.chunk-block-body') : [];
+  blocks.forEach(function(b) { b.style.fontSize = px + 'px'; });
+}
+
+// JSON preview modal
+function showJsonPreview() {
+  var overlay = document.getElementById('jsonModal');
+  overlay.style.display = 'flex';
+  var body = document.getElementById('jsonPreviewBody');
+  body.textContent = 'Loading...';
+  fetch(window.location.pathname + '/json-preview')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      body.textContent = JSON.stringify(data, null, 2);
+    })
+    .catch(function(err) {
+      body.textContent = 'Failed to load JSON: ' + err.message;
+    });
+}
+function hideJsonPreview(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('jsonModal').style.display = 'none';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideJsonPreview();
+});
 </script>

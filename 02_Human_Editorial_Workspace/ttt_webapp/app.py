@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -491,6 +491,14 @@ def clear_chunk_session(request: Request, testament: str, book: str, chapter: in
         return render_workspace(request, wb, active_tab="draft", partial=True)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-preview", response_class=JSONResponse)
+def json_preview(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+    wb = controller()
+    book = resolve_book_name(wb, testament, book)
+    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+    return JSONResponse(wb.json_preview_payload())
 
 
 @app.get("/settings", response_class=HTMLResponse)
