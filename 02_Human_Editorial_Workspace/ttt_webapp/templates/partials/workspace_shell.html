@@ -240,74 +240,7 @@
     </section>
 
     <aside class="right-workspace">
-      {# Study panel #}
-      <article class="workspace-card context-panel" id="context-panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Study</p>
-            <h2>Comparison sources and lexical context</h2>
-          </div>
-          <div class="panel-summary">
-            <label class="font-size-control compact-field" style="display:inline-grid;gap:0.15rem;width:100px;">
-              <span style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Font</span>
-              <select id="study-font-size">
-                <option value="12">12px</option>
-                <option value="14">14px</option>
-                <option value="16" selected>16px</option>
-                <option value="18">18px</option>
-              </select>
-            </label>
-          </div>
-        </div>
-
-        <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#context-panel" hx-swap="outerHTML">
-          <div class="source-chip-grid">
-            {% for option in comparison_source_options %}
-            <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
-              <input type="checkbox" name="selected_sources" value="{{ option.alias }}" {% if option.selected %}checked{% endif %} {% if option.disabled %}disabled{% endif %}>
-              <span>{{ option.label }}</span>
-            </label>
-            {% endfor %}
-          </div>
-        </form>
-
-        {# Chunk-level study blocks #}
-        <div class="chunk-block-sheet" id="study-blocks" data-font-size="16">
-          {% for block in study_blocks %}
-          <div class="chunk-block">
-            <div class="chunk-block-head">
-              <span class="verse-tag">{{ block.label }}</span>
-              {% if block.caption %}
-              <span class="context-meta">{{ block.caption }}</span>
-              {% endif %}
-            </div>
-            {% if block.text %}
-            <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
-            {% endif %}
-            {% if block.gloss_tokens %}
-            <div class="chunk-block-gloss">
-              {% for gt in block.gloss_tokens %}
-              <span class="gloss-word" data-surface="{{ gt.surface }}" data-gloss="{{ gt.gloss }}">{{ gt.gloss }}</span>
-              {% if not loop.last %}<span class="gloss-sep"> | </span>{% endif %}
-              {% endfor %}
-            </div>
-            {% endif %}
-            {% if block.verse_texts %}
-            <div class="translation-verses">
-              {% for verse_text in block.verse_texts %}
-              {% set v = loop.index0 + (state.chunk_start or 1) %}
-              <div class="translation-verse-row">
-                <span class="translation-verse-num">{{ v }}</span>
-                <span class="translation-verse-text">{{ verse_text or "[no text]" }}</span>
-                <button class="translation-copy-btn" type="button" onclick="copyTranslationVerse(this, '{{ verse_text.replace("'", "\\'")|e }}')" title="Copy verse {{ v }}">Copy</button>
-              </div>
-              {% endfor %}
-            </div>
-            {% endif %}
-          </div>
-          {% endfor %}
-        </div>
-      </article>
+      {% include "partials/context_panel.html" %}
     </aside>
   </div>
   {% endif %}
