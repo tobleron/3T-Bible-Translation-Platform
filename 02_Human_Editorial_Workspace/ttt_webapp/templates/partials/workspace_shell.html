@@ -114,6 +114,14 @@
       {% else %}
       <span class="activity-pill is-muted">No recent notes yet.</span>
       {% endfor %}
+      {% if flash_messages %}
+      {% for message in flash_messages %}
+      <span class="activity-pill flash-{{ message.accent }}">
+        <strong>{{ message.title }}</strong>
+        <span>{{ message.body|truncate(120) }}</span>
+      </span>
+      {% endfor %}
+      {% endif %}
     </div>
     {% if jobs %}
     <div class="activity-ribbon-group">
@@ -123,26 +131,7 @@
       {% endfor %}
     </div>
     {% endif %}
-    {% if flash_messages %}
-    {% for message in flash_messages %}
-    <span class="activity-pill flash-{{ message.accent }}">
-      <strong>{{ message.title }}</strong>
-      <span>{{ message.body|truncate(120) }}</span>
-    </span>
-    {% endfor %}
-    {% endif %}
   </section>
-  {% endif %}
-
-  {% if flash_messages %}
-  <div class="flash-stack compact-flash-stack">
-    {% for message in flash_messages %}
-    <article class="flash flash-{{ message.accent }}">
-      <h3>{{ message.title }}</h3>
-      <pre>{{ message.body }}</pre>
-    </article>
-    {% endfor %}
-  </div>
   {% endif %}
 
   {% if not current_chunk_key %}
