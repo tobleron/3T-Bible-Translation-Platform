@@ -44,8 +44,8 @@ workbench:
 epub:
   meta:
     epub_title: "The Holy Bible"
-    version_number: "0.5"
-    publication_date: "May 2025"
+    version_number: "0.1.1"
+    publication_date: "April 2026"
     bible_edition: "TTT"
     creator: "TTT Translation Team"
     publisher: "TTT Project"

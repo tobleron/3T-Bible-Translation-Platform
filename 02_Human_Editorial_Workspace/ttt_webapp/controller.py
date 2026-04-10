@@ -736,23 +736,20 @@ class BrowserWorkbench(WorkbenchApp):
 
         translation_aliases = self.selected_sources() or ["LSB"]
         for alias in translation_aliases:
-            text = self._chunk_join(
-                [
-                    self.source_repo.verse_text(
-                        alias,
-                        self.state.book or "",
-                        self.state.chapter or 0,
-                        verse,
-                    )
-                    for verse in range(start_verse, end_verse + 1)
-                ]
-            )
+            verse_texts = []
+            for verse in range(start_verse, end_verse + 1):
+                verse_texts.append(self.source_repo.verse_text(
+                    alias,
+                    self.state.book or "",
+                    self.state.chapter or 0,
+                    verse,
+                ).strip())
             blocks.append(
                 {
                     "label": f"{alias}",
                     "caption": "",
-                    "text": text,
-                    "gloss": "",
+                    "text": self._chunk_join(verse_texts),
+                    "verse_texts": verse_texts,
                     "kind": "translation",
                 }
             )

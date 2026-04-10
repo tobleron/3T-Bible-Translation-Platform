@@ -489,6 +489,65 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   color: var(--text);
 }
 
+/* Translation verses block */
+.translation-verses {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+.translation-verse-row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.015);
+}
+.translation-verse-row:hover {
+  background: rgba(255,255,255,0.03);
+}
+.translation-verse-num {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 28px;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(198,155,98,0.1);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.translation-verse-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.translation-copy-btn {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  padding: 0.15rem 0.5rem;
+  font-size: 0.68rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+.translation-verse-row:hover .translation-copy-btn {
+  opacity: 1;
+}
+.translation-copy-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.translation-copy-btn.copied {
+  border-color: var(--success);
+  color: var(--success);
+}
+
 /* Copied indicator inside activity bar */
 #gloss-copied-indicator {
   display: none;

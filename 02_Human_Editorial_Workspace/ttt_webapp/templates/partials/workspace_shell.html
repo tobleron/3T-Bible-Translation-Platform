@@ -294,6 +294,18 @@
               {% endfor %}
             </div>
             {% endif %}
+            {% if block.verse_texts %}
+            <div class="translation-verses">
+              {% for verse_text in block.verse_texts %}
+              {% set v = loop.index0 + (state.chunk_start or 1) %}
+              <div class="translation-verse-row">
+                <span class="translation-verse-num">{{ v }}</span>
+                <span class="translation-verse-text">{{ verse_text or "[no text]" }}</span>
+                <button class="translation-copy-btn" type="button" onclick="copyTranslationVerse(this, '{{ verse_text.replace("'", "\\'")|e }}')" title="Copy verse {{ v }}">Copy</button>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
           </div>
           {% endfor %}
         </div>
@@ -471,5 +483,18 @@ function showGlossCopiedIndicator(text) {
   indicator.style.display = 'inline';
   indicator.textContent = 'Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : '');
   setTimeout(function() { indicator.style.display = 'none'; }, 3000);
+}
+function copyTranslationVerse(btn, text) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓';
+    btn.classList.add('copied');
+    showGlossCopiedIndicator(text);
+    setTimeout(function() {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1500);
+  }).catch(function() {
+    btn.textContent = 'Failed';
+  });
 }
 </script>
