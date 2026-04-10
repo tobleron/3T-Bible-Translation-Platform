@@ -14,5 +14,12 @@
     "context_snapshot": "",
     "focus_start": 1,
     "focus_end": 1
+  },
+  "old|genesis|1|1-5": {
+    "messages": [],
+    "context_loaded": false,
+    "context_snapshot": "",
+    "focus_start": 1,
+    "focus_end": 5
   }
 }

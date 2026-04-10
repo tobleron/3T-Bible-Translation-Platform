@@ -331,6 +331,37 @@ class BrowserWorkbench(WorkbenchApp):
     def clear_flash(self) -> None:
         self.flash_messages = []
 
+    def _dedup_flash_messages(self) -> list[dict[str, str]]:
+        """Return flash messages with consecutive duplicates collapsed."""
+        deduped: list[dict[str, str]] = []
+        for msg in self.flash_messages[-10:]:
+            if not msg.get("title") or msg["title"].strip().lower() in {"notice", ""}:
+                continue
+            body = (msg.get("body") or "").strip()
+            if not body:
+                continue
+            if deduped:
+                prev = deduped[-1]
+                if prev.get("title") == msg["title"] and prev.get("body", "").strip() == body:
+                    continue
+            deduped.append(msg)
+        return deduped
+
+    def _dedup_activity_items(self) -> list[dict[str, str]]:
+        """Return last 3 history entries with duplicates collapsed."""
+        items = list(self.history_entries[-8:])
+        deduped: list[dict[str, str]] = []
+        for item in items:
+            summary = (item.get("summary") or "").strip()
+            if not summary or summary.lower() in {"notice", "notice ────────"}:
+                continue
+            if deduped:
+                prev = deduped[-1]
+                if prev.get("title") == item.get("title") and prev.get("summary", "").strip() == summary:
+                    continue
+            deduped.append(item)
+        return deduped[-3:]
+
     def current_chunk_key(self) -> str | None:
         if not self.state.chunk_start or not self.state.chunk_end:
             return None
@@ -1297,9 +1328,9 @@ User message:
             "review_lines": self.review_summary_card() if self.state.last_review else [],
             "pending_writes": self.pending_commit_writes(),
             "active_tab": active_tab,
-            "flash_messages": list(self.flash_messages),
+            "flash_messages": self._dedup_flash_messages(),
             "history_entries": list(self.history_entries[-8:]),
-            "activity_items": list(self.history_entries[-3:]),
+            "activity_items": self._dedup_activity_items(),
             "jobs": [
                 {
                     "id": job.job_id,

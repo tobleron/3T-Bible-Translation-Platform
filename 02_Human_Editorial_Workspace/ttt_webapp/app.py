@@ -241,7 +241,6 @@ async def study_sources(
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         selected = form.getlist("selected_sources")
         wb.set_selected_sources(selected)
-        wb.notify("Comparison sources updated.")
         wb.activate_tab("study")
         wb.save_state()
         return render_workspace(request, wb, active_tab="study", partial=True)
