@@ -780,6 +780,49 @@ class LexicalRepository:
             return {}
         return result
 
+    def fetch_lexicon_glosses(self, corpus: str, strong_ids: list[str]) -> dict[str, str]:
+        """Look up English glosses from the lexicon by Strong's numbers.
+        
+        The corpus determines which lexicon to use:
+          - 'hebrew_ot' → hebrew_bible (TBESH)
+          - 'greek_nt' / 'greek_ot_lxx' → greek_bible (TBESG)
+        """
+        import re as _re
+        lexicon_map = {
+            "hebrew_ot": "hebrew_bible",
+            "greek_nt": "greek_bible",
+            "greek_ot_lxx": "greek_bible",
+        }
+        lex_corpus = lexicon_map.get(corpus, corpus.replace("_ot", "_bible").replace("_nt", "_bible"))
+        if not strong_ids:
+            return {}
+        clean_ids = list({sid for sid in strong_ids if sid and sid.strip()})
+        if not clean_ids:
+            return {}
+        placeholders = ",".join("?" for _ in clean_ids)
+        query = f"""
+            SELECT strong_id, gloss
+            FROM lexicon_entries
+            WHERE corpus = ? AND strong_id IN ({placeholders})
+        """
+        result: dict[str, str] = {}
+        try:
+            with self._connect() as conn:
+                for row in conn.execute(query, [lex_corpus, *clean_ids]):
+                    sid, gloss = row
+                    if gloss:
+                        # Strip HTML tags, normalize whitespace
+                        clean = _re.sub(r'<[^>]+>', '; ', gloss)
+                        clean = clean.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
+                        # Take first sense (before first semicolon or slash)
+                        clean = clean.split(';')[0].split('/')[0].strip()
+                        clean = _re.sub(r'\s+', ' ', clean)
+                        if clean:
+                            result[sid] = clean
+        except sqlite3.Error:
+            pass
+        return result
+
     def chapter_verse_numbers(self, corpus: str, book: str, chapter: int) -> list[int]:
         if not self.available():
             return []
