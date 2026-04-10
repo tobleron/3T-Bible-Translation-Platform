@@ -112,7 +112,7 @@
     {% endif %}
   </section>
 
-  {% if activity_items or jobs or flash_messages %}
+  {# Persistent activity bar — always visible #}
   <section class="workspace-card activity-ribbon">
     <div class="activity-ribbon-group">
       <span class="activity-ribbon-label">Activity</span>
@@ -122,7 +122,7 @@
         <span>{{ item.summary }}</span>
       </span>
       {% else %}
-      <span class="activity-pill is-muted">No recent notes yet.</span>
+      <span class="activity-pill is-muted">No recent activity.</span>
       {% endfor %}
       {% if flash_messages %}
       {% for message in flash_messages %}
@@ -132,6 +132,7 @@
       </span>
       {% endfor %}
       {% endif %}
+      <span id="gloss-copied-indicator" class="gloss-copied-indicator" style="display:none;"></span>
     </div>
     {% if jobs %}
     <div class="activity-ribbon-group">
@@ -142,7 +143,6 @@
     </div>
     {% endif %}
   </section>
-  {% endif %}
 
   {% if not current_chunk_key %}
   <section class="workspace-card chapter-overview-card">
@@ -467,13 +467,6 @@ function copyGlossWord(btn, text) {
 }
 function showGlossCopiedIndicator(text) {
   var indicator = document.getElementById('gloss-copied-indicator');
-  if (!indicator) {
-    indicator = document.createElement('span');
-    indicator.id = 'gloss-copied-indicator';
-    indicator.className = 'gloss-copied-indicator';
-    var actions = document.querySelector('.top-actions');
-    if (actions) actions.prepend(indicator);
-  }
   if (!indicator) return;
   indicator.style.display = 'inline';
   indicator.textContent = 'Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : '');
