@@ -316,39 +316,100 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   color: var(--bg);
 }
 
-/* Commit + action buttons */
+/* Commit + action buttons inline with Save draft */
+.inline-form {
+  margin: 0;
+  display: inline;
+}
+
 .commit-button {
   border-radius: 999px;
   border: none;
-  padding: 0.65rem 1.2rem;
+  padding: 0.58rem 1rem;
   cursor: pointer;
   font-weight: 600;
   background: var(--success);
   color: #171310;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 .commit-button:hover {
   filter: brightness(1.1);
 }
 
-.clear-msg-btn {
+.epub-button {
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  padding: 0.58rem 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.82rem;
+}
+.epub-button:hover:not(:disabled) {
+  background: var(--accent);
+  color: #171310;
+  border-color: var(--accent);
+}
+.epub-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.chat-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.primary-button.send-button {
+  padding: 0.52rem 1rem;
+  font-size: 0.88rem;
+}
+.clear-button {
   border-radius: 999px;
   border: 1px solid var(--line);
   background: transparent;
   color: var(--muted);
-  padding: 0.45rem 0.85rem;
+  padding: 0.52rem 0.8rem;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 500;
 }
-.clear-msg-btn:hover {
+.clear-button:hover {
   border-color: var(--danger);
   color: var(--danger);
 }
-.json-preview-btn {
-  width: 100%;
-  margin-top: 0.5rem;
+
+/* Study block fonts — English same size as original */
+.chunk-block-body {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted);
+  white-space: pre-wrap;
 }
+.chunk-block-body.translation {
+  font-family: var(--serif);
+  font-size: 16px;
+}
+.chunk-block-body.hebrew {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.chunk-block-body.greek {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.chunk-block-gloss {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--accent-soft);
+  margin-top: 0.25rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* JSON preview modal */
 .json-modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;

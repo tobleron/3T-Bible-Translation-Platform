@@ -36,15 +36,12 @@
       {% endif %}
     </div>
 
-    {# HTMX-powered navigator #}
     <div class="compact-nav-form">
       <label class="compact-select">
         <span>Testament</span>
         <select name="testament" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
           {% for testament_name in ("old", "new") %}
-          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>
-            {{ testament_name.title() }} Testament
-          </option>
+          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>{{ testament_name.title() }} Testament</option>
           {% endfor %}
         </select>
       </label>
@@ -53,9 +50,7 @@
         <select name="book" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
           {% for item in book_items %}
           {% if item.chapters or item.first_ready_chapter %}
-          <option value="{{ item.name }}" {% if item.name == selected_book %}selected{% endif %}>
-            {{ item.name }}
-          </option>
+          <option value="{{ item.name }}" {% if item.name == selected_book %}selected{% endif %}>{{ item.name }}</option>
           {% endif %}
           {% endfor %}
         </select>
@@ -64,9 +59,7 @@
         <span>Chapter</span>
         <select name="chapter" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
           {% for chapter_value in chapter_options %}
-          <option value="{{ chapter_value }}" {% if chapter_value == selected_chapter %}selected{% endif %}>
-            {{ chapter_value }}
-          </option>
+          <option value="{{ chapter_value }}" {% if chapter_value == selected_chapter %}selected{% endif %}>{{ chapter_value }}</option>
           {% endfor %}
         </select>
       </label>
@@ -76,9 +69,7 @@
           <option value="">Chapter overview</option>
           {% for chunk in chapter_chunks %}
           {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
-          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>
-            {{ loop.index }}. {{ chunk.start_verse }}-{{ chunk.end_verse }} | {{ chunk.title }}
-          </option>
+          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>{{ loop.index }}. {{ chunk.start_verse }}-{{ chunk.end_verse }} | {{ chunk.title }}</option>
           {% endfor %}
         </select>
       </label>
@@ -187,7 +178,7 @@
           </div>
           {% endif %}
 
-          {# Per-verse auto-expanding textareas — ALL verses in chunk #}
+          {# Per-verse auto-expanding textareas #}
           <div class="verse-editor-stack">
             {% for v in draft_editor_verses %}
             <div class="verse-editor-row">
@@ -203,7 +194,13 @@
 
           <div class="editor-actions">
             <button class="secondary-button" type="submit">Save draft</button>
-            <span class="muted-line">All verses in the current chunk are shown above.</span>
+            <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
+              <button class="commit-button" type="submit">Commit</button>
+            </form>
+            <form class="inline-form" hx-post="/epub/generate-download" hx-target="#workspace-shell" hx-swap="outerHTML">
+              <button class="epub-button" type="submit" {% if pending_writes %}disabled title="Commit all verses first"{% endif %}>Generate EPUB</button>
+            </form>
+            <button class="secondary-button" type="button" onclick="showJsonPreview()">JSON</button>
           </div>
         </form>
 
@@ -227,14 +224,13 @@
         <form class="compact-chat-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat"
           hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
-          <textarea name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title unless it clearly needs improvement."></textarea>
+          <textarea name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
-            <button class="primary-button" type="submit">Send to model</button>
-            <button class="secondary-button clear-msg-btn" type="button"
+            <button class="primary-button send-button" type="submit">Send</button>
+            <button class="secondary-button clear-button" type="button"
               hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
               hx-target="#workspace-shell" hx-swap="outerHTML"
-              hx-confirm="Clear all chat messages for this chunk?">Clear messages</button>
-            <span class="muted-line">The current draft title and all verses are included automatically.</span>
+              hx-confirm="Clear all chat messages for this chunk?">Clear</button>
           </div>
         </form>
       </article>
@@ -253,10 +249,9 @@
               <span style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Font</span>
               <select id="study-font-size">
                 <option value="12">12px</option>
-                <option value="13">13px</option>
-                <option value="14" selected>14px</option>
-                <option value="15">15px</option>
-                <option value="16">16px</option>
+                <option value="14">14px</option>
+                <option value="16" selected>16px</option>
+                <option value="18">18px</option>
               </select>
             </label>
           </div>
@@ -274,12 +269,14 @@
         </form>
 
         {# Chunk-level study blocks #}
-        <div class="chunk-block-sheet" id="study-blocks" data-font-size="14">
+        <div class="chunk-block-sheet" id="study-blocks" data-font-size="16">
           {% for block in study_blocks %}
           <div class="chunk-block">
             <div class="chunk-block-head">
               <span class="verse-tag">{{ block.label }}</span>
+              {% if block.caption %}
               <span class="context-meta">{{ block.caption }}</span>
+              {% endif %}
             </div>
             <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
             {% if block.gloss %}
@@ -287,53 +284,6 @@
             {% endif %}
           </div>
           {% endfor %}
-        </div>
-      </article>
-
-      {# JSON preview #}
-      <article class="workspace-card json-preview-card">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Preview</p>
-            <h2>Committed JSON</h2>
-          </div>
-        </div>
-        <button class="secondary-button json-preview-btn" type="button" onclick="showJsonPreview()">Show JSON preview</button>
-      </article>
-
-      {# Commit panel: just Commit + Generate EPUB #}
-      <article class="workspace-card commit-panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Commit</p>
-            <h2>Write or preview output</h2>
-          </div>
-          <div class="panel-summary">
-            <span class="inline-badge">{{ pending_writes|length }} pending file{{ "" if pending_writes|length == 1 else "s" }}</span>
-          </div>
-        </div>
-
-        <div class="commit-actions">
-          <form hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
-            <button class="commit-button" type="submit">Commit current draft</button>
-          </form>
-          <form hx-post="/epub/generate-download" hx-target="#workspace-shell" hx-swap="outerHTML">
-            <button class="secondary-button" type="submit">Generate EPUB</button>
-          </form>
-        </div>
-
-        <div class="pending-write-block">
-          <h3>Pending writes</h3>
-          <ul class="compact-list">
-            {% for path, old_text, new_text, notes in pending_writes %}
-            <li>
-              <strong>{{ path.name }}</strong>
-              <span>{{ "; ".join(notes) if notes else "pending change" }}</span>
-            </li>
-            {% else %}
-            <li>No pending file writes. The current draft matches the committed JSON.</li>
-            {% endfor %}
-          </ul>
         </div>
       </article>
     </aside>
@@ -357,7 +307,7 @@ document.addEventListener('htmx:afterSettle', function() {
   document.querySelectorAll('.verse-editor-textarea').forEach(function(el) { autoResize(el); });
   var studyBlocks = document.getElementById('study-blocks');
   if (studyBlocks) {
-    var fontSize = localStorage.getItem('studyFontSize') || '14';
+    var fontSize = localStorage.getItem('studyFontSize') || '16';
     applyStudyFontSize(fontSize);
     var sel = document.getElementById('study-font-size');
     if (sel) sel.value = fontSize;
@@ -365,7 +315,7 @@ document.addEventListener('htmx:afterSettle', function() {
 });
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.verse-editor-textarea').forEach(function(el) { autoResize(el); });
-  var fontSize = localStorage.getItem('studyFontSize') || '14';
+  var fontSize = localStorage.getItem('studyFontSize') || '16';
   applyStudyFontSize(fontSize);
   var sel = document.getElementById('study-font-size');
   if (sel) sel.value = fontSize;
@@ -388,7 +338,7 @@ function applyStudyFontSize(px) {
   var el = document.getElementById('study-blocks');
   if (!el) return;
   el.style.fontSize = px + 'px';
-  el.querySelectorAll('.chunk-block-body').forEach(function(b) { b.style.fontSize = px + 'px'; });
+  el.querySelectorAll('.chunk-block-body, .chunk-block-gloss').forEach(function(b) { b.style.fontSize = px + 'px'; });
 }
 function showJsonPreview() {
   var overlay = document.getElementById('jsonModal');

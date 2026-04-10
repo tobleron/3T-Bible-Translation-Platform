@@ -724,9 +724,10 @@ class BrowserWorkbench(WorkbenchApp):
             )
             blocks.append(
                 {
-                    "label": f"{alias} Translation",
-                    "caption": "Selected comparison text" if alias in self.selected_sources() else "Default fallback",
+                    "label": f"{alias}",
+                    "caption": "",
                     "text": text,
+                    "gloss": "",
                     "kind": "translation",
                 }
             )
