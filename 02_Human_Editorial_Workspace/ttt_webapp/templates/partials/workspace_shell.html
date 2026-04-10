@@ -16,32 +16,40 @@
 
 <div class="compact-workspace">
   <section class="workspace-card navigator-bar">
+    {# Row 1: heading + banner merged #}
     <div class="navigator-bar-head">
+      {% if chunk_summary.chunk %}
+      <div class="nav-inline-banner">
+        <span class="eyebrow">Workspace</span>
+        <strong>{{ chunk_summary.chunk.title }}</strong>
+        <span class="inline-badge">{{ chunk_summary.chunk.type }}</span>
+        <span class="inline-badge">{{ model_label }} model</span>
+        <span class="muted-line">{{ chunk_summary.range_label }}</span>
+      </div>
+      {% elif selected_book and selected_chapter %}
+      <div class="nav-inline-banner is-muted">
+        <span class="eyebrow">Workspace</span>
+        <strong>{{ selected_book }} {{ selected_chapter }}</strong>
+        <span class="muted-line">Choose a chunk to start editing.</span>
+      </div>
+      {% else %}
       <div>
         <p class="eyebrow">Workspace</p>
         <h1>Chat-First Editing Surface</h1>
       </div>
-      {% if chunk_summary.chunk %}
-      <div class="chunk-banner">
-        <strong>{{ chunk_summary.chunk.title }}</strong>
-        <span class="inline-badge">{{ chunk_summary.chunk.type }}</span>
-        <span class="inline-badge">{{ model_label }} thinking model</span>
-        <span class="muted-line">{{ chunk_summary.range_label }}</span>
-      </div>
-      {% elif selected_book and selected_chapter %}
-      <div class="chunk-banner is-muted">
-        <strong>{{ selected_book }} {{ selected_chapter }}</strong>
-        <span class="muted-line">Choose a chunk from the compact selector to start editing.</span>
-      </div>
+      {% endif %}
+      {% if chapter_chunks|length >= 2 %}
+      <button class="merge-toggle secondary-button" type="button" onclick="this.closest('.navigator-bar').querySelector('.merge-bar').classList.toggle('is-visible')" title="Merge chunks">⚡</button>
       {% endif %}
     </div>
 
+    {# Row 2: condensed selectors #}
     <div class="compact-nav-form">
       <label class="compact-select">
-        <span>Testament</span>
+        <span>Test.</span>
         <select name="testament" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
           {% for testament_name in ("old", "new") %}
-          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>{{ testament_name.title() }} Testament</option>
+          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>{{ testament_name.title() }}</option>
           {% endfor %}
         </select>
       </label>
@@ -56,7 +64,7 @@
         </select>
       </label>
       <label class="compact-select">
-        <span>Chapter</span>
+        <span>Ch.</span>
         <select name="chapter" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
           {% for chapter_value in chapter_options %}
           <option value="{{ chapter_value }}" {% if chapter_value == selected_chapter %}selected{% endif %}>{{ chapter_value }}</option>
@@ -66,38 +74,40 @@
       <label class="compact-select chunk-select">
         <span>Chunk</span>
         <select name="chunk" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
-          <option value="">Chapter overview</option>
+          <option value="">Overview</option>
           {% for chunk in chapter_chunks %}
           {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
-          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>{{ loop.index }}. {{ chunk.start_verse }}-{{ chunk.end_verse }} | {{ chunk.title }}</option>
+          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>{{ chunk.start_verse }}-{{ chunk.end_verse }} {{ chunk.title }}</option>
           {% endfor %}
         </select>
       </label>
     </div>
 
+    {# Row 3: chunk outline as horizontal scroll strip #}
     {% if chapter_chunks %}
-    <div class="chunk-outline">
+    <div class="chunk-outline-strip">
       {% for chunk in chapter_chunks %}
       {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
-      <a class="chunk-outline-item {% if key == current_chunk_key %}is-active{% endif %}"
+      <a class="chunk-strip-item {% if key == current_chunk_key %}is-active{% endif %}"
         hx-get="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ key }}"
         hx-target="#workspace-shell" hx-swap="outerHTML">
-        <span class="chunk-outline-index">#{{ loop.index }}</span>
-        <span>{{ chunk.start_verse }}-{{ chunk.end_verse }}</span>
-        <strong>{{ chunk.title }}</strong>
+        <span class="chunk-strip-index">{{ loop.index }}</span>
+        <span class="chunk-strip-range">{{ chunk.start_verse }}-{{ chunk.end_verse }}</span>
+        <span class="chunk-strip-title">{{ chunk.title }}</span>
       </a>
       {% endfor %}
     </div>
     {% endif %}
 
+    {# Merge bar (hidden by default, toggled with ⚡) #}
     {% if chapter_chunks|length >= 2 %}
     <form class="merge-bar" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge" hx-target="#workspace-shell" hx-swap="outerHTML">
-      <label class="compact-field tiny-field"><span>Merge from</span><input type="text" name="start_index" value="1"></label>
+      <label class="compact-field tiny-field"><span>from</span><input type="text" name="start_index" value="1"></label>
       <label class="compact-field tiny-field"><span>to</span><input type="text" name="end_index" value="2"></label>
-      <label class="compact-field"><span>New title</span><input type="text" name="title" placeholder="Merged section title"></label>
+      <label class="compact-field"><span>Title</span><input type="text" name="title" placeholder="Merged title"></label>
       <label class="compact-field"><span>Type</span><input type="text" name="chunk_type" placeholder="Optional"></label>
-      <label class="compact-field wide-field"><span>Reason</span><input type="text" name="reason" placeholder="Optional merge note"></label>
-      <button class="secondary-button" type="submit">Merge chunks</button>
+      <label class="compact-field wide-field"><span>Reason</span><input type="text" name="reason" placeholder="Optional"></label>
+      <button class="secondary-button" type="submit">Merge</button>
     </form>
     {% endif %}
   </section>
