@@ -403,7 +403,7 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
 .chunk-block-gloss {
   font-size: 16px;
   line-height: 1.55;
-  color: var(--accent-soft);
+  color: #e2c06e;
   margin-top: 0.25rem;
   padding-top: 0.35rem;
   border-top: 1px solid rgba(255,255,255,0.04);
