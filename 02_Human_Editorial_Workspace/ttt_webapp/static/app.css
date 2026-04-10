@@ -259,6 +259,14 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   font-size: 15px;
   line-height: 1.6;
 }
+.chunk-block-gloss {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--accent-soft);
+  margin-top: 0.25rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
 
 /* Session panel */
 .session-panel { /* same card styling */ }

@@ -16,6 +16,7 @@ from ttt_core.utils.common import (
     book_ref_code,
     ensure_parent,
     extract_json_payload,
+    lexical_book_code,
     make_text_hash,
     normalize_book_key,
     repair_linewise_json_strings,
@@ -739,9 +740,9 @@ class LexicalRepository:
         return sqlite3.connect(self.paths.lexical_db_path)
 
     def refs_for_range(
-        self, book: str, chapter: int, start_verse: int, end_verse: int
+        self, book: str, chapter: int, start_verse: int, end_verse: int, *, corpus: str = ""
     ) -> list[str]:
-        code = book_ref_code(book)
+        code = lexical_book_code(book, corpus) if corpus else book_ref_code(book)
         return [f"{code}.{chapter}.{verse}" for verse in range(start_verse, end_verse + 1)]
 
     def fetch_tokens(
@@ -749,7 +750,7 @@ class LexicalRepository:
     ) -> dict[str, list[dict[str, str]]]:
         if not self.available():
             return {}
-        refs = self.refs_for_range(book, chapter, start_verse, end_verse)
+        refs = self.refs_for_range(book, chapter, start_verse, end_verse, corpus=corpus)
         placeholders = ",".join("?" for _ in refs)
         query = f"""
             SELECT ref, ordinal, surface, transliteration, english, strong_id, morph, lemma, gloss, lexical_id

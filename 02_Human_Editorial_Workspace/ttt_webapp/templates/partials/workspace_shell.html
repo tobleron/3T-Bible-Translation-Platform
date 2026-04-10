@@ -364,6 +364,9 @@
               <span class="context-meta">{{ block.caption }}</span>
             </div>
             <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
+            {% if block.gloss %}
+            <div class="chunk-block-gloss">{{ block.gloss }}</div>
+            {% endif %}
           </div>
           {% endfor %}
         </div>

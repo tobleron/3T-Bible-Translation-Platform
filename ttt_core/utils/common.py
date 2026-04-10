@@ -161,6 +161,112 @@ def book_ref_code(book: str) -> str:
     return BOOK_REF_CODES.get(key, book[:3].title())
 
 
+# STEP Bible abbreviations used in the Hebrew OT lexical database (TAHOT)
+# These differ from BOOK_REF_CODES for many books.
+HEBREW_OT_BOOK_CODES = {
+    "genesis": "Gen",
+    "exodus": "Exo",
+    "leviticus": "Lev",
+    "numbers": "Num",
+    "deuteronomy": "Deu",
+    "joshua": "Jos",
+    "judges": "Jdg",
+    "ruth": "Rut",
+    "1samuel": "1Sa",
+    "2samuel": "2Sa",
+    "1kings": "1Ki",
+    "2kings": "2Ki",
+    "1chronicles": "1Ch",
+    "2chronicles": "2Ch",
+    "ezra": "Ezr",
+    "nehemiah": "Neh",
+    "esther": "Est",
+    "job": "Job",
+    "psalms": "Psa",
+    "psalm": "Psa",
+    "proverbs": "Pro",
+    "ecclesiastes": "Ecc",
+    "songofsongs": "Sng",
+    "songofsolomon": "Sng",
+    "isaiah": "Isa",
+    "jeremiah": "Jer",
+    "lamentations": "Lam",
+    "ezekiel": "Ezk",
+    "daniel": "Dan",
+    "hosea": "Hos",
+    "joel": "Jol",
+    "amos": "Amo",
+    "obadiah": "Oba",
+    "jonah": "Jon",
+    "micah": "Mic",
+    "nahum": "Nam",
+    "habakkuk": "Hab",
+    "zephaniah": "Zep",
+    "haggai": "Hag",
+    "zechariah": "Zec",
+    "malachi": "Mal",
+}
+
+# LXX (Rahlfs 1935) book abbreviations stored in the lexical database
+LXX_BOOK_CODES = {
+    "genesis": "Gen",
+    "exodus": "Exo",
+    "leviticus": "Lev",
+    "numbers": "Num",
+    "deuteronomy": "Deu",
+    "joshua": "Josh",
+    "judges": "Judg",
+    "ruth": "Ruth",
+    "1samuel": "1Sam",
+    "2samuel": "2Sam",
+    "1kings": "1Kgs",
+    "2kings": "2Kgs",
+    "1chronicles": "1Chr",
+    "2chronicles": "2Chr",
+    "ezra": "Ezr",
+    "nehemiah": "Neh",
+    "esther": "Est",
+    "job": "Job",
+    "psalms": "Psa",
+    "psalm": "Psa",
+    "proverbs": "Pro",
+    "ecclesiastes": "Ecc",
+    "songofsongs": "Sng",
+    "songofsolomon": "Sng",
+    "isaiah": "Isa",
+    "jeremiah": "Jer",
+    "lamentations": "Lam",
+    "ezekiel": "Ezk",
+    "daniel": "Dan",
+    "hosea": "Hos",
+    "joel": "Joel",
+    "amos": "Amos",
+    "obadiah": "Obad",
+    "jonah": "Jonah",
+    "micah": "Mic",
+    "nahum": "Nah",
+    "habakkuk": "Hab",
+    "zephaniah": "Zeph",
+    "haggai": "Hag",
+    "zechariah": "Zech",
+    "malachi": "Mal",
+}
+
+# Corpus → book code mapping
+_CORPUS_BOOK_CODES = {
+    "hebrew_ot": HEBREW_OT_BOOK_CODES,
+    "greek_ot_lxx": LXX_BOOK_CODES,
+    "greek_nt": BOOK_REF_CODES,  # NT uses standard codes (Mat, Mk, Luk, etc.)
+}
+
+
+def lexical_book_code(book: str, corpus: str) -> str:
+    """Return the book code used in the lexical DB for a given corpus."""
+    mapping = _CORPUS_BOOK_CODES.get(corpus, BOOK_REF_CODES)
+    key = normalize_book_key(book)
+    return mapping.get(key, book[:3].title())
+
+
 def reference_key(book: str, chapter: int, start_verse: int, end_verse: int) -> str:
     return f"{normalize_book_key(book)}:{chapter}:{start_verse}-{end_verse}"
 

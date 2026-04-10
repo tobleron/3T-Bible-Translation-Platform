@@ -420,9 +420,9 @@ class BrowserWorkbench(WorkbenchApp):
                 "greek_ot_lxx", self.state.book or "", self.state.chapter or 0, start_verse, end_verse
             )
             for verse in range(start_verse, end_verse + 1):
-                ref = self.lexical_ref(verse)
+                ref = self.lexical_ref(verse, corpus="hebrew_ot")
                 heb_tokens = hebrew.get(ref, [])
-                lxx_tokens = lxx.get(ref, [])
+                lxx_tokens = lxx.get(self.lexical_ref(verse, corpus="greek_ot_lxx"), [])
                 cards.append(
                     {
                         "verse": verse,
@@ -458,7 +458,7 @@ class BrowserWorkbench(WorkbenchApp):
                 "greek_nt", self.state.book or "", self.state.chapter or 0, start_verse, end_verse
             )
             for verse in range(start_verse, end_verse + 1):
-                ref = self.lexical_ref(verse)
+                ref = self.lexical_ref(verse, corpus="greek_nt")
                 tokens = greek.get(ref, [])
                 cards.append(
                     {
@@ -548,6 +548,17 @@ class BrowserWorkbench(WorkbenchApp):
     def _chunk_join(self, pieces: list[str]) -> str:
         return " ".join(piece.strip() for piece in pieces if piece and piece.strip()).strip() or "[missing]"
 
+    @staticmethod
+    def _chunk_join_gloss(pieces: list[str]) -> str:
+        """Join gloss parts, skipping empty ones. Returns empty string if nothing."""
+        return " ".join(p.strip() for p in pieces if p.strip()).strip()
+
+    def lexical_ref(self, verse: int, *, corpus: str = "") -> str:
+        """Build a lexical reference key using corpus-specific book codes."""
+        from ttt_core.utils import lexical_book_code
+        code = lexical_book_code(self.state.book or "", corpus) if corpus else self.state.book or ""
+        return f"{code}.{self.state.chapter or 0}.{verse}"
+
     def _fallback_verse_text(self, verse: int) -> str:
         """Get raw verse text from the Bible repo as fallback when lexical data is missing."""
         if not self.state.book or not self.state.chapter:
@@ -582,40 +593,72 @@ class BrowserWorkbench(WorkbenchApp):
                 end_verse,
             )
 
-            # Try Hebrew lexical first, fall back to original text from Bible repo
-            hebrew_parts = []
-            has_lexical = False
+            # Hebrew surface + literal English gloss
+            hebrew_surface_parts = []
+            hebrew_gloss_parts = []
+            has_hebrew = False
             for verse in range(start_verse, end_verse + 1):
-                tokens = hebrew.get(self.lexical_ref(verse), [])
+                tokens = hebrew.get(self.lexical_ref(verse, corpus="hebrew_ot"), [])
                 surface = " ".join(
                     t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()
                 )
+                gloss = " / ".join(
+                    (t.get("english") or t.get("gloss") or "").replace("<br>", "; ").strip()
+                    for t in tokens if (t.get("english") or t.get("gloss"))
+                )
                 if surface:
-                    has_lexical = True
-                    hebrew_parts.append(surface)
+                    has_hebrew = True
+                    hebrew_surface_parts.append(surface)
+                    hebrew_gloss_parts.append(gloss if gloss else "")
                 else:
-                    # Fallback: get the verse text from the Bible repo
                     fallback = self._fallback_verse_text(verse)
-                    hebrew_parts.append(fallback if fallback else "[no data]")
+                    if fallback:
+                        has_hebrew = True
+                        hebrew_surface_parts.append(fallback)
+                        hebrew_gloss_parts.append("")
+                    else:
+                        hebrew_surface_parts.append("[no data]")
+                        hebrew_gloss_parts.append("")
 
-            hebrew_text = self._chunk_join(hebrew_parts)
-            if has_lexical:
-                blocks.append({"label": "Original Language 1", "caption": "Hebrew", "text": hebrew_text, "kind": "hebrew"})
-            elif hebrew_text != "[missing]":
-                blocks.append({"label": "Original Language 1", "caption": "Hebrew (text)", "text": hebrew_text, "kind": "hebrew"})
+            if has_hebrew:
+                blocks.append({
+                    "label": "Hebrew",
+                    "caption": "Masoretic Text (WLC)",
+                    "text": self._chunk_join(hebrew_surface_parts),
+                    "gloss": self._chunk_join_gloss(hebrew_gloss_parts),
+                    "kind": "hebrew",
+                })
 
-            lxx_text = self._chunk_join(
-                [
-                    " ".join(
-                        token.get("surface", "").strip()
-                        for token in lxx.get(self.lexical_ref(verse), [])
-                        if token.get("surface", "").strip()
-                    )
-                    for verse in range(start_verse, end_verse + 1)
-                ]
-            )
-            if lxx_text != "[missing]":
-                blocks.append({"label": "Original Language 2", "caption": "LXX Greek", "text": lxx_text, "kind": "greek"})
+            # LXX surface + literal gloss
+            lxx_surface_parts = []
+            lxx_gloss_parts = []
+            has_lxx = False
+            for verse in range(start_verse, end_verse + 1):
+                tokens = lxx.get(self.lexical_ref(verse, corpus="greek_ot_lxx"), [])
+                surface = " ".join(
+                    t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()
+                )
+                gloss = " / ".join(
+                    (t.get("gloss") or t.get("english") or "").replace("<br>", "; ").strip()
+                    for t in tokens if (t.get("gloss") or t.get("english"))
+                )
+                if surface:
+                    has_lxx = True
+                    lxx_surface_parts.append(surface)
+                    lxx_gloss_parts.append(gloss if gloss else "")
+                else:
+                    lxx_surface_parts.append("")
+                    lxx_gloss_parts.append("")
+
+            lxx_text = self._chunk_join(lxx_surface_parts) if has_lxx else ""
+            if lxx_text and lxx_text != "[missing]":
+                blocks.append({
+                    "label": "LXX Greek",
+                    "caption": "Septuagint (Rahlfs 1935)",
+                    "text": lxx_text,
+                    "gloss": self._chunk_join_gloss(lxx_gloss_parts),
+                    "kind": "greek",
+                })
         else:
             greek = self.lexical_repo.fetch_tokens(
                 "greek_nt",
@@ -624,17 +667,27 @@ class BrowserWorkbench(WorkbenchApp):
                 start_verse,
                 end_verse,
             )
-            greek_text = self._chunk_join(
-                [
-                    " ".join(
-                        token.get("surface", "").strip()
-                        for token in greek.get(self.lexical_ref(verse), [])
-                        if token.get("surface", "").strip()
-                    )
-                    for verse in range(start_verse, end_verse + 1)
-                ]
-            )
-            blocks.append({"label": "Original Language 1", "caption": "Greek", "text": greek_text, "kind": "greek"})
+            greek_surface_parts = []
+            greek_gloss_parts = []
+            for verse in range(start_verse, end_verse + 1):
+                tokens = greek.get(self.lexical_ref(verse, corpus="greek_nt"), [])
+                surface = " ".join(
+                    t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()
+                )
+                gloss = " / ".join(
+                    (t.get("gloss") or t.get("english") or "").replace("<br>", "; ").strip()
+                    for t in tokens if (t.get("gloss") or t.get("english"))
+                )
+                greek_surface_parts.append(surface if surface else "[no data]")
+                greek_gloss_parts.append(gloss if gloss else "")
+
+            blocks.append({
+                "label": "SBLGNT Greek",
+                "caption": "SBL Greek New Testament",
+                "text": self._chunk_join(greek_surface_parts),
+                "gloss": self._chunk_join_gloss(greek_gloss_parts),
+                "kind": "greek",
+            })
 
         translation_aliases = self.selected_sources() or ["LSB"]
         for alias in translation_aliases:
@@ -924,6 +977,8 @@ class BrowserWorkbench(WorkbenchApp):
         for block in blocks:
             lines.append(f"{block['label']} ({block['caption']}):")
             lines.append(block["text"])
+            if block.get("gloss"):
+                lines.append(f"  Literal gloss: {block['gloss']}")
             lines.append("")
         return "\n".join(lines).strip()
 
