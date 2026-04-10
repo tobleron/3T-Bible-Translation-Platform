@@ -13,15 +13,43 @@
   "focus_end": 7,
   "menu_index": 0,
   "history_panel_open": false,
-  "draft_chunk": {},
-  "draft_title": "",
+  "draft_chunk": {
+    "1": "These are the names of the sons of Israel who went to Egypt with Jacob, each with his family:",
+    "2": "Reuben, Simeon, Levi, and Judah;",
+    "3": "ds",
+    "4": "",
+    "5": "",
+    "6": "",
+    "7": ""
+  },
+  "draft_title": "Israelites in Egypt",
   "title_alternatives": [],
   "chat_messages": [],
   "analysis_cache": {},
   "analysis_meta": {},
   "last_review": null,
-  "pending_verse_updates": [],
-  "pending_title_updates": [],
+  "pending_verse_updates": [
+    {
+      "book": "Exodus",
+      "chapter": 1,
+      "verses": {
+        "1": "These are the names of the sons of Israel who went to Egypt with Jacob, each with his family:",
+        "2": "Reuben, Simeon, Levi, and Judah;",
+        "3": "ds"
+      },
+      "start_verse": 1,
+      "end_verse": 3
+    }
+  ],
+  "pending_title_updates": [
+    {
+      "book": "Exodus",
+      "chapter": 1,
+      "start_verse": 1,
+      "end_verse": 7,
+      "title": "Israelites in Egypt"
+    }
+  ],
   "pending_justification_updates": [],
   "pending_repairs": [],
   "justify_draft": null,

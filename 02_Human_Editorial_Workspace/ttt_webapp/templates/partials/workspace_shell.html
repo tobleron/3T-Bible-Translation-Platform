@@ -361,11 +361,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 function autoResize(el) {
-  el.style.height = 'auto';
+  // Set initial size
   el.style.height = (el.scrollHeight + 4) + 'px';
   el.addEventListener('input', function() {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight + 4) + 'px';
+    var el = this;
+    // Save scroll positions to prevent jumping
+    var scrollLeft = window.scrollX || window.pageXOffset;
+    var scrollTop = window.scrollY || window.pageYOffset;
+    // Resize
+    el.style.height = 'auto';
+    el.style.height = (el.scrollHeight + 4) + 'px';
+    // Restore scroll position
+    window.scrollTo(scrollLeft, scrollTop);
   });
 }
 document.addEventListener('change', function(e) {
