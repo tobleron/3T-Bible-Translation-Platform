@@ -7,17 +7,6 @@
   </div>
 
   <section class="study-toolbar" aria-label="Study controls">
-    <div class="study-toolbar-row">
-      <label class="font-size-control compact-field">
-        <select id="study-font-size" aria-label="Study font size">
-          <option value="12">12px</option>
-          <option value="14">14px</option>
-          <option value="16" selected>16px</option>
-          <option value="18">18px</option>
-        </select>
-      </label>
-    </div>
-
     <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#context-panel" hx-swap="outerHTML">
       <div class="source-chip-grid" role="group" aria-label="Comparison sources">
         {% for option in comparison_source_options %}
@@ -26,6 +15,14 @@
           <span>{{ option.label }}</span>
         </label>
         {% endfor %}
+        <label class="source-chip source-chip-control font-size-control compact-field">
+          <select id="study-font-size" aria-label="Study font size">
+            <option value="12">12px</option>
+            <option value="14">14px</option>
+            <option value="16" selected>16px</option>
+            <option value="18">18px</option>
+          </select>
+        </label>
       </div>
     </form>
   </section>
