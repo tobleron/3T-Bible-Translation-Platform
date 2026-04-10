@@ -1,7 +1,7 @@
 {
   "session_id": "358e4d40",
-  "mode": "COMMAND",
-  "screen": "STUDY",
+  "mode": "CHAT",
+  "screen": "CHAT",
   "book": "Exodus",
   "chapter": 1,
   "wizard_testament": "old",
@@ -16,7 +16,7 @@
   "draft_chunk": {
     "1": "These are the names of the sons of Israel who went to Egypt with Jacob, each with his family:",
     "2": "Reuben, Simeon, Levi, and Judah;",
-    "3": "ds",
+    "3": "adw",
     "4": "",
     "5": "",
     "6": "",
@@ -35,7 +35,7 @@
       "verses": {
         "1": "These are the names of the sons of Israel who went to Egypt with Jacob, each with his family:",
         "2": "Reuben, Simeon, Levi, and Judah;",
-        "3": "ds"
+        "3": "adw"
       },
       "start_verse": 1,
       "end_verse": 3

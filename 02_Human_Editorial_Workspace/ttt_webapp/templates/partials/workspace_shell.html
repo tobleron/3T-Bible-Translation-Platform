@@ -190,11 +190,7 @@
             {% for v in draft_editor_verses %}
             <div class="verse-editor-row">
               <span class="verse-editor-label">{{ v.verse }}</span>
-              <textarea class="verse-editor-textarea" name="verse_{{ v.verse }}" rows="1"
-                hx-trigger="input changed delay:300ms"
-                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
-                hx-target="#workspace-shell" hx-swap="outerHTML"
-                hx-include="#draft-form">{{ v.text }}</textarea>
+              <textarea class="verse-editor-textarea" name="verse_{{ v.verse }}" rows="1">{{ v.text }}</textarea>
             </div>
             {% endfor %}
           </div>
