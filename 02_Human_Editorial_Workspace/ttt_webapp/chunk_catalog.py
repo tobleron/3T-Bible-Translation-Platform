@@ -21,6 +21,7 @@ class ChunkCatalogRepository:
         self.book_dir = (
             self.paths.workspace_dir / "scripts" / "chapter_chunk_catalog_books"
         )
+        self._committed_section_cache: dict[tuple[str, str, int], dict[str, Any] | None] = {}
 
     def _chapter_path(self, testament: str, book: str, chapter: int) -> Path:
         key = normalize_book_key(book)
@@ -47,17 +48,23 @@ class ChunkCatalogRepository:
     def committed_section_payload(
         self, testament: str, book: str, chapter: int
     ) -> dict[str, Any] | None:
+        cache_key = (testament, normalize_book_key(book), chapter)
+        if cache_key in self._committed_section_cache:
+            return self._committed_section_cache[cache_key]
         try:
             chapter_file = self.bible_repo.load_chapter(book, chapter, allow_scaffold=False)
-        except FileNotFoundError:
+        except (FileNotFoundError, OSError, ValueError, json.JSONDecodeError):
+            self._committed_section_cache[cache_key] = None
             return None
 
         verse_map = self.bible_repo.verse_map(chapter_file.doc)
         if not any(str(text).strip() for text in verse_map.values()):
+            self._committed_section_cache[cache_key] = None
             return None
 
         section_ranges = self.bible_repo.section_ranges(chapter_file.doc)
         if not section_ranges:
+            self._committed_section_cache[cache_key] = None
             return None
 
         chunks: list[dict[str, Any]] = []
@@ -74,7 +81,7 @@ class ChunkCatalogRepository:
             )
 
         verses = sorted(verse_map)
-        return {
+        payload = {
             "schema_version": 1,
             "prompt_version": "committed_sections_v1",
             "generated_at": utc_now(),
@@ -89,6 +96,8 @@ class ChunkCatalogRepository:
             "verse_count": len(verses),
             "chunks": chunks,
         }
+        self._committed_section_cache[cache_key] = payload
+        return payload
 
     def load_chapter_payload(self, testament: str, book: str, chapter: int) -> dict[str, Any]:
         path = self._chapter_path(testament, book, chapter)
@@ -152,12 +161,6 @@ class ChunkCatalogRepository:
                     continue
                 if chapter > 0:
                     chapter_counts[chapter] = len(payload.get("chunks", []))
-        for chapter in self.bible_repo.chapters_for_book(testament, book):
-            if chapter in chapter_counts:
-                continue
-            fallback_payload = self.committed_section_payload(testament, book, chapter)
-            if fallback_payload is not None:
-                chapter_counts[chapter] = len(fallback_payload.get("chunks", []))
         return chapter_counts
 
     def _load_book_payload(self, testament: str, book: str) -> dict | None:
