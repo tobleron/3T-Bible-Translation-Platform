@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Opening Supplication and Distress",
+      "reason": "The psalmist begins with a direct plea to God for hearing and answers, describing the current state of spiritual exhaustion and enemy pursuit."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "blessing_or_prayer",
+      "title": "Remembrance and Request for Guidance",
+      "reason": "The psalmist recalls God's past works to renew hope and urgently asks for a sense of God's presence and direction."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "blessing_or_prayer",
+      "title": "Deliverance and Vindication",
+      "reason": "The prayer concludes with specific requests for rescue from enemies and the restoration of the psalmist's life based on God's faithfulness."
+    }
+  ]
+}

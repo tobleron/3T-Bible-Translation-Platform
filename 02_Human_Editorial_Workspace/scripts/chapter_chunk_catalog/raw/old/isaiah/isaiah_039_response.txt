@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Babylonian Envoys Visit Hezekiah",
+      "reason": "Describes the arrival of Babylonian envoys and Hezekiah's display of his treasures."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 4,
+      "type": "dialogue",
+      "title": "Hezekiah Reports to Isaiah",
+      "reason": "Records the conversation between Hezekiah and Isaiah regarding the visitors."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Prophecy of Babylonian Exile",
+      "reason": "Contains Isaiah's prophetic declaration about future treasures and sons being taken to Babylon."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Hezekiah's Acceptance of the Word",
+      "reason": "Records Hezekiah's response to the prophecy and his reasoning for accepting it."
+    }
+  ]
+}

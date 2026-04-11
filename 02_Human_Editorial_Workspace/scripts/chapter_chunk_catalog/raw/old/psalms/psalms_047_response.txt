@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "exhortation",
+      "title": "Call to Praise God's Kingship",
+      "reason": "An invitation for all peoples to clap and shout in joy because Yahweh is the great King over all the earth."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "psalm",
+      "title": "God Reigns Over All Nations",
+      "reason": "A declaration of God's ascension and reign over the nations, culminating in the assembly of nobles under His rule."
+    }
+  ]
+}

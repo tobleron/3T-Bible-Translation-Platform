@@ -1,0 +1,85 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 69:1-36
+
+Chapter text:
+1. For the choir director. According to Shoshannim. Of David. Save me, O God, For the waters have threatened my life.
+2. I have sunk in deep clay, and there is no foothold; I have come into deep waters, and a flood overflows me.
+3. I am weary with my calling out; my throat is parched; My eyes fail while I wait for my God.
+4. Those who hate me without cause are more than the hairs of my head; Those who would destroy me are powerful, being wrongfully my enemies; What I did not steal, I then have to restore.
+5. O God, it is You who knows my folly, And all my guilt is not hidden from You.
+6. May those who hope for You not be ashamed through me, O Lord Yahweh of hosts; May those who seek You not be dishonored through me, O God of Israel,
+7. Because for Your sake I have borne reproach; Dishonor has covered my face.
+8. I have become estranged from my brothers And a foreigner to my mother’s sons.
+9. For zeal for Your house has consumed me, And the reproaches of those who reproach You have fallen on me.
+10. When I wept in my soul with fasting, It became my reproach.
+11. When I made sackcloth my clothing, I became a byword to them.
+12. Those who dwell at the gate moan about me, And I am the drunkards’ songs.
+13. But as for me, my prayer is to You, O Yahweh, at an acceptable time; O God, in the abundance of Your lovingkindness, Answer me with the truth of Your salvation.
+14. Deliver me from the mire and do not let me sink; May I be delivered from my foes and from the deep waters.
+15. May the flood of water not overflow me Nor the deep swallow me up, Nor the pit shut its mouth on me.
+16. Answer me, O Yahweh, for Your lovingkindness is good; According to the abundance of Your compassion, turn to me,
+17. And do not hide Your face from Your slave, For I am in distress; answer me quickly.
+18. Oh draw near to my soul and redeem it; Ransom me because of my enemies!
+19. You know my reproach and my shame and my dishonor; All my adversaries are before You.
+20. Reproach has broken my heart and I am so sick. And I hoped for sympathy, but there was none, And for comforters, but I found none.
+21. They also gave me gall for my food And for my thirst they gave me vinegar to drink.
+22. May their table before them become a snare; And when they are in peace, may it become a trap.
+23. May their eyes darken so that they cannot see, And make their loins quake continually.
+24. Pour out Your indignation on them, And may Your burning anger overtake them.
+25. May their camp be desolate; May none dwell in their tents.
+26. For they have persecuted him whom You Yourself have struck down, And they recount the pain of those whom You have wounded.
+27. Add iniquity to their iniquity, And may they not come into Your righteousness.
+28. May they be blotted out of the book of life And may they not be recorded with the righteous.
+29. But I am afflicted and in pain; May Your salvation, O God, set me securely on high.
+30. I will praise the name of God with song And magnify Him with thanksgiving.
+31. And this will please Yahweh better than an ox Or a young bull with horns and hoofs.
+32. The humble see it and are glad; You who seek God, let your heart revive.
+33. For Yahweh hears the needy And does not despise His who are prisoners.
+34. Let heaven and earth praise Him, The seas and everything that moves in them.
+35. For God will save Zion and build the cities of Judah, That they may dwell there and possess it.
+36. The seed of His slaves will inherit it, And those who love His name will dwell in it.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

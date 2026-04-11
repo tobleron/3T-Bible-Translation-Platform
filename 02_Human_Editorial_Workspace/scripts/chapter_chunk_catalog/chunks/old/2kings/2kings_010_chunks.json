@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:42:17Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Kings",
+  "chapter": 10,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 36,
+  "verse_count": 36,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Jehu's Purge of Ahab's Line",
+      "reason": "A continuous narrative describing Jehu's letters to Samaria, the slaughter of Ahab's seventy sons, and his journey to kill Ahaziah's relatives."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 28,
+      "type": "story",
+      "title": "The Destruction of Baal Worship",
+      "reason": "A coherent narrative unit where Jehu gathers the prophets of Baal, tricks them into a temple, and systematically destroys their cult."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 36,
+      "type": "mixed",
+      "title": "Evaluation and Conclusion of Jehu's Reign",
+      "reason": "A concluding section containing historical evaluation, a divine oracle regarding the dynasty, and the summary of his reign."
+    }
+  ]
+}

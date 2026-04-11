@@ -1,0 +1,75 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 49:1-26
+
+Chapter text:
+1. Listen to Me, O coastlands, And pay attention, you peoples from afar. Yahweh called Me from the womb; From the body of My mother He made My name to be remembered.
+2. He has set My mouth like a sharp sword; In the shadow of His hand He has concealed Me; And He has also set Me as a select arrow; He has hidden Me in His quiver.
+3. He said to Me, “You are My Servant, Israel, In Whom I will show forth My beautiful glory.”
+4. But I said, “I have toiled in vain; I have spent My might for nothing and vanity; Yet surely the justice due to Me is with Yahweh, And My reward with My God.”
+5. So now says Yahweh, who formed Me from the womb to be His Servant, To return Jacob back to Him, so that Israel might be gathered to Him (For I am glorified in the sight of Yahweh, And My God is My strength),
+6. He says, “It is too small a thing that You should be My Servant To raise up the tribes of Jacob and to cause the preserved ones of Israel to return; I will also give You as a light of the nations So that My salvation may reach to the end of the earth.”
+7. Thus says Yahweh, the Redeemer of Israel and its Holy One, To the despised One, To the One abhorred by the nation, To the Servant of rulers, “Kings will see and arise, Princes will also bow down, Because of Yahweh who is faithful, the Holy One of Israel who has chosen You.”
+8. Thus says Yahweh, “In an acceptable time I have answered You, And in a day of salvation I have helped You; And I will guard You and give You for a covenant of the people, To establish the land, to make them inherit the desolate inheritance;
+9. Saying to those who are bound, ‘Go forth,’ To those who are in darkness, ‘Show yourselves.’ Along the roads they will feed, And their pasture will be on all bare heights.
+10. They will not hunger or thirst, Nor will the scorching heat or sun strike them down; For He who has compassion on them will guide them And will lead them to springs of water.
+11. I will set all My mountains as a road, And My highways will be raised up.
+12. Behold, these will come from afar; And behold, these will come from the north and from the west, And these from the land of Sinim.”
+13. Shout for joy, O heavens! And rejoice, O earth! Break forth into joyful shouting, O mountains! For Yahweh has comforted His people And will have compassion on His afflicted.
+14. But Zion said, “Yahweh has forsaken me, And the Lord has forgotten me.”
+15. “Can a woman forget her infant And have no compassion on the son of her womb? Even these may forget, but I will not forget you.
+16. Behold, I have inscribed you on the palms of My hands; Your walls are continually before Me.
+17. Your builders hurry; Your destroyers and devastators Will depart from you.
+18. Lift up your eyes and look around; All of them gather together; they come to you. As I live,” declares Yahweh, “You will surely put on all of them as jewels and bind them on as a bride.
+19. For your devastated and desolate places and your destroyed land— Surely now you will be too cramped for the inhabitants, And those who swallowed you will be far away.
+20. The children of whom you were bereaved will yet say in your ears, ‘The place is too cramped for me; Make room for me that I may live here.’
+21. Then you will say in your heart, ‘Who has borne these for me? Indeed, I have been bereaved of my children And am barren, an exile and a wanderer. And who has reared these? Behold, I remained alone; From where did these come?’”
+22. Thus says Lord Yahweh, “Behold, I will lift up My hand to the nations And make high My standard to the peoples; And they will bring your sons in their bosom, And your daughters will be lifted up on their shoulders.
+23. Kings will be your guardians, And their princesses your nurses. They will bow down to you with their faces to the earth And lick the dust of your feet; And you will know that I am Yahweh; Those who hope in Me will not be put to shame.
+24. “Can the prey be taken from the mighty man, Or the captives of the righteous be granted escape?”
+25. Surely, thus says Yahweh, “Even the captives of the mighty man will be taken away, And the prey of the tyrant will be granted escape; For I will contend with the one who contends with you, And I will save your sons.
+26. I will feed those who mistreat you with their own flesh, And they will become drunk with their own blood as with sweet wine; And all flesh will know that I, Yahweh, am your Savior And your Redeemer, the Mighty One of Jacob.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

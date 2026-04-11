@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T06:36:49Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 111,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 10,
+  "verse_count": 10,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "blessing_or_prayer",
+      "title": "Praise for God's Works",
+      "reason": "Introduction and declaration of the greatness and majesty of Yahweh's works."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 9,
+      "type": "list_or_catalog",
+      "title": "Catalog of God's Deeds",
+      "reason": "A detailed listing of specific acts of redemption, covenant faithfulness, and provision."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 10,
+      "type": "exhortation",
+      "title": "The Fear of the Lord",
+      "reason": "A concluding wisdom statement defining the beginning of wisdom and its enduring nature."
+    }
+  ]
+}

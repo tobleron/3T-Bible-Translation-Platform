@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "psalm",
+      "title": "God as Refuge and Stronghold",
+      "reason": "A unified unit of praise describing God's protection against natural and political turmoil."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Call to Behold God's Works",
+      "reason": "A direct invitation to witness God's judgment on nations and a command to cease striving."
+    }
+  ]
+}

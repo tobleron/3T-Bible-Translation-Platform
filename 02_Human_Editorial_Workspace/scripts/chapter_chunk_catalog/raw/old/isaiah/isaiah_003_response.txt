@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "oracle",
+      "title": "Judgment on Leadership",
+      "reason": "Describes the removal of key leaders and the rise of young rulers."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "The Reluctant Ruler",
+      "reason": "A short dialogue illustrating the desperation of the people and the refusal of a candidate."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Reasons for Judgment",
+      "reason": "Explains the spiritual cause of the fall and the chaos resulting from poor leadership."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Yahweh's Court Case",
+      "reason": "God stands to judge and specifically indicts the elders and princes."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 24,
+      "type": "list_or_catalog",
+      "title": "Judgment on Daughters of Zion",
+      "reason": "A detailed catalog of removed ornaments followed by the resulting humiliation."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 26,
+      "type": "oracle",
+      "title": "Final Consequences",
+      "reason": "Describes the death of men and the desolation of the city gates."
+    }
+  ]
+}

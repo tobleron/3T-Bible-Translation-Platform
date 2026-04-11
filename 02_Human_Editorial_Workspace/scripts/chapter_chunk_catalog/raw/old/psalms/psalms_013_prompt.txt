@@ -1,0 +1,55 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 13:1-6
+
+Chapter text:
+1. For the choir director. A Psalm of David. How long, O Yahweh? Will You forget me forever? How long will You hide Your face from me?
+2. How long shall I take counsel in my soul, Having sorrow in my heart all the day? How long will my enemy be exalted over me?
+3. Look and answer me, O Yahweh my God; Give light to my eyes, lest I sleep the sleep of death,
+4. Lest my enemy says, “I have overcome him,” And my adversaries rejoice that I am shaken.
+5. But I have trusted in Your lovingkindness; My heart shall rejoice in Your salvation.
+6. I will sing to Yahweh, Because He has dealt bountifully with me.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

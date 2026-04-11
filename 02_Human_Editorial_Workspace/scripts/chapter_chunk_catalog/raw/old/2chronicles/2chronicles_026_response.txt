@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Accession and Early Reign",
+      "reason": "Introduces Uzziah's age, lineage, and initial faithfulness."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Military Successes and Fortifications",
+      "reason": "Details Uzziah's conquests, economic growth, and military preparations."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Pride and Leprosy",
+      "reason": "Narrates Uzziah's pride, the priestly confrontation, and his subsequent disease."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Death and Succession",
+      "reason": "Concludes with the record of his acts, death, burial, and Jotham's succession."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:20:02Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 46,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "psalm",
+      "title": "God as Refuge and Stronghold",
+      "reason": "A unified unit of praise describing God's protection against natural and political turmoil."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Call to Behold God's Works",
+      "reason": "A direct invitation to witness God's judgment on nations and a command to cease striving."
+    }
+  ]
+}

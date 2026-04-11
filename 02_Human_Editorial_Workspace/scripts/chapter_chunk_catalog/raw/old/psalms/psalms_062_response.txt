@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "psalm",
+      "title": "Trust in God as Refuge",
+      "reason": "A unified psalm of David expressing personal trust in God's stability and exhorting the soul to wait silently."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 10,
+      "type": "argument",
+      "title": "Vanity of Human Status",
+      "reason": "An argument contrasting the fleeting nature of low and high status with the reality of divine judgment."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "God's Strength and Justice",
+      "reason": "A concluding oracle affirming that strength belongs to God and He repays according to one's work."
+    }
+  ]
+}

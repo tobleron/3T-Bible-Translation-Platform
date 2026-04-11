@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Father's Instruction on Wisdom",
+      "reason": "A father addresses his sons about acquiring and valuing wisdom."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 19,
+      "type": "exhortation",
+      "title": "The Two Paths",
+      "reason": "An exhortation to follow the path of wisdom contrasted with the paths of the wicked and the righteous."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 27,
+      "type": "exhortation",
+      "title": "Practical Instructions for Life",
+      "reason": "Specific directives on how to internalize words and control one's physical actions."
+    }
+  ]
+}

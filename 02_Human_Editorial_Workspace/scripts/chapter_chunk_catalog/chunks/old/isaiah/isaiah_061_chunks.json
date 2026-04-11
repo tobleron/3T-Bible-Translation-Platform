@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T10:28:45Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 61,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "The Anointed One's Mission",
+      "reason": "A continuous declaration of the Spirit-anointed mission to bring good news and comfort."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Restoration and Priestly Status",
+      "reason": "A prophetic vision describing the rebuilding of cities and the elevated status of God's people."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 9,
+      "type": "argument",
+      "title": "God's Covenant and Justice",
+      "reason": "Yahweh explains the basis for the blessing through His love of justice and the resulting covenant."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 11,
+      "type": "blessing_or_prayer",
+      "title": "Joy and Righteousness",
+      "reason": "A personal expression of joy followed by a metaphorical conclusion about the growth of righteousness."
+    }
+  ]
+}

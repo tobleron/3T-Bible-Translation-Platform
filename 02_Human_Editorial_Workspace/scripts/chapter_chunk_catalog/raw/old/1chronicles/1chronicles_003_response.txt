@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "genealogy",
+      "title": "Sons of David in Hebron and Jerusalem",
+      "reason": "Lists the sons born to David in Hebron and Jerusalem, including their mothers."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Kings of Judah from Solomon to Jeconiah",
+      "reason": "Traces the royal line from Solomon through Rehoboam to the exile under Jeconiah."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 24,
+      "type": "genealogy",
+      "title": "Descendants of Jeconiah Post-Exile",
+      "reason": "Details the lineage from Jeconiah through Zerubbabel to later generations."
+    }
+  ]
+}

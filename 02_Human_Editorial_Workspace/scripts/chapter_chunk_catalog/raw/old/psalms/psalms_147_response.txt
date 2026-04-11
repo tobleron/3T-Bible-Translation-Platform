@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "Praise for God's Power and Care",
+      "reason": "A unified call to praise focusing on God's attributes of healing, power, and justice."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "psalm",
+      "title": "God as Creator and Provider",
+      "reason": "A section describing God's control over nature and His preference for the humble."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Call to Jerusalem",
+      "reason": "A specific address to Jerusalem and Zion regarding their security and prosperity."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "psalm",
+      "title": "God's Word and Distinction",
+      "reason": "A concluding unit contrasting God's command over nature with His revelation to Israel."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Kings 12:1-21
+
+Chapter text:
+1. In the seventh year of Jehu, Jehoash became king, and he reigned forty years in Jerusalem; and his mother’s name was Zibiah of Beersheba.
+2. And Jehoash did what was right in the sight of Yahweh all his days in which Jehoiada the priest instructed him.
+3. Only the high places were not taken away; the people still sacrificed and burned incense on the high places.
+4. Then Jehoash said to the priests, “All the money of the sacred things which is brought into the house of Yahweh, both the money for each numbered man—the money from each person’s assessment in the census—and all the money which any man’s heart prompts him to bring into the house of Yahweh,
+5. let the priests take it for themselves, each from his acquaintance; and they shall repair the damages of the house wherever any damage may be found.”
+6. Now it happened that in the twenty-third year of King Jehoash the priests had not repaired the damages of the house.
+7. Then King Jehoash called for Jehoiada the priest, and for the other priests and said to them, “Why do you not repair the damages of the house? So now, take no more money from your acquaintances, but give it over to pay for the damages of the house.”
+8. So the priests agreed that they would take no more money from the people, nor repair the damages of the house.
+9. But Jehoiada the priest took a chest and bored a hole in its lid and put it beside the altar, on the right side as one comes into the house of Yahweh; and the priests who kept watch over the threshold put in it all the money which was brought into the house of Yahweh.
+10. Now it happened that when they saw that there was much money in the chest, the king’s scribe and the high priest came up and tied it in bags and counted the money which was found in the house of Yahweh.
+11. And they gave the money, which was weighed out, into the hands of those who did the work, who had the oversight of the house of Yahweh; and they paid it out to the craftsmen of wood and the builders who worked on the house of Yahweh;
+12. and to the masons and the hewers of stone, and for buying timber and hewn stone to repair the damages to the house of Yahweh, and for all that was laid out for the house to repair it.
+13. But there were not made for the house of Yahweh silver cups, snuffers, bowls, trumpets, any vessels of gold, or vessels of silver from the money which was brought into the house of Yahweh;
+14. for they gave that to those who did the work, and with it they repaired the house of Yahweh.
+15. Moreover, they did not require an accounting from the men into whose hand they paid the money in order to pay those who did the work, for they were doing it faithfully.
+16. The money from the guilt offerings and the money from the sin offerings was not brought into the house of Yahweh; it was for the priests.
+17. Then Hazael king of Aram went up and fought against Gath and captured it, and Hazael set his face to go up to Jerusalem.
+18. And Jehoash king of Judah took all the holy things that Jehoshaphat and Jehoram and Ahaziah, his fathers, kings of Judah, had set apart as holy, and his own holy things and all the gold that was found among the treasuries of the house of Yahweh and of the king’s house, and sent them to Hazael king of Aram. Then he went away from Jerusalem.
+19. Now the rest of the acts of Joash and all that he did, are they not written in the Book of the Chronicles of the Kings of Judah?
+20. And his servants arose and made a conspiracy and struck down Joash at the house of Millo as he was going down to Silla.
+21. Now Jozacar the son of Shimeath and Jehozabad the son of Shomer, his servants, struck him and he died; and they buried him with his fathers in the city of David, and Amaziah his son became king in his place.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

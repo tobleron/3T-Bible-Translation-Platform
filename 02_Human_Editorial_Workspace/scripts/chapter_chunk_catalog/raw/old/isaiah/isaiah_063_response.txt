@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "dialogue",
+      "title": "The Warrior from Edom",
+      "reason": "A dialogue between an observer and Yahweh describing His victory over Edom."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Remembrance of Past Deliverance",
+      "reason": "A speech recalling Yahweh's past compassion and deliverance of Israel from Egypt."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Restoration",
+      "reason": "A prayer asking Yahweh to look down from heaven and restore His people."
+    }
+  ]
+}

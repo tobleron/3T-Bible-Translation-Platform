@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "The Covenant Warning",
+      "reason": "Jeremiah delivers Yahweh's message regarding the covenant with Judah and Jerusalem."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "Judgment on Idolatry",
+      "reason": "Yahweh pronounces judgment on the conspiracy and idolatry of Judah using the olive tree metaphor."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 20,
+      "type": "speech",
+      "title": "Jeremiah's Complaint",
+      "reason": "Jeremiah describes his discovery of the plot against him and petitions Yahweh for justice."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Judgment on Anathoth",
+      "reason": "Yahweh declares specific punishment for the men of Anathoth who sought Jeremiah's life."
+    }
+  ]
+}

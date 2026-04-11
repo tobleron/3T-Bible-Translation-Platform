@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "David's Complaint and Question",
+      "reason": "The psalmist addresses his critics' advice to flee and questions the stability of the righteous."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "God's Sovereign Judgment",
+      "reason": "The psalmist declares God's position in heaven and His judgment upon the wicked and righteous."
+    }
+  ]
+}

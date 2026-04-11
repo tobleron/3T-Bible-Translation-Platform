@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 132:1-18
+
+Chapter text:
+1. A Song of Ascents. Remember, O Yahweh, on David’s behalf, All his affliction;
+2. How he swore to Yahweh And vowed to the Mighty One of Jacob,
+3. “Surely I will not come into my house, Nor lie in the comfort of my bed;
+4. I will not give sleep to my eyes Or slumber to my eyelids,
+5. Until I find a place for Yahweh, A dwelling place for the Mighty One of Jacob.”
+6. Behold, we heard of it in Ephrathah, We found it in the fields of Jaar.
+7. Let us come into His dwelling place; Let us worship at the footstool of His feet.
+8. Arise, O Yahweh, to Your resting place, You and the ark of Your strength.
+9. Let Your priests be clothed with righteousness, And let Your holy ones sing for joy.
+10. For the sake of David Your servant, Do not turn away the face of Your anointed.
+11. Yahweh has sworn to David A truth from which He will not turn back: “Of the fruit of your body I will set upon your throne.
+12. If your sons keep My covenant And My testimony which I will teach them, Their sons also shall sit upon your throne forever.”
+13. For Yahweh has chosen Zion; He has desired it for His habitation.
+14. “This is My resting place forever; Here I will inhabit, for I have desired it.
+15. I will abundantly bless her provision; I will satisfy her needy with bread.
+16. Her priests also I will clothe with salvation, And her holy ones will sing loudly for joy.
+17. There I will cause the horn of David to spring up; I have prepared a lamp for Mine anointed.
+18. His enemies I will clothe with shame, But upon him, his crown shall blossom.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

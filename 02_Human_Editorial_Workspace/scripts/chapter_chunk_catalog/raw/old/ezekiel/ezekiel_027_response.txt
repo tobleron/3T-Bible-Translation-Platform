@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Introduction to the Lament",
+      "reason": "The prophet receives the command and begins addressing Tyre directly."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 25,
+      "type": "list_or_catalog",
+      "title": "Description of Tyre's Glory and Trade",
+      "reason": "A detailed catalog of the city's construction materials, military allies, and trading partners."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 34,
+      "type": "speech",
+      "title": "The Sinking of Tyre",
+      "reason": "A description of the shipwreck and the immediate aftermath of the city's destruction."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 36,
+      "type": "speech",
+      "title": "The Reaction of the Nations",
+      "reason": "The final response of the coastlands and merchants to Tyre's fall."
+    }
+  ]
+}

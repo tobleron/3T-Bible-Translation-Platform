@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Famine and Atonement with Gibeonites",
+      "reason": "A complete narrative unit covering the famine, the negotiation with the Gibeonites, the execution of Saul's descendants, Rizpah's vigil, and the burial of Saul and Jonathan."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 22,
+      "type": "list_or_catalog",
+      "title": "Wars Against the Giants",
+      "reason": "A catalog of four distinct battles where David's men defeated specific giants from Gath."
+    }
+  ]
+}

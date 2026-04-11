@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Jehoshaphat's Early Reign and Spiritual Reform",
+      "reason": "Describes Jehoshaphat's succession, military preparations, and initial spiritual reforms driven by Yahweh's favor."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The Teaching Mission",
+      "reason": "Details the sending of officials and Levites to teach the law throughout Judah in the third year of his reign."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Divine Peace and Growing Wealth",
+      "reason": "Narrates the fear of surrounding nations, tribute received from Philistines and Arabians, and Jehoshaphat's increasing prosperity."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "list_or_catalog",
+      "title": "Military Muster of Judah and Benjamin",
+      "reason": "Provides a detailed catalog of commanders and the number of mighty men in Jerusalem and fortified cities."
+    }
+  ]
+}

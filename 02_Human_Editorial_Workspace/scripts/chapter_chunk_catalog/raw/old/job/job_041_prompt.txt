@@ -1,0 +1,83 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 41:1-34
+
+Chapter text:
+1. “Can you draw out Leviathan with a fishhook? Or press down its tongue with a cord?
+2. Can you put a rope in its nose Or pierce its jaw with a hook?
+3. Will it make many supplications to you, Or will he speak to you soft words?
+4. Will it cut a covenant with you? Will you take it for a slave forever?
+5. Will you play with it as with a bird, Or will you bind it for your young women?
+6. Will the traders bargain over it? Will they divide it among the merchants?
+7. Can you fill its skin with harpoons, Or its head with fishing spears?
+8. Place your hand on it; Remember the battle; you will not do that again!
+9. Behold, his expectation is a lie; Will he be laid low even at the sight of it?
+10. No one is so fierce that he dares to arouse it; Who then is he that can stand before Me?
+11. Who has given to Me that I should repay him? Whatever is under the whole heaven is Mine.
+12. “I will not keep silence concerning its limbs, Or its mighty strength or its graceful frame.
+13. Who can strip off its outer armor? Who can come with its doubled bridle?
+14. Who can open the doors of its face? Around its teeth there is dreadful terror.
+15. Its strong scales are its pride, Shut up as with a tight seal.
+16. One is so near to another That no air can come between them.
+17. They cling one to another; They are interlocked and cannot be separated.
+18. Its sneezes flash forth light, And its eyes are like the eyelids of the morning.
+19. Out of its mouth go burning torches; Sparks of fire leap forth.
+20. Out of its nostrils smoke goes forth As from a boiling pot and burning reeds.
+21. Its breath kindles coals, And a flame goes forth from its mouth.
+22. In its neck lodges strength, And dismay leaps before it.
+23. The folds of its flesh cling together, Hardened upon it and is not shaken.
+24. Its heart is as hard as a stone, Even as hard as a lower millstone.
+25. When it raises itself up, the mighty fear, Because of the crashing they are bewildered.
+26. The sword that reaches it cannot avail, Nor the spear, the dart, or the javelin.
+27. It regards iron as straw, Bronze as rotten wood.
+28. The arrow cannot make it flee; Slingstones are turned into stubble for it.
+29. Clubs are regarded as stubble; It laughs at the rattling of the javelin.
+30. Its underparts are like sharp potsherds; It spreads out like a threshing sledge on the mire.
+31. It makes the depths boil like a pot; It makes the sea like a jar of ointment.
+32. Behind it, it makes a wake to shine; One would think the deep to be gray‑haired.
+33. There is nothing upon the dust like it, One made without terror.
+34. It looks on everything that is high; It is king over all the sons of pride.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

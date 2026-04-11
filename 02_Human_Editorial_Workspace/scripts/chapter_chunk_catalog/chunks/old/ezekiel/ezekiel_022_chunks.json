@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T12:28:55Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezekiel",
+  "chapter": 22,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 16,
+      "type": "speech",
+      "title": "Judgment on the City of Blood",
+      "reason": "A unified oracle addressing Jerusalem's guilt and impending exile."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "The Refining of Dross",
+      "reason": "A distinct metaphorical vision describing God's judgment as a refining process."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 31,
+      "type": "speech",
+      "title": "Condemnation of Leaders and People",
+      "reason": "A detailed indictment of specific social classes followed by the final verdict."
+    }
+  ]
+}

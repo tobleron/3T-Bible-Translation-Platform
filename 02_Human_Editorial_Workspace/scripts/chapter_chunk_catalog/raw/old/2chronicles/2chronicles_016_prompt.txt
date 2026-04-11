@@ -1,0 +1,63 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Chronicles 16:1-14
+
+Chapter text:
+1. In the thirty-sixth year of Asa’s reign Baasha king of Israel went up against Judah and built up Ramah in order to prevent anyone from going out or coming in to Asa king of Judah.
+2. Then Asa brought out silver and gold from the treasuries of the house of Yahweh and the king’s house, and sent them to Ben-hadad king of Aram, who lived in Damascus, saying,
+3. “Let there be a covenant between you and me, as between my father and your father. Behold, I have sent you silver and gold; go, break your covenant with Baasha king of Israel so that he will withdraw from me.”
+4. So Ben-hadad listened to King Asa and sent the commanders of his military forces against the cities of Israel, and they struck down Ijon, Dan, Abel-maim, and all the store cities of Naphtali.
+5. Now it happened that when Baasha heard of it, he ceased building up Ramah and stopped his work.
+6. Then King Asa brought all Judah, and they carried away the stones of Ramah and its timber with which Baasha had been building, and with them he built Geba and Mizpah.
+7. Now at that time Hanani the seer came to Asa king of Judah and said to him, “Because you have leaned on the king of Aram and have not leaned on Yahweh your God, therefore the military force of the king of Aram has escaped out of your hand.
+8. Were not the Ethiopians and the Lubim a vast military force with an exceedingly vast number of chariots and horsemen? Yet because you leaned on Yahweh, He gave them into your hand.
+9. For the eyes of Yahweh move to and fro throughout the earth that He may strongly support those whose heart is wholly devoted to Him. You have acted foolishly in this. Indeed, from now on you will surely have wars.”
+10. Then Asa was vexed with the seer and put him in prison, for he was enraged at him for this. And Asa oppressed some of the people at the same time.
+11. Now behold, the acts of Asa from first to last, behold, they are written in the Book of the Kings of Judah and Israel.
+12. And Asa became diseased in his feet in the thirty-ninth year of his reign. His disease was severe, yet even in his disease he did not seek Yahweh, but the physicians.
+13. So Asa slept with his fathers. And he died in the forty-first year of his reign.
+14. And they buried him in his own tomb which he had cut out for himself in the city of David, and they laid him in the resting place which he had filled with spices of various kinds blended by the perfumers’ art; and they made a very great fire for him.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

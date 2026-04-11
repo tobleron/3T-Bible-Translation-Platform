@@ -1,0 +1,57 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 4:1-8
+
+Chapter text:
+1. For the choir director. With stringed instruments. A Psalm of David. Answer me when I call, O God of my righteousness! You have relieved me in my distress; Be gracious to me and hear my prayer.
+2. O sons of men, how long will my glory become a reproach? How long will you love what is worthless and seek falsehood? Selah.
+3. But know that Yahweh has set apart the holy one for Himself; Yahweh hears when I call to Him.
+4. Tremble, and do not sin; Ponder in your heart upon your bed, and be still. Selah.
+5. Offer the sacrifices of righteousness, And trust in Yahweh.
+6. Many are saying, “Who will show us good?” Lift up the light of Your face upon us, O Yahweh!
+7. You have put gladness in my heart, More than when their grain and new wine abound.
+8. In peace I will both lie down and sleep, For You alone, O Yahweh, make me to abide in safety.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

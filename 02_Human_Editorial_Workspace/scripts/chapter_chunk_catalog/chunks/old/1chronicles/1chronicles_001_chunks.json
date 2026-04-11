@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:07:40Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 1,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 54,
+  "verse_count": 54,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 27,
+      "type": "genealogy",
+      "title": "Genealogy from Adam to Abraham",
+      "reason": "Continuous genealogical list tracing the line from Adam through Noah's sons down to Abraham."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 34,
+      "type": "genealogy",
+      "title": "Genealogy of Abraham and Isaac",
+      "reason": "Focuses on the descendants of Abraham through his sons Isaac, Ishmael, and Keturah, concluding with Isaac's sons."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 42,
+      "type": "genealogy",
+      "title": "Genealogy of Esau and Edomites",
+      "reason": "Lists the descendants of Esau (Edom) and the chiefs of the land of Seir."
+    },
+    {
+      "start_verse": 43,
+      "end_verse": 54,
+      "type": "list_or_catalog",
+      "title": "Kings and Chiefs of Edom",
+      "reason": "Catalogs the kings who reigned in Edom before Israel and lists their chiefs."
+    }
+  ]
+}

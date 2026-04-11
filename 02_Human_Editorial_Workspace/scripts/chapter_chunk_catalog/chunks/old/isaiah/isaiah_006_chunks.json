@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T08:33:58Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 13,
+  "verse_count": 13,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "vision",
+      "title": "The Vision and Cleansing",
+      "reason": "Describes Isaiah's vision of God in the temple and his subsequent purification by a seraph."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "dialogue",
+      "title": "The Commissioning",
+      "reason": "Records the dialogue between God and Isaiah regarding the mission to the people."
+    }
+  ]
+}

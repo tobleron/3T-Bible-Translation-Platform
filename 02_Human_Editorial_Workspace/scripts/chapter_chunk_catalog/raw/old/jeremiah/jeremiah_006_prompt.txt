@@ -1,0 +1,79 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 6:1-30
+
+Chapter text:
+1. “Flee for safety, O sons of Benjamin, From the midst of Jerusalem! Now blow a trumpet in Tekoa And raise a signal over Beth‑haccerem, For evil looks down from the north, As well as great destruction.
+2. The comely and delicate one, the daughter of Zion, I will ruin.
+3. Shepherds and their flocks will come to her; They will pitch their tents around her; They will pasture each in his place.
+4. Set yourselves apart for war against her; Arise, and let us go up at noon. Woe to us, for the day declines, For the shadows of the evening stretch out!
+5. Arise, and let us go up by night And destroy her palaces!”
+6. For thus says Yahweh of hosts, “Cut down her trees And cast up a siege against Jerusalem. This is the city to be punished, In whose midst there is only oppression.
+7. Like a well keeps its waters fresh, So she keeps fresh her evil. Violence and devastation are heard in her; Sickness and wounds are continually before Me.
+8. Heed discipline, O Jerusalem, Lest My soul become disgusted at you, Lest I make you a desolation, A land not inhabited.”
+9. Thus says Yahweh of hosts, “They will thoroughly glean as the vine the remnant of Israel; Pass your hand again like a grape gatherer Over the branches.”
+10. To whom shall I speak and give warning That they may hear? Behold, their ears are uncircumcised, And they cannot give heed. Behold, the word of Yahweh has become a reproach to them; They have no delight in it.
+11. But I am full of the wrath of Yahweh; I am weary of holding it in. “Pour it out on the infants in the street And on the gathering of choice men together; For both husband and wife shall be captured, The aged with the one full of days.
+12. Their houses shall be turned over to others, Their fields and their wives together, For I will stretch out My hand Against the inhabitants of the land,” declares Yahweh.
+13. “For from the least of them even to the greatest of them, Everyone is greedy for gain, And from the prophet even to the priest Everyone practices lying.
+14. They have healed the brokenness of My people superficially, Saying, ‘Peace, peace,’ But there is no peace.
+15. Were they ashamed because of the abomination they have done? They were not even ashamed at all; They did not even know how to feel dishonor. Therefore they shall fall among those who fall; At the time that I punish them, They shall be cast down,” says Yahweh.
+16. Thus says Yahweh, “Stand by the ways and see and ask for the ancient paths, Where the good way is, and walk in it; And you will find rest for your souls. But they said, ‘We will not walk in it.’
+17. And I set watchmen over you, saying, ‘Give heed to the sound of the trumpet!’ But they said, ‘We will not give heed.’
+18. Therefore hear, O nations, And know, O congregation, what is among them.
+19. Hear, O earth: behold, I am bringing evil on this people, The fruit of their plans, Because they have not given heed to My words, And as for My law, they have rejected it also.
+20. For what purpose does frankincense come to Me from Sheba And the sweet cane from a distant land? Your burnt offerings are not acceptable, And your sacrifices are not pleasing to Me.”
+21. Therefore, thus says Yahweh, “Behold, I am laying stumbling blocks before this people. And they will stumble against them, Fathers and sons together; Neighbor and friend will perish.”
+22. Thus says Yahweh, “Behold, a people is coming from the land of the north, And a great nation will be aroused from the remote parts of the earth.
+23. They take hold of bow and spear; They are cruel and have no compassion; Their voice roars like the sea, And they ride on horses, Arranged as a man for the battle Against you, O daughter of Zion!”
+24. We have heard the report of it; Our hands are limp. Distress has taken hold of us, Pain as of a woman in childbirth.
+25. Do not go out into the field And do not walk on the road, For the enemy has a sword; Terror is on every side.
+26. O daughter of my people, gird yourself with sackcloth And roll in ashes; Mourn as for an only son, A lamentation most bitter. For suddenly the destroyer Will come upon us.
+27. “I have made you a tester of metals and an assayer among My people, That you may know and test their way.”
+28. All of them are rebelliously stubborn, Going about as a slanderer. They are bronze and iron; They, all of them, are corrupt.
+29. The bellows blow fiercely; The lead is consumed by the fire; In vain the refining goes on, But the evil ones are not separated.
+30. They call them rejected silver Because Yahweh has rejected them.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

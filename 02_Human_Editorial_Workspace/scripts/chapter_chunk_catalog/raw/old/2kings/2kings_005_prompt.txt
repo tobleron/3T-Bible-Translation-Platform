@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Kings 5:1-27
+
+Chapter text:
+1. Now Naaman, commander of the army of the king of Aram, was a great man with his master, and highly respected, because by him Yahweh had given salvation to Aram. The man was also a mighty man of valor, but he was a leper.
+2. Now the Arameans had gone out in marauding bands and had taken captive a little girl from the land of Israel; and she waited on Naaman’s wife.
+3. And she said to her mistress, “I wish that my master were before the prophet who is in Samaria! Then he would cure him of his leprosy.”
+4. Then Naaman went in and told his master, saying, “Thus and thus spoke the girl who is from the land of Israel.”
+5. Then the king of Aram said, “Go now, and I will send a letter to the king of Israel.” So he went and took in his hand ten talents of silver and six thousand shekels of gold and ten changes of clothes.
+6. And he brought the letter to the king of Israel, saying, “So now as this letter comes to you, behold, I have sent Naaman my servant to you, that you may cure him of his leprosy.”
+7. Now it happened that when the king of Israel read the letter, he tore his clothes and said, “Am I God, to put to death and to make alive, that this man is sending word to me to cure a man of his leprosy? But know now, and see how he is seeking a quarrel against me.”
+8. Now it happened when Elisha the man of God heard that the king of Israel had torn his clothes, that he sent word to the king, saying, “Why have you torn your clothes? Now let him come to me, and he shall know that there is a prophet in Israel.”
+9. So Naaman came with his horses and his chariots and stood at the doorway of the house of Elisha.
+10. And Elisha sent a messenger to him, saying, “Go and wash in the Jordan seven times, and your flesh will be restored to you and you will be clean.”
+11. But Naaman was furious and went away and said, “Behold, I said to myself, ‘He will surely come out to me and stand and call on the name of Yahweh his God, and wave his hand over the place and cure the leper.’
+12. Are not Abanah and Pharpar, the rivers of Damascus, better than all the waters of Israel? Could I not wash in them and be clean?” So he turned and went away in wrath.
+13. Then his servants approached and spoke to him and said, “My father, had the prophet spoken with you to do some great thing, would you not have done it? How much more then, when he says to you, ‘Wash, and be clean’?”
+14. So he went down and dipped himself seven times in the Jordan, according to the word of the man of God; and his flesh was restored like the flesh of a young boy and he was clean.
+15. Then he returned to the man of God with all his camp, and came and stood before him, and said, “Behold now, I know that there is no God in all the earth, but in Israel; so now please take a blessing from your servant.”
+16. But he said, “As Yahweh lives, before whom I stand, I will take nothing.” And he urged him to take it, but he refused.
+17. So Naaman said, “If not, please let your servant at least be given two mules’ load of earth; for your servant will no longer offer burnt offering nor will he sacrifice to other gods, but to Yahweh.
+18. In this matter may Yahweh pardon your servant: when my master goes into the house of Rimmon to worship there, and he leans on my hand and I bow myself in the house of Rimmon, when I bow myself in the house of Rimmon, Yahweh pardon your servant in this matter.”
+19. And he said to him, “Go in peace.” So he went from him some distance.
+20. Then Gehazi, the young man of Elisha the man of God, said to himself, “Behold, my master has spared this Naaman the Aramean, by not receiving from his hands what he brought. As Yahweh lives, I will run after him and take something from him.”
+21. So Gehazi pursued Naaman. And Naaman saw one running after him, so he came down from the chariot to meet him and said, “Is all at peace?”
+22. And he said, “All is at peace. My master has sent me, saying, ‘Behold, just now two young men of the sons of the prophets have come to me from the hill country of Ephraim. Please give them a talent of silver and two changes of clothes.’”
+23. Then Naaman said, “Be pleased to take two talents.” And he urged him and bound two talents of silver in two bags with two changes of clothes and gave them to two of his young men; and they carried them before him.
+24. So he came to the hill, and he took them from their hand and deposited them in the house. Then he sent the men away, and they departed.
+25. But he came in and stood before his master. And Elisha said to him, “Where have you been, Gehazi?” And he said, “Your servant went nowhere.”
+26. Then he said to him, “Did not my heart go with you, when the man turned from his chariot to meet you? Is it a time to receive money and to receive clothes and olive groves and vineyards and sheep and oxen and male and female slaves?
+27. Thus the leprosy of Naaman shall cling to you and to your seed forever.” So he went out from his presence a leper as white as snow.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

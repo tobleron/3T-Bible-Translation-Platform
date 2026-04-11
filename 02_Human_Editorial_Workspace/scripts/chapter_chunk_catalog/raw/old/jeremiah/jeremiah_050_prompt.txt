@@ -1,0 +1,95 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 50:1-46
+
+Chapter text:
+1. The word which Yahweh spoke concerning Babylon, the land of the Chaldeans, by the hand of Jeremiah the prophet:
+2. “Declare and make it heard among the nations. Make it heard and lift up a standard. Do not conceal it but say, ‘Babylon has been captured; Bel has been put to shame; Marduk has been shattered; Her images have been put to shame; her idols have been shattered.’
+3. For a nation has come up against her out of the north; it will make her land an object of horror, and there will be no inhabitant in it. Both man and beast have wandered off; they have gone away!
+4. “In those days and at that time,” declares Yahweh, “the sons of Israel will come, both they and the sons of Judah as well; they will go along weeping as they go, and it will be Yahweh their God they will seek.
+5. They will ask for the way to Zion—turning their faces in its direction and saying, ‘Come!’—in order that they may join themselves to Yahweh in an everlasting covenant that will not be forgotten.
+6. “My people have become lost sheep; Their shepherds have led them astray. They have made them turn away on the mountains; They have gone along from mountain to hill And have forgotten their resting place.
+7. All who came out against them have devoured them; And their adversaries have said, ‘We are not guilty, Inasmuch as they have sinned against Yahweh, who is the abode of righteousness, Even Yahweh, the hope of their fathers.’
+8. “Wander away from the midst of Babylon And go forth from the land of the Chaldeans; Be also like male goats at the head of the flock.
+9. For behold, I am going to arouse and bring up against Babylon An assembly of great nations from the land of the north, And they will arrange their battle lines against her; From there she will be taken captive. Their arrows will be like a warrior who makes one childless Who does not return empty‑handed.
+10. Chaldea will become spoil; All who take her spoil will have enough,” declares Yahweh.
+11. “Because you are glad, because you exult, O you who plunder My inheritance, Because you skip about like a threshing heifer And neigh like valiant steeds,
+12. Your mother will be greatly ashamed; She who gave you birth will be humiliated. Behold, she will be the least of the nations, A wilderness, a parched land, and a desert.
+13. Because of the wrath of Yahweh she will not be inhabited, But she will be completely desolate; Everyone who passes by Babylon will be in desolation And will hiss because of all her wounds.
+14. Arrange your battle lines against Babylon on every side, All you who bend the bow; Shoot at her, do not be sparing with your arrows, For she has sinned against Yahweh.
+15. Raise a loud shout against her on every side! She has given herself up, her pillars have fallen, Her walls have been pulled down. For this is the vengeance of Yahweh: Take vengeance on her; As she has done to others, so do to her.
+16. Cut off the sower from Babylon And the one who seizes the sickle at the time of harvest; From before the sword of the oppressor They will each turn back to his own people, And they will each flee to his own land.
+17. “Israel is a scattered flock; the lions have banished them away. The first one who devoured him was the king of Assyria, and this last one who has broken his bones is Nebuchadnezzar king of Babylon.
+18. Therefore thus says Yahweh of hosts, the God of Israel: ‘Behold, I am going to punish the king of Babylon and his land, just as I punished the king of Assyria.
+19. And I will return Israel back to his pasture, and he will graze on Carmel and Bashan, and his desire will be satisfied in the hill country of Ephraim and Gilead.
+20. In those days and at that time,’ declares Yahweh, ‘search will be made for the iniquity of Israel, but there will be none; and for the sins of Judah, but they will not be found; for I will pardon those whom I leave as a remnant.’
+21. “Against the land of Merathaim, go up against it, And against the inhabitants of Pekod. Put them to the sword and devote them to destruction,” declares Yahweh, “And do according to all that I have commanded you.
+22. The noise of battle is in the land, And great destruction.
+23. How the hammer of the whole earth Has been cut in pieces and broken! How Babylon has become An object of horror among the nations!
+24. I set a snare for you, and you were also caught, O Babylon, But you yourself did not know; You have been found and also seized Because you have engaged in conflict with Yahweh.”
+25. Yahweh has opened His armory And has brought forth the weapons of His indignation, For it is a work of Lord Yahweh of hosts In the land of the Chaldeans.
+26. Come to her from the farthest border; Open up her barns; Pile her up like heaps, And devote her to destruction; Let nothing of her remain.
+27. Put all her young bulls to the sword; Let them go down to the slaughter! Woe be upon them, for their day has come, The time of their punishment.
+28. There is a sound of those who flee and escape from the land of Babylon, To declare in Zion the vengeance of Yahweh our God, Vengeance for His temple.
+29. “Summon many against Babylon, All those who bend the bow: Encamp against her on every side, Let there be no escape. Repay her according to her work; According to all that she has done, so do to her; For she has become arrogant against Yahweh, Against the Holy One of Israel.
+30. Therefore her young men will fall in her open squares, And all her men of war will be silenced in that day,” declares Yahweh.
+31. “Behold, I am against you, O arrogant one,” Declares Lord Yahweh of hosts, “For your day has come, The time when I will punish you.
+32. The arrogant one will stumble and fall With no one to raise him up; And I will set fire to his cities, And it will devour him on every side.”
+33. Thus says Yahweh of hosts, “The sons of Israel are oppressed, And the sons of Judah as well; And all who took them captive have held them fast; They have refused to let them go.
+34. Their Redeemer is strong, Yahweh of hosts is His name; He will vigorously plead their case So that He may bring relief to the earth, But turmoil to the inhabitants of Babylon.
+35. A sword against the Chaldeans,” declares Yahweh, “And against the inhabitants of Babylon And against her officials and her wise men!
+36. A sword against the oracle priests, and they will become fools! A sword against her mighty men, and they will be shattered!
+37. A sword against their horses and against their chariots And against all the foreigners who are in the midst of her, And they will become women! A sword against her treasures, and they will be plundered!
+38. A drought on her waters, and they will be dried up! For it is a land of graven images, And they are mad over terrifying idols.
+39. “Therefore the desert creatures will live there along with the jackals; The ostriches also will live in it, And it will never again be lived in Or dwelt in from generation to generation.
+40. As when God overthrew Sodom And Gomorrah with its neighbors,” declares Yahweh, “No man will live there, Nor will any son of man sojourn in it.
+41. “Behold, a people is coming from the north, And a great nation and many kings Will be aroused from the remote parts of the earth.
+42. They seize their bow and javelin; They are cruel and have no compassion. Their voice roars like the sea; And they ride on horses, Arranged like a man for the battle Against you, O daughter of Babylon.
+43. The king of Babylon has heard the report about them, And his hands hang limp; Distress has taken hold of him, Agony like a woman in childbirth.
+44. “Behold, one will come up like a lion from the thicket of the Jordan to an enduring pasture; for in an instant I will make them run away from it, and whoever is chosen I will appoint over it. For who is like Me, and who will summon Me into court? And who then is the shepherd who can stand before Me?”
+45. Therefore hear the counsel of Yahweh which He has counseled against Babylon, and His purposes which He has purposed against the land of the Chaldeans: surely they will drag them off, even the little ones of the flock; surely He will make their pasture desolate because of them.
+46. At the sound, “Babylon has been seized!” the earth is shaken, and an outcry is heard among the nations.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

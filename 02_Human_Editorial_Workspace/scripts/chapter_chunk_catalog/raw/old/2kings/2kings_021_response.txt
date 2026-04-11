@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Reign and Idolatry of Manasseh",
+      "reason": "Describes the reign, specific idolatrous acts, and the resulting spiritual decline of Judah under Manasseh."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "Oracle Against Jerusalem",
+      "reason": "Contains the prophetic declaration of judgment delivered by Yahweh through the prophets."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Manasseh's Death and Succession",
+      "reason": "Details Manasseh's bloodshed, his burial, and the accession of his son Amon."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Reign and Death of Amon",
+      "reason": "Chronicles the brief reign of Amon, his assassination, and the rise of Josiah."
+    }
+  ]
+}

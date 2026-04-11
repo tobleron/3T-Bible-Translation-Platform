@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "The Woman Restores Her Property",
+      "reason": "A complete narrative unit where the woman returns from exile and regains her estate through Elisha's servant."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 15,
+      "type": "dialogue",
+      "title": "Elisha and Hazael in Damascus",
+      "reason": "A continuous dialogue sequence involving the sick king, Hazael's visit, Elisha's prophecy, and Hazael's accession."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 24,
+      "type": "mixed",
+      "title": "Reign of Joram of Judah",
+      "reason": "A historical summary covering the reign, character, military failures, and death of King Joram."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 29,
+      "type": "mixed",
+      "title": "Reign of Ahaziah and War at Ramoth-gilead",
+      "reason": "A narrative block detailing the short reign of Ahaziah and the joint military campaign against Aram."
+    }
+  ]
+}

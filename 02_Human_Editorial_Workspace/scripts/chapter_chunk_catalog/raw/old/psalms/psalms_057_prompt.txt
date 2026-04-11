@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 57:1-11
+
+Chapter text:
+1. For the choir director. Al-tashheth. Of David. A Mikhtam. When he fled from Saul in the cave. Be gracious to me, O God, be gracious to me, For my soul takes refuge in You; And in the shadow of Your wings I will take refuge Until destruction passes by.
+2. I will call to God Most High, To God who accomplishes all things for me.
+3. He will send from heaven and save me; He reproaches him who tramples upon me. Selah. God will send His lovingkindness and His truth.
+4. My soul is among lions; I am lying down among those who breathe forth fire, Sons of men whose teeth are spears and arrows And their tongue a sharp sword.
+5. Be exalted above the heavens, O God; Let Your glory be above all the earth.
+6. They have set a net for my steps; My soul is bowed down; They dug a pit before me; They themselves have fallen into the midst of it. Selah.
+7. My heart is set, O God, my heart is set; I will sing, yes, I will sing praises!
+8. Awake, my glory! Awake, harp and lyre! I will awaken the dawn.
+9. I will give thanks to You, O Lord, among the peoples; I will sing praises to You among the nations.
+10. For Your lovingkindness is great to the heavens And Your truth to the skies.
+11. Be exalted above the heavens, O God; Let Your glory be above all the earth.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 27,
+      "type": "list_or_catalog",
+      "title": "Signatories to the Covenant",
+      "reason": "A continuous list of priests, Levites, and heads of people who sealed the document."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 39,
+      "type": "law",
+      "title": "The Covenant Oath and Regulations",
+      "reason": "A unified section detailing the collective oath and specific legal stipulations regarding marriage, sabbaths, tithes, and temple service."
+    }
+  ]
+}

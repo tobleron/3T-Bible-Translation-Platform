@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "argument",
+      "title": "God's Foreknowledge and Refinement",
+      "reason": "Yahweh argues that He declared future events to prove His sovereignty and refine Israel despite their stubbornness."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 16,
+      "type": "speech",
+      "title": "The Servant's Mission",
+      "reason": "A distinct speech where the Servant speaks of being sent by Yahweh to execute judgment on Babylon."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 19,
+      "type": "law",
+      "title": "The Blessing of Obedience",
+      "reason": "A conditional promise outlining the blessings of peace and progeny if Israel had kept God's commandments."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 21,
+      "type": "exhortation",
+      "title": "Call to Depart Babylon",
+      "reason": "A direct call for the people to leave Babylon and proclaim God's redemption, referencing the wilderness journey."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "Conclusion on the Wicked",
+      "reason": "A final prophetic statement contrasting the peace of the redeemed with the lack thereof for the wicked."
+    }
+  ]
+}

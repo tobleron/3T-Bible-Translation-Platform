@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "argument",
+      "title": "Human Plans and Divine Sovereignty",
+      "reason": "A cohesive argument contrasting human planning with God's ultimate direction of steps."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 15,
+      "type": "list_or_catalog",
+      "title": "Wisdom for Kings and Rulers",
+      "reason": "A collection of proverbs specifically addressing the conduct and judgment of kings."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 24,
+      "type": "exhortation",
+      "title": "The Value of Wisdom and Speech",
+      "reason": "An exhortation to pursue wisdom over gold and the power of wise speech."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 30,
+      "type": "list_or_catalog",
+      "title": "The Wicked and Their Ways",
+      "reason": "A series of warnings describing the deceptive and destructive nature of the wicked."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 33,
+      "type": "mixed",
+      "title": "Righteousness and Divine Control",
+      "reason": "Concluding verses on the honor of age, self-control, and God's sovereignty over chance."
+    }
+  ]
+}

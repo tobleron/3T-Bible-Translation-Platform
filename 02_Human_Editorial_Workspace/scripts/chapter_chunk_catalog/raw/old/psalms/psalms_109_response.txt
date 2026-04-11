@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Complaint Against Enemies",
+      "reason": "The psalmist describes the wicked words and hatred of his accusers."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Curse on the Accuser",
+      "reason": "A detailed series of judgments and curses pronounced against the enemy."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 31,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Deliverance and Praise",
+      "reason": "The psalmist appeals to God's name for help and promises future praise."
+    }
+  ]
+}

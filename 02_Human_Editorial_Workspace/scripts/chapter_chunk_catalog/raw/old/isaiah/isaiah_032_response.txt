@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Righteous King and Noble Men",
+      "reason": "Describes the future righteous reign and contrasts noble plans with wicked schemes."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Judgment on Complacent Women",
+      "reason": "Direct address to women urging them to mourn the coming desolation of the city."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "vision",
+      "title": "Restoration and Blessing",
+      "reason": "Prophesies the outpouring of the Spirit, transformation of the land, and final blessing on the people."
+    }
+  ]
+}

@@ -11,9 +11,11 @@ To use multiple source translations and original Greek/Hebrew texts (via LLMs) t
 ## 2. Infrastructure & LLM Setup
 The project has been migrated from Ollama to **llama.cpp** for improved local performance and control.
 
-*   **Primary Endpoint:** `http://192.168.1.186:8080`
-*   **Client Logic:** Located in `01_AI_Translation_Engine/llm_clients.py`. 
-*   **Configuration:** The scripts are configured to use the `/completion` endpoint of llama.cpp, allowing for streaming output directly in the terminal.
+*   **Primary Endpoint:** `http://192.168.1.186:8081/v1` (via auth proxy)
+*   **Authentication:** Requires an API key. Set the `TTT_LLAMA_CPP_API_KEY` environment variable.
+*   **Client Logic:** Located in `ttt_core/llm/llama_cpp.py` (unified) and `01_AI_Translation_Engine/llm_clients.py`. 
+*   **Configuration:** The scripts are configured to use the `/completion` or `/v1/completions` endpoint of llama.cpp.
+
 
 ---
 

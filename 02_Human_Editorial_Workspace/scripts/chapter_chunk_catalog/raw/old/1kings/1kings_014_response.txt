@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Jeroboam's Wife Visits Ahijah",
+      "reason": "A complete narrative unit covering the wife's journey, the prophecy, and the child's death."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 20,
+      "type": "mixed",
+      "title": "Summary of Jeroboam's Reign",
+      "reason": "Concludes the narrative of Jeroboam with historical summary and succession details."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 30,
+      "type": "mixed",
+      "title": "Rehoboam's Reign and Egypt Invasion",
+      "reason": "A continuous historical account detailing Rehoboam's reign, Judah's apostasy, and the Egyptian invasion."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 31,
+      "type": "mixed",
+      "title": "Conclusion of Rehoboam's Reign",
+      "reason": "Final summary verse covering burial and succession for Rehoboam."
+    }
+  ]
+}

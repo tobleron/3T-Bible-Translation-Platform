@@ -1,0 +1,68 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 1:1-19
+
+Chapter text:
+1. The words of Jeremiah the son of Hilkiah, of the priests who were in Anathoth in the land of Benjamin,
+2. to whom the word of Yahweh came in the days of Josiah the son of Amon, king of Judah, in the thirteenth year of his reign.
+3. And it came in the days of Jehoiakim the son of Josiah, king of Judah, until the end of the eleventh year of Zedekiah the son of Josiah, king of Judah, until the exile of Jerusalem in the fifth month.
+4. Now the word of Yahweh came to me saying,
+5. “Before I formed you in the innermost parts I knew you, And before you came out from the womb I set you apart; I have given you as a prophet to the nations.”
+6. Then I said, “Alas, Lord Yahweh! Behold, I do not know how to speak Because I am a youth.”
+7. But Yahweh said to me, “Do not say, ‘I am a youth,’ Because everywhere I send you, you shall go, And all that I command you, you shall speak.
+8. Do not be afraid of them, For I am with you to deliver you,” declares Yahweh.
+9. Then Yahweh sent forth His hand and touched my mouth, and Yahweh said to me, “Behold, I have put My words in your mouth.
+10. See, I have appointed you this day over the nations and over the kingdoms, To uproot and to tear down, To cause to perish and to pull down, To build and to plant.”
+11. Now the word of Yahweh came to me saying, “What do you see, Jeremiah?” And I said, “I see a rod of an almond tree.”
+12. Then Yahweh said to me, “You have seen well, for I am watching over My word to do it.”
+13. The word of Yahweh came to me a second time saying, “What do you see?” And I said, “I see a boiling pot, facing away from the north.”
+14. Then Yahweh said to me, “From the north the evil will break open on all the inhabitants of the land.
+15. For, behold, I am calling all the families of the kingdoms of the north,” declares Yahweh; “and they will come, and each one of them will put his throne at the opening of the gates of Jerusalem, and against all its walls round about and against all the cities of Judah.
+16. I will speak My judgments on them concerning all their evil, whereby they have forsaken Me and have burned incense to other gods and worshiped the works of their own hands.
+17. Now, gird up your loins and arise and speak to them all which I command you. Do not be dismayed before them, lest I dismay you before them.
+18. Now behold, I have given you today as a fortified city and as a pillar of iron and as walls of bronze against the whole land, to the kings of Judah, to its princes, to its priests, and to the people of the land.
+19. And they will fight against you, but they will not overcome you, for I am with you to deliver you,” declares Yahweh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

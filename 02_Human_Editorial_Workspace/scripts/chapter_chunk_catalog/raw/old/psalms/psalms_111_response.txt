@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "blessing_or_prayer",
+      "title": "Praise for God's Works",
+      "reason": "Introduction and declaration of the greatness and majesty of Yahweh's works."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 9,
+      "type": "list_or_catalog",
+      "title": "Catalog of God's Deeds",
+      "reason": "A detailed listing of specific acts of redemption, covenant faithfulness, and provision."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 10,
+      "type": "exhortation",
+      "title": "The Fear of the Lord",
+      "reason": "A concluding wisdom statement defining the beginning of wisdom and its enduring nature."
+    }
+  ]
+}

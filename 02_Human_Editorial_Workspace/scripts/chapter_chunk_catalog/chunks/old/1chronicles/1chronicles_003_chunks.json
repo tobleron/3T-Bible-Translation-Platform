@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:10:52Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 3,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 24,
+  "verse_count": 24,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "genealogy",
+      "title": "Sons of David in Hebron and Jerusalem",
+      "reason": "Lists the sons born to David in Hebron and Jerusalem, including their mothers."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Kings of Judah from Solomon to Jeconiah",
+      "reason": "Traces the royal line from Solomon through Rehoboam to the exile under Jeconiah."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 24,
+      "type": "genealogy",
+      "title": "Descendants of Jeconiah Post-Exile",
+      "reason": "Details the lineage from Jeconiah through Zerubbabel to later generations."
+    }
+  ]
+}

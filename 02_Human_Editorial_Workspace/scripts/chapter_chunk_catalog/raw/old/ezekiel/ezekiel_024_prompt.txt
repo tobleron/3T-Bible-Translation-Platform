@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezekiel 24:1-27
+
+Chapter text:
+1. And the word of Yahweh came to me in the ninth year, in the tenth month, on the tenth of the month, saying,
+2. “Son of man, write the name of the day, this very day. The king of Babylon has laid siege to Jerusalem this very day.
+3. Speak a parable to the rebellious house, and you shall say to them, ‘Thus says Lord Yahweh, “Put on the pot, put it on and also pour water in it;
+4. Put in it the pieces, Every good piece, the thigh and the shoulder; Fill it with choice bones.
+5. Take the choicest of the flock, And also pile wood under the pot. Make it seethe vigorously. Also boil its bones in it.”
+6. ‘Therefore, thus says Lord Yahweh, “Woe to the city of blood, To the pot in which there is rust And whose rust has not gone out of it! Take out of it piece after piece, Without making a choice.
+7. For her blood is in her midst; She placed it on the bare rock; She did not pour it on the ground To cover it with dust.
+8. That it may cause wrath to come up to take vengeance, I have put her blood on the bare rock, That it may not be covered.”
+9. Therefore, thus says Lord Yahweh, “Woe to the city of blood! I also will make the pile great.
+10. Heap on the wood, kindle the fire, Completely cook the flesh And mix in the spices And let the bones be burned.
+11. Then stand it empty on its coals So that it may be hot And its bronze may glow And its uncleanness may be melted in it, Its rust brought to a complete end.
+12. She has wearied Me with toil, Yet her great rust has not gone from her; Let her rust be in the fire!
+13. In your uncleanness is lewdness. Because I would have cleansed you, Yet you are not clean; You will not be cleansed from your uncleanness again Until I have caused My wrath against you to be at rest.
+14. I, Yahweh, have spoken; it is coming, and I will act. I will not regret, and I will not pity, and I will not relent; according to your ways and according to your deeds I will judge you,” declares Lord Yahweh.’”
+15. And the word of Yahweh came to me saying,
+16. “Son of man, behold, I am about to take from you the desire of your eyes with a blow; but you shall not mourn, and you shall not weep, and your tears shall not come.
+17. Groan silently; make no mourning for the dead. Bind on your headdress and put your shoes on your feet and do not cover your mustache and do not eat the bread of men.”
+18. So I spoke to the people in the morning, and in the evening my wife died. And in the morning I did as I was commanded.
+19. The people said to me, “Will you not tell us what these things that you are doing mean for us?”
+20. Then I said to them, “The word of Yahweh came to me saying,
+21. ‘Say to the house of Israel, “Thus says Lord Yahweh, ‘Behold, I am about to profane My sanctuary, the pride of your strength, the desire of your eyes, and the delight of your soul; and your sons and your daughters whom you have left behind will fall by the sword.
+22. And you will do as I have done; you will not cover your mustache, and you will not eat the bread of men.
+23. And your headdresses will be on your heads and your shoes on your feet. You will not mourn, and you will not weep, but you will rot away in your iniquities, and you will groan to one another.
+24. Thus Ezekiel will be a wondrous sign to you; according to all that he has done you will do; when it comes, then you will know that I am Lord Yahweh.’”
+25. ‘Now as for you, son of man, will it not be on the day when I take from them their strong defense, the joy of their beauty, the desire of their eyes, and what lifts up their soul, their sons and their daughters,
+26. that on that day he who escapes will come to you with a report for your ears?
+27. On that day your mouth will be opened to him who escaped, and you will speak and be mute no longer. Thus you will be a wondrous sign to them, and they will know that I am Yahweh.’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

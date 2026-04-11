@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "list_or_catalog",
+      "title": "Wisdom and Folly in Speech",
+      "reason": "A collection of proverbs contrasting the speech and behavior of fools with sound wisdom."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 14,
+      "type": "mixed",
+      "title": "Strength in God and the Human Spirit",
+      "reason": "Verses on the security of Yahweh's name, the delusion of wealth, and the endurance of the spirit."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "argument",
+      "title": "The Pursuit and Power of Knowledge",
+      "reason": "A logical progression on acquiring knowledge, the influence of gifts, legal disputes, and the fruit of speech."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 24,
+      "type": "mixed",
+      "title": "Life, Marriage, and Friendship",
+      "reason": "Concluding proverbs on the power of the tongue, the blessing of a wife, social dynamics, and true friendship."
+    }
+  ]
+}

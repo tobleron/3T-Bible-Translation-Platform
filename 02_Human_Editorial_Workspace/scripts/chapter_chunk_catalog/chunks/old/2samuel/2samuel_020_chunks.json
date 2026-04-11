@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T23:47:48Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Samuel",
+  "chapter": 20,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 26,
+  "verse_count": 26,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Sheba's Rebellion",
+      "reason": "Describes the start of Sheba's revolt and the division between Israel and Judah."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David's Actions at Jerusalem",
+      "reason": "Narrates David's treatment of his concubines and the delay in Amasa gathering troops."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Pursuit of Sheba and Death of Amasa",
+      "reason": "Details the chase for Sheba and Joab's ambush and killing of Amasa."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Siege of Abel Beth-Maacah",
+      "reason": "Covers the siege, the wise woman's negotiation with Joab, and Sheba's execution."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 26,
+      "type": "list_or_catalog",
+      "title": "David's Officials",
+      "reason": "Lists the key administrative and military leaders serving King David."
+    }
+  ]
+}

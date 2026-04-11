@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T23:54:07Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Samuel",
+  "chapter": 24,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 25,
+  "verse_count": 25,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The Census Ordered and Completed",
+      "reason": "Describes the narrative of David ordering the census, Joab's objection, the execution of the count across Israel, and the final report."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 17,
+      "type": "mixed",
+      "title": "David's Repentance and the Plague",
+      "reason": "Combines David's internal conviction, his prayer for forgiveness, God's oracle through Gad offering three choices, David's selection of divine mercy, and the onset of the plague ending at Araunah's threshing floor."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 25,
+      "type": "story",
+      "title": "The Altar on Araunah's Threshing Floor",
+      "reason": "Narrates the instruction to build an altar, the interaction between David and Araunah regarding the purchase of the land and oxen, and the final offering that stops the plague."
+    }
+  ]
+}

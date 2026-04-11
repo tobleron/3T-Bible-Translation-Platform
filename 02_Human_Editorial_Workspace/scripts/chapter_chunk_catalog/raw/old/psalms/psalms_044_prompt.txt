@@ -1,0 +1,75 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 44:1-26
+
+Chapter text:
+1. For the choir director. Of the sons of Korah. A Maskil. O God, we have heard with our ears, Our fathers have recounted to us The work that You did in their days, In the days of old.
+2. You with Your own hand dispossessed the nations; Then You planted them; You afflicted the peoples, Then You cast them out.
+3. For by their own sword they did not possess the land, And their own arm did not save them, But Your right hand and Your arm and the light of Your presence, For You favored them.
+4. You are my King, O God; Command salvation for Jacob.
+5. Through You we will push back our adversaries; Through Your name we will tread down those who rise up against us.
+6. For I will not trust in my bow, And my sword will not save me.
+7. But You have saved us from our adversaries, And You have put to shame those who hate us.
+8. In God we have boasted all day long, And we will give thanks to Your name forever. Selah.
+9. Yet You have rejected us and brought us to dishonor, And do not go out with our armies.
+10. You cause us to turn back from the adversary; And those who hate us have plundered us for themselves.
+11. You give us as sheep to be eaten And have scattered us among the nations.
+12. You sell Your people for no amount, And You have not profited from their price.
+13. You make us a reproach to our neighbors, A mockery and a derision to those around us.
+14. You make us a byword among the nations, A laughingstock among the peoples.
+15. All day long my dishonor is before me And the shame of my face has covered me,
+16. Because of the voice of him who reproaches and reviles, Because of the presence of the enemy and the avenger.
+17. All this has come upon us, but we have not forgotten You, And we have not dealt falsely with Your covenant.
+18. Our heart has not turned back, Nor have our steps deviated from Your path,
+19. Yet You have crushed us in a place of jackals And covered us with the shadow of death.
+20. If we had forgotten the name of our God Or spread our hands to a strange god,
+21. Would not God find this out? For He knows the secrets of the heart.
+22. But for Your sake we are killed all day long; We are counted as sheep for the slaughter.
+23. Arouse Yourself, why do You sleep, O Lord? Awake, do not reject us forever.
+24. Why do You hide Your face And forget our affliction and our oppression?
+25. For our soul has sunk down into the dust; Our body cleaves to the earth.
+26. Rise up, be our help, And redeem us for the sake of Your lovingkindness.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 29:1-27
+
+Chapter text:
+1. A man who hardens his neck after much reproof Will suddenly be broken beyond healing.
+2. When the righteous increase, the people are glad, But when a wicked man rules, people groan.
+3. A man who loves wisdom makes his father glad, But he who befriends harlots destroys his wealth.
+4. By justice the king causes the land to stand, But a man of bribes tears it down.
+5. A man who flatters his neighbor Is spreading a net for his steps.
+6. By transgression an evil man is ensnared, But the righteous sings with joy and is glad.
+7. The righteous knows the cause of the poor, The wicked does not understand that knowledge.
+8. Scoffers set a city aflame, But wise men turn away anger.
+9. When a wise man is brought into judgment with a man who is an ignorant fool, The ignorant fool both rages and laughs, and there is no rest.
+10. Men of bloodshed hate the blameless, But the upright seek the well‑being of his soul.
+11. A fool lets out all of his spirit, But a wise man holds it back.
+12. If a ruler pays attention to a lying word, All his ministers become wicked.
+13. The poor man and the oppressor meet together in this— Yahweh gives light to the eyes of both.
+14. If a king judges the poor with truth, His throne will be established forever.
+15. The rod and reproof give wisdom, But a child left to himself brings shame to his mother.
+16. When the wicked increase, transgression increases; But the righteous will see their fall.
+17. Discipline your son, and he will give you rest; And he will give delight to your soul.
+18. Where there is no vision, the people are out of control, But how blessed is he who keeps the law.
+19. A slave will not be corrected by words alone; For though he understands, there will be no answer.
+20. Do you behold a man who is hasty in his words? There is more hope for a fool than for him.
+21. He who pampers his slave from childhood Will in the end find him to be arrogant.
+22. An angry man stirs up strife, And a hot‑tempered man abounds in transgression.
+23. A man’s lofty pride will bring him low, But a lowly spirit will take hold of glory.
+24. He who divides the spoil with a thief hates his own soul; He hears the oath but declares nothing.
+25. Trembling before man brings a snare, But he who trusts in Yahweh will be set securely on high.
+26. Many seek the face of a ruler, But justice for man comes from Yahweh.
+27. An unjust man is an abomination to the righteous, And he who is upright in the way is an abomination to the wicked.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

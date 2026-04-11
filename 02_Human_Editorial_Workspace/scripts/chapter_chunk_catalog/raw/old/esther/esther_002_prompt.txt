@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Esther 2:1-23
+
+Chapter text:
+1. After these things when the wrath of King Ahasuerus had subsided, he remembered Vashti and what she had done and what had been decided against her.
+2. Then the young men of the king, who attended to him, said, “Let young virgins, beautiful in appearance, be sought for the king.
+3. And let the king appoint overseers in all the provinces of his kingdom that they may gather every young virgin, beautiful in appearance, to the citadel of Susa, to the harem, into the hand of Hegai, the king’s eunuch, who keeps charge of the women; and let their cosmetics be given to them.
+4. Then let the young lady who is good in the eyes of the king be queen in place of Vashti.” And the word was good in the eyes of the king, and he did so.
+5. Now there was at the citadel in Susa a Jew. And his name was Mordecai, the son of Jair, the son of Shimei, the son of Kish, a Benjamite,
+6. who had been taken away into exile from Jerusalem with the exiles who had been taken away into exile with Jeconiah king of Judah, whom Nebuchadnezzar the king of Babylon had taken away into exile.
+7. And he was bringing up Hadassah, that is Esther, his uncle’s daughter, for she had no father or mother. Now the young lady was beautiful in form and beautiful in appearance, and when her father and her mother died, Mordecai took her as his own daughter.
+8. Now it happened that when the word and law of the king were heard and many young ladies were gathered to the citadel of Susa into the hand of Hegai, that Esther was taken to the king’s house into the hand of Hegai, who kept charge of the women.
+9. And the young lady was good in his eyes, and she advanced in lovingkindness before him. So he hurried to give her cosmetics and portions of food to her, and to give to her seven choice young women from the king’s house. And he transferred her and her young women to the best place in the harem.
+10. Esther did not tell anyone about her people or her kinsmen, for Mordecai had commanded her that she should not tell anyone about them.
+11. And every day Mordecai walked back and forth in front of the court of the harem to know the well-being of Esther and how she fared.
+12. Now when it reached the turn of each young lady to go in to King Ahasuerus, after the end of her twelve months under the regulations for the women—for the days of their cosmetic treatment were fulfilled as follows: six months with oil of myrrh and six months with spices and the cosmetics for women—
+13. then the young lady would go in to the king in this way: anything that she said she desired was given to her to come with her from the harem to the king’s house.
+14. In the evening she would go in, and in the morning she would return to the second harem, to the hand of Shaashgaz, the king’s eunuch who kept charge of the concubines. She would not again go in to the king unless the king delighted in her and she was summoned by name.
+15. Now when it reached the turn of Esther, the daughter of Abihail the uncle of Mordecai who had taken her as his daughter, to go in to the king, she did not seek anything except what Hegai, the king’s eunuch who kept charge of the women, said. And Esther advanced in favor in the eyes of all who saw her.
+16. So Esther was taken to King Ahasuerus to his royal house in the tenth month which is the month Tebeth, in the seventh year of his reign.
+17. And the king loved Esther more than all the women, and she advanced in favor and lovingkindness before him more than all the virgins, so that he set the royal crown on her head and made her queen in place of Vashti.
+18. Then the king held a great feast, Esther’s feast, for all his princes and his servants; he also held a remission of taxes for the provinces and gave gifts according to the king’s hand.
+19. And when the virgins were gathered together the second time, then Mordecai was sitting at the king’s gate.
+20. Esther had not yet told anyone about her kinsmen or her people, just as Mordecai had commanded her; indeed Esther was doing what Mordecai declared that she do, just as she had done when she was being brought up by him.
+21. In those days, while Mordecai was sitting at the king’s gate, Bigthan and Teresh, two of the king’s eunuchs from those who were doorkeepers, became furious and sought to send forth their hand against King Ahasuerus.
+22. But the matter became known to Mordecai, and he told it to Queen Esther, and Esther said it to the king in Mordecai’s name.
+23. Then the matter was sought out and found to be true, so they were both hanged on a gallows; and it was written in the book of the chronicles in the king’s presence.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

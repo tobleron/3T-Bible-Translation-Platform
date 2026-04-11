@@ -1,0 +1,66 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 86:1-17
+
+Chapter text:
+1. A Prayer of David. Incline Your ear, O Yahweh, and answer me; For I am afflicted and needy.
+2. Keep my soul, for I am a holy one; O You my God, save Your slave who trusts in You.
+3. Be gracious to me, O Lord, For to You I call all day long.
+4. Make glad the soul of Your slave, For to You, O Lord, I lift up my soul.
+5. For You, Lord, are good, and by nature forgiving, And abundant in lovingkindness to all who call upon You.
+6. Give ear, O Yahweh, to my prayer; And give heed to the voice of my supplications!
+7. In the day of my distress I shall call upon You, For You will answer me.
+8. There is no one like You among the gods, O Lord, Nor are there any works like Yours.
+9. All nations whom You have made shall come and worship before You, O Lord, And they shall glorify Your name.
+10. For You are great and do wondrous deeds; You alone are God.
+11. Teach me Your way, O Yahweh; I will walk in Your truth; Unite my heart to fear Your name.
+12. I will give thanks to You, O Lord my God, with all my heart, And will glorify Your name forever.
+13. For Your lovingkindness toward me is great, And You have delivered my soul from Sheol below.
+14. O God, arrogant men have risen up against me, And a band of ruthless men have sought my life, And they have not set You before them.
+15. But You, O Lord, are a God compassionate and gracious, Slow to anger and abundant in lovingkindness and truth.
+16. Turn to me, and be gracious to me; Oh grant Your strength to Your slave, And save the son of Your maidservant.
+17. Show me a sign for good, That those who hate me may see it and be ashamed, Because You, O Yahweh, have helped me and comforted me.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

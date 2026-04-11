@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:23:40Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 11,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 47,
+  "verse_count": 47,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "David Anointed King and Captures Jerusalem",
+      "reason": "Narrative of Israel gathering at Hebron to anoint David and the subsequent capture of Zion."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 47,
+      "type": "list_or_catalog",
+      "title": "The Mighty Men of David",
+      "reason": "Catalogue of the thirty mighty men and their deeds following the introduction in verse 10."
+    }
+  ]
+}

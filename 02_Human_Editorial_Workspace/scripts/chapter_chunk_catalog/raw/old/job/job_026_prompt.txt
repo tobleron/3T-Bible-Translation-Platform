@@ -1,0 +1,63 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 26:1-14
+
+Chapter text:
+1. Then Job answered and said,
+2. “What a help you are to the one without power! How you have saved the arm without strength!
+3. What counsel you have given to one without wisdom! What sound wisdom you have abundantly made known!
+4. To whom have you declared words? And whose breath comes out from you?
+5. “The departed spirits tremble Under the waters and their inhabitants.
+6. Naked is Sheol before Him, And Abaddon has no covering.
+7. He stretches out the north over what is formless And hangs the earth on nothing.
+8. He wraps up the waters in His clouds, And the cloud does not break out under them.
+9. He obscures the face of His throne And spreads His cloud over it.
+10. He has marked a circle on the surface of the waters At the boundary of light and darkness.
+11. The pillars of heaven tremble And are astonished at His rebuke.
+12. He quieted the sea with His power, And by His understanding He crushed Rahab.
+13. By His breath the heavens are made beautiful; His hand has pierced the fleeing serpent.
+14. Behold, these are the fringes of His ways; And how only with a whisper of a word do we hear of Him! But His mighty thunder, who can understand?”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

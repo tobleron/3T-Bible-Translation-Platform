@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 23:1-18
+
+Chapter text:
+1. The oracle concerning Tyre. Wail, O ships of Tarshish, For Tyre is destroyed, without house or harbor; It is revealed to them from the land of Cyprus.
+2. Be silent, you inhabitants of the coastland, You merchants of Sidon; Your messengers crossed the sea
+3. And were on many waters. The grain of Shihor, the harvest of the Nile was her revenue; And she was the nations’ gain.
+4. Be ashamed, O Sidon; For the sea speaks, the strong defense of the sea, saying, “I have neither travailed nor given birth; I have neither brought up choice men nor reared virgins.”
+5. When the report reaches Egypt, They will be in travail at the report of Tyre.
+6. Pass over to Tarshish; Wail, O inhabitants of the coastland.
+7. Is this your exultant city, Whose origin is from days of old, Whose feet used to lead her to sojourn in distant places?
+8. Who has counseled this against Tyre, the bestower of crowns, Whose merchants were princes, whose traders were the honored of the earth?
+9. Yahweh of hosts has counseled it, to defile the pride of all beauty, To make contemptuous all the honored of the earth.
+10. Overflow your land like the Nile, O daughter of Tarshish; There is no more restraint.
+11. He has stretched His hand out over the sea; He has made the kingdoms tremble; Yahweh has given a command concerning Canaan to demolish its strong defenses.
+12. So He said, “You shall exult no more, O crushed virgin daughter of Sidon. Arise, pass over to Cyprus; even there you will find no rest.”
+13. Behold, the land of the Chaldeans—this is the people which was not; Assyria established it for desert creatures—they erected their siege towers, they stripped its palaces, they made it a ruin.
+14. Wail, O ships of Tarshish, For your strong defense is destroyed.
+15. Now it will be in that day, that Tyre will be forgotten for seventy years like the days of one king. At the end of seventy years it will happen to Tyre as in the song of the harlot:
+16. Take your harp, walk about the city, O forgotten harlot; Pluck the strings skillfully, sing many songs, That you may be remembered.
+17. And it will be at the end of seventy years that Yahweh will visit Tyre. Then she will go back to her harlot’s wages and will play the harlot with all the kingdoms on the face of the earth.
+18. And her gain and her harlot’s wages will be set apart to Yahweh; it will not be treasured up or hoarded, but her gain will become sufficient food and choice attire for those who inhabit the presence of Yahweh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

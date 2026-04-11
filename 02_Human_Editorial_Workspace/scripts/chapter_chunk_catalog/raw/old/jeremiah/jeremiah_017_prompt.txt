@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 17:1-27
+
+Chapter text:
+1. The sin of Judah is written down with an iron stylus; With a diamond point it is engraved upon the tablet of their heart And on the horns of their altars,
+2. As they remember their children, So they remember their altars and their Asherim By green trees on the high hills.
+3. O mountain of Mine in the countryside, I will give over your wealth and all your treasures for plunder, Your high places for sin throughout your borders.
+4. And you will, even of yourself, let go of your inheritance That I gave you; And I will make you serve your enemies In the land which you do not know, For you have kindled a fire in My anger Which will burn forever.
+5. Thus says Yahweh, “Cursed is the man who trusts in mankind And makes flesh his strength, And whose heart turns away from Yahweh.
+6. And he will be like a juniper in the desert And will not see when prosperity comes, But will dwell in stony wastes in the wilderness, A land of salt which is not inhabited.
+7. Blessed is the man who trusts in Yahweh And whose trust is Yahweh.
+8. And he will be like a tree planted by the water, That sends forth its roots by a stream And will not fear when the heat comes; But its leaves will be green, And it will not be anxious in a year of drought Nor refrain from yielding fruit.
+9. “The heart is more deceitful than all else And is desperately sick; Who can know it?
+10. I, Yahweh, search the heart; I test the inmost being, Even to give to each man according to his ways, According to the fruit of his deeds.
+11. As a partridge that hatches eggs which it has not laid, So is he who makes a fortune, but unjustly; In the midst of his days it will forsake him, And in the end he will be a wicked fool.”
+12. A glorious throne on high from the beginning Is the place of our sanctuary.
+13. O Yahweh, the hope of Israel, All who forsake You will be put to shame. Those who turn away on earth will be written down Because they have forsaken the fountain of living water, even Yahweh.
+14. Heal me, O Yahweh, and I will be healed; Save me and I will be saved, For You are my praise.
+15. Behold, they keep saying to me, “Where is the word of Yahweh? Let it come now!”
+16. But as for me, I have not hurried away from being a shepherd after You, Nor have I longed for the sickening day; You Yourself know that the utterance of my lips Was in Your presence.
+17. Do not be a terror to me; You are my refuge in the day of calamity.
+18. Let those who pursue me be put to shame, but as for me, let me not be put to shame; Let them be dismayed, but let me not be dismayed. Bring on them a day of calamity, And crush them with twofold crushing!
+19. Thus Yahweh said to me, “Go and stand in the public gate, through which the kings of Judah come in and go out, as well as in all the gates of Jerusalem,
+20. and say to them, ‘Listen to the word of Yahweh, kings of Judah and all Judah and all inhabitants of Jerusalem who come in through these gates:
+21. Thus says Yahweh, “Take care of yourselves, and do not carry any load on the sabbath day or bring anything in through the gates of Jerusalem.
+22. You shall not bring a load out of your houses on the sabbath day nor do any work, but keep the sabbath day holy, as I commanded your fathers.
+23. Yet they did not listen or incline their ears, but stiffened their necks in order not to listen or receive discipline.
+24. “But it will be, if you listen carefully to Me,” declares Yahweh, “to bring no load in through the gates of this city on the sabbath day, but to keep the sabbath day holy by doing no work on it,
+25. then there will come in through the gates of this city kings and princes sitting on the throne of David, riding in chariots and on horses, they and their princes, the men of Judah and the inhabitants of Jerusalem, and this city will be inhabited forever.
+26. And they will come in from the cities of Judah and from all around Jerusalem, from the land of Benjamin, from the Shephelah, from the hill country, and from the Negev, bringing burnt offerings, sacrifices, grain offerings, and frankincense, and bringing sacrifices of thanksgiving to the house of Yahweh.
+27. But if you do not listen to Me to keep the sabbath day holy by not carrying a load and coming in through the gates of Jerusalem on the sabbath day, then I will kindle a fire in its gates, and it will devour the palaces of Jerusalem and not be quenched.”’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

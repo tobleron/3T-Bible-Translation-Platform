@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "David Appoints Solomon and Organizes the Levites",
+      "reason": "Narrative introduction of David's final act and the census numbers."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 23,
+      "type": "genealogy",
+      "title": "Genealogy of the Levitical Families",
+      "reason": "Detailed listing of the heads and descendants of Gershon, Kohath, and Merari."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 32,
+      "type": "law",
+      "title": "Duties and Responsibilities of the Levites",
+      "reason": "Description of their service roles, age requirements, and specific duties in the temple."
+    }
+  ]
+}

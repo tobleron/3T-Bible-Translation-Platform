@@ -1,0 +1,71 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ecclesiastes 3:1-22
+
+Chapter text:
+1. There is an appointed time for everything. And there is a time for every matter under heaven—
+2. A time to give birth and a time to die; A time to plant and a time to uproot what is planted.
+3. A time to kill and a time to heal; A time to tear down and a time to build up.
+4. A time to weep and a time to laugh; A time to mourn and a time to dance.
+5. A time to throw stones and a time to gather stones; A time to embrace and a time to shun embracing.
+6. A time to search and a time to lose; A time to keep and a time to throw away.
+7. A time to tear apart and a time to sew together; A time to be silent and a time to speak.
+8. A time to love and a time to hate; A time for war and a time for peace.
+9. What advantage is there to the worker from that in which he labors?
+10. I have seen the endeavor which God has given the sons of men with which to occupy themselves.
+11. He has made everything beautiful in its time. He has also set eternity in their heart, yet so that man will not find out the work which God has done from the beginning even to the end.
+12. I know that there is nothing better for them than to be glad and to do good in one’s lifetime;
+13. moreover, that every man who eats and drinks and sees good in all his labor—it is the gift of God.
+14. I know that everything God does will be forever; there is nothing to add to it and there is nothing to take from it—God has so worked that men should fear Him.
+15. That which is has been already and that which will be has already been, yet God seeks what is pursued.
+16. Furthermore, I have seen under the sun that in the place of justice there is wickedness, and in the place of righteousness there is wickedness.
+17. I said in my heart, “God will judge both the righteous man and the wicked man,” for a time for every matter and for every work is there.
+18. I said in my heart concerning the sons of men, “God is testing them in order for them to see that they are but beasts.”
+19. For the fate of the sons of men and the fate of beasts is the same fate for each of them. As one dies so dies the other, and they all have the same breath. So there is no advantage for man over beast, for all is vanity.
+20. All go to the same place. All came from the dust, and all return to the dust.
+21. Who knows that the breath of man ascends upward and the breath of the beast descends downward to the earth?
+22. I have seen that nothing is better than that man should be glad in his works, for that is his portion. For who will bring him to see what will occur after him?
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

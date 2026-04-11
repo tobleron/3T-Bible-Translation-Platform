@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Azariah's Prophecy to Asa",
+      "reason": "A prophetic speech encouraging King Asa and the people of Judah and Benjamin."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Asa's Reform and Covenant",
+      "reason": "Narrative describing Asa's response to the prophecy, including reforms, assembly, sacrifice, and covenant renewal."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Further Reforms and Peace",
+      "reason": "Continuation of the narrative detailing the removal of Maacah's idol, Asa's devotion, and the resulting peace."
+    }
+  ]
+}

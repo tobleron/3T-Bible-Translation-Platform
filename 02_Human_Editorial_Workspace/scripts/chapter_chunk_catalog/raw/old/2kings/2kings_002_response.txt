@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Elijah Taken to Heaven and Elisha Inherited His Spirit",
+      "reason": "This section covers the journey from Gilgal to the Jordan, Elijah's ascension in a whirlwind, Elisha's request for a double portion, his validation of the spirit through the Jordan crossing, and the prophets' confirmation."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Elisha Purifies the Waters at Jericho",
+      "reason": "This unit describes the men of Jericho complaining about bad water and Elisha's miracle of purification using salt."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Elisha Cursed by Young Men at Bethel",
+      "reason": "This segment details the mockery of young men at Bethel, Elisha's curse resulting in two bears attacking them, and his subsequent travel to Carmel and Samaria."
+    }
+  ]
+}

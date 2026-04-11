@@ -8,7 +8,8 @@
 # LLM Providers
 # ---------------------------------------------------------------------------
 llama_cpp:
-  base_url: "http://192.168.1.186:8080"
+  base_url: "http://192.168.1.186:8081/v1"
+  api_key: "" # Set TTT_LLAMA_CPP_API_KEY environment variable
 
 openai:
   # Recommended: export OPENAI_API_KEY=sk-...

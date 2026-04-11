@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "The Harlotry of Israel and Judah",
+      "reason": "Yahweh addresses the people's spiritual adultery using the metaphor of a divorced wife."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Israel and Judah Compared",
+      "reason": "A narrative recounting Yahweh's past dealings with Israel and Judah regarding their faithlessness."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 20,
+      "type": "oracle",
+      "title": "Call to Return for Israel",
+      "reason": "Yahweh pronounces a judgment and promise of restoration specifically directed toward faithless Israel."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 25,
+      "type": "blessing_or_prayer",
+      "title": "Confession and Promise of Healing",
+      "reason": "The people respond with a collective prayer acknowledging their sin and seeking Yahweh's healing."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 95:1-11
+
+Chapter text:
+1. Oh come, let us sing for joy to Yahweh, Let us make a loud shout to the rock of our salvation.
+2. Let us come before His presence with thanksgiving, Let us make a loud shout to Him with songs of praise.
+3. For Yahweh is a great God And a great King above all gods,
+4. In whose hand are the depths of the earth, The peaks of the mountains are His also.
+5. The sea is His, for it was He who made it, And His hands formed the dry land.
+6. Come, let us worship and bow down, Let us kneel before Yahweh our Maker.
+7. For He is our God, And we are the people of His pasture and the sheep of His hand. Today, if you hear His voice,
+8. Do not harden your hearts, as at Meribah, As in the day of Massah in the wilderness,
+9. “When your fathers tried Me, They tested Me, though they had seen My work.
+10. For forty years I loathed that generation, And said they are a people who wander in their heart, And they do not know My ways.
+11. Therefore I swore in My anger, They shall never enter into My rest.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

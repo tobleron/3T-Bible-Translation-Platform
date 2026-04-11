@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Elihu Introduces His Argument",
+      "reason": "Elihu calls for attention and summarizes Job's claim that God has removed his justice."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 20,
+      "type": "argument",
+      "title": "God's Justice and Sovereignty",
+      "reason": "Elihu argues that God rewards according to work and rules over the earth without partiality."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 30,
+      "type": "argument",
+      "title": "God's Omniscience and Judgment",
+      "reason": "Elihu describes how God sees all ways of man and judges the wicked without delay."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 37,
+      "type": "speech",
+      "title": "Conclusion Against Job",
+      "reason": "Elihu challenges Job to accept chastisement and concludes that Job speaks without knowledge."
+    }
+  ]
+}

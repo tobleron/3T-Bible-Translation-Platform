@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Haman's Rise and Wrath",
+      "reason": "Narrative describing Haman's elevation, Mordecai's refusal to bow, and Haman's decision to target all Jews."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Haman's Proposal to the King",
+      "reason": "Dialogue where Haman persuades the king to issue a decree and the king grants his authority."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Issuance of the Decree",
+      "reason": "Description of the written law being drafted, sent to provinces, and the immediate aftermath in Susa."
+    }
+  ]
+}

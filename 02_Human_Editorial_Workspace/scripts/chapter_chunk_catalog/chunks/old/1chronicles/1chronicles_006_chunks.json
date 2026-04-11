@@ -1,0 +1,65 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:15:55Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 81,
+  "verse_count": 81,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 15,
+      "type": "genealogy",
+      "title": "Genealogy of the Priests from Levi to Exile",
+      "reason": "A continuous genealogical list tracing the priestly line from Levi through Aaron down to the exile."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 30,
+      "type": "genealogy",
+      "title": "Genealogy of the Levite Families",
+      "reason": "A detailed genealogical list covering the sons of Gershom, Kohath, and Merari."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 47,
+      "type": "list_or_catalog",
+      "title": "Levitical Singers and Their Lineages",
+      "reason": "A catalog of the singers appointed by David, including their genealogical lines."
+    },
+    {
+      "start_verse": 48,
+      "end_verse": 53,
+      "type": "mixed",
+      "title": "Roles of Levites and Aaron's Lineage",
+      "reason": "A summary of the general service of Levites followed by a specific genealogy of Aaron's sons."
+    },
+    {
+      "start_verse": 54,
+      "end_verse": 60,
+      "type": "list_or_catalog",
+      "title": "Cities Given to the Sons of Aaron",
+      "reason": "A list of cities and pasture lands assigned to the priestly families from Judah and Benjamin."
+    },
+    {
+      "start_verse": 61,
+      "end_verse": 70,
+      "type": "list_or_catalog",
+      "title": "Cities Given to the Rest of Kohathites",
+      "reason": "A list of cities assigned to the remaining Kohathite families from Ephraim and Manasseh."
+    },
+    {
+      "start_verse": 71,
+      "end_verse": 81,
+      "type": "list_or_catalog",
+      "title": "Cities Given to Gershom and Merari",
+      "reason": "A list of cities assigned to the families of Gershom and Merari from various tribes."
+    }
+  ]
+}

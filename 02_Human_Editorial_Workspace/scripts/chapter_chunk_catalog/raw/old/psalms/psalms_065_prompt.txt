@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 65:1-13
+
+Chapter text:
+1. For the choir director. A Psalm of David. A Song. To You, there will be silence and praise in Zion, O God, And to You the vow will be paid.
+2. O You who hear prayer, To You all flesh comes.
+3. Words of iniquity prevail against me; As for our transgressions, You atone for them.
+4. How blessed is the one whom You choose and bring near to You That he would dwell in Your courts. We will be satisfied with the goodness of Your house, Your holy temple.
+5. By fearsome deeds You answer us in righteousness, O God of our salvation, You who are the trust of all the ends of the earth and of the farthest sea;
+6. Who establishes the mountains by His strength, Being girded with might;
+7. Who stills the rumbling of the seas, The rumbling of their waves, And the tumult of the peoples.
+8. They who inhabit the ends of the earth are in fear on account of Your signs; You make the dawn and the sunset shout for joy.
+9. You visit the earth and cause it to overflow; You greatly enrich it; The stream of God is full of water; You establish their grain, for thus You establish the earth.
+10. You water its furrows abundantly, You smooth its ridges, You soften it with showers, You bless its growth.
+11. You crown the year with Your goodness, And Your paths drip with richness.
+12. The pastures of the wilderness drip, And the hills gird themselves with rejoicing.
+13. The meadows are clothed with flocks And the valleys are covered with grain; They make a loud shout, indeed, they sing.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

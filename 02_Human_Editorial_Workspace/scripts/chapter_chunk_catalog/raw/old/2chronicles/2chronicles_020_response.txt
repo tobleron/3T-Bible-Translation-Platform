@@ -1,0 +1,66 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "The Threat Arrives",
+      "reason": "Describes the arrival of the enemy coalition and Jehoshaphat's initial reaction."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Jehoshaphat's Prayer",
+      "reason": "A continuous prayer where the king appeals to God's past faithfulness and current power."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "Prophecy of Victory",
+      "reason": "Jahaziel delivers a divine message assuring the people of God's intervention."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Worship and March",
+      "reason": "The people respond to the prophecy with worship and prepare to march out."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Divine Victory and Spoils",
+      "reason": "Details the miraculous defeat of the enemies and the gathering of their wealth."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 30,
+      "type": "story",
+      "title": "Return to Jerusalem",
+      "reason": "Describes the joyful return of the army and the resulting peace in the region."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 34,
+      "type": "mixed",
+      "title": "King's Summary",
+      "reason": "Provides a brief summary of Jehoshaphat's reign and character."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 37,
+      "type": "story",
+      "title": "Alliance with Ahaziah",
+      "reason": "Concludes the chapter with a specific event showing a lapse in judgment and its consequence."
+    }
+  ]
+}

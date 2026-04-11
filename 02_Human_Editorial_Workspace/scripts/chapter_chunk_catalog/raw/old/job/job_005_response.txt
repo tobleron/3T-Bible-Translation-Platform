@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Eliphaz on the fate of the fool",
+      "reason": "Eliphaz addresses Job directly regarding the consequences of ignorance and the inevitability of trouble."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 16,
+      "type": "speech",
+      "title": "Eliphaz on God's power and justice",
+      "reason": "Eliphaz shifts to describing God's sovereign actions in lifting the lowly and frustrating the crafty."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 26,
+      "type": "exhortation",
+      "title": "Eliphaz on accepting divine discipline",
+      "reason": "Eliphaz exhorts Job to accept God's correction and promises blessings for those who do."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 27,
+      "type": "speech",
+      "title": "Conclusion of Eliphaz's speech",
+      "reason": "Eliphaz concludes his argument by asserting the truth of his investigation."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T09:58:11Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 37,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 38,
+  "verse_count": 38,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Hezekiah Sends to Isaiah",
+      "reason": "Narrative of Hezekiah's reaction and the messengers' arrival with their plea."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Rabshakeh's Second Message",
+      "reason": "Narrative shift to Assyria and the delivery of a taunting letter."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 20,
+      "type": "blessing_or_prayer",
+      "title": "Hezekiah's Prayer",
+      "reason": "Hezekiah spreads the letter before God and offers a specific prayer for deliverance."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 35,
+      "type": "oracle",
+      "title": "Oracle Against Assyria",
+      "reason": "Isaiah delivers God's judgment and promise of defense against the king of Assyria."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 38,
+      "type": "story",
+      "title": "Fall of the Assyrian Army",
+      "reason": "Narrative conclusion describing the angel's strike and Sennacherib's death."
+    }
+  ]
+}

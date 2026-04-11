@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "psalm",
+      "title": "Petition for Deliverance from the Wicked",
+      "reason": "The psalmist describes the nature of his enemies and their specific traps in a unified plea for rescue."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 11,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Vindication and Judgment",
+      "reason": "This section shifts to a direct address where the psalmist asks God to defeat his enemies and prevent their schemes."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 13,
+      "type": "psalm",
+      "title": "Confidence in God's Justice",
+      "reason": "The psalm concludes with a declaration of trust in Yahweh's care for the needy and the future thanksgiving of the righteous."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 1,
+      "type": "story",
+      "title": "Destruction of High Places",
+      "reason": "Describes the completion of religious reforms across Judah and Benjamin."
+    },
+    {
+      "start_verse": 2,
+      "end_verse": 4,
+      "type": "law",
+      "title": "Restoration of Priestly Divisions",
+      "reason": "Details Hezekiah's organization of priests and Levites for temple service."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Collection of Tithes and Offerings",
+      "reason": "Narrates the people's generous response and the gathering of tithes over four months."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "dialogue",
+      "title": "Review of the Heaps",
+      "reason": "Hezekiah inspects the offerings and receives a report from the chief priest."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 19,
+      "type": "list_or_catalog",
+      "title": "Administration of Temple Stores",
+      "reason": "Lists the officials appointed to manage and distribute the contributions."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Hezekiah's Faithful Service",
+      "reason": "Concludes with a summary of Hezekiah's consistent dedication to God."
+    }
+  ]
+}

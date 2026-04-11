@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Lament over Physical Affliction",
+      "reason": "The psalmist describes the physical and emotional consequences of God's discipline."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Isolation from Friends",
+      "reason": "The psalmist details the alienation experienced from friends and enemies."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "speech",
+      "title": "Confession and Hope",
+      "reason": "The psalmist expresses trust in God while confessing sin and noting the strength of enemies."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Final Plea for Help",
+      "reason": "The psalm concludes with a direct prayer for God's immediate intervention."
+    }
+  ]
+}

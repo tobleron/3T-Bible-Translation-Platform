@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "list_or_catalog",
+      "title": "Solomon's Officials",
+      "reason": "A list of the key administrative and religious officials serving King Solomon."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 19,
+      "type": "list_or_catalog",
+      "title": "The Twelve Deputies",
+      "reason": "A detailed catalog of the twelve deputies assigned to districts across Israel to sustain the royal household."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Solomon's Prosperity and Peace",
+      "reason": "A narrative description of Solomon's vast dominion, abundant provisions, and the peace enjoyed by the people."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 34,
+      "type": "story",
+      "title": "Solomon's Wisdom",
+      "reason": "A narrative account of the wisdom God gave Solomon, his reputation among nations, and the variety of his writings."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Completion of Building Projects",
+      "reason": "Describes the completion of Solomon's building work and settlement of cities."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 10,
+      "type": "list_or_catalog",
+      "title": "Forced Laborers and Officials",
+      "reason": "Catalogs the foreign laborers used and lists the chief deputies of Solomon."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Temple Worship Organization",
+      "reason": "Narrates the moving of Pharaoh's daughter and the establishment of priestly duties."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Naval Expedition to Ophir",
+      "reason": "Records Solomon's journey to Ezion-geber and the return of gold from Ophir."
+    }
+  ]
+}

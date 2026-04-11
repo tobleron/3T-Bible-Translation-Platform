@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Accusation against the Wicked",
+      "reason": "The psalmist addresses the 'gods' and 'sons of men,' describing their inherent unrighteousness and comparing them to a deaf serpent."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Divine Judgment",
+      "reason": "A series of petitions asking God to shatter the teeth of the wicked and sweep them away like water or thorns."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Conclusion on Vengeance",
+      "reason": "The psalm concludes with the righteous rejoicing at God's vengeance and a declaration that God truly judges on earth."
+    }
+  ]
+}

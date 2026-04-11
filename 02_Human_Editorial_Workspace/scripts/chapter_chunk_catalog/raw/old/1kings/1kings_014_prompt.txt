@@ -1,0 +1,80 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 1 Kings 14:1-31
+
+Chapter text:
+1. At that time Abijah the son of Jeroboam became sick.
+2. And Jeroboam said to his wife, “Arise now, and disguise yourself so that they will not know that you are the wife of Jeroboam, and go to Shiloh; behold, Ahijah the prophet is there, who spoke concerning me that I would be king over this people.
+3. And take ten loaves with you, some cakes, and a jar of honey, and go to him. He will tell you what will happen to the boy.”
+4. Then Jeroboam’s wife did so, and arose and went to Shiloh, and came to the house of Ahijah. Now Ahijah could not see, for his eyes had set because of his old age.
+5. Now Yahweh had said to Ahijah, “Behold, the wife of Jeroboam is coming to inquire of you concerning her son, for he is sick. You shall say thus and thus to her, for it will be when she arrives that she will pretend to be another woman.”
+6. Now it happened as Ahijah heard the sound of her feet coming in the doorway, that he said, “Come in, wife of Jeroboam, why do you pretend to be another woman? For I am sent to you with a harsh message.
+7. Go, say to Jeroboam, ‘Thus says Yahweh, the God of Israel, “Because I exalted you from among the people and made you ruler over My people Israel,
+8. and tore the kingdom away from the house of David and gave it to you—yet you have not been like My servant David, who kept My commandments and who walked after Me with all his heart, to do only that which was right in My sight;
+9. you also have done more evil than all who were before you, and have gone and made for yourself other gods and molten images to provoke Me to anger, and have cast Me behind your back—
+10. therefore behold, I am bringing evil on the house of Jeroboam: I will cut off from Jeroboam every male person, both bond and free in Israel, and I will make a clean sweep of the house of Jeroboam, as one sweeps away dung until it is all gone.
+11. Anyone belonging to Jeroboam who dies in the city the dogs will eat. And he who dies in the field the birds of the sky will eat; for Yahweh has spoken it.”’
+12. But you, arise, go to your house. When your feet enter the city the child will die.
+13. And all Israel shall mourn for him and bury him, for he alone of Jeroboam’s family will come to the grave, because in him something good was found toward Yahweh, the God of Israel, in the house of Jeroboam.
+14. Moreover, Yahweh will raise up for Himself a king over Israel who will cut off the house of Jeroboam this day and from now on.
+15. “So Yahweh will strike Israel, as a reed is shaken in the water; and He will uproot Israel from this good land which He gave to their fathers, and will scatter them beyond the River, because they have made their Asherim, provoking Yahweh to anger.
+16. And He will give Israel over on account of the sins of Jeroboam, which he sinned and with which he made Israel to sin.”
+17. Then Jeroboam’s wife arose and went away and came to Tirzah. As she was entering the threshold of the house, the child died.
+18. And all Israel buried him and mourned for him, according to the word of Yahweh which He spoke through His servant Ahijah the prophet.
+19. Now the rest of the acts of Jeroboam, how he made war and how he reigned, behold, they are written in the Book of the Chronicles of the Kings of Israel.
+20. Now the time that Jeroboam reigned was twenty-two years; and he slept with his fathers, and Nadab his son became king in his place.
+21. Now Rehoboam the son of Solomon became king in Judah. Rehoboam was forty-one years old when he became king, and he reigned seventeen years in Jerusalem, the city which Yahweh had chosen from all the tribes of Israel to put His name there. And his mother’s name was Naamah the Ammonitess.
+22. And Judah did what was evil in the sight of Yahweh, and they provoked Him to jealousy more than all that their fathers had done, with the sins which they sinned.
+23. They also built for themselves high places and sacred pillars and Asherim on every high hill and beneath every green tree.
+24. There were also male cult prostitutes in the land. They did according to all the abominations of the nations which Yahweh dispossessed before the sons of Israel.
+25. Now it happened in the fifth year of King Rehoboam, that Shishak king of Egypt came up against Jerusalem.
+26. And he took the treasures of the house of Yahweh and the treasures of the king’s house. And he took everything; he even took all the shields of gold which Solomon had made.
+27. Then King Rehoboam made shields of bronze in their place and committed them into the hand of the commanders of the guard who kept the door of the king’s house.
+28. Now it happened as often as the king entered the house of Yahweh, that the guards would carry them and would bring them back into the guards’ room.
+29. Now the rest of the acts of Rehoboam and all that he did, are they not written in the Book of the Chronicles of the Kings of Judah?
+30. Now there was war between Rehoboam and Jeroboam all their days.
+31. And Rehoboam slept with his fathers and was buried with his fathers in the city of David; and his mother’s name was Naamah the Ammonitess. And Abijam his son became king in his place.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

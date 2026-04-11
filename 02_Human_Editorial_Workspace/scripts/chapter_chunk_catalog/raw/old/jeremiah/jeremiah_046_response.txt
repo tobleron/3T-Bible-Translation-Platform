@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "list_or_catalog",
+      "title": "Introduction to the Oracle on Egypt",
+      "reason": "Sets the context and historical background for the prophecy."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "The Battle at Carchemish",
+      "reason": "Describes the defeat of Egypt's army by Babylon."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 26,
+      "type": "oracle",
+      "title": "The Coming Invasion of Egypt",
+      "reason": "Details Nebuchadnezzar's future conquest and the judgment on Egyptian gods."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 28,
+      "type": "blessing_or_prayer",
+      "title": "Promise of Restoration for Israel",
+      "reason": "Shifts focus to God's promise of deliverance for Jacob."
+    }
+  ]
+}

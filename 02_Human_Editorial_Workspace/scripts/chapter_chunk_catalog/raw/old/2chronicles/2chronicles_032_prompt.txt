@@ -1,0 +1,82 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Chronicles 32:1-33
+
+Chapter text:
+1. After these acts of faithfulness Sennacherib king of Assyria came and invaded Judah and encamped against the fortified cities, and thought to break into them for himself.
+2. Then Hezekiah saw that Sennacherib had come and that he had set his face to make war on Jerusalem,
+3. and he took counsel with his commanders and his warriors to stop up the supply of water from the springs which were outside the city, and they helped him.
+4. So many people gathered and stopped up all the springs and the stream which flowed in the midst of the land, saying, “Why should the kings of Assyria come and find abundant water?”
+5. And he strengthened himself and rebuilt all the wall that had been broken down and erected towers on it, and built another outside wall and strengthened the Millo in the city of David, and made weapons and shields in great number.
+6. He also put military commanders over the people and gathered them to him in the square at the city gate, and spoke to their hearts, saying,
+7. “Be strong and courageous. Do not fear or be dismayed because of the king of Assyria nor because of all the multitude that is with him; for the one with us is greater than the one with him.
+8. With him is only an arm of flesh, but with us is Yahweh our God to help us and to fight our battles.” And the people were sustained by the words of Hezekiah king of Judah.
+9. After this Sennacherib king of Assyria sent his servants to Jerusalem while he was besieging Lachish with all his forces with him, against Hezekiah king of Judah and against all Judah who were at Jerusalem, saying,
+10. “Thus says Sennacherib king of Assyria, ‘On what are you trusting that you are remaining in Jerusalem under siege?
+11. Is not Hezekiah inciting you to give yourselves over to die by hunger and by thirst, saying, “Yahweh our God will deliver us from the hand of the king of Assyria”?
+12. Has not the same Hezekiah taken away His high places and His altars, and said to Judah and Jerusalem, “You shall worship before one altar, and on it you shall offer offerings up in smoke”?
+13. Do you not know what I and my fathers have done to all the peoples of the lands? Were the gods of the nations of the lands able at all to deliver their land from my hand?
+14. Who was there among all the gods of these nations which my fathers devoted to destruction, who could deliver his people from my hand, that your God should be able to deliver you from my hand?
+15. So now, do not let Hezekiah deceive you or incite you like this, and do not believe him, for no god of any nation or kingdom was able to deliver his people from my hand or from the hand of my fathers. How much less will your God deliver you from my hand?’”
+16. His servants spoke further against Yahweh God and against His servant Hezekiah.
+17. He also wrote letters to reproach Yahweh, the God of Israel, and to speak against Him, saying, “As the gods of the nations of the lands have not delivered their people from my hand, so the God of Hezekiah will not deliver His people from my hand.”
+18. And they called this out with a loud voice in the language of Judah to the people of Jerusalem who were on the wall, to instill fear and terrify them, so that they might capture the city.
+19. And they spoke of the God of Jerusalem as of the gods of the peoples of the earth, the work of men’s hands.
+20. But King Hezekiah and Isaiah the prophet, the son of Amoz, prayed about this and cried out to heaven.
+21. And Yahweh sent an angel who wiped out every mighty man of valor, ruler, and commander in the camp of the king of Assyria. So he returned in shame to his own land. And he entered the house of his god, and some of his own children caused him to fall there by the sword.
+22. So Yahweh saved Hezekiah and the inhabitants of Jerusalem from the hand of Sennacherib the king of Assyria and from the hand of all others, and He guided them on every side.
+23. And many were bringing presents to Yahweh at Jerusalem and precious things to Hezekiah king of Judah, so that he was lifted up in the sight of all nations thereafter.
+24. In those days Hezekiah became sick to the point of death; and he prayed to Yahweh, and Yahweh spoke to him and gave him a miraculous sign.
+25. But Hezekiah gave no return for the benefit he received, because his heart was proud; therefore wrath came on him and on Judah and Jerusalem.
+26. However, Hezekiah humbled the pride of his heart, both he and the inhabitants of Jerusalem, so that the wrath of Yahweh did not come on them in the days of Hezekiah.
+27. Now Hezekiah had abundant riches and honor; and he made for himself treasuries for silver, gold, precious stones, spices, shields, and all kinds of desirable articles,
+28. storehouses also for the produce of grain, wine, and oil, stalls for all kinds of cattle, and sheepfolds for the flocks.
+29. He also made cities for himself and acquired flocks and herds in abundance, for God had given him exceedingly abundant wealth.
+30. And it was Hezekiah who stopped the upper outlet of the waters of Gihon and directed them to the west side of the city of David. And Hezekiah succeeded in all that he did.
+31. Even in the matter of the envoys of the rulers of Babylon, who sent to him to inquire of the miraculous sign that had happened in the land, God left him alone only to test him, that He might know all that was in his heart.
+32. Now the rest of the acts of Hezekiah and his deeds of lovingkindness, behold, they are written in the vision of Isaiah the prophet, the son of Amoz, in the Book of the Kings of Judah and Israel.
+33. So Hezekiah slept with his fathers, and they buried him in the upper section of the tombs of the sons of David; and all Judah and the inhabitants of Jerusalem honored him at his death. And Manasseh his son became king in his place.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

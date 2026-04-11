@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Oracle on Jerusalem's Fall and Joy",
+      "reason": "Describes the invasion of Jerusalem, the people's panic, their reliance on human defenses, and their foolish celebration before judgment."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 25,
+      "type": "speech",
+      "title": "Judgment on Shebna and Appointment of Eliakim",
+      "reason": "Contains a direct address to the steward Shebna regarding his tomb, followed by the transfer of authority to Eliakim and its eventual failure."
+    }
+  ]
+}

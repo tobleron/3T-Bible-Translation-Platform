@@ -1,0 +1,71 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 103:1-22
+
+Chapter text:
+1. Of David. Bless Yahweh, O my soul, And all that is within me, bless His holy name.
+2. Bless Yahweh, O my soul, And forget none of His benefits;
+3. Who pardons all your iniquities, Who heals all your diseases;
+4. Who redeems your life from the pit, Who crowns you with lovingkindness and compassion;
+5. Who satisfies your years with good things, So that your youth is renewed like the eagle.
+6. Yahweh performs righteous deeds And judgments for all who are oppressed.
+7. He made known His ways to Moses, His acts to the sons of Israel.
+8. Yahweh is compassionate and gracious, Slow to anger and abounding in lovingkindness.
+9. He will not always contend with us, And He will not keep His anger forever.
+10. He has not dealt with us according to our sins, And He has not rewarded us according to our iniquities.
+11. For as high as the heavens are above the earth, So great is His lovingkindness toward those who fear Him.
+12. As far as the east is from the west, So far has He removed our transgressions from us.
+13. As a father has compassion on his children, So Yahweh has compassion on those who fear Him.
+14. For He Himself knows our form; He remembers that we are but dust.
+15. As for man, his days are like grass; As a flower of the field, so he flowers.
+16. When the wind has passed over it, it is no more, And its place acknowledges it no longer.
+17. But the lovingkindness of Yahweh is from everlasting to everlasting on those who fear Him, And His righteousness to children’s children,
+18. To those who keep His covenant And remember His precepts to do them.
+19. Yahweh has established His throne in the heavens, And His kingdom rules over all.
+20. Bless Yahweh, you His angels, Mighty in strength, who perform His word, Obeying the voice of His word!
+21. Bless Yahweh, all you His hosts, You who serve Him, doing His will.
+22. Bless Yahweh, all you works of His, In all places of His rule; Bless Yahweh, O my soul!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

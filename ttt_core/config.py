@@ -72,6 +72,7 @@ def _defaults() -> dict[str, Any]:
     return {
         "llama_cpp": {
             "base_url": "http://192.168.1.186:8080",
+            "api_key": os.environ.get("TTT_LLAMA_CPP_API_KEY", ""),
         },
         "openai": {
             "api_key": os.environ.get("OPENAI_API_KEY", ""),
@@ -123,6 +124,8 @@ def _apply_env_overrides(cfg: dict[str, Any]) -> dict[str, Any]:
     """Overlay ``TTT_XXX`` env vars onto the config."""
     if os.environ.get("TTT_LLAMA_CPP_BASE_URL"):
         cfg.setdefault("llama_cpp", {})["base_url"] = os.environ["TTT_LLAMA_CPP_BASE_URL"]
+    if os.environ.get("TTT_LLAMA_CPP_API_KEY"):
+        cfg.setdefault("llama_cpp", {})["api_key"] = os.environ["TTT_LLAMA_CPP_API_KEY"]
     if os.environ.get("TTT_OPENAI_API_KEY"):
         cfg.setdefault("openai", {})["api_key"] = os.environ["TTT_OPENAI_API_KEY"]
     return cfg

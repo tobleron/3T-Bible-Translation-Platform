@@ -1,0 +1,65 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ecclesiastes 4:1-16
+
+Chapter text:
+1. Then I looked again at all the acts of oppression which were being done under the sun. And behold, I saw the tears of the oppressed and that they had no one to comfort them; and on the side of their oppressors was power, but they had no one to comfort them.
+2. So I lauded the dead who are already dead more than the living who are still living.
+3. But better off than both of them is the one who never has been, who has never seen the evil work that is done under the sun.
+4. I have seen that every labor and every success of the work is the result of jealousy between a man and his neighbor. This too is vanity and striving after wind.
+5. The fool folds his hands in embrace and consumes his own flesh.
+6. One hand full of rest is better than two fists full of labor and striving after wind.
+7. Then I looked again at vanity under the sun.
+8. There was a certain man without a second man, having neither a son nor a brother, yet there was no end to all his labor. Indeed, his eyes were not satisfied with riches—“And for whom am I laboring and depriving myself of good?” This too is vanity, and it is a grievous endeavor.
+9. Two are better than one because they have good wages for their labor.
+10. For if either of them falls, the one will lift up his companion. But woe to the one who falls when there is not a second one to lift him up.
+11. Furthermore, if two lie down together they keep warm, but how can one be warm alone?
+12. And if one can overpower him who is alone, two can stand against him. A cord of three strands is not quickly torn apart.
+13. A poor yet wise lad is better than an old and foolish king who no longer knows how to receive warning.
+14. For he has come out of prison to become king, even though he was born poor in his kingdom.
+15. I have seen all the living who walk about under the sun go along with the second lad who stands in place of him.
+16. There is no end to all the people, to all who were before them, and even the ones who will come later will not be glad with him, for this too is vanity and striving after wind.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

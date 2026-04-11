@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "psalm",
+      "title": "God as Eternal Dwelling Place",
+      "reason": "Establishes God's eternal nature and His role as humanity's dwelling place."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Human Frailty and Divine Anger",
+      "reason": "Contrasts human transience with God's wrath to argue for the need for wisdom."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Restoration and Favor",
+      "reason": "A concluding petition for God's return, satisfaction, and blessing upon the work of the people."
+    }
+  ]
+}

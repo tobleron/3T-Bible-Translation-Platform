@@ -1,0 +1,82 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 30:1-33
+
+Chapter text:
+1. The words of Agur the son of Jakeh, the oracle. The man declares to Ithiel, to Ithiel and Ucal:
+2. Surely I am more senseless than any man, And I do not have the understanding of mankind.
+3. Neither have I learned wisdom, Nor do I know the knowledge of the Holy One.
+4. Who has ascended into heaven and descended? Who has gathered the wind in His fists? Who has wrapped the waters in His garment? Who has established all the ends of the earth? What is His name? And what is His Son’s name? Surely you know!
+5. Every word of God is tested; He is a shield to those who take refuge in Him.
+6. Do not add to His words Lest He reprove you, and you be proved a liar.
+7. Two things I asked of You, Do not withhold from me before I die:
+8. Keep worthlessness and every false word far from me, Give me neither poverty nor riches; Feed me with the food that is my portion,
+9. Lest I be full and deny You and say, “Who is Yahweh?” Or lest I be impoverished and steal, And profane the name of my God.
+10. Do not slander a slave to his master, Lest he curse you and you be found guilty.
+11. There is a generation that curses its father And does not bless its mother.
+12. There is a generation that is clean in its own eyes, Yet is not washed from its filthiness.
+13. There is a generation—oh how haughty are its eyes! And its eyelids are lifted up.
+14. There is a generation whose teeth are like swords And its fangs like knives, To devour the afflicted from the earth And the needy from among men.
+15. The leech has two daughters, “Give,” “Give.” There are three things that will not be satisfied, Four that will not say, “Enough”:
+16. Sheol, and the barren womb, Earth that is never satisfied with water, And fire that never says, “Enough.”
+17. The eye that mocks a father And despises obedience to a mother, The ravens of the valley will pick it out, And the young eagles will eat it.
+18. There are three things which are too wonderful for me, Four which I do not understand:
+19. The way of an eagle in the sky, The way of a serpent on a rock, The way of a ship in the heart of the sea, And the way of a man with a virgin.
+20. This is the way of an adulterous woman: She eats and wipes her mouth, And says, “I have done no wrong.”
+21. Under three things the earth quakes, And under four, it cannot bear up:
+22. Under a slave when he becomes king, And a wicked fool when he is satisfied with food,
+23. Under an unloved woman when she gets a husband, And a servant‑girl when she supplants her mistress.
+24. Four things are small on the earth, But they are exceedingly wise:
+25. The ants are not a strong people, But they prepare their food in the summer;
+26. The shephanim are not a mighty people, Yet they make their houses in the cliff;
+27. The locusts have no king, Yet all of them go out in rank;
+28. The lizard you may grasp with the hands, Yet it is in kings’ palaces.
+29. There are three things which are stately in their march, Even four which are stately when they walk:
+30. The lion which is mighty among the animals And does not turn back before any,
+31. The strutting rooster, the male goat also, And a king when his army is with him.
+32. If you have been wickedly foolish in lifting yourself up, Or if you have schemed evil, put your hand on your mouth.
+33. For pressing milk brings forth butter, And pressing the nose brings forth blood; And pressing anger brings forth strife.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

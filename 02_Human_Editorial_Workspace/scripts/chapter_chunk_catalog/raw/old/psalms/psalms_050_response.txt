@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "God's Call to Justice",
+      "reason": "Introduction of God speaking from Zion with cosmic imagery."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Instruction on True Worship",
+      "reason": "God addresses His people regarding the nature of sacrifice and thanksgiving."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 21,
+      "type": "argument",
+      "title": "Reproof of the Wicked",
+      "reason": "God contrasts the wicked's behavior with His silence and impending judgment."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "exhortation",
+      "title": "Final Warning and Promise",
+      "reason": "Concluding call to remember God and the promise of salvation for the righteous."
+    }
+  ]
+}

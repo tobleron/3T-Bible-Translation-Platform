@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Man of God Prophesies Against Jeroboam",
+      "reason": "Complete narrative unit covering the prophecy, sign, and initial departure."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 32,
+      "type": "story",
+      "title": "The Old Prophet Deceives the Man of God",
+      "reason": "Continuous narrative detailing the deception, judgment, and burial."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 34,
+      "type": "argument",
+      "title": "Jeroboam's Continued Rebellion",
+      "reason": "Concluding summary of the king's reaction and the theological consequence."
+    }
+  ]
+}

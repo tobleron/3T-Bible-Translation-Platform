@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 27:1-13
+
+Chapter text:
+1. In that day Yahweh will punish Leviathan the fleeing serpent, With His fierce and great and mighty sword, Even Leviathan the twisted serpent; And He will kill the dragon who lives in the sea.
+2. In that day, “A vineyard of delight, sing of it!
+3. I, Yahweh, am its keeper; I water it every moment. Lest anyone damage it, I keep it night and day.
+4. I have no wrath. Who would ever give Me briars and thorns in the battle? I would step on them, I would burn them completely.
+5. Or let him rely on My strong defense, Let him make peace with Me, Let him make peace with Me.”
+6. In the days to come Jacob will take root, Israel will blossom and bud, And they will fill the whole world with produce.
+7. Like the striking of Him who has struck them, has He struck them? Or like the slaughter of those of His who were killed, have they been killed?
+8. You contended with them by driving them away, by making them forlorn. With His fierce wind He has expelled them on the day of the east wind.
+9. Therefore through this, Jacob’s iniquity will be atoned for; And this will be the whole fruit of the turning away of his sin: When he makes all the altar stones like pulverized chalk stones, When Asherim and incense altars will not stand.
+10. For the fortified city is isolated, A haunt forlorn and forsaken like the desert; There the calf will graze, And there it will lie down and feed on its twigs.
+11. When its limbs are dry, they are broken off; Women come and light a fire with them, For they are not a people of discernment, Therefore their Maker will not have compassion on them. And their Creator will not be gracious to them.
+12. And it will be in that day, that Yahweh will start His threshing from the flowing stream of the River to the brook of Egypt, and you will be gathered up one by one, O sons of Israel.
+13. And it will be in that day, that a great trumpet will be blown, and those who were perishing in the land of Assyria and who were banished in the land of Egypt will come and worship Yahweh in the holy mountain at Jerusalem.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

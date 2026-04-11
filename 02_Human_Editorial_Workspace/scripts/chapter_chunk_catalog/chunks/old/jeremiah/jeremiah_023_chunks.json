@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T11:06:34Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Jeremiah",
+  "chapter": 23,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 40,
+  "verse_count": 40,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Judgment on Shepherds and Promise of Restoration",
+      "reason": "A unified oracle addressing the corrupt leaders with a promise of future restoration and the coming Messiah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Jeremiah's Distress over False Prophets",
+      "reason": "A personal speech describing the prophet's emotional state and specific accusations against false prophets in Samaria and Jerusalem."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "argument",
+      "title": "Contrast of True and False Prophets",
+      "reason": "An argumentative section distinguishing between the false prophets' self-derived visions and the true council of Yahweh."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 29,
+      "type": "oracle",
+      "title": "Yahweh's Omnipresence and Word Compared to Dreams",
+      "reason": "An oracle using rhetorical questions about God's presence and metaphors of fire and hammer to contrast His word with human dreams."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 32,
+      "type": "oracle",
+      "title": "Judgment on Stealing Words and Lying Dreams",
+      "reason": "A specific oracle condemning prophets who steal words from one another or recount lying dreams."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 40,
+      "type": "exhortation",
+      "title": "Warning Against the Phrase Oracle of Yahweh",
+      "reason": "A concluding exhortation warning the people and priests against misusing the title 'oracle of Yahweh' as a cliché."
+    }
+  ]
+}

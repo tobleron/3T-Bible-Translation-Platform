@@ -1,0 +1,69 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 147:1-20
+
+Chapter text:
+1. Praise Yah! For it is good to sing praises to our God; For it is pleasant and praise is becoming.
+2. Yahweh builds up Jerusalem; He gathers the outcasts of Israel.
+3. He is the One who heals the brokenhearted And who binds up their wounds,
+4. Who counts the number of the stars; He gives names to all of them.
+5. Great is our Lord and abundant in power; His discernment is infinite.
+6. Yahweh helps up the afflicted; He brings down the wicked to the ground.
+7. Sing to Yahweh with thanksgiving; Sing praises to our God on the lyre.
+8. He is the One who covers the heavens with clouds, The One who provides rain for the earth, The One who makes grass to sprout on the mountains,
+9. Who gives to the animal its food, And to the young ravens which call out.
+10. He does not delight in the might of the horse; He does not take pleasure in the legs of a man.
+11. Yahweh is pleased with those who fear Him, Those who wait for His lovingkindness.
+12. Laud Yahweh, O Jerusalem! Praise your God, O Zion!
+13. For He strengthened the bars of your gates; He blessed your sons within you.
+14. He is the One who sets peace in your borders, He satisfies you with the finest of the wheat,
+15. The One who sends forth His command to the earth; His word runs very swiftly,
+16. The One who gives snow like wool; He scatters the frost like ashes,
+17. Who casts forth His ice as fragments; Who can stand before His cold?
+18. He sends forth His word and melts them; He causes His wind to blow and so the waters flow,
+19. Who declares His words to Jacob, His statutes and His judgments to Israel.
+20. He has not done so with any nation; So as for His judgments, they have not known them. Praise Yah!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

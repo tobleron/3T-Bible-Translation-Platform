@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Accession and Character of Jotham",
+      "reason": "Introduces the king's age, reign, mother, and general spiritual standing compared to his father."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Building Projects and Military Victory",
+      "reason": "Details Jotham's architectural works in Jerusalem and Judah, followed by his victory over Ammon."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Conclusion of Reign and Death",
+      "reason": "Summarizes the reason for his success, references external records, and notes his death and succession."
+    }
+  ]
+}

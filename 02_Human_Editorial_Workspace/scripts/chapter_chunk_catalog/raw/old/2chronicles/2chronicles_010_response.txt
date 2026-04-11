@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Jeroboam Returns to Shechem",
+      "reason": "Narrative introduction of the political gathering and initial request."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "dialogue",
+      "title": "Counsel and Rejection of Elders",
+      "reason": "Extended dialogue between Rehoboam, elders, and young men leading to the harsh response."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Division of the Kingdom",
+      "reason": "The people's rejection of Rehoboam and the establishment of the northern rebellion."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Job's Retort to Friends",
+      "reason": "Job responds directly to his friends' accusations with sarcasm and a counter-claim of wisdom."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Argument from Nature and Age",
+      "reason": "Job uses rhetorical questions about creation and the value of age to argue for God's sovereignty."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 25,
+      "type": "oracle",
+      "title": "The Sovereignty of God",
+      "reason": "A declarative section describing God's absolute power over nature, kings, and nations."
+    }
+  ]
+}

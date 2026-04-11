@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "blessing_or_prayer",
+      "title": "Praise for God's Deliverance",
+      "reason": "A prayer of thanksgiving describing God as a refuge and defender against the ruthless."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "oracle",
+      "title": "The Future Banquet and Victory",
+      "reason": "A prophetic vision of a feast for all peoples and the final defeat of death."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Judgment on Moab",
+      "reason": "A specific oracle detailing the destruction of Moab and its fortifications."
+    }
+  ]
+}

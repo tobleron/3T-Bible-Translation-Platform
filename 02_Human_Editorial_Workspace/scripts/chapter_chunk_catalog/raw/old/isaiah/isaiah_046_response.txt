@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Fall of Babylonian Idols",
+      "reason": "Describes the defeat and captivity of Bel and Nebo."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "God's Promise to Carry Israel",
+      "reason": "Direct address from God promising to bear His people through old age."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "argument",
+      "title": "Contrast Between Idols and God",
+      "reason": "Rhetorical question comparing the static idols to the living God."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "oracle",
+      "title": "God's Sovereignty Over History",
+      "reason": "Declaration of God's unique power to declare the end from the beginning."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 13,
+      "type": "exhortation",
+      "title": "Call to Repentance and Promise of Salvation",
+      "reason": "Final call to the stubborn heart with a promise of near salvation."
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 139:1-24
+
+Chapter text:
+1. For the choir director. Of David. A Psalm. O Yahweh, You have searched me and known me.
+2. You know when I sit down and when I rise up; You understand my thought from afar.
+3. You scrutinize my path and my lying down, And are intimately acquainted with all my ways.
+4. Even before there is a word on my tongue, Behold, O Yahweh, You know it all.
+5. You have enclosed me behind and before, And You have put Your hand upon me.
+6. Such knowledge is too wonderful for me; It is too high, I cannot attain to it.
+7. Where can I go from Your Spirit? Or where can I flee from Your presence?
+8. If I ascend to heaven, You are there; If I make my bed in Sheol, behold, You are there.
+9. If I lift up the wings of the dawn, If I dwell in the remotest part of the sea,
+10. Even there Your hand will lead me, And Your right hand will lay hold of me.
+11. If I say, “Surely the darkness will bruise me, And the light around me will be night,”
+12. Even the darkness is not too dark for You, And the night is as bright as the day. Darkness and light are alike to You.
+13. For You formed my inward parts; You wove me in my mother’s womb.
+14. I will give thanks to You, for I am fearfully and wonderfully made; Wonderful are Your works, And my soul knows it very well.
+15. My frame was not hidden from You, When I was made in secret, And intricately woven in the depths of the earth;
+16. Your eyes have seen my unshaped substance; And in Your book all of them were written The days that were formed for me, When as yet there was not one of them.
+17. How precious are Your thoughts to me, O God! How vast is the sum of them!
+18. If I should count them, they would outnumber the sand. When I awake, I am still with You.
+19. Oh that You would slay the wicked, O God! O men of bloodshed, depart from me.
+20. For they speak against You wickedly, And Your enemies take Your name in vain.
+21. Do I not hate those who hate You, O Yahweh? And do I not revile those who rise up against You?
+22. I hate them with the utmost hatred; They have become my enemies.
+23. Search me, O God, and know my heart; Try me and know my anxious thoughts;
+24. And see if there be any hurtful way in me, And lead me in the everlasting way.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

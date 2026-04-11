@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:04:16Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 136,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 26,
+  "verse_count": 26,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "list_or_catalog",
+      "title": "Creation and God's Titles",
+      "reason": "Catalog of titles and creative acts with the refrain."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Exodus and Conquest History",
+      "reason": "Narrative of deliverance from Egypt and conquest of kings."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 26,
+      "type": "blessing_or_prayer",
+      "title": "General Deliverance and Thanksgiving",
+      "reason": "Summary of God's care for the people and final call to praise."
+    }
+  ]
+}

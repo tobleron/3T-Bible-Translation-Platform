@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 27,
+      "type": "list_or_catalog",
+      "title": "Wisdom Sayings on Life and Leadership",
+      "reason": "The chapter consists of a continuous series of independent proverbial statements covering various topics without distinct narrative or speech breaks."
+    }
+  ]
+}

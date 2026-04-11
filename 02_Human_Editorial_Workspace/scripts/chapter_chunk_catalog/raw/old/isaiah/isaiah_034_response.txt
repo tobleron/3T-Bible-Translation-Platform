@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Call to Nations and Cosmic Judgment",
+      "reason": "An introductory call to the nations describing the universal scope of Yahweh's wrath against all peoples."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Judgment on Edom and Bozrah",
+      "reason": "A specific oracle detailing the divine sword's descent upon Edom and the total desolation of its land."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 15,
+      "type": "list_or_catalog",
+      "title": "Desolation and Wild Creatures",
+      "reason": "A catalog describing the transition of Edom into a wilderness inhabited by specific birds and beasts."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 17,
+      "type": "argument",
+      "title": "Divine Decree of Possession",
+      "reason": "A concluding argument asserting that the creatures' permanent possession is sealed by Yahweh's command and lot."
+    }
+  ]
+}

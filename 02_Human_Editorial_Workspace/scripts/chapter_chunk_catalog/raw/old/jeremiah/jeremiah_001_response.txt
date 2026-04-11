@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "list_or_catalog",
+      "title": "Introduction and Historical Context",
+      "reason": "Establishes the prophet's lineage and the specific historical timeframe of his ministry."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "dialogue",
+      "title": "Call to Prophecy",
+      "reason": "Records the divine call, Jeremiah's objection, and God's commissioning with assurance."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "vision",
+      "title": "Vision of Almond Tree and Boiling Pot",
+      "reason": "Describes two symbolic visions confirming God's watchfulness and the coming judgment from the north."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Judgment and Assurance",
+      "reason": "Details the invasion from the north, the people's sin, and God's promise of protection for the prophet."
+    }
+  ]
+}

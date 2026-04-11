@@ -1,0 +1,61 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 62:1-12
+
+Chapter text:
+1. For the choir director. According to Jeduthun. A Psalm of David. Surely my soul waits in silence for God; From Him is my salvation.
+2. Surely He is my rock and my salvation, My stronghold; I shall not be greatly shaken.
+3. How long will you assail a man, That you may murder him, all of you, Like a leaning wall, like a fence thrust down?
+4. Surely they have counseled to thrust him down from his high position; They find pleasure in falsehood; They bless with their mouth, But inwardly they curse. Selah.
+5. Surely wait in silence for God, O my soul, For my hope is from Him.
+6. Surely He is my rock and my salvation, My stronghold; I shall not be shaken.
+7. On God my salvation and my glory rest; The rock of my strength, my refuge is in God.
+8. Trust in Him at all times, O people; Pour out your heart before Him; God is a refuge for us. Selah.
+9. Surely men of low degree are merely vanity and men of rank are a lie; In the balances they go up; They are together lighter than a breath of vanity.
+10. Do not trust in oppression And do not put vain hope in robbery; If riches increase, do not set your heart upon them.
+11. Once God has spoken; Twice I have heard this: That strength belongs to God;
+12. And that to You, O Lord, belongs lovingkindness, For You repay a man according to his work.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

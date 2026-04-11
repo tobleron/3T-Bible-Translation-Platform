@@ -1,0 +1,101 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 89:1-52
+
+Chapter text:
+1. A Maskil of Ethan the Ezrahite. I will sing of the lovingkindnesses of Yahweh forever; From generation to generation I will make known Your faithfulness with my mouth.
+2. For I have said, “Lovingkindness will be built up forever; In the heavens You will establish Your faithfulness.”
+3. “I have cut a covenant with My chosen; I have sworn to David My servant,
+4. I will establish your seed forever And build up your throne from generation to generation.” Selah.
+5. The heavens will praise Your wonders, O Yahweh; Your faithfulness also in the assembly of the holy ones.
+6. For who in the sky is comparable to Yahweh? Who among the sons of the mighty is like Yahweh,
+7. A God greatly dreaded in the council of the holy ones, And fearsome above all those who are around Him?
+8. O Yahweh God of hosts, who is like You, O mighty Yah? Your faithfulness also surrounds You.
+9. You rule the swelling of the sea; When its waves rise, You still them.
+10. You Yourself crushed Rahab like one who is slain; You scattered Your enemies with Your strong arm.
+11. The heavens are Yours, the earth also is Yours; The world and its fullness, You have founded them.
+12. The north and the south, You have created them; Tabor and Hermon sing with joy at Your name.
+13. You have a mighty arm; Your hand is strong, Your right hand is exalted.
+14. Righteousness and justice are the foundation of Your throne; Lovingkindness and truth go before You.
+15. How blessed are the people who know the loud shout of joy! O Yahweh, they walk in the light of Your face.
+16. In Your name they rejoice all the day, And by Your righteousness they are exalted.
+17. For You are the beauty of their strength, And by Your favor our horn is exalted.
+18. For our shield belongs to Yahweh, And our king to the Holy One of Israel.
+19. Formerly You spoke in vision to Your holy ones, And said, “I have bestowed help to a mighty one; I have exalted one chosen from the people.
+20. I have found David My servant; With My holy oil I have anointed him,
+21. With whom My hand will be established; My arm also will strengthen him.
+22. The enemy will not deceive him, Nor the son of unrighteousness afflict him.
+23. But I shall crush his adversaries before him, And strike those who hate him.
+24. My faithfulness and My lovingkindness will be with him, And in My name his horn will be exalted.
+25. I shall also set his hand on the sea And his right hand on the rivers.
+26. He will call to Me, ‘You are my Father, My God, and the rock of my salvation.’
+27. I also shall make him My firstborn, The highest of the kings of the earth.
+28. My lovingkindness I will keep for him forever, And My covenant shall be confirmed to him.
+29. So I will set up his seed to endure forever And his throne as the days of heaven.
+30. “If his sons forsake My law And do not walk in My judgments,
+31. If they profane My statutes And do not keep My commandments,
+32. Then I will punish their transgression with the rod And their iniquity with striking.
+33. But I will not break off My lovingkindness from him, Nor deal falsely in My faithfulness.
+34. My covenant I will not profane, Nor will I alter what comes forth from My lips.
+35. Once I have sworn by My holiness; I will not lie to David.
+36. His seed shall endure forever And his throne as the sun before Me.
+37. It shall be established forever like the moon, And the witness in the sky is faithful.” Selah.
+38. But You have cast off and rejected, You have been full of wrath against Your anointed.
+39. You have spurned the covenant of Your slave; You have profaned his crown to the ground.
+40. You have broken down all his walls; You have beset his strongholds with ruin.
+41. All who pass along the way plunder him; He has become a reproach to his neighbors.
+42. You have exalted the right hand of his adversaries; You have made all his enemies be glad.
+43. You also turn back the edge of his sword And have not made him arise in battle.
+44. You have made his splendor to cease And cast his throne to the ground.
+45. You have shortened the days of his youth; You have wrapped him up with shame. Selah.
+46. How long, O Yahweh? Will You hide Yourself forever? Will Your wrath burn like fire?
+47. Remember what my span of life is; For what vanity You have created all the sons of men!
+48. What man can live and not see death? Can he provide his soul escape from the power of Sheol? Selah.
+49. Where are Your former lovingkindnesses, O Lord, Which You swore to David in Your faithfulness?
+50. Remember, O Lord, the reproach of Your slaves; How I bear in my bosom the reproach of all the many peoples,
+51. With which Your enemies have reproached, O Yahweh, With which they have reproached the footsteps of Your anointed.
+52. Blessed be Yahweh forever! Amen and Amen.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

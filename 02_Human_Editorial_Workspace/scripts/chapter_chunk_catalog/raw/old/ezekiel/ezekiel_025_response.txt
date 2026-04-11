@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Oracle Against Ammon",
+      "reason": "A complete prophetic oracle directed at the sons of Ammon with a specific reason and judgment."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "oracle",
+      "title": "Oracle Against Moab",
+      "reason": "A distinct prophetic oracle targeting Moab and Seir with specific cities mentioned."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Oracle Against Edom",
+      "reason": "A complete prophetic unit concerning Edom's vengeance against Judah."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "Oracle Against Philistia",
+      "reason": "The final distinct prophetic unit in this section targeting the Philistines."
+    }
+  ]
+}

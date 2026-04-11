@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:04:30Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Nehemiah",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 19,
+  "verse_count": 19,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "dialogue",
+      "title": "Sanballat's Repeated Invitations",
+      "reason": "A continuous exchange of messages where Nehemiah resists Sanballat's attempts to lure him out of the wall construction."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 14,
+      "type": "story",
+      "title": "The Trap at Shemaiah's House",
+      "reason": "A narrative account of Nehemiah recognizing a false prophet sent to scare him into the temple and his subsequent prayer for judgment."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Completion of the Wall",
+      "reason": "A summary statement describing the completion of the wall in fifty-two days and the reaction of the surrounding nations."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 19,
+      "type": "argument",
+      "title": "Nobles' Alliance with Tobiah",
+      "reason": "An explanation of the political and familial ties between the nobles of Judah and Tobiah that undermined Nehemiah's leadership."
+    }
+  ]
+}

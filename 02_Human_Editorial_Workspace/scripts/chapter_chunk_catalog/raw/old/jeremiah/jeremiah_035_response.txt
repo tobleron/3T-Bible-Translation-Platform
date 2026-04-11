@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Jeremiah and the Rechabites",
+      "reason": "Narrative account of Jeremiah bringing the Rechabites to the temple and their refusal of wine."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "argument",
+      "title": "Judah's Failure Compared to Rechabites",
+      "reason": "Yahweh's oracle contrasting the obedience of the Rechabites with Judah's disobedience."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "Promise to the Rechabites",
+      "reason": "Jeremiah's declaration of Yahweh's promise regarding the lineage of Jonadab."
+    }
+  ]
+}

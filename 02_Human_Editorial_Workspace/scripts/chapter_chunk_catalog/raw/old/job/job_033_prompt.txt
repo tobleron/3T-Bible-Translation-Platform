@@ -1,0 +1,82 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 33:1-33
+
+Chapter text:
+1. “However now, Job, please hear my speech, And give ear to all my words.
+2. Behold now, I open my mouth; My tongue in my mouth speaks.
+3. My words are from the uprightness of my heart, And my lips speak knowledge sincerely.
+4. The Spirit of God has made me, And the breath of the Almighty gives me life.
+5. Respond to me if you can; Arrange yourselves before me, take your stand.
+6. Behold, I belong to God like you; I too have been formed out of the clay.
+7. Behold, no dread of me should terrify you, Nor should my pressure weigh heavily on you.
+8. “Surely you have spoken in my hearing, And I have heard the sound of your speech:
+9. ‘I am pure, without transgression; I am innocent, and there is no guilt in me.
+10. Behold, He finds reasons for opposition against me; He counts me as His enemy.
+11. He puts my feet in the stocks; He keeps watch over all my paths.’
+12. Behold, let me answer you; you are not right in this, For God is greater than mortal man.
+13. “Why do you contend against Him? For He does not give an answer for all His doings.
+14. Indeed God speaks once, Or twice, yet no one perceives it.
+15. In a dream, a vision of the night, When deep sleep falls on men, While they slumber in their beds,
+16. Then He opens the ears of men, And seals in their discipline,
+17. That He may turn man aside from his conduct, And keep man from pride;
+18. He holds back his soul from the pit, And his life from passing over to death by a weapon.
+19. “Man is also reproved with pain on his bed, And with unceasing contention in his bones,
+20. So that his life loathes bread, And his soul favorite food.
+21. His flesh wastes away from sight, And his bones which were not seen stick out.
+22. Then his soul draws near to the pit, And his life to those who bring death.
+23. “If there is an angel as mediator for him, One out of a thousand, To declare to a man what is right for him,
+24. Then let him be gracious to him, and say, ‘Deliver him from going down to the pit; I have found atonement’;
+25. Let his flesh become fresher than in youth, Let him return to the days of his youthful vigor;
+26. Then he will entreat God, and He will accept him, And he will see His face with joyful shouts, And He may restore His righteousness to man.
+27. He will sing to men and say, ‘I have sinned and perverted what is right, But He has not done what is due to me.
+28. He has redeemed my soul from passing into the pit, And my life shall see the light.’
+29. “Behold, God does all these things twice, three times with men,
+30. To bring back his soul from the pit, That he may be enlightened with the light of life.
+31. Pay attention, O Job, listen to me; Keep silent, and I will speak.
+32. Then if you have any speech, respond to me; Speak, for I desire to prove you righteous.
+33. If not, listen to me; Keep silent, and I will teach you wisdom.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

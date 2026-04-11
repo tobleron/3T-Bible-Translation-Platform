@@ -96,7 +96,7 @@ class ChapterChunkBatch:
             source_repository=self.source_repo,
             lexical_repository=self.lexical_repo,
         )
-        self.llm = LlamaCppClient(base_url=args.base_url)
+        self.llm = LlamaCppClient(base_url=args.base_url, api_key=args.api_key)
         self.schema_prompt = (
             self.paths.chunking_prompts_dir / "chunk_schema.txt"
         ).read_text(encoding="utf-8")
@@ -583,7 +583,8 @@ def parse_args() -> argparse.Namespace:
         default=str(script_dir / "chapter_chunk_catalog"),
         help="Directory for generated chapter chunk files and logs.",
     )
-    parser.add_argument("--base-url", default="http://192.168.1.186:8080")
+    parser.add_argument("--base-url", default="http://192.168.1.186:8081/v1")
+    parser.add_argument("--api-key", help="API key for the auth proxy.")
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--max-tokens", type=int, default=1800)
     parser.add_argument("--max-attempts", type=int, default=3)

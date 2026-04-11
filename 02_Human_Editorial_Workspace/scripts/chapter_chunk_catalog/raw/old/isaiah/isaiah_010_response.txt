@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "oracle",
+      "title": "Woe to the Oppressors",
+      "reason": "A prophetic oracle pronouncing judgment on corrupt judges and leaders."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 19,
+      "type": "speech",
+      "title": "Assyria as God's Rod",
+      "reason": "A speech describing Assyria's role as an instrument of judgment and its subsequent pride."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 26,
+      "type": "oracle",
+      "title": "The Remnant Returns",
+      "reason": "An oracle concerning the future hope of Israel's remnant and God's deliverance."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 34,
+      "type": "story",
+      "title": "The Fall of Assyria",
+      "reason": "A narrative description of the Assyrian army's advance and final destruction."
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezekiel 17:1-24
+
+Chapter text:
+1. Now the word of Yahweh came to me saying,
+2. “Son of man, propound a riddle and speak a parable to the house of Israel,
+3. and you will say, ‘Thus says Lord Yahweh, “A great eagle with great wings, long pinions, and a full plumage of many colors came to Lebanon and took away the top of the cedar.
+4. He plucked off the topmost of its young twigs and brought it to a land of merchants; he set it in a city of traders.
+5. He also took some of the seed of the land and planted it in a field fit for seed. He placed it beside abundant waters; he set it like a willow.
+6. Then it sprouted and became a low, spreading vine with its foliage turned toward him, but its roots remained under it. So it became a vine and yielded shoots and sent out branches.
+7. “But there was another great eagle with great wings and much plumage; and behold, this vine bent its roots toward him and sent out its foliage toward him from the beds where it was planted, that he might water it.
+8. It was planted in a good field beside abundant waters, that it might yield branches and bear fruit and become a majestic vine.”’
+9. Say, ‘Thus says Lord Yahweh, “Will it succeed? Will he not pull up its roots and cut off its fruit, so that it dries up—so that all its sprouting leaves dry up? And neither by great strength nor by many people can it be raised from its roots again.
+10. And behold, though it is planted, will it succeed? Will it not completely dry up as soon as the east wind strikes it—dry up on the beds where it sprouted?”’”
+11. Moreover, the word of Yahweh came to me, saying,
+12. “Say now to the rebellious house, ‘Do you not know what these things mean?’ Say, ‘Behold, the king of Babylon came to Jerusalem, took its king and princes, and brought them to him in Babylon.
+13. He took one of the royal seed and cut a covenant with him and brought him under oath. He also took away the dominant one of the land,
+14. that the kingdom might become lowly, not lifting itself up, but keeping his covenant that it might continue.
+15. But he rebelled against him by sending his messengers to Egypt that they might give him horses and many troops. Will he succeed? Will he who does such things escape? Can he indeed break the covenant and escape?
+16. As I live,’ declares Lord Yahweh, ‘Surely in the country of the king who made him king, whose oath he despised and whose covenant he broke, in Babylon he shall die.
+17. And Pharaoh with his mighty military force and great assembly will not help him in the war, when they cast up ramps and build siege walls to cut off many lives.
+18. Now he despised the oath by breaking the covenant, and behold, he pledged his allegiance, yet did all these things; he shall not escape.’”
+19. Therefore, thus says Lord Yahweh, “As I live, surely My oath which he despised and My covenant which he broke, I will put on his head.
+20. I will spread My net over him, and he will be caught in My snare. Then I will bring him to Babylon and enter into judgment with him there regarding the unfaithful act which he has committed against Me.
+21. All the choice men in all his troops will fall by the sword, and the remnant will be scattered to every wind; and you will know that I, Yahweh, have spoken.”
+22. Thus says Lord Yahweh, “I will also take a sprig from the lofty top of the cedar and set it out; I will pluck from the topmost of its young twigs a tender one, and I will plant it on an exalted and lofty mountain.
+23. On the high mountain of Israel I will plant it, that it may lift up boughs and yield fruit and become a majestic cedar. And birds of every kind will dwell under it; they will dwell in the shade of its branches.
+24. And all the trees of the field will know that I am Yahweh; I bring down the exalted tree, exalt the low tree, dry up the green tree, and make the dry tree flourish. I am Yahweh; I have spoken, and I will do it.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

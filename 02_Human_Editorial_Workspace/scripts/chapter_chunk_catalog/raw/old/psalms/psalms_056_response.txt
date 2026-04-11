@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "psalm",
+      "title": "Trust in God Amid Oppression",
+      "reason": "The psalmist introduces his distress and declares trust in God despite daily attacks."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "psalm",
+      "title": "God's Care for the Suffering",
+      "reason": "The text describes the enemies' schemes and affirms God's intimate record of the psalmist's tears."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "psalm",
+      "title": "Vows and Deliverance",
+      "reason": "The psalmist repeats his trust, promises thank offerings, and celebrates God's deliverance from death."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Call to the Land of Whirring Wings",
+      "reason": "A prophetic address to a distant nation and all inhabitants of the earth regarding an impending sign."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "Oracle of Yahweh's Quiet Judgment",
+      "reason": "Yahweh reveals His plan to observe quietly and then prune the nation like a vineyard."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 7,
+      "type": "story",
+      "title": "The Gift of Homage at Mount Zion",
+      "reason": "A concluding narrative statement describing the future submission of the nation to Yahweh."
+    }
+  ]
+}

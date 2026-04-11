@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "The Servant's Call and Mission",
+      "reason": "A continuous speech by the Servant describing his divine calling and expanding mission to the nations."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "oracle",
+      "title": "Promise of Restoration and Joy",
+      "reason": "An oracle from Yahweh promising covenant restoration, physical comfort for the exiles, and universal rejoicing."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 23,
+      "type": "dialogue",
+      "title": "Zion's Lament and Yahweh's Comfort",
+      "reason": "A dialogue where Zion questions God's presence and Yahweh responds with promises of return and honor."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 26,
+      "type": "argument",
+      "title": "The Victory over the Mighty",
+      "reason": "An argumentative conclusion asserting God's power to rescue captives and judge oppressors."
+    }
+  ]
+}

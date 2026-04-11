@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Call to Zion's Awakening",
+      "reason": "A unified exhortation calling Jerusalem to rise and a declaration of redemption."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "The Messenger and the Departure",
+      "reason": "A prophetic vision of the messenger's arrival followed by instructions for the people to leave."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "The Suffering Servant",
+      "reason": "A distinct oracle describing the exaltation and suffering of Yahweh's Servant."
+    }
+  ]
+}

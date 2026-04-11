@@ -1,0 +1,84 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 3:1-35
+
+Chapter text:
+1. My son, do not forget my law, But let your heart guard my commandments;
+2. For length of days and years of life And peace they will add to you.
+3. Do not let lovingkindness and truth forsake you; Bind them around your neck, Write them on the tablet of your heart.
+4. So you will find favor and good insight In the eyes of God and man.
+5. Trust in Yahweh with all your heart And do not lean on your own understanding.
+6. In all your ways acknowledge Him, And He will make your paths straight.
+7. Do not be wise in your own eyes; Fear Yahweh and turn away from evil.
+8. It will be healing to your body And refreshment to your bones.
+9. Honor Yahweh from your wealth And from the first of all your produce;
+10. So your barns will be filled with plenty And your vats will burst with new wine.
+11. My son, do not reject the discipline of Yahweh Or loathe His reproof,
+12. For whom Yahweh loves He reproves, Even as a father reproves the son in whom he delights.
+13. How blessed is the man who finds wisdom And the man who obtains discernment.
+14. For her profit is better than the profit of silver And her produce better than fine gold.
+15. She is more precious than pearls; And nothing you desire compares with her.
+16. Length of days is in her right hand; In her left hand are riches and glory.
+17. Her ways are pleasant ways And all her pathways are peace.
+18. She is a tree of life to those who seize her, And all those who hold her fast are blessed.
+19. Yahweh by wisdom founded the earth, By discernment He established the heavens.
+20. By His knowledge the deeps were split up And the skies drip with dew.
+21. My son, let them not deviate from your eyes; Guard sound wisdom and discretion,
+22. So they will be life for your soul And grace for your neck.
+23. Then you will walk in your way securely And your foot will not stumble.
+24. When you lie down, you will not be in dread; You will lie down, and your sleep will be pleasant.
+25. Do not be afraid of sudden dread Nor of the storm of the wicked when it comes;
+26. For Yahweh will be your confidence And will keep your foot from being caught.
+27. Do not withhold good from those to whom it is due, When it is in your hand to do it.
+28. Do not say to your neighbor, “Go, and come back, And tomorrow I will give it,” When it is there with you.
+29. Do not devise harm against your neighbor, While he lives securely beside you.
+30. Do not contend with a man without cause, If he has dealt you no harm.
+31. Do not envy a man of violence And do not choose any of his ways.
+32. For the devious one is an abomination to Yahweh; But His secret council is with the upright.
+33. The curse of Yahweh is on the house of the wicked one, But He blesses the abode of the righteous.
+34. Though He scoffs at the scoffers, Yet He gives grace to the humble.
+35. The wise will inherit glory, But fools raise up disgrace.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

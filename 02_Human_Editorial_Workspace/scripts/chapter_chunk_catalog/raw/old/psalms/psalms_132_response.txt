@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "David's Vow for the Ark",
+      "reason": "David recounts his personal oath to find a dwelling place for God."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "exhortation",
+      "title": "Call to Worship at Zion",
+      "reason": "The community responds to the vow and calls for God's presence."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "The Davidic Covenant",
+      "reason": "God's sworn promise to establish David's lineage on the throne."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "blessing_or_prayer",
+      "title": "God's Choice of Zion",
+      "reason": "God declares His choice of Zion and promises blessing to the city and David."
+    }
+  ]
+}

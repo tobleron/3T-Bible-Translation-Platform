@@ -1,0 +1,63 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 27:1-14
+
+Chapter text:
+1. Of David. Yahweh is my light and my salvation; Whom shall I fear? Yahweh is the strong defense of my life; Whom shall I dread?
+2. When evildoers came upon me to devour my flesh, My adversaries and my enemies, they stumbled and fell.
+3. Though a host encamp against me, My heart will not fear; Though war arise against me, In this I trust.
+4. One thing I have asked from Yahweh, that I shall seek: That I may dwell in the house of Yahweh all the days of my life, To behold the beauty of Yahweh And to inquire in His temple.
+5. For in the day of calamity He will conceal me in His shelter; In the secret place of His tent He will hide me; He will lift me up on a rock.
+6. And now my head will be lifted up above my enemies around me, And I will offer in His tent sacrifices with loud shouts of joy; I will sing, and I will sing praises to Yahweh.
+7. Hear, O Yahweh, when I call with my voice, And be gracious to me and answer me.
+8. On Your behalf my heart says, “Seek My face,” “Your face, O Yahweh, I shall seek.”
+9. Do not hide Your face from me, Do not turn Your slave away in anger; You have been my help; Do not abandon me and do not forsake me, O God of my salvation!
+10. For my father and my mother have forsaken me, But Yahweh will take me up.
+11. Instruct me in Your way, O Yahweh, And lead me in a level path Because of my foes.
+12. Do not give me over to the desire of my adversaries, For false witnesses have risen against me, And such as breathe out violence.
+13. I would have despaired unless I had believed that I would see the goodness of Yahweh In the land of the living.
+14. Hope in Yahweh; Be strong and let your heart take courage; Hope in Yahweh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

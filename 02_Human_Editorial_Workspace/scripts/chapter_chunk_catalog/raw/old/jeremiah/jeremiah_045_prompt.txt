@@ -1,0 +1,54 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 45:1-5
+
+Chapter text:
+1. This is the message which Jeremiah the prophet spoke to Baruch the son of Neriah, when he had written down these words in a book at Jeremiah’s dictation, in the fourth year of Jehoiakim the son of Josiah, king of Judah, saying:
+2. “Thus says Yahweh the God of Israel to you, O Baruch:
+3. ‘You said, “Ah, woe is me! For Yahweh has added sorrow to my pain; I am weary with my sighing and have found no rest.”’
+4. Thus you are to say to him, ‘Thus says Yahweh, “Behold, what I have built I am about to pull down, and what I have planted I am about to uproot, that is, the whole land.”
+5. But as for you, are you seeking great things for yourself? Do not seek them; for behold, I am going to bring calamity on all flesh,’ declares Yahweh, ‘but I will give your life to you as spoil in all the places where you may go.’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

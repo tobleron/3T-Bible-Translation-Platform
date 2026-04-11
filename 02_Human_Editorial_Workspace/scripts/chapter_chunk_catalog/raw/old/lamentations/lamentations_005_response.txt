@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Lament over the Nation's Suffering",
+      "reason": "A continuous first-person plural description of the physical and social devastation following the exile."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Restoration",
+      "reason": "A direct address to Yahweh acknowledging His eternal throne and pleading for renewal despite current rejection."
+    }
+  ]
+}

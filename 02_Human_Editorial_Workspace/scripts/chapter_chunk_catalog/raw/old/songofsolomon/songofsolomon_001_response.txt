@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "blessing_or_prayer",
+      "title": "Opening Invocation and Praise",
+      "reason": "The chapter begins with a title followed by the bride's prayer for intimacy and mutual praise of love."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Bride's Self-Description and Search",
+      "reason": "The bride describes her appearance and condition while asking the beloved for his location."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Exchange of Affirmations and Metaphors",
+      "reason": "The beloved responds with instructions and comparisons, followed by the bride's poetic metaphors."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 17,
+      "type": "speech",
+      "title": "Mutual Praise of Beauty and Home",
+      "reason": "The couple exchanges compliments on each other's beauty and describes their dwelling place."
+    }
+  ]
+}

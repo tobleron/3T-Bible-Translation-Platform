@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T12:11:49Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezekiel",
+  "chapter": 10,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "vision",
+      "title": "The Throne and the Coals",
+      "reason": "Describes the appearance of the throne above the cherubim and the command to scatter fire."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 17,
+      "type": "vision",
+      "title": "The Wheels and Living Creatures",
+      "reason": "Details the structure of the wheels, their movement, and the connection between the creatures and the wheels."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 22,
+      "type": "vision",
+      "title": "Departure of Glory",
+      "reason": "Records the departure of Yahweh's glory from the temple and identifies the living creatures as cherubim."
+    }
+  ]
+}

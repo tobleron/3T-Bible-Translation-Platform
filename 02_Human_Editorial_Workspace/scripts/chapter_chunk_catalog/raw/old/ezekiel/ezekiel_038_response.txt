@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Call to Prophesy Against Gog",
+      "reason": "Introduction of the oracle and description of Gog's assembled forces."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "dialogue",
+      "title": "Gog's Plan and Merchant Reaction",
+      "reason": "Shift to Gog's internal thoughts and the merchants' questioning of his motives."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Divine Judgment on Gog",
+      "reason": "Yahweh's response detailing the timing, cosmic signs, and final judgment."
+    }
+  ]
+}

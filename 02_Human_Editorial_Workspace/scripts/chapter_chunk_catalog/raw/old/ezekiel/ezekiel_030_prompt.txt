@@ -1,0 +1,75 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezekiel 30:1-26
+
+Chapter text:
+1. The word of Yahweh came again to me saying,
+2. “Son of man, prophesy and say, ‘Thus says Lord Yahweh, “Wail, ‘Alas for the day!’
+3. For the day is near, Even the day of Yahweh is near; It will be a day of clouds, A time of doom for the nations.
+4. A sword will come upon Egypt, And anguish will be in Ethiopia; When the slain fall in Egypt, They take away her multitude, And her foundations are pulled down.
+5. Ethiopia, Put, Lud, all Arabia, Libya, and the people of the land that is in covenant will fall with them by the sword.”
+6. ‘Thus says Yahweh, “Indeed, those who support Egypt will fall, And the pride of her strength will come down; From Migdol to Syene They will fall within her by the sword,” Declares Lord Yahweh.
+7. “They will be desolate In the midst of the desolated lands; And her cities will be In the midst of the cities laid waste.
+8. And they will know that I am Yahweh, When I set a fire in Egypt And all her helpers are broken.
+9. On that day messengers will go forth from Me in ships to frighten secure Ethiopia; and anguish will be on them as on the day of Egypt; for behold, it is coming!”
+10. ‘Thus says Lord Yahweh, “I will also make the multitude of Egypt cease By the hand of Nebuchadnezzar king of Babylon.
+11. He and his people with him, The most ruthless of the nations, Will be brought in to make the land a ruin; And they will draw their swords against Egypt And fill the land with the slain.
+12. Moreover, I will make the canals of the Nile dry And sell the land into the hands of evil men. And I will make the land desolate, As well as its fullness, By the hand of strangers; I, Yahweh, have spoken.”
+13. ‘Thus says Lord Yahweh, “I will also destroy the idols And make the images cease from Memphis. And there will no longer be a prince in the land of Egypt; And I will put fear in the land of Egypt.
+14. I will make Pathros desolate, Set a fire in Zoan, And execute judgments on Thebes.
+15. I will pour out My wrath on Sin, The strong defense of Egypt; I will also cut off the multitude of Thebes.
+16. I will set a fire in Egypt; Sin will writhe in anguish; Thebes will be breached, And Memphis will have distresses daily.
+17. The choice men of On and of Pi‑beseth Will fall by the sword, And the women will go into captivity.
+18. In Tehaphnehes the day will be dark When I break there the bars of the yoke of Egypt. Then the pride of her strength will cease in her; A cloud will cover her, And her daughters will go into captivity.
+19. Thus I will execute judgments on Egypt, And they will know that I am Yahweh.”’”
+20. In the eleventh year, in the first month, on the seventh of the month, the word of Yahweh came to me saying,
+21. “Son of man, I have broken the arm of Pharaoh king of Egypt; and behold, it has not been bound up to be given healing or wrapped with a bandage, that it may be strong to seize the sword.
+22. Therefore thus says Lord Yahweh, ‘Behold, I am against Pharaoh king of Egypt and will break his arms, both the strong and the broken; and I will make the sword fall from his hand.
+23. I will scatter the Egyptians among the nations and disperse them among the lands.
+24. For I will strengthen the arms of the king of Babylon and put My sword in his hand; and I will break the arms of Pharaoh so that he will groan before him with the groanings of a wounded man.
+25. Thus I will strengthen the arms of the king of Babylon, but the arms of Pharaoh will fall. Then they will know that I am Yahweh, when I put My sword into the hand of the king of Babylon and he stretches it out against the land of Egypt.
+26. When I scatter the Egyptians among the nations and disperse them among the lands, then they will know that I am Yahweh.’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

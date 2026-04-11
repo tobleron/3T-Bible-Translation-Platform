@@ -1,0 +1,83 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 52:1-34
+
+Chapter text:
+1. Zedekiah was twenty-one years old when he became king, and he reigned eleven years in Jerusalem; and his mother’s name was Hamutal the daughter of Jeremiah of Libnah.
+2. And he did what was evil in the sight of Yahweh, according to all that Jehoiakim had done.
+3. For through the anger of Yahweh this came about in Jerusalem and Judah until He cast them out from His presence. And Zedekiah rebelled against the king of Babylon.
+4. Now it happened in the ninth year of his reign, on the tenth day of the tenth month, that Nebuchadnezzar king of Babylon came, he and all his military force, against Jerusalem, and they camped against it and built a siege wall all around it.
+5. So the city came under siege until the eleventh year of King Zedekiah.
+6. On the ninth day of the fourth month, the famine was so strong in the city that there was no food for the people of the land.
+7. Then the city was breached, and all the men of war fled and went forth from the city at night by way of the gate between the two walls which was by the king’s garden, though the Chaldeans were all around the city. And they went by way of the Arabah.
+8. But the military force of the Chaldeans pursued the king and overtook Zedekiah in the plains of Jericho, and all his military force was scattered from him.
+9. Then they seized the king and brought him up to the king of Babylon at Riblah in the land of Hamath, and he spoke his judgment on him.
+10. Then the king of Babylon slaughtered the sons of Zedekiah before his eyes, and he also slaughtered all the princes of Judah in Riblah.
+11. Then he blinded the eyes of Zedekiah; and the king of Babylon bound him with bronze fetters and brought him to Babylon and put him in prison until the day of his death.
+12. Now on the tenth day of the fifth month, which was the nineteenth year of King Nebuchadnezzar, king of Babylon, Nebuzaradan the captain of the bodyguard, who stood before the king of Babylon, came to Jerusalem.
+13. And he burned the house of Yahweh, the king’s house, and all the houses of Jerusalem; even every large house he burned with fire.
+14. So all the military force of the Chaldeans who were with the captain of the guard tore down all the walls around Jerusalem.
+15. Then Nebuzaradan the captain of the guard took away into exile some of the poorest of the people, the rest of the people who remained in the city, the defectors who had defected to the king of Babylon, and the rest of the artisans.
+16. But Nebuzaradan the captain of the guard had some of the poorest of the land remain to be vinedressers and plowmen.
+17. Now the bronze pillars which belonged to the house of Yahweh and the stands and the bronze sea, which were in the house of Yahweh, the Chaldeans shattered and carried all their bronze to Babylon.
+18. They also took away the pots, the shovels, the snuffers, the bowls, the pans, and all the bronze vessels which were used to minister.
+19. And the captain of the guard also took away the cups, the firepans, the bowls, the pots, the lampstands, the pans, and the offering bowls, what was fine gold and what was fine silver.
+20. The two pillars, the one sea, and the twelve bronze bulls that were under the sea, and the stands, which King Solomon had made for the house of Yahweh—the bronze of all these vessels was beyond weight.
+21. As for the pillars, the height of each pillar was eighteen cubits, and it was twelve cubits in circumference and four fingers in thickness, and hollow.
+22. Now a capital of bronze was on it; and the height of each capital was five cubits, with network and pomegranates upon the capital all around, all of bronze. And the second pillar was like these, including pomegranates.
+23. There were ninety-six exposed pomegranates; all the pomegranates numbered one hundred on the network all around.
+24. Then the captain of the guard took Seraiah the chief priest and Zephaniah the second priest, with the three doorkeepers of the temple.
+25. And from the city he took one official who was overseer of the men of war, and seven of the king’s advisers who were found in the city, and the scribe of the commander of the army who mustered the people of the land, and sixty men of the people of the land who were found in the midst of the city.
+26. And Nebuzaradan the captain of the guard took them and led them to the king of Babylon at Riblah.
+27. Then the king of Babylon struck them down and put them to death at Riblah in the land of Hamath. So Judah went into exile from its land.
+28. These are the people whom Nebuchadnezzar took away into exile: in the seventh year 3,023 Jews;
+29. in the eighteenth year of Nebuchadnezzar 832 persons from Jerusalem;
+30. in the twenty-third year of Nebuchadnezzar, Nebuzaradan the captain of the guard took away into exile 745 Jewish people; there were 4,600 persons in all.
+31. Now it happened in the thirty-seventh year of the exile of Jehoiachin king of Judah, in the twelfth month, on the twenty-fifth of the month, that Evil-merodach king of Babylon, in the first year of his reign, lifted up the head of Jehoiachin king of Judah and brought him out of prison;
+32. and he spoke to him good words, and he set his throne above the throne of the kings who were with him in Babylon.
+33. So Jehoiachin changed his prison clothes and had his meals in the king’s presence continually all the days of his life.
+34. For his allowance, a continual allowance was given him by the king of Babylon, a daily portion all the days of his life until the day of his death.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "list_or_catalog",
+      "title": "Selection and Organization of Musicians",
+      "reason": "Describes the selection of sons of Asaph, Heman, and Jeduthun for temple service and their total number."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 31,
+      "type": "list_or_catalog",
+      "title": "Casting Lots for Duties",
+      "reason": "Details the casting of lots to assign responsibilities among the twenty-four groups of musicians."
+    }
+  ]
+}

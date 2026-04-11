@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:09:23Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Nehemiah",
+  "chapter": 9,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 38,
+  "verse_count": 38,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Gathering and Invocation",
+      "reason": "Describes the assembly of Israel for fasting and confession, followed by the Levites' call to bless God."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "God's Creation and Covenant with Abraham",
+      "reason": "A prayer recounting God as Creator and His specific covenant actions with Abraham."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 31,
+      "type": "speech",
+      "title": "History of Israel's Rebellion and Deliverance",
+      "reason": "A detailed historical review of Israel's cycles of disobedience and God's faithful deliverance in the wilderness and conquest."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 37,
+      "type": "speech",
+      "title": "Confession of Current Hardship",
+      "reason": "The people acknowledge God's righteousness while confessing their current state of slavery and distress."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 38,
+      "type": "story",
+      "title": "Sealing the Agreement",
+      "reason": "Concludes the chapter with the action of sealing a written covenant document."
+    }
+  ]
+}

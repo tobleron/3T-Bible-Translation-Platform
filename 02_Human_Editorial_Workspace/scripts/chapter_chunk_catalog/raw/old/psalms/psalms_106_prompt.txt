@@ -1,0 +1,97 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 106:1-48
+
+Chapter text:
+1. Praise Yah! Oh give thanks to Yahweh, for He is good; For His lovingkindness endures forever.
+2. Who can speak of the mighty deeds of Yahweh, Or can make all His praise to be heard?
+3. How blessed are those who keep justice, And he who does righteousness at all times!
+4. Remember me, O Yahweh, in Your favor toward Your people; Visit me with Your salvation,
+5. That I may see the goodness of Your chosen ones, That I may rejoice in the gladness of Your nation, That I may boast with Your inheritance.
+6. We have sinned with our fathers, We have committed iniquity, we have acted wickedly.
+7. Our fathers in Egypt did not consider Your wondrous deeds; They did not remember Your abundant lovingkindnesses, But they rebelled by the sea, at the Red Sea.
+8. Yet He saved them for the sake of His name, That He might make His might known.
+9. Thus He rebuked the Red Sea and it dried up, And He led them through the deeps, as through the wilderness.
+10. So He saved them from the hand of the one who hated them, And redeemed them from the hand of the enemy.
+11. The waters covered their adversaries; Not one of them was left.
+12. Then they believed His words; They sang His praise.
+13. They quickly forgot His works; They did not wait for His counsel,
+14. But craved intensely in the wilderness, And put God to the test in the wasteland.
+15. So He gave them their request, But sent a wasting disease against their lives.
+16. Then they became envious of Moses in the camp, And of Aaron, the holy one of Yahweh,
+17. The earth opened and swallowed up Dathan, And covered up the company of Abiram.
+18. And a fire burned up in their company; The flame consumed the wicked.
+19. They made a calf in Horeb And worshiped a molten image.
+20. Thus they exchanged their glory For the image of an ox that eats grass.
+21. They forgot God their Savior, Who had done great things in Egypt,
+22. Wondrous deeds in the land of Ham And awesome things by the Red Sea.
+23. Therefore He said that He would destroy them, Had not Moses His chosen one stood in the breach before Him, To turn away His wrath from eradicating them.
+24. Then they despised the pleasant land; They did not believe in His word,
+25. But grumbled in their tents; They did not listen to the voice of Yahweh.
+26. So He swore to them To make them fall in the wilderness,
+27. And to make their seed fall among the nations And to scatter them in the lands.
+28. They then joined themselves to Baal‑peor, And ate sacrifices offered to the dead.
+29. Thus they provoked Him to anger with their actions, And the plague broke out among them.
+30. Then Phinehas stood up and interceded, And so the plague was checked.
+31. And it was counted to him for righteousness, From generation to generation forever.
+32. They also provoked Him to wrath at the waters of Meribah, So that it went badly with Moses on their account;
+33. Because they were rebellious against His Spirit, He spoke rashly with his lips.
+34. They did not destroy the peoples, As Yahweh commanded them,
+35. But they mingled with the nations And learned their works,
+36. And served their idols, Which became a snare to them.
+37. They sacrificed their sons and their daughters to the demons,
+38. And they shed innocent blood, The blood of their sons and their daughters, Whom they sacrificed to the idols of Canaan; And the land was polluted with the blood.
+39. Thus they became unclean in their works, And played the harlot in their actions.
+40. So the anger of Yahweh was kindled against His people And He abhorred His inheritance.
+41. Then He gave them into the hand of the nations, And those who hated them ruled over them.
+42. Their enemies oppressed them, And they were subdued under their hand.
+43. Many times He would deliver them; But they were rebellious in their counsel, And so they sank down in their iniquity.
+44. Nevertheless He looked upon their distress When He heard their cry of lamentation;
+45. And He remembered for them His covenant, And relented according to the abundance of His lovingkindness.
+46. He also made them objects of compassion In the presence of all their captors.
+47. Save us, O Yahweh our God, And gather us from among the nations, To give thanks to Your holy name And revel in Your praise.
+48. Blessed be Yahweh, the God of Israel, From everlasting to everlasting. And let all the people say, “Amen.” Praise Yah!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

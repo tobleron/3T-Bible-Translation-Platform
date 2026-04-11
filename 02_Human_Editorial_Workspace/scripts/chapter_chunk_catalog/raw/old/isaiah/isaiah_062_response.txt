@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "oracle",
+      "title": "Promise of Restoration for Zion",
+      "reason": "A unified prophetic declaration describing God's commitment to restore Jerusalem's glory and relationship with Him."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "exhortation",
+      "title": "Call for Watchmen",
+      "reason": "A specific instruction to appointed watchmen to persistently pray for Jerusalem's establishment."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 9,
+      "type": "oracle",
+      "title": "Assurance of Provision",
+      "reason": "A divine oath guaranteeing that the people will enjoy their harvest rather than their enemies."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "exhortation",
+      "title": "Preparation for Return",
+      "reason": "A call to clear the way and announce the coming salvation and new identity of the people."
+    }
+  ]
+}

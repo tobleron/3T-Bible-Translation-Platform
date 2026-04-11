@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Nehemiah 1:1-11
+
+Chapter text:
+1. The words of Nehemiah the son of Hacaliah. Now it happened in the month Chislev, in the twentieth year—and I was in Susa the capitol—
+2. that Hanani, one of my brothers, and some men from Judah came; and I asked them concerning the Jews who had escaped and remain from the captivity, and about Jerusalem.
+3. They said to me, “The remnant there in the province who remain from the captivity are in great calamity and reproach, and the wall of Jerusalem is broken down and its gates are burned with fire.”
+4. Now it happened that when I heard these words, I sat down and wept and mourned for days; and I was fasting and praying before the God of heaven.
+5. I said, “I beseech You, O Yahweh, the God of heaven, the great and fearsome God, who keeps the covenant and lovingkindness for those who love Him and keep His commandments,
+6. let Your ear now be attentive and Your eyes open to hear the prayer of Your slave which I am praying before You today, day and night, on behalf of the sons of Israel Your slaves, confessing the sins of the sons of Israel which we have sinned against You; I and my father’s house have sinned.
+7. We have worked in utter destruction against You and have not kept the commandments, nor the statutes, nor the judgments which You commanded Your servant Moses.
+8. Remember the word which You commanded Your servant Moses, saying, ‘If you are unfaithful, I will scatter you among the peoples;
+9. but if you return to Me and keep My commandments and do them, though those of you who have been banished were at the ends of the sky, I will gather them from there and will bring them to the place where I have chosen to cause My name to dwell.’
+10. They are Your slaves and Your people whom You redeemed by Your great power and by Your strong hand.
+11. O Lord, I beseech You, may Your ear be attentive to the prayer of Your slave and the prayer of Your slaves who delight to fear Your name, and make Your slave successful today and grant him compassion before this man.” Now I was the cupbearer to the king.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

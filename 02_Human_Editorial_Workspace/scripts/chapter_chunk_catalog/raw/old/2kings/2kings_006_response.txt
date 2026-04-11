@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "The Floating Axe Head",
+      "reason": "A complete narrative unit describing the sons of prophets cutting wood and Elisha restoring a lost axe head."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Elisha's Capture and Release of Arameans",
+      "reason": "A continuous narrative covering the Aramean siege of Dothan, Elisha's vision of chariots, the blinding of the army, and their release in Samaria."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 33,
+      "type": "story",
+      "title": "The Siege of Samaria and Elisha's Oracle",
+      "reason": "A complete narrative arc detailing the famine during the siege, the woman's complaint to the king, the king's curse on Elisha, and Elisha's final prophecy."
+    }
+  ]
+}

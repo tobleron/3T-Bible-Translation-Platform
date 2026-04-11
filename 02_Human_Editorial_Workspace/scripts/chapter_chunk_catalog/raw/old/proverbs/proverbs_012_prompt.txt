@@ -1,0 +1,77 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 12:1-28
+
+Chapter text:
+1. Whoever loves discipline loves knowledge, But he who hates reproof is senseless.
+2. A good man will obtain favor from Yahweh, But a man of evil schemes He will condemn.
+3. A man will not be established by wickedness, But the root of the righteous will not be shaken.
+4. An excellent wife is the crown of her husband, But she who causes shame is like rottenness in his bones.
+5. The thoughts of the righteous are just, But the guidance of the wicked is deceitful.
+6. The words of the wicked lie in wait for blood, But the mouth of the upright will deliver them.
+7. The wicked are overthrown and are no more, But the house of the righteous will stand.
+8. A man will be praised according to his insight, But one of perverse heart will be despised.
+9. Better is he who is lightly esteemed and has a servant Than he who honors himself and lacks bread.
+10. A righteous man knows the value of the life of his animal, But even the compassion of the wicked is cruel.
+11. He who cultivates his land will be satisfied with bread, But he who pursues empty things lacks a heart of wisdom.
+12. The wicked man desires a stronghold of evil men, But the root of the righteous gives fruit.
+13. The snare of an evil man is in the transgression of his lips, But the righteous man will come out from distress.
+14. A man will be satisfied with good by the fruit of his mouth, And the good deed of a man’s hands will return to him.
+15. The way of an ignorant fool is right in his own eyes, But a wise man is he who listens to counsel.
+16. An ignorant fool’s anger is known at once, But a prudent man conceals disgrace.
+17. He who breathes out truth declares what is right, But a false witness, deceit.
+18. There is one who speaks rashly like the thrusts of a sword, But the tongue of the wise brings healing.
+19. Truthful lips will be established forever, But a lying tongue is only for a moment.
+20. Deceit is in the heart of those who devise evil, But counselors of peace have gladness.
+21. No misfortune befalls the righteous, But the wicked are filled with calamity.
+22. Lying lips are an abomination to Yahweh, But doers of faithfulness are His delight.
+23. A prudent man conceals knowledge, But the heart of fools proclaims folly.
+24. The hand of the diligent will rule, But the slack hand will be put to forced labor.
+25. Anxiety in a man’s heart weighs it down, But a good word makes it glad.
+26. The righteous is a guide to his neighbor, But the way of the wicked makes them wander about.
+27. A slack handed man does not roast his prey, But the wealth of a man is precious for the diligent.
+28. In the path of righteousness is life, And in its pathway there is no death.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

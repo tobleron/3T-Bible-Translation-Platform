@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "blessing_or_prayer",
+      "title": "Introduction and Praise",
+      "reason": "The psalmist introduces the context of feigned madness and declares a commitment to bless Yahweh continually."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Testimony of Deliverance",
+      "reason": "A narrative section describing personal experience of Yahweh's answer and deliverance from dread and trouble."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 22,
+      "type": "exhortation",
+      "title": "Instruction on the Fear of Yahweh",
+      "reason": "A direct address to children and the community offering wisdom on speech, conduct, and the assurance of God's protection."
+    }
+  ]
+}

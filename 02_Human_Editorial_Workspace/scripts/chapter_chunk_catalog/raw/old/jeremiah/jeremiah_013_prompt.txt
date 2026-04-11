@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 13:1-27
+
+Chapter text:
+1. Thus Yahweh said to me, “Go and buy yourself a linen belt and put it around your loins, but do not put it in water.”
+2. So I bought the belt in accordance with the word of Yahweh and put it around my loins.
+3. Then the word of Yahweh came to me a second time, saying,
+4. “Take the belt that you have bought, which is around your loins, and arise, go to the Euphrates and hide it there in a crevice of the rock.”
+5. So I went and hid it by the Euphrates, as Yahweh had commanded me.
+6. Now it happened that after many days Yahweh said to me, “Arise, go to the Euphrates and take from there the belt which I commanded you to hide there.”
+7. Then I went to the Euphrates and dug, and I took the belt from the place where I had hidden it; and behold, the belt was ruined; it was totally worthless.
+8. Then the word of Yahweh came to me, saying,
+9. “Thus says Yahweh, ‘Just so will I ruin the pride of Judah and the great pride of Jerusalem.
+10. This evil people, who refuse to listen to My words, who walk in the stubbornness of their hearts and have walked after other gods to serve them and to worship them, let them be just like this belt which is totally worthless.
+11. For as the belt clings to the loins of a man, so I made the whole household of Israel and the whole household of Judah cling to Me,’ declares Yahweh, ‘that they might be for Me a people, for a name, for praise, and for beauty; but they did not listen.’
+12. “Therefore you are to say this word to them, ‘Thus says Yahweh, the God of Israel, “Every jug is to be filled with wine.”’ And they will say to you, ‘Do we not very well know that every jug is to be filled with wine?’
+13. Then you shall say to them, ‘Thus says Yahweh, “Behold, I am about to fill all the inhabitants of this land—the kings that sit for David on his throne, the priests, the prophets, and all the inhabitants of Jerusalem—with drunkenness!
+14. I will shatter them against each other, both the fathers and the sons together,” declares Yahweh. “I will not spare nor show pity nor have compassion so as not to ruin them.”’”
+15. Listen and give ear, do not be haughty, For Yahweh has spoken.
+16. Give glory to Yahweh your God, Before He brings darkness And before your feet stumble On the dusky mountains; And while you are hoping for light, He makes it into the shadow of death And turns it into dense gloom.
+17. But if you will not listen to it, My soul will cry in secret for such pride; And my eyes will bitterly weep And flow down with tears Because the flock of Yahweh has been taken captive.
+18. Say to the king and the queen mother, “Take a lowly seat, For your beautiful crown Has come down from your head.”
+19. The cities of the Negev have been closed up, And there is no one to open them; All Judah has been taken away into exile, Wholly taken away into exile.
+20. “Lift up your eyes and see Those coming from the north. Where is the flock that was given you, Your beautiful sheep?
+21. What will you say when He appoints over you— And you yourself had taught them— Former companions to be head over you? Will not pangs seize you Like a woman in childbirth?
+22. If you say in your heart, ‘Why have these things happened to me?’ Because of the magnitude of your iniquity Your skirts have been uncovered And your heels have suffered violence.
+23. Can the Ethiopian change his skin Or the leopard his spots? Then you also can do good Who are accustomed to doing evil.
+24. Therefore I will scatter them like chaff passing away Into the wilderness wind.
+25. This is your lot, the portion measured to you From Me,” declares Yahweh, “Because you have forgotten Me And trusted in lies.
+26. So I Myself have also stripped your skirts off over your face, That your disgrace may be seen.
+27. As for your adulteries and your lustful neighings, The lewdness of your prostitution On the hills in the field, I have seen your detestable things. Woe to you, O Jerusalem! How long will you not cleanse yourself?”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

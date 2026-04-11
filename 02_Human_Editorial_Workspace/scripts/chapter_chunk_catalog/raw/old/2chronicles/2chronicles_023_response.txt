@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Preparation for the Coronation",
+      "reason": "Describes Jehoiada's covenant with commanders and the organization of Levite guards."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Coronation and Overthrow of Athaliah",
+      "reason": "Narrates the crowning of Joash, Athaliah's discovery, and her execution."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 21,
+      "type": "mixed",
+      "title": "Covenant Renewal and Worship Restoration",
+      "reason": "Details the covenant between people and God, destruction of Baal's temple, and restoration of priestly duties."
+    }
+  ]
+}

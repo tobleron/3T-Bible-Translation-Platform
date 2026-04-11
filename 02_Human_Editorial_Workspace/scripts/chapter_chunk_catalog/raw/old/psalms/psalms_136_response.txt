@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "list_or_catalog",
+      "title": "Creation and God's Titles",
+      "reason": "Catalog of titles and creative acts with the refrain."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Exodus and Conquest History",
+      "reason": "Narrative of deliverance from Egypt and conquest of kings."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 26,
+      "type": "blessing_or_prayer",
+      "title": "General Deliverance and Thanksgiving",
+      "reason": "Summary of God's care for the people and final call to praise."
+    }
+  ]
+}

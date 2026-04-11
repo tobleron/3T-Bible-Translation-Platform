@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Divine Warning to Rehoboam",
+      "reason": "Contains the oracle from Yahweh through Shemaiah instructing Rehoboam not to fight Israel."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Rehoboam's Fortifications",
+      "reason": "Describes the building of fortified cities and military preparations in Judah."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Levites Join Rehoboam",
+      "reason": "Narrates the migration of priests and Levites to Judah and their strengthening of the kingdom."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 23,
+      "type": "genealogy",
+      "title": "Rehoboam's Family and Succession",
+      "reason": "Details Rehoboam's wives, children, and his plan for succession among his sons."
+    }
+  ]
+}

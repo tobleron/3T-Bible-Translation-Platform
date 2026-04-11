@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "argument",
+      "title": "The Curse of Unenjoyed Wealth",
+      "reason": "A complete argument contrasting a wealthy man who cannot enjoy his riches with a miscarriage that has more rest."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 9,
+      "type": "argument",
+      "title": "The Futility of Labor and Wisdom",
+      "reason": "A reflection on how labor fails to satisfy the soul and questions the advantage of wisdom over folly."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "The Limits of Human Knowledge",
+      "reason": "A concluding argument stating that existence is predetermined and humans cannot know what is truly good for them."
+    }
+  ]
+}

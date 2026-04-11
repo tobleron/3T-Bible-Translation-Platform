@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "oracle",
+      "title": "Woe to the Rebellious Children",
+      "reason": "A prophetic declaration of judgment against those who seek alliance with Egypt instead of trusting Yahweh."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 17,
+      "type": "speech",
+      "title": "The Oracle of the Beasts and the Rejection of God's Word",
+      "reason": "A continuous prophetic speech detailing the futility of Egypt's help, the people's stubbornness, and the coming judgment."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 26,
+      "type": "blessing_or_prayer",
+      "title": "Promise of Restoration and Healing",
+      "reason": "A section shifting from judgment to hope, describing God's patience, the Teacher's presence, and future agricultural abundance."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 33,
+      "type": "vision",
+      "title": "The Coming Judgment on Assyria",
+      "reason": "A vivid vision of Yahweh's arrival to judge the nations and destroy the enemy in Topheth."
+    }
+  ]
+}

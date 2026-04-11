@@ -1,0 +1,70 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 7:1-21
+
+Chapter text:
+1. “Is not man conscripted to labor on earth, And are not his days like the days of a hired man?
+2. As a slave who pants for the shade, And as a hired man who eagerly hopes for his wages,
+3. So am I apportioned months of worthlessness, And nights of trouble are appointed me.
+4. If I lie down I say, ‘When shall I arise?’ But the twilight continues, And I am saturated with tossing until dawn.
+5. My flesh is clothed with worms and a crust of dirt; My skin scabs over and flows out again.
+6. My days are swifter than a weaver’s shuttle, And come to an end without hope.
+7. “Remember that my life is but wind; My eye will not again see good.
+8. The eye of him who sees me will behold me no longer; Your eyes will be on me, but I will not be.
+9. A cloud vanishes, and it is gone, So he who goes down to Sheol does not come up.
+10. He will not return again to his house, Nor will his place recognize him anymore.
+11. “Indeed I will not hold back my mouth; I will speak in the distress of my spirit; I will muse on the bitterness of my soul.
+12. Am I the sea or the sea monster, That You set a guard over me?
+13. If I say, ‘My bed will comfort me; My couch will ease my bitter musing,’
+14. Then You frighten me with dreams And terrify me by visions,
+15. So that my soul would choose suffocation, Death rather than my pains.
+16. I have rejected everything; I will not live forever. Leave me alone, for my days are but a breath.
+17. What is man that You magnify him, And that You set Your heart on him,
+18. That You examine him every morning And test him every moment?
+19. Will You never turn Your gaze away from me, Nor let me alone until I swallow my spit?
+20. Have I sinned? What have I done to You, O watcher of men? Why have You set me as Your target, So that I am a burden to myself?
+21. Why then do You not forgive my transgression And take away my iniquity? For now I will lie down in the dust; And You will seek me earnestly, but I will not be.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:56:36Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Kings",
+  "chapter": 19,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 37,
+  "verse_count": 37,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "Hezekiah Sends Envoys to Isaiah",
+      "reason": "Describes Hezekiah's reaction and the messengers' dialogue with Isaiah."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Rabshakeh's Second Message to Hezekiah",
+      "reason": "Contains the Assyrian general's taunt and rhetorical questions sent to Hezekiah."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "Hezekiah's Prayer of Faith",
+      "reason": "Depicts Hezekiah spreading the letter before God and praying for deliverance."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 34,
+      "type": "oracle",
+      "title": "Isaiah's Prophecy Against Assyria",
+      "reason": "Records the Lord's specific judgment and promise of defense against Sennacherib."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 37,
+      "type": "story",
+      "title": "The Fall of the Assyrian Army and King",
+      "reason": "Narrates the angelic strike on the camp and the subsequent death of Sennacherib."
+    }
+  ]
+}

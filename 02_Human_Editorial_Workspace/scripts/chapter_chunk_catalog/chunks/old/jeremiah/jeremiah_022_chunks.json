@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T11:04:50Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Jeremiah",
+  "chapter": 22,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 30,
+  "verse_count": 30,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Judgment on the House of Judah",
+      "reason": "A unified oracle delivered to the king and people concerning justice and the consequence of disobedience."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Lament for Shallum",
+      "reason": "A specific prophetic declaration regarding the exile and death of King Jehoahaz (Shallum)."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Woe to Jehoiakim",
+      "reason": "A detailed condemnation of King Jehoiakim's greed and lack of justice, contrasting him with his father Josiah."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 30,
+      "type": "oracle",
+      "title": "Judgment on Coniah",
+      "reason": "A final oracle declaring the childless fate of King Jehoiachin (Coniah) and his removal from the throne."
+    }
+  ]
+}

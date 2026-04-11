@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:41:41Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 36,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "story",
+      "title": "The Last Kings of Judah",
+      "reason": "Chronicles the reigns and downfalls of Joahaz, Jehoiakim, and Jehoiachin."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Zedekiah's Rebellion and Prophetic Warning",
+      "reason": "Details Zedekiah's reign, his rebellion against Babylon, and the people's rejection of God's messengers."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 21,
+      "type": "story",
+      "title": "The Fall of Jerusalem and Exile",
+      "reason": "Describes the Babylonian conquest, destruction of the temple, and the seventy-year exile."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Cyrus's Decree",
+      "reason": "Contains Cyrus's proclamation allowing the Jews to return and rebuild the temple."
+    }
+  ]
+}

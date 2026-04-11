@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Job's Introduction and Reaction",
+      "reason": "Job introduces his speech and expresses his dismay at the thought of speaking."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 16,
+      "type": "argument",
+      "title": "The Prosperity of the Wicked",
+      "reason": "Job describes how the wicked live in comfort and power despite their actions."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 26,
+      "type": "argument",
+      "title": "The Fate of the Wicked and the Righteous",
+      "reason": "Job questions if disaster always comes to the wicked and notes that both die regardless of their life."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 33,
+      "type": "speech",
+      "title": "Refutation of Friends' Views",
+      "reason": "Job counters his friends' specific claims about the wicked's end and their families."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 34,
+      "type": "speech",
+      "title": "Conclusion of Job's Speech",
+      "reason": "Job concludes by challenging the validity of his friends' consolation."
+    }
+  ]
+}

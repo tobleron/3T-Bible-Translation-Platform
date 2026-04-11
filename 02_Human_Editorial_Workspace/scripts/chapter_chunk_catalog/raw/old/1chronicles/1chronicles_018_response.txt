@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Conquest of the Philistines and Zobah",
+      "reason": "Describes David's military campaigns against the Philistines, Moab, and Hadadezer king of Zobah."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Acquisition of Spoils and Victory over Edom",
+      "reason": "Details the collection of tribute from conquered nations and Abishai's victory in Edom."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "list_or_catalog",
+      "title": "Summary of David's Reign and Officials",
+      "reason": "Summarizes David's rule and lists the key administrative and military officials."
+    }
+  ]
+}

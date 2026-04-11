@@ -1,0 +1,63 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 19:1-14
+
+Chapter text:
+1. For the choir director. A Psalm of David. The heavens are telling of the glory of God; And the expanse is declaring the work of His hands.
+2. Day to day pours forth speech, And night to night reveals knowledge.
+3. There is no speech, nor are there words; Their voice is not heard.
+4. Their line has gone out through all the earth, And their utterances to the end of the world. In them He has placed a tent for the sun,
+5. Which is as a bridegroom coming out of his chamber; It rejoices as a strong man to run his course.
+6. Its rising is from one end of the heavens, And its circuit to the other end of them; And there is nothing hidden from its heat.
+7. The law of Yahweh is perfect, restoring the soul; The testimony of Yahweh is sure, making wise the simple.
+8. The precepts of Yahweh are right, rejoicing the heart; The commandment of Yahweh is pure, enlightening the eyes.
+9. The fear of Yahweh is clean, enduring forever; The judgments of Yahweh are true; they are righteous altogether.
+10. They are more desirable than gold, even more than much fine gold; Sweeter also than honey and the drippings of the honeycomb.
+11. Moreover, by them Your slave is warned; In keeping them there is great reward.
+12. Who can discern his errors? Acquit me of hidden faults.
+13. Also keep back Your slave from presumptuous sins; Let them not rule over me; Then I will be blameless, And I shall be acquitted of great transgression.
+14. Let the words of my mouth and the meditation of my heart Be acceptable in Your sight, O Yahweh, my rock and my Redeemer.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

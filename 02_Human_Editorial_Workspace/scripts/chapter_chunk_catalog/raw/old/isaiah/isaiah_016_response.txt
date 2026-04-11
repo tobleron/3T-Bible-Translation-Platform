@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Call for Refuge in Zion",
+      "reason": "Moab sends tribute and seeks counsel from Judah to escape destruction."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Lament Over Moab's Pride",
+      "reason": "The prophet describes the fall of Moab's cities and their futile worship."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Prophecy of Moab's Decline",
+      "reason": "A concluding oracle specifying the timeline for Moab's remaining glory."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "psalm",
+      "title": "God's Victory in Zion",
+      "reason": "Describes God's dwelling and past acts of judgment against enemies."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "exhortation",
+      "title": "Response to Divine Wrath",
+      "reason": "Calls for vows and gifts in response to God's sovereign rule."
+    }
+  ]
+}

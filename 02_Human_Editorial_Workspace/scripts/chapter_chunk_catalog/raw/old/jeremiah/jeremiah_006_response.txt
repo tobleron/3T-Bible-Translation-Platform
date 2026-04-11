@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Call to Flee from the North",
+      "reason": "A cohesive call to action for Benjamin and Jerusalem to flee impending destruction."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "Oracle Against Jerusalem's Corruption",
+      "reason": "A unified prophetic judgment detailing the city's internal decay and God's impending punishment."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 21,
+      "type": "argument",
+      "title": "Rejection of the Ancient Path",
+      "reason": "An argumentative section contrasting God's call to return with the people's stubborn refusal."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 26,
+      "type": "vision",
+      "title": "Vision of the Northern Army",
+      "reason": "A vivid description of the invading army from the north and the resulting terror."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 30,
+      "type": "metaphor",
+      "title": "The Refiner's Fire",
+      "reason": "A concluding metaphorical oracle describing Jeremiah as a tester of metals and the people as rejected silver."
+    }
+  ]
+}

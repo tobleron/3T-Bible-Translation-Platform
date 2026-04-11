@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Rehoboam at Shechem and the Request",
+      "reason": "Narrative introduction of Rehoboam's coronation attempt and Jeroboam's return."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "dialogue",
+      "title": "Counsel of Elders and Young Men",
+      "reason": "Complete exchange between the king and his advisors followed by the king's harsh response."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "story",
+      "title": "The Division of the Kingdom",
+      "reason": "Israel's rejection of Rehoboam and Jeroboam's coronation."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 24,
+      "type": "oracle",
+      "title": "God Stops the War",
+      "reason": "Divine instruction to Rehoboam via Shemaiah to halt the military campaign."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Jeroboam's Religious Reforms",
+      "reason": "Narrative of Jeroboam establishing alternative worship centers and priesthood."
+    }
+  ]
+}

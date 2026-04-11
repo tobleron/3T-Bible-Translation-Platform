@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:16:42Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Kings",
+  "chapter": 15,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 34,
+  "verse_count": 34,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Reign of Abijam",
+      "reason": "Complete narrative covering the accession, reign, and death of King Abijam of Judah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Reign of Asa",
+      "reason": "Comprehensive account of King Asa's reforms, wars with Baasha, and death."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 34,
+      "type": "story",
+      "title": "Reigns of Nadab and Baasha",
+      "reason": "Narrative detailing the brief reign of Nadab and the rise of Baasha over Israel."
+    }
+  ]
+}

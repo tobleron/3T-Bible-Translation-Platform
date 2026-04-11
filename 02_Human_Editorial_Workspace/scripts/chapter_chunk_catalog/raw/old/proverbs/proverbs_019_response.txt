@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Wealth and Friends",
+      "reason": "A collection of proverbs contrasting the poor and rich, focusing on social relationships."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Discernment and Authority",
+      "reason": "Proverbs regarding the value of wisdom, the consequences of lying, and the nature of a king's favor."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Family and Discipline",
+      "reason": "Instructions concerning the home, marriage, parental discipline, and the value of counsel."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 29,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Character and Justice",
+      "reason": "Final proverbs covering the will of God, the sluggard, the scoffer, and divine judgment."
+    }
+  ]
+}

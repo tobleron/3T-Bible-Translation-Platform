@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "argument",
+      "title": "God's Sovereignty and Diligence",
+      "reason": "Contrasts divine control over human hearts with the outcomes of diligence versus haste."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "list_or_catalog",
+      "title": "Character and Consequences",
+      "reason": "A series of proverbs describing the nature of the wicked, their thoughts, and their interactions."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 15,
+      "type": "argument",
+      "title": "Wisdom and Justice",
+      "reason": "Discusses the results of correction, the righteous observing the wicked, and the value of justice."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Warnings on Lifestyle",
+      "reason": "A collection of sayings regarding wandering from insight, loving pleasure, and the wise storing treasure."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 26,
+      "type": "exhortation",
+      "title": "Pursuing Righteousness",
+      "reason": "Encourages the pursuit of righteousness and contrasts the sluggard with the generous righteous."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 31,
+      "type": "argument",
+      "title": "Final Wisdom on God's Supremacy",
+      "reason": "Concludes with observations on sacrifices, witnesses, and the ultimate reliance on Yahweh."
+    }
+  ]
+}

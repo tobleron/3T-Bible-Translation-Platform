@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Testimony of Deliverance",
+      "reason": "The psalmist recounts past trials and God's righteous intervention."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Judgment on Zion's Enemies",
+      "reason": "A prophetic declaration of shame and withering for those who hate Zion."
+    }
+  ]
+}

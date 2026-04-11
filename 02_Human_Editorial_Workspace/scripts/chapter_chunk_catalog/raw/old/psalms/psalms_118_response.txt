@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "list_or_catalog",
+      "title": "Call to Give Thanks",
+      "reason": "A repeated refrain inviting different groups to acknowledge God's enduring love."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Personal Testimony of Deliverance",
+      "reason": "A first-person narrative describing distress, divine rescue, and trust in God's power."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 24,
+      "type": "dialogue",
+      "title": "Entrance into the Temple",
+      "reason": "A liturgical exchange between worshippers and priests regarding entry through the gates."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 27,
+      "type": "blessing_or_prayer",
+      "title": "Processional Hymn",
+      "reason": "Short petitions for salvation and blessings associated with a festival procession."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 29,
+      "type": "psalm",
+      "title": "Final Praise",
+      "reason": "A concluding declaration of gratitude that mirrors the opening verses."
+    }
+  ]
+}

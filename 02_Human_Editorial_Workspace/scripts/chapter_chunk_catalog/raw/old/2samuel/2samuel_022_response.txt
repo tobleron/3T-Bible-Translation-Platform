@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Introduction and Praise",
+      "reason": "David introduces the song and declares Yahweh as his refuge and deliverer."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 20,
+      "type": "speech",
+      "title": "Deliverance from Enemies",
+      "reason": "David describes the distress of enemies surrounding him and Yahweh's dramatic intervention to save him."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 28,
+      "type": "argument",
+      "title": "Righteousness and Recompense",
+      "reason": "David argues that his deliverance is based on his righteousness and Yahweh's character."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 46,
+      "type": "speech",
+      "title": "Victory and Dominion",
+      "reason": "David recounts how God empowered him to defeat enemies and rule over nations."
+    },
+    {
+      "start_verse": 47,
+      "end_verse": 51,
+      "type": "blessing_or_prayer",
+      "title": "Final Praise and Promise",
+      "reason": "David concludes with a doxology and a declaration of God's eternal covenant with his line."
+    }
+  ]
+}

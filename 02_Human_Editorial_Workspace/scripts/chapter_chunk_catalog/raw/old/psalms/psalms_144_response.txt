@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Praise for God as Warrior and Fortress",
+      "reason": "David opens with a declaration of Yahweh's power in training him for battle and acting as his protector."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 4,
+      "type": "argument",
+      "title": "The Fragility of Humanity",
+      "reason": "A rhetorical reflection on the smallness and transience of man compared to God."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "prayer",
+      "title": "Petition for Divine Intervention",
+      "reason": "A plea for God to descend in power and deliver the psalmist from enemies."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Vow of Praise and Deliverance",
+      "reason": "The psalmist promises a new song to God for saving him from the hand of foreigners."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "list_or_catalog",
+      "title": "Blessings of a Prosperous Community",
+      "reason": "A detailed description of the ideal state of families, agriculture, and livestock."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 15,
+      "type": "blessing_or_prayer",
+      "title": "Conclusion on Blessedness",
+      "reason": "A final beatitude declaring the people blessed who enjoy these conditions and whose God is Yahweh."
+    }
+  ]
+}

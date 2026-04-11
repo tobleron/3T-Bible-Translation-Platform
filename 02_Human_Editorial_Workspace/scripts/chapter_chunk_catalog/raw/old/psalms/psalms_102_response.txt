@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "blessing_or_prayer",
+      "title": "The Afflicted's Lament",
+      "reason": "A continuous prayer describing physical and emotional distress."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "God's Eternal Faithfulness to Zion",
+      "reason": "A shift in focus from the psalmist's suffering to God's eternal nature and future restoration of Jerusalem."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 28,
+      "type": "mixed",
+      "title": "The Psalmist's Plea and God's Promise",
+      "reason": "A return to the psalmist's plea for life followed by a declaration of God's unchanging nature and the future security of His people."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David's Messengers to Hanun",
+      "reason": "Narrative of David sending comforters and their subsequent humiliation."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 15,
+      "type": "story",
+      "title": "First Battle Against Ammon and Arameans",
+      "reason": "Account of the alliance formed against Israel and Joab's tactical victory."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 19,
+      "type": "story",
+      "title": "David's Victory Over Arameans",
+      "reason": "Narrative of the second battle where David defeats the reinforcements and secures peace."
+    }
+  ]
+}

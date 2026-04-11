@@ -1,0 +1,81 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Esther 9:1-32
+
+Chapter text:
+1. Now in the twelfth month (that is, the month Adar), on the thirteenth day when the king’s word and law had reached the point for them to be done, on the day when the enemies of the Jews hoped to gain power over them, it was turned around so that the Jews themselves gained power over those who hated them.
+2. The Jews assembled in their cities throughout all the provinces of King Ahasuerus to send forth their hand against those who sought their calamity; and no one could stand before them, for the dread of them had fallen on all the peoples.
+3. Even all the princes of the provinces, the satraps, the governors, and those who were doing the king’s work advanced the Jews, because the dread of Mordecai had fallen on them.
+4. Indeed, Mordecai was great in the king’s house, and the report about him went throughout all the provinces; for the man Mordecai became greater and greater.
+5. Thus the Jews struck all their enemies with the sword, killing and causing them to perish; and they did what they pleased to those who hated them.
+6. And at the citadel in Susa the Jews killed and caused to perish 500 men,
+7. and Parshandatha, Dalphon, Aspatha,
+8. Poratha, Adalia, Aridatha,
+9. Parmashta, Arisai, Aridai, and Vaizatha,
+10. the 10 sons of Haman the son of Hammedatha, the Jews’ adversary; but they did not send forth their hand for the plunder.
+11. On that day the number of those who were killed at the citadel in Susa came to the king.
+12. So the king said to Queen Esther, “The Jews have killed and caused to perish 500 men and the 10 sons of Haman at the citadel in Susa. Now in the rest of the king’s provinces, what have they done? So what is your petition? It shall even be given to you. And what is your further request? It shall also be done.”
+13. Then Esther said, “If it is good to the king, let tomorrow also be given to the Jews who are in Susa to do according to the law for today; and let Haman’s 10 sons be hanged on the gallows.”
+14. So the king said that it should be done so; and a law was given in Susa, and Haman’s 10 sons were hanged.
+15. And the Jews who were in Susa assembled also on the fourteenth day of the month Adar and killed 300 men in Susa, but they did not send forth their hand for the plunder.
+16. Now the rest of the Jews who were in the king’s provinces assembled, to make a stand for their lives and obtain rest for themselves from their enemies, and to kill 75,000 of those who hated them; but they did not send forth their hand for the plunder.
+17. This was done on the thirteenth day of the month Adar, and on the fourteenth day they rested and made it a day of feasting and gladness.
+18. But the Jews who were in Susa assembled on the thirteenth and the fourteenth of the same month, and they rested on the fifteenth day and made it a day of feasting and gladness.
+19. Therefore the Jews of the rural areas, who live in the rural towns, make the fourteenth day of the month Adar a holiday for gladness and feasting and sending portions of food to one another.
+20. Then Mordecai wrote down these events, and he sent letters to all the Jews who were in all the provinces of King Ahasuerus, both near and far,
+21. to establish among them to celebrate the fourteenth day of the month Adar, and the fifteenth day of the same month, annually,
+22. because on those days the Jews obtained rest for themselves from their enemies, and it was a month which was turned around for them from sorrow into gladness and from mourning into a holiday; that they should make them days of feasting and gladness and sending portions of food to one another and gifts to the poor.
+23. Thus the Jews fully accepted what they had started to do and what Mordecai had written to them.
+24. For Haman the son of Hammedatha, the Agagite, the adversary of all the Jews, had devised against the Jews to cause them to perish and had cast Pur, that is the lot, to throw them into confusion and cause them to perish.
+25. But when it came before the king, he said by letter that his evil scheme, which he had devised against the Jews, should return on his own head and that he and his sons should be hanged on the gallows.
+26. Therefore they called these days Purim after the name of Pur. Therefore, because of the words in this letter, both what they had seen in this regard and what had reached them,
+27. the Jews established and accepted a custom for themselves and for their seed and for all those who joined themselves to them, so that celebrating these two days according to what was written down and according to their fixed time from year to year would not pass away.
+28. So these days were to be remembered and celebrated throughout every generation, every family, every province, and every city; thus these days of Purim were not to pass away from among the Jews, nor their memory come to an end from their seed.
+29. Then Queen Esther, daughter of Abihail, with Mordecai the Jew, wrote with full authority to establish this second letter about Purim.
+30. And he sent letters to all the Jews, to the 127 provinces of the kingdom of Ahasuerus, namely, words of peace and truth,
+31. to establish these days of Purim at their appointed times, just as Mordecai the Jew and Queen Esther had established for them, and just as they had established for themselves and for their seed with words concerning their times of fasting and their crying out.
+32. And the declaration of Esther established these words concerning Purim, and it was written in the book.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

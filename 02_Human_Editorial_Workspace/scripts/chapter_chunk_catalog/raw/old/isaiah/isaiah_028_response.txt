@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "Oracle Against Ephraim and Promise to Remnant",
+      "reason": "Contrasts the judgment on the proud leaders of Ephraim with the future blessing for God's remnant."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Judgment on Priests and Prophets",
+      "reason": "Describes the spiritual confusion of religious leaders due to wine and explains God's method of judgment through foreign speech."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "Oracle Against Jerusalem Scoffers",
+      "reason": "Condemns the political leaders of Jerusalem for their false covenant with death and warns of coming destruction."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 29,
+      "type": "parable",
+      "title": "Parable of the Farmer's Wisdom",
+      "reason": "Uses agricultural imagery to illustrate God's wise and varied discipline for His people."
+    }
+  ]
+}

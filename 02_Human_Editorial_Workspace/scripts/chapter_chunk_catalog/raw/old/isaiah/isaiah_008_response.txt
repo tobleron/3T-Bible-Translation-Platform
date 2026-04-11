@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Sign of Maher-shalal-hash-baz",
+      "reason": "Narrative account of the prophet taking a wife and bearing a son with a prophetic name."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Oracle Against Damascus and Samaria",
+      "reason": "Prophetic declaration regarding the Assyrian invasion as judgment on Israel's alliance."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 15,
+      "type": "exhortation",
+      "title": "Call to Trust Yahweh Alone",
+      "reason": "Instruction to the prophet and people to fear God rather than political powers."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Sealing the Testimony and Waiting",
+      "reason": "Personal declaration of waiting on God and identification as signs for Israel."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "argument",
+      "title": "Rejection of Mediums and Coming Darkness",
+      "reason": "Rhetorical argument contrasting inquiry of the dead with God's law, ending in judgment."
+    }
+  ]
+}

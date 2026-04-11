@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Jehoram's Reign and Moabite Rebellion",
+      "reason": "Establishes the political context and the cause of the upcoming war."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "story",
+      "title": "The Three Kings March to Edom",
+      "reason": "Describes the military alliance and the crisis of water shortage."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Seeking Elisha's Counsel",
+      "reason": "The kings locate the prophet and engage in initial conversation."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Elisha's Prophecy of Water and Victory",
+      "reason": "The prophet receives the word from Yahweh and delivers instructions."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Fulfillment of the Prophecy and Battle",
+      "reason": "The water arrives, the Moabites are deceived, and Israel attacks."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 27,
+      "type": "story",
+      "title": "The King of Moab's Desperate Act",
+      "reason": "Concludes the narrative with the sacrifice and Israel's withdrawal."
+    }
+  ]
+}

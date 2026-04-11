@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "argument",
+      "title": "Wisdom on Boasting and Friendship",
+      "reason": "A cohesive unit of wisdom sayings contrasting human pride with the value of honest reproof."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Wisdom on Contentment and Prudence",
+      "reason": "Continues the theme of practical wisdom regarding satisfaction, location, and recognizing danger."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 16,
+      "type": "argument",
+      "title": "Warnings on Guarantors and Conflict",
+      "reason": "A distinct section focusing on the risks of financial guarantees and a contentious spouse."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "argument",
+      "title": "Wisdom on Mutual Growth and Testing",
+      "reason": "A series of metaphors illustrating how people refine each other and how folly is tested."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 27,
+      "type": "exhortation",
+      "title": "Exhortation to Manage Flocks",
+      "reason": "A concluding practical instruction on diligent management of livestock and wealth."
+    }
+  ]
+}

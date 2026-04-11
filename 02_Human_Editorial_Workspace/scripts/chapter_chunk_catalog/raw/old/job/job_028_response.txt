@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "list_or_catalog",
+      "title": "Human Mining Achievements",
+      "reason": "Describes the extent of human skill in extracting minerals and resources from the earth."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 22,
+      "type": "argument",
+      "title": "The Rarity of Wisdom",
+      "reason": "Explores the difficulty of finding wisdom and its value compared to precious materials."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 28,
+      "type": "speech",
+      "title": "God's Knowledge and Definition of Wisdom",
+      "reason": "Concludes that God alone knows wisdom's location and defines it as the fear of the Lord."
+    }
+  ]
+}

@@ -26,5 +26,26 @@
     "context_snapshot": "",
     "focus_start": 11,
     "focus_end": 15
+  },
+  "new|matthew|1|1-17": {
+    "messages": [],
+    "context_loaded": false,
+    "context_snapshot": "",
+    "focus_start": 1,
+    "focus_end": 17
+  },
+  "new|matthew|1|18-25": {
+    "messages": [],
+    "context_loaded": false,
+    "context_snapshot": "",
+    "focus_start": 18,
+    "focus_end": 25
+  },
+  "old|genesis|1|6-8": {
+    "messages": [],
+    "context_loaded": false,
+    "context_snapshot": "",
+    "focus_start": 6,
+    "focus_end": 8
   }
 }

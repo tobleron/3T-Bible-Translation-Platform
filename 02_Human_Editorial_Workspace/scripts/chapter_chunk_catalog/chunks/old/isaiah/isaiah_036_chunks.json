@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T09:44:08Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 36,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 3,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Assyrian Invasion and Delegation",
+      "reason": "Sets the scene for the confrontation between Assyria and Judah."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Rabshakeh's Initial Taunt",
+      "reason": "Rabshakeh addresses the officials with a rhetorical challenge to their trust."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 12,
+      "type": "dialogue",
+      "title": "Negotiation of Language",
+      "reason": "The officials request Aramaic to spare the people, which Rabshakeh rejects."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Rabshakeh's Public Oratory",
+      "reason": "Rabshakeh shouts the Assyrian king's ultimatum to the people on the wall."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Report to Hezekiah",
+      "reason": "The officials return to Hezekiah with the news of the siege."
+    }
+  ]
+}

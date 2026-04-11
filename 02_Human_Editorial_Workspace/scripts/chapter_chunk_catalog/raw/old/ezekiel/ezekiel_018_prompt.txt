@@ -1,0 +1,81 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezekiel 18:1-32
+
+Chapter text:
+1. Then the word of Yahweh came to me, saying,
+2. “What do you mean by using this proverb concerning the land of Israel, saying, ‘The fathers eat the sour grapes, But the children’s teeth are set on edge’?
+3. As I live,” declares Lord Yahweh, “you are surely not going to use this proverb in Israel anymore.
+4. Behold, all souls are Mine; the soul of the father as well as the soul of the son is Mine. The soul who sins will die.
+5. “But if a man is righteous and does justice and righteousness,
+6. and does not eat at the mountain shrines or lift up his eyes to the idols of the house of Israel, or defile his neighbor’s wife or approach a woman during her menstrual period—
+7. if a man does not mistreat anyone, but returns to the debtor his pledge, does not commit robbery, but gives his bread to the hungry and covers the naked with clothing,
+8. if he does not lend money on interest or take increase, if he turns his hand from injustice and does true justice between man and man,
+9. if he walks in My statutes and My judgments and is careful to do the truth—he is righteous and will surely live,” declares Lord Yahweh.
+10. “Then he may have a violent son who sheds blood and who does any of these things to a brother
+11. (though he himself did not do any of these things), that is, he even eats at the mountain shrines and defiles his neighbor’s wife;
+12. he mistreats the afflicted and needy, commits robbery, does not return a pledge, but lifts up his eyes to the idols and does abominations;
+13. he lends money on interest and takes increase; will he live? He will not live! He has done all these abominations; he will surely be put to death; his blood will be on himself.
+14. “Now behold, he has a son who has seen all his father’s sins which he has done. And he saw this but does not do likewise.
+15. He does not eat at the mountain shrines or lift up his eyes to the idols of the house of Israel, or defile his neighbor’s wife
+16. or mistreat anyone, or retain a pledge or commit robbery, but he gives his bread to the hungry and covers the naked with clothing;
+17. he turns his hand away from the afflicted, does not take interest or increase, but does My judgments and walks in My statutes; he will not die for his father’s iniquity; he will surely live.
+18. As for his father, because he practiced extortion, robbed his brother, and did what was not good among his people, behold, he will die for his iniquity.
+19. “Yet you say, ‘Why should the son not bear the punishment for the father’s iniquity?’ But the son has done justice and righteousness and has kept all My statutes and done them. He shall surely live.
+20. The soul who sins will die. The son will not bear the iniquity of the father, nor will the father bear the iniquity of the son; the righteousness of the righteous will be upon himself, and the wickedness of the wicked will be upon himself.
+21. “But if the wicked man turns from all his sins which he has done and keeps all My statutes and does justice and righteousness, he shall surely live; he shall not die.
+22. All his transgressions which he has done will not be remembered against him; because of his righteousness which he has done, he will live.
+23. Do I have any pleasure in the death of the wicked,” declares Lord Yahweh, “is it not that he should turn from his ways and live?
+24. “But when a righteous man turns away from his righteousness, does injustice, and does according to all the abominations that a wicked man does, will he live? All his righteous deeds which he has done will not be remembered for his unfaithfulness which he has committed and his sin which he has committed; for them he will die.
+25. Yet you say, ‘The way of the Lord is not right.’ Hear now, O house of Israel! Is My way not right? Is it not your ways that are not right?
+26. When a righteous man turns away from his righteousness, does injustice, and dies because of it, for his injustice which he has done he will die.
+27. Again, when a wicked man turns away from his wickedness which he has done and does justice and righteousness, he will preserve his life.
+28. Again, he considered and turned away from all his transgressions which he had done; he shall surely live; he shall not die.
+29. But the house of Israel says, ‘The way of the Lord is not right.’ Are My ways not right, O house of Israel? Is it not your ways that are not right?
+30. “Therefore I will judge you, O house of Israel, each according to his way,” declares Lord Yahweh. “Turn back and turn away from all your transgressions, so that iniquity may not become a stumbling block to you.
+31. Cast away from yourselves all your transgressions which you have committed and make yourselves a new heart and a new spirit! Now why will you die, O house of Israel?
+32. For I have no pleasure in the death of anyone who dies,” declares Lord Yahweh. “Therefore, turn back and live.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

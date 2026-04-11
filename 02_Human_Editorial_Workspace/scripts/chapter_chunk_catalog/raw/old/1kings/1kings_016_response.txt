@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Oracle Against Baasha",
+      "reason": "A prophetic judgment pronounced against King Baasha and his house for following Jeroboam's sins."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Reign and Death of Elah",
+      "reason": "Narrative account of King Elah's short reign, his assassination by Zimri, and the fulfillment of the oracle."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Reign and Death of Zimri",
+      "reason": "Brief account of Zimri's seven-day reign and his suicide as the army besieged Tirzah."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Rise of Omri",
+      "reason": "Narrative of the civil war between Omri and Tibni, culminating in Omri's victory and establishment of Samaria."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 34,
+      "type": "story",
+      "title": "Reign of Ahab",
+      "reason": "Introduction of King Ahab, his marriage to Jezebel, worship of Baal, and the fulfillment of Joshua's prophecy regarding Jericho."
+    }
+  ]
+}

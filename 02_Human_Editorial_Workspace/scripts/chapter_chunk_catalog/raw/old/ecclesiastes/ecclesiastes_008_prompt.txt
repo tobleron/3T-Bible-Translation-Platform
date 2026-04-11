@@ -1,0 +1,66 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ecclesiastes 8:1-17
+
+Chapter text:
+1. Who is like the wise man and who knows the interpretation of a matter? A man’s wisdom illumines his face and causes his stern face to beam.
+2. I say, “Keep the command of the king because of the sworn oath before God.
+3. Do not be in a hurry to go from his presence. Do not stand in an evil matter, for he will do whatever he pleases.”
+4. Since the word of the king is powerful, who will say to him, “What are you doing?”
+5. He who keeps a royal command experiences no evil thing, for a wise heart knows the proper time and custom.
+6. For there is a proper time and custom for every matter, though a man’s trouble is multiplied upon him.
+7. If no one knows what will happen, who can tell him when it will happen?
+8. There is no man who has power to restrain the wind with the wind, and there is none who has power over the day of death; and there is no discharge in the time of war, and wickedness will not provide escape to its masters.
+9. All this I have seen and given my heart to every work that has been done under the sun wherein a man has power over another man to his calamity.
+10. So then, I have seen the wicked buried, those who used to go in and out from the holy place, and they are soon forgotten in the city where they did thus. This too is vanity.
+11. Because the sentence against an evil work is not executed quickly, therefore the hearts of the sons of men among them are given fully to do evil.
+12. Although a sinner does evil a hundred times and may prolong his life, still I know that it will be well for those who fear God, who fear Him openly.
+13. But it will not be well for the wicked man, and he will not prolong his days like a shadow, because he does not fear God openly.
+14. There is vanity which is done on the earth, that is, there are righteous men to whom it happens according to the works of the wicked. On the other hand, there are wicked men to whom it happens according to the works of the righteous. I say that this too is vanity.
+15. So I laud gladness, for there is nothing good for a man under the sun except to eat and to drink and to be merry, and this will join with him in his labor throughout the days of his life which God has given him under the sun.
+16. When I gave my heart to know wisdom and to see the endeavor which has been done on the earth (even though one never sees sleep with his eyes day or night),
+17. and I saw every work of God, I concluded that man cannot find out the work which has been done under the sun. Even though man should seek laboriously, he will not find it out; and though the wise man should say, “I know,” he cannot find it out.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

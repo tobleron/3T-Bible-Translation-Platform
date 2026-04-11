@@ -1,0 +1,73 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 18:1-24
+
+Chapter text:
+1. He who separates himself seeks his own desire, He breaks out in dispute against all sound wisdom.
+2. A fool does not delight in discernment, But only in revealing his own heart.
+3. When a wicked man comes, despising also comes, And with disgrace comes reproach.
+4. The words of a man’s mouth are deep waters; The fountain of wisdom is a flowing brook.
+5. To show partiality to the wicked is not good, Nor to thrust aside the righteous in judgment.
+6. A fool’s lips come with strife, And his mouth calls for beatings.
+7. A fool’s mouth is his ruin, And his lips are the snare of his soul.
+8. The words of a whisperer are like dainty morsels, And they go down into the innermost parts of the stomach.
+9. He also who is slack in his work Is brother to him who destroys.
+10. The name of Yahweh is a strong tower; The righteous runs into it and is set securely on high.
+11. A rich man’s wealth is his strong city, And like a high wall in his own delusion.
+12. Before destruction the heart of man is haughty, But humility goes before glory.
+13. He who responds with a word before he hears, It is folly and shame to him.
+14. The spirit of a man can endure his sickness, But as for a broken spirit, who can bear it?
+15. The heart of the understanding acquires knowledge, And the ear of the wise seeks knowledge.
+16. A man’s gift makes room for him And leads him into the presence of great men.
+17. The first to plead his case seems right, Until another comes and examines him.
+18. The cast lot puts an end to contentions And decides between the mighty ones.
+19. A brother offended is harder to win over than a strong city, And contentions are like the bars of a citadel.
+20. From the fruit of a man’s mouth his stomach will be satisfied; With the produce of his lips he will be satisfied.
+21. Death and life are in the power of the tongue, And those who love it will eat its fruit.
+22. He who finds a wife finds a good thing And obtains favor from Yahweh.
+23. The poor man speaks supplications, But the rich man answers with strong words.
+24. A man of too many friends comes to ruin, But there is a friend who sticks closer than a brother.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:21:55Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Kings",
+  "chapter": 19,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Elijah Fears Jezebel and Travels to Horeb",
+      "reason": "Narrative of Elijah's flight from Jezebel, his journey to Beersheba and the wilderness, and divine provision by an angel."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Elijah's Complaint at Horeb",
+      "reason": "Dialogue between God and Elijah where Elijah expresses his despair and God questions him."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "oracle",
+      "title": "God's Instructions to Elijah",
+      "reason": "Divine command for Elijah to anoint Hazael and Jehu, appoint Elisha, and the promise of 7,000 faithful Israelites."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Elijah Calls Elisha",
+      "reason": "Narrative of Elijah finding Elisha plowing, throwing his mantle on him, and Elisha's immediate response to follow."
+    }
+  ]
+}

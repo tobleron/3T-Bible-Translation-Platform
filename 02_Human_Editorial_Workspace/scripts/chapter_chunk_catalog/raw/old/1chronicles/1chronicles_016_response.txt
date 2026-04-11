@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Arrival of the Ark and Initial Offerings",
+      "reason": "Narrative account of bringing the ark to Jerusalem, offering sacrifices, and appointing Levitical musicians."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 36,
+      "type": "psalm",
+      "title": "David's Song of Thanksgiving",
+      "reason": "A unified liturgical poem celebrating God's covenant, history, and majesty, framed by narrative markers."
+    },
+    {
+      "start_verse": 37,
+      "end_verse": 43,
+      "type": "story",
+      "title": "Appointment of Priests and Levites",
+      "reason": "Narrative conclusion detailing the establishment of worship teams at Jerusalem and Gibeon."
+    }
+  ]
+}

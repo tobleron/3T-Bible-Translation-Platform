@@ -1,0 +1,56 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 87:1-7
+
+Chapter text:
+1. Of the sons of Korah. A Psalm. A Song. His foundation is in the holy mountains.
+2. Yahweh loves the gates of Zion More than all the dwelling places of Jacob.
+3. Glorious things are spoken of you, O city of God. Selah.
+4. “I shall mention Rahab and Babylon among those who know Me; Behold, Philistia and Tyre with Ethiopia: ‘This one was born there.’”
+5. But of Zion it shall be said, “This one and that one were born in her”; And the Most High Himself will establish her.
+6. Yahweh will count when He registers the peoples, “This one was born there.” Selah.
+7. And singers, just like the dancers, will all say, “All my springs are in you.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

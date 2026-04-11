@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Message to Zedekiah",
+      "reason": "Jeremiah delivers a unified oracle regarding the turning of weapons and the fate of the king."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Way of Life or Death",
+      "reason": "A distinct prophetic declaration presenting two choices for the people with specific consequences."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Warning to the Royal House",
+      "reason": "A direct address to the house of David calling for justice and warning of impending judgment."
+    }
+  ]
+}

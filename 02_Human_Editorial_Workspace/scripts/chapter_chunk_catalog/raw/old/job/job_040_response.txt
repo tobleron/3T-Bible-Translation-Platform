@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "dialogue",
+      "title": "Job's Humble Response",
+      "reason": "A brief exchange where Job acknowledges his insignificance before God."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "God's Challenge to Job",
+      "reason": "Yahweh challenges Job to demonstrate divine power and judgment."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 24,
+      "type": "vision",
+      "title": "Description of Behemoth",
+      "reason": "A vivid description of the mighty creature Behemoth to illustrate God's power."
+    }
+  ]
+}

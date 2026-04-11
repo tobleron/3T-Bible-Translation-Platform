@@ -1,0 +1,54 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 43:1-5
+
+Chapter text:
+1. Give justice to me, O God, and plead my case against an unholy nation; Oh protect me from the deceitful and unrighteous man!
+2. For You are the God of my strength; why have You rejected me? Why do I go mourning because of the oppression of the enemy?
+3. Oh send out Your light and Your truth, let them lead me; Let them bring me to Your holy mountain And to Your dwelling places.
+4. Then I will go to the altar of God, To God my exceeding joy; And upon the lyre I shall praise You, O God, my God.
+5. Why are you in despair, O my soul? And why are you disturbed within me? Wait for God, for I shall still praise Him, The salvation of my presence and my God.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

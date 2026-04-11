@@ -1,0 +1,59 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 111:1-10
+
+Chapter text:
+1. Praise Yah! I will give thanks to Yahweh with all my heart, In the council of the upright and in the congregation.
+2. Great are the works of Yahweh; They are sought by all who delight in them.
+3. Splendid and majestic is His work, And His righteousness stands forever.
+4. He has made His wondrous deeds to be remembered; Yahweh is gracious and compassionate.
+5. He has given food to those who fear Him; He will remember His covenant forever.
+6. He has declared to His people the power of His works, In giving them an inheritance of the nations.
+7. The works of His hands are truth and justice; All His precepts are faithful.
+8. They are upheld forever and ever; They are done in truth and uprightness.
+9. He has sent redemption to His people; He has commanded His covenant forever; Holy and fearsome is His name.
+10. The fear of Yahweh is the beginning of wisdom; Good insight belongs to all those who do His commandments; His praise stands forever.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

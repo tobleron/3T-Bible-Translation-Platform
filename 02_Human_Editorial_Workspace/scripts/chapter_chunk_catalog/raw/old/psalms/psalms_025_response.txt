@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 21,
+      "type": "psalm",
+      "title": "Psalm of Trust and Deliverance",
+      "reason": "A unified prayer expressing trust in God, confession of sin, and plea for deliverance from enemies."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Israel",
+      "reason": "A concluding verse shifting focus from the individual to the collective redemption of Israel."
+    }
+  ]
+}

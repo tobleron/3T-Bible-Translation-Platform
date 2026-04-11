@@ -1,0 +1,73 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 29:1-24
+
+Chapter text:
+1. Woe, O Ariel, Ariel the city where David once camped! Add year to year, observe your feasts on schedule.
+2. I will bring distress to Ariel, And she will be a city of mourning and moaning; And she will be like an Ariel to me.
+3. And I will camp against you encircling you, And I will fortify siegeworks against you, And I will raise up fortifications against you.
+4. Then you will be brought low; From the earth you will speak, And from the dust where you are prostrate Your words will come. Your voice will also be like that of a spirit from the ground, And your speech will whisper from the dust.
+5. But it will be that the multitude of your enemies will become like fine dust, And the multitude of the ruthless ones like the chaff which blows away; And it will happen instantly, suddenly.
+6. From Yahweh of hosts you will be punished with thunder and earthquake and loud noise, With whirlwind and tempest and the flame of a consuming fire.
+7. And it will be that the multitude of all the nations who wage war against Ariel, Even all who wage war against her and her stronghold, and who distress her, Will be like a dream, a vision of the night.
+8. And it will be as when a hungry man dreams— And behold, he is eating; But he awakens, and his soul is empty, Or as when a thirsty man dreams— And behold, he is drinking, But he awakens, and behold, he is faint, And his soul is not quenched. Thus the multitude of all the nations will be Who wage war against Mount Zion.
+9. Astonish yourselves and be astonished, Blind yourselves and be blind; They become drunk, but not with wine; They stagger, but not with strong drink.
+10. For Yahweh has poured over you a spirit of deep sleep; He has shut your eyes, the prophets; And He has covered your heads, the seers.
+11. The entire vision will be to you like the words of a sealed book, which when they give it to the one who is literate, saying, “Please read this,” he will say, “I cannot, for it is sealed.”
+12. Then the book will be given to the one who does not know how to read a book, saying, “Please read this.” And he will say, “I do not know how to read a book.”
+13. Then the Lord said, “Because this people draw near with their mouth And honor Me with their lips, But they remove their hearts far from Me, And their fear of Me is in the command of men learned by rote,
+14. Therefore behold, I will once again deal marvelously with this people, wondrously marvelous; And the wisdom of their wise men will perish, And the discernment of their discerning men will be hidden.”
+15. Woe to those who deeply hide their counsel from Yahweh, And whose deeds are done in a dark place, And they say, “Who sees us?” or “Who knows us?”
+16. You turn things around! Shall the potter be considered as equal with the clay, That what is made would say to its maker, “He did not make me”; Or what is formed say to him who formed it, “He has no understanding”?
+17. Is it not yet just a little while Before Lebanon will be turned into a fruitful orchard, And the fruitful orchard will be counted as a forest?
+18. On that day the deaf will hear words of a book, And out of darkness and thick darkness the eyes of the blind will see.
+19. The afflicted also will increase their gladness in Yahweh, And the needy of mankind will rejoice in the Holy One of Israel.
+20. For the ruthless will come to an end and the scoffer will be finished, Indeed all who are watching out to do evil will be cut off;
+21. Who cause a person to sin by a word, And ensnare him who reproves at the gate, And defraud the one in the right with meaningless arguments.
+22. Therefore thus says Yahweh, who redeemed Abraham, concerning the house of Jacob: “Jacob shall not now be ashamed, and now his face shall not turn pale;
+23. But when he sees his children, the work of My hands, in his midst, They will sanctify My name; Indeed, they will sanctify the Holy One of Jacob And will stand trembling before the God of Israel.
+24. Those who err in spirit will know discernment, And those who criticize will gain learning.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:55:57Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Job",
+  "chapter": 18,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Bildad's Rebuke",
+      "reason": "Introduction of Bildad's speech and direct challenge to Job."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 21,
+      "type": "oracle",
+      "title": "Fate of the Wicked",
+      "reason": "Detailed description of the wicked man's destruction and final conclusion."
+    }
+  ]
+}

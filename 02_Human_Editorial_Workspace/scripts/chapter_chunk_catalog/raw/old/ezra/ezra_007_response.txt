@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "genealogy",
+      "title": "Genealogy of Ezra",
+      "reason": "Lists the priestly lineage from Seraiah to Aaron."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Ezra's Journey and Purpose",
+      "reason": "Describes Ezra's departure from Babylon, arrival in Jerusalem, and his heart to study the law."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 26,
+      "type": "speech",
+      "title": "Letter of Artaxerxes",
+      "reason": "Contains the full royal decree granting authority, resources, and judicial power to Ezra."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 28,
+      "type": "blessing_or_prayer",
+      "title": "Ezra's Thanksgiving",
+      "reason": "Ezra blesses God for the king's favor and concludes the narrative of his gathering."
+    }
+  ]
+}

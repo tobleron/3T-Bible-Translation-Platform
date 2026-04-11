@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Zophar's Opening Argument on the Wicked's Fate",
+      "reason": "Zophar introduces his response and describes the temporary nature of the wicked's success."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 17,
+      "type": "speech",
+      "title": "The Wicked Man's Wealth Turns to Poison",
+      "reason": "Describes the reversal of the wicked man's fortune and the internal corruption of his wealth."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 29,
+      "type": "speech",
+      "title": "The Final Destruction of the Wicked",
+      "reason": "Details the specific judgments and total loss awaiting the wicked man as his portion from God."
+    }
+  ]
+}

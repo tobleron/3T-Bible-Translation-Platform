@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:02:59Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Kings",
+  "chapter": 23,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 37,
+  "verse_count": 37,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "The Covenant Renewal",
+      "reason": "Describes the gathering of elders and the king's covenant ceremony."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Religious Reforms in Judah and Samaria",
+      "reason": "Details the systematic removal of idols, high places, and priests across the land."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Celebration of Passover",
+      "reason": "Records the command to celebrate Passover and its historical significance."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 28,
+      "type": "argument",
+      "title": "Evaluation of Josiah's Reign",
+      "reason": "Summarizes the extent of reforms and God's final judgment on Judah."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 37,
+      "type": "story",
+      "title": "Death of Josiah and Succession",
+      "reason": "Narrates the king's death at Megiddo and the brief reigns of Jehoahaz and Jehoiakim."
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 109:1-31
+
+Chapter text:
+1. For the choir director. Of David. A Psalm. O God of my praise, Do not be silent!
+2. For they have opened a wicked mouth and a deceitful mouth against me; They have spoken to me with a lying tongue.
+3. They have also surrounded me with words of hatred, And fought against me without cause.
+4. In return for my love they accuse me; But I am in prayer.
+5. Thus they have set upon me evil for good And hatred for my love.
+6. Appoint a wicked man over him, And let an accuser stand at his right hand.
+7. When he is judged, let him come forth a wicked man, And let his prayer become sin.
+8. Let his days be few; Let another take his office.
+9. Let his sons be orphans And his wife a widow.
+10. Let his sons wander aimlessly and beg; And let them search for food from their ruined homes.
+11. Let the creditor seize all that he has, And let strangers plunder the fruit of his labor.
+12. Let there be none to extend lovingkindness to him, And let there be none to be gracious to his orphans.
+13. Let those who follow him be cut off; In a following generation let their name be blotted out.
+14. Let the iniquity of his fathers be remembered before Yahweh, And let not the sin of his mother be blotted out.
+15. Let them be before Yahweh continually, That He may cut off their memory from the earth;
+16. Because he did not remember to show lovingkindness, But persecuted the afflicted, the needy man, And the disheartened to put them to death.
+17. He also loved cursing, so it came to him; And he did not delight in blessing, so it was far from him.
+18. But he clothed himself with cursing as his garment, And it came into his inward parts like water And like oil into his bones.
+19. Let it be to him as a garment with which he wraps himself, And for a belt with which he constantly girds himself.
+20. This is the reward of my accusers from Yahweh, And of those who speak evil against my soul.
+21. But as for You, O Yahweh, O Lord, deal with me for Your name’s sake; Because Your lovingkindness is good, deliver me;
+22. For I am afflicted and needy, And my heart is pierced within me.
+23. I am passing like a shadow when it is stretched out; I am shaken off like the locust.
+24. My knees are feeble from fasting, And my flesh has grown lean, without fatness.
+25. As for me, I have become a reproach to them; They see me, they wag their head.
+26. Help me, O Yahweh my God; Save me according to Your lovingkindness.
+27. And let them know that this is Your hand; You, O Yahweh, have done it.
+28. Let them curse, but You bless; They arise and will be put to shame, But Your slave shall be glad.
+29. Let my accusers be clothed with dishonor, And let them wrap themselves with their own shame as with a robe.
+30. With my mouth I will give thanks abundantly to Yahweh; And in the midst of many I will praise Him.
+31. For He stands at the right hand of the needy, To save him from those who judge his soul.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

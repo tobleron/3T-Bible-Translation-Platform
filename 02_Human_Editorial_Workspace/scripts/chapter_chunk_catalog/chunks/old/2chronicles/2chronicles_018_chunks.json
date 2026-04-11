@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:13:27Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 18,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 34,
+  "verse_count": 34,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Jehoshaphat and Ahab Alliance",
+      "reason": "Establishes the political alliance and the invitation to battle."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "The Four Hundred Prophets and Micaiah's First Vision",
+      "reason": "Contrasts the false prophets with Micaiah's initial vision of Israel scattered."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 27,
+      "type": "oracle",
+      "title": "The Heavenly Council and Micaiah's Arrest",
+      "reason": "Details the divine council scene where a lying spirit is sent, followed by Micaiah's confrontation and imprisonment."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 34,
+      "type": "story",
+      "title": "The Battle at Ramoth-gilead",
+      "reason": "Describes the battle strategy, the accidental death of Ahab, and his eventual demise."
+    }
+  ]
+}

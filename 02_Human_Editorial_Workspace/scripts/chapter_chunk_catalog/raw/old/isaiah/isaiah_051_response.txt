@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "exhortation",
+      "title": "Call to Remember the Patriarchs",
+      "reason": "An exhortation urging the people to look back at Abraham and Sarah as a foundation for future hope."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Promise of Eternal Righteousness",
+      "reason": "A divine oracle contrasting the temporary nature of creation with the eternal stability of God's salvation."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "poem",
+      "title": "Awakening the Arm of Yahweh",
+      "reason": "A poetic invocation recalling past victories over chaos and Rahab to anticipate future redemption."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 16,
+      "type": "argument",
+      "title": "Argument Against Fear of Man",
+      "reason": "A rhetorical argument challenging the people's fear of mortal men by highlighting God's creative power."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Judgment on Jerusalem and Her Oppressors",
+      "reason": "A prophetic oracle addressing Jerusalem's suffering cup and the transfer of judgment to her enemies."
+    }
+  ]
+}

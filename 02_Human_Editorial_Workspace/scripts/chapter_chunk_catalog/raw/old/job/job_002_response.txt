@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "Satan's Challenge and Affliction",
+      "reason": "Contains the dialogue between Yahweh and Satan regarding Job's integrity followed by the execution of the affliction."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Job's Suffering and Response",
+      "reason": "Describes Job's physical pain and his dialogue with his wife where he maintains his integrity."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 13,
+      "type": "story",
+      "title": "The Arrival of the Friends",
+      "reason": "Narrates the three friends hearing of Job's calamity, arriving to mourn with him, and sitting in silence."
+    }
+  ]
+}

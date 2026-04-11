@@ -1,0 +1,115 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Lamentations 3:1-66
+
+Chapter text:
+1. I am the man who has seen affliction Because of the rod of His wrath.
+2. He has driven me and made me walk In darkness and not in light.
+3. Surely against me He has turned His hand Repeatedly all the day.
+4. He has caused my flesh and my skin to waste away; He has broken my bones.
+5. He has besieged and encompassed me with gall and hardship.
+6. Dark places He has made me inhabit, Like those who have long been dead.
+7. He has walled me in so that I cannot go out; He has made my chain heavy.
+8. Even when I cry out and call for help, He shuts out my prayer.
+9. He has blocked my ways with cut stone; He has made my paths crooked.
+10. He is to me like a bear lying in wait, Like a lion in secret places.
+11. He has turned aside my ways and torn me to pieces; He has made me desolate.
+12. He bent His bow And set me as a target for the arrow.
+13. He made the arrows of His quiver To enter into my inward parts.
+14. I have become a laughingstock to all my people, Their music of mockery all the day.
+15. He has saturated me with bitterness; He has sated me with wormwood.
+16. He has broken my teeth with gravel; He has made me cower in the dust.
+17. My soul has been rejected from peace; I have forgotten goodness.
+18. So I say, “My strength has perished, As well as my hopeful waiting which comes from Yahweh.”
+19. Remember my affliction and my homelessness, the wormwood and gall.
+20. Surely my soul remembers And is bowed down within me.
+21. This I will return to my heart; Therefore I will wait in hope.
+22. The lovingkindnesses of Yahweh indeed never cease, For His compassions never fail.
+23. They are new every morning; Great is Your faithfulness.
+24. “Yahweh is my portion,” says my soul, “Therefore I wait for Him.”
+25. Yahweh is good to those who hope in Him, To the soul who seeks Him.
+26. It is good that he waits silently For the salvation of Yahweh.
+27. It is good for a man that he should bear The yoke in his youth.
+28. Let him sit alone and be silent Since He has laid it on him.
+29. Let him put his mouth in the dust; Perhaps there is hope.
+30. Let him give his cheek to the one who strikes him; Let him be saturated with reproach.
+31. For the Lord will not reject forever,
+32. For if He causes grief, Then He will have compassion According to His abundant lovingkindness.
+33. For He does not afflict from His heart Or grieve the sons of men.
+34. To crush under His feet All the prisoners of the land,
+35. To deprive a man of justice In the presence of the Most High,
+36. To defraud a man in his legal case— These things the Lord does not see with approval.
+37. Who is there who speaks and it happens, Unless the Lord has commanded it?
+38. Is it not from the mouth of the Most High That both calamities and good go forth?
+39. Why should any living person or any man Complain because of his sins?
+40. Let us search out and examine our ways, And let us return to Yahweh.
+41. We lift up our heart to our hands Toward God in heaven;
+42. We have transgressed and rebelled; You have not pardoned.
+43. You have covered Yourself with anger And pursued us; You have killed and have not spared.
+44. You have covered Yourself with a cloud So that no prayer can pass through.
+45. You have made us mere scum and refuse In the midst of the peoples.
+46. All our enemies have opened their mouths against us.
+47. Panic and pitfall have befallen us, Devastation and destruction;
+48. My eyes run down with streams of water Because of the destruction of the daughter of my people.
+49. My eyes pour down unceasingly, Without stopping,
+50. Until Yahweh looks down And sees from heaven.
+51. My eyes deal severely with my soul Because of all the daughters of my city.
+52. My enemies without cause Hunted me down like a bird;
+53. They have silenced my life in the pit And have placed a stone on me.
+54. Waters flowed over my head; I said, “I am cut off!”
+55. I called on Your name, O Yahweh, Out of the lowest pit.
+56. You have heard my voice, “Do not hide Your ear from my prayer for relief, From my cry for help.”
+57. You drew near when I called on You; You said, “Do not fear!”
+58. O Lord, You have pleaded my soul’s cause; You have redeemed my life.
+59. O Yahweh, You have seen my oppression; Judge my case.
+60. You have seen all their vengeance, All their purposes against me.
+61. You have heard their reproach, O Yahweh, All their purposes against me.
+62. The lips of those who rise against me and their whispering Are against me all day long.
+63. Look on their sitting and their rising; I am their mocking song.
+64. You will recompense them, O Yahweh, According to the work of their hands.
+65. You will give them dullness of heart; Your curse will be on them.
+66. You will pursue them in anger and destroy them From under the heavens of Yahweh!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "vision",
+      "title": "Vision of Isaiah and Judgment on Judah",
+      "reason": "Introduces the prophet's vision and describes the spiritual sickness and desolation of the land."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 20,
+      "type": "speech",
+      "title": "Call to Repentance and Divine Offer",
+      "reason": "God addresses the leaders as Sodom and Gomorrah, critiques their worship, and offers a choice between blessing and judgment."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 31,
+      "type": "oracle",
+      "title": "Oracle of the Faithless City",
+      "reason": "Describes the corruption of Jerusalem's leaders, promises purification through judgment, and concludes with the fate of the wicked."
+    }
+  ]
+}

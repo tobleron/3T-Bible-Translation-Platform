@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Covenant with Eyes and Adultery",
+      "reason": "Job declares his sexual purity and the consequences of lust."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Justice for Slaves and the Poor",
+      "reason": "Job defends his fair treatment of servants and care for the needy."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 37,
+      "type": "speech",
+      "title": "Purity from Wealth and Pride",
+      "reason": "Job rejects idolatry of gold, sun, moon, and secret sin."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 40,
+      "type": "speech",
+      "title": "Purity from Land Exploitation",
+      "reason": "Job concludes his oath by denying exploitation of the land."
+    }
+  ]
+}

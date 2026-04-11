@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:27:07Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 51,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 19,
+  "verse_count": 19,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Confession of Sin",
+      "reason": "David acknowledges his specific transgressions against God."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 12,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Cleansing and Renewal",
+      "reason": "A plea for inner purification and restoration of the spirit."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "argument",
+      "title": "Promise of Praise and True Sacrifice",
+      "reason": "David contrasts external rituals with the internal attitude God desires."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Zion",
+      "reason": "A concluding petition for the restoration of Jerusalem and acceptable worship."
+    }
+  ]
+}

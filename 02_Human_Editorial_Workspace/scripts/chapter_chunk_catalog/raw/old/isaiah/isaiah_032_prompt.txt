@@ -1,0 +1,69 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 32:1-20
+
+Chapter text:
+1. Behold, a king will reign righteously And princes will rule justly.
+2. Each will be like a refuge from the wind And a shelter from the storm, Like streams of water in a dry country, Like the shade of a huge rock in a weary land.
+3. Then the eyes of those who see will not be blinded, And the ears of those who hear will pay attention.
+4. And the heart of the hasty will discern knowledge, And the tongue of the stammerers will hasten to speak clearly.
+5. No longer will the wicked fool be called noble, Or the rogue be spoken of as generous.
+6. For a wicked fool speaks wicked folly, And his heart does wickedness: To do ungodliness and to speak error against Yahweh, In order to make the hungry person empty; He even causes the thirsty to lack a drink.
+7. As for a rogue, his weapons are evil; He counsels wicked schemes To wreak destruction on the afflicted with lying words, Even though the needy one speaks justly.
+8. But the noble man counsels noble plans; And by noble plans he rises up.
+9. Rise up, you women who are at ease, And hear my voice; Give ear to my word, You complacent daughters.
+10. Within a year and a few days You will quake, O complacent daughters; For the grape harvest is ended, And the fruit gathering will not come.
+11. Tremble, you women who are at ease; Quake, you complacent daughters; Strip, undress, and put sackcloth on your waist,
+12. Beat your breasts for the desirable fields, for the fruitful vine,
+13. For the land of my people in which thorns and briars shall come up, Indeed, against all the joyful houses and the exultant city.
+14. Because the palace has been abandoned, the populated city forsaken. Hill and watchtower have become caves forever, A joy for wild donkeys, a pasture for flocks,
+15. Until the Spirit is poured out upon us from on high, And the wilderness becomes a fruitful orchard, And the fruitful orchard is counted as a forest.
+16. Then justice will dwell in the wilderness, And righteousness will live in the fruitful orchard.
+17. And the work of righteousness will be peace, And the service of righteousness, quietness and security forever.
+18. Then my people will live in a peaceful abode, And in secure dwellings and in undisturbed resting places;
+19. And it will hail when the forest comes down, And the city will be utterly laid low.
+20. How blessed will you be, you who sow beside all waters, Who let out freely the ox and the donkey.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

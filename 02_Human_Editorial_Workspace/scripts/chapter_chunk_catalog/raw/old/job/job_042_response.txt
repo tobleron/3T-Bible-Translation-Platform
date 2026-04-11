@@ -1,0 +1,29 @@
+
+
+<think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Job's Repentance and Confession",
+      "reason": "A complete speech where Job acknowledges God's sovereignty and repents for speaking without full understanding."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 10,
+      "type": "story",
+      "title": "God Rebukes the Friends and Restores Job",
+      "reason": "A narrative unit where God addresses Eliphaz, instructs the friends to sacrifice, and restores Job's fortunes."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Job's Restoration and Final Days",
+      "reason": "A narrative account of the community's comfort, Job's doubled wealth, his daughters, and his peaceful death."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "Song of the Strong City",
+      "reason": "A hymn celebrating God's salvation and the judgment of the proud city."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "prayer",
+      "title": "Prayer for Righteous Paths",
+      "reason": "A prayer acknowledging God's judgments and asking for peace."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "argument",
+      "title": "Contrast of Masters and Birth Pangs",
+      "reason": "A reflection on past idols versus God's power, using a metaphor of labor pains."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 21,
+      "type": "oracle",
+      "title": "Promise of Resurrection and Judgment",
+      "reason": "A prophetic declaration of the dead rising and God's final judgment on the earth."
+    }
+  ]
+}

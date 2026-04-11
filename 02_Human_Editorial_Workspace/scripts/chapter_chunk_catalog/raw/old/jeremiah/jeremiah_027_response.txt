@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Command to Send Yoke Message",
+      "reason": "Jeremiah receives a specific command to create a yoke and deliver a unified oracle to foreign kings regarding Babylonian dominance."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "exhortation",
+      "title": "Address to King Zedekiah",
+      "reason": "A direct address to the king urging submission to Babylon and warning against false prophets."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "Oracle Against False Prophets and Vessels",
+      "reason": "A concluding oracle addressing the priests and people about the false hope of returning vessels and their eventual fate in Babylon."
+    }
+  ]
+}

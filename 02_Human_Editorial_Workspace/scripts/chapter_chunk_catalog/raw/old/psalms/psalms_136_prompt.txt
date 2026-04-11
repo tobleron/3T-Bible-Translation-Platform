@@ -1,0 +1,75 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 136:1-26
+
+Chapter text:
+1. Give thanks to Yahweh, for He is good, For His lovingkindness endures forever.
+2. Give thanks to the God of gods, For His lovingkindness endures forever.
+3. Give thanks to the Lord of lords, For His lovingkindness endures forever.
+4. To Him who alone does great wonders, For His lovingkindness endures forever;
+5. To Him who made the heavens with skill, For His lovingkindness endures forever;
+6. To Him who spread out the earth above the waters, For His lovingkindness endures forever;
+7. To Him who made the great lights, For His lovingkindness endures forever:
+8. The sun to rule by day, For His lovingkindness endures forever,
+9. The moon and stars to rule by night, For His lovingkindness endures forever.
+10. To Him who struck the Egyptians through their firstborn, For His lovingkindness endures forever,
+11. Then brought Israel out from their midst, For His lovingkindness endures forever,
+12. With a strong hand and an outstretched arm, For His lovingkindness endures forever.
+13. To Him who divided the Red Sea in two, For His lovingkindness endures forever,
+14. And made Israel pass through the midst of it, For His lovingkindness endures forever,
+15. But He overthrew Pharaoh and his army in the Red Sea, For His lovingkindness endures forever.
+16. To Him who led His people through the wilderness, For His lovingkindness endures forever;
+17. To Him who struck great kings, For His lovingkindness endures forever,
+18. And killed mighty kings, For His lovingkindness endures forever:
+19. Sihon, king of the Amorites, For His lovingkindness endures forever,
+20. And Og, king of Bashan, For His lovingkindness endures forever,
+21. And gave their land as an inheritance, For His lovingkindness endures forever,
+22. Even an inheritance to Israel His servant, For His lovingkindness endures forever.
+23. Who remembered us in our low estate, For His lovingkindness endures forever,
+24. And has snatched us from our adversaries, For His lovingkindness endures forever;
+25. Who gives food to all flesh, For His lovingkindness endures forever.
+26. Give thanks to the God of heaven, For His lovingkindness endures forever.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

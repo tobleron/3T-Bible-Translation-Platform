@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "David's Offering and the People's Response",
+      "reason": "Narrative account of David presenting resources and the assembly's generous response."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "David's Prayer of Thanksgiving",
+      "reason": "A continuous prayer where David blesses God and petitions for Solomon."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Crowning of Solomon",
+      "reason": "Narrative describing the people's worship and Solomon's enthronement."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 30,
+      "type": "story",
+      "title": "David's Reign and Death Summary",
+      "reason": "Concluding summary of David's reign length, death, and historical records."
+    }
+  ]
+}

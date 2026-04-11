@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "oracle",
+      "title": "Bones Spread to the Heavens",
+      "reason": "Oracle describing the desecration of Judah's dead and the preference for death over life."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 13,
+      "type": "argument",
+      "title": "Judgment on Faithlessness and False Wisdom",
+      "reason": "Argument contrasting human faithlessness with natural order, criticizing scribes and priests, and predicting loss of harvest."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 20,
+      "type": "dialogue",
+      "title": "Dialogue on the Oncoming Enemy and Despair",
+      "reason": "Dialogue between the people acknowledging their sin and the prophet describing the invasion and divine judgment."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "Lament for the Broken Daughter",
+      "reason": "Speech of Jeremiah expressing personal grief and asking about the lack of healing."
+    }
+  ]
+}

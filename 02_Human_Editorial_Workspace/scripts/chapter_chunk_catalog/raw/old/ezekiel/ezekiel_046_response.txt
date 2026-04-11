@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Regulations for the Prince and People",
+      "reason": "A continuous legal section detailing gate usage, sacrificial offerings for Sabbaths and new moons, and daily provisions."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 18,
+      "type": "law",
+      "title": "Inheritance Laws for the Prince",
+      "reason": "A distinct legal unit governing the prince's right to give inheritance to sons versus servants."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 24,
+      "type": "vision",
+      "title": "The Priestly Kitchens and Outer Courts",
+      "reason": "A narrative vision segment describing the tour of the inner chambers for boiling sacrifices and the outer court corners."
+    }
+  ]
+}

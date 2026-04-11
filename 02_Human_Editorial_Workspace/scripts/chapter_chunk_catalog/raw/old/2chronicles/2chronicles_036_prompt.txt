@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Chronicles 36:1-23
+
+Chapter text:
+1. Then the people of the land took Joahaz the son of Josiah, and made him king in place of his father in Jerusalem.
+2. Joahaz was twenty-three years old when he became king, and he reigned three months in Jerusalem.
+3. Then the king of Egypt had him removed in Jerusalem and imposed on the land a fine of one hundred talents of silver and one talent of gold.
+4. Then the king of Egypt made Eliakim his brother king over Judah and Jerusalem, and changed his name to Jehoiakim. But Neco took Joahaz his brother and brought him to Egypt.
+5. Jehoiakim was twenty-five years old when he became king, and he reigned eleven years in Jerusalem; and he did what was evil in the sight of Yahweh his God.
+6. Nebuchadnezzar king of Babylon came up against him and bound him with bronze chains to lead him off to Babylon.
+7. Nebuchadnezzar also brought some of the articles of the house of Yahweh to Babylon and put them in his temple at Babylon.
+8. Now the rest of the acts of Jehoiakim and the abominations which he did, and what was found against him, behold, they are written in the Book of the Kings of Israel and Judah. And Jehoiachin his son became king in his place.
+9. Jehoiachin was eight years old when he became king, and he reigned three months and ten days in Jerusalem, and he did what was evil in the sight of Yahweh.
+10. And at the turn of the year King Nebuchadnezzar sent and brought him to Babylon with the valuable articles of the house of Yahweh, and he made his relative Zedekiah king over Judah and Jerusalem.
+11. Zedekiah was twenty-one years old when he became king, and he reigned eleven years in Jerusalem.
+12. And he did what was evil in the sight of Yahweh his God; he did not humble himself before Jeremiah the prophet who spoke from the mouth of Yahweh.
+13. He also rebelled against King Nebuchadnezzar who had made him swear allegiance by God. But he stiffened his neck and hardened his heart against turning to Yahweh, the God of Israel.
+14. Furthermore, all the leaders of the priests and the people were very unfaithful following all the abominations of the nations; and they defiled the house of Yahweh which He had set apart as holy in Jerusalem.
+15. And Yahweh, the God of their fathers, sent word to them again and again by the hand of His messengers, because He had compassion on His people and on His habitation;
+16. but they continually mocked the messengers of God, despised His words and scoffed at His prophets, until the wrath of Yahweh arose against His people, until there was no remedy.
+17. Therefore He brought up against them the king of the Chaldeans who killed their choice men with the sword in the house of their sanctuary, and had no compassion on choice man or virgin, old man or infirm; He gave them all into his hand.
+18. And all the articles of the house of God, great and small, and the treasures of the house of Yahweh, and the treasures of the king and of his officials, he brought them all to Babylon.
+19. Then they burned the house of God and tore down the wall of Jerusalem, and burned all its palaces with fire and destroyed all its valuable articles.
+20. And those who had escaped from the sword he took away into exile to Babylon; and they were slaves to him and to his sons until the rule of the kingdom of Persia,
+21. to fulfill the word of Yahweh by the mouth of Jeremiah, until the land had made up for its sabbaths. All the days of its desolation it kept sabbath until seventy years were fulfilled.
+22. Now in the first year of Cyrus king of Persia—in order to complete the word of Yahweh by the mouth of Jeremiah—Yahweh stirred up the spirit of Cyrus king of Persia, so that he had a proclamation pass throughout all his kingdom, and also put it in writing, saying,
+23. “Thus says Cyrus king of Persia, ‘Yahweh, the God of heaven, has given me all the kingdoms of the earth, and He has appointed me to build Him a house in Jerusalem, which is in Judah. Whoever there is among you of all His people, may Yahweh his God be with him, and let him go up!’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

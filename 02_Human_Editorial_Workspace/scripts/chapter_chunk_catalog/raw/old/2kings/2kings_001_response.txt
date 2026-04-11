@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Ahaziah's Illness and Elijah's Message",
+      "reason": "Establishes the context of Moab's revolt and Ahaziah's sickness, followed by Elijah's initial oracle."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "dialogue",
+      "title": "The Messengers Return and the King Identifies Elijah",
+      "reason": "Contains the dialogue between the king and his messengers regarding the man who intercepted them."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "story",
+      "title": "The First Two Commanders of Fifty",
+      "reason": "Narrates the arrival and destruction of the first two groups sent by the king."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "story",
+      "title": "The Third Commander and Final Judgment",
+      "reason": "Describes the third commander's plea, Elijah's acceptance of his message, and the fulfillment of the prophecy."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 18,
+      "type": "mixed",
+      "title": "Epilogue on Ahaziah",
+      "reason": "Provides a brief summary of Ahaziah's death and succession."
+    }
+  ]
+}

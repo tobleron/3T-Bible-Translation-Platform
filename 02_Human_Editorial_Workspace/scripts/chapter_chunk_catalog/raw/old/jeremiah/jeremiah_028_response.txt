@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Hananiah's Prophecy of Peace",
+      "reason": "Hananiah delivers a complete oracle predicting the end of Babylonian rule and the return of exiles."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 11,
+      "type": "dialogue",
+      "title": "Jeremiah's Response and Symbolic Act",
+      "reason": "Jeremiah engages Hananiah in dialogue and witnesses the breaking of the wooden yoke."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Jeremiah's Counter-Oracle and Fulfillment",
+      "reason": "God gives Jeremiah a new message of judgment which is fulfilled by Hananiah's death."
+    }
+  ]
+}

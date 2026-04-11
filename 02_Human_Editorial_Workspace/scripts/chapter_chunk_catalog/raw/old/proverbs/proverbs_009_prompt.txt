@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 9:1-18
+
+Chapter text:
+1. Wisdom has built her house, She has hewn out her seven pillars;
+2. She has slaughtered her cattle, she has mixed her wine; She has also prepared her table;
+3. She has sent out her maidens, she calls From the tops of the heights of the city:
+4. “Whoever is simple, let him turn in here!” To him who lacks a heart of wisdom she says,
+5. “Come, eat of my bread And drink of the wine I have mixed.
+6. Forsake your simplicity and live, And step into the way of understanding.”
+7. He who disciplines a scoffer receives disgrace for himself, And he who reproves a wicked man receives injury for himself.
+8. Do not reprove a scoffer, lest he hate you, Reprove a wise man and he will love you.
+9. Give knowledge to a wise man and he will be still wiser, Make a righteous man know it and he will increase his learning.
+10. The fear of Yahweh is the beginning of wisdom, And the knowledge of the Holy One is understanding.
+11. For by me your days will become many, And years of life will be added to you.
+12. If you are wise, you are wise for yourself, And if you scoff, you alone will bear it.
+13. The woman of foolishness is boisterous, A woman of simplicity, and does not know anything.
+14. She sits at the doorway of her house, On a seat by the high places of the city,
+15. To call to those who pass by that way, Who are making their paths straight:
+16. “Whoever is simple, let him turn in here,” And to him who lacks a heart of wisdom she says,
+17. “Stolen water is sweet; And bread eaten in secret is pleasant.”
+18. But he does not know that the dead are there, That those she called are in the depths of Sheol.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

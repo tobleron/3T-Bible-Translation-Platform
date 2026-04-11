@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Josiah's Passover Celebration",
+      "reason": "Describes the preparation, execution, and significance of King Josiah's Passover."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Josiah's Death at Megiddo",
+      "reason": "Narrates Josiah's encounter with Neco of Egypt, his wounding, death, and the subsequent lament."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 27,
+      "type": "list_or_catalog",
+      "title": "Summary of Josiah's Reign",
+      "reason": "Provides a concluding summary referencing the records of his deeds and acts."
+    }
+  ]
+}

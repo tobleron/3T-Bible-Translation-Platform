@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Description of the Wicked",
+      "reason": "A coherent unit describing the internal state and actions of the ungodly."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Praise for God's Attributes",
+      "reason": "A section celebrating Yahweh's lovingkindness, faithfulness, and provision."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "exhortation",
+      "title": "Petition for Deliverance",
+      "reason": "A prayer asking for continued favor and protection from the wicked."
+    }
+  ]
+}

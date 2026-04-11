@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Solomon's Decision and Workforce",
+      "reason": "Introduces the project and initial mobilization of laborers."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Solomon's Letter to Huram",
+      "reason": "Contains Solomon's request for materials and skilled workers."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Huram's Reply to Solomon",
+      "reason": "Records the king of Tyre's response and agreement."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Final Census and Assignment",
+      "reason": "Concludes the chapter with the final count and distribution of workers."
+    }
+  ]
+}

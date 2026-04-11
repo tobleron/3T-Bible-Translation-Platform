@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Jeremiah's Complaint and God's Answer",
+      "reason": "A unified dialogue where Jeremiah questions God about the prosperity of the wicked and receives a challenge to persevere."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 13,
+      "type": "oracle",
+      "title": "Judgment on Judah's Vineyard",
+      "reason": "God describes the desolation of His inheritance and the judgment coming upon the land due to its evil."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "Promise Regarding Neighboring Nations",
+      "reason": "A specific prophecy concerning the fate of Israel's neighbors and their potential restoration or destruction."
+    }
+  ]
+}

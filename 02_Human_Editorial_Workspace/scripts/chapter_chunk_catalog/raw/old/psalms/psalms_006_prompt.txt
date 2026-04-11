@@ -1,0 +1,59 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 6:1-10
+
+Chapter text:
+1. For the choir director. With stringed instruments. According to the Sheminith. A Psalm of David. O Yahweh, do not reprove me in Your anger, Nor discipline me in Your wrath.
+2. Be gracious to me, O Yahweh, for I am pining away; Heal me, O Yahweh, for my bones are dismayed.
+3. And my soul is greatly dismayed; But You, O Yahweh—how long?
+4. Return, O Yahweh, rescue my soul; Save me because of Your lovingkindness.
+5. For there is no remembrance of You in death; In Sheol who will give You thanks?
+6. I am weary with my sighing; Every night I make my bed swim, I flood my couch with my tears.
+7. My eye has wasted away with grief; It has become old because of all my adversaries.
+8. Depart from me, all you workers of iniquity, For Yahweh has heard the sound of my weeping.
+9. Yahweh has heard my supplication, Yahweh receives my prayer.
+10. All my enemies will be ashamed and greatly dismayed; They shall turn back, they will suddenly be ashamed.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

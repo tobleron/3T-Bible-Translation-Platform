@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Conquest of Rabbah",
+      "reason": "Describes the siege of Rabbah by Joab and David's subsequent actions with the spoils."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 8,
+      "type": "list_or_catalog",
+      "title": "Victories over the Giants",
+      "reason": "Catalogs four specific battles against Philistine giants and their descendants."
+    }
+  ]
+}

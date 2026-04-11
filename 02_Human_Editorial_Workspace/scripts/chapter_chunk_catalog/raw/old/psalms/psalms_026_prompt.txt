@@ -1,0 +1,61 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 26:1-12
+
+Chapter text:
+1. Of David. Give justice to me, O Yahweh, for I have walked in my integrity, And I have trusted in Yahweh; I will not waver.
+2. Test me, O Yahweh, and try me; Refine my mind and my heart.
+3. For Your lovingkindness is before my eyes, And I have walked in Your truth.
+4. I do not sit with worthless men, And I will not go with pretenders.
+5. I hate the assembly of evildoers, And I will not sit with the wicked.
+6. I shall wash my hands in innocence, So I will go around Your altar, O Yahweh,
+7. In order to proclaim with the voice of thanksgiving And to recount all Your wondrous deeds.
+8. O Yahweh, I love the habitation of Your house And the place where Your glory dwells.
+9. Do not take my soul away along with sinners, Nor my life with men of bloodshed,
+10. In whose hands is a wicked scheme, And whose right hand is full of bribes.
+11. But as for me, I shall walk in my integrity; Redeem me, and be gracious to me.
+12. My foot stands on level ground; In the congregations I shall bless Yahweh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

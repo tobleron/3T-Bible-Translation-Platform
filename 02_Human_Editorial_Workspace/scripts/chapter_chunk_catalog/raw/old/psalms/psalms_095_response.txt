@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "blessing_or_prayer",
+      "title": "Call to Worship",
+      "reason": "An invitation to sing, shout, and bow before God as Creator."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Warning from the Wilderness",
+      "reason": "A call to heed God's voice today, referencing the rebellion at Meribah and Massah."
+    }
+  ]
+}

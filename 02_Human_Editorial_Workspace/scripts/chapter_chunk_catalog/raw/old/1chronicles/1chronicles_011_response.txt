@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "David Anointed King and Captures Jerusalem",
+      "reason": "Narrative of Israel gathering at Hebron to anoint David and the subsequent capture of Zion."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 47,
+      "type": "list_or_catalog",
+      "title": "The Mighty Men of David",
+      "reason": "Catalogue of the thirty mighty men and their deeds following the introduction in verse 10."
+    }
+  ]
+}

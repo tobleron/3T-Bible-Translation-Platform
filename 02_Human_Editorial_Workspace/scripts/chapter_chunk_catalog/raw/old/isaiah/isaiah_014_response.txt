@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 32,
+      "type": "mixed",
+      "title": "Restoration and Judgment Oracles",
+      "reason": "The chapter combines a prophecy of Israel's restoration with three distinct oracles against Babylon, Assyria, and Philistia."
+    }
+  ]
+}

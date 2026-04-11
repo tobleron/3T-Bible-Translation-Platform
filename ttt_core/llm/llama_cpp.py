@@ -9,6 +9,7 @@ from typing import Generator
 
 import requests
 
+from ttt_core.config import load_config
 from ttt_core.utils.common import extract_json_payload
 
 
@@ -21,16 +22,37 @@ class LlamaCppClient:
     - ``complete_json()``: blocking call with automatic JSON repair attempts
     """
 
-    def __init__(self, base_url: str = "http://192.168.1.186:8080") -> None:
+    def __init__(self, base_url: str | None = None, api_key: str | None = None) -> None:
+        if base_url is None or api_key is None:
+            cfg = load_config()
+            llm_cfg = cfg.get("llama_cpp", {})
+            if base_url is None:
+                base_url = llm_cfg.get("base_url", "http://192.168.1.186:8081/v1")
+            if api_key is None:
+                api_key = llm_cfg.get("api_key")
+
         self.base_url = base_url.rstrip("/")
+        self.api_key = api_key
+
+    def _get_headers(self) -> dict[str, str]:
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        return headers
 
     # ------------------------------------------------------------------
     # Model discovery
     # ------------------------------------------------------------------
     def list_models(self) -> list[str]:
-        url = f"{self.base_url}/v1/models"
+        # If base_url already contains /v1, don't add it again
+        if "/v1" in self.base_url:
+            url = f"{self.base_url}/models"
+        else:
+            url = f"{self.base_url}/v1/models"
+            
         try:
-            with urllib.request.urlopen(url, timeout=5) as response:
+            request = urllib.request.Request(url, headers=self._get_headers())
+            with urllib.request.urlopen(request, timeout=5) as response:
                 payload = json.loads(response.read().decode("utf-8"))
                 return [
                     item.get("id", "llama.cpp-model")
@@ -60,10 +82,17 @@ class LlamaCppClient:
         if stop:
             payload["stop"] = stop
         data = json.dumps(payload).encode("utf-8")
+        
+        # Determine endpoint. llama.cpp legacy /completion vs /v1/completions
+        if "/v1" in self.base_url:
+            url = f"{self.base_url}/completions"
+        else:
+            url = f"{self.base_url}/completion"
+
         request = urllib.request.Request(
-            f"{self.base_url}/completion",
+            url,
             data=data,
-            headers={"Content-Type": "application/json"},
+            headers=self._get_headers(),
         )
         try:
             with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
@@ -110,8 +139,12 @@ class LlamaCppClient:
         }
 
         try:
-            url = f"{self.base_url}/completion"
-            with requests.post(url, json=payload, stream=True, timeout=300) as resp:
+            if "/v1" in self.base_url:
+                url = f"{self.base_url}/completions"
+            else:
+                url = f"{self.base_url}/completion"
+                
+            with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=300) as resp:
                 resp.raise_for_status()
                 for line in resp.iter_lines():
                     if not line:

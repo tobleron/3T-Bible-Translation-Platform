@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:08:39Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 14,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 15,
+  "verse_count": 15,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Asa's Reign and Fortifications",
+      "reason": "Narrative covering Asa's accession, religious reforms, and building projects during a period of peace."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "story",
+      "title": "War with Zerah the Ethiopian",
+      "reason": "Narrative describing the military confrontation, Asa's prayer, and the subsequent victory."
+    }
+  ]
+}

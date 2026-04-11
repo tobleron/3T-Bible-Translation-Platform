@@ -14,10 +14,11 @@ fi
 echo "Starting full Bible chunk extraction..."
 echo "Script: $SCRIPT"
 echo "Output: $OUTPUT_DIR"
-echo "Endpoint: http://192.168.1.186:8080"
+echo "Endpoint: http://192.168.1.186:8081/v1"
 echo
 
 exec "$VENV_PY" "$SCRIPT" \
   --testament all \
   --output-dir "$OUTPUT_DIR" \
+  --base-url "http://192.168.1.186:8081/v1" \
   "$@"

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Dedication of the Temple and Feast",
+      "reason": "Narrative account of fire consuming sacrifices, the people's worship, Solomon's extensive offerings, and the conclusion of the feast."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "Yahweh's Response to Solomon",
+      "reason": "Divine speech containing a promise of answer to prayer, conditions for blessing or judgment, and the consequences of covenant faithfulness."
+    }
+  ]
+}

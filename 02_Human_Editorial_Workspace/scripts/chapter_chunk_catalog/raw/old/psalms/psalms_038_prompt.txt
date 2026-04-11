@@ -1,0 +1,71 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 38:1-22
+
+Chapter text:
+1. A Psalm of David. To bring to remembrance. O Yahweh, reprove me not in Your wrath, And discipline me not in Your burning anger.
+2. For Your arrows have pressed deep into me, And Your hand has pressed down upon me.
+3. There is no soundness in my flesh because of Your indignation; There is no health in my bones because of my sin.
+4. For my iniquities go over my head; As a heavy burden they weigh too much for me.
+5. My wounds stink and rot Because of my folly.
+6. I am bent over and greatly bowed down; I go mourning all day long.
+7. For my loins are filled with burning, And there is no soundness in my flesh.
+8. I am faint and badly crushed; I groan because of the agitation of my heart.
+9. Lord, all my desire is before You; And my sighing is not hidden from You.
+10. My heart throbs, my strength forsakes me; And the light of my eyes, even that has gone from me.
+11. My loved ones and my friends stand aloof from my plague; And my kinsmen stand afar off.
+12. Those who search for my life lay snares for me; And those who seek to do me evil have threatened destruction, And they meditate on deception all day long.
+13. But I, like a deaf man, do not hear; And I am like a mute man who does not open his mouth.
+14. And I am like a man who does not hear, And in whose mouth are no reproofs.
+15. For I wait on You, O Yahweh; You will answer, O Lord my God.
+16. For I said, “Save, lest they be glad over me, Who, when my foot stumbles, magnify themselves against me.”
+17. For I am ready to fall, And my sorrow is continually before me.
+18. For I confess my iniquity; I am full of anxiety because of my sin.
+19. But my enemies are vigorous and strong, And those who wrongfully hate me abound.
+20. And those who repay evil for good, They accuse me, for I pursue what is good.
+21. Do not forsake me, O Yahweh; O my God, do not be far from me!
+22. Make haste to help me, O Lord, my salvation!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

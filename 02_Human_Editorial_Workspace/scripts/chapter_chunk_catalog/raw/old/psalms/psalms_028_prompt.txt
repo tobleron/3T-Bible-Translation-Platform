@@ -1,0 +1,58 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 28:1-9
+
+Chapter text:
+1. Of David. To You, O Yahweh, I call; My rock, do not be silent to me, Lest if You are hesitant toward me, I will become like those who go down to the pit.
+2. Hear the voice of my supplications when I cry to You for help, When I lift up my hands toward Your holy sanctuary.
+3. Do not drag me away with the wicked And with workers of iniquity, Who speak peace with their neighbors, While evil is in their hearts.
+4. Give to them according to their work and according to the evil of their actions; Give to them according to the deeds of their hands; Return their dealings upon them.
+5. Because they do not regard the works of Yahweh Nor the deeds of His hands, He will tear them down and not build them up.
+6. Blessed be Yahweh, Because He has heard the voice of my supplications.
+7. Yahweh is my strength and my shield; My heart trusts in Him, and I am helped; Therefore my heart exults, And with my song I shall thank Him.
+8. Yahweh is their strength, And He is a strong defense of salvation to His anointed.
+9. Save Your people and bless Your inheritance; Be their shepherd also, and carry them forever.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

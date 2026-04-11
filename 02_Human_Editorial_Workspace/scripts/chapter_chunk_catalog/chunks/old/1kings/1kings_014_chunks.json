@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:16:21Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Kings",
+  "chapter": 14,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Jeroboam's Wife Visits Ahijah",
+      "reason": "A complete narrative unit covering the wife's journey, the prophecy, and the child's death."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 20,
+      "type": "mixed",
+      "title": "Summary of Jeroboam's Reign",
+      "reason": "Concludes the narrative of Jeroboam with historical summary and succession details."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 30,
+      "type": "mixed",
+      "title": "Rehoboam's Reign and Egypt Invasion",
+      "reason": "A continuous historical account detailing Rehoboam's reign, Judah's apostasy, and the Egyptian invasion."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 31,
+      "type": "mixed",
+      "title": "Conclusion of Rehoboam's Reign",
+      "reason": "Final summary verse covering burial and succession for Rehoboam."
+    }
+  ]
+}

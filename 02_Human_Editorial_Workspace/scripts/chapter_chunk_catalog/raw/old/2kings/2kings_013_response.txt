@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Reign of Jehoahaz",
+      "reason": "Describes the reign, sins, and deliverance of King Jehoahaz."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Reign of Joash",
+      "reason": "Describes the reign and death of King Joash."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Death of Elisha",
+      "reason": "Narrates the interaction between Joash and Elisha, the prophecy, and Elisha's posthumous miracle."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Restoration of Israel",
+      "reason": "Summarizes the oppression by Aram and the final victories of Joash."
+    }
+  ]
+}

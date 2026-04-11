@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Oracle Against the Mountains",
+      "reason": "A unified prophetic message directed at the mountains of Israel detailing judgment and a future remnant."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Call to Lament and Final Judgment",
+      "reason": "A distinct section where the prophet is commanded to perform a physical gesture of lament before describing the comprehensive nature of the coming wrath."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "list_or_catalog",
+      "title": "Benjaminites at Ziklag",
+      "reason": "A catalog of names and families from Benjamin who joined David."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "list_or_catalog",
+      "title": "Gadites in the Wilderness",
+      "reason": "A description of the Gadite warriors and a list of their leaders."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Defectors Join David",
+      "reason": "Narrative accounts of Benjamites, Judahites, and Manassites joining David."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 37,
+      "type": "list_or_catalog",
+      "title": "Tribal Numbers at Hebron",
+      "reason": "A detailed statistical list of warriors from various tribes arriving at Hebron."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 40,
+      "type": "story",
+      "title": "David Crowned King",
+      "reason": "Narrative conclusion describing the unity of Israel and the celebration."
+    }
+  ]
+}

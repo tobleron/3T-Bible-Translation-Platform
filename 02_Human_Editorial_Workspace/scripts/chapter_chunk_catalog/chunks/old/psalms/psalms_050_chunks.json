@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:25:40Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 50,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "God's Call to Justice",
+      "reason": "Introduction of God speaking from Zion with cosmic imagery."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Instruction on True Worship",
+      "reason": "God addresses His people regarding the nature of sacrifice and thanksgiving."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 21,
+      "type": "argument",
+      "title": "Reproof of the Wicked",
+      "reason": "God contrasts the wicked's behavior with His silence and impending judgment."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "exhortation",
+      "title": "Final Warning and Promise",
+      "reason": "Concluding call to remember God and the promise of salvation for the righteous."
+    }
+  ]
+}

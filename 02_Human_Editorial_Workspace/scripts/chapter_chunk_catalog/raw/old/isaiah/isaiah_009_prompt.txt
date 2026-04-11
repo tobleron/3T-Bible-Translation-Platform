@@ -1,0 +1,70 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 9:1-21
+
+Chapter text:
+1. But there will be no more gloom for her who was in anguish; in earlier times He treated the land of Zebulun and the land of Naphtali with contempt, but later on He shall make it glorious, by the way of the sea, on the other side of Jordan, Galilee of the Gentiles.
+2. The people who walk in darkness Will see a great light; Those who live in the land of the shadow of death, The light will shine on them.
+3. You shall multiply the nation, You shall make great their gladness; They will be glad in Your presence As with the gladness of harvest, As men rejoice when they divide the spoil.
+4. For You shall shatter the yoke of their burden and the staff on their shoulders, The rod of their taskmaster, as at the battle of Midian.
+5. For every boot of the booted warrior in the rumbling of battle, And cloak rolled in blood, will be for burning, fuel for the fire.
+6. For a child will be born to us, a son will be given to us; And the government will rest on His shoulders; And His name will be called Wonderful Counselor, Mighty God, Eternal Father, Prince of Peace.
+7. There will be no end to the increase of His government or of peace, On the throne of David and over his kingdom, To establish it and to uphold it with justice and righteousness From then on and forevermore. The zeal of Yahweh of hosts will accomplish this.
+8. The Lord sends a message against Jacob, And it falls on Israel.
+9. And all the people know it, That is, Ephraim and the inhabitants of Samaria, Saying in lofty pride and in arrogance of heart:
+10. “The bricks have fallen down, But we will rebuild with cut stones; The sycamores have been cut in pieces, But we will replace them with cedars.”
+11. Therefore Yahweh exalts against them adversaries from Rezin And incites their enemies,
+12. The Arameans on the east and the Philistines on the west; And they devour Israel with gaping jaws. In spite of all this, His anger does not turn back, And His hand is still stretched out.
+13. Yet the people do not turn back to Him who struck them, Nor do they seek Yahweh of hosts.
+14. So Yahweh cuts off head and tail from Israel, Both palm branch and bulrush in a single day.
+15. The head is the elder and the highly respected man, And the prophet who teaches falsehood is the tail.
+16. For those who guide this people are leading them astray; And those who are guided by them are brought to confusion.
+17. Therefore the Lord is not glad in their choice men, Nor does He have compassion on their orphans or their widows; For every one of them is godless and an evildoer, And every mouth is speaking wicked foolishness. In spite of all this, His anger does not turn back, And His hand is still stretched out.
+18. For wickedness burns like a fire; It consumes briars and thorns; It even sets the thickets of the forest aflame, And they roll upward in a column of smoke.
+19. By the fury of Yahweh of hosts the land is burned up, And the people are like fuel for the fire; No man spares his brother.
+20. They slice off what is on the right hand but still are hungry, And they eat what is on the left hand but they are not satisfied; Each of them eats the flesh of his own arm.
+21. Manasseh devours Ephraim, and Ephraim Manasseh, And together they are against Judah. In spite of all this, His anger does not turn back, And His hand is still stretched out.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

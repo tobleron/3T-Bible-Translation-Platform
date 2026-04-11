@@ -1,0 +1,72 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T11:18:57Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Jeremiah",
+  "chapter": 31,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 40,
+  "verse_count": 40,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Promise of Restoration",
+      "reason": "Yahweh declares a new relationship with Israel and promises future rebuilding."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Gathering from Exile",
+      "reason": "A call to the nations to witness Yahweh's gathering of the remnant with joy."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "speech",
+      "title": "Rachel's Comfort and Ephraim's Return",
+      "reason": "Transition from Rachel's weeping to Yahweh's tender address to Ephraim."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 26,
+      "type": "exhortation",
+      "title": "Call to Return and Promise of Satisfaction",
+      "reason": "Instruction to return to the cities followed by a vision of satisfaction."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 30,
+      "type": "oracle",
+      "title": "Replanting and Personal Responsibility",
+      "reason": "Promise to sow the house of Israel and Judah and end the proverb about sour grapes."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 34,
+      "type": "law",
+      "title": "The New Covenant",
+      "reason": "Definition of the internal covenant where God's law is written on hearts."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 37,
+      "type": "argument",
+      "title": "Certainty of the Covenant",
+      "reason": "Yahweh uses cosmic order to guarantee Israel's continued existence."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 40,
+      "type": "vision",
+      "title": "Rebuilt Jerusalem",
+      "reason": "Detailed description of the boundaries and holiness of the renewed city."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Lament over the Ruins",
+      "reason": "A unified prayer questioning God's rejection and describing the enemy's destruction of the sanctuary."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "argument",
+      "title": "Recall of Creation Deeds",
+      "reason": "A theological argument recalling God's past power over nature and history to support the plea for help."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 23,
+      "type": "exhortation",
+      "title": "Call to Remember and Arise",
+      "reason": "A concluding section urging God to remember the covenant and arise to defend His cause against enemies."
+    }
+  ]
+}

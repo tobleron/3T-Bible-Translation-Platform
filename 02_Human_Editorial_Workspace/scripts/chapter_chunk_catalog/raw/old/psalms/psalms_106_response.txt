@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "blessing_or_prayer",
+      "title": "Opening Praise and Petition",
+      "reason": "A unified call to praise followed by a personal prayer for remembrance and participation in God's glory."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Confession and the Exodus Deliverance",
+      "reason": "A confession of sin regarding the fathers' rebellion at the Red Sea and God's saving intervention."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Rebellion in the Wilderness",
+      "reason": "A narrative sequence of Israel's ingratitude, craving for food, envy of Moses and Aaron, and the calf idolatry."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Disobedience at Kadesh and Meribah",
+      "reason": "The story of despising the Promised Land, joining Baal-peor, Phinehas's intercession, and Moses' failure at Meribah."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 46,
+      "type": "story",
+      "title": "Cycles of Idolatry and Deliverance",
+      "reason": "A summary of the conquest failures, idolatrous practices in Canaan, and God's repeated mercy despite their rebellion."
+    },
+    {
+      "start_verse": 47,
+      "end_verse": 48,
+      "type": "blessing_or_prayer",
+      "title": "Final Prayer and Doxology",
+      "reason": "A concluding plea for gathering from the nations followed by a formal doxological affirmation."
+    }
+  ]
+}

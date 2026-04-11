@@ -1,0 +1,73 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 30:1-24
+
+Chapter text:
+1. The word which came to Jeremiah from Yahweh, saying,
+2. “Thus says Yahweh, the God of Israel, ‘Write all the words which I have spoken to you in a book.
+3. For behold, days are coming,’ declares Yahweh, ‘when I will return the fortunes of My people Israel and Judah.’ Yahweh says, ‘I will also cause them to return to the land that I gave to their fathers, and they shall possess it.’”
+4. Now these are the words which Yahweh spoke concerning Israel and concerning Judah:
+5. “For thus says Yahweh, ‘We have heard a sound of trembling, Of dread, and there is no peace.
+6. Ask now, and see If a male can give birth. Why do I see every man With his hands on his loins, as a woman in childbirth? And why have all faces turned pale?
+7. Alas! For that day is great, There is none like it; And it is the time of Jacob’s distress, But he will be saved from it.
+8. ‘And it will be in that day,’ declares Yahweh of hosts, ‘that I will break his yoke from off your neck and will tear off your bonds; and strangers will no longer make them their slaves.
+9. But they shall be a slave to Yahweh their God and David their king, whom I will raise up for them.
+10. Fear not, O Jacob My servant,’ declares Yahweh, ‘And do not be dismayed, O Israel; For behold, I will save you from afar And your seed from the land of their captivity. And Jacob will return and will be quiet and at ease, And no one will make him tremble.
+11. For I am with you,’ declares Yahweh, ‘to save you; For I will make a complete destruction of all the nations where I have scattered you, Only I will not make a complete destruction of you. But I will chasten you justly And will by no means leave you unpunished.’
+12. “For thus says Yahweh, ‘Your injury is incurable, And your wound is desperately sick.
+13. There is no one to plead your cause; No healing for your sore, No recovery for you.
+14. All your lovers have forgotten you; They do not seek you; For I have wounded you with the wound of an enemy, With the punishment of a cruel one, Because your iniquity is numerous And your sins are mighty.
+15. Why do you cry out over your injury? Your pain is incurable. Because your iniquity is numerous And your sins are mighty, I have done these things to you.
+16. Therefore all who devour you will be devoured; And all your adversaries, every one of them, will go into captivity; And those who take you as spoil will be spoil, And all who plunder you I will give as plunder.
+17. For I will restore you to health, And I will heal you of your wounds,’ declares Yahweh, ‘Because they have called you a banished one, saying: “It is Zion; no one is seeking her.”’
+18. “Thus says Yahweh, ‘Behold, I will return the fortunes of the tents of Jacob And have compassion on his dwelling places; And the city will be rebuilt on its ruin, And the palace will sit on its just place.
+19. From them will come forth thanksgiving And the voice of those who celebrate; And I will multiply them, and they will not decrease; I will also honor them, and they will not be insignificant.
+20. Their children also will be as formerly, And their congregation shall be established before Me; And I will punish all their oppressors.
+21. And their mighty one shall be one of them, And their ruler shall come forth from their midst; And I will bring Him near, and He shall approach Me; For who would dare to give his heart as security to approach Me?’ declares Yahweh.
+22. ‘You shall be My people, And I will be your God.’”
+23. Behold, the storm of Yahweh! Wrath has gone forth, A sweeping storm; It will burst on the head of the wicked.
+24. The burning anger of Yahweh will not turn back Until He has done and until He has established The intent of His heart; In the last days you will understand this.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

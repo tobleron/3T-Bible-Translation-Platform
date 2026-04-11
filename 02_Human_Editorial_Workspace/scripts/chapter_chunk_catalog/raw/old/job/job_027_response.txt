@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Job's Oath of Integrity",
+      "reason": "Job swears by God to maintain his righteousness and silence until death."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Hope of the Wicked and Rebuke of Friends",
+      "reason": "Job questions the hope of the godless and challenges his friends' vanity."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Portion of the Wicked Man",
+      "reason": "A detailed description of the inevitable destruction and loss suffered by the wicked."
+    }
+  ]
+}

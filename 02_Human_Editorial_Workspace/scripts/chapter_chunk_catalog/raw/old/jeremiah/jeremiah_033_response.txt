@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Promise of Healing and Restoration",
+      "reason": "A unified oracle where God promises healing, restoration of fortunes, and cleansing from iniquity to the city of Jerusalem."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Restoration of Joy and Agriculture",
+      "reason": "A prophetic vision describing the return of joy, marriage, thank offerings, and agricultural life to the desolate land."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 18,
+      "type": "oracle",
+      "title": "The Righteous Branch and Eternal Covenant",
+      "reason": "A declaration of the coming Davidic King who will bring justice and the assurance that his line and the priesthood will never end."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "argument",
+      "title": "Covenant Analogy with Day and Night",
+      "reason": "An argument using the constancy of day and night to prove the certainty of God's covenant with David and the Levites."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 26,
+      "type": "speech",
+      "title": "Rebuttal to Doubt and Final Promise",
+      "reason": "A concluding speech addressing the people's doubt about God rejecting his chosen families, reaffirming the covenant with Jacob."
+    }
+  ]
+}

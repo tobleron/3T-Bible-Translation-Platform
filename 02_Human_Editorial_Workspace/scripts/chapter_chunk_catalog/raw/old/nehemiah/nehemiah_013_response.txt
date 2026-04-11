@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "law",
+      "title": "Exclusion of Foreigners",
+      "reason": "Reading of the law regarding Ammonites and Moabites and the resulting separation."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Restoration of Temple Chambers",
+      "reason": "Narrative of Nehemiah returning to Jerusalem and correcting the misuse of temple storage."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Observance of the Sabbath",
+      "reason": "Account of Nehemiah enforcing Sabbath rest and closing the city gates."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Marriage to Foreign Women",
+      "reason": "Narrative of Nehemiah addressing intermarriage and purifying the priesthood."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 31,
+      "type": "exhortation",
+      "title": "Final Reforms and Prayer",
+      "reason": "Summary of administrative fixes and a concluding prayer for remembrance."
+    }
+  ]
+}

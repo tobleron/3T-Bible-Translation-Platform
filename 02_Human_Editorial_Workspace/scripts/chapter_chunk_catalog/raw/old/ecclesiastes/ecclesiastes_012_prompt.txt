@@ -1,0 +1,63 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ecclesiastes 12:1-14
+
+Chapter text:
+1. Remember also your Creator in the days of your youth, before the evil days happen and the years draw near in which you will say, “I have no delight in them”;
+2. before the sun and the light, the moon and the stars are darkened, and clouds return after the rain;
+3. in the day that the watchmen of the house tremble, and valiant men bend down, the grinding ones stand idle because they are few, and those who look through windows grow dark;
+4. and the doors on the street are shut as the sound of the grinding mill is low, and one will arise at the sound of the bird, and all the daughters of song will sing softly.
+5. Furthermore, men are afraid of a high place and of terrors on the road; the almond tree blooms, the grasshopper drags itself along, and the caperberry is ineffective. For man goes to his eternal home, but the mourners go about in the street.
+6. Remember Him before the silver cord is snapped and the golden bowl is crushed, the pitcher by the spring is broken and the wheel at the cistern is crushed;
+7. then the dust will return to the earth as it was, and the spirit will return to God who gave it.
+8. “Vanity of vanities,” says the Preacher, “all is vanity!”
+9. In addition to being a wise man, the Preacher also taught the people knowledge; and he pondered, searched out, and arranged many proverbs.
+10. The Preacher sought to find delightful words and words of truth written uprightly.
+11. The words of wise men are like goads, and masters of these collections are like well-driven nails; they are given by one Shepherd.
+12. But in addition to this, my son, be warned: the making of many books is endless, and much devotion to books is wearying to the flesh.
+13. The end of the matter, all that has been heard: fear God and keep His commandments, because this is the end of the matter for all mankind.
+14. For God will bring every work to judgment, everything which is hidden, whether it is good or evil.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "Hezekiah Sends Envoys to Isaiah",
+      "reason": "Describes Hezekiah's reaction and the messengers' dialogue with Isaiah."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Rabshakeh's Second Message to Hezekiah",
+      "reason": "Contains the Assyrian general's taunt and rhetorical questions sent to Hezekiah."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "Hezekiah's Prayer of Faith",
+      "reason": "Depicts Hezekiah spreading the letter before God and praying for deliverance."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 34,
+      "type": "oracle",
+      "title": "Isaiah's Prophecy Against Assyria",
+      "reason": "Records the Lord's specific judgment and promise of defense against Sennacherib."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 37,
+      "type": "story",
+      "title": "The Fall of the Assyrian Army and King",
+      "reason": "Narrates the angelic strike on the camp and the subsequent death of Sennacherib."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Oracle Against Egypt",
+      "reason": "A unified prophetic declaration detailing the coming judgment on Egypt and its allies."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 26,
+      "type": "speech",
+      "title": "Breaking of Pharaoh's Arms",
+      "reason": "A specific prophetic speech describing the weakening of Egypt and the strengthening of Babylon."
+    }
+  ]
+}

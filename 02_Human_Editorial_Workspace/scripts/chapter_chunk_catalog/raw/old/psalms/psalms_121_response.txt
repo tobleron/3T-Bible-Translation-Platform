@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "psalm",
+      "title": "Lifting Eyes to the Mountains",
+      "reason": "The psalmist poses a question about help and answers that it comes from Yahweh."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 8,
+      "type": "blessing_or_prayer",
+      "title": "Yahweh as Keeper",
+      "reason": "A declaration of God's protection over the believer day and night."
+    }
+  ]
+}

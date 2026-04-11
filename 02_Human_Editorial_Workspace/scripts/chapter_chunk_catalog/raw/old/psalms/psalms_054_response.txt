@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "David's Cry for Help",
+      "reason": "Contains the historical context and the initial plea to God against enemies."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 7,
+      "type": "blessing_or_prayer",
+      "title": "Confidence in Deliverance",
+      "reason": "Shifts from the problem to God's help and the vow of thanksgiving."
+    }
+  ]
+}

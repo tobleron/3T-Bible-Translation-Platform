@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 16,
+      "type": "oracle",
+      "title": "Oracle Against False Prophets",
+      "reason": "A unified prophetic judgment against male prophets who use their own spirit to deceive Israel with false peace."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Oracle Against False Prophetesses",
+      "reason": "A distinct prophetic judgment against female practitioners of magic and divination who hunt souls for profit."
+    }
+  ]
+}

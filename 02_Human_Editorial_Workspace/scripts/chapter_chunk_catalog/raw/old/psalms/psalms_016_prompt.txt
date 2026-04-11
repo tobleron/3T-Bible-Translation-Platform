@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 16:1-11
+
+Chapter text:
+1. A Mikhtam of David. Keep me, O God, for I take refuge in You.
+2. O my soul, you have said to Yahweh, “You are my Lord; I have no good without You.”
+3. As for the saints who are in the earth, They are the majestic ones in whom is all my delight.
+4. The pains of those who have bartered for another god will be multiplied; I shall not pour out their drink offerings of blood, Nor will I take their names upon my lips.
+5. Yahweh is the portion of my inheritance and my cup; You support my lot.
+6. The lines have fallen to me in pleasant places; Indeed, my inheritance is beautiful to me.
+7. I will bless Yahweh who has counseled me; Indeed, my mind instructs me in the night.
+8. I have set Yahweh continually before me; Because He is at my right hand, I will not be shaken.
+9. Therefore my heart is glad and my glory rejoices; My flesh also will dwell securely.
+10. For You will not forsake my soul to Sheol; You will not give Your Holy One over to see corruption.
+11. You will make known to me the path of life; In Your presence is fullness of joy; In Your right hand there are pleasures forever.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

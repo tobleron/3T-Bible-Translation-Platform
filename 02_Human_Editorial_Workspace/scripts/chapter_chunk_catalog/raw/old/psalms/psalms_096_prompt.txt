@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 96:1-13
+
+Chapter text:
+1. Sing to Yahweh a new song; Sing to Yahweh, all the earth.
+2. Sing to Yahweh, bless His name; Proclaim good news of His salvation from day to day.
+3. Recount His glory among the nations, His wondrous deeds among all the peoples.
+4. For great is Yahweh and greatly to be praised; He is more fearsome than all gods.
+5. For all the gods of the peoples are idols, But Yahweh made the heavens.
+6. Splendor and majesty are before Him, Strength and beauty are in His sanctuary.
+7. Ascribe to Yahweh, O families of the peoples, Ascribe to Yahweh glory and strength.
+8. Ascribe to Yahweh the glory of His name; Lift up an offering and come into His courts.
+9. Worship Yahweh in the splendor of holiness; Tremble before Him, all the earth.
+10. Say among the nations, “Yahweh reigns; Indeed, the world is established, it will not be shaken; He will render justice to the peoples with equity.”
+11. Let the heavens be glad, and let the earth rejoice; Let the sea roar, as well as its fullness;
+12. Let the field exult, and all that is in it. Then all the trees of the forest will sing for joy
+13. Before Yahweh, for He is coming, For He is coming to judge the earth. He will judge the world in righteousness And the peoples in His faithfulness.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

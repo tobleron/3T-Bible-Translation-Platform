@@ -1,0 +1,67 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 88:1-18
+
+Chapter text:
+1. A Song. A Psalm of the sons of Korah. For the choir director. According to Mahalath Leannoth. A Maskil of Heman the Ezrahite. O Yahweh, the God of my salvation, I have cried out by day and throughout the night before You.
+2. Let my prayer come before You; Incline Your ear to my cry of lamentation!
+3. For my soul has been saturated with calamities, And my life has reached Sheol.
+4. I am counted among those who go down to the pit; I am like a man without strength,
+5. Released among the dead, Like the slain who lie in the grave, Whom You remember no more, And they are cut off from Your hand.
+6. You have put me in the pit far below, In dark places, in the depths.
+7. Your wrath lies upon me, And You afflict me with all Your breaking waves. Selah.
+8. You have removed my acquaintances far from me; You have set me as an abomination to them; I am shut up and cannot go out.
+9. My eye has wasted away because of affliction; I have called upon You every day, O Yahweh; I have spread out my hands to You.
+10. Will You do wonders for the dead? Will the departed spirits rise and praise You? Selah.
+11. Will Your lovingkindness be recounted in the grave, Your faithfulness in Abaddon?
+12. Will Your wonders be known in the darkness? And Your righteousness in the land of forgetfulness?
+13. But as for me, O Yahweh, I have cried out to You for help, And in the morning my prayer comes before You.
+14. O Yahweh, why do You reject my soul? Why do You hide Your face from me?
+15. I have been afflicted and about to breathe my last from my youth on; I bear Your terrors; I am overcome.
+16. Your burning anger has passed over me; Your horrors have destroyed me.
+17. They have surrounded me like water all day long; They have encompassed me altogether.
+18. You have removed lover and friend far from me; My acquaintances are in darkness.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

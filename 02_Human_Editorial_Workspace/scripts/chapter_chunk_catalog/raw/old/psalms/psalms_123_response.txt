@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "blessing_or_prayer",
+      "title": "Lifting Eyes to God",
+      "reason": "The psalmist lifts his eyes to God and compares the posture of dependence to that of slaves waiting for their master."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 4,
+      "type": "blessing_or_prayer",
+      "title": "Petition for Grace",
+      "reason": "The psalmist pleads for God's grace due to being filled with contempt and mockery from the proud."
+    }
+  ]
+}

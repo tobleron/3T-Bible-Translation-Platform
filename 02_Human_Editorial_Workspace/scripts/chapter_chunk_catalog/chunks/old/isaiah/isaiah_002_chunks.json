@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T08:28:04Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 2,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "oracle",
+      "title": "Prophecy of the Mountain of Yahweh",
+      "reason": "Introduces the vision and describes the future gathering of nations to Zion for instruction and peace."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "argument",
+      "title": "Diagnosis of Israel's Sin",
+      "reason": "Explains the cause of judgment through idolatry, foreign influences, and wealth."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "The Day of Yahweh's Judgment",
+      "reason": "Describes the coming terror where human pride and idols are humbled before God's majesty."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "oracle",
+      "title": "Words of King Lemuel",
+      "reason": "An oracle from a mother to her son regarding the duties of kings."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 31,
+      "type": "poem",
+      "title": "The Excellent Wife",
+      "reason": "An acrostic poem describing the virtues and actions of a capable woman."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 85:1-13
+
+Chapter text:
+1. For the choir director. Of the sons of Korah. A Psalm. O Yahweh, You showed favor to Your land; You returned the fortunes of Jacob.
+2. You forgave the iniquity of Your people; You covered all their sin. Selah.
+3. You withdrew all Your fury; You turned back from Your burning anger.
+4. Turn us back, O God of our salvation, And cause Your vexation toward us to cease.
+5. Will You be angry with us forever? Will You prolong Your anger from generation to generation?
+6. Will You not Yourself return to revive us, That Your people may be glad in You?
+7. Show us, O Yahweh, Your lovingkindness, And give us Your salvation.
+8. Let me hear what the God, Yahweh, will speak; For He will speak peace to His people, to His holy ones; But let them not turn back to folly.
+9. Surely His salvation is near to those who fear Him, That glory may dwell in our land.
+10. Lovingkindness and truth have met together; Righteousness and peace have kissed each other.
+11. Truth springs up from the earth, And righteousness looks down from heaven.
+12. Indeed, Yahweh will give what is good, And our land will yield its produce.
+13. Righteousness will go before Him And will establish the way of His steps.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

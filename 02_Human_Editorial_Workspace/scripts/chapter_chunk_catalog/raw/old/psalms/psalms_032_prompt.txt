@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 32:1-11
+
+Chapter text:
+1. Of David. A Maskil. How blessed is he whose transgression is forgiven, Whose sin is covered!
+2. How blessed is the man whose iniquity Yahweh will not take into account, And in whose spirit there is no deceit!
+3. When I kept silent about my sin, my bones wasted away Through my groaning all day long.
+4. For day and night Your hand was heavy upon me; My vitality was drained away as with the heat of summer. Selah.
+5. I acknowledged my sin to You, And my iniquity I did not cover up; I said, “I will confess my transgressions to Yahweh;” And You forgave the iniquity of my sin. Selah.
+6. Therefore, let every holy one pray to You at a time when You may be found; Surely in a flood of great waters they will not reach him.
+7. You are my hiding place; You guard me from trouble; You surround me with songs of deliverance. Selah.
+8. I will give you insight and teach you in the way which you should go; I will counsel you with My eye upon you.
+9. Do not be as the horse or as the mule which have no understanding, Whose harness are bit and bridle to control them, Otherwise they will not come near you.
+10. Many are the sorrows of the wicked, But he who trusts in Yahweh, lovingkindness shall surround him.
+11. Be glad in Yahweh and rejoice, you righteous ones; And shout for joy, all you who are upright in heart.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

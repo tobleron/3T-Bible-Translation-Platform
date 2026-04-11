@@ -1,0 +1,61 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 53:1-12
+
+Chapter text:
+1. Who has believed our report? And to whom has the arm of Yahweh been revealed?
+2. For He grew up before Him like a tender shoot, And like a root out of parched ground; He has no stately form or majesty That we should look upon Him, Nor appearance that we should desire Him.
+3. He was despised and forsaken of men, A man of sorrows and acquainted with grief; And like one from whom men hide their face He was despised, and we did not esteem Him.
+4. Surely our griefs He Himself bore, And our sorrows He carried; Yet we ourselves esteemed Him stricken, Smitten of God, and afflicted.
+5. But He was pierced through for our transgressions, He was crushed for our iniquities; The chastening for our peace fell upon Him, And by His wounds we are healed.
+6. All of us like sheep have gone astray, Each of us has turned to his own way; But Yahweh has caused the iniquity of us all To fall on Him.
+7. He was oppressed and He was afflicted, Yet He did not open His mouth; Like a lamb that is led to slaughter, And like a sheep that is silent before its shearers, So He did not open His mouth.
+8. By oppression and judgment He was taken away; And as for His generation, who considered That He was cut off out of the land of the living, That for the transgression of my people, striking was due to Him?
+9. So His grave was assigned with wicked men, Yet He was with a rich man in His death, Because He had done no violence, Nor was there any deceit in His mouth.
+10. But Yahweh was pleased To crush Him, putting Him to grief; If You would place His soul as a guilt offering, He will see His seed, He will prolong His days, And the good pleasure of Yahweh will succeed in His hand.
+11. As a result of the anguish of His soul, He will see it and be satisfied; By His knowledge the Righteous One, My Servant, will justify the many, As He will bear their iniquities.
+12. Therefore, I will divide for Him a portion with the many, And He will divide the spoil with the strong; Because He poured out His soul to death, And was numbered with the transgressors; Yet He Himself bore the sin of many, And interceded for the transgressors.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

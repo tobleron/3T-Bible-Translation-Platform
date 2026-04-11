@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 13,
+      "type": "oracle",
+      "title": "Universal Judgment and Desolation",
+      "reason": "Describes the global destruction of the earth and its inhabitants as a unified prophetic oracle."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 20,
+      "type": "mixed",
+      "title": "Remnant Praise and Final Collapse",
+      "reason": "Shifts to the remnant's praise of Yahweh before concluding with the earth's final collapse."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Divine Victory and Reign",
+      "reason": "Concludes with Yahweh punishing heavenly and earthly rulers and establishing His reign in Zion."
+    }
+  ]
+}

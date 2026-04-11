@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "blessing_or_prayer",
+      "title": "Call for Deliverance",
+      "reason": "The psalmist calls to Yahweh in distress and asks for rescue from a lying tongue."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 4,
+      "type": "oracle",
+      "title": "Judgment on the Deceitful",
+      "reason": "A rhetorical question followed by imagery of divine punishment against the deceitful tongue."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Complaint Against Enemies",
+      "reason": "The psalmist laments dwelling among hostile people and contrasts his love for peace with their warlike nature."
+    }
+  ]
+}

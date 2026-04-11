@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Hezekiah's Illness and Healing",
+      "reason": "Narrative of Hezekiah's sickness, prayer, and miraculous recovery."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "dialogue",
+      "title": "The Sign of the Shadow",
+      "reason": "Dialogue between Hezekiah and Isaiah regarding the sign of healing."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Visit from Babylonian Envoys",
+      "reason": "Narrative of envoys arriving and Hezekiah showing his treasures."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Prophecy Against Babylon",
+      "reason": "Isaiah's oracle predicting the future exile of Hezekiah's treasures and sons."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Hezekiah's Death and Succession",
+      "reason": "Concluding narrative about Hezekiah's deeds and the succession of Manasseh."
+    }
+  ]
+}

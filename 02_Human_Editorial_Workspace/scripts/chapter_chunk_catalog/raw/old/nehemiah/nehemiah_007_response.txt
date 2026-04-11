@@ -1,0 +1,66 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Organization and Population Status",
+      "reason": "Describes the appointment of officials, security measures for the gates, and the sparse population of Jerusalem."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 38,
+      "type": "list_or_catalog",
+      "title": "Genealogy of Israelites",
+      "reason": "Lists the heads of families and their numbers returning from exile."
+    },
+    {
+      "start_verse": 39,
+      "end_verse": 45,
+      "type": "list_or_catalog",
+      "title": "Genealogy of Priests and Levites",
+      "reason": "Catalogs the numbers of priests, Levites, singers, and gatekeepers."
+    },
+    {
+      "start_verse": 46,
+      "end_verse": 60,
+      "type": "list_or_catalog",
+      "title": "Genealogy of Temple Servants",
+      "reason": "Lists the families of temple servants and Solomon's servants with their total count."
+    },
+    {
+      "start_verse": 61,
+      "end_verse": 65,
+      "type": "story",
+      "title": "Uncertain Lineages",
+      "reason": "Describes those who could not prove their lineage and the resulting restriction on their priesthood."
+    },
+    {
+      "start_verse": 66,
+      "end_verse": 69,
+      "type": "list_or_catalog",
+      "title": "Total Population and Livestock",
+      "reason": "Provides the total assembly count along with numbers of slaves, singers, and livestock."
+    },
+    {
+      "start_verse": 70,
+      "end_verse": 72,
+      "type": "list_or_catalog",
+      "title": "Donations for the Temple",
+      "reason": "Lists the specific amounts of gold, silver, and tunics contributed by leaders and people."
+    },
+    {
+      "start_verse": 73,
+      "end_verse": 73,
+      "type": "story",
+      "title": "Settlement in Cities",
+      "reason": "Concludes the chapter with the people living in their cities and the arrival of the seventh month."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "story",
+      "title": "The Potter and the Clay",
+      "reason": "Narrative of Jeremiah visiting the potter's house followed by Yahweh's oracle explaining the metaphor."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 23,
+      "type": "mixed",
+      "title": "Jeremiah's Adversaries and Prayer",
+      "reason": "Dialogue of the priests and elders plotting against Jeremiah followed by his personal prayer for judgment."
+    }
+  ]
+}

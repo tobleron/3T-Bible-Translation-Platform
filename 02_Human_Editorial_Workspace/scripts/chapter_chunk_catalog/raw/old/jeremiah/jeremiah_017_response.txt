@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "oracle",
+      "title": "Judah's Sin and Exile",
+      "reason": "Oracle pronouncing judgment on Judah's engrained sin and resulting exile."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 11,
+      "type": "argument",
+      "title": "Trust in Man vs Trust in God",
+      "reason": "Argument contrasting the fate of those who trust in flesh versus Yahweh."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 18,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Healing and Vindication",
+      "reason": "Prayer acknowledging God's sanctuary and pleading for healing and deliverance."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Sabbath Command at the Gate",
+      "reason": "Law regarding Sabbath observance delivered at the city gates with blessings and curses."
+    }
+  ]
+}

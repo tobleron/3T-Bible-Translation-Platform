@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:11:45Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Kings",
+  "chapter": 11,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 43,
+  "verse_count": 43,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Solomon's Apostasy and Judgment",
+      "reason": "Describes Solomon's foreign wives turning his heart to idols and Yahweh's initial decree to tear the kingdom from him."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Adversaries Raised Against Solomon",
+      "reason": "Narrates the rise of Hadad the Edomite and Rezon of Aram as adversaries to Israel during Solomon's reign."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 40,
+      "type": "mixed",
+      "title": "Jeroboam Called and Fled",
+      "reason": "Introduces Jeroboam's rise, the prophet Ahijah's oracle dividing the kingdom, and Jeroboam's flight to Egypt."
+    },
+    {
+      "start_verse": 41,
+      "end_verse": 43,
+      "type": "story",
+      "title": "Solomon's Death and Succession",
+      "reason": "Concludes the chapter with a summary of Solomon's reign, his death, and Rehoboam becoming king."
+    }
+  ]
+}

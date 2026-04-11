@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Description of the Drought",
+      "reason": "Narrative description of the physical effects of drought on people and animals."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Mercy",
+      "reason": "A communal prayer appealing to God's name and character amidst distress."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Oracle of Rejection",
+      "reason": "God's declaration that He will not accept the people's worship due to their stubbornness."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "dialogue",
+      "title": "Prophets and Jeremiah's Lament",
+      "reason": "Dialogue concerning false prophets followed by Jeremiah's description of the coming judgment."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Confession and Appeal",
+      "reason": "A concluding prayer confessing sin and appealing to God's covenant and power."
+    }
+  ]
+}

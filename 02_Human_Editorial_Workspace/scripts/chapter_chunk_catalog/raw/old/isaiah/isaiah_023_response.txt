@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Oracle Against Tyre and Sidon",
+      "reason": "A unified prophetic judgment declaring the destruction of Tyre and Sidon as a response to their pride."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "mixed",
+      "title": "Restoration of Tyre After Seventy Years",
+      "reason": "A narrative shift describing Tyre's temporary forgetfulness followed by its return to trade and consecration to Yahweh."
+    }
+  ]
+}

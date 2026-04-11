@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "psalm",
+      "title": "Call to Thanksgiving",
+      "reason": "The entire passage functions as a unified liturgical psalm inviting the congregation to worship and acknowledge God's character."
+    }
+  ]
+}

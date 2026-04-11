@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "exhortation",
+      "title": "Exhortation to Treasure Wisdom",
+      "reason": "Direct address to the son urging him to internalize instruction to avoid the foreign woman."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Story of the Adulteress and the Simple Man",
+      "reason": "A narrative account of a young man being lured by a seductive woman to his destruction."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 27,
+      "type": "argument",
+      "title": "Conclusion and Warning",
+      "reason": "The father summarizes the story's lesson and warns against following her ways to death."
+    }
+  ]
+}

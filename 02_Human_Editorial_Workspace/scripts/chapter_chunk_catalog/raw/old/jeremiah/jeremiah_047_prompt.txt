@@ -1,0 +1,56 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 47:1-7
+
+Chapter text:
+1. That which came as the word of Yahweh to Jeremiah the prophet concerning the Philistines, before Pharaoh struck down Gaza.
+2. Thus says Yahweh: “Behold, waters are going to rise from the north And become an overflowing torrent, And overflow the land as well as its fullness, The city and those who inhabit it; And the men will cry out, And every inhabitant of the land will wail.
+3. Because of the noise of the galloping hoofs of his valiant steeds, The quaking of his chariots, and the tumult of his wheels, The fathers have not turned back for their children, Because of the limpness of their hands,
+4. On account of the day that is coming To destroy all the Philistines, To cut off from Tyre and Sidon Every ally that is left; For Yahweh is going to destroy the Philistines, The remnant of the coastland of Caphtor.
+5. Baldness has come upon Gaza; Ashkelon has been ruined. O remnant of their valley, How long will you gash yourself?
+6. Ah, sword of Yahweh, How long will you not be quiet? Withdraw into your sheath; Be at rest and stay still.
+7. How can it be quiet? Yahweh has given it a command; Against Ashkelon and against the seacoast— There He has assigned it.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

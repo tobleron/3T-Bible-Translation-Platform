@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "exhortation",
+      "title": "Guidelines for Worship and Vows",
+      "reason": "A cohesive unit of instruction regarding proper attitude in the house of God and the management of vows."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Observations on Power and Wealth",
+      "reason": "An argumentative section observing political corruption, the futility of loving money, and the contrast between laborers and the rich."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "argument",
+      "title": "The Evil of Hoarded Riches",
+      "reason": "A specific argument describing the tragedy of wealth lost before death and the resulting vexation of the rich man."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 20,
+      "type": "exhortation",
+      "title": "The Gift of Enjoyment",
+      "reason": "A concluding exhortation encouraging the enjoyment of life's simple pleasures as a divine gift."
+    }
+  ]
+}

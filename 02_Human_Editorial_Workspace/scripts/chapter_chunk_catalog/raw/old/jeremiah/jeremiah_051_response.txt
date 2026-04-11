@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Oracle Against Babylon and Call to Flee",
+      "reason": "A unified oracle declaring God's judgment on Babylon followed by an exhortation for Israel to escape."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 26,
+      "type": "speech",
+      "title": "Call to Arms and the Instrument of Shattering",
+      "reason": "A speech commanding the Medes to prepare for battle and identifying Babylon as God's instrument of judgment."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 39,
+      "type": "speech",
+      "title": "Gathering Nations and Final Destruction",
+      "reason": "A speech detailing the gathering of nations against Babylon and describing its inevitable fall."
+    },
+    {
+      "start_verse": 40,
+      "end_verse": 53,
+      "type": "speech",
+      "title": "The Fall of Sheshak and Call to Escape",
+      "reason": "A speech describing the capture of Babylon and urging God's people to flee before the final judgment."
+    },
+    {
+      "start_verse": 54,
+      "end_verse": 58,
+      "type": "oracle",
+      "title": "Final Destruction of Babylon",
+      "reason": "A concluding oracle describing the total silence and ruin of the city."
+    },
+    {
+      "start_verse": 59,
+      "end_verse": 64,
+      "type": "story",
+      "title": "Jeremiah's Symbolic Act with Seraiah",
+      "reason": "A narrative account of Jeremiah instructing Seraiah to read the scroll and cast it into the Euphrates."
+    }
+  ]
+}

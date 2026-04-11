@@ -1,0 +1,80 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 40:1-31
+
+Chapter text:
+1. “Comfort, O comfort My people,” says your God.
+2. “Speak to the heart of Jerusalem; And call out to her, that her warfare has been fulfilled, That her iniquity has been removed, That she has received from the hand of Yahweh Double for all her sins.”
+3. A voice is calling, “Prepare the way for Yahweh in the wilderness; Make smooth in the desert a highway for our God.
+4. Let every valley be lifted up, And every mountain and hill be made low; And let the rough ground become a plain, And the rugged terrain a broad valley;
+5. Then the glory of Yahweh will be revealed, And all flesh will see it together; For the mouth of Yahweh has spoken.”
+6. A voice says, “Call out.” Then he answered, “What shall I call out?” All flesh is grass, and all its lovingkindness is like the flower of the field.
+7. The grass withers, the flower fades, When the breath of Yahweh blows upon it; Surely the people are grass.
+8. The grass withers, the flower fades, But the word of our God stands forever.
+9. Get yourself up on a high mountain, O Zion, bearer of good news, Raise up your voice powerfully, O Jerusalem, bearer of good news; Raise it up, do not fear. Say to the cities of Judah, “Behold your God!”
+10. Behold, Lord Yahweh will come with strength, With His arm ruling for Him. Behold, His reward is with Him And His recompense before Him.
+11. Like a shepherd He will shepherd His flock; In His arm He will gather the lambs And carry them in His bosom; He will gently lead the nursing ewes.
+12. Who has measured the waters in the hollow of His hand, And encompassed the heavens by the span, And calculated the dust of the earth by the measure, And weighed the mountains in a balance And the hills in a pair of scales?
+13. Who has encompassed the Spirit of Yahweh, Or as His counselor has informed Him?
+14. With whom did He take counsel and who gave Him understanding? And who taught Him in the path of justice and taught Him knowledge And made Him know the way of understanding?
+15. Behold, the nations are like a drop from a bucket, And are counted as a speck of dust on the scales; Behold, He lifts up the coastlands like fine dust.
+16. Even Lebanon is not enough to burn, Nor its beasts enough for a burnt offering.
+17. All the nations are as nothing before Him; They are counted by Him as non‑existent and utterly formless.
+18. To whom then will you liken God? Or what likeness will you compare with Him?
+19. As for the graven images, a craftsman casts it, A goldsmith plates it with gold, And a silversmith fashions chains of silver.
+20. He who is too impoverished to make such a contribution Chooses a tree that does not rot; He seeks out for himself a wise craftsman To prepare a graven image that will not be shaken.
+21. Do you not know? Have you not heard? Has it not been declared to you from the beginning? Have you not understood from the foundations of the earth?
+22. It is He who inhabits above the circle of the earth, And its inhabitants are like grasshoppers; It is He who stretches out the heavens like a curtain And spreads them out like a tent to inhabit.
+23. It is He who reduces rulers to nothing, Who makes the judges of the earth utterly formless.
+24. Scarcely have they been planted; Scarcely have they been sown; Scarcely has their stem taken root in the earth, But He merely blows on them, and they wither, And the storm carries them away like stubble.
+25. “To whom then will you liken Me That I would be his equal?” says the Holy One.
+26. Lift up your eyes on high And see who has created these stars, The One who leads forth their host by number, He calls them all by name; Because of the greatness of His vigor and the strength of His power, Not one of them is missing.
+27. Why do you say, O Jacob, and assert, O Israel, “My way is hidden from Yahweh, And the justice due me passes by my God”?
+28. Do you not know? Have you not heard? The Everlasting God, Yahweh, the Creator of the ends of the earth, Does not become weary or tired. His understanding is unsearchable.
+29. He gives power to the weary, And to him who lacks vigor He increases might.
+30. Though youths grow weary and tired, And choice young men stumble badly,
+31. Yet those who hope in Yahweh Will gain new power; They will mount up with wings like eagles; They will run and not get tired; They will walk and not become weary.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

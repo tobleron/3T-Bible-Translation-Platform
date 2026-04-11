@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Psalm of Lament and Deliverance",
+      "reason": "A continuous first-person prayer moving from deep distress to confident plea for rescue."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 31,
+      "type": "exhortation",
+      "title": "Praise and Universal Kingdom",
+      "reason": "A shift to third-person declaration of God's faithfulness and a call for all nations to worship."
+    }
+  ]
+}

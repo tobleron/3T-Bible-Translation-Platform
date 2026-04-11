@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "oracle",
+      "title": "Prophecy of the Mountain of Yahweh",
+      "reason": "Introduces the vision and describes the future gathering of nations to Zion for instruction and peace."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "argument",
+      "title": "Diagnosis of Israel's Sin",
+      "reason": "Explains the cause of judgment through idolatry, foreign influences, and wealth."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 22,
+      "type": "oracle",
+      "title": "The Day of Yahweh's Judgment",
+      "reason": "Describes the coming terror where human pride and idols are humbled before God's majesty."
+    }
+  ]
+}

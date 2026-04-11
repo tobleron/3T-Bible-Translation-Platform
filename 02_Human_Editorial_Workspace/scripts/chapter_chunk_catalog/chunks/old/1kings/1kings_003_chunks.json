@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T23:59:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Kings",
+  "chapter": 3,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 28,
+  "verse_count": 28,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Solomon's Early Reign and Sacrifice at Gibeon",
+      "reason": "Describes Solomon's political marriage, the state of worship on high places, and his journey to Gibeon for sacrifice."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 15,
+      "type": "vision",
+      "title": "Solomon's Dream and Request for Wisdom",
+      "reason": "Narrates Yahweh appearing to Solomon in a dream, the dialogue regarding his request, God's response granting wisdom and riches, and Solomon's return."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 28,
+      "type": "story",
+      "title": "The Judgment of the Two Harlots",
+      "reason": "Details the dispute between two women over a living child, Solomon's clever test with a sword, and the resulting judgment that established his reputation."
+    }
+  ]
+}

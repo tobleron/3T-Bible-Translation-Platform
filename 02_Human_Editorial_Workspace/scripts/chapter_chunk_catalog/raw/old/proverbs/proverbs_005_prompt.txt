@@ -1,0 +1,72 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 5:1-23
+
+Chapter text:
+1. My son, pay attention to my wisdom, Incline your ear to my discernment;
+2. That you may keep discretion And that your lips may guard knowledge.
+3. For the lips of a strange woman drip honey And smoother than oil is her speech;
+4. But her end is bitter as wormwood, Sharp as a two‑edged sword.
+5. Her feet go down to death, Her steps take hold of Sheol,
+6. Lest she watch the path of life; Her tracks are unstable, she does not know it.
+7. So now, my sons, listen to me And do not turn away from the words of my mouth.
+8. Keep your way far from her And do not go near the door of her house,
+9. Lest you give your splendor to others And your years to the cruel one;
+10. Lest strangers be satisfied by your strength And by your painful labor, those in the house of a foreigner;
+11. And you groan at your end, When your flesh and your body are consumed;
+12. And you say, “How I have hated discipline! And my heart spurned reproof!
+13. I have not listened to the voice of my instructors, And I have not inclined my ear to my teachers!
+14. I was almost in utter ruin In the midst of the assembly and congregation.”
+15. Drink water from your own cistern And fresh water from your own well.
+16. Should your springs be dispersed abroad, Streams of water in the streets?
+17. Let them be for you alone, And not for strangers with you.
+18. Let your fountain be blessed, And be glad in the wife of your youth.
+19. As a loving hind and a graceful doe, Let her breasts satisfy you at all times; Be intoxicated always with her love.
+20. So why should you, my son, be intoxicated with a strange woman And embrace the bosom of a foreign woman?
+21. For the ways of a man are before the eyes of Yahweh, And He watches all his tracks.
+22. His own iniquities will capture him who is the wicked one, And with the cords of his sin he will be held fast.
+23. He will die for lack of discipline, And in the abundance of his folly he will stumble in intoxication.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

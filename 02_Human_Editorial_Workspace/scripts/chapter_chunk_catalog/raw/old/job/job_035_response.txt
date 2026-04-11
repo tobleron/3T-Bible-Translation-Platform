@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Elihu's Reply to Job's Claim of Righteousness",
+      "reason": "Elihu addresses Job directly, challenging his assertion that human righteousness benefits God."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 16,
+      "type": "argument",
+      "title": "The Futility of Empty Cries and Job's Vain Words",
+      "reason": "Elihu argues that God often ignores the cries of the oppressed due to pride and concludes that Job speaks without knowledge."
+    }
+  ]
+}

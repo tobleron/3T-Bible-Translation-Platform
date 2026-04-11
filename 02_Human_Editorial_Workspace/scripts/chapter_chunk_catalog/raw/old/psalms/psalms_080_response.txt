@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "blessing_or_prayer",
+      "title": "Invocation and Lament",
+      "reason": "The psalmist calls on God as Shepherd to restore the people and asks how long He will remain angry."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 17,
+      "type": "parable",
+      "title": "Parable of the Vine",
+      "reason": "A metaphorical description of Israel as a vine planted by God that has been destroyed."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 19,
+      "type": "blessing_or_prayer",
+      "title": "Petition for Revival",
+      "reason": "A concluding plea for God's hand to rest on His people so they may be revived and call upon His name."
+    }
+  ]
+}

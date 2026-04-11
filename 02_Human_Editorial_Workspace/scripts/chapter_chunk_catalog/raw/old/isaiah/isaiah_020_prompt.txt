@@ -1,0 +1,55 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 20:1-6
+
+Chapter text:
+1. In the year that the commander came to Ashdod, when Sargon the king of Assyria sent him and he fought against Ashdod and captured it,
+2. at that time Yahweh spoke by the hand of Isaiah the son of Amoz, saying, “Go and loosen the sackcloth from your hips and take your shoes off your feet.” And he did so, going naked and barefoot.
+3. And Yahweh said, “Even as My servant Isaiah has gone naked and barefoot three years as a sign and wonder against Egypt and Ethiopia,
+4. so the king of Assyria will lead away the captives of Egypt and the exiles of Ethiopia, young and old, naked and barefoot with buttocks uncovered, to the shame of Egypt.
+5. Then they will be dismayed and ashamed because of Ethiopia their hope and Egypt their boast.
+6. So the inhabitants of this coastland will say in that day, ‘Behold, such is our hope, where we fled for help to be delivered from the king of Assyria; and we, how shall we escape?’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -2,19 +2,36 @@ import os
 import requests
 import json
 from openai import OpenAI
+from ttt_core.config import load_config
 
 class LlamaCppClient:
     """Handles communication with the local llama.cpp server."""
     def __init__(self, config=None):
+        if config is None:
+            config = load_config()
+        
         # Default endpoint as requested by user
-        self.base_url = "http://192.168.1.186:8080"
-        if config and 'llama_cpp' in config:
-            self.base_url = config['llama_cpp'].get('base_url', self.base_url)
+        self.base_url = "http://192.168.1.186:8081/v1"
+        self.api_key = None
+        
+        if 'llama_cpp' in config:
+            self.base_url = config['llama_cpp'].get('base_url', self.base_url).rstrip("/")
+            self.api_key = config['llama_cpp'].get('api_key')
+
+    def _get_headers(self):
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        return headers
 
     def list_models(self):
         """llama.cpp usually serves one model, returning a placeholder or actual model info if available."""
         try:
-            response = requests.get(f"{self.base_url}/v1/models", timeout=5)
+            if "/v1" in self.base_url:
+                url = f"{self.base_url}/models"
+            else:
+                url = f"{self.base_url}/v1/models"
+            response = requests.get(url, headers=self._get_headers(), timeout=5)
             if response.status_code == 200:
                 models = response.json().get("data", [])
                 return [m["id"] for m in models]
@@ -47,8 +64,11 @@ class LlamaCppClient:
 
         try:
             # Using llama.cpp's native /completion endpoint
-            url = f"{self.base_url}/completion"
-            with requests.post(url, json=payload, stream=True, timeout=300) as response:
+            if "/v1" in self.base_url:
+                url = f"{self.base_url}/completions"
+            else:
+                url = f"{self.base_url}/completion"
+            with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=300) as response:
                 response.raise_for_status()
                 for line in response.iter_lines():
                     if line:

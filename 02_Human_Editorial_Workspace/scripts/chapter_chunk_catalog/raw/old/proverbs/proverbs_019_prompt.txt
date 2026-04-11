@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 19:1-29
+
+Chapter text:
+1. Better is a poor man who walks in his integrity Than he who is crooked in lips and is a fool.
+2. Also it is not good for a person to be without knowledge, And he who hurries his footsteps sins.
+3. The folly of man subverts his way, But his heart rages against Yahweh.
+4. Wealth adds many friends, But a poor man is separated from his friend.
+5. A false witness will not go unpunished, And he who breathes out lies will not escape.
+6. Many will seek the favor of a noble man, And everyone is a friend to a man who gives gifts.
+7. All the brothers of a poor man hate him; How much more do his friends distance themselves from him! He pursues them with words, but they are no more.
+8. He who acquires a heart of wisdom loves his own soul; He who keeps discernment will find good.
+9. A false witness will not go unpunished, And he who breathes out lies will perish.
+10. Luxury is not fitting for a fool; Much less for a slave to rule over princes.
+11. A man’s insight makes him slow to anger, And it is his honor to overlook a transgression.
+12. The king’s wrath is like the roaring of a lion, But his favor is like dew on the grass.
+13. A foolish son is destruction to his father, And the contentions of a wife are a constant dripping.
+14. House and wealth are an inheritance from fathers, But a wife who has insight is from Yahweh.
+15. Laziness casts into a deep sleep, And a slack‑handed soul will suffer hunger.
+16. He who keeps the commandment keeps his soul, But he who despises his way will die.
+17. He who is gracious to a poor man lends to Yahweh, And He will repay him for his bountiful deed.
+18. Discipline your son while there is hope, And do not direct your soul to put him to death.
+19. A man of great wrath will bear the penalty, For if you deliver him, you will only have to do it again.
+20. Listen to counsel and receive discipline, That you may be wise in the end of your days.
+21. Many thoughts are in a man’s heart, But it is the counsel of Yahweh that will stand.
+22. What is desirable in a man is his lovingkindness, And better is a poor man than a man of falsehood.
+23. The fear of Yahweh leads to life, So that one may sleep satisfied, not visited by evil.
+24. The sluggard buries his hand in the dish, But will not even bring it back to his mouth.
+25. Strike a scoffer and the simple may become prudent, But reprove one who has understanding and he will understand knowledge.
+26. He who assaults his father and causes his mother to flee Is a son who brings shame and humiliation.
+27. Cease listening, my son, to discipline, And you will stray from the words of knowledge.
+28. A vile witness scoffs at justice, And the mouth of the wicked swallows up iniquity.
+29. Judgments are established for scoffers, And beatings for the back of fools.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

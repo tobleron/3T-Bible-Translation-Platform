@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Cyrus's Decree to Rebuild the Temple",
+      "reason": "Contains the full proclamation of Cyrus inviting the exiles to return and rebuild."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 6,
+      "type": "story",
+      "title": "The People's Response to the Decree",
+      "reason": "Describes the reaction of the leaders and neighbors as they prepare for the journey."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Return of Temple Articles by Sheshbazzar",
+      "reason": "Details the inventory and transfer of sacred vessels from Babylon to Jerusalem."
+    }
+  ]
+}

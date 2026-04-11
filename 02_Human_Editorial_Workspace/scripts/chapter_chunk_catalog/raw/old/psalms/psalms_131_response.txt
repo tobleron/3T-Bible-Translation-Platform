@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "psalm",
+      "title": "David's Humble Trust",
+      "reason": "The psalmist expresses personal humility and soulful quietness in a unified poetic unit."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 3,
+      "type": "exhortation",
+      "title": "Call to Wait on God",
+      "reason": "A direct address to Israel urging patience and trust in Yahweh."
+    }
+  ]
+}

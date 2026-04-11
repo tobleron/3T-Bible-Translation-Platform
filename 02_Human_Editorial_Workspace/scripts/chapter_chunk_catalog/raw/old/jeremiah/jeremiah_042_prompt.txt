@@ -1,0 +1,71 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 42:1-22
+
+Chapter text:
+1. Then all the commanders of the military forces, Johanan the son of Kareah, Jezaniah the son of Hoshaiah, and all the people both small and great approached
+2. and said to Jeremiah the prophet, “Please let our supplication come before you, and pray for us to Yahweh your God, that is for all this remnant, because we remain but a few out of many, as your own eyes now see us,
+3. that Yahweh your God may tell us the way in which we should walk and the thing that we should do.”
+4. Then Jeremiah the prophet said to them, “I have heard you. Behold, I am going to pray to Yahweh your God in accordance with your words; and I will tell you the whole message which Yahweh will answer you. I will not keep back a word from you.”
+5. And they said to Jeremiah, “May Yahweh be a true and faithful witness against us if we do not act in accordance with the whole message with which Yahweh your God will send you to us.
+6. Whether it is good or bad, we will listen to the voice of Yahweh our God to whom we are sending you, so that good may come to us when we listen to the voice of Yahweh our God.”
+7. Now it happened that at the end of ten days the word of Yahweh came to Jeremiah.
+8. Then he called for Johanan the son of Kareah and all the commanders of the military forces that were with him, and for all the people both small and great,
+9. and said to them, “Thus says Yahweh the God of Israel, to whom you sent me to present your supplication before Him:
+10. ‘If you will indeed stay in this land, then I will build you up and not pull you down, and I will plant you and not uproot you; for I have relented of the calamity that I have done against you.
+11. Do not be afraid of the king of Babylon, whom you are now fearing; do not be afraid of him,’ declares Yahweh, ‘for I am with you to save you and deliver you from his hand.
+12. I will also show you compassion, so that he will have compassion on you and return you to your own soil.
+13. But if you are going to say, “We will not stay in this land,” so as not to listen to the voice of Yahweh your God,
+14. saying, “No, but we will go to the land of Egypt, where we will not see war or hear the sound of a trumpet or hunger for bread, and we will stay there,”
+15. then now, listen to the word of Yahweh, O remnant of Judah. Thus says Yahweh of hosts, the God of Israel, “If you really set your face to enter Egypt, and you will enter to sojourn there,
+16. then the sword, which you are afraid of, will overtake you there in the land of Egypt; and the famine, about which you are anxious, will follow closely after you there in Egypt, and you will die there.
+17. So all the men who set their face to go to Egypt to sojourn there will die by the sword, by the famine, and by the pestilence; and they will have no survivors or any who escaped from the calamity that I am going to bring on them.”’”
+18. For thus says Yahweh of hosts, the God of Israel, “As My anger and wrath have been poured out on the inhabitants of Jerusalem, so My wrath will be poured out on you when you enter Egypt. And you will become a curse, an object of horror, an imprecation, and a reproach; and you will see this place no more.”
+19. Yahweh has spoken to you, O remnant of Judah, “Do not go into Egypt!” You should clearly know that today I have testified against you.
+20. For you have only led yourselves astray; for it is you who sent me to Yahweh your God, saying, “Pray for us to Yahweh our God; and according to all that Yahweh our God says, tell us so, and we will do it.”
+21. So I have told you today, but you have not listened to the voice of Yahweh your God, even according to all that He has sent me to tell you.
+22. So now, you should clearly know that you will die by the sword, by famine, and by pestilence, in the place where you desire to go to sojourn.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

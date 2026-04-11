@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:06:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 139,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 24,
+  "verse_count": 24,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "God's Omniscience",
+      "reason": "A unified declaration of God's intimate knowledge of the psalmist's life and thoughts."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "God's Omnipresence",
+      "reason": "A rhetorical argument demonstrating that God's presence is inescapable regardless of location."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "psalm",
+      "title": "Creation and Providence",
+      "reason": "A reflection on God's creative work in the womb and His foreknowledge of the psalmist's days."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "Wrath Against Wickedness",
+      "reason": "A passionate outburst expressing hatred toward those who oppose God and speak against Him."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 24,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Examination",
+      "reason": "A concluding prayer asking God to search the heart and guide the psalmist into the right path."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Reign and Character of Ahaz",
+      "reason": "Introduces King Ahaz and describes his wicked reign compared to David."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Syrian-Israelite Alliance and Assyrian Intervention",
+      "reason": "Narrates the siege of Jerusalem by Rezin and Pekah and Ahaz's appeal to Tiglath-pileser."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 16,
+      "type": "story",
+      "title": "The New Altar in the Temple",
+      "reason": "Details Ahaz's visit to Damascus, the copy of the altar, and the priest Urijah's execution of the king's orders."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Alterations to Temple Furnishings",
+      "reason": "Describes Ahaz removing the bronze stands, laver, and covered way for the sake of Assyria."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Conclusion of Ahaz's Reign",
+      "reason": "Summarizes the record of his acts and notes his death and succession by Hezekiah."
+    }
+  ]
+}

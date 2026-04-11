@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Jehu's Purge of Ahab's Line",
+      "reason": "A continuous narrative describing Jehu's letters to Samaria, the slaughter of Ahab's seventy sons, and his journey to kill Ahaziah's relatives."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 28,
+      "type": "story",
+      "title": "The Destruction of Baal Worship",
+      "reason": "A coherent narrative unit where Jehu gathers the prophets of Baal, tricks them into a temple, and systematically destroys their cult."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 36,
+      "type": "mixed",
+      "title": "Evaluation and Conclusion of Jehu's Reign",
+      "reason": "A concluding section containing historical evaluation, a divine oracle regarding the dynasty, and the summary of his reign."
+    }
+  ]
+}

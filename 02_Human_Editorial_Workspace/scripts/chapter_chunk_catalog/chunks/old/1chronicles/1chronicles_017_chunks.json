@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:32:35Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 17,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "dialogue",
+      "title": "David and Nathan Discuss Building the Temple",
+      "reason": "Initial conversation between David and Nathan regarding the ark's location."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "God's Promise to David Through Nathan",
+      "reason": "Divine revelation given to Nathan containing the covenant promise."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 27,
+      "type": "blessing_or_prayer",
+      "title": "David's Prayer of Thanksgiving and Supplication",
+      "reason": "David's response to the oracle expressing humility and gratitude."
+    }
+  ]
+}

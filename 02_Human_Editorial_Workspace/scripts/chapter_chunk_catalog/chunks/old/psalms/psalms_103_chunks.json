@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T06:26:09Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 103,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "blessing_or_prayer",
+      "title": "Call to Praise and Benefits",
+      "reason": "The psalmist invites his soul to bless Yahweh and lists specific benefits received."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "argument",
+      "title": "Yahweh's Character and Compassion",
+      "reason": "A theological argument describing God's justice, mercy, and fatherly compassion."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Fragility of Man and Eternity of God",
+      "reason": "A contrast between the fleeting nature of human life and the enduring covenant love of God."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Universal Call to Praise",
+      "reason": "A final exhortation for angels, hosts, and all creation to bless Yahweh."
+    }
+  ]
+}

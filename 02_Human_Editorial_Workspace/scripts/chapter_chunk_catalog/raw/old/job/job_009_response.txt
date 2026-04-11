@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "argument",
+      "title": "God's Power and Man's Inability to Contend",
+      "reason": "Job argues that God is too powerful for a man to dispute with Him."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 24,
+      "type": "speech",
+      "title": "The Futility of Job's Righteousness",
+      "reason": "Job describes how even if he were righteous, God would still condemn him."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 31,
+      "type": "speech",
+      "title": "The Swiftness of Days and Hopeless Purity",
+      "reason": "Job laments the speed of his life and the futility of trying to be pure before God."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 35,
+      "type": "argument",
+      "title": "The Need for a Mediator",
+      "reason": "Job concludes that without an arbitrator between him and God, he cannot speak freely."
+    }
+  ]
+}

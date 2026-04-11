@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Deliverance",
+      "reason": "A unified psalm of David invoking God's help against enemies and expressing personal need."
+    }
+  ]
+}

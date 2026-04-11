@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Hezekiah's Preparations for War",
+      "reason": "Describes Hezekiah's strategic preparations and speech to the people before the Assyrian siege."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 19,
+      "type": "dialogue",
+      "title": "Sennacherib's Taunts",
+      "reason": "Contains the Assyrian king's messengers delivering a speech to the people of Jerusalem."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Divine Deliverance and Victory",
+      "reason": "Narrates the prayer of Hezekiah and Isaiah, the angelic strike on the Assyrians, and the subsequent tribute."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Hezekiah's Illness and Pride",
+      "reason": "Details Hezekiah's sickness, the sign given, his initial pride, and subsequent humility."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Hezekiah's Legacy and Death",
+      "reason": "Summarizes his remaining deeds and describes his burial and succession by Manasseh."
+    }
+  ]
+}

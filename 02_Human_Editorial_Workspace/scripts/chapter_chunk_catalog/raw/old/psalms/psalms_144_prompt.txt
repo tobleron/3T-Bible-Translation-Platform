@@ -1,0 +1,64 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 144:1-15
+
+Chapter text:
+1. Of David. Blessed be Yahweh, my rock, Who trains my hands for war, My fingers for battle;
+2. My lovingkindness and my fortress, My stronghold and my deliverer, My shield and He in whom I take refuge, Who subdues my people under me.
+3. O Yahweh, what is man, that You know him? Or the son of man, that You think of him?
+4. Man is like a breath; His days are like a passing shadow.
+5. O Yahweh, bow Your heavens, and come down; Touch the mountains, that they may smoke.
+6. Flash forth lightning and scatter them; Send out Your arrows and confuse them.
+7. Send forth Your hand from on high; Set me free and deliver me out of many waters, Out of the hand of foreigners
+8. Whose mouth speaks worthlessness, And whose right hand is a right hand of lying.
+9. O God, I will sing a new song to You; Upon a harp of ten strings I will sing praises to You,
+10. Who gives salvation to kings, Who sets David His servant free from the evil sword.
+11. Set me free and deliver me out of the hand of the sons of a foreigner, Whose mouth speaks worthlessness And whose right hand is a right hand of lying.
+12. That our sons would be as grown‑up plants in their youth, And our daughters as corner pillars fashioned as for a palace;
+13. That our granaries would be full, furnishing every kind of produce, And our flocks would bring forth thousands and ten thousands in our fields outside;
+14. That our cattle would bear Without mishap and without loss, And without outcry in our streets!
+15. How blessed are the people for whom this is so; How blessed are the people for whom God is Yahweh!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Complaint about the Wicked",
+      "reason": "A continuous description of the wicked man's pride and oppression."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 18,
+      "type": "prayer",
+      "title": "Prayer for Deliverance",
+      "reason": "A direct appeal to God to arise and judge the wicked."
+    }
+  ]
+}

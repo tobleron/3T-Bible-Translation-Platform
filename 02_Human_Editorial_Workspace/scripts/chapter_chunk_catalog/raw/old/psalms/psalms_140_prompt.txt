@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 140:1-13
+
+Chapter text:
+1. For the choir director. A Psalm of David. Rescue me, O Yahweh, from evil men; Guard me from violent men
+2. Who think up evil things in their hearts; They continually stir up wars.
+3. They sharpen their tongues as a serpent; Poison of an asp is under their lips. Selah.
+4. Keep me, O Yahweh, from the hands of the wicked; Guard me from violent men Who give thought to trip up my steps.
+5. The proud have hidden a trap for me, and cords; They have spread a net by the wayside; They have set snares for me. Selah.
+6. I said to Yahweh, “You are my God; Give ear, O Yahweh, to the voice of my supplications.
+7. O Yahweh, O Lord, the strength of my salvation, You have covered my head in the day of battle.
+8. Do not grant, O Yahweh, the desires of the wicked; Do not promote his evil scheme, that they not be exalted. Selah.
+9. “As for the head of those who surround me, May the trouble from their lips cover them.
+10. May burning coals be shaken out upon them; May He cause them to fall into the fire, Into bottomless pits from which they can never rise.
+11. May a slanderer not be established in the earth; May evil hunt the violent man speedily.”
+12. I know that Yahweh will maintain the cause for the afflicted And judgment for the needy.
+13. Surely the righteous will give thanks to Your name; The upright will abide in Your presence.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

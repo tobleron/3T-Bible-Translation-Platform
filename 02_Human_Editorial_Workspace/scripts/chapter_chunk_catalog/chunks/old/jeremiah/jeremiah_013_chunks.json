@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T10:52:37Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Jeremiah",
+  "chapter": 13,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "mixed",
+      "title": "Symbolic Action and Oracle on Pride",
+      "reason": "Combines the narrative of the linen belt with the prophetic explanation of Judah's pride and impending drunkenness."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 27,
+      "type": "speech",
+      "title": "Call to Repentance and Warning of Exile",
+      "reason": "A continuous prophetic address urging the people to give glory before darkness falls, addressing the king and queen mother."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Song of Solomon 1:1-17
+
+Chapter text:
+1. The Song of Songs, which is Solomon’s.
+2. “May he kiss me with the kisses of his mouth! For your love is better than wine.
+3. Your oils have a pleasing fragrance, Your name is like purified oil; Therefore the maidens love you.
+4. Draw me after you and let us run together! The king has brought me into his chambers.” “We will rejoice in you and be glad; We will extol your love more than wine. Rightly do they love you.”
+5. “I am black but lovely, O daughters of Jerusalem, Like the tents of Kedar, Like the curtains of Solomon.
+6. Do not look at me because I am swarthy, For the sun has burned me. My mother’s sons were angry with me; They made me caretaker of the vineyards, But I have not taken care of my own vineyard.
+7. Tell me, O you whom my soul loves, Where do you shepherd your flock, Where do you make it lie down at noon? For why should I be like one who veils herself Beside the flocks of your companions?”
+8. “If you yourself do not know, Most beautiful among women, Go forth on the trail of the flock And pasture your young goats By the dwellings of the shepherds.
+9. “To a mare of mine among the chariots of Pharaoh I compare you, O my darling.
+10. Your cheeks are lovely with ornaments, Your neck with strings of beads.”
+11. “We will make for you ornaments of gold With beads of silver.”
+12. “While the king was at his banqueting table, My perfume gave forth its fragrance.
+13. My beloved is to me a pouch of myrrh Which lies all night between my breasts.
+14. My beloved is to me a cluster of henna blossoms In the vineyards of Engedi.”
+15. “Behold, you are beautiful, my darling, Behold, you are beautiful! Your eyes are like doves.”
+16. “Behold, you are handsome, my beloved, Indeed, so pleasant! Indeed, our couch is luxuriant!
+17. The beams of our houses are cedars, Our rafters, cypresses.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

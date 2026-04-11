@@ -1,0 +1,57 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 12:1-8
+
+Chapter text:
+1. For the choir director. According to the Sheminith. A Psalm of David. Save, O Yahweh, for the holy man ceases to be, For the faithful disappear from among the sons of men.
+2. They speak worthlessness to one another; With a flattering lip and with a double heart they speak.
+3. May Yahweh cut off all flattering lips, The tongue that speaks great things;
+4. Who have said, “With our tongue we will prevail; Our lips are our own; who is lord over us?”
+5. “Because of the devastation of the afflicted, because of the groaning of the needy, Now I will arise,” says Yahweh; “I will set him in the safety for which he longs.”
+6. The words of Yahweh are pure words; As silver tried in a furnace on the ground, refined seven times.
+7. You, O Yahweh, will keep them; You will guard him from this generation forever.
+8. The wicked strut about on every side When vileness is exalted among the sons of men.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

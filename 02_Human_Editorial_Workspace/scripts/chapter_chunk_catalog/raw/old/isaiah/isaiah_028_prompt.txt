@@ -1,0 +1,78 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 28:1-29
+
+Chapter text:
+1. Woe to the proud crown of the drunkards of Ephraim, And to the fading flower of its glorious beauty, Which is at the head of the fertile valley Of those who are overcome with wine!
+2. Behold, the Lord has a strong and courageous agent; As a storm of hail, a tempest of destruction, Like a storm of mighty overflowing waters, He has set it down to the earth with His hand.
+3. The proud crown of the drunkards of Ephraim is trodden under foot.
+4. And the fading flower of its glorious beauty, Which is at the head of the fertile valley, Will be like the first‑ripe fig prior to summer, Which one sees, And as soon as it is in his hand, He swallows it.
+5. In that day Yahweh of hosts will become a beautiful crown And a glorious diadem to the remnant of His people;
+6. A spirit of just judgment for him who sits in judgment, A might to those who turn back the onslaught at the gate.
+7. And these also reel with wine and stagger from strong drink: The priest and the prophet reel with strong drink; They are swallowed up by wine, they stagger from strong drink; They reel while having visions; They totter when rendering a verdict.
+8. For all the tables are full of filthy vomit, without a single clean place.
+9. “Whom would He instruct in knowledge, And whom would He provide understanding about the report? Those just weaned from milk? Those just taken from the breast?
+10. For He says, ‘Order on order, order on order, Line on line, line on line, A little here, a little there.’”
+11. Indeed, He will speak to this people Through stammering lips and a foreign tongue,
+12. He who said to them, “Here is rest, give rest to the weary,” And, “Here is repose,” but they would not listen.
+13. So the word of Yahweh to them will be, “Order on order, order on order, Line on line, line on line, A little here, a little there,” That they may go and stumble backward, be broken, snared, and taken captive.
+14. Therefore, hear the word of Yahweh, O scoffers, Who rule this people who are in Jerusalem,
+15. Because you have said, “We have cut a covenant with death, And with Sheol we have made a pact. The overflowing scourge will not reach us when it passes by, For we have made falsehood our refuge and we have hidden ourselves with lying.”
+16. Therefore thus says Lord Yahweh, “Behold, I am laying in Zion a stone, a tested stone, A costly cornerstone for the foundation, firmly placed. He who believes in it will not be disturbed.
+17. I will make justice the measuring line And righteousness the level; Then hail will sweep away the refuge of falsehood, And the waters will overflow the secret place.
+18. Your covenant with death will be canceled, And your pact with Sheol will not stand; When the overflowing scourge passes through, Then you will become its trampling place.
+19. As often as it passes through, it will take you; For morning after morning it will pass through, anytime during the day or night, And it will be sheer terror to understand the report.”
+20. The bed is too short on which to stretch out, And the blanket is too narrow to wrap oneself in.
+21. For Yahweh will rise up as at Mount Perazim; He will be stirred up as in the valley of Gibeon, To work His work, His unusual work, And to labor in His labor, His exceptional labor.
+22. So now do not carry on as scoffers, Lest your fetters be made stronger; For I have heard from Lord Yahweh of hosts Of complete destruction, one that is decreed, on all the earth.
+23. Give ear and hear my voice, Pay attention and hear my words.
+24. Does the farmer plow continually to plant seed? Does he continually turn and harrow his ground?
+25. Does he not level its surface And sow dill and scatter cumin And plant wheat in rows, Barley in its place and rye within its area?
+26. For his God disciplines and teaches him proper judgment.
+27. For dill is not threshed with a threshing sledge, Nor is the wheel of a cart driven over cumin; But dill is beaten out with a staff, and cumin with a rod.
+28. Grain for bread is crushed, But he does not continue to thresh it forever. Because the wheel of his cart and his horses eventually disturb it, He does not crush it longer.
+29. This also comes from Yahweh of hosts, Who has made His counsel wonderful and His wisdom great.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

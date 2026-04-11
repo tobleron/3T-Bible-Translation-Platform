@@ -1,0 +1,59 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "exhortation",
+      "title": "Introduction and Purpose",
+      "reason": "The poet introduces the song as a Maskil of Asaph, calling Israel to listen to history so future generations remember God's deeds."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 17,
+      "type": "story",
+      "title": "The Rebellion of Ephraim",
+      "reason": "A specific historical critique of the tribe of Ephraim for their cowardice and failure to keep the covenant."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 32,
+      "type": "story",
+      "title": "Testing God in the Wilderness",
+      "reason": "The narrative of Israel's complaint for food, God's provision of manna and quail, and their subsequent judgment."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 41,
+      "type": "argument",
+      "title": "The Cycle of Sin and Mercy",
+      "reason": "A reflection on the futility of Israel's lives due to sin, contrasted with God's compassion and repeated forgiveness."
+    },
+    {
+      "start_verse": 42,
+      "end_verse": 51,
+      "type": "list_or_catalog",
+      "title": "Recall of the Plagues",
+      "reason": "A summary list of the signs and miracles performed in Egypt to demonstrate God's power."
+    },
+    {
+      "start_verse": 52,
+      "end_verse": 64,
+      "type": "story",
+      "title": "Entry into Canaan and Shiloh",
+      "reason": "The journey to the holy land, the driving out of nations, and the subsequent failure at Shiloh."
+    },
+    {
+      "start_verse": 65,
+      "end_verse": 72,
+      "type": "story",
+      "title": "Selection of Zion and David",
+      "reason": "The conclusion describing God's choice of Judah over Ephraim and the anointing of King David."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+
+
+<think>
+
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Model profile: qwen3.5 35B A3B thinking model (though output should be JSON only, no markdown fences, etc.).
+    *   Task: Segment Isaiah 57:1-21 into practical translation chunks.
+    *   Source Text: Provided LSB text of Isaiah 57.
+    *   Output Format: Strict JSON with specific keys (`chunks` array containing objects with `start_verse`, `end_verse`, `type`, `title`, `reason`).
+    *   Constraints: Contiguous, non-overlapping, cover full chapter (1-21), allowed types only, short/plain titles, no markdown fences, no commentary.
+
+2.  **Analyze the Source Text (Isaiah 57):**
+    *   Verses 1-2: General observation/wise saying about the righteous perishing and entering peace. Often seen as an introduction or a proverbial statement setting the context for the following oracle.
+    *   Verses 3-13: A direct address (speech/oracle) to the idolaters ("sons of a soothsayer"). Accusations, description of their practices, God's challenge.
+    *   Verse 14: A distinct voice/command ("Build up, build up..."). Often seen as a transition or a specific oracle regarding the way preparation.
+    *   Verses 15-21: God speaking directly about His nature (high and holy vs. lowly), His discipline, healing, peace for the near/far, and the wicked's lack of peace. This is a cohesive block of divine speech/oracle/exhortation.
+
+3.  **Determine Chunk Boundaries:**
+    *   *Chunk 1:* Verses 1-2. This is a short introductory unit. It sets up the contrast between the righteous (who are gathered away) and the wicked (who remain). It functions as an introduction to the oracle. Type: `speech` or `argument`. Let's call it `speech` or `intro`. Given the allowed types, `speech` fits well as it states a fact/observation. Or `mixed`? No, keep it simple. It's a statement of truth. Let's group 1-2 together.
+    *   *Chunk 2:* Verses 3-13. This is a clear dialogue/speech directed at the idolaters ("draw near..."). It contains accusations and a challenge to idols. Type: `speech` or `dialogue`. Since it's God speaking to them, `speech` is appropriate.
+    *   *Chunk 3:* Verses 14-21. This section shifts focus. Verse 14 is a command to build the way (often linked to the coming of Yahweh). Verses 15-21 are God's self-revelation and promise of peace/healing vs. the wicked. These flow together as a divine oracle/exhortation. Type: `oracle` or `speech`. Let's use `oracle` for the divine declaration.
+    *   *Refinement:* Looking closely at verse 14 ("And it will be said..."). This is often considered part of the oracle leading into God's speech in 15-21. However, some translations separate 14 as a distinct instruction to the people or angels preparing the way. But structurally, 14-21 forms a cohesive unit of comfort and judgment.
+    *   *Alternative Split:*
+        *   1-2: Intro (Righteous vs Wicked context).
+        *   3-13: Accusation to Idolaters.
+        *   14-21: Promise of Peace/Healing for the Contrite vs Wicked.
+    *   Let's check verse 14 again. "And it will be said, 'Build up...'" This is often seen as a transition into God's dwelling place description in 15. So 14-21 works well as one chunk.
+    *   Wait, is 1-2 distinct enough? Yes, it stands alone as a proverbial statement before the direct address begins at verse 3 ("But draw near...").
+    *   Is 3-13 distinct? Yes, ends with "he who takes refuge in Me will inherit the land".
+    *   Is 14-21 distinct? Yes, starts with a new command/voice and moves into God's self-description.
+
+    *   *Proposed Chunks:*
+        1.  1-2: Introduction/Observation. Type: `speech` (or `argument`). Let's use `speech`. Title: "The Fate of the Righteous".
+        2.  3-13: Address to Idolaters. Type: `speech`. Title: "Accusation Against Idolaters".
+        3.  14-21: Promise of Peace and Judgment. Type: `oracle`. Title: "God's Dwelling and Peace".
+
+    *   *Wait, check constraints:* "Allowed chunk types only: story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, blessing_or_prayer, list_or_catalog, mixed".
+    *   Chunk 1 (1-2): It's a statement of fact. `speech` works.
+    *   Chunk 2 (3-13): God speaking to the people. `speech`.
+    *   Chunk 3 (14-21): God speaking about Himself and the wicked. `oracle`.
+
+    *   Let's refine titles to be short and plain English.
+    *   Chunk 1: "The Righteous Rest"
+    *   Chunk 2: "Judgment on Idolaters"
+    *   Chunk 3: "God's Promise of Peace"
+
+    *   Wait, looking at verse 14 again. Some scholars split 14 from 15-21. But for translation chunks, keeping them together is often better as they form the conclusion of the chapter (Peace vs Wicked). Verse 14 sets the scene for God's dwelling in 15.
+    *   Let's check if 1-2 should be merged with 3-13? "The righteous man perishes... But draw near..." The "But" suggests a contrast to the previous thought, but verse 3 starts a new address. Keeping them separate is better for translation flow (Intro vs Main Body).
+    *   Let's check if 14 should be separate? Verse 14 is imperative ("Build up"). Verses 15-21 are declarative ("For thus says..."). However, they are tightly linked. I will keep 14-21 together as one unit of divine promise and warning.
+
+    *   Wait, looking at the JSON structure required:
+        ```json
+        {
+          "chunks": [
+            {
+              "start_verse": 1,
+              "end_verse": 17,
+              "type": "genealogy",
+              "title": "Genealogy of Jesus",
+              "reason": "One concise sentence."
+            }
+          ]
+        }
+        ```
+    *   I need to ensure the JSON is valid and strictly follows the schema.
+
+    *   Re-evaluating Chunk 1 (1-2): Is it a `speech`? It's more of an observation. `argument` might fit, but `speech` is safer for "The righteous man perishes...". Actually, `mixed` could work if it's not clearly one type, but `speech` is standard for prophetic utterances. Let's use `speech`.
+    *   Re-evaluating Chunk 2 (3-13): This is definitely a speech/oracle directed at the people. `speech`.
+    *   Re-evaluating Chunk 3 (14-21): This is God speaking about His nature and the wicked. `oracle` fits well here as it contains "For thus says...".
+
+    *   Let's verify verse counts.
+    *   Chunk 1: 1-2.
+    *   Chunk 2: 3-13.
+    *   Chunk 3: 14-21.

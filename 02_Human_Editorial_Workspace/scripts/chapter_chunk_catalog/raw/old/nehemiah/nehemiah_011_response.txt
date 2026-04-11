@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Settling Jerusalem",
+      "reason": "Describes the casting of lots and the leaders who moved to the holy city."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 19,
+      "type": "list_or_catalog",
+      "title": "Population Registers",
+      "reason": "Provides detailed genealogies and headcounts for Judah, Benjamin, priests, Levites, and gatekeepers."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Distribution of People",
+      "reason": "Summarizes the location of remaining Israelites and lists specific officials in Jerusalem."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 36,
+      "type": "list_or_catalog",
+      "title": "Villages of Judah and Benjamin",
+      "reason": "Lists the specific towns and villages where the tribes settled outside Jerusalem."
+    }
+  ]
+}

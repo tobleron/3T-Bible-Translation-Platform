@@ -1,0 +1,66 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 90:1-17
+
+Chapter text:
+1. A Prayer of Moses, the man of God. Lord, You have been our dwelling place from generation to generation.
+2. Before the mountains were born Or You brought forth the earth and the world, Even from everlasting to everlasting, You are God.
+3. You turn man back into dust And say, “Return, O sons of men.”
+4. For a thousand years in Your sight Are like yesterday when it passes by, Or as a watch in the night.
+5. You have swept them away like a flood, they fall asleep; In the morning they are like grass which sprouts anew.
+6. In the morning it blossoms and sprouts anew; Toward evening it withers away and dries up.
+7. For we have been consumed by Your anger And by Your wrath we have been dismayed.
+8. You have set our iniquities before You, Our secret sins in the light of Your presence.
+9. For all our days have declined in Your fury; We have finished our years like a sigh.
+10. As for the days of our life, they contain seventy years, Or if due to might, eighty years, Yet their pride is but labor and wickedness; For soon it is gone and we fly away.
+11. Who knows the power of Your anger And Your fury, according to the fear that is due You?
+12. So teach us to number our days, That we may present to You a heart of wisdom.
+13. Return, O Yahweh; how long will it be? And be sorry for Your slaves.
+14. O satisfy us in the morning with Your lovingkindness, That we may sing for joy and be glad all our days.
+15. Make us glad according to the days You have afflicted us, And the years we have seen evil.
+16. Let Your work appear to Your slaves And Your majesty to their sons.
+17. Let the favor of the Lord our God be upon us; And establish for us the work of our hands; Establish the work of our hands.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

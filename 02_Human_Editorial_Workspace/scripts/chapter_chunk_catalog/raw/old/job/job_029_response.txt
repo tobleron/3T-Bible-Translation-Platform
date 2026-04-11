@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 25,
+      "type": "speech",
+      "title": "Job's Recollection of Past Honor",
+      "reason": "A continuous monologue where Job contrasts his former glory and social standing with his current state."
+    }
+  ]
+}

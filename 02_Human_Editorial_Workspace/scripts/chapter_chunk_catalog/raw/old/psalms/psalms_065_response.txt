@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "blessing_or_prayer",
+      "title": "Praise and Prayer in Zion",
+      "reason": "The psalmist opens with a declaration of praise to God in Zion, acknowledging His willingness to hear prayer and atone for sins."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "psalm",
+      "title": "God's Sovereign Power",
+      "reason": "This section describes God's mighty deeds in nature and history, establishing Him as the trust of all the earth."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "blessing_or_prayer",
+      "title": "God's Provision for the Earth",
+      "reason": "The psalm concludes with a vivid description of God's care for the land, resulting in abundant harvest and joy."
+    }
+  ]
+}

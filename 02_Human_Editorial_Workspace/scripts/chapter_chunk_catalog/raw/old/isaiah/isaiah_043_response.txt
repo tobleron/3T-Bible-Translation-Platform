@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Promise of Redemption and Gathering",
+      "reason": "A unified speech where God addresses Jacob and Israel with promises of redemption and gathering from all directions."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "Witnesses and Judgment on Nations",
+      "reason": "An oracle calling the blind to witness God's power, identifying Israel as His witnesses, and declaring judgment on Babylon."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 21,
+      "type": "exhortation",
+      "title": "Call to Remember the New Thing",
+      "reason": "An exhortation urging the people to forget past events and recognize God's new work in the wilderness."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 28,
+      "type": "argument",
+      "title": "Rebuke for Unfaithfulness and Promise of Forgiveness",
+      "reason": "A legal argument where God rebukes Israel's lack of worship, contrasts their burden with His grace, and declares forgiveness."
+    }
+  ]
+}

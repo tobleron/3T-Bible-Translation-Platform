@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Guarded Speech",
+      "reason": "David petitions Yahweh to guard his mouth and heart from wickedness."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Reproof and the Fate of Enemies",
+      "reason": "The psalmist accepts correction from the righteous and describes the destruction of his enemies."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "blessing_or_prayer",
+      "title": "Refuge and Final Vindication",
+      "reason": "David expresses trust in Yahweh as refuge and asks for the wicked to fall into their own traps."
+    }
+  ]
+}

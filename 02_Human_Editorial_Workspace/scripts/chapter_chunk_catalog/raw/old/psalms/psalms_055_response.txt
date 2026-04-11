@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Psalmist's Distress and Longing for Rest",
+      "reason": "The psalmist opens with a prayer of complaint describing inner turmoil and a desire to escape to the wilderness."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Description of Enemies and Betrayal",
+      "reason": "The speaker identifies the source of trouble as a close friend rather than a stranger, describing their deceitful nature."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Trust in God and Final Judgment",
+      "reason": "The psalmist declares reliance on God for deliverance, contrasts the enemy's smooth speech with hidden malice, and concludes with a vow of trust."
+    }
+  ]
+}

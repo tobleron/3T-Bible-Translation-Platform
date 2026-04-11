@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Yahweh's Response to Solomon",
+      "reason": "A continuous speech where Yahweh responds to Solomon's dedication of the temple with conditions for blessing and warnings of judgment."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Solomon's Building Projects and Administration",
+      "reason": "A narrative section detailing the completion of building projects, the exchange with Hiram, the use of forced labor, and religious observances."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 28,
+      "type": "story",
+      "title": "The Ezion-geber Fleet",
+      "reason": "A distinct narrative unit describing the construction of a naval fleet with Hiram's help and the return of gold from Ophir."
+    }
+  ]
+}

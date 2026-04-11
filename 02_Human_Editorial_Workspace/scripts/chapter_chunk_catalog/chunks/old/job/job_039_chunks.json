@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T04:22:42Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Job",
+  "chapter": 39,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 30,
+  "verse_count": 30,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Mountain Goats and Deer",
+      "reason": "God questions Job about the birth cycles of mountain goats and deer."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "The Wild Donkey",
+      "reason": "God describes the wild donkey's freedom in the desert."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "The Wild Ox",
+      "reason": "God questions Job about taming the wild ox for labor."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "The Ostrich",
+      "reason": "God describes the ostrich's unique and seemingly foolish parenting."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 25,
+      "type": "speech",
+      "title": "The War Horse",
+      "reason": "God details the horse's strength and courage in battle."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 30,
+      "type": "speech",
+      "title": "The Hawk and Eagle",
+      "reason": "God describes the soaring flight and hunting prowess of birds of prey."
+    }
+  ]
+}

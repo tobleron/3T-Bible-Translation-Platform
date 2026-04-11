@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Prophets Encourage Rebuilding",
+      "reason": "Narrative of Haggai and Zechariah inspiring Zerubbabel and Jeshua to resume work despite Tattenai's arrival."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 17,
+      "type": "speech",
+      "title": "Letter from Tattenai to Darius",
+      "reason": "A complete letter containing the inquiry, the elders' response, and the request for verification of Cyrus's decree."
+    }
+  ]
+}

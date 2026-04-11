@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "vision",
+      "title": "Description of the North and South Chambers",
+      "reason": "This section details the architectural layout of the chambers and includes a speech defining their holy use by the priests."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "vision",
+      "title": "Measurement of the Outer Court Wall",
+      "reason": "This section describes the final measurement of the entire complex to separate the holy from the profane."
+    }
+  ]
+}

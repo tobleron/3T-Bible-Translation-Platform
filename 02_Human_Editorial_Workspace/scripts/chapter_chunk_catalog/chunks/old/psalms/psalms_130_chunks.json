@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T06:58:21Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 130,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 8,
+  "verse_count": 8,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "psalm",
+      "title": "Psalm of Supplication and Forgiveness",
+      "reason": "The psalmist cries out from the depths, acknowledges God's forgiveness as the basis for fear, and establishes the theme of hope."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "Psalm of Waiting and Hope",
+      "reason": "The speaker expresses deep personal hope in Yahweh's word using the metaphor of watchmen waiting for morning."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 8,
+      "type": "exhortation",
+      "title": "Call to Israel and Promise of Redemption",
+      "reason": "The text shifts from personal expression to a communal call for Israel to wait on God, concluding with the promise of redemption."
+    }
+  ]
+}

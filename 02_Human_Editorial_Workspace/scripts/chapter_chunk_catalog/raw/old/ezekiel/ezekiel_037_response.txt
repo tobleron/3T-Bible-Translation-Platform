@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "vision",
+      "title": "Vision of Dry Bones",
+      "reason": "A complete vision narrative describing the resurrection of dry bones and its interpretation regarding Israel's restoration."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 28,
+      "type": "oracle",
+      "title": "Oracle of Two Sticks",
+      "reason": "A prophetic oracle involving a symbolic action with two sticks representing the unification of Judah and Israel under a new covenant."
+    }
+  ]
+}

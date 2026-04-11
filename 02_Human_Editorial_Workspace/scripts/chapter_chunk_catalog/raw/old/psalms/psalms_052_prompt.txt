@@ -1,0 +1,58 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 52:1-9
+
+Chapter text:
+1. For the choir director. A Maskil of David. When Doeg the Edomite came and told Saul and said to him, “David has come to the house of Ahimelech.” Why do you boast in evil, O mighty man? The lovingkindness of God endures all day long.
+2. Your tongue devises destruction, Like a sharp razor, O worker of deceit.
+3. You love evil more than good, Falsehood more than speaking what is right. Selah.
+4. You love all words that devour, O deceitful tongue.
+5. But God will break you down forever; He will snatch you up and tear you away from your tent, And uproot you from the land of the living, Selah.
+6. So that the righteous will see and fear, And will laugh at him, saying,
+7. “Behold, the man who would not set God as his strength, But trusted in the abundance of his riches And was strong in his destruction.”
+8. But as for me, I am like a green olive tree in the house of God; I trust in the lovingkindness of God forever and ever.
+9. I will give You thanks forever, because You have done it, And I will hope on Your name, for it is good, in the presence of Your holy ones.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

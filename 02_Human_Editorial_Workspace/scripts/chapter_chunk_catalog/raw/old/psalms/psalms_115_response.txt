@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Glory to God and Idols",
+      "reason": "A prayer declaring God's glory contrasted with the lifeless nature of idols."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Call to Trust",
+      "reason": "A threefold invitation for Israel, Aaron, and the faithful to trust in Yahweh."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 16,
+      "type": "blessing_or_prayer",
+      "title": "Divine Blessings",
+      "reason": "A declaration of God's remembrance and a prayer for increase and blessing."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Praise from the Living",
+      "reason": "A concluding contrast between the dead who do not praise and the living who will."
+    }
+  ]
+}

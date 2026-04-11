@@ -1,0 +1,68 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Jeremiah 35:1-19
+
+Chapter text:
+1. The word which came to Jeremiah from Yahweh in the days of Jehoiakim the son of Josiah, king of Judah, saying,
+2. “Go to the house of the Rechabites and speak to them and bring them into the house of Yahweh, into one of the chambers, and give them wine to drink.”
+3. Then I took Jaazaniah the son of Jeremiah, son of Habazziniah, and his brothers and all his sons and the whole house of the Rechabites,
+4. and I brought them into the house of Yahweh, into the chamber of the sons of Hanan the son of Igdaliah, the man of God, which was beside the chamber of the officials, which was above the chamber of Maaseiah the son of Shallum, the doorkeeper.
+5. Then I put before the men of the house of the Rechabites pitchers full of wine and cups; and I said to them, “Drink wine!”
+6. But they said, “We will not drink wine, for Jonadab the son of Rechab, our father, commanded us, saying, ‘You shall not drink wine, you or your sons, forever.
+7. And you shall not build a house, and you shall not sow seed, and you shall not plant a vineyard or own one; but tents you shall inhabit all your days, that you may live many days in the land where you sojourn.’
+8. So we have listened to the voice of Jonadab the son of Rechab, our father, in all that he commanded us, not to drink wine all our days, we, our wives, our sons, or our daughters,
+9. nor to build ourselves houses to inhabit; and we do not have vineyard or field or seed.
+10. We have only inhabited tents and have listened and have done according to all that Jonadab our father commanded us.
+11. But it happened that when Nebuchadnezzar king of Babylon came up against the land, we said, ‘Come, let us come to Jerusalem before the military force of the Chaldeans and before the military force of the Arameans.’ So we have inhabited Jerusalem.”
+12. Then the word of Yahweh came to Jeremiah, saying,
+13. “Thus says Yahweh of hosts, the God of Israel, ‘Go and say to the men of Judah and the inhabitants of Jerusalem, “Will you not receive discipline by listening to My words?” declares Yahweh.
+14. “The words of Jonadab the son of Rechab, which he commanded his sons, not to drink wine, are established. So they do not drink wine to this day, for they have listened to their father’s command. But I have spoken to you, rising up early and speaking; yet you have not listened to Me.
+15. Also I have sent to you all My slaves the prophets, rising up early and sending, saying: ‘Turn now every man from his evil way and make good your deeds, and do not walk after other gods to serve them. Then you will inhabit the land which I have given to you and to your fathers; but you have not inclined your ear or listened to Me.
+16. Indeed, the sons of Jonadab the son of Rechab have established the command of their father which he commanded them, but this people has not listened to Me.’”’
+17. Therefore thus says Yahweh, the God of hosts, the God of Israel, ‘Behold, I am bringing on Judah and on all the inhabitants of Jerusalem all the harmful evil that I have spoken against them because I spoke to them but they did not listen, and I have called them but they did not answer.’”
+18. Then Jeremiah said to the house of the Rechabites, “Thus says Yahweh of hosts, the God of Israel, ‘Because you have listened to the command of Jonadab your father, kept all his commands, and done according to all that he commanded you,
+19. therefore thus says Yahweh of hosts, the God of Israel, “Jonadab the son of Rechab shall not have a man cut off from standing before Me always.”’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

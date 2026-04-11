@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Introduction to the Oracle",
+      "reason": "Sets the scene for the prophet's address against Mount Seir."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 9,
+      "type": "oracle",
+      "title": "Judgment on Edom",
+      "reason": "Details the specific destruction and desolation coming upon Mount Seir."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "argument",
+      "title": "Reasons for Judgment",
+      "reason": "Explains the historical enmity and arrogant claims that provoked God's anger."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 15,
+      "type": "oracle",
+      "title": "Conclusion of Judgment",
+      "reason": "Summarizes the punishment as a direct response to their delight in Israel's ruin."
+    }
+  ]
+}

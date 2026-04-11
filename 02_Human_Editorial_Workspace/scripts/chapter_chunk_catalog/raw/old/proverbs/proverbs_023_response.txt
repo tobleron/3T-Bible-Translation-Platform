@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "exhortation",
+      "title": "Dining with a Ruler",
+      "reason": "Advice on managing appetite and expectations when eating with a wealthy host."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Fool, Orphans, and Discipline",
+      "reason": "Three distinct instructions regarding speech to a fool, property boundaries for orphans, and child discipline."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 28,
+      "type": "speech",
+      "title": "Wisdom and Parental Joy",
+      "reason": "A continuous address from a father to his son covering wisdom, hope, wine, parents, and the danger of a harlot."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 35,
+      "type": "parable",
+      "title": "The Woes of Wine",
+      "reason": "A rhetorical description of the effects of heavy drinking culminating in a first-person dialogue of the drunkard."
+    }
+  ]
+}

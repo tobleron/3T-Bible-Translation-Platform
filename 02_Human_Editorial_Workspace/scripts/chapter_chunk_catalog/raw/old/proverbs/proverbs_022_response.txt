@@ -1,0 +1,59 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "list_or_catalog",
+      "title": "Wisdom Sayings on Wealth and Training",
+      "reason": "A collection of independent proverbs regarding wealth, humility, and child training."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 16,
+      "type": "list_or_catalog",
+      "title": "Wisdom Sayings on Social Relations",
+      "reason": "A series of proverbs concerning the rich and poor, generosity, and discipline."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Introduction to the Words of the Wise",
+      "reason": "A direct address introducing a collection of wisdom sayings and their purpose."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 23,
+      "type": "law",
+      "title": "Justice for the Poor",
+      "reason": "A specific instruction regarding the treatment of the poor with a divine reason."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 25,
+      "type": "list_or_catalog",
+      "title": "Warnings on Friendship",
+      "reason": "Two related proverbs warning against associating with angry men."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Warning Against Guarantors",
+      "reason": "An instruction regarding financial pledges and the risk of losing one's bed."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 29,
+      "type": "list_or_catalog",
+      "title": "Final Instructions on Boundaries and Skill",
+      "reason": "Two concluding proverbs about property boundaries and professional excellence."
+    }
+  ]
+}

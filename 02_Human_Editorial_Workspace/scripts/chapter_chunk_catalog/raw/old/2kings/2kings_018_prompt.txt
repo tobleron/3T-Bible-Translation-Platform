@@ -1,0 +1,86 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Kings 18:1-37
+
+Chapter text:
+1. Now it happened in the third year of Hoshea, the son of Elah king of Israel, that Hezekiah the son of Ahaz king of Judah became king.
+2. He was twenty-five years old when he became king; and he reigned twenty-nine years in Jerusalem. And his mother’s name was Abi, the daughter of Zechariah.
+3. And he did what was right in the sight of Yahweh, according to all that David his father had done.
+4. He took away the high places and shattered the sacred pillars and cut down the Asherah. And he broke in pieces the bronze serpent that Moses had made, for until those days the sons of Israel were burning incense to it; and it was called Nehushtan.
+5. He trusted in Yahweh, the God of Israel; so that after him there was none like him among all the kings of Judah, nor among those who were before him.
+6. So he clung to Yahweh; he did not turn away from following Him, but kept His commandments, which Yahweh had commanded Moses.
+7. And Yahweh was with him; wherever he went he prospered. And he rebelled against the king of Assyria and did not serve him.
+8. He struck the Philistines as far as Gaza and its territory, from watchtower to fortified city.
+9. Now in the fourth year of King Hezekiah, which was the seventh year of Hoshea son of Elah king of Israel, Shalmaneser king of Assyria came up against Samaria and besieged it.
+10. And at the end of three years they captured it; in the sixth year of Hezekiah, which was the ninth year of Hoshea king of Israel, Samaria was captured.
+11. Then the king of Assyria took Israel away into exile to Assyria, and put them in Halah and on the Habor, the river of Gozan, and in the cities of the Medes,
+12. because they did not listen to the voice of Yahweh their God, but trespassed against His covenant, even all that Moses the servant of Yahweh commanded; they would neither listen nor do it.
+13. Now in the fourteenth year of King Hezekiah, Sennacherib king of Assyria came up against all the fortified cities of Judah and seized them.
+14. Then Hezekiah king of Judah sent to the king of Assyria at Lachish, saying, “I have done wrong. Turn away from me; whatever penalty you give to me I will bear.” So the king of Assyria set a penalty on Hezekiah king of Judah three hundred talents of silver and thirty talents of gold.
+15. Thus Hezekiah gave him all the silver which was found in the house of Yahweh and in the treasuries of the king’s house.
+16. At that time Hezekiah cut off the gold from the doors of the temple of Yahweh and from the doorposts, which Hezekiah king of Judah had overlaid, and gave it to the king of Assyria.
+17. Then the king of Assyria sent Tartan and Rab-saris and Rabshakeh from Lachish to King Hezekiah with a heavy military force to Jerusalem. So they went up and came to Jerusalem. And when they went up, they came and stood by the conduit of the upper pool, which is on the highway of the fuller’s field.
+18. Then they called to the king, and Eliakim the son of Hilkiah, who was over the household, and Shebnah the scribe and Joah the son of Asaph the recorder, came out to them.
+19. Then Rabshakeh said to them, “Say now to Hezekiah, ‘Thus says the great king, the king of Assyria, “What is this trust that you have?
+20. You say (but they are only empty words), ‘I have counsel and might for the war.’ Now on whom do you trust, that you have rebelled against me?
+21. Now behold, you trust in the staff of this crushed reed, even on Egypt; on which if a man leans, it will go into his hand and pierce it. So is Pharaoh king of Egypt to all who trust in him.
+22. But if you say to me, ‘We trust in Yahweh our God,’ is it not He whose high places and whose altars Hezekiah has taken away, and has said to Judah and to Jerusalem, ‘You shall worship before this altar in Jerusalem’?
+23. So now, come, make a bargain with my master the king of Assyria, and I will give you two thousand horses, if you are able on your part to give riders for them.
+24. How then can you turn away one official of the least of my master’s servants, and trust in Egypt for chariots and for horsemen?
+25. So now, have I come up without the approval of Yahweh against this place to make it a ruin? Yahweh said to me, ‘Go up against this land and make it a ruin.’”’”
+26. Then Eliakim the son of Hilkiah, and Shebnah and Joah, said to Rabshakeh, “Speak now to your servants in Aramaic, for we understand it; and do not speak with us in Judean in the hearing of the people who are on the wall.”
+27. But Rabshakeh said to them, “Has my master sent me only to your master and to you to speak these words, and not to the men who sit on the wall, doomed to eat their own dung and drink their own urine with you?”
+28. Then Rabshakeh stood and cried with a loud voice in Judean, saying, “Hear the word of the great king, the king of Assyria.
+29. Thus says the king, ‘Do not let Hezekiah deceive you, for he will not be able to deliver you from his hand;
+30. and do not let Hezekiah make you trust in Yahweh, saying, “Yahweh will surely deliver us, and this city will not be given into the hand of the king of Assyria.”
+31. Do not listen to Hezekiah, for thus says the king of Assyria, “Make your peace with me and come out to me, and eat each of his vine and each of his fig tree and drink each of the waters of his own cistern,
+32. until I come and take you away to a land like your own land, a land of grain and new wine, a land of bread and vineyards, a land of olive oil and honey, that you may live and not die.” But do not listen to Hezekiah when he misleads you, saying, “Yahweh will deliver us.”
+33. Has any one of the gods of the nations delivered his land from the hand of the king of Assyria?
+34. Where are the gods of Hamath and Arpad? Where are the gods of Sepharvaim, Hena, and Ivvah? When have they delivered Samaria from my hand?
+35. Who among all the gods of the lands have delivered their land from my hand, that Yahweh would deliver Jerusalem from my hand?’”
+36. But the people were silent and answered him not a word, for the king’s commandment was, “Do not answer him.”
+37. Then Eliakim the son of Hilkiah, who was over the household, and Shebna the scribe and Joah the son of Asaph, the recorder, came to Hezekiah with their clothes torn and told him the words of Rabshakeh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Promise of Comfort and Word of God",
+      "reason": "A unified oracle announcing comfort to Jerusalem and contrasting the permanence of God's word with human frailty."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 17,
+      "type": "exhortation",
+      "title": "The Coming Shepherd and Sovereign God",
+      "reason": "An exhortation to the messenger of good news followed by a description of God's power over nations."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 26,
+      "type": "argument",
+      "title": "Argument Against Idolatry and for Creation",
+      "reason": "A rhetorical argument contrasting the smallness of idols with the greatness of the Creator who orders the stars."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 31,
+      "type": "dialogue",
+      "title": "Encouragement to the Weary",
+      "reason": "A dialogue addressing Jacob's complaint and concluding with a promise of renewed strength for those who hope in Yahweh."
+    }
+  ]
+}

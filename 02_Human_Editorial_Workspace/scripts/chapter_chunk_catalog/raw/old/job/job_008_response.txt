@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Bildad's Initial Rebuke and Promise",
+      "reason": "Bildad opens the speech by questioning Job's words and asserting God's justice before offering a conditional promise of restoration."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "argument",
+      "title": "Appeal to Tradition and the Fate of the Wicked",
+      "reason": "Bildad appeals to ancestral wisdom and uses a metaphor about papyrus to illustrate the inevitable end of those who forget God."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "Description of the Wicked and Final Exhortation",
+      "reason": "The speech concludes with a detailed description of the fragile hope of the godless followed by a final assurance of God's justice."
+    }
+  ]
+}

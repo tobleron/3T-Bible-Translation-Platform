@@ -1,0 +1,59 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 75:1-10
+
+Chapter text:
+1. For the choir director. Al-tashheth. A Psalm of Asaph. A Song. We give thanks to You, O God, we give thanks, For Your name is near; Men recount Your wondrous deeds.
+2. “For I select an appointed time, It is I who judge with equity.
+3. The earth and all who dwell in it melt; It is I who have firmly set its pillars. Selah.
+4. I said to the boastful, ‘Do not boast,’ And to the wicked, ‘Do not raise up the horn;
+5. Do not raise up your horn on high, Nor speak with insolent pride.’”
+6. For one’s rising up does not come from the east, nor from the west, And not from the desert;
+7. But God is the Judge; He puts down one and raises up another.
+8. For a cup is in the hand of Yahweh, and the wine foams; It is full of His mixture, and He pours from this; Surely all the wicked of the earth must drain and drink down its dregs.
+9. But as for me, I will declare it forever; I will sing praises to the God of Jacob.
+10. And all the horns of the wicked I will cut off, But the horns of the righteous will be raised up.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

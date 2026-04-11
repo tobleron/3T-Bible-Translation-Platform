@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:50:25Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 71,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 24,
+  "verse_count": 24,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Prayer for Deliverance in Youth and Old Age",
+      "reason": "The psalmist opens with a plea for refuge and protection, recalling God's faithfulness from birth to old age."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Enemies' Plot and Call for Help",
+      "reason": "The psalmist describes the specific counsel of enemies who claim God has forsaken him and urgently calls for divine intervention."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Confidence in God's Righteousness and Future Restoration",
+      "reason": "The psalmist declares a commitment to wait on God, recount His deeds, and trust in His power to revive him from troubles."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 24,
+      "type": "blessing_or_prayer",
+      "title": "Vow of Praise and Victory",
+      "reason": "The psalm concludes with a musical vow to praise God with instruments and a declaration that the enemies will be humiliated."
+    }
+  ]
+}

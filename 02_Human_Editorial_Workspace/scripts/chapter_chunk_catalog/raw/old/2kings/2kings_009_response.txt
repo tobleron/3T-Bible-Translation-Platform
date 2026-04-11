@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Anointing of Jehu",
+      "reason": "The prophet sends a young man to Ramoth-gilead to anoint Jehu as king, followed by the soldiers' immediate acceptance."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Death of Joram and Ahaziah",
+      "reason": "Jehu travels to Jezreel, confronts King Joram, kills him, and pursues King Ahaziah who flees to Megiddo."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 37,
+      "type": "story",
+      "title": "Death of Jezebel",
+      "reason": "Jehu arrives at Jezreel, Jezebel is thrown from the window, and her body is found partially eaten by dogs."
+    }
+  ]
+}

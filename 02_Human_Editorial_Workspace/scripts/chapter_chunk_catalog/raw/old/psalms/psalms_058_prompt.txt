@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 58:1-11
+
+Chapter text:
+1. For the choir director. Al-tashheth. Of David. A Mikhtam. Do you indeed speak righteousness, O gods? Do you judge with equity, O sons of men?
+2. No, in heart you work unrighteousness; On earth you prepare a path for the violence of your hands.
+3. The wicked are estranged from the womb; These who speak falsehood wander in error from birth.
+4. They have venom like the venom of a serpent; Like a deaf cobra that stops up its ear,
+5. So that it does not hear the voice of charmers, Or a skillful caster of spells.
+6. O God, shatter their teeth in their mouth; Break out the fangs of the young lions, O Yahweh.
+7. Let them flow away like water that runs off; When he aims his arrows, let them be as headless shafts.
+8. Let them be as a snail which melts away as it goes along, Like the miscarriages of a woman which never behold the sun.
+9. Before your pots can feel the fire of thorns He will sweep them away with a whirlwind, the living and the burning alike.
+10. The righteous will be glad when he beholds the vengeance; He will wash his feet in the blood of the wicked.
+11. And men will say, “Surely there is a reward for the righteous; Surely there is a God who judges on earth!”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezra 1:1-11
+
+Chapter text:
+1. Now in the first year of Cyrus king of Persia—in order to complete the word of Yahweh from the mouth of Jeremiah—Yahweh stirred up the spirit of Cyrus king of Persia, so that he had a proclamation pass throughout all his kingdom, and also put it in writing, saying:
+2. “Thus says Cyrus king of Persia, ‘Yahweh, the God of heaven, has given me all the kingdoms of the earth, and He has appointed me to build Him a house in Jerusalem, which is in Judah.
+3. Whoever there is among you of all His people, may his God be with him! Let him go up to Jerusalem which is in Judah and rebuild the house of Yahweh, the God of Israel; He is the God who is in Jerusalem.
+4. So everyone who remains, at whatever place he may sojourn, let the men of that place support him with silver and gold, with goods and cattle, together with a freewill offering for the house of God which is in Jerusalem.’”
+5. Then the heads of fathers’ households of Judah and Benjamin and the priests and the Levites arose, that is of everyone whose spirit God had stirred to go up to rebuild the house of Yahweh which is in Jerusalem.
+6. All those around them strengthened them with articles of silver, with gold, with possessions, with cattle, and with precious things, aside from all that was given as a freewill offering.
+7. Also King Cyrus brought out the articles of the house of Yahweh, which Nebuchadnezzar had brought out from Jerusalem and put in the house of his gods;
+8. and Cyrus, king of Persia, had them brought out by the hand of Mithredath the treasurer, and he counted them out to Sheshbazzar, the prince of Judah.
+9. Now this was their number: 30 gold dishes, 1,000 silver dishes, 29 duplicates;
+10. 30 gold bowls, 410 silver bowls of a second kind and 1,000 other articles.
+11. All the articles of gold and silver numbered 5,400. Sheshbazzar brought them all up with the exiles who went up from Babylon to Jerusalem.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

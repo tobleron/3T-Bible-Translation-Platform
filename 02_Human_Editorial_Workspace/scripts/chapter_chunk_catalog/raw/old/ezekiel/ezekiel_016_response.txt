@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 63,
+      "type": "speech",
+      "title": "Allegory of Jerusalem's History and Restoration",
+      "reason": "A continuous prophetic speech using an extended metaphor to describe Jerusalem's origin, unfaithfulness, judgment, and eventual restoration."
+    }
+  ]
+}

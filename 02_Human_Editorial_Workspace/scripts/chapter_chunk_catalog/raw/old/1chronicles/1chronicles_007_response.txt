@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "genealogy",
+      "title": "Genealogy of Issachar",
+      "reason": "Complete genealogical record and military count for the tribe of Issachar."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "genealogy",
+      "title": "Genealogy of Benjamin",
+      "reason": "Complete genealogical record and military counts for the tribe of Benjamin."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 19,
+      "type": "genealogy",
+      "title": "Genealogy of Naphtali and Manasseh",
+      "reason": "Genealogical lines for Naphtali and the specific lineage of Manasseh through Machir."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 29,
+      "type": "genealogy",
+      "title": "Genealogy of Ephraim",
+      "reason": "Complete genealogical record for Ephraim including the story of his sons and their settlements."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 40,
+      "type": "genealogy",
+      "title": "Genealogy of Asher",
+      "reason": "Complete genealogical record and military count for the tribe of Asher."
+    }
+  ]
+}

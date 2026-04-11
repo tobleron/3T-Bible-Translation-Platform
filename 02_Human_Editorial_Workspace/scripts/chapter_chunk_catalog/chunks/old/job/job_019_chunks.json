@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:56:14Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Job",
+  "chapter": 19,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 29,
+  "verse_count": 29,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "Job's Complaint to His Friends",
+      "reason": "A continuous speech where Job addresses his friends, questioning their torment and pleading for pity."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 27,
+      "type": "speech",
+      "title": "Job's Declaration of Faith",
+      "reason": "A distinct section where Job expresses his hope for a living Redeemer and future vision of God."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 29,
+      "type": "exhortation",
+      "title": "Job's Warning to His Friends",
+      "reason": "A concluding warning urging his friends to fear the sword and recognize divine judgment."
+    }
+  ]
+}

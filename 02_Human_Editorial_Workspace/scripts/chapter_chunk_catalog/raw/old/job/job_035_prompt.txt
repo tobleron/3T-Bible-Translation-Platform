@@ -1,0 +1,65 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 35:1-16
+
+Chapter text:
+1. Then Elihu answered and said,
+2. “Do you think this is according to justice? Do you say, ‘My righteousness is more than God’s’?
+3. For you say, ‘What use will it be to You? What profit will I have, more than if I had sinned?’
+4. I will respond to you, And your friends with you.
+5. Look at the heavens and see; And perceive the clouds—they are higher than you.
+6. If you have sinned, what do you accomplish against Him? And if your transgressions are many, what do you do to Him?
+7. If you are righteous, what do you give to Him, Or what does He receive from your hand?
+8. Your wickedness is for a man like yourself, And your righteousness is for a son of man.
+9. “Because of many oppressions they cry out; They cry for help because of the arm of many oppressors.
+10. But no one says, ‘Where is God my Maker, Who gives songs of praise in the night,
+11. Who teaches us more than the beasts of the earth And makes us wiser than the birds of the heavens?’
+12. There they cry out, but He does not answer Because of the pride of evil men.
+13. Surely God will not listen to an empty cry, Nor will the Almighty perceive it.
+14. How much less when you say you do not perceive Him, The case is before Him, and you must wait for Him!
+15. And now, because He has not visited in His anger, Nor has He acknowledged transgression well,
+16. So Job opens his mouth vainly; He multiplies words without knowledge.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

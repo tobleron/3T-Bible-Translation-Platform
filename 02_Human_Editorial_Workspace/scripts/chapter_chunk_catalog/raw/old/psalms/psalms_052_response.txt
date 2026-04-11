@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Address to Doeg",
+      "reason": "The psalmist directly addresses the wicked man Doeg with a series of accusations and predictions of judgment."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Observation by the Righteous",
+      "reason": "The righteous observers react to Doeg's downfall with fear and mockery, summarizing his error."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Psalmist's Confidence and Praise",
+      "reason": "The psalmist shifts to a personal declaration of trust in God and offers thanks for His deliverance."
+    }
+  ]
+}

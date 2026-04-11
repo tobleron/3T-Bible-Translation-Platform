@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "exhortation",
+      "title": "Wisdom and Patience in Life's Trials",
+      "reason": "A cohesive collection of proverbs contrasting the wise and foolish, emphasizing patience and the value of a good name."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 22,
+      "type": "argument",
+      "title": "The Balance of Righteousness and Human Frailty",
+      "reason": "An argument advising moderation in righteousness and wisdom while acknowledging universal human sinfulness."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 29,
+      "type": "speech",
+      "title": "The Search for Meaning and the Preacher's Conclusion",
+      "reason": "A personal reflection on the limits of wisdom, the difficulty of finding a righteous man, and the final conclusion that God made men upright."
+    }
+  ]
+}

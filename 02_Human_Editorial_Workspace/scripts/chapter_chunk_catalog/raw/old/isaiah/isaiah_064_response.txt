@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Lament and Confession of Sin",
+      "reason": "A unified plea for God's intervention followed by a confession of universal sinfulness."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Mercy and Relationship",
+      "reason": "A shift to acknowledging God as Father and requesting mercy based on their covenant relationship."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Description of Desolation and Final Plea",
+      "reason": "A description of the ruined holy places concluding with a rhetorical question about God's silence."
+    }
+  ]
+}

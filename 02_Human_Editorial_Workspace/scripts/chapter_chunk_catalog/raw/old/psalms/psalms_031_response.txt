@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Prayer for Deliverance",
+      "reason": "A continuous plea to God for refuge and protection from enemies."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Description of Distress",
+      "reason": "The psalmist describes physical and emotional suffering caused by adversaries."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Trust and Praise",
+      "reason": "A declaration of trust in God's sovereignty followed by praise for His goodness."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 24,
+      "type": "exhortation",
+      "title": "Call to Courage",
+      "reason": "A concluding reflection on God's hearing of prayer and a call for others to trust Him."
+    }
+  ]
+}

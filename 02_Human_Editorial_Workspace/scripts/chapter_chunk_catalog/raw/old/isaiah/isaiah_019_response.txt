@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "oracle",
+      "title": "Judgment on Egypt",
+      "reason": "Introduces Yahweh's coming to Egypt and the initial political chaos."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Ecological and Economic Collapse",
+      "reason": "Describes the drying of the Nile and the ruin of Egypt's industries."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "argument",
+      "title": "The Folly of Egyptian Leaders",
+      "reason": "Critiques the wisdom of Pharaoh's counselors and predicts Judah's terror."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 25,
+      "type": "blessing_or_prayer",
+      "title": "Restoration and Unity",
+      "reason": "Prophesies the conversion of Egypt, a highway to Assyria, and Israel's role."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "dialogue",
+      "title": "Esther's Petition Revealed",
+      "reason": "The king invites Esther to speak her mind and she reveals the crisis facing her people."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 6,
+      "type": "dialogue",
+      "title": "Identification of the Enemy",
+      "reason": "The king asks who is responsible and Esther identifies Haman as the adversary."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Haman's Desperation",
+      "reason": "The king leaves in anger while Haman pleads with Esther and is caught off guard."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Haman's Execution",
+      "reason": "A eunuch points out the gallows and the king orders Haman to be hanged on them."
+    }
+  ]
+}

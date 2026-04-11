@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:09:47Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 37,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 40,
+  "verse_count": 40,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Do Not Fret at the Wicked",
+      "reason": "An initial exhortation to trust God and not envy evildoers, contrasting their temporary fate with the inheritance of the righteous."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 20,
+      "type": "argument",
+      "title": "The Fate of the Wicked and Righteous",
+      "reason": "A descriptive argument detailing how the wicked scheme against the righteous but ultimately perish while the humble inherit the land."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 34,
+      "type": "exhortation",
+      "title": "Character and Conduct of the Righteous",
+      "reason": "A section focusing on the practical behavior of the righteous, including generosity and trust, with promises of God's sustaining care."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 40,
+      "type": "speech",
+      "title": "Personal Witness and Final Assurance",
+      "reason": "The psalmist offers personal testimony regarding the wicked's end and concludes with a final assurance of God's salvation for the righteous."
+    }
+  ]
+}

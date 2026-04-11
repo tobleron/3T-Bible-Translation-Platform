@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Organization of the Priestly Divisions",
+      "reason": "Describes the division of Aaron's sons into groups based on David's order and the lot casting."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 19,
+      "type": "list_or_catalog",
+      "title": "Assignments of the Priestly Courses",
+      "reason": "Lists the twenty-four priestly courses assigned by lot and their purpose."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 31,
+      "type": "genealogy",
+      "title": "Genealogy of the Levites",
+      "reason": "Details the family lines of the sons of Levi and their subsequent division by lot."
+    }
+  ]
+}

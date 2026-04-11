@@ -1,0 +1,72 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T11:47:40Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Jeremiah",
+  "chapter": 50,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 46,
+  "verse_count": 46,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "oracle",
+      "title": "Oracle Against Babylon",
+      "reason": "Introduction and declaration of Babylon's capture."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Return of Israel and Judah",
+      "reason": "Promise of return to Yahweh and description of lost sheep."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "exhortation",
+      "title": "Call to Flee Babylon",
+      "reason": "Command to leave the land and description of its future desolation."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 20,
+      "type": "oracle",
+      "title": "Judgment on Babylon and Restoration",
+      "reason": "Battle instructions against Babylon and promise of Israel's restoration."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 27,
+      "type": "list_or_catalog",
+      "title": "Specific Targets of Judgment",
+      "reason": "List of specific cities and groups to be destroyed."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 34,
+      "type": "speech",
+      "title": "Vengeance for the Temple",
+      "reason": "Call to summon nations and declaration of God's vindication."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 40,
+      "type": "list_or_catalog",
+      "title": "Catalog of Destruction",
+      "reason": "Series of 'sword' and 'drought' judgments against various groups."
+    },
+    {
+      "start_verse": 41,
+      "end_verse": 46,
+      "type": "vision",
+      "title": "The Northern Army",
+      "reason": "Description of the invading army and final confirmation of judgment."
+    }
+  ]
+}

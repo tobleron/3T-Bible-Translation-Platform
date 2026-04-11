@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "list_or_catalog",
+      "title": "Description of the Sea and Lavers",
+      "reason": "Describes the construction and placement of the bronze sea, oxen, lavers, lampstands, tables, and court doors."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Completion of Utensils by Huram-abi",
+      "reason": "Details the specific work done by Huram-abi, including pillars and networks, and notes where the items were cast."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "list_or_catalog",
+      "title": "Furniture of the Inner Sanctuary",
+      "reason": "Lists the golden altar, tables, lampstands, and various gold utensils used inside the temple."
+    }
+  ]
+}

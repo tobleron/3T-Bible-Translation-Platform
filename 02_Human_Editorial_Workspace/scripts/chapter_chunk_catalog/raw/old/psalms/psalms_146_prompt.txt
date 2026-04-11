@@ -1,0 +1,59 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 146:1-10
+
+Chapter text:
+1. Praise Yah! Praise Yahweh, O my soul!
+2. I will praise Yahweh throughout my life; I will sing praises to my God while I have my being.
+3. Do not trust in nobles, In merely a son of man, in whom there is no salvation.
+4. His spirit departs, he returns to the earth; In that very day his plans perish.
+5. How blessed is he whose help is the God of Jacob, Whose hope is in Yahweh his God,
+6. Who made heaven and earth, The sea and all that is in them; Who keeps truth forever;
+7. Who does justice for the oppressed; Who gives food to the hungry. Yahweh sets the prisoners free.
+8. Yahweh opens the eyes of the blind; Yahweh raises up those who are bowed down; Yahweh loves the righteous;
+9. Yahweh keeps the sojourners; He helps up the orphan and the widow, But He bends the way of the wicked.
+10. Yahweh will reign forever, Your God, O Zion, from generation to generation. Praise Yah!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

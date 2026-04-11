@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezekiel 7:1-27
+
+Chapter text:
+1. Moreover, the word of Yahweh came to me saying,
+2. “Now as for you, son of man, thus says Lord Yahweh to the land of Israel, ‘An end! The end is coming on the four corners of the earth.
+3. Now the end is upon you, and I will send My anger against you; I will judge you according to your ways and put all your abominations upon you.
+4. For My eye will have no pity on you, nor will I spare you, but I will put your ways upon you, and your abominations will be among you; then you will know that I am Yahweh!’
+5. “Thus says Lord Yahweh, ‘A calamitous evil, a unique calamitous evil, behold, it is coming!
+6. An end has come; the end has come! It has awakened against you; behold, it is coming!
+7. Your doom has come to you, O inhabitant of the land. The time has come; the day is near—confusion rather than joyful shouting on the mountains.
+8. Now it is near when I will pour out My wrath on you and spend My anger against you and judge you according to your ways and put on you all your abominations.
+9. My eye will show no pity, nor will I spare. I will give to you according to your ways, while your abominations are among you; then you will know that I, Yahweh, do the striking.
+10. ‘Behold, the day! Behold, it is coming! Your doom has gone forth; the rod has blossomed; arrogance has budded.
+11. Violence has grown into a rod of wickedness. None of them shall remain, none of their multitude, none of their moaning, nor anything eminent among them.
+12. The time has come; the day has arrived. Let not the buyer be glad nor the seller mourn; for wrath is against all their multitude.
+13. Indeed, the seller will not return to himself what he sold as long as they both live; for the vision regarding all their multitude will not return empty, nor will any of them strengthen his life by his iniquity.
+14. ‘They have blown the trumpet and made everything ready, but no one is going to the battle, for My wrath is against all their multitude.
+15. The sword is outside, and the plague and the famine are inside. He who is in the field will die by the sword; famine and the plague will also devour those in the city.
+16. Even when their survivors escape, they will be on the mountains like doves of the valleys, all of them moaning, each over his own iniquity.
+17. All hands will hang limp, and all knees will become like water.
+18. They will gird themselves with sackcloth, and horror will cover them; and shame will be on all faces and baldness on all their heads.
+19. They will throw their silver into the streets, and their gold will become an impure thing; their silver and their gold will not be able to deliver them in the day of the fury of Yahweh. They cannot satisfy their soul, nor can they fill their stomachs, for their iniquity has become an occasion of stumbling.
+20. They transformed the beauty of His ornaments into pride, and they made the images of their abominations and their detestable things with it; therefore I will make it an impure thing to them.
+21. I will give it into the hands of the foreigners as plunder and to the wicked of the earth as spoil, and they will profane it.
+22. I will also turn My face from them, and they will profane My secret place; then robbers will enter and profane it.
+23. ‘Make the chain, for the land is full of judgments that promote bloodshed, and the city is full of violence.
+24. Therefore, I will bring the most evil of the nations, and they will possess their houses. I will also make the pride of the strong ones cease, and their holy places will be profaned.
+25. Anguish has come, and they will seek peace, but there will be none.
+26. Disaster will come upon disaster, and report will be added to report; then they will seek a vision from a prophet, but the law will be lost from the priest and counsel from the elders.
+27. The king will mourn, the prince will be clothed with desolation, and the hands of the people of the land will be dismayed. According to their way I will deal with them, and by their judgments I will judge them. And they will know that I am Yahweh.’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

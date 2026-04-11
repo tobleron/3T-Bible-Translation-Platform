@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "vision",
+      "title": "The Six Executioners Arrive",
+      "reason": "Describes the arrival of six men with weapons and a scribe clothed in linen."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 7,
+      "type": "dialogue",
+      "title": "The Marking and Slaughter Command",
+      "reason": "Contains the glory of God moving to the threshold and the specific commands given to the scribe and executioners."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "dialogue",
+      "title": "Ezekiel's Plea and God's Response",
+      "reason": "Features Ezekiel falling in prayer and Yahweh explaining the extent of Israel's iniquity."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 11,
+      "type": "story",
+      "title": "Completion of the Task",
+      "reason": "Reports the scribe confirming the completion of the command."
+    }
+  ]
+}

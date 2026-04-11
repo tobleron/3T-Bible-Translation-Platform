@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "psalm",
+      "title": "Longing for God's Dwelling",
+      "reason": "The psalmist expresses deep longing for the temple and declares the blessedness of those who dwell there."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "exhortation",
+      "title": "Strength in the Journey to Zion",
+      "reason": "Describes the spiritual strength of pilgrims traveling through difficult valleys to appear before God."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "blessing_or_prayer",
+      "title": "Prayer and Preference for the Temple",
+      "reason": "A prayer for God to hear and look upon His anointed, followed by a declaration that being in God's courts is better than anywhere else."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "God as Sun and Shield",
+      "reason": "Concludes with a theological statement about God's provision for the blameless and a final blessing on those who trust in Him."
+    }
+  ]
+}

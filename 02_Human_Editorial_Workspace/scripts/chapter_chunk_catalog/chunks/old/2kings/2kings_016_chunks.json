@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:51:48Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Kings",
+  "chapter": 16,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 20,
+  "verse_count": 20,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Reign and Character of Ahaz",
+      "reason": "Introduces King Ahaz and describes his wicked reign compared to David."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Syrian-Israelite Alliance and Assyrian Intervention",
+      "reason": "Narrates the siege of Jerusalem by Rezin and Pekah and Ahaz's appeal to Tiglath-pileser."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 16,
+      "type": "story",
+      "title": "The New Altar in the Temple",
+      "reason": "Details Ahaz's visit to Damascus, the copy of the altar, and the priest Urijah's execution of the king's orders."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Alterations to Temple Furnishings",
+      "reason": "Describes Ahaz removing the bronze stands, laver, and covered way for the sake of Assyria."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Conclusion of Ahaz's Reign",
+      "reason": "Summarizes the record of his acts and notes his death and succession by Hezekiah."
+    }
+  ]
+}

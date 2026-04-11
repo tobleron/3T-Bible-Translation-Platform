@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Josiah's Early Reign and Reform",
+      "reason": "Describes Josiah's youth, his spiritual seeking, and the initial cleansing of Judah and Jerusalem."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Repairing the Temple",
+      "reason": "Details the collection of funds and the faithful execution of repairs on the house of Yahweh."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Discovery of the Book of Law",
+      "reason": "Narrates Hilkiah finding the law book and King Josiah's reaction to hearing its words."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 28,
+      "type": "oracle",
+      "title": "Huldah's Prophecy",
+      "reason": "Contains the prophetess Huldah's message from Yahweh regarding judgment on the land and peace for the king."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Covenant Renewal and Final Reform",
+      "reason": "Describes the gathering of the people, the reading of the law, the covenant renewal, and the final removal of idols."
+    }
+  ]
+}

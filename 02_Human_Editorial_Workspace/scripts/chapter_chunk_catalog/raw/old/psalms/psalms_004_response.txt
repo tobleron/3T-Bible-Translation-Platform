@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "David's Initial Plea",
+      "reason": "The psalmist addresses God and the people in a continuous prayerful appeal."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 5,
+      "type": "exhortation",
+      "title": "Call to Repentance and Trust",
+      "reason": "A direct instruction to the audience to reflect, cease sinning, and offer sacrifices."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 8,
+      "type": "blessing_or_prayer",
+      "title": "Confidence in God's Presence",
+      "reason": "The psalmist contrasts the crowd's anxiety with his own peace and trust in Yahweh."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 16,
+      "type": "story",
+      "title": "The Story of Naboth's Vineyard",
+      "reason": "A complete narrative unit covering Ahab's request, Jezebel's scheme, and the execution of Naboth."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 26,
+      "type": "mixed",
+      "title": "Elijah's Oracle Against Ahab",
+      "reason": "Combines a divine speech to Elijah with the prophet's direct confrontation and judgment against the king."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Ahab's Humiliation and God's Response",
+      "reason": "Describes Ahab's reaction to the oracle and the subsequent divine decision regarding the timing of judgment."
+    }
+  ]
+}

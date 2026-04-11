@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Praise of the Bride's Beauty",
+      "reason": "The man describes the woman's physical features using poetic similes and declares her flawless."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "dialogue",
+      "title": "Invitation to the Mountain and Garden Metaphor",
+      "reason": "The man invites the woman from Lebanon and compares her to a sealed garden full of spices."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 16,
+      "type": "blessing_or_prayer",
+      "title": "Call for Fragrance and Union",
+      "reason": "The woman calls the winds to bring her beloved into the garden to enjoy its fruits."
+    }
+  ]
+}

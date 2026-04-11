@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for God's Favor",
+      "reason": "The psalmist asks God to be gracious and bless His people so that salvation is known among the nations."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "exhortation",
+      "title": "Call for Universal Praise",
+      "reason": "A repeated call for all peoples and nations to praise God and rejoice in His righteous judgment."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Continued Blessing",
+      "reason": "Acknowledging God's provision of produce and a final petition that all the earth may fear Him."
+    }
+  ]
+}

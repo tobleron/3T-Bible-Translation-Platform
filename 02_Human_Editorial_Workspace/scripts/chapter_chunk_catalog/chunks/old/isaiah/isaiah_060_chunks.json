@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T10:27:15Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 60,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Call to Shine and Gathering of Nations",
+      "reason": "A prophetic oracle calling Zion to rise and describing the influx of wealth and people from distant lands."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Restoration and Submission of Enemies",
+      "reason": "A speech detailing the return of exiles, the rebuilding of walls by foreigners, and the submission of former oppressors."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Eternal Glory and Righteousness",
+      "reason": "A concluding blessing describing the eternal light, peace, righteousness, and the transformation of the people into a mighty nation."
+    }
+  ]
+}

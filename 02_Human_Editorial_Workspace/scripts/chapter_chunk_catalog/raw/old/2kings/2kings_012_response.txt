@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Introduction to King Joash",
+      "reason": "Establishes the reign and religious context of Joash."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 8,
+      "type": "dialogue",
+      "title": "Joash Orders Temple Repairs",
+      "reason": "Contains dialogue regarding the collection and use of funds for repairs."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Temple Fund Collection and Use",
+      "reason": "Describes the mechanism of collection and the faithful expenditure on repairs."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 19,
+      "type": "story",
+      "title": "War with Hazael and Tribute",
+      "reason": "Narrates the threat from Aram and Joash's payment to secure peace."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Death and Succession of Joash",
+      "reason": "Details the conspiracy against Joash and the rise of his son Amaziah."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "exhortation",
+      "title": "Call to Praise and Declaration of God's Greatness",
+      "reason": "The psalm opens with a call to worship followed by theological assertions about God's choice of Israel and His supremacy."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 14,
+      "type": "argument",
+      "title": "God's Sovereignty in Creation and History",
+      "reason": "This section describes God's power over nature and His historical acts of judgment and deliverance for Israel."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "argument",
+      "title": "Contrast Between Idols and Yahweh",
+      "reason": "A logical argument contrasting the lifeless nature of pagan idols with the living God."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 21,
+      "type": "blessing_or_prayer",
+      "title": "Liturgical Benediction and Final Praise",
+      "reason": "The psalm concludes with a specific call to various groups of Israel to bless God and a final doxology."
+    }
+  ]
+}

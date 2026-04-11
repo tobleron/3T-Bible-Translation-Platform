@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 2:1-13
+
+Chapter text:
+1. Again it was the day that the sons of God came to stand before Yahweh, and Satan also came among them to stand himself before Yahweh.
+2. And Yahweh said to Satan, “Where do you come from?” Then Satan answered Yahweh and said, “From roaming about on the earth and walking around on it.”
+3. And Yahweh said to Satan, “Have you set your heart upon My servant Job? For there is no one like him on the earth, a blameless and upright man, fearing God and turning away from evil. And he still holds fast his integrity. So you incited Me against him to swallow him up in vain.”
+4. Satan answered Yahweh and said, “Skin for skin! Yes, all that a man has he will give for his life.
+5. However, send forth Your hand now, and touch his bone and his flesh; he will curse You in Your face.”
+6. So Yahweh said to Satan, “Behold, he is in your hand, only spare his life.”
+7. Then Satan went out from the presence of Yahweh and struck Job with terrible boils from the sole of his foot to the top of his head.
+8. And he took a potsherd to scrape himself while he was sitting among the ashes.
+9. Then his wife said to him, “Do you still hold fast your integrity? Curse God and die!”
+10. But he said to her, “You speak as one of the wickedly foolish women speaks. Shall we indeed accept good from God and not accept calamity?” In all this Job did not sin with his lips.
+11. Then Job’s three friends heard of all this calamity that had come upon him. So they came each one from his own place, Eliphaz the Temanite, Bildad the Shuhite, and Zophar the Naamathite; and they made an appointment together to come to console him and comfort him.
+12. Then they lifted up their eyes at a distance and did not recognize him, and they lifted up their voices and wept. And each of them tore his robe, and they threw dust over their heads toward the sky.
+13. Then they sat down on the ground with him for seven days and seven nights with no one speaking a word to him, for they saw that his pain was very great.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

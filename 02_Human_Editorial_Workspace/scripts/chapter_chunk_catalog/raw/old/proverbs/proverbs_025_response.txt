@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "list_or_catalog",
+      "title": "Introduction and Royal Wisdom",
+      "reason": "Contains the title of the collection followed by wisdom regarding God, kings, and silver refining."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 10,
+      "type": "exhortation",
+      "title": "Advice on Courtly Conduct",
+      "reason": "A cohesive unit of advice regarding humility before the king and handling disputes with neighbors."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Wisdom Sayings on Speech and Behavior",
+      "reason": "A series of distinct metaphors illustrating the value of timely words, patience, moderation, and the danger of false testimony."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 28,
+      "type": "mixed",
+      "title": "Final Exhortations on Enemies and Self-Control",
+      "reason": "Concludes with instructions on treating enemies, the nature of secrets, contentment, and self-restraint."
+    }
+  ]
+}

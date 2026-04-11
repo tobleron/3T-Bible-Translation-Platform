@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Zophar's Rebuke",
+      "reason": "Zophar opens his speech by challenging Job's verbosity and claiming God will reveal the secrets of wisdom."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "The Depth of God",
+      "reason": "Zophar argues for the incomprehensible nature of God's wisdom and contrasts it with human foolishness."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "exhortation",
+      "title": "Call to Repentance",
+      "reason": "Zophar exhorts Job to repent and promises restoration if he turns from wickedness, contrasting it with the fate of the wicked."
+    }
+  ]
+}

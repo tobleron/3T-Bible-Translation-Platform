@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:50:34Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Job",
+  "chapter": 14,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "The Fragility of Human Life",
+      "reason": "Job describes the brevity and turmoil of human existence compared to God's scrutiny."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Comparison of Tree and Man",
+      "reason": "Job contrasts the regenerative hope of a tree with the finality of human death."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "blessing_or_prayer",
+      "title": "Hope for Restoration in Sheol",
+      "reason": "Job expresses a desire for God to hide him until anger passes and he is remembered."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "The Inevitability of Decay",
+      "reason": "Job concludes that God's power destroys human hope and leaves man unaware of his family's fate."
+    }
+  ]
+}

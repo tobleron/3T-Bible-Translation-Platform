@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 26,
+      "type": "speech",
+      "title": "Recall of Israel's History in Egypt and Wilderness",
+      "reason": "A continuous speech recounting the rebellion of the fathers and children in the wilderness."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 44,
+      "type": "argument",
+      "title": "Condemnation and Promise of Restoration",
+      "reason": "An extended argument addressing current idolatry followed by a promise of future purification."
+    },
+    {
+      "start_verse": 45,
+      "end_verse": 48,
+      "type": "oracle",
+      "title": "Oracle Against the Negev Forest",
+      "reason": "A distinct prophetic oracle concerning fire consuming the forest of the south."
+    },
+    {
+      "start_verse": 49,
+      "end_verse": 49,
+      "type": "story",
+      "title": "Translator's Reaction",
+      "reason": "A brief narrative conclusion describing Ezekiel's response to the people's skepticism."
+    }
+  ]
+}

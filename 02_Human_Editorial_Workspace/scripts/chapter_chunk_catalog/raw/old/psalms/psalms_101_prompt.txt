@@ -1,0 +1,57 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 101:1-8
+
+Chapter text:
+1. Of David. A Psalm. I will sing of lovingkindness and justice, To You, O Yahweh, I will sing praises.
+2. I will consider the way of the blameless. When will You come to me? I will walk within my house in the integrity of my heart.
+3. I will set no vile thing before my eyes; I hate the work of those who fall away; It shall not cling to me.
+4. A crooked heart shall depart from me; I will know no evil.
+5. Whoever secretly slanders his neighbor, him I will destroy; Whoever has a haughty look and an arrogant heart, I will not endure.
+6. My eyes shall be upon the faithful of the land, that they may abide with me; He who walks in the way of the blameless is the one who will minister to me.
+7. He who practices deceit shall not dwell within my house; He who speaks lies shall not be established before my eyes.
+8. Every morning I will destroy all the wicked of the land, To cut off from the city of Yahweh all the workers of iniquity.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

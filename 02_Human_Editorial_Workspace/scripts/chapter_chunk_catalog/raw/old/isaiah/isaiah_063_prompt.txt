@@ -1,0 +1,68 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Isaiah 63:1-19
+
+Chapter text:
+1. Who is this who comes from Edom, With garments of glowing colors from Bozrah, This One who is majestic in His clothing, Marching in the greatness of His power? “It is I who speak in righteousness, mighty to save.”
+2. Why is Your clothing red, And Your garments like the one who treads in the wine press?
+3. “I have trodden the wine trough alone, And from the peoples there was no man with Me. I also trod them in My anger And trampled them in My wrath; And their lifeblood is sprinkled on My garments, And I stained all My clothes.
+4. For the day of vengeance was in My heart, And My year of redemption has come.
+5. I looked, and there was no one to help, And I was astonished, and there was no one to uphold; So My own arm brought salvation to Me, And My wrath upheld Me.
+6. I trod down the peoples in My anger And made them drunk in My wrath, And I brought down their lifeblood to the earth.”
+7. I shall bring to remembrance the lovingkindnesses of Yahweh, the praises of Yahweh, According to all the ways that Yahweh has dealt bountifully with us, And the abundant goodness toward the house of Israel, Which He has dealt bountifully to them according to His compassion And according to the abundance of His lovingkindnesses.
+8. And He said, “Surely, they are My people, Sons who will not deal falsely.” So He became their Savior.
+9. In all their distress He was distressed, And the angel of His presence saved them; In His love and in His mercy He redeemed them, And He lifted them and carried them all the ancient days.
+10. But they rebelled And grieved His Holy Spirit; Therefore He turned Himself to become their enemy; He fought against them.
+11. Then His people remembered the ancient days, of Moses. Where is He who brought them up out of the sea with the shepherds of His flock? Where is He who put His Holy Spirit in the midst of them,
+12. Who caused His glorious arm to go at the right hand of Moses, Who split the waters before them to make for Himself an everlasting name,
+13. Who led them through the depths? Like the horse in the wilderness, they did not stumble;
+14. As the cattle which go down into the valley, The Spirit of Yahweh gave them rest. So You led Your people, To make for Yourself a glorious name.
+15. Look down from heaven and see from Your holy and glorious habitation; Where are Your zeal and Your mighty deeds? The tumults within You and Your compassion are restrained toward me.
+16. For You are our Father, though Abraham does not know us And Israel does not recognize us. You, O Yahweh, are our Father, Our Redeemer from everlasting is Your name.
+17. Why, O Yahweh, do You cause us to stray from Your ways And stiffen our heart from fearing You? Return for the sake of Your slaves, the tribes of Your inheritance.
+18. Your holy people possessed Your sanctuary for a little while; Our adversaries have trodden it down.
+19. We have become like those over whom You have never ruled, Like those who were not called by Your name.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

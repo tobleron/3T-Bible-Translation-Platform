@@ -1,0 +1,89 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 37:1-40
+
+Chapter text:
+1. Of David. Do not fret because of evildoers, Be not envious toward doers of unrighteousness.
+2. For they will wither quickly like the grass And fade like the green herb.
+3. Trust in Yahweh and do good; Dwell in the land and cultivate faithfulness.
+4. Delight yourself in Yahweh; And He will give you the desires of your heart.
+5. Commit your way to Yahweh, Trust in Him, and He will do it.
+6. He will bring forth your righteousness as the light And your judgment as the noonday.
+7. Be still in Yahweh and wait patiently for Him; Do not fret because of him who prospers in his way, Because of the man who carries out schemes of wickedness.
+8. Cease from anger and forsake wrath; Do not fret; it leads only to evildoing.
+9. For evildoers will be cut off, But those who hope for Yahweh, they will inherit the land.
+10. Yet a little while and the wicked man will be no more; You will look carefully at his place, and he will not be there.
+11. But the lowly will inherit the land And will delight themselves in abundant peace.
+12. The wicked schemes against the righteous And gnashes at him with his teeth.
+13. The Lord laughs at him, For He sees that his day is coming.
+14. The wicked have drawn the sword and bent their bow To cast down the afflicted and the needy, To slay those who are upright in conduct.
+15. Their sword will enter their own heart, And their bows will be broken.
+16. Better is the little of the righteous Than the abundance of many wicked.
+17. For the arms of the wicked will be broken, But Yahweh sustains the righteous.
+18. Yahweh knows the days of the blameless, And their inheritance will be forever.
+19. They will not be ashamed in the time of evil, And in the days of famine they will be satisfied.
+20. But the wicked will perish; And the enemies of Yahweh will be like the glory of the pastures, They vanish—in smoke they vanish away.
+21. The wicked borrows and does not pay back, But the righteous is gracious and gives.
+22. For those blessed by Him will inherit the land, But those cursed by Him will be cut off.
+23. The footsteps of a man are established by Yahweh, And He delights in his way.
+24. When he falls, he will not be hurled headlong, Because Yahweh is the One who sustains his hand.
+25. I was young and now I am old, Yet I have not seen the righteous forsaken Or his seed begging bread.
+26. All day long he is gracious and lends, And his seed is a blessing.
+27. Depart from evil and do good, So you will dwell forever.
+28. For Yahweh loves justice And will not forsake His holy ones; They are kept forever, But the seed of the wicked will be cut off.
+29. The righteous will inherit the land And dwell in it forever.
+30. The mouth of the righteous utters wisdom, And his tongue speaks justice.
+31. The law of his God is in his heart; His steps do not slip.
+32. The wicked spies upon the righteous And seeks to put him to death.
+33. Yahweh will not forsake him in his hand; He will not condemn him when he is judged.
+34. Hope for Yahweh and keep His way, And He will exalt you to inherit the land; When the wicked are cut off, you will see it.
+35. I have seen a wicked, ruthless man Spreading himself like a luxuriant tree in its native soil.
+36. Then he passed away, and behold, he was no more; I sought for him, but he could not be found.
+37. Observe the blameless man, and behold the upright; For the man of peace will have a posterity.
+38. But transgressors will be altogether destroyed; The posterity of the wicked will be cut off.
+39. But the salvation of the righteous is from Yahweh; He is their strength in time of distress.
+40. Yahweh helps them and protects them; He protects them from the wicked and saves them, Because they take refuge in Him.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

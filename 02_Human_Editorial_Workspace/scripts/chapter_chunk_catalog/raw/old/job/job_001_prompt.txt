@@ -1,0 +1,71 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 1:1-22
+
+Chapter text:
+1. There was a man in the land of Uz whose name was Job; and that man was blameless, upright, fearing God, and turning away from evil.
+2. Seven sons and three daughters were born to him.
+3. His possessions also were 7,000 sheep, 3,000 camels, 500 pairs of oxen, 500 female donkeys, and very many servants; and that man was the greatest of all the sons of the east.
+4. His sons used to go and hold a feast in the house of each one on his day, and they would send and invite their three sisters to eat and drink with them.
+5. Now it happened when the days of feasting had completed their cycle, that Job would send and set them apart as holy. And he would rise up early in the morning and offer burnt offerings according to the number of them all; for Job said, “Perhaps my sons have sinned and cursed God in their hearts.” Thus Job did continually.
+6. Now it was the day that the sons of God came to stand before Yahweh, and Satan also came among them.
+7. And Yahweh said to Satan, “From where do you come?” Then Satan answered Yahweh and said, “From roaming about on the earth and walking around on it.”
+8. Then Yahweh said to Satan, “Have you set your heart upon My servant Job? For there is no one like him on the earth, a blameless and upright man, fearing God and turning away from evil.”
+9. And Satan answered Yahweh and said, “Does Job fear God without cause?
+10. Have You not made a hedge about him and his house and all that he has, on every side? You have blessed the work of his hands, and his possessions have increased in the land.
+11. But send forth Your hand now and touch all that he has; he will surely curse You to Your face.”
+12. Then Yahweh said to Satan, “Behold, all that he has is in your hand, only do not send forth your hand toward him.” So Satan went out from the presence of Yahweh.
+13. Now it happened that on the day when his sons and his daughters were eating and drinking wine in the house of their brother, the firstborn,
+14. a messenger came to Job and said, “The oxen were plowing and the donkeys feeding beside them,
+15. and the Sabeans fell upon them and took them. They also struck down the young men with the edge of the sword, and I alone have escaped to tell you.”
+16. While this one was still speaking, another also came and said, “The fire of God fell from heaven and burned up the sheep and the young men and consumed them, and I alone have escaped to tell you.”
+17. While this one was still speaking, another also came and said, “The Chaldeans set up three companies and made a raid on the camels and took them and struck down the young men with the edge of the sword, and I alone have escaped to tell you.”
+18. While this one was still speaking, another also came and said, “Your sons and your daughters were eating and drinking wine in the house of their brother, the firstborn,
+19. and behold, a great wind came from across the wilderness and touched the four corners of the house, and it fell on the young people, and they died, and I alone have escaped to tell you.”
+20. Then Job arose and tore his robe and shaved his head, and he fell to the ground and worshiped.
+21. And he said, “Naked I came from my mother’s womb, And naked I shall return there. Yahweh gave, and Yahweh has taken away. Blessed be the name of Yahweh.”
+22. Through all this Job did not sin, nor did he give offense to God.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

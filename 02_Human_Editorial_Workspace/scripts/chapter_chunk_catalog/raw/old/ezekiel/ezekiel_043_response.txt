@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "vision",
+      "title": "Glory Returns to the Temple",
+      "reason": "Describes the return of God's glory into the temple from the east."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "God's Promise and Instructions",
+      "reason": "Contains God speaking to Ezekiel about His dwelling place and the laws of the house."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "list_or_catalog",
+      "title": "Measurements of the Altar",
+      "reason": "Provides specific architectural measurements and dimensions for the altar."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 27,
+      "type": "law",
+      "title": "Statutes for the Altar",
+      "reason": "Details the ritual procedures and sacrifices required to consecrate the altar."
+    }
+  ]
+}

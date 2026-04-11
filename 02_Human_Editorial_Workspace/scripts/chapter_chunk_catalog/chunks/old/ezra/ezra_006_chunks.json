@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:49:30Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezra",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "law",
+      "title": "Decree of Darius",
+      "reason": "Contains the full text of King Darius's official decree regarding the temple reconstruction."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 15,
+      "type": "story",
+      "title": "Completion of the Temple",
+      "reason": "Narrates the execution of the decree and the completion of the building project."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Dedication and Feast",
+      "reason": "Describes the dedication ceremony, Passover celebration, and Feast of Unleavened Bread."
+    }
+  ]
+}

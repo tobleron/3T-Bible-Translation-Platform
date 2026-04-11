@@ -1,0 +1,75 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Job 3:1-26
+
+Chapter text:
+1. Afterward Job opened his mouth and cursed the day of his birth.
+2. And Job answered and said,
+3. “Let the day perish on which I was to be born, And the night which said, ‘A man is conceived.’
+4. May that day be darkness; Let not God seek it from above, Nor light shine on it.
+5. Let darkness and shadow of death redeem it; Let a cloud dwell upon it; Let the blackness of the day terrify it.
+6. As for that night, let thick darkness take it; Let it not rejoice among the days of the year; Let it not come into the number of the months.
+7. Behold, let that night be barren; Let no joyful shout enter it.
+8. Let those curse it who curse the day, Who are ready to rouse Leviathan.
+9. Let the stars of its twilight be darkened; Let it hope for light but have none, And let it not see the breaking dawn,
+10. Because it did not shut the opening of my mother’s body, Or hide trouble from my eyes.
+11. “Why did I not die from the womb, Come forth from the womb and breathe my last?
+12. Why did the knees receive me, And why the breasts, that I should suck?
+13. For now I would have lain down and been quiet; I would have slept then; it would have been rest to me,
+14. With kings and with counselors of the earth, Who rebuilt waste places for themselves,
+15. Or with princes who had gold, Who were filling their houses with silver.
+16. Or why was I not like a miscarriage hidden away, As infants that never saw light?
+17. There the wicked cease from raging, And there the weary of strength are at rest.
+18. The prisoners are at ease together; They do not hear the voice of the taskmaster.
+19. The small and the great are there, And the slave is free from his master.
+20. “Why is light given to him who is troubled, And life to the bitter of soul,
+21. Who long for death, but there is none, And dig for it more than for hidden treasures,
+22. Who are glad with joy, And rejoice when they find the grave?
+23. Why is light given to a man whose way is hidden, And whom God has hedged in?
+24. For my groaning comes at the sight of my food, And my roaring pours out like water.
+25. For the dread that I dread comes upon me, And what I am afraid of befalls me.
+26. I am not complacent, nor am I quiet, And I am not at rest, and raging comes.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

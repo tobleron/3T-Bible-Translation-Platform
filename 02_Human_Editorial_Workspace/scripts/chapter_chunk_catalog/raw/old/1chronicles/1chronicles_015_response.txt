@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Preparation for the Ark",
+      "reason": "Narrative introduction of David preparing a place and assembling Israel."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "list_or_catalog",
+      "title": "Levite Leaders by Clan",
+      "reason": "Catalog of Levite chiefs and their relatives from specific clans."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "David's Instruction to Priests and Levites",
+      "reason": "David addresses the leaders, explaining their role and past failure."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Organization of the Levites and Musicians",
+      "reason": "Narrative describing the carrying of the ark and appointment of singers."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Procession and Arrival at City of David",
+      "reason": "The journey of the ark with music and sacrifice, ending with Michal's reaction."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 27,
+      "type": "oracle",
+      "title": "Oracle of Doom on Israel",
+      "reason": "A unified prophetic oracle detailing the coming judgment, calamity, and despair upon the land of Israel."
+    }
+  ]
+}

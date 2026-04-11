@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "psalm",
+      "title": "Prayer for the King's Reign",
+      "reason": "A continuous prayer and oracle for the king covering his character, dominion, and blessings."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 20,
+      "type": "blessing_or_prayer",
+      "title": "Doxology and Conclusion",
+      "reason": "A concluding doxology praising God followed by the chapter's editorial note."
+    }
+  ]
+}

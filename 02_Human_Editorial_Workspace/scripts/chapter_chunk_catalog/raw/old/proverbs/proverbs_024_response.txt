@@ -1,0 +1,66 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "exhortation",
+      "title": "Warning Against the Wicked",
+      "reason": "Direct address to avoid envy of evil men."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "Wisdom and Strength",
+      "reason": "Logical argument connecting wisdom to building, strength, and divine justice."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Wisdom Like Honey",
+      "reason": "Metaphorical instruction on the value of wisdom for the soul."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "exhortation",
+      "title": "Attitude Toward Enemies and Evildoers",
+      "reason": "Instructions on not plotting against the righteous and not fretting at the wicked."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "exhortation",
+      "title": "Fear God and the King",
+      "reason": "Direct command to respect authority and avoid fickle men."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 26,
+      "type": "list_or_catalog",
+      "title": "Sayings on Judgment",
+      "reason": "Collection of proverbs regarding partiality and reproof."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 29,
+      "type": "law",
+      "title": "Practical Instructions",
+      "reason": "Rules for work order, testimony, and retaliation."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 34,
+      "type": "story",
+      "title": "The Sluggard's Field",
+      "reason": "Narrative observation of a neglected field leading to a lesson on poverty."
+    }
+  ]
+}

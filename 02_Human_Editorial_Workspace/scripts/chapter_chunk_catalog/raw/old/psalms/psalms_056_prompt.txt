@@ -1,0 +1,62 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 56:1-13
+
+Chapter text:
+1. For the choir director. According to Jonath Elem Rehokim. A Mikhtam of David. When the Philistines seized him in Gath. Be gracious to me, O God, for man has trampled upon me; All day long, an attacker oppresses me.
+2. My foes have trampled upon me all day long, For many attack me proudly.
+3. When I am afraid, I will trust in You.
+4. In God, whose word I praise, In God I trust; I shall not be afraid. What can mere man do to me?
+5. All day long they distort my words; All their thoughts are against me for evil.
+6. They attack, they lurk, They watch my heels, As they have hoped to take my life.
+7. On account of their wickedness, will they have an escape? In anger, bring down the peoples, O God!
+8. You have taken account of my wanderings; Put my tears in Your bottle. Are they not in Your book?
+9. Then my enemies will turn back in the day when I call; This I know, that God is for me.
+10. In God, whose word I praise, In Yahweh, whose word I praise,
+11. In God I trust, I shall not be afraid. What can man do to me?
+12. Your vows are binding upon me, O God; I will fulfill thank offerings to You.
+13. For You have delivered my soul from death, Indeed my feet from stumbling, So that I may walk before God In the light of the living.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

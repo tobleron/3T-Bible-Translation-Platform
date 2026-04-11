@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Athaliah Seizes Power and Joash is Hidden",
+      "reason": "Describes the immediate aftermath of Ahaziah's death and the secret preservation of the heir."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 12,
+      "type": "story",
+      "title": "The Coronation of Joash",
+      "reason": "Details the covenant with commanders, the preparation of guards, and the crowning ceremony."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 16,
+      "type": "story",
+      "title": "Athaliah's Downfall",
+      "reason": "Narrates Athaliah's arrival at the temple, her reaction to the noise, and her execution."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Covenant Renewal and Consolidation of Power",
+      "reason": "Outlines the covenant between God, king, and people, the destruction of Baal's temple, and Joash's official enthronement."
+    }
+  ]
+}

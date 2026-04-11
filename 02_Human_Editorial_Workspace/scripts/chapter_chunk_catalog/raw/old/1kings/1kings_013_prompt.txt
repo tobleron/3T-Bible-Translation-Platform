@@ -1,0 +1,83 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 1 Kings 13:1-34
+
+Chapter text:
+1. Now behold, there came a man of God from Judah to Bethel by the word of Yahweh, while Jeroboam was standing by the altar to burn incense.
+2. And he cried against the altar by the word of Yahweh, and said, “O altar, altar, thus says Yahweh, ‘Behold, a son shall be born to the house of David, Josiah is his name; and on you he shall sacrifice the priests of the high places who burn incense on you, and human bones shall be burned on you.’”
+3. Then he gave a miraculous sign the same day, saying, “This is the miraculous sign which Yahweh has spoken, ‘Behold, the altar shall be torn apart and the ashes which are on it shall be poured out.’”
+4. Now it happened that when the king heard the word of the man of God, which he cried against the altar in Bethel, Jeroboam stretched out his hand from the altar, saying, “Seize him.” But his hand which he stretched out against him dried up, so that he could not draw it back to himself.
+5. The altar also was torn apart and the ashes were poured out from the altar, according to the miraculous sign which the man of God had given by the word of Yahweh.
+6. Then the king answered and said to the man of God, “Please entreat Yahweh your God, and pray for me, that my hand may be restored to me.” So the man of God entreated Yahweh, and the king’s hand was restored to him, and it became as it was before.
+7. Then the king said to the man of God, “Come home with me and refresh yourself, and I will give you a gift.”
+8. But the man of God said to the king, “If you were to give me half your house, I would not go with you, nor would I eat bread or drink water in this place.
+9. For so it was commanded me by the word of Yahweh, saying, ‘You shall eat no bread, nor drink water, nor return by the way which you came.’”
+10. So he went another way and did not return by the way which he came to Bethel.
+11. Now an old prophet was living in Bethel; and his sons came and recounted to him all the work which the man of God had done that day in Bethel; the words which he had spoken to the king, these also they recounted to their father.
+12. And their father said to them, “Which way did he go?” And his sons had seen the way which the man of God who came from Judah had gone.
+13. Then he said to his sons, “Saddle the donkey for me.” So they saddled the donkey for him and he rode away on it.
+14. So he went after the man of God and found him sitting under an oak; and he said to him, “Are you the man of God who came from Judah?” And he said, “I am.”
+15. Then he said to him, “Come home with me and eat bread.”
+16. And he said, “I cannot return with you, nor go with you, nor will I eat bread or drink water with you in this place.
+17. For a word came to me by the word of Yahweh, ‘You shall eat no bread, nor drink water there; do not return by going the way which you came.’”
+18. And he said to him, “I also am a prophet like you, and an angel spoke to me by the word of Yahweh, saying, ‘Bring him back with you to your house, that he may eat bread and drink water.’” But he dealt falsely with him.
+19. So he went back with him, and ate bread in his house and drank water.
+20. Now it happened as they were sitting down at the table, that the word of Yahweh came to the prophet who had brought him back;
+21. and he called out to the man of God who came from Judah, saying, “Thus says Yahweh, ‘Because you have rebelled against the word of Yahweh, and have not kept the commandment which Yahweh your God commanded you,
+22. but have returned and eaten bread and drunk water in the place of which He said to you, “Eat no bread and drink no water”; your body shall not come to the grave of your fathers.’”
+23. Now it happened after he had eaten bread and after he had drunk, that he saddled the donkey for him, for the prophet whom he had brought back.
+24. Then he went and on the way a lion met him and put him to death, and his body was thrown on the road, with the donkey standing beside it; the lion also was standing beside the body.
+25. And behold, men passed by and saw the body thrown on the road, and the lion standing beside the body; so they came and spoke about it in the city where the old prophet lived.
+26. Then the prophet, who brought him back from the way, heard it and said, “It is the man of God, who rebelled against the command of Yahweh; therefore Yahweh has given him to the lion, which has mauled him and put him to death, according to the word of Yahweh which He spoke to him.”
+27. Then he spoke to his sons, saying, “Saddle the donkey for me.” And they saddled it.
+28. And he went and found his body thrown on the road with the donkey and the lion standing beside the body; the lion had not eaten the body nor mauled the donkey.
+29. So the prophet took up the body of the man of God and laid it on the donkey and brought it back, and he came to the city of the old prophet to mourn and to bury him.
+30. He laid his body in his own grave, and they mourned over him, saying, “Alas, my brother!”
+31. Now it happened after he had buried him, that he spoke to his sons, saying, “When I die, you shall bury me in the grave in which the man of God is buried; lay my bones beside his bones.
+32. For the word shall surely happen which he cried by the word of Yahweh against the altar in Bethel and against all the houses of the high places which are in the cities of Samaria.”
+33. After this event Jeroboam did not return from his evil way, but he returned and made priests of the high places from among all the people; any who delighted to be so, he ordained. So they became priests of the high places.
+34. And this event became sin to the house of Jeroboam, even to blot it out and destroy it from off the face of the earth.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "Prayer for Deliverance in Distress",
+      "reason": "A continuous plea for God's help and protection while surrounded by enemies."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "blessing_or_prayer",
+      "title": "Confident Praise and Thanksgiving",
+      "reason": "A declaration of trust leading into a vow to praise God among the nations."
+    }
+  ]
+}

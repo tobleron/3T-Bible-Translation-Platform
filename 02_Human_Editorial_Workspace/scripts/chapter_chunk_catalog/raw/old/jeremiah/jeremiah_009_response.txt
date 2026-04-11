@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Lament for the Land",
+      "reason": "A continuous prophetic lament expressing grief over the nation's sin and impending judgment."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Question and Answer on Judgment",
+      "reason": "A rhetorical question regarding the cause of ruin followed by Yahweh's direct explanation."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "exhortation",
+      "title": "Call to Mourning Women",
+      "reason": "An instruction to summon professional mourners to lament the destruction of Jerusalem."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 24,
+      "type": "oracle",
+      "title": "True Boasting in God",
+      "reason": "A distinct oracle contrasting worldly pride with the knowledge of Yahweh's character."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 26,
+      "type": "oracle",
+      "title": "Judgment on Uncircumcised Nations",
+      "reason": "A concluding oracle declaring judgment on both Israel and surrounding nations for spiritual unfaithfulness."
+    }
+  ]
+}

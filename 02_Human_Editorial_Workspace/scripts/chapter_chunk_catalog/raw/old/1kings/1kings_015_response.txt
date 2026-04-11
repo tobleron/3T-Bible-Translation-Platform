@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Reign of Abijam",
+      "reason": "Complete narrative covering the accession, reign, and death of King Abijam of Judah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Reign of Asa",
+      "reason": "Comprehensive account of King Asa's reforms, wars with Baasha, and death."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 34,
+      "type": "story",
+      "title": "Reigns of Nadab and Baasha",
+      "reason": "Narrative detailing the brief reign of Nadab and the rise of Baasha over Israel."
+    }
+  ]
+}

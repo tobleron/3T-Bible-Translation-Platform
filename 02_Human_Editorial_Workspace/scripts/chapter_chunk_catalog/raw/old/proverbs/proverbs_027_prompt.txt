@@ -1,0 +1,76 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Proverbs 27:1-27
+
+Chapter text:
+1. Do not boast about tomorrow, For you do not know what a day may bring forth.
+2. Let a stranger praise you, and not your own mouth; A foreigner, and not your own lips.
+3. A stone is heavy and the sand weighty, But the provocation of an ignorant fool is heavier than both of them.
+4. Wrath is cruelty and anger is a flood, But who can stand before jealousy?
+5. Better is reproof that is revealed Than love that is hidden.
+6. Faithful are the wounds of a friend, But deceitful are the kisses of an enemy.
+7. A satisfied soul tramples the honeycomb, But to a hungry soul any bitter thing is sweet.
+8. Like a bird that wanders from her nest, So is a man who wanders from his place.
+9. Oil and incense make the heart glad, So counsel from the soul is sweet to his friend.
+10. Do not forsake your friend or your father’s friend, And do not come to your brother’s house in the day of your disaster; Better is one who dwells near than a brother far away.
+11. Be wise, my son, and make my heart glad, That I may respond with a word to him who reproaches me.
+12. A prudent man sees evil and hides, The simple pass on and are punished.
+13. Take his garment when he becomes a guarantor for a stranger; And for a foreign woman seize it as a pledge.
+14. He who blesses his friend with a loud voice early in the morning, It will be counted as a curse to him.
+15. A constant dripping on a day of steady rain And a contentious woman are alike;
+16. He who would restrain her restrains the wind, And grasps oil with his right hand.
+17. Iron sharpens iron, So one man sharpens another.
+18. He who guards the fig tree will eat its fruit, And he who keeps watch for his master will be honored.
+19. As in water face reflects face, So the heart of man reflects man.
+20. Sheol and Abaddon are never satisfied, So the eyes of man are never satisfied.
+21. The refining pot is for silver and the furnace for gold, And each is tested by the mouth that praises him.
+22. Though you pound an ignorant fool in a mortar with a pestle in the midst of crushed grain, His folly will not turn aside from him.
+23. Know well the condition of your flocks, And pay attention to your herds;
+24. For wealth is not forever, Neither is a crown from generation to generation.
+25. When the grass disappears and the vegetation appears, And the herbs of the mountains are gathered in,
+26. The lambs will be for your clothing, And the goats will bring the price of a field,
+27. And there will be enough goats’ milk for your food, For the food of your household, And sustenance for your maidens.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:40:27Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Job",
+  "chapter": 7,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Job's Complaint on Human Suffering",
+      "reason": "Job describes the futility of human life and compares his days to a hired man's labor."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Job's Lament Before God",
+      "reason": "Job resolves to speak his bitterness and questions why God tests him so intensely."
+    }
+  ]
+}

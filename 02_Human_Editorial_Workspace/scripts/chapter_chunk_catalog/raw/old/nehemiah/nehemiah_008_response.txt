@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "mixed",
+      "title": "Reading and Celebration of the Law",
+      "reason": "Describes the gathering for reading, the Levites' explanation, the people's emotional response, and the command to celebrate."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Observance of the Feast of Booths",
+      "reason": "Details the discovery of the command to dwell in booths, the execution of this command, and the conclusion of the feast."
+    }
+  ]
+}

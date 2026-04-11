@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "dialogue",
+      "title": "The Beloved's Location",
+      "reason": "A question from the women followed by the Shulammite's answer about her beloved's whereabouts."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Praise of Beauty",
+      "reason": "The king praises the Shulammite's beauty and uniqueness compared to other women."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Journey to the Garden",
+      "reason": "The Shulammite describes her movement through the garden and being caught up by the chariots."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 13,
+      "type": "dialogue",
+      "title": "Call to Return",
+      "reason": "The women invite the Shulammite to return and behold her."
+    }
+  ]
+}

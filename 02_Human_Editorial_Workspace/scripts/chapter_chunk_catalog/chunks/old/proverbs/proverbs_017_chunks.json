@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:38:23Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Proverbs",
+  "chapter": 17,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 28,
+  "verse_count": 28,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "list_or_catalog",
+      "title": "Wisdom in Daily Life",
+      "reason": "A collection of short proverbs contrasting peace with strife and testing hearts."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "mixed",
+      "title": "Character and Speech",
+      "reason": "Observations on the behavior of evildoers, liars, and the impact of rebuke."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "mixed",
+      "title": "Rebellion and Friendship",
+      "reason": "Warnings about rebellious men contrasted with the enduring nature of friendship."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 25,
+      "type": "mixed",
+      "title": "Wisdom and Folly",
+      "reason": "Instructions on pledges, justice, and the grief caused by foolish sons."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 28,
+      "type": "list_or_catalog",
+      "title": "Discernment in Silence",
+      "reason": "Final proverbs on justice and the wisdom found in silence."
+    }
+  ]
+}

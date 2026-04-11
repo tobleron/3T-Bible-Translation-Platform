@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "dialogue",
+      "title": "Solomon and Hiram's Agreement",
+      "reason": "This section covers the complete exchange of letters and agreement between Solomon and Hiram regarding the cedar timber."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Organization of Labor for the Temple",
+      "reason": "This section details the mobilization and organization of the workforce required to build the temple."
+    }
+  ]
+}

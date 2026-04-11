@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Call for Deliverance",
+      "reason": "David petitions God to rescue him from enemies who attack without cause."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 13,
+      "type": "oracle",
+      "title": "Judgment on Enemies",
+      "reason": "Description of the enemies' behavior and a prayer for their destruction."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "psalm",
+      "title": "Song of Praise",
+      "reason": "David expresses confidence in God's strength and vows to sing praises."
+    }
+  ]
+}

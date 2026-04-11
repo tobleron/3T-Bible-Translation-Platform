@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "exhortation",
+      "title": "Call to Praise and Warning Against Nobles",
+      "reason": "An opening call to praise followed by a warning against trusting in human rulers."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Blessing on Those Who Trust God",
+      "reason": "A declaration of the blessed state of those who hope in Yahweh and a list of His mercies."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 10,
+      "type": "psalm",
+      "title": "Conclusion and Doxology",
+      "reason": "A final statement of God's eternal reign and a closing call to praise."
+    }
+  ]
+}

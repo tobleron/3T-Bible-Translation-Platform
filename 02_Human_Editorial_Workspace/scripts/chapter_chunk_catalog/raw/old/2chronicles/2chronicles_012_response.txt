@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Israel Forsakes Yahweh and Shishak Attacks",
+      "reason": "Describes the apostasy of Rehoboam and the subsequent invasion by Shishak king of Egypt."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "dialogue",
+      "title": "Shemaiah's Oracle and the King's Humbling",
+      "reason": "Contains the prophet's message from Yahweh and the king's response of humility."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Looting of Jerusalem and Replacement of Shields",
+      "reason": "Details the plundering of the temple and palace treasures and the making of bronze shields."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 16,
+      "type": "mixed",
+      "title": "Rehoboam's Reign Summary and Death",
+      "reason": "Summarizes the king's reign, character, sources of history, and his death."
+    }
+  ]
+}

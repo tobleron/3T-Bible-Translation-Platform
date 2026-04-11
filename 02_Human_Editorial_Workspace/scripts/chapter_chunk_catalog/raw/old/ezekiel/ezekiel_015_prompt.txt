@@ -1,0 +1,57 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Ezekiel 15:1-8
+
+Chapter text:
+1. Then the word of Yahweh came to me, saying,
+2. “Son of man, how is the wood of the vine better than any wood of a branch which is among the trees of the forest?
+3. Can wood be taken from it to make anything, or can men take a peg from it on which to hang any vessel?
+4. If it has been put into the fire for fuel, and the fire has consumed both of its ends, and its middle part has been charred, is it then useful for anything?
+5. Behold, while it is intact, it is not made into anything. How much less, when the fire has consumed it and it is charred, can it still be made into anything!
+6. Therefore, thus says Lord Yahweh, ‘As the wood of the vine among the trees of the forest, which I have given to the fire for fuel, so have I given up the inhabitants of Jerusalem;
+7. and I will give My face to be against them. Though they have come out of the fire, yet the fire will consume them. Then you will know that I am Yahweh, when I set My face against them.
+8. Thus I will give over the land to desolation because they have acted unfaithfully,’” declares Lord Yahweh.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

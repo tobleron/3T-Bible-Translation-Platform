@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "exhortation",
+      "title": "Call to Expand the Tent",
+      "reason": "A direct command to the barren woman to enlarge her dwelling and spread abroad."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Promise of Restoration and Covenant",
+      "reason": "A divine oracle reassuring the woman of her future glory and God's everlasting covenant."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "blessing_or_prayer",
+      "title": "Promise of Security and Victory",
+      "reason": "A prophetic blessing describing the rebuilding of the city and the assurance of victory over enemies."
+    }
+  ]
+}

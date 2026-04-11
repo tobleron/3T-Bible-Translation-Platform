@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T00:48:34Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Kings",
+  "chapter": 14,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 29,
+  "verse_count": 29,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Amaziah's Reign and Victory over Edom",
+      "reason": "Introduces Amaziah's accession, his partial righteousness, and his military success against Edom."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "War between Judah and Israel",
+      "reason": "Contains the exchange of messengers, Jehoash's parable, the battle at Beth-shemesh, and Jehoash's return to Samaria."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Death of Amaziah and Accession of Azariah",
+      "reason": "Describes the remaining years of Amaziah, his assassination at Lachish, and the coronation of his son."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Reign of Jeroboam II",
+      "reason": "Chronicles the reign of Jeroboam II, his restoration of Israel's borders through Jonah, and his death."
+    }
+  ]
+}

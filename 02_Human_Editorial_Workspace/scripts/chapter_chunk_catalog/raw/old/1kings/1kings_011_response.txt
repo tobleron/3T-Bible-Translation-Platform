@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Solomon's Apostasy and Judgment",
+      "reason": "Describes Solomon's foreign wives turning his heart to idols and Yahweh's initial decree to tear the kingdom from him."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Adversaries Raised Against Solomon",
+      "reason": "Narrates the rise of Hadad the Edomite and Rezon of Aram as adversaries to Israel during Solomon's reign."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 40,
+      "type": "mixed",
+      "title": "Jeroboam Called and Fled",
+      "reason": "Introduces Jeroboam's rise, the prophet Ahijah's oracle dividing the kingdom, and Jeroboam's flight to Egypt."
+    },
+    {
+      "start_verse": 41,
+      "end_verse": 43,
+      "type": "story",
+      "title": "Solomon's Death and Succession",
+      "reason": "Concludes the chapter with a summary of Solomon's reign, his death, and Rehoboam becoming king."
+    }
+  ]
+}

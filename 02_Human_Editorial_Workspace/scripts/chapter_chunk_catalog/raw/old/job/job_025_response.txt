@@ -1,0 +1,17 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Bildad's Argument on God's Greatness",
+      "reason": "A single continuous speech by Bildad contrasting God's majesty with human insignificance."
+    }
+  ]
+}

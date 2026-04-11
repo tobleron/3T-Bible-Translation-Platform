@@ -1,0 +1,121 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 78:1-72
+
+Chapter text:
+1. A Maskil of Asaph. Give ear, O my people, to my instruction; Incline your ears to the words of my mouth.
+2. I will open my mouth in a parable; I will pour forth dark sayings of old,
+3. Which we have heard and known, And our fathers have recounted to us.
+4. We will not conceal them from their children, But recount to the generation to come the praises of Yahweh, And His strength and His wondrous deeds that He has done.
+5. For He established a testimony in Jacob And set a law in Israel, Which He commanded our fathers That they should teach them to their children,
+6. That the generation to come might know, even the children yet to be born, That they may arise and recount them to their children,
+7. That they should set their confidence in God And not forget the deeds of God, But observe His commandments,
+8. And not be like their fathers, A stubborn and rebellious generation, A generation that did not prepare its heart And whose spirit was not faithful to God.
+9. The sons of Ephraim were archers equipped with bows, Yet they turned back in the day of battle.
+10. They did not keep the covenant of God And refused to walk in His law;
+11. So they forgot His acts And His wondrous deeds that He had shown them.
+12. He did wonders before their fathers In the land of Egypt, in the field of Zoan.
+13. He split the sea and caused them to pass through, And He made the waters stand up like a heap.
+14. Then He led them with the cloud by day And all the night with a light of fire.
+15. He was splitting the rocks in the wilderness And so gave them abundant drink like the ocean depths.
+16. He brought forth streams also from the cliff face And caused waters to run down like rivers.
+17. Yet they still continued to sin against Him, To rebel against the Most High in the desert.
+18. And in their heart they put God to the test By asking for food according to their desire.
+19. Then they spoke against God; They said, “Can God prepare a table in the wilderness?
+20. Behold, He struck the rock so that waters gushed out, And streams were overflowing; Can He give bread also? Will He prepare meat for His people?”
+21. Therefore Yahweh heard and was full of wrath; And a fire was kindled against Jacob And anger also mounted against Israel,
+22. Because they did not believe in God And did not trust in His salvation.
+23. Yet He commanded the skies above And opened the doors of heaven;
+24. He rained down manna upon them to eat And gave them grain from heaven.
+25. Man ate the bread of angels; He sent them provision to satisfy.
+26. He led forth the east wind in the heavens And by His strength He guided the south wind.
+27. Then He rained meat upon them like the dust, Even winged fowl like the sand of the seas,
+28. He caused them to fall in the midst of His camp, All around His dwelling places.
+29. So they ate and were very satisfied, And their desire He brought to them.
+30. Before they had satisfied their desire, While their food was in their mouths,
+31. The anger of God rose against them And killed some of their stoutest ones, And subdued the choice men of Israel.
+32. In spite of all this they still sinned And did not believe in His wondrous deeds.
+33. So He brought their days to an end in futility And their years in sudden terror.
+34. When He killed them, then they sought Him, And returned and sought earnestly for God;
+35. And they remembered that God was their rock, And the Most High God their Redeemer.
+36. But they deceived Him with their mouth And lied to Him with their tongue.
+37. For their heart was not prepared to remain with Him, Nor were they faithful in His covenant.
+38. But He, being compassionate, atoned for their iniquity and did not destroy them; And He abounded in turning back His anger And did not arouse all His wrath.
+39. Thus He remembered that they were but flesh, A wind that goes and does not return.
+40. How often they rebelled against Him in the wilderness And grieved Him in the wasteland!
+41. Again and again they tested God, And pained the Holy One of Israel.
+42. They did not remember His power, The day when He redeemed them from the adversary,
+43. When He performed His signs in Egypt And His miracles in the field of Zoan,
+44. And turned their rivers to blood, And their streams, they could not drink.
+45. He sent among them swarms of flies which devoured them, And frogs which destroyed them.
+46. He gave also their crops to the grasshopper And the fruit of their labor to the locust.
+47. He killed their vines with hailstones And their sycamore trees with frost.
+48. He gave over their cattle also to the hailstones And their herds to bolts of lightning.
+49. He sent upon them His burning anger, Fury and indignation and distress, A band of destroying angels.
+50. He leveled a path for His anger; He did not hold back their soul from death, But gave over their life to the plague,
+51. So He struck all the firstborn in Egypt, The first of their vigor in the tents of Ham.
+52. But He led forth His own people like sheep And guided them in the wilderness like a flock;
+53. He led them safely, so that they did not fear; But the sea covered their enemies.
+54. So He brought them to His holy land, To this hill country which His right hand had acquired.
+55. He also drove out the nations before them And apportioned them for an inheritance by measurement, And made the tribes of Israel dwell in their tents.
+56. Yet they tested and rebelled against the Most High God And did not keep His testimonies,
+57. But turned back and acted treacherously like their fathers; They turned aside like a treacherous bow.
+58. For they provoked Him with their high places And aroused His jealousy with their graven images.
+59. God heard and was filled with wrath And greatly rejected Israel;
+60. So that He abandoned the dwelling place at Shiloh, The tent which He caused to dwell among men,
+61. And gave up His strength to captivity And His beauty into the hand of the adversary.
+62. He also gave over His people to the sword, And was filled with wrath at His inheritance.
+63. Fire devoured His choice men, And His virgins had no wedding songs.
+64. His priests fell by the sword, And His widows could not weep.
+65. Then the Lord awoke as if from sleep, As if He were a warrior overcome by wine.
+66. He struck His adversaries backward; He put on them an everlasting reproach.
+67. He also rejected the tent of Joseph, And did not choose the tribe of Ephraim,
+68. But chose the tribe of Judah, Mount Zion which He loved.
+69. And He built His sanctuary like the heights, Like the earth which He has founded forever.
+70. He also chose David His servant And took him from the sheepfolds;
+71. From following the nursing ewes He brought him To shepherd Jacob His people, And Israel His inheritance.
+72. So he shepherded them according to the integrity of his heart, And led them with his skillful hands.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -10,22 +10,22 @@
       "start_verse": 1,
       "end_verse": 9,
       "type": "story",
-      "title": "Tabernacle Dedication and Carts",
-      "reason": "Narrative of the tabernacle's anointing and the leaders' offering of carts for the Levites."
+      "title": "Dedication of the Tabernacle and Carts",
+      "reason": "Narrative describing the anointing of the tabernacle and the allocation of carts to the Levites."
     },
     {
       "start_verse": 10,
       "end_verse": 88,
       "type": "list_or_catalog",
       "title": "Twelve Days of Altar Offerings",
-      "reason": "Repetitive catalog of daily offerings by each tribal leader followed by a summary total."
+      "reason": "Repetitive catalog of offerings brought by each tribal leader over twelve days."
     },
     {
       "start_verse": 89,
       "end_verse": 89,
       "type": "story",
-      "Title": "Moses Hears God's Voice",
-      "reason": "Concluding narrative of Moses entering the tent to receive divine communication."
+      "title": "Moses Speaks with God",
+      "reason": "Narrative conclusion describing Moses entering the tent to hear God's voice."
     }
   ]
 }

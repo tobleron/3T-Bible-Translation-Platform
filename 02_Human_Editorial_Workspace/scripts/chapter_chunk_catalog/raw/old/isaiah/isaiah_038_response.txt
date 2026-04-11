@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Hezekiah's Illness and Healing Promise",
+      "reason": "Narrative account of Hezekiah's sickness, Isaiah's oracle, and the sign of the shadow moving back."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 20,
+      "type": "psalm",
+      "title": "Hezekiah's Song of Thanksgiving",
+      "reason": "A poetic composition by Hezekiah recounting his near-death experience and gratitude for deliverance."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "dialogue",
+      "title": "The Fig Cake and Final Sign",
+      "reason": "Brief exchange between Isaiah and Hezekiah regarding the healing method and a final question about ascending to the temple."
+    }
+  ]
+}

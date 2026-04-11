@@ -1,0 +1,61 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 2:1-12
+
+Chapter text:
+1. Why do the nations rage And the peoples meditate on a vain thing?
+2. The kings of the earth take their stand And the rulers take counsel together Against Yahweh and against His Anointed, saying,
+3. “Let us tear their fetters apart And cast away their cords from us!”
+4. He who sits in the heavens laughs, The Lord mocks them.
+5. Then He speaks to them in His anger And terrifies them in His fury, saying,
+6. “But as for Me, I have installed My King Upon Zion, My holy mountain.”
+7. “I will surely tell of the decree of Yahweh: He said to Me, ‘You are My Son, Today I have begotten You.
+8. Ask of Me, and I will surely give the nations as Your inheritance, And the ends of the earth as Your possession.
+9. You shall break them with a rod of iron, You shall shatter them like a potter’s vessel.’”
+10. So now, O kings, show insight; Take warning, O judges of the earth.
+11. Serve Yahweh with fear And rejoice with trembling.
+12. Kiss the Son, lest He become angry, and you perish in the way, For His wrath may soon be kindled. How blessed are all who take refuge in Him!
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

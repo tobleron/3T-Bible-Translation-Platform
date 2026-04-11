@@ -144,8 +144,10 @@ class BibleTranslationTool:
             service_map = {1: ("llama.cpp", LlamaCppClient), 2: ("OpenAI", OpenAIClient)}
             service_name, client_class = service_map[choice]
             if service_name == "llama.cpp":
-                base_url = self.config.get("llama_cpp", {}).get("base_url", "http://192.168.1.186:8080")
-                self.llm_client = client_class(base_url=base_url)
+                llm_cfg = self.config.get("llama_cpp", {})
+                base_url = llm_cfg.get("base_url")
+                api_key = llm_cfg.get("api_key")
+                self.llm_client = client_class(base_url=base_url, api_key=api_key)
             else:
                 self.llm_client = client_class(self.config)
             

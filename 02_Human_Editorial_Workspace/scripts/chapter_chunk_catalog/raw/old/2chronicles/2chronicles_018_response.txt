@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Jehoshaphat and Ahab Alliance",
+      "reason": "Establishes the political alliance and the invitation to battle."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "The Four Hundred Prophets and Micaiah's First Vision",
+      "reason": "Contrasts the false prophets with Micaiah's initial vision of Israel scattered."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 27,
+      "type": "oracle",
+      "title": "The Heavenly Council and Micaiah's Arrest",
+      "reason": "Details the divine council scene where a lying spirit is sent, followed by Micaiah's confrontation and imprisonment."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 34,
+      "type": "story",
+      "title": "The Battle at Ramoth-gilead",
+      "reason": "Describes the battle strategy, the accidental death of Ahab, and his eventual demise."
+    }
+  ]
+}

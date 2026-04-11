@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Job's Rebuke to Friends",
+      "reason": "A continuous speech where Job asserts his equal understanding and criticizes his friends' arguments."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 19,
+      "type": "argument",
+      "title": "Job's Determination to Argue with God",
+      "reason": "A coherent section where Job declares his intent to speak directly to God and present his case."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 28,
+      "type": "blessing_or_prayer",
+      "title": "Job's Prayer for Relief",
+      "reason": "A prayerful petition asking God to remove His hand and dread so Job can speak freely."
+    }
+  ]
+}

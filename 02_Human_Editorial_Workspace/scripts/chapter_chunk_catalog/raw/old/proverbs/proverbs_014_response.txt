@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "list_or_catalog",
+      "title": "Wisdom and Folly Contrasted",
+      "reason": "A series of antithetical proverbs contrasting the wise and foolish in daily life."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 14,
+      "type": "argument",
+      "title": "The Heart's Condition",
+      "reason": "Reflections on internal states, emotional satisfaction, and the consequences of one's path."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Discernment and Social Standing",
+      "reason": "Proverbs regarding belief, fear of evil, anger, inheritance, and the social dynamics of wealth."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 27,
+      "type": "exhortation",
+      "title": "Compassion and Fear of Yahweh",
+      "reason": "Instructions on treating the poor, the value of truth, and the security found in fearing God."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 35,
+      "type": "list_or_catalog",
+      "title": "Leadership and Character",
+      "reason": "Observations on kings, anger management, the body's health, and the impact of righteousness on society."
+    }
+  ]
+}

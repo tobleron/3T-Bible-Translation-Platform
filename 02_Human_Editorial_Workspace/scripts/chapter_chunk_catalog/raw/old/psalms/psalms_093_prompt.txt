@@ -1,0 +1,54 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Psalms 93:1-5
+
+Chapter text:
+1. Yahweh reigns, He is clothed with majesty; Yahweh has clothed and girded Himself with strength; Indeed, the world is established, it will not be shaken.
+2. Your throne is established from of old; You are from everlasting.
+3. The rivers have lifted up, O Yahweh, The rivers have lifted up their voice, The rivers lift up their pounding waves.
+4. More than the voices of many waters, Than the mighty breakers of the sea, Yahweh on high is mighty.
+5. Your testimonies are very faithful; Holiness befits Your house, O Yahweh, forevermore.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

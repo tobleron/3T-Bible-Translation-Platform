@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Abijah's Reign and Army",
+      "reason": "Introduces Abijah's accession, reign details, and the opposing armies."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Abijah's Speech to Jeroboam",
+      "reason": "A continuous speech where Abijah argues for Davidic legitimacy and contrasts Judah's worship with Israel's."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "story",
+      "title": "The Battle of Mount Zemaraim",
+      "reason": "Describes the ambush, the battle cry, the divine victory, and the aftermath."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Abijah's Later Years and Death",
+      "reason": "Concludes with Abijah's family details and the reference to the prophetic record."
+    }
+  ]
+}

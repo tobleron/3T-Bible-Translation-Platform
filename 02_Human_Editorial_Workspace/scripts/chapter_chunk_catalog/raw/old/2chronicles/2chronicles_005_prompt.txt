@@ -1,0 +1,63 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: 2 Chronicles 5:1-14
+
+Chapter text:
+1. Thus all the work that Solomon did for the house of Yahweh was finished. And Solomon brought in the things set apart as holy by his father David, even the silver and the gold and all the utensils, and he put them in the treasuries of the house of God.
+2. Then Solomon assembled the elders of Israel and all the heads of the tribes, the leaders of the fathers’ households of the sons of Israel to Jerusalem, to bring up the ark of the covenant of Yahweh from the city of David, which is Zion.
+3. And all the men of Israel assembled themselves to the king at the feast, that is in the seventh month.
+4. Then all the elders of Israel came, and the Levites carried the ark.
+5. And they brought up the ark and the tent of meeting and all the holy utensils which were in the tent; the Levitical priests brought them up.
+6. And King Solomon and all the congregation of Israel who congregated with him before the ark, were sacrificing so many sheep and oxen that they could not be counted or numbered.
+7. Then the priests brought the ark of the covenant of Yahweh to its place, into the inner sanctuary of the house, to the Holy of Holies, under the wings of the cherubim.
+8. And the cherubim spread their wings over the place of the ark, and the cherubim made a covering over the ark and its poles from above.
+9. But the poles were so long that the ends of the poles of the ark could be seen before the inner sanctuary, but they could not be seen outside; and they are there to this day.
+10. There was nothing in the ark except the two tablets which Moses put there at Horeb, where Yahweh cut a covenant with the sons of Israel, when they came out of Egypt.
+11. Now it happened that when the priests came out of the holy place (for all the priests who were present had sanctified themselves, without regard to divisions),
+12. and all the Levitical singers, Asaph, Heman, Jeduthun, and their sons and relatives, clothed in fine linen, with cymbals, harps, and lyres, standing east of the altar, and with them 120 priests blowing trumpets
+13. in unison when the trumpeters and the singers were to make themselves heard with one voice to praise and to give thanks to Yahweh, and when they lifted up their voice accompanied by trumpets and cymbals and instruments of music, and when they praised Yahweh saying, “He indeed is good for His lovingkindness endures forever,” then the house, the house of Yahweh, was filled with a cloud,
+14. so that the priests could not stand to minister because of the cloud, for the glory of Yahweh filled the house of God.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed
