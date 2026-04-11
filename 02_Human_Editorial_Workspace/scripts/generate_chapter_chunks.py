@@ -59,6 +59,15 @@ ALLOWED_TYPES = {
     "mixed",
 }
 
+PROTECTED_OUTPUT_SOURCES = {
+    "migrated-from-sections",
+    "user-edited",
+}
+
+PROTECTED_OUTPUT_STATUSES = {
+    "approved",
+}
+
 
 def strip_think_blocks(text: str) -> str:
     """Remove visible reasoning blocks from raw model output before JSON parsing."""
@@ -93,6 +102,7 @@ class ChapterChunkBatch:
         ).read_text(encoding="utf-8")
         self.prompt_version = "chapter_chunk_batch_v1"
         self.output_dir = Path(args.output_dir).resolve()
+        self.proposal_dir = Path(args.proposal_dir).resolve() if args.proposal_dir else None
         self.chunks_dir = self.output_dir / "chunks"
         self.raw_dir = self.output_dir / "raw"
         self.logs_dir = self.output_dir / "logs"
@@ -139,6 +149,17 @@ class ChapterChunkBatch:
     def chapter_output_path(self, testament: str, book: str, chapter: int) -> Path:
         safe_book = normalize_book_key(book) or "book"
         return self.chunks_dir / testament / safe_book / f"{safe_book}_{chapter:03d}_chunks.json"
+
+    def chapter_proposal_path(self, testament: str, book: str, chapter: int) -> Path:
+        if self.proposal_dir is None:
+            raise ValueError("Proposal directory is not configured.")
+        safe_book = normalize_book_key(book) or "book"
+        return (
+            self.proposal_dir
+            / testament
+            / safe_book
+            / f"{safe_book}_{chapter:03d}_chunks.proposal.json"
+        )
 
     def chapter_prompt_path(self, testament: str, book: str, chapter: int) -> Path:
         safe_book = normalize_book_key(book) or "book"
@@ -293,6 +314,24 @@ Rules:
             return payload, repaired
         return None, None
 
+    @staticmethod
+    def load_existing_output(path: Path) -> dict[str, Any] | None:
+        if not path.exists():
+            return None
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return None
+        return payload if isinstance(payload, dict) else None
+
+    @staticmethod
+    def is_protected_output(payload: dict[str, Any] | None) -> bool:
+        if not isinstance(payload, dict):
+            return False
+        source = str(payload.get("source", "")).strip().lower()
+        status = str(payload.get("status", "")).strip().lower()
+        return source in PROTECTED_OUTPUT_SOURCES or status in PROTECTED_OUTPUT_STATUSES
+
     def validate_payload(self, payload: dict[str, Any], target: ChapterTarget) -> list[dict[str, Any]]:
         if not isinstance(payload, dict):
             raise ValueError("Parsed payload is not a JSON object.")
@@ -353,7 +392,38 @@ Rules:
     def generate_one(self, target: ChapterTarget) -> None:
         key = self.chapter_key(target.book, target.chapter)
         output_path = self.chapter_output_path(target.testament, target.book, target.chapter)
-        if output_path.exists() and not self.args.force:
+        existing_output = self.load_existing_output(output_path)
+        target_path = output_path
+        target_kind = "catalog"
+        if self.is_protected_output(existing_output):
+            if self.proposal_dir is None:
+                self.log(
+                    f"SKIP {target.book} {target.chapter}: approved catalog is protected"
+                )
+                self.manifest["chapters"][key] = {
+                    "status": "skipped_protected",
+                    "output_path": str(output_path),
+                    "updated_at": utc_now(),
+                }
+                self.save_manifest()
+                return
+            target_path = self.chapter_proposal_path(
+                target.testament, target.book, target.chapter
+            )
+            target_kind = "proposal"
+            if target_path.exists() and not self.args.force:
+                self.log(
+                    f"SKIP {target.book} {target.chapter}: proposal already exists"
+                )
+                self.manifest["chapters"][key] = {
+                    "status": "proposal_exists",
+                    "output_path": str(output_path),
+                    "proposal_path": str(target_path),
+                    "updated_at": utc_now(),
+                }
+                self.save_manifest()
+                return
+        elif output_path.exists() and not self.args.force:
             self.log(f"SKIP {target.book} {target.chapter}: output already exists")
             self.manifest["chapters"][key] = {
                 "status": "completed",
@@ -426,15 +496,17 @@ Rules:
             "verse_count": len(target.verses),
             "attempts_used": attempts,
             "repaired_json": repaired_json,
+            "source": "model-generated",
+            "status": "proposed" if target_kind == "proposal" else "generated",
             "chunks": normalized_chunks,
         }
-        ensure_parent(output_path)
-        output_path.write_text(
+        ensure_parent(target_path)
+        target_path.write_text(
             json.dumps(output, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
         self.manifest["chapters"][key] = {
-            "status": "completed",
+            "status": "proposal_written" if target_kind == "proposal" else "completed",
             "testament": target.testament,
             "book": target.book,
             "chapter": target.chapter,
@@ -442,6 +514,7 @@ Rules:
             "repaired_json": repaired_json,
             "chunk_count": len(normalized_chunks),
             "output_path": str(output_path),
+            "proposal_path": str(target_path) if target_kind == "proposal" else "",
             "response_path": str(response_path),
             "updated_at": utc_now(),
         }
@@ -450,9 +523,9 @@ Rules:
         self.log(
             f"DONE {target.book} {target.chapter}: {len(normalized_chunks)} chunks"
             + (" (repaired)" if repaired_json else "")
-            + f" | attempts={attempts}"
+            + f" | attempts={attempts} | target={target_kind}"
         )
-        self.log(f"OUTPUT {output_path}")
+        self.log(f"OUTPUT {target_path}")
 
     def run(self) -> int:
         targets = self.current_targets()
@@ -519,7 +592,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Regenerate chapters even if output files already exist.",
+        help="Regenerate chapters even if unprotected output files already exist. Protected approved catalogs are not overwritten in place.",
+    )
+    parser.add_argument(
+        "--proposal-dir",
+        help="Optional directory for proposal outputs when a protected approved catalog already exists.",
     )
     return parser.parse_args()
 

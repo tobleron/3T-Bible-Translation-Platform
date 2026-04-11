@@ -35,9 +35,67 @@ class ChunkCatalogRepository:
         key = normalize_book_key(book)
         return self.book_dir / testament / f"{key}_chunks.json"
 
+    def chapter_payload_path(self, testament: str, book: str, chapter: int) -> Path:
+        return self._chapter_path(testament, book, chapter)
+
+    @staticmethod
+    def _default_chunk_title(start_verse: int, end_verse: int) -> str:
+        if start_verse == end_verse:
+            return f"Verse {start_verse}"
+        return f"Verses {start_verse}-{end_verse}"
+
+    def committed_section_payload(
+        self, testament: str, book: str, chapter: int
+    ) -> dict[str, Any] | None:
+        try:
+            chapter_file = self.bible_repo.load_chapter(book, chapter, allow_scaffold=False)
+        except FileNotFoundError:
+            return None
+
+        verse_map = self.bible_repo.verse_map(chapter_file.doc)
+        if not any(str(text).strip() for text in verse_map.values()):
+            return None
+
+        section_ranges = self.bible_repo.section_ranges(chapter_file.doc)
+        if not section_ranges:
+            return None
+
+        chunks: list[dict[str, Any]] = []
+        for _index, start_verse, end_verse, headline in section_ranges:
+            chunks.append(
+                {
+                    "start_verse": start_verse,
+                    "end_verse": end_verse,
+                    "type": "mixed",
+                    "title": str(headline).strip()
+                    or self._default_chunk_title(start_verse, end_verse),
+                    "reason": "Derived from committed section boundaries in the chapter JSON.",
+                }
+            )
+
+        verses = sorted(verse_map)
+        return {
+            "schema_version": 1,
+            "prompt_version": "committed_sections_v1",
+            "generated_at": utc_now(),
+            "source": "migrated-from-sections",
+            "status": "approved",
+            "testament": testament,
+            "book": book,
+            "book_key": normalize_book_key(book),
+            "chapter": chapter,
+            "verse_start": verses[0],
+            "verse_end": verses[-1],
+            "verse_count": len(verses),
+            "chunks": chunks,
+        }
+
     def load_chapter_payload(self, testament: str, book: str, chapter: int) -> dict[str, Any]:
         path = self._chapter_path(testament, book, chapter)
         if not path.exists():
+            fallback_payload = self.committed_section_payload(testament, book, chapter)
+            if fallback_payload is not None:
+                return fallback_payload
             raise FileNotFoundError(f"No chapter chunk file found for {book} {chapter}.")
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
@@ -67,21 +125,23 @@ class ChunkCatalogRepository:
                 if int(chapter_item.get("chapter", 0)) != chapter:
                     continue
                 return self._parse_chunks(chapter_item.get("chunks", []))
-        chapter_path = self._chapter_path(testament, book, chapter)
-        if chapter_path.exists():
-            payload = json.loads(chapter_path.read_text(encoding="utf-8"))
-            return self._parse_chunks(payload.get("chunks", []))
-        return []
+        try:
+            payload = self.load_chapter_payload(testament, book, chapter)
+        except (FileNotFoundError, ValueError):
+            return []
+        return self._parse_chunks(payload.get("chunks", []))
 
     def chunk_status_map(self, testament: str, book: str) -> dict[int, int]:
+        chapter_counts: dict[int, int] = {}
         book_payload = self._load_book_payload(testament, book)
         if book_payload:
-            return {
-                int(chapter_item.get("chapter", 0)): len(chapter_item.get("chunks", []))
-                for chapter_item in book_payload.get("chapters", [])
-                if int(chapter_item.get("chapter", 0)) > 0
-            }
-        chapter_counts: dict[int, int] = {}
+            chapter_counts.update(
+                {
+                    int(chapter_item.get("chapter", 0)): len(chapter_item.get("chunks", []))
+                    for chapter_item in book_payload.get("chapters", [])
+                    if int(chapter_item.get("chapter", 0)) > 0
+                }
+            )
         chapter_root = self.chapter_dir / testament / normalize_book_key(book)
         if chapter_root.exists():
             for path in sorted(chapter_root.glob("*_chunks.json")):
@@ -92,6 +152,12 @@ class ChunkCatalogRepository:
                     continue
                 if chapter > 0:
                     chapter_counts[chapter] = len(payload.get("chunks", []))
+        for chapter in self.bible_repo.chapters_for_book(testament, book):
+            if chapter in chapter_counts:
+                continue
+            fallback_payload = self.committed_section_payload(testament, book, chapter)
+            if fallback_payload is not None:
+                chapter_counts[chapter] = len(fallback_payload.get("chunks", []))
         return chapter_counts
 
     def _load_book_payload(self, testament: str, book: str) -> dict | None:
