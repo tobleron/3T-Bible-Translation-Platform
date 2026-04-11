@@ -92,6 +92,13 @@ class PendingJustificationUpdate:
 
 
 @dataclass
+class PendingFootnoteUpdate:
+    book: str
+    chapter: int
+    entry: dict[str, Any]
+
+
+@dataclass
 class PendingRepair:
     kind: str
     book: str
@@ -111,6 +118,15 @@ class JustificationDraft:
     reason: str = ""
     target: str = "verse_text"
     entry_id: str | None = None
+
+
+@dataclass
+class FootnoteDraft:
+    book: str
+    chapter: int
+    verse: int
+    letter: str = ""
+    content: str = ""
 
 
 @dataclass
@@ -162,8 +178,12 @@ class SessionState:
     pending_justification_updates: list[PendingJustificationUpdate] = field(
         default_factory=list
     )
+    pending_footnote_updates: list[PendingFootnoteUpdate] = field(
+        default_factory=list
+    )
     pending_repairs: list[PendingRepair] = field(default_factory=list)
     justify_draft: JustificationDraft | None = None
+    footnote_draft: FootnoteDraft | None = None
     notifications: list[str] = field(default_factory=list)
     undo_stack: list[str] = field(default_factory=list)
     chunk_suggestion_window_start: int | None = None
@@ -189,6 +209,7 @@ class SessionState:
     def from_json(cls, data: dict[str, Any]) -> "SessionState":
         review = data.get("last_review")
         justify = data.get("justify_draft")
+        footnote = data.get("footnote_draft")
         # Task 005: Restore terminology ledger
         ledger_data = data.get("terminology_ledger", {})
         ledger = {}
@@ -229,10 +250,15 @@ class SessionState:
                 PendingJustificationUpdate(**item)
                 for item in data.get("pending_justification_updates", [])
             ],
+            pending_footnote_updates=[
+                PendingFootnoteUpdate(**item)
+                for item in data.get("pending_footnote_updates", [])
+            ],
             pending_repairs=[
                 PendingRepair(**item) for item in data.get("pending_repairs", [])
             ],
             justify_draft=JustificationDraft(**justify) if justify else None,
+            footnote_draft=FootnoteDraft(**footnote) if footnote else None,
             notifications=data.get("notifications", []),
             undo_stack=data.get("undo_stack", []),
             chunk_suggestion_window_start=data.get("chunk_suggestion_window_start"),

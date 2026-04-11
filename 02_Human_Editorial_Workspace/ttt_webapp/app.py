@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from ttt_core.utils import normalize_book_key
+from ttt_core.models import FootnoteDraft, PendingFootnoteUpdate
 
 from .controller import BrowserWorkbench
 
@@ -421,16 +422,82 @@ async def justify_stage(
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        verse_range = str(form.get("justify_range", chunk_key))
-        wb.cmd_justify([verse_range])
-        if wb.state.justify_draft:
-            wb.state.justify_draft.source_term = str(form.get("source_term", "")).strip()
-            wb.state.justify_draft.decision = str(form.get("decision", "")).strip()
-            wb.state.justify_draft.reason = str(form.get("reason", "")).strip()
-            if str(form.get("action", "")) == "autofill":
-                wb.cmd_jautofill([])
-            elif str(form.get("action", "")) == "stage":
-                wb.cmd_jstage([])
+        apply_draft_form(wb, form)
+        action = str(form.get("action", "")).strip()
+        if action == "cancel":
+            wb.cmd_jcancel([])
+        else:
+            verse_range = str(form.get("justify_range", chunk_key)).strip() or chunk_key
+            wb.cmd_justify([verse_range])
+            if wb.state.justify_draft:
+                wb.state.justify_draft.source_term = str(form.get("source_term", "")).strip()
+                wb.state.justify_draft.decision = str(form.get("decision", "")).strip()
+                wb.state.justify_draft.reason = str(form.get("reason", "")).strip()
+                if action == "autofill":
+                    wb.cmd_jautofill([])
+                elif action == "stage":
+                    wb.cmd_jstage([])
+        wb.activate_tab("draft")
+        wb.save_state()
+        return render_workspace(request, wb, active_tab="draft", partial=True)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/footnotes", response_class=HTMLResponse)
+async def footnote_stage(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        apply_draft_form(wb, form)
+        action = str(form.get("action", "stage")).strip()
+        if action == "cancel":
+            wb.state.footnote_draft = None
+            wb.notify("Footnote draft cancelled.")
+        else:
+            verse = int(str(form.get("footnote_verse", "0")).strip() or "0")
+            letter = str(form.get("footnote_letter", "")).strip()
+            content = str(form.get("footnote_content", "")).strip()
+            wb.state.footnote_draft = FootnoteDraft(
+                book=book,
+                chapter=chapter,
+                verse=verse,
+                letter=letter,
+                content=content,
+            )
+            if action == "stage":
+                if verse <= 0:
+                    raise ValueError("Select a verse before staging a footnote.")
+                if not content:
+                    raise ValueError("Add footnote content before staging it.")
+                wb.state.pending_footnote_updates = [
+                    item
+                    for item in wb.state.pending_footnote_updates
+                    if not (
+                        item.book == book
+                        and item.chapter == chapter
+                        and int(item.entry.get("verse", 0)) == verse
+                        and str(item.entry.get("letter", "")).strip() == letter
+                    )
+                ]
+                wb.state.pending_footnote_updates.append(
+                    PendingFootnoteUpdate(
+                        book=book,
+                        chapter=chapter,
+                        entry={"verse": verse, "letter": letter, "content": content},
+                    )
+                )
+                wb.state.footnote_draft = None
+                wb.notify("Footnote staged.")
+        wb.activate_tab("draft")
         wb.save_state()
         return render_workspace(request, wb, active_tab="draft", partial=True)
     except Exception as exc:
@@ -623,6 +690,8 @@ def epub_generate_download(request: Request):
             media_type="application/epub+zip",
         )
     wb.print_error(message)
+    if request.headers.get("x-requested-with", "").lower() == "fetch":
+        return JSONResponse({"ok": False, "message": message}, status_code=500)
     return RedirectResponse(url="/epub", status_code=302)
 
 

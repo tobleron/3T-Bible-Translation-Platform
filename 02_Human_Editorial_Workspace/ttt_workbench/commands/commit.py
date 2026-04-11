@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from ..app import WorkbenchApp
 
 from ..models import (
+    PendingFootnoteUpdate,
     PendingJustificationUpdate,
     PendingRepair,
     PendingTitleUpdate,
@@ -34,18 +35,32 @@ class CommitCommandsMixin:
         for pending in self.state.pending_title_updates:
             grouped_title[(pending.book, pending.chapter)] = pending
 
+        grouped_footnotes: dict[tuple[str, int], list[PendingFootnoteUpdate]] = {}
+        for pending in self.state.pending_footnote_updates:
+            grouped_footnotes.setdefault((pending.book, pending.chapter), []).append(pending)
+
         translation_docs: dict[tuple[str, int], dict] = {}
-        for key, updates in grouped_text.items():
+        chapter_keys = set(grouped_text) | set(grouped_title) | set(grouped_footnotes)
+        for key in sorted(chapter_keys):
             book, chapter = key
             chapter_file = self.bible_repo.load_chapter(book, chapter)
             doc = json.loads(json.dumps(chapter_file.doc))
-            changed = self.bible_repo.apply_verse_updates(doc, updates)
+            changed: list[str] = []
+            if key in grouped_text:
+                changed.extend(self.bible_repo.apply_verse_updates(doc, grouped_text[key]))
             title_update = grouped_title.get(key)
             if title_update:
                 self.bible_repo.apply_title_update(
                     doc, title_update.start_verse, title_update.end_verse, title_update.title
                 )
                 changed.append("headline")
+            if key in grouped_footnotes:
+                changed.extend(
+                    self.bible_repo.apply_footnote_updates(
+                        doc,
+                        [pending.entry for pending in grouped_footnotes[key]],
+                    )
+                )
             new_text = self.bible_repo.dump(doc)
             translation_docs[key] = doc
             if new_text != chapter_file.original_text:
@@ -118,6 +133,7 @@ class CommitCommandsMixin:
         self.state.pending_verse_updates = []
         self.state.pending_title_updates = []
         self.state.pending_justification_updates = []
+        self.state.pending_footnote_updates = []
         self.state.pending_repairs = []
         self.state.last_review = None
         self.set_screen("CHUNK_PICKER", mode="COMMAND")

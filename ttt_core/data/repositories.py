@@ -358,6 +358,36 @@ class BibleRepository:
         doc["sections"][idx]["headline"] = title
         return current
 
+    def apply_footnote_updates(
+        self, doc: dict[str, Any], updates: list[dict[str, Any]]
+    ) -> list[str]:
+        footnotes = doc.setdefault("footnotes", [])
+        changed: list[str] = []
+        index = {
+            (int(entry.get("verse", 0)), str(entry.get("letter", "")).strip()): pos
+            for pos, entry in enumerate(footnotes)
+            if isinstance(entry, dict) and str(entry.get("content", "")).strip()
+        }
+        for raw_entry in updates:
+            verse = int(raw_entry.get("verse", 0))
+            letter = str(raw_entry.get("letter", "")).strip()
+            content = str(raw_entry.get("content", "")).strip()
+            if verse <= 0 or not content:
+                continue
+            entry = {"verse": verse, "letter": letter, "content": content}
+            key = (verse, letter)
+            note_label = f"footnote {verse}{letter}" if letter else f"footnote {verse}"
+            if key in index:
+                if footnotes[index[key]] != entry:
+                    footnotes[index[key]] = entry
+                    changed.append(note_label)
+            else:
+                footnotes.append(entry)
+                index[key] = len(footnotes) - 1
+                changed.append(note_label)
+        footnotes.sort(key=lambda item: (int(item.get("verse", 0)), str(item.get("letter", "")).strip()))
+        return changed
+
     def dump(self, doc: dict[str, Any]) -> str:
         return json.dumps(doc, indent=2, ensure_ascii=False) + "\n"
 

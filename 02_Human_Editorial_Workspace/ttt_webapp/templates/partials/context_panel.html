@@ -39,7 +39,7 @@
             {% endif %}
           </div>
           {% if block.kind == 'translation' %}
-          <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label }}" onclick="applyStudyTranslationToDraft(this)" title="Overwrite the draft verses with {{ block.label }}">
+          <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label }}" onclick="applyStudyTranslationToDraft(this)" title="Load {{ block.label }} into the draft verses">
             Use In Draft
           </button>
           {% endif %}

@@ -200,9 +200,7 @@
             <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
               <button class="commit-button" type="submit">Commit</button>
             </form>
-            <form class="inline-form" hx-post="/epub/generate-download" hx-target="#workspace-shell" hx-swap="outerHTML">
-              <button class="epub-button" type="submit" {% if pending_writes %}disabled title="Commit all verses first"{% endif %}>Generate EPUB</button>
-            </form>
+            <button class="epub-button" type="button" onclick="generateEpubDownload(this)" {% if pending_writes %}disabled title="Commit all verses first"{% endif %}>Generate EPUB</button>
             <button class="secondary-button" type="button" onclick="showJsonPreview()">JSON</button>
           </div>
         </form>
@@ -236,6 +234,147 @@
               hx-confirm="Clear all chat messages for this chunk?">Clear</button>
           </div>
         </form>
+      </article>
+
+      {% set justify_range_value = current_chunk_key %}
+      {% if state.justify_draft %}
+        {% set justify_range_value = state.justify_draft.start_verse|string %}
+        {% if state.justify_draft.end_verse != state.justify_draft.start_verse %}
+          {% set justify_range_value = state.justify_draft.start_verse|string ~ "-" ~ state.justify_draft.end_verse|string %}
+        {% endif %}
+      {% endif %}
+      {% set footnote_verse_value = state.footnote_draft.verse if state.footnote_draft else (state.chunk_start or 1) %}
+
+      <article class="workspace-card support-panel">
+        <div class="panel-head support-panel-head">
+          <div>
+            <p class="eyebrow">Justifications</p>
+            <h2>Decision notes for this chunk</h2>
+          </div>
+          <span class="inline-badge">{{ justification_entries|length }} item{% if justification_entries|length != 1 %}s{% endif %}</span>
+        </div>
+
+        {% if justification_entries %}
+        <div class="support-entry-list">
+          {% for item in justification_entries %}
+          <details class="support-entry">
+            <summary>
+              <span class="support-entry-title">Verses {{ item.verse_label }}</span>
+              <span class="support-entry-summary">
+                {% if item.source_term %}{{ item.source_term }}{% else %}Decision note{% endif %}
+                {% if item.decision %} -> {{ item.decision }}{% endif %}
+              </span>
+              <span class="support-status {% if item.status == 'Pending' %}is-pending{% endif %}">{{ item.status }}</span>
+            </summary>
+            <div class="support-entry-body">
+              {% if item.source_term %}
+              <p><strong>Source term:</strong> {{ item.source_term }}</p>
+              {% endif %}
+              {% if item.decision %}
+              <p><strong>Decision:</strong> {{ item.decision }}</p>
+              {% endif %}
+              <p>{{ item.reason }}</p>
+            </div>
+          </details>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="support-empty">No justification notes for this chunk yet.</p>
+        {% endif %}
+
+        <details class="support-composer"{% if state.justify_draft %} open{% endif %}>
+          <summary>{{ "Continue justification" if state.justify_draft else "Add justification" }}</summary>
+          <form class="support-form"
+            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/justify"
+            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
+            <div class="support-grid support-grid-justify">
+              <label class="compact-field support-range-field">
+                <span>Verses</span>
+                <input type="text" name="justify_range" value="{{ justify_range_value }}" placeholder="3 or 3-5">
+              </label>
+              <label class="compact-field">
+                <span>Source term</span>
+                <input type="text" name="source_term" value="{{ state.justify_draft.source_term if state.justify_draft else '' }}" placeholder="Optional">
+              </label>
+              <label class="compact-field">
+                <span>Decision</span>
+                <input type="text" name="decision" value="{{ state.justify_draft.decision if state.justify_draft else '' }}" placeholder="Required">
+              </label>
+            </div>
+            <label class="compact-field">
+              <span>Reason</span>
+              <textarea name="reason" rows="4" placeholder="Why this rendering is right for the selected verse(s).">{{ state.justify_draft.reason if state.justify_draft else '' }}</textarea>
+            </label>
+            <div class="support-actions">
+              <button class="secondary-button" type="submit" name="action" value="autofill">Autofill</button>
+              {% if state.justify_draft %}
+              <button class="secondary-button" type="submit" name="action" value="cancel">Cancel</button>
+              {% endif %}
+              <button class="primary-button" type="submit" name="action" value="stage">Stage</button>
+            </div>
+          </form>
+        </details>
+      </article>
+
+      <article class="workspace-card support-panel">
+        <div class="panel-head support-panel-head">
+          <div>
+            <p class="eyebrow">Footnotes</p>
+            <h2>Footer notes for this chunk</h2>
+          </div>
+          <span class="inline-badge">{{ footnote_entries|length }} item{% if footnote_entries|length != 1 %}s{% endif %}</span>
+        </div>
+
+        {% if footnote_entries %}
+        <div class="support-entry-list">
+          {% for item in footnote_entries %}
+          <details class="support-entry">
+            <summary>
+              <span class="support-entry-title">Verse {{ item.verse_label }}</span>
+              <span class="support-entry-summary">{{ item.content|truncate(110) }}</span>
+              <span class="support-status {% if item.status == 'Pending' %}is-pending{% endif %}">{{ item.status }}</span>
+            </summary>
+            <div class="support-entry-body">
+              <p>{{ item.content }}</p>
+            </div>
+          </details>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="support-empty">No footnotes for this chunk yet.</p>
+        {% endif %}
+
+        <details class="support-composer"{% if state.footnote_draft %} open{% endif %}>
+          <summary>{{ "Continue footnote" if state.footnote_draft else "Add footnote" }}</summary>
+          <form class="support-form"
+            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/footnotes"
+            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
+            <div class="support-grid support-grid-footnote">
+              <label class="compact-field">
+                <span>Verse</span>
+                <select name="footnote_verse">
+                  {% for item in draft_editor_verses %}
+                  <option value="{{ item.verse }}" {% if item.verse == footnote_verse_value %}selected{% endif %}>{{ item.verse }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+              <label class="compact-field footnote-letter-field">
+                <span>Mark</span>
+                <input type="text" name="footnote_letter" maxlength="3" value="{{ state.footnote_draft.letter if state.footnote_draft else '' }}" placeholder="a">
+              </label>
+            </div>
+            <label class="compact-field">
+              <span>Content</span>
+              <textarea name="footnote_content" rows="3" placeholder="Short footer note.">{{ state.footnote_draft.content if state.footnote_draft else '' }}</textarea>
+            </label>
+            <div class="support-actions">
+              {% if state.footnote_draft %}
+              <button class="secondary-button" type="submit" name="action" value="cancel">Cancel</button>
+              {% endif %}
+              <button class="primary-button" type="submit" name="action" value="stage">Stage</button>
+            </div>
+          </form>
+        </details>
       </article>
     </section>
 
@@ -444,7 +583,6 @@ function applyStudyTranslationToDraft(btn) {
   var block = btn.closest('.translation-block');
   var form = document.getElementById('draft-form');
   if (!alias || !block || !form) return;
-  if (!window.confirm('Overwrite the current draft verses with ' + alias + ' for this chunk?')) return;
   var rows = block.querySelectorAll('.translation-verse-row[data-verse]');
   if (!rows.length) return;
 
@@ -475,5 +613,57 @@ function applyStudyTranslationToDraft(btn) {
     btn.textContent = 'Use In Draft';
     btn.classList.remove('applied');
   }, 1600);
+}
+
+function generateEpubDownload(btn) {
+  if (!btn || btn.disabled) return;
+  var originalLabel = btn.dataset.label || btn.textContent;
+  btn.dataset.label = originalLabel;
+  btn.disabled = true;
+  btn.textContent = 'Generating...';
+
+  fetch('/epub/generate-download', {
+    method: 'POST',
+    headers: {
+      'X-Requested-With': 'fetch'
+    }
+  })
+    .then(function(response) {
+      var contentType = response.headers.get('content-type') || '';
+      if (!response.ok || contentType.indexOf('application/epub+zip') === -1) {
+        if (contentType.indexOf('application/json') !== -1) {
+          return response.json().then(function(payload) {
+            throw new Error(payload.message || 'EPUB generation failed.');
+          });
+        }
+        throw new Error('EPUB generation failed.');
+      }
+      return Promise.all([Promise.resolve(response), response.blob()]);
+    })
+    .then(function(parts) {
+      var response = parts[0];
+      var blob = parts[1];
+      var disposition = response.headers.get('content-disposition') || '';
+      var match = disposition.match(/filename="?([^";]+)"?/i);
+      var filename = match ? match[1] : 'translation.epub';
+      var url = window.URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function() {
+        window.URL.revokeObjectURL(url);
+      }, 1000);
+      showWorkspaceIndicator('Downloaded ' + filename + '.');
+    })
+    .catch(function(err) {
+      showWorkspaceIndicator(err.message || 'EPUB generation failed.');
+    })
+    .finally(function() {
+      btn.disabled = false;
+      btn.textContent = originalLabel;
+    });
 }
 </script>

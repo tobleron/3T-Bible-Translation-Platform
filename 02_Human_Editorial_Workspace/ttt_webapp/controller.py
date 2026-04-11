@@ -13,7 +13,12 @@ from uuid import uuid4
 from rich.panel import Panel
 
 from ttt_core.data.repositories import ProjectPaths
-from ttt_core.models import ChunkSuggestion, PendingTitleUpdate, PendingVerseUpdate, SessionState
+from ttt_core.models import (
+    ChunkSuggestion,
+    PendingTitleUpdate,
+    PendingVerseUpdate,
+    SessionState,
+)
 from ttt_core.utils import normalize_book_key
 
 from ttt_workbench.app import WorkbenchApp
@@ -418,6 +423,7 @@ class BrowserWorkbench(WorkbenchApp):
         self.state.title_alternatives = []
         self.state.last_review = None
         self.state.justify_draft = None
+        self.state.footnote_draft = None
         self.state.chunk_suggestions = []
         self.state.chunk_suggestion_window_start = None
         self.state.chunk_suggestion_window_end = None
@@ -775,6 +781,106 @@ class BrowserWorkbench(WorkbenchApp):
             else "No chunk selected",
         }
 
+    def _current_chunk_bounds(self) -> tuple[int, int] | None:
+        if not self.has_open_chunk():
+            return None
+        start = self.state.chunk_start or 1
+        end = self.state.chunk_end or start
+        return start, end
+
+    @staticmethod
+    def _format_verse_label(verses: list[int]) -> str:
+        if not verses:
+            return "?"
+        if len(verses) == 1:
+            return str(verses[0])
+        if verses == list(range(verses[0], verses[-1] + 1)):
+            return f"{verses[0]}-{verses[-1]}"
+        return ", ".join(str(verse) for verse in verses)
+
+    def chunk_justification_entries(self) -> list[dict[str, Any]]:
+        bounds = self._current_chunk_bounds()
+        if not bounds or not self.state.book or not self.state.chapter:
+            return []
+        start, end = bounds
+        just_file = self.just_repo.load_document(self.state.book, self.state.chapter)
+        merged: dict[str, dict[str, Any]] = {}
+
+        def include(raw_entry: dict[str, Any], status: str) -> None:
+            verses = sorted(
+                {
+                    int(item)
+                    for item in raw_entry.get("verses", [])
+                    if str(item).strip().isdigit()
+                }
+            )
+            if not verses or verses[-1] < start or verses[0] > end:
+                return
+            entry_id = str(raw_entry.get("id") or f"{verses[0]}-{verses[-1]}")
+            merged[entry_id] = {
+                "id": entry_id,
+                "verses": verses,
+                "verse_label": self._format_verse_label(verses),
+                "source_term": str(raw_entry.get("source_term", "")).strip(),
+                "decision": str(raw_entry.get("decision", "")).strip(),
+                "reason": str(raw_entry.get("reason", "")).strip(),
+                "status": status,
+            }
+
+        for entry in just_file.doc.get("justifications", []):
+            if isinstance(entry, dict):
+                include(entry, "Saved")
+        for pending in self.state.pending_justification_updates:
+            if pending.book == self.state.book and pending.chapter == self.state.chapter:
+                include(pending.entry, "Pending")
+
+        return sorted(
+            merged.values(),
+            key=lambda item: (
+                item["verses"][0] if item["verses"] else 10**9,
+                item["id"],
+            ),
+        )
+
+    def chunk_footnote_entries(self) -> list[dict[str, Any]]:
+        bounds = self._current_chunk_bounds()
+        if not bounds or not self.state.book or not self.state.chapter:
+            return []
+        start, end = bounds
+        chapter_doc = self.bible_repo.load_chapter(self.state.book, self.state.chapter).doc
+        merged: dict[tuple[int, str], dict[str, Any]] = {}
+
+        def include(raw_entry: dict[str, Any], status: str) -> None:
+            try:
+                verse = int(raw_entry.get("verse", 0))
+            except (TypeError, ValueError):
+                return
+            if verse < start or verse > end:
+                return
+            letter = str(raw_entry.get("letter", "")).strip()
+            content = str(raw_entry.get("content", "")).strip()
+            if not content:
+                return
+            merged[(verse, letter)] = {
+                "verse": verse,
+                "letter": letter,
+                "verse_label": f"{verse}{letter}" if letter else str(verse),
+                "content": content,
+                "status": status,
+            }
+
+        for entry in chapter_doc.get("footnotes", []):
+            if isinstance(entry, dict):
+                include(entry, "Saved")
+        for pending in self.state.pending_footnote_updates:
+            if pending.book == self.state.book and pending.chapter == self.state.chapter:
+                include(pending.entry, "Pending")
+
+        return sorted(
+            merged.values(),
+            key=lambda item: (item["verse"], item["letter"]),
+        )
+
     def study_provenance(self) -> list[dict[str, str]]:
         testament = self.state.wizard_testament or self.testament() or "new"
         if testament == "old":
@@ -988,13 +1094,7 @@ class BrowserWorkbench(WorkbenchApp):
         if not self.has_open_chunk():
             self.state.pending_verse_updates = []
             self.state.pending_title_updates = []
-            self.state.pending_justification_updates = []
-            self.state.pending_repairs = []
             return
-        self.state.pending_verse_updates = []
-        self.state.pending_title_updates = []
-        self.state.pending_justification_updates = []
-        self.state.pending_repairs = []
         self.sync_current_chunk_for_commit()
 
     def explain_llm_failure(self, raw_error: str) -> str:
@@ -1341,6 +1441,8 @@ User message:
             "editor_range_options": self.editor_range_options() if chunk_open else [],
             "draft_editor_verses": self.draft_editor_verses() if chunk_open else [],
             "chunk_sessions": self.chunk_session_list(),
+            "justification_entries": self.chunk_justification_entries() if chunk_open else [],
+            "footnote_entries": self.chunk_footnote_entries() if chunk_open else [],
         }
 
     def json_preview_payload(self) -> dict[str, Any]:
