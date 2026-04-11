@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import html
 import json
 import os
 import re
 import subprocess
 import sys
 from dataclasses import dataclass
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
@@ -25,6 +27,97 @@ from ttt_workbench.app import WorkbenchApp
 from ttt_workbench.repositories import restore_backup_set
 
 from .chunk_catalog import ChunkCatalogRepository
+
+
+_ALLOWED_INLINE_TAGS = frozenset({"i", "em", "b", "strong", "sup", "sub", "br"})
+_BLOCKED_INLINE_TAGS = frozenset({"script", "style"})
+_LEGACY_BOLD_RE = re.compile(r"(?<!\*)\*\*([^*\n][^*]*?)\*\*(?!\*)")
+_LEGACY_ITALIC_RE = re.compile(r"(?<!\*)\*([^*\n][^*]*?)\*(?!\*)")
+
+
+class _InlineMarkupSanitizer(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.parts: list[str] = []
+        self.block_depth = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        clean = tag.lower()
+        if clean in _BLOCKED_INLINE_TAGS:
+            self.block_depth += 1
+            return
+        if self.block_depth:
+            return
+        if clean == "br":
+            self.parts.append("<br>")
+            return
+        if clean in _ALLOWED_INLINE_TAGS:
+            self.parts.append(f"<{clean}>")
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+
+    def handle_endtag(self, tag: str) -> None:
+        clean = tag.lower()
+        if clean in _BLOCKED_INLINE_TAGS:
+            if self.block_depth:
+                self.block_depth -= 1
+            return
+        if self.block_depth or clean == "br":
+            return
+        if clean in _ALLOWED_INLINE_TAGS:
+            self.parts.append(f"</{clean}>")
+
+    def handle_data(self, data: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(html.escape(data))
+
+    def handle_entityref(self, name: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"&{name};")
+
+    def handle_charref(self, name: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"&#{name};")
+
+    def sanitized_html(self) -> str:
+        return "".join(self.parts)
+
+
+class _InlineTextExtractor(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+        self.block_depth = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        clean = tag.lower()
+        if clean in _BLOCKED_INLINE_TAGS:
+            self.block_depth += 1
+            return
+        if self.block_depth:
+            return
+        if clean == "br":
+            self.parts.append("\n")
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+
+    def handle_endtag(self, tag: str) -> None:
+        clean = tag.lower()
+        if clean in _BLOCKED_INLINE_TAGS and self.block_depth:
+            self.block_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(data)
+
+    def plain_text(self) -> str:
+        return "".join(self.parts)
 
 
 @dataclass
@@ -253,6 +346,38 @@ class BrowserWorkbench(WorkbenchApp):
     def set_selected_sources(self, aliases: list[str]) -> None:
         clean = [alias.upper() for alias in aliases if alias.upper() in self.source_repo.catalog]
         self.save_web_settings({"selected_sources": clean})
+
+    @staticmethod
+    def _legacy_inline_markup_to_html(text: str) -> str:
+        clean = str(text or "").replace("\r\n", "\n").replace("\r", "\n")
+        clean = _LEGACY_BOLD_RE.sub(r"<strong>\1</strong>", clean)
+        clean = _LEGACY_ITALIC_RE.sub(r"<em>\1</em>", clean)
+        return clean.replace("\n", "<br>")
+
+    @classmethod
+    def sanitize_inline_markup(cls, text: str) -> str:
+        prepared = cls._legacy_inline_markup_to_html(text)
+        parser = _InlineMarkupSanitizer()
+        parser.feed(prepared)
+        parser.close()
+        return parser.sanitized_html()
+
+    @classmethod
+    def plain_text_from_inline_markup(cls, text: str) -> str:
+        sanitized = cls.sanitize_inline_markup(text)
+        parser = _InlineTextExtractor()
+        parser.feed(sanitized)
+        parser.close()
+        plain = parser.plain_text()
+        return re.sub(r"\s+", " ", plain).strip()
+
+    @classmethod
+    def inline_markup_payload(cls, text: str) -> dict[str, str]:
+        return {
+            "raw": str(text or ""),
+            "html": cls.sanitize_inline_markup(text),
+            "text": cls.plain_text_from_inline_markup(text),
+        }
 
     def prompt_settings(self) -> list[PromptSetting]:
         return [
@@ -909,13 +1034,22 @@ class BrowserWorkbench(WorkbenchApp):
             if not verses or verses[-1] < start or verses[0] > end:
                 return
             entry_id = str(raw_entry.get("id") or f"{verses[0]}-{verses[-1]}")
+            source_term = self.inline_markup_payload(raw_entry.get("source_term", ""))
+            decision = self.inline_markup_payload(raw_entry.get("decision", ""))
+            reason = self.inline_markup_payload(raw_entry.get("reason", ""))
             merged[entry_id] = {
                 "id": entry_id,
                 "verses": verses,
                 "verse_label": self._format_verse_label(verses),
-                "source_term": str(raw_entry.get("source_term", "")).strip(),
-                "decision": str(raw_entry.get("decision", "")).strip(),
-                "reason": str(raw_entry.get("reason", "")).strip(),
+                "source_term": source_term["raw"].strip(),
+                "source_term_html": source_term["html"],
+                "source_term_text": source_term["text"],
+                "decision": decision["raw"].strip(),
+                "decision_html": decision["html"],
+                "decision_text": decision["text"],
+                "reason": reason["raw"].strip(),
+                "reason_html": reason["html"],
+                "reason_text": reason["text"],
                 "status": status,
             }
 
@@ -953,11 +1087,14 @@ class BrowserWorkbench(WorkbenchApp):
             content = str(raw_entry.get("content", "")).strip()
             if not content:
                 return
+            content_markup = self.inline_markup_payload(content)
             merged[(verse, letter)] = {
                 "verse": verse,
                 "letter": letter,
                 "verse_label": f"{verse}{letter}" if letter else str(verse),
                 "content": content,
+                "content_html": content_markup["html"],
+                "content_text": content_markup["text"],
                 "status": status,
             }
 

@@ -316,19 +316,19 @@
             <summary>
               <span class="support-entry-title">Verses {{ item.verse_label }}</span>
               <span class="support-entry-summary">
-                {% if item.source_term %}{{ item.source_term }}{% else %}Decision note{% endif %}
-                {% if item.decision %} -> {{ item.decision }}{% endif %}
+                {% if item.source_term_text %}{{ item.source_term_text }}{% else %}Decision note{% endif %}
+                {% if item.decision_text %} -> {{ item.decision_text }}{% endif %}
               </span>
               <span class="support-status {% if item.status == 'Pending' %}is-pending{% endif %}">{{ item.status }}</span>
             </summary>
             <div class="support-entry-body">
-              {% if item.source_term %}
-              <p><strong>Source term:</strong> {{ item.source_term }}</p>
+              {% if item.source_term_text %}
+              <p><strong>Source term:</strong> <span class="support-richtext">{{ item.source_term_html|safe }}</span></p>
               {% endif %}
-              {% if item.decision %}
-              <p><strong>Decision:</strong> {{ item.decision }}</p>
+              {% if item.decision_text %}
+              <p><strong>Decision:</strong> <span class="support-richtext">{{ item.decision_html|safe }}</span></p>
               {% endif %}
-              <p>{{ item.reason }}</p>
+              <div class="support-richtext">{{ item.reason_html|safe }}</div>
             </div>
           </details>
           {% endfor %}
@@ -342,6 +342,15 @@
           <form class="support-form"
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/justify"
             hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <div class="support-format-bar">
+              <span class="support-format-label">Format</span>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text">Italic</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'bold')" title="Bold selected text">Bold</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
+              <span class="support-format-hint">Applies to the focused field.</span>
+            </div>
             <div class="support-grid support-grid-justify">
               <label class="compact-field support-range-field">
                 <span>Verses</span>
@@ -349,17 +358,21 @@
               </label>
               <label class="compact-field">
                 <span>Source term</span>
-                <input type="text" name="source_term" value="{{ state.justify_draft.source_term if state.justify_draft else '' }}" placeholder="Optional">
+                <input type="text" name="source_term" value="{{ state.justify_draft.source_term if state.justify_draft else '' }}" placeholder="Optional" data-inline-format-field>
               </label>
               <label class="compact-field">
                 <span>Decision</span>
-                <input type="text" name="decision" value="{{ state.justify_draft.decision if state.justify_draft else '' }}" placeholder="Required">
+                <input type="text" name="decision" value="{{ state.justify_draft.decision if state.justify_draft else '' }}" placeholder="Required" data-inline-format-field>
               </label>
             </div>
             <label class="compact-field">
               <span>Reason</span>
-              <textarea name="reason" rows="4" placeholder="Why this rendering is right for the selected verse(s).">{{ state.justify_draft.reason if state.justify_draft else '' }}</textarea>
+              <textarea name="reason" rows="4" placeholder="Why this rendering is right for the selected verse(s)." data-inline-format-field data-inline-format-default>{{ state.justify_draft.reason if state.justify_draft else '' }}</textarea>
             </label>
+            <div class="support-preview" data-inline-preview-panel data-preview-source="reason" hidden>
+              <span class="support-preview-label">Reason preview</span>
+              <div class="support-richtext" data-inline-preview-html></div>
+            </div>
             <div class="support-actions">
               <button class="secondary-button" type="submit" name="action" value="autofill">Autofill</button>
               {% if state.justify_draft %}
@@ -386,11 +399,11 @@
           <details class="support-entry">
             <summary>
               <span class="support-entry-title">Verse {{ item.verse_label }}</span>
-              <span class="support-entry-summary">{{ item.content|truncate(110) }}</span>
+              <span class="support-entry-summary">{{ item.content_text|truncate(110) }}</span>
               <span class="support-status {% if item.status == 'Pending' %}is-pending{% endif %}">{{ item.status }}</span>
             </summary>
             <div class="support-entry-body">
-              <p>{{ item.content }}</p>
+              <div class="support-richtext">{{ item.content_html|safe }}</div>
             </div>
           </details>
           {% endfor %}
@@ -404,6 +417,15 @@
           <form class="support-form"
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/footnotes"
             hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <div class="support-format-bar">
+              <span class="support-format-label">Format</span>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text">Italic</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'bold')" title="Bold selected text">Bold</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
+              <span class="support-format-hint">Applies to the focused field.</span>
+            </div>
             <div class="support-grid support-grid-footnote">
               <label class="compact-field">
                 <span>Verse</span>
@@ -420,8 +442,12 @@
             </div>
             <label class="compact-field">
               <span>Content</span>
-              <textarea name="footnote_content" rows="3" placeholder="Short footer note.">{{ state.footnote_draft.content if state.footnote_draft else '' }}</textarea>
+              <textarea name="footnote_content" rows="3" placeholder="Short footer note." data-inline-format-field data-inline-format-default>{{ state.footnote_draft.content if state.footnote_draft else '' }}</textarea>
             </label>
+            <div class="support-preview" data-inline-preview-panel data-preview-source="footnote_content" hidden>
+              <span class="support-preview-label">Footnote preview</span>
+              <div class="support-richtext" data-inline-preview-html></div>
+            </div>
             <div class="support-actions">
               {% if state.footnote_draft %}
               <button class="secondary-button" type="submit" name="action" value="cancel">Cancel</button>
@@ -462,6 +488,7 @@ document.addEventListener('htmx:afterSettle', function() {
     if (sel) sel.value = fontSize;
   }
   initGlossTooltips();
+  initSupportFormattingTools();
   // Restore last copied indicator after HTMX swap
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
   if (lastCopied) {
@@ -476,6 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var sel = document.getElementById('study-font-size');
   if (sel) sel.value = fontSize;
   initGlossTooltips();
+  initSupportFormattingTools();
   // Restore last copied indicator from session storage
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
   if (lastCopied) {
@@ -496,6 +524,168 @@ function autoResize(el) {
     el.style.height = (el.scrollHeight + 4) + 'px';
     // Restore scroll position
     window.scrollTo(scrollLeft, scrollTop);
+  });
+}
+function findSupportFormatField(trigger) {
+  var form = trigger.closest('form');
+  if (!form) return null;
+  var active = document.activeElement;
+  if (active && form.contains(active) && active.matches('[data-inline-format-field]')) {
+    return active;
+  }
+  return form.querySelector('[data-inline-format-default]') || form.querySelector('[data-inline-format-field]');
+}
+function applySupportFormat(trigger, kind) {
+  var field = findSupportFormatField(trigger);
+  if (!field || typeof field.value !== 'string') return;
+
+  var wrapOpen = '';
+  var wrapClose = '';
+  var placeholder = '';
+  var insertText = '';
+
+  if (kind === 'italic') {
+    wrapOpen = '<i>';
+    wrapClose = '</i>';
+    placeholder = 'text';
+  } else if (kind === 'bold') {
+    wrapOpen = '<strong>';
+    wrapClose = '</strong>';
+    placeholder = 'text';
+  } else if (kind === 'sup') {
+    wrapOpen = '<sup>';
+    wrapClose = '</sup>';
+    placeholder = '2';
+  } else if (kind === 'sub') {
+    wrapOpen = '<sub>';
+    wrapClose = '</sub>';
+    placeholder = '2';
+  } else if (kind === 'br') {
+    insertText = '<br>';
+  } else {
+    return;
+  }
+
+  var start = typeof field.selectionStart === 'number' ? field.selectionStart : field.value.length;
+  var end = typeof field.selectionEnd === 'number' ? field.selectionEnd : field.value.length;
+  var before = field.value.slice(0, start);
+  var selected = field.value.slice(start, end);
+  var after = field.value.slice(end);
+  var replacement = insertText;
+  var selectionStart = start;
+  var selectionEnd = start;
+
+  if (!insertText) {
+    var body = selected || placeholder;
+    replacement = wrapOpen + body + wrapClose;
+    if (selected) {
+      selectionStart = start + replacement.length;
+      selectionEnd = selectionStart;
+    } else {
+      selectionStart = start + wrapOpen.length;
+      selectionEnd = selectionStart + body.length;
+    }
+  } else {
+    selectionStart = start + replacement.length;
+    selectionEnd = selectionStart;
+  }
+
+  field.value = before + replacement + after;
+  field.focus();
+  if (typeof field.setSelectionRange === 'function') {
+    field.setSelectionRange(selectionStart, selectionEnd);
+  }
+  field.dispatchEvent(new Event('input', { bubbles: true }));
+}
+function escapeSupportHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function normalizeSupportInlineMarkup(text) {
+  return String(text || '')
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .replace(/(?<!\*)\*\*([^*\n][^*]*?)\*\*(?!\*)/g, '<strong>$1</strong>')
+    .replace(/(?<!\*)\*([^*\n][^*]*?)\*(?!\*)/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+function sanitizeSupportInlineMarkup(text) {
+  var normalized = normalizeSupportInlineMarkup(text);
+  var doc = new DOMParser().parseFromString('<div>' + normalized + '</div>', 'text/html');
+  var allowed = { i: true, em: true, b: true, strong: true, sup: true, sub: true, br: true };
+  var blocked = { script: true, style: true };
+
+  function renderNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return escapeSupportHtml(node.textContent || '');
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      return '';
+    }
+    var tag = node.tagName.toLowerCase();
+    if (blocked[tag]) {
+      return '';
+    }
+    if (tag === 'br' && allowed[tag]) {
+      return '<br>';
+    }
+    var inner = '';
+    Array.prototype.forEach.call(node.childNodes, function(child) {
+      inner += renderNode(child);
+    });
+    if (!allowed[tag]) {
+      return inner;
+    }
+    return '<' + tag + '>' + inner + '</' + tag + '>';
+  }
+
+  var root = doc.body.firstElementChild;
+  if (!root) return '';
+  var html = '';
+  Array.prototype.forEach.call(root.childNodes, function(child) {
+    html += renderNode(child);
+  });
+  return html;
+}
+function plainSupportInlineMarkup(text) {
+  var container = document.createElement('div');
+  container.innerHTML = sanitizeSupportInlineMarkup(text);
+  return (container.textContent || '').replace(/\s+/g, ' ').trim();
+}
+function syncSupportComposerPreview(form) {
+  if (!form) return;
+  form.querySelectorAll('[data-inline-preview-panel]').forEach(function(panel) {
+    var sourceName = panel.getAttribute('data-preview-source');
+    var source = sourceName ? form.querySelector('[name="' + sourceName + '"]') : null;
+    var htmlTarget = panel.querySelector('[data-inline-preview-html]');
+    if (!source || !htmlTarget) return;
+    var previewHtml = sanitizeSupportInlineMarkup(source.value || '');
+    if (!plainSupportInlineMarkup(source.value || '')) {
+      panel.hidden = true;
+      htmlTarget.innerHTML = '';
+      return;
+    }
+    htmlTarget.innerHTML = previewHtml;
+    panel.hidden = false;
+  });
+}
+function initSupportFormattingTools() {
+  document.querySelectorAll('.support-form').forEach(function(form) {
+    if (form.dataset.inlinePreviewBound === '1') {
+      syncSupportComposerPreview(form);
+      return;
+    }
+    form.dataset.inlinePreviewBound = '1';
+    form.querySelectorAll('[data-inline-format-field]').forEach(function(field) {
+      field.addEventListener('input', function() {
+        syncSupportComposerPreview(form);
+      });
+    });
+    syncSupportComposerPreview(form);
   });
 }
 document.addEventListener('change', function(e) {
