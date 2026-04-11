@@ -25,6 +25,7 @@ class JustifyCommandsMixin:
             chapter=self.state.chapter or 0,
             start_verse=start_verse,
             end_verse=end_verse,
+            verses=list(range(start_verse, end_verse + 1)),
         )
         self.state.mode = "JUSTIFY"
         self.set_screen("JUSTIFY", mode="JUSTIFY")
@@ -62,7 +63,7 @@ class JustifyCommandsMixin:
             self.print_error("No active justification draft.")
             return
         lines = [
-            f"Range: {draft.start_verse}-{draft.end_verse}",
+            f"Range: {', '.join(str(verse) for verse in (draft.verses or list(range(draft.start_verse, draft.end_verse + 1))))}",
             f"Source term: {draft.source_term or '[optional]'}",
             f"Decision: {draft.decision or '[blank]'}",
             "Reason:",
@@ -129,6 +130,7 @@ class JustifyCommandsMixin:
             draft.chapter,
             draft.start_verse,
             draft.end_verse,
+            draft.verses,
             draft.source_term,
             draft.decision,
             draft.reason,

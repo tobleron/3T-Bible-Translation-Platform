@@ -1179,6 +1179,7 @@ Rules:
                 "id": entry_id,
                 "verses": verses,
                 "verse_label": self._format_verse_label(verses),
+                "verse_spec": ", ".join(str(verse) for verse in verses),
                 "source_term": source_term["raw"].strip(),
                 "source_term_html": source_term["html"],
                 "source_term_text": source_term["text"],

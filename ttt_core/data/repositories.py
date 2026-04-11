@@ -571,6 +571,7 @@ class JustificationRepository:
         chapter: int,
         start_verse: int,
         end_verse: int,
+        verses: list[int] | None,
         source_term: str,
         decision: str,
         reason: str,
@@ -578,17 +579,19 @@ class JustificationRepository:
         existing_ids: set[str],
         entry_id: str | None = None,
     ) -> dict[str, Any]:
-        verses = list(range(start_verse, end_verse + 1))
+        clean_verses = sorted({int(item) for item in (verses or []) if int(item) > 0})
+        if not clean_verses:
+            clean_verses = list(range(start_verse, end_verse + 1))
         now = utc_now()
         return {
             "id": entry_id or self._next_entry_id(existing_ids, book, chapter),
             "chapter": chapter,
-            "verses": verses,
+            "verses": clean_verses,
             "target": "verse_text",
             "source_term": source_term,
             "decision": decision,
             "reason": reason,
-            "text_hash": make_text_hash(book, chapter, verses, verse_map),
+            "text_hash": make_text_hash(book, chapter, clean_verses, verse_map),
             "status": "active",
             "created_at": now,
             "updated_at": now,

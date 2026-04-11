@@ -113,6 +113,7 @@ class JustificationDraft:
     chapter: int
     start_verse: int
     end_verse: int
+    verses: list[int] = field(default_factory=list)
     source_term: str = ""
     decision: str = ""
     reason: str = ""

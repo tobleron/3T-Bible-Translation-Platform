@@ -161,9 +161,13 @@
     <section class="left-workspace">
       {% set justify_range_value = current_chunk_key %}
       {% if state.justify_draft %}
-        {% set justify_range_value = state.justify_draft.start_verse|string %}
-        {% if state.justify_draft.end_verse != state.justify_draft.start_verse %}
-          {% set justify_range_value = state.justify_draft.start_verse|string ~ "-" ~ state.justify_draft.end_verse|string %}
+        {% if state.justify_draft.verses and state.justify_draft.verses|length > 0 %}
+          {% set justify_range_value = state.justify_draft.verses|join(', ') %}
+        {% else %}
+          {% set justify_range_value = state.justify_draft.start_verse|string %}
+          {% if state.justify_draft.end_verse != state.justify_draft.start_verse %}
+            {% set justify_range_value = state.justify_draft.start_verse|string ~ "-" ~ state.justify_draft.end_verse|string %}
+          {% endif %}
         {% endif %}
       {% endif %}
       {% set footnote_verse_value = state.footnote_draft.verse if state.footnote_draft else (state.chunk_start or 1) %}
@@ -414,7 +418,7 @@
                 hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="entry_id" value="{{ item.id }}">
-                <input type="hidden" name="justify_range" value="{{ item.verse_label }}">
+                <input type="hidden" name="justify_range" value="{{ item.verse_spec }}">
                 <input type="hidden" name="source_term" value="{{ item.source_term }}">
                 <input type="hidden" name="decision" value="{{ item.decision }}">
                 <input type="hidden" name="reason" value="{{ item.reason }}">

@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from ttt_core.utils import normalize_book_key
-from ttt_core.models import FootnoteDraft, PendingFootnoteUpdate
+from ttt_core.models import FootnoteDraft, JustificationDraft, PendingFootnoteUpdate
 
 from .controller import BrowserWorkbench
 
@@ -111,13 +111,50 @@ def render_workspace_error(
     return render_workspace(request, wb, active_tab=active_tab, partial=partial)
 
 
-def _parse_verse_range(raw_value: str, fallback_chunk_key: str) -> tuple[int, int]:
+def _parse_verse_selection(raw_value: str, fallback_chunk_key: str) -> list[int]:
     raw = (raw_value or fallback_chunk_key).strip() or fallback_chunk_key
-    if "-" in raw:
-        left, right = raw.split("-", 1)
-        return int(left.strip()), int(right.strip())
-    verse = int(raw)
-    return verse, verse
+    verses: list[int] = []
+    for part in [item.strip() for item in raw.split(",") if item.strip()]:
+        if "-" in part:
+            left, right = part.split("-", 1)
+            start = int(left.strip())
+            end = int(right.strip())
+            if start > end:
+                raise ValueError("Invalid verse selection. Start verse cannot be greater than end verse.")
+            verses.extend(range(start, end + 1))
+        else:
+            verses.append(int(part))
+    clean = sorted({verse for verse in verses if verse > 0})
+    if clean:
+        return clean
+    if fallback_chunk_key and fallback_chunk_key != raw:
+        return _parse_verse_selection(fallback_chunk_key, "")
+    raise ValueError("Invalid verse selection. Use 5, 5-12, or 5, 7, 9-10.")
+
+
+def _build_justification_draft(
+    *,
+    book: str,
+    chapter: int,
+    verse_spec: str,
+    fallback_chunk_key: str,
+    source_term: str = "",
+    decision: str = "",
+    reason: str = "",
+    entry_id: str | None = None,
+) -> JustificationDraft:
+    verses = _parse_verse_selection(verse_spec, fallback_chunk_key)
+    return JustificationDraft(
+        book=book,
+        chapter=chapter,
+        start_verse=verses[0],
+        end_verse=verses[-1],
+        verses=verses,
+        source_term=source_term,
+        decision=decision,
+        reason=reason,
+        entry_id=entry_id,
+    )
 
 
 @app.get("/workspace/navigate")
@@ -464,27 +501,38 @@ async def justify_stage(
         if action == "cancel":
             wb.cmd_jcancel([])
         elif action == "edit":
-            start_verse, end_verse = _parse_verse_range(
-                str(form.get("justify_range", chunk_key)),
-                chunk_key,
+            wb.state.justify_draft = _build_justification_draft(
+                book=book,
+                chapter=chapter,
+                verse_spec=str(form.get("justify_range", chunk_key)),
+                fallback_chunk_key=chunk_key,
+                entry_id=str(form.get("entry_id", "")).strip() or None,
+                source_term=str(form.get("source_term", "")).strip(),
+                decision=str(form.get("decision", "")).strip(),
+                reason=str(form.get("reason", "")).strip(),
             )
-            wb.cmd_justify([f"{start_verse}-{end_verse}" if start_verse != end_verse else str(start_verse)])
             if wb.state.justify_draft:
-                wb.state.justify_draft.entry_id = str(form.get("entry_id", "")).strip() or None
-                wb.state.justify_draft.source_term = str(form.get("source_term", "")).strip()
-                wb.state.justify_draft.decision = str(form.get("decision", "")).strip()
-                wb.state.justify_draft.reason = str(form.get("reason", "")).strip()
+                wb.state.mode = "JUSTIFY"
+                wb.set_screen("JUSTIFY", mode="JUSTIFY")
+                wb.notify("Justification loaded for editing.")
         else:
             verse_range = str(form.get("justify_range", chunk_key)).strip() or chunk_key
-            wb.cmd_justify([verse_range])
+            wb.state.justify_draft = _build_justification_draft(
+                book=book,
+                chapter=chapter,
+                verse_spec=verse_range,
+                fallback_chunk_key=chunk_key,
+                entry_id=str(form.get("entry_id", "")).strip() or None,
+                source_term=str(form.get("source_term", "")).strip(),
+                decision=str(form.get("decision", "")).strip(),
+                reason=str(form.get("reason", "")).strip(),
+            )
             if wb.state.justify_draft:
+                wb.state.mode = "JUSTIFY"
+                wb.set_screen("JUSTIFY", mode="JUSTIFY")
                 wb.state.justify_custom_prompt = str(
                     form.get("justify_custom_prompt", wb.state.justify_custom_prompt)
                 ).strip()
-                wb.state.justify_draft.source_term = str(form.get("source_term", "")).strip()
-                wb.state.justify_draft.decision = str(form.get("decision", "")).strip()
-                wb.state.justify_draft.reason = str(form.get("reason", "")).strip()
-                wb.state.justify_draft.entry_id = str(form.get("entry_id", "")).strip() or None
                 if action == "stage":
                     wb.cmd_jstage([])
         wb.activate_tab("draft")
