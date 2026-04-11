@@ -365,6 +365,25 @@ class BrowserWorkbench(WorkbenchApp):
         clean = [alias.upper() for alias in aliases if alias.upper() in self.source_repo.catalog]
         self.save_web_settings({"selected_sources": clean})
 
+    def chat_context_sources(self) -> list[str]:
+        values = getattr(self.state, "browser_chat_sources", [])
+        if not isinstance(values, list):
+            return ["draft"]
+        clean: list[str] = []
+        for item in values:
+            value = str(item).strip().lower()
+            if value in {"draft", "original"} and value not in clean:
+                clean.append(value)
+        return clean or []
+
+    def set_chat_context_sources(self, values: list[str]) -> None:
+        clean: list[str] = []
+        for item in values:
+            value = str(item).strip().lower()
+            if value in {"draft", "original"} and value not in clean:
+                clean.append(value)
+        self.state.browser_chat_sources = clean
+
     @staticmethod
     def _legacy_inline_markup_to_html(text: str) -> str:
         clean = str(text or "").replace("\r\n", "\n").replace("\r", "\n")
@@ -1492,9 +1511,40 @@ Rules:
         ]
         for block in blocks:
             lines.append(f"{block['label']} ({block['caption']}):")
-            lines.append(block["text"])
+            block_text = str(block.get("text", "")).strip()
+            if not block_text and block.get("verse_texts"):
+                block_text = "\n".join(
+                    str(item).strip() or "[blank]" for item in block.get("verse_texts", [])
+                ).strip()
+            lines.append(block_text or "[blank]")
             if block.get("gloss"):
                 lines.append(f"  Literal gloss: {block['gloss']}")
+            lines.append("")
+        return "\n".join(lines).strip()
+
+    def original_language_chat_context_snapshot(self) -> str:
+        blocks = [
+            block
+            for block in self.chunk_study_blocks()
+            if str(block.get("kind", "")).strip().lower() in {"hebrew", "greek"}
+        ]
+        if not blocks:
+            return "None."
+        lines = ["Original-language context for the current chunk:"]
+        for block in blocks:
+            label = str(block.get("label", "")).strip() or "Source"
+            caption = str(block.get("caption", "")).strip()
+            lines.append(f"{label}{f' ({caption})' if caption else ''}:")
+            lines.append(str(block.get("text", "")).strip() or "[blank]")
+            gloss_tokens = block.get("gloss_tokens") or []
+            if gloss_tokens:
+                gloss_preview = ", ".join(
+                    f"{str(item.get('surface', '')).strip()}={str(item.get('gloss', '')).strip()}"
+                    for item in gloss_tokens[:20]
+                    if str(item.get("surface", "")).strip() and str(item.get("gloss", "")).strip()
+                )
+                if gloss_preview:
+                    lines.append(f"Gloss aid: {gloss_preview}")
             lines.append("")
         return "\n".join(lines).strip()
 
@@ -1524,6 +1574,33 @@ Rules:
         session = self.current_chunk_session()
         include_context = not bool(session.get("context_loaded"))
         context_block = self.session_context_snapshot() if include_context else ""
+        chat_sources = set(self.chat_context_sources())
+        selected_labels = ", ".join(
+            label
+            for label in (
+                "draft" if "draft" in chat_sources else "",
+                "original languages" if "original" in chat_sources else "",
+            )
+            if label
+        ) or "none"
+        draft_block = (
+            f"""
+
+Current draft for the full chunk (verses {start}-{end}):
+{self.selected_range_draft_text()}
+""".rstrip()
+            if "draft" in chat_sources
+            else ""
+        )
+        original_block = (
+            f"""
+
+Original-language context:
+{self.original_language_chat_context_snapshot()}
+""".rstrip()
+            if "original" in chat_sources
+            else ""
+        )
         return f"""
 You are assisting a Bible translator in a browser-based editorial workbench.
 
@@ -1544,8 +1621,10 @@ Current chunk: {self.state.book} {self.state.chapter}:{start}-{end}
 Current draft title:
 {self.state.draft_title or "[untitled]"}
 
-Current draft for the full chunk (verses {start}-{end}):
-{self.selected_range_draft_text()}
+Chat context sources selected by the user:
+{selected_labels}
+{draft_block}
+{original_block}
 
 Approved terminology ledger:
 {ledger}
@@ -1814,6 +1893,7 @@ User message:
             "comparison_sources": self.comparison_sources(),
             "comparison_source_options": self.comparison_source_options(),
             "selected_sources": self.selected_sources(),
+            "chat_context_sources": self.chat_context_sources(),
             "commit_history": self.commit_history_entries(),
             "model_label": self.model_label,
             "editor_range_start": editor_start,

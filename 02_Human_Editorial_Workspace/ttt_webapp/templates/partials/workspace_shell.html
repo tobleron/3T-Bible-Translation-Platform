@@ -291,12 +291,23 @@
         </div>
         {% endif %}
 
-        <form class="compact-chat-form"
+        <form class="compact-chat-form model-action-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat"
           hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+          <div class="chat-context-picker">
+            <span class="chat-context-label">Include in chat</span>
+            <label class="compact-check">
+              <input type="checkbox" name="chat_context_sources" value="draft" {% if 'draft' in chat_context_sources %}checked{% endif %}>
+              <span>Draft</span>
+            </label>
+            <label class="compact-check">
+              <input type="checkbox" name="chat_context_sources" value="original" {% if 'original' in chat_context_sources %}checked{% endif %}>
+              <span>Original languages</span>
+            </label>
+          </div>
           <textarea name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
-            <button class="primary-button send-button" type="submit">Send</button>
+            <button class="primary-button send-button" type="submit" data-loading-label="Sending...">Send</button>
             <button class="secondary-button clear-button" type="button"
               hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
               hx-target="#workspace-shell" hx-swap="outerHTML"
@@ -318,48 +329,54 @@
           </div>
         </div>
 
-        <form class="editorial-form"
+        <form class="editorial-form model-action-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editorial"
           hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-          <label class="compact-field">
-            <span>Input</span>
-            <textarea id="editorial-input" name="editorial_input" rows="4" placeholder="Paste a sentence, footnote, or justification prose here.">{{ editorial_input }}</textarea>
-          </label>
+          <div class="editorial-tab-bar">
+            <button class="tab-button is-active" type="button" data-editorial-tab="run" onclick="switchEditorialTab(this, 'run')">Run</button>
+            <button class="tab-button" type="button" data-editorial-tab="prompts" onclick="switchEditorialTab(this, 'prompts')">Prompts</button>
+          </div>
 
-          <details class="editorial-prompts">
-            <summary>Edit prompts</summary>
+          <section class="editorial-tab-panel is-active" data-editorial-panel="run">
+            <label class="compact-field">
+              <span>Input</span>
+              <textarea id="editorial-input" name="editorial_input" rows="4" placeholder="Paste a sentence, footnote, or justification prose here.">{{ editorial_input }}</textarea>
+            </label>
+
+            <div class="editorial-actions">
+              <button class="secondary-button" type="submit" name="action" value="grammar" data-loading-label="Improving...">Grammar Only</button>
+              <button class="secondary-button" type="submit" name="action" value="concise" data-loading-label="Condensing...">Concise</button>
+              <button class="secondary-button" type="submit" name="action" value="scholarly" data-loading-label="Rephrasing...">Scholarly</button>
+              <button class="secondary-button" type="submit" name="action" value="clear">Clear</button>
+            </div>
+
+            {% if editorial_output %}
+            <label class="compact-field editorial-output-field">
+              <span>{{ editorial_output_label or "Editorial output" }}</span>
+              <textarea id="editorial-output" rows="4" readonly>{{ editorial_output }}</textarea>
+            </label>
+            <div class="editorial-actions">
+              <button class="secondary-button" type="button" onclick="copyEditorialOutput()">Copy Output</button>
+            </div>
+            {% endif %}
+          </section>
+
+          <section class="editorial-tab-panel" data-editorial-panel="prompts" hidden>
             <div class="editorial-prompt-grid">
               <label class="compact-field">
                 <span>Grammar only</span>
-                <textarea id="editorial-prompt-grammar" name="editorial_prompt_grammar" rows="4">{{ editorial_prompts.grammar }}</textarea>
+                <textarea id="editorial-prompt-grammar" name="editorial_prompt_grammar" rows="5">{{ editorial_prompts.grammar }}</textarea>
               </label>
               <label class="compact-field">
                 <span>Concise rewrite</span>
-                <textarea id="editorial-prompt-concise" name="editorial_prompt_concise" rows="4">{{ editorial_prompts.concise }}</textarea>
+                <textarea id="editorial-prompt-concise" name="editorial_prompt_concise" rows="5">{{ editorial_prompts.concise }}</textarea>
               </label>
               <label class="compact-field">
                 <span>Scholarly rewrite</span>
-                <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="4">{{ editorial_prompts.scholarly }}</textarea>
+                <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="5">{{ editorial_prompts.scholarly }}</textarea>
               </label>
             </div>
-          </details>
-
-          <div class="editorial-actions">
-            <button class="secondary-button" type="submit" name="action" value="grammar">Grammar Only</button>
-            <button class="secondary-button" type="submit" name="action" value="concise">Concise</button>
-            <button class="secondary-button" type="submit" name="action" value="scholarly">Scholarly</button>
-            <button class="secondary-button" type="submit" name="action" value="clear">Clear</button>
-          </div>
-
-          {% if editorial_output %}
-          <label class="compact-field editorial-output-field">
-            <span>{{ editorial_output_label or "Editorial output" }}</span>
-            <textarea id="editorial-output" rows="4" readonly>{{ editorial_output }}</textarea>
-          </label>
-          <div class="editorial-actions">
-            <button class="secondary-button" type="button" onclick="copyEditorialOutput()">Copy Output</button>
-          </div>
-          {% endif %}
+          </section>
         </form>
       </article>
 
@@ -423,8 +440,6 @@
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
-              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'scholarly')" title="Scholarly rewrite">S</button>
-              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'custom')" title="Custom tweak">?</button>
               <span class="support-format-hint">Applies to the focused field.</span>
             </div>
             <div class="support-grid support-grid-justify">
@@ -446,6 +461,10 @@
               <span>Custom tweak prompt</span>
               <input type="text" name="justify_custom_prompt" value="{{ state.justify_custom_prompt }}" placeholder="Example: Make this more cautious and formal.">
             </label>
+            <div class="support-enhancement-actions">
+              <button class="secondary-button support-enhance-button" type="button" onclick="enhanceSupportField(this, 'scholarly')" data-loading-label="Rephrasing...">Scholarly</button>
+              <button class="secondary-button support-enhance-button" type="button" onclick="enhanceSupportField(this, 'custom')" data-loading-label="Tweaking...">Apply Custom Prompt</button>
+            </div>
             <label class="compact-field">
               <span>Reason</span>
               <textarea name="reason" rows="4" placeholder="Why this rendering is right for the selected verse(s)." data-inline-format-field data-inline-format-default>{{ state.justify_draft.reason if state.justify_draft else '' }}</textarea>
@@ -513,8 +532,6 @@
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
-              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'scholarly')" title="Scholarly rewrite">S</button>
-              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'custom')" title="Custom tweak">?</button>
               <span class="support-format-hint">Applies to the focused field.</span>
             </div>
             <div class="support-grid support-grid-footnote">
@@ -535,6 +552,10 @@
               <span>Custom tweak prompt</span>
               <input type="text" name="footnote_custom_prompt" value="{{ state.footnote_custom_prompt }}" placeholder="Example: Make this shorter and more formal.">
             </label>
+            <div class="support-enhancement-actions">
+              <button class="secondary-button support-enhance-button" type="button" onclick="enhanceSupportField(this, 'scholarly')" data-loading-label="Rephrasing...">Scholarly</button>
+              <button class="secondary-button support-enhance-button" type="button" onclick="enhanceSupportField(this, 'custom')" data-loading-label="Tweaking...">Apply Custom Prompt</button>
+            </div>
             <label class="compact-field">
               <span>Content</span>
               <textarea name="footnote_content" rows="3" placeholder="Short footer note." data-inline-format-field data-inline-format-default>{{ state.footnote_draft.content if state.footnote_draft else '' }}</textarea>
@@ -584,6 +605,7 @@ document.addEventListener('htmx:afterSettle', function() {
   }
   initGlossTooltips();
   initSupportFormattingTools();
+  initModelActionForms();
   // Restore last copied indicator after HTMX swap
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
   if (lastCopied) {
@@ -599,6 +621,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (sel) sel.value = fontSize;
   initGlossTooltips();
   initSupportFormattingTools();
+  initModelActionForms();
   // Restore last copied indicator from session storage
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
   if (lastCopied) {
@@ -905,6 +928,47 @@ function showWorkspaceIndicator(message) {
   clearTimeout(showWorkspaceIndicator._timer);
   showWorkspaceIndicator._timer = setTimeout(function() { indicator.style.display = 'none'; }, 3000);
 }
+function setModelButtonBusy(button, loadingLabel) {
+  if (!button) return null;
+  if (!button.dataset.originalLabel) {
+    button.dataset.originalLabel = button.textContent;
+  }
+  button.disabled = true;
+  button.classList.add('is-loading');
+  button.textContent = loadingLabel || 'Working...';
+  return {
+    restore: function() {
+      button.disabled = false;
+      button.classList.remove('is-loading');
+      button.textContent = button.dataset.originalLabel || button.textContent;
+    }
+  };
+}
+function initModelActionForms() {
+  document.querySelectorAll('.model-action-form').forEach(function(form) {
+    if (form.dataset.modelActionBound === '1') return;
+    form.dataset.modelActionBound = '1';
+    form.addEventListener('submit', function(event) {
+      var submitter = event.submitter;
+      if (!submitter) return;
+      var label = submitter.getAttribute('data-loading-label');
+      if (!label) return;
+      setModelButtonBusy(submitter, label);
+    });
+  });
+}
+function switchEditorialTab(button, tabName) {
+  var form = button.closest('.editorial-form');
+  if (!form) return;
+  form.querySelectorAll('[data-editorial-tab]').forEach(function(tabButton) {
+    tabButton.classList.toggle('is-active', tabButton === button);
+  });
+  form.querySelectorAll('[data-editorial-panel]').forEach(function(panel) {
+    var active = panel.getAttribute('data-editorial-panel') === tabName;
+    panel.hidden = !active;
+    panel.classList.toggle('is-active', active);
+  });
+}
 function currentEditorialPromptValues() {
   return {
     grammar: (document.getElementById('editorial-prompt-grammar') || {}).value || '',
@@ -937,7 +1001,7 @@ function enhanceEditorVerse(btn, mode) {
   var row = btn.closest('.verse-editor-row');
   var field = row ? row.querySelector('.verse-editor-textarea') : null;
   if (!field) return;
-  btn.disabled = true;
+  var busy = setModelButtonBusy(btn, '...');
   runEnhancementRequest({
     mode: mode,
     context_label: 'Bible draft verse',
@@ -949,7 +1013,7 @@ function enhanceEditorVerse(btn, mode) {
   }).catch(function(err) {
     showWorkspaceIndicator(err.message || 'Enhancement failed.');
   }).finally(function() {
-    btn.disabled = false;
+    if (busy) busy.restore();
   });
 }
 function enhanceSupportField(trigger, mode) {
@@ -961,7 +1025,7 @@ function enhanceSupportField(trigger, mode) {
   var contextLabel = form.querySelector('[name="reason"]')
     ? 'translation justification prose'
     : 'translation footnote prose';
-  trigger.disabled = true;
+  var busy = setModelButtonBusy(trigger, trigger.getAttribute('data-loading-label') || 'Working...');
   runEnhancementRequest({
     mode: mode,
     context_label: contextLabel,
@@ -974,7 +1038,7 @@ function enhanceSupportField(trigger, mode) {
   }).catch(function(err) {
     showWorkspaceIndicator(err.message || 'Enhancement failed.');
   }).finally(function() {
-    trigger.disabled = false;
+    if (busy) busy.restore();
   });
 }
 function copyEditorialOutput() {

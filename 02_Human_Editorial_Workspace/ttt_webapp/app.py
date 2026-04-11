@@ -383,6 +383,7 @@ async def chat_turn(
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         apply_draft_form(wb, form)
+        wb.set_chat_context_sources(form.getlist("chat_context_sources"))
         wb.activate_tab("draft")
         if message:
             wb.state.mode = "CHAT"

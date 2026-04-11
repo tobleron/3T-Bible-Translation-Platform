@@ -1058,6 +1058,29 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
 .chat-bridge-empty strong {
   color: var(--text);
 }
+.chat-context-picker {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.chat-context-label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.compact-check {
+  display: inline-flex;
+  gap: 0.38rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.compact-check input {
+  margin: 0;
+}
 .editorial-panel {
   display: grid;
   gap: 0.9rem;
@@ -1066,25 +1089,22 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   display: grid;
   gap: 0.8rem;
 }
-.editorial-prompts {
-  padding-top: 0.15rem;
+.editorial-tab-bar {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.editorial-prompts summary {
-  list-style: none;
-  color: var(--accent-soft);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.editorial-prompts summary::-webkit-details-marker {
+.editorial-tab-panel {
   display: none;
+  gap: 0.8rem;
+}
+.editorial-tab-panel.is-active {
+  display: grid;
 }
 .editorial-prompt-grid {
   display: grid;
   gap: 0.7rem;
-  margin-top: 0.7rem;
 }
 .editorial-actions {
   display: flex;
@@ -1094,6 +1114,12 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
 }
 .editorial-output-field textarea[readonly] {
   background: rgba(255,255,255,0.03);
+}
+.model-action-form button.is-loading,
+.mini-tool-button.is-loading,
+.support-enhance-button.is-loading {
+  opacity: 0.8;
+  cursor: wait;
 }
 
 .support-panel {
@@ -1277,6 +1303,15 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   gap: 0.65rem;
   align-items: center;
   flex-wrap: wrap;
+}
+.support-enhancement-actions {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.support-enhance-button {
+  padding: 0.42rem 0.72rem;
 }
 .support-preview {
   display: grid;
