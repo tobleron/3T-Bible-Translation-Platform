@@ -30,6 +30,7 @@ def load_config(project_root: Path | None = None) -> dict[str, Any]:
     if project_root is None:
         project_root = _detect_project_root()
 
+    _load_dotenv(project_root / ".env")
     cfg = _defaults()
 
     # 3. Legacy workbench config (fallback)
@@ -129,3 +130,17 @@ def _apply_env_overrides(cfg: dict[str, Any]) -> dict[str, Any]:
     if os.environ.get("TTT_OPENAI_API_KEY"):
         cfg.setdefault("openai", {})["api_key"] = os.environ["TTT_OPENAI_API_KEY"]
     return cfg
+
+def _load_dotenv(path: Path) -> None:
+    """Very simple .env loader if python-dotenv is not installed."""
+    if not path.exists():
+        return
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" in line:
+                key, val = line.split("=", 1)
+                # setdefault ensures that explicitly set ENV vars override .env
+                os.environ.setdefault(key.strip(), val.strip())

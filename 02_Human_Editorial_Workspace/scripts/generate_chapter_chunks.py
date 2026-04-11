@@ -432,6 +432,7 @@ Rules:
                 "updated_at": utc_now(),
             }
             self.save_manifest()
+            self.consecutive_failures = 0
             return
 
         prompt = self.build_prompt(target)
