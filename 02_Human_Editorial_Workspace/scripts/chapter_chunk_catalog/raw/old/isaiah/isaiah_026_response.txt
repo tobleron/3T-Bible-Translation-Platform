@@ -11,21 +11,21 @@
       "end_verse": 6,
       "type": "psalm",
       "title": "Song of the Strong City",
-      "reason": "A hymn celebrating God's salvation and the judgment of the proud city."
+      "reason": "A hymn celebrating God's salvation and the downfall of the proud city."
     },
     {
       "start_verse": 7,
       "end_verse": 12,
-      "type": "prayer",
-      "title": "Prayer for Righteous Paths",
-      "reason": "A prayer acknowledging God's judgments and asking for peace."
+      "type": "speech",
+      "title": "Trust in Yahweh's Judgments",
+      "reason": "A prayer expressing trust in God's upright path and His establishment of peace."
     },
     {
       "start_verse": 13,
       "end_verse": 18,
       "type": "argument",
-      "title": "Contrast of Masters and Birth Pangs",
-      "reason": "A reflection on past idols versus God's power, using a metaphor of labor pains."
+      "title": "God Alone is Master",
+      "reason": "A theological reflection contrasting God's rule with other masters and the people's spiritual labor."
     },
     {
       "start_verse": 19,

@@ -1,1 +1,45 @@
-[ERROR] llama.cpp HTTP 401: {"error": {"message": "Invalid or missing API key. Use: Authorization: Bearer <your-key>", "type": "authentication_error", "code": 401}}
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "exhortation",
+      "title": "Call to Remember the Fathers",
+      "reason": "Invites listeners to recall Abraham and Sarah as a foundation for future hope."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Promise of Eternal Righteousness",
+      "reason": "Declares God's law and justice as eternal compared to the temporary nature of human foes."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "poem",
+      "title": "Awakening of Divine Strength",
+      "reason": "A poetic call to recall past victories over chaos and the return of the redeemed."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 16,
+      "type": "argument",
+      "title": "Comfort Against Fear",
+      "reason": "God argues against human fear by emphasizing His creative power and eternal presence."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Judgment on Jerusalem and Her Oppressors",
+      "reason": "Describes Jerusalem's suffering with the cup of wrath and God's promise to transfer it to her enemies."
+    }
+  ]
+}

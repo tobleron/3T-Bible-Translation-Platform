@@ -1,0 +1,60 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Hosea 1:1-11
+
+Chapter text:
+1. The word of Yahweh which came to Hosea the son of Beeri, in the days of Uzziah, Jotham, Ahaz, and Hezekiah, kings of Judah, and in the days of Jeroboam the son of Joash, king of Israel.
+2. When Yahweh first spoke through Hosea, Yahweh said to Hosea, “Go, take for yourself a wife of harlotry and have children of harlotry; for the land commits flagrant harlotry, forsaking Yahweh.”
+3. So he went and took Gomer the daughter of Diblaim, and she conceived and gave birth to a son for him.
+4. And Yahweh said to him, “Name him Jezreel; for yet a little while, and I will visit the bloodshed of Jezreel upon the house of Jehu, and I will cause the kingdom of the house of Israel to cease.
+5. And it will be in that day, that I will break the bow of Israel in the valley of Jezreel.”
+6. Then she conceived again and gave birth to a daughter. And Yahweh said to him, “Name her Lo-ruhamah, for I will no longer have compassion on the house of Israel, that I would ever forgive them.
+7. But I will have compassion on the house of Judah and save them by Yahweh their God, and I will not save them by bow, sword, battle, horses, or horsemen.”
+8. Then she weaned Lo-ruhamah. And she conceived and gave birth to a son.
+9. And Yahweh said, “Name him Lo-ammi, for you are not My people, and I am not your God.”
+10. Yet the number of the sons of Israel Will be like the sand of the sea, Which cannot be measured or numbered; And it will be that in the place Where it is said to them, “You are not My people,” It will be said to them, “You are the sons of the living God.”
+11. And the sons of Judah and the sons of Israel will be gathered together, And they will set for themselves one head, And they will go up from the land, For great will be the day of Jezreel.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

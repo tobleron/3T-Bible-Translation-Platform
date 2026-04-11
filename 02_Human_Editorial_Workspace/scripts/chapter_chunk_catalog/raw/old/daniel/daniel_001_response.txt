@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Daniel and Friends Taken to Babylon",
+      "reason": "Describes the siege of Jerusalem, the selection of youths, and their renaming."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Daniel's Dietary Test",
+      "reason": "Contains Daniel's request for vegetables and the subsequent ten-day trial."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Success Before the King",
+      "reason": "Summarizes their wisdom, standing before Nebuchadnezzar, and Daniel's longevity."
+    }
+  ]
+}

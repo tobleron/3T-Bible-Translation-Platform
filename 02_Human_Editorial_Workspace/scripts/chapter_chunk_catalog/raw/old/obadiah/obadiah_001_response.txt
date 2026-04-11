@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "vision",
+      "title": "Vision of Yahweh against Edom",
+      "reason": "The opening vision declaring God's judgment on Edom's arrogance."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Oracle of Total Ruin",
+      "reason": "A prophetic oracle detailing the complete destruction and shame awaiting Edom."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Exhortation on Edom's Betrayal",
+      "reason": "Specific commands to the Edomites regarding their hostile actions during Jerusalem's calamity."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "argument",
+      "title": "Argument of Retribution and Restoration",
+      "reason": "The theological conclusion regarding the Day of Yahweh, judgment on nations, and restoration for Jacob."
+    }
+  ]
+}

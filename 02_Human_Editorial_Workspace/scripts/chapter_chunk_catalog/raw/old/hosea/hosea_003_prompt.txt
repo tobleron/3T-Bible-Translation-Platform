@@ -1,0 +1,54 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Hosea 3:1-5
+
+Chapter text:
+1. Then Yahweh said to me, “Go again, love a woman who is loved by her companion and is an adulteress, even as Yahweh loves the sons of Israel, though they turn to other gods and love raisin cakes.”
+2. So I bargained for her for myself for fifteen shekels of silver and a homer and a half of barley.
+3. Then I said to her, “You shall stay with me for many days. You shall not play the harlot, nor shall you have a man; so I will also be toward you.”
+4. For the sons of Israel will remain for many days without king or prince, without sacrifice or sacred pillar, and without ephod or household idols.
+5. Afterward the sons of Israel will return and seek Yahweh their God and David their king; and they will come in dread to Yahweh and to His goodness in the last days.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

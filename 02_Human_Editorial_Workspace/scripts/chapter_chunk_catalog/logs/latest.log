@@ -4703,3 +4703,1039 @@
 [2026-04-11T13:42:18Z] DONE Philemon 1: 3 chunks | attempts=1 | target=catalog
 [2026-04-11T13:42:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/new/philemon/philemon_001_chunks.json
 [2026-04-11T13:42:18Z] Run complete.
+[2026-04-11T13:44:44Z] Run start: 1189 chapters | model=Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf | endpoint=http://192.168.1.186:8081/v1
+[2026-04-11T13:44:44Z] SKIP Genesis 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 22: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 23: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 24: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 25: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 26: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 27: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 28: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 29: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 30: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 31: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 32: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 33: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 34: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 35: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 36: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 37: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 38: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 39: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 40: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 41: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 42: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 43: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 44: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 45: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 46: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 47: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 48: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 49: output already exists
+[2026-04-11T13:44:44Z] SKIP Genesis 50: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 22: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 23: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 24: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 25: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 26: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 27: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 28: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 29: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 30: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 31: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 32: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 33: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 34: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 35: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 36: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 37: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 38: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 39: output already exists
+[2026-04-11T13:44:44Z] SKIP Exodus 40: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 22: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 23: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 24: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 25: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 26: output already exists
+[2026-04-11T13:44:44Z] SKIP Leviticus 27: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 22: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 23: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 24: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 25: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 26: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 27: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 28: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 29: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 30: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 31: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 32: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 33: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 34: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 35: output already exists
+[2026-04-11T13:44:44Z] SKIP Numbers 36: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 22: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 23: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 24: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 25: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 26: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 27: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 28: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 29: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 30: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 31: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 32: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 33: output already exists
+[2026-04-11T13:44:44Z] SKIP Deuteronomy 34: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 22: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 23: output already exists
+[2026-04-11T13:44:44Z] SKIP Joshua 24: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 15: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 16: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 17: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 18: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 19: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 20: output already exists
+[2026-04-11T13:44:44Z] SKIP Judges 21: output already exists
+[2026-04-11T13:44:44Z] SKIP Ruth 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Ruth 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Ruth 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Ruth 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 1: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 2: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 3: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 5: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 6: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 7: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 8: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 9: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 10: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 11: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 12: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 13: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 14: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 15: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 16: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 17: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 18: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 19: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 20: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 21: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 22: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 23: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 24: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 25: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 26: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 27: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 28: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 29: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 30: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Samuel 31: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 1: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 2: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 3: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 5: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 6: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 7: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 8: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 9: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 10: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 11: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 12: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 13: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 14: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 15: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 16: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 17: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 18: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 19: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 20: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 21: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 22: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 23: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Samuel 24: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 1: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 2: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 3: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 5: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 6: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 7: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 8: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 9: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 10: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 11: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 12: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 13: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 14: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 15: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 16: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 17: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 18: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 19: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 20: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 21: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Kings 22: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 1: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 2: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 3: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 5: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 6: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 7: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 8: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 9: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 10: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 11: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 12: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 13: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 14: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 15: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 16: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 17: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 18: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 19: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 20: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 21: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 22: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 23: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 24: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Kings 25: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 1: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 2: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 3: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 5: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 6: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 7: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 8: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 9: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 10: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 11: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 12: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 13: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 14: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 15: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 16: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 17: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 18: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 19: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 20: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 21: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 22: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 23: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 24: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 25: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 26: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 27: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 28: output already exists
+[2026-04-11T13:44:44Z] SKIP 1 Chronicles 29: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 1: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 2: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 3: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 4: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 5: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 6: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 7: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 8: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 9: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 10: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 11: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 12: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 13: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 14: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 15: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 16: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 17: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 18: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 19: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 20: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 21: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 22: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 23: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 24: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 25: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 26: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 27: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 28: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 29: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 30: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 31: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 32: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 33: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 34: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 35: output already exists
+[2026-04-11T13:44:44Z] SKIP 2 Chronicles 36: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Ezra 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Nehemiah 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Esther 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 1: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 2: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 3: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 4: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 5: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 6: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 7: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 8: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 9: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 10: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 11: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 12: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 13: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 14: output already exists
+[2026-04-11T13:44:44Z] SKIP Job 15: output already exists
+[2026-04-11T13:44:44Z] START Job 16 (1-22)
+[2026-04-11T13:44:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/job/job_016_prompt.txt
+[2026-04-11T13:46:07Z] DONE Job 16: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T13:46:07Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/job/job_016_chunks.json
+[2026-04-11T13:46:07Z] SKIP Job 17: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 18: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 19: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 20: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 21: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 22: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 23: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 24: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 25: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 26: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 27: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 28: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 29: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 30: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 31: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 32: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 33: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 34: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 35: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 36: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 37: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 38: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 39: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 40: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 41: output already exists
+[2026-04-11T13:46:07Z] SKIP Job 42: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 1: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 2: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 3: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 4: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 5: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 6: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 7: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 8: output already exists
+[2026-04-11T13:46:07Z] SKIP Psalms 9: output already exists
+[2026-04-11T13:46:07Z] START Psalms 10 (1-18)
+[2026-04-11T13:46:07Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/psalms/psalms_010_prompt.txt
+[2026-04-11T13:47:31Z] DONE Psalms 10: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T13:47:31Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/psalms/psalms_010_chunks.json
+[2026-04-11T13:47:31Z] SKIP Psalms 11: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 12: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 13: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 14: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 15: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 16: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 17: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 18: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 19: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 20: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 21: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 22: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 23: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 24: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 25: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 26: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 27: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 28: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 29: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 30: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 31: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 32: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 33: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 34: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 35: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 36: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 37: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 38: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 39: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 40: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 41: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 42: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 43: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 44: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 45: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 46: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 47: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 48: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 49: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 50: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 51: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 52: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 53: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 54: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 55: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 56: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 57: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 58: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 59: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 60: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 61: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 62: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 63: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 64: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 65: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 66: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 67: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 68: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 69: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 70: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 71: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 72: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 73: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 74: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 75: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 76: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 77: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 78: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 79: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 80: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 81: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 82: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 83: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 84: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 85: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 86: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 87: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 88: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 89: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 90: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 91: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 92: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 93: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 94: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 95: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 96: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 97: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 98: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 99: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 100: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 101: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 102: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 103: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 104: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 105: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 106: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 107: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 108: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 109: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 110: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 111: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 112: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 113: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 114: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 115: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 116: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 117: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 118: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 119: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 120: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 121: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 122: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 123: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 124: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 125: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 126: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 127: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 128: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 129: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 130: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 131: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 132: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 133: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 134: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 135: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 136: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 137: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 138: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 139: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 140: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 141: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 142: output already exists
+[2026-04-11T13:47:31Z] SKIP Psalms 143: output already exists
+[2026-04-11T13:47:31Z] START Psalms 144 (1-15)
+[2026-04-11T13:47:31Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/psalms/psalms_144_prompt.txt
+[2026-04-11T13:47:51Z] FAIL Psalms 144: Chunk 3 uses invalid type 'prayer'. | consecutive_failures=1
+[2026-04-11T13:47:51Z] SKIP Psalms 145: output already exists
+[2026-04-11T13:47:51Z] SKIP Psalms 146: output already exists
+[2026-04-11T13:47:51Z] SKIP Psalms 147: output already exists
+[2026-04-11T13:47:51Z] SKIP Psalms 148: output already exists
+[2026-04-11T13:47:51Z] SKIP Psalms 149: output already exists
+[2026-04-11T13:47:51Z] SKIP Psalms 150: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 1: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 2: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 3: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 4: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 5: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 6: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 7: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 8: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 9: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 10: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 11: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 12: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 13: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 14: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 15: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 16: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 17: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 18: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 19: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 20: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 21: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 22: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 23: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 24: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 25: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 26: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 27: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 28: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 29: output already exists
+[2026-04-11T13:47:51Z] SKIP Proverbs 30: output already exists
+[2026-04-11T13:47:51Z] START Proverbs 31 (1-31)
+[2026-04-11T13:47:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/proverbs/proverbs_031_prompt.txt
+[2026-04-11T13:48:06Z] FAIL Proverbs 31: Chunk 2 uses invalid type 'poem'. | consecutive_failures=1
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 1: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 2: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 3: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 4: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 5: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 6: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 7: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 8: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 9: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 10: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 11: output already exists
+[2026-04-11T13:48:06Z] SKIP Ecclesiastes 12: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 1: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 2: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 3: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 4: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 5: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 6: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 7: output already exists
+[2026-04-11T13:48:06Z] SKIP Song of Solomon 8: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 1: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 2: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 3: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 4: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 5: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 6: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 7: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 8: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 9: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 10: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 11: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 12: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 13: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 14: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 15: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 16: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 17: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 18: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 19: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 20: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 21: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 22: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 23: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 24: output already exists
+[2026-04-11T13:48:06Z] SKIP Isaiah 25: output already exists
+[2026-04-11T13:48:06Z] START Isaiah 26 (1-21)
+[2026-04-11T13:48:06Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/isaiah/isaiah_026_prompt.txt
+[2026-04-11T13:49:34Z] DONE Isaiah 26: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T13:49:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/isaiah/isaiah_026_chunks.json
+[2026-04-11T13:49:34Z] SKIP Isaiah 27: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 28: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 29: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 30: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 31: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 32: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 33: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 34: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 35: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 36: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 37: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 38: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 39: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 40: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 41: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 42: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 43: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 44: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 45: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 46: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 47: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 48: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 49: output already exists
+[2026-04-11T13:49:34Z] SKIP Isaiah 50: output already exists
+[2026-04-11T13:49:34Z] START Isaiah 51 (1-23)
+[2026-04-11T13:49:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/isaiah/isaiah_051_prompt.txt
+[2026-04-11T13:51:07Z] FAIL Isaiah 51: Chunk 3 uses invalid type 'poem'. | consecutive_failures=1
+[2026-04-11T13:51:07Z] SKIP Isaiah 52: output already exists
+[2026-04-11T13:51:07Z] SKIP Isaiah 53: output already exists
+[2026-04-11T13:51:07Z] SKIP Isaiah 54: output already exists
+[2026-04-11T13:51:07Z] SKIP Isaiah 55: output already exists
+[2026-04-11T13:51:07Z] SKIP Isaiah 56: output already exists
+[2026-04-11T13:51:07Z] START Isaiah 57 (1-21)
+[2026-04-11T13:51:07Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/isaiah/isaiah_057_prompt.txt
+[2026-04-11T13:52:32Z] DONE Isaiah 57: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T13:52:32Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/isaiah/isaiah_057_chunks.json
+[2026-04-11T13:52:32Z] SKIP Isaiah 58: output already exists
+[2026-04-11T13:52:32Z] SKIP Isaiah 59: output already exists
+[2026-04-11T13:52:32Z] SKIP Isaiah 60: output already exists
+[2026-04-11T13:52:32Z] SKIP Isaiah 61: output already exists
+[2026-04-11T13:52:32Z] SKIP Isaiah 62: output already exists
+[2026-04-11T13:52:32Z] SKIP Isaiah 63: output already exists
+[2026-04-11T13:52:32Z] SKIP Isaiah 64: output already exists
+[2026-04-11T13:52:33Z] SKIP Isaiah 65: output already exists
+[2026-04-11T13:52:33Z] SKIP Isaiah 66: output already exists
+[2026-04-11T13:52:33Z] SKIP Jeremiah 1: output already exists
+[2026-04-11T13:52:33Z] SKIP Jeremiah 2: output already exists
+[2026-04-11T13:52:33Z] SKIP Jeremiah 3: output already exists
+[2026-04-11T13:52:33Z] SKIP Jeremiah 4: output already exists
+[2026-04-11T13:52:33Z] SKIP Jeremiah 5: output already exists
+[2026-04-11T13:52:33Z] START Jeremiah 6 (1-30)
+[2026-04-11T13:52:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/jeremiah/jeremiah_006_prompt.txt
+[2026-04-11T13:52:58Z] FAIL Jeremiah 6: Chunk 5 uses invalid type 'metaphor'. | consecutive_failures=1
+[2026-04-11T13:52:58Z] SKIP Jeremiah 7: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 8: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 9: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 10: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 11: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 12: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 13: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 14: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 15: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 16: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 17: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 18: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 19: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 20: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 21: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 22: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 23: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 24: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 25: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 26: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 27: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 28: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 29: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 30: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 31: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 32: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 33: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 34: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 35: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 36: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 37: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 38: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 39: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 40: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 41: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 42: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 43: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 44: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 45: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 46: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 47: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 48: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 49: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 50: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 51: output already exists
+[2026-04-11T13:52:58Z] SKIP Jeremiah 52: output already exists
+[2026-04-11T13:52:58Z] SKIP Lamentations 1: output already exists
+[2026-04-11T13:52:58Z] SKIP Lamentations 2: output already exists
+[2026-04-11T13:52:58Z] SKIP Lamentations 3: output already exists
+[2026-04-11T13:52:58Z] SKIP Lamentations 4: output already exists
+[2026-04-11T13:52:58Z] SKIP Lamentations 5: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 1: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 2: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 3: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 4: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 5: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 6: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 7: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 8: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 9: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 10: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 11: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 12: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 13: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 14: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 15: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 16: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 17: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 18: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 19: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 20: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 21: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 22: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 23: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 24: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 25: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 26: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 27: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 28: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 29: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 30: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 31: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 32: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 33: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 34: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 35: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 36: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 37: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 38: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 39: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 40: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 41: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 42: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 43: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 44: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 45: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 46: output already exists
+[2026-04-11T13:52:58Z] SKIP Ezekiel 47: output already exists
+[2026-04-11T13:52:58Z] START Ezekiel 48 (1-35)
+[2026-04-11T13:52:58Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/ezekiel/ezekiel_048_prompt.txt
+[2026-04-11T13:54:14Z] DONE Ezekiel 48: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T13:54:14Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/ezekiel/ezekiel_048_chunks.json
+[2026-04-11T13:54:14Z] START Daniel 1 (1-21)
+[2026-04-11T13:54:14Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_001_prompt.txt
+[2026-04-11T13:55:38Z] DONE Daniel 1: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T13:55:38Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_001_chunks.json
+[2026-04-11T13:55:38Z] START Daniel 2 (1-49)
+[2026-04-11T13:55:38Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_002_prompt.txt
+[2026-04-11T13:57:18Z] DONE Daniel 2: 5 chunks | attempts=2 | target=catalog
+[2026-04-11T13:57:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_002_chunks.json
+[2026-04-11T13:57:18Z] START Daniel 3 (1-30)
+[2026-04-11T13:57:18Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_003_prompt.txt
+[2026-04-11T13:58:57Z] DONE Daniel 3: 6 chunks | attempts=2 | target=catalog
+[2026-04-11T13:58:57Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_003_chunks.json
+[2026-04-11T13:58:57Z] START Daniel 4 (1-37)
+[2026-04-11T13:58:57Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_004_prompt.txt
+[2026-04-11T14:00:33Z] DONE Daniel 4: 5 chunks | attempts=2 | target=catalog
+[2026-04-11T14:00:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_004_chunks.json
+[2026-04-11T14:00:33Z] START Daniel 5 (1-31)
+[2026-04-11T14:00:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_005_prompt.txt
+[2026-04-11T14:04:57Z] DONE Daniel 5: 7 chunks | attempts=2 | target=catalog
+[2026-04-11T14:04:57Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_005_chunks.json
+[2026-04-11T14:04:57Z] START Daniel 6 (1-28)
+[2026-04-11T14:04:57Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_006_prompt.txt
+[2026-04-11T14:06:34Z] DONE Daniel 6: 6 chunks | attempts=2 | target=catalog
+[2026-04-11T14:06:34Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_006_chunks.json
+[2026-04-11T14:06:34Z] START Daniel 7 (1-28)
+[2026-04-11T14:06:34Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_007_prompt.txt
+[2026-04-11T14:08:08Z] DONE Daniel 7: 5 chunks | attempts=2 | target=catalog
+[2026-04-11T14:08:08Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_007_chunks.json
+[2026-04-11T14:08:08Z] START Daniel 8 (1-27)
+[2026-04-11T14:08:08Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_008_prompt.txt
+[2026-04-11T14:09:35Z] DONE Daniel 8: 2 chunks | attempts=2 | target=catalog
+[2026-04-11T14:09:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_008_chunks.json
+[2026-04-11T14:09:35Z] START Daniel 9 (1-27)
+[2026-04-11T14:09:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_009_prompt.txt
+[2026-04-11T14:11:06Z] DONE Daniel 9: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:11:06Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_009_chunks.json
+[2026-04-11T14:11:06Z] START Daniel 10 (1-21)
+[2026-04-11T14:11:06Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_010_prompt.txt
+[2026-04-11T14:12:33Z] DONE Daniel 10: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:12:33Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_010_chunks.json
+[2026-04-11T14:12:33Z] START Daniel 11 (1-45)
+[2026-04-11T14:12:33Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_011_prompt.txt
+[2026-04-11T14:14:18Z] DONE Daniel 11: 6 chunks | attempts=2 | target=catalog
+[2026-04-11T14:14:18Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_011_chunks.json
+[2026-04-11T14:14:18Z] START Daniel 12 (1-13)
+[2026-04-11T14:14:18Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/daniel/daniel_012_prompt.txt
+[2026-04-11T14:15:44Z] DONE Daniel 12: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:15:44Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/daniel/daniel_012_chunks.json
+[2026-04-11T14:15:44Z] START Hosea 1 (1-11)
+[2026-04-11T14:15:44Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_001_prompt.txt
+[2026-04-11T14:17:14Z] DONE Hosea 1: 5 chunks | attempts=2 | target=catalog
+[2026-04-11T14:17:14Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_001_chunks.json
+[2026-04-11T14:17:14Z] START Hosea 2 (1-23)
+[2026-04-11T14:17:14Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_002_prompt.txt
+[2026-04-11T14:18:38Z] DONE Hosea 2: 2 chunks | attempts=2 | target=catalog
+[2026-04-11T14:18:38Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_002_chunks.json
+[2026-04-11T14:18:38Z] START Hosea 3 (1-5)
+[2026-04-11T14:18:38Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_003_prompt.txt
+[2026-04-11T14:18:48Z] DONE Hosea 3: 2 chunks | attempts=1 | target=catalog
+[2026-04-11T14:18:48Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_003_chunks.json
+[2026-04-11T14:18:48Z] START Hosea 4 (1-19)
+[2026-04-11T14:18:48Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_004_prompt.txt
+[2026-04-11T14:19:06Z] DONE Hosea 4: 3 chunks | attempts=1 | target=catalog
+[2026-04-11T14:19:06Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_004_chunks.json
+[2026-04-11T14:19:06Z] START Hosea 5 (1-15)
+[2026-04-11T14:19:06Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_005_prompt.txt
+[2026-04-11T14:19:23Z] DONE Hosea 5: 3 chunks | attempts=1 | target=catalog
+[2026-04-11T14:19:23Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_005_chunks.json
+[2026-04-11T14:19:23Z] START Hosea 6 (1-11)
+[2026-04-11T14:19:23Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_006_prompt.txt
+[2026-04-11T14:20:46Z] DONE Hosea 6: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:20:46Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_006_chunks.json
+[2026-04-11T14:20:46Z] START Hosea 7 (1-16)
+[2026-04-11T14:20:46Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_007_prompt.txt
+[2026-04-11T14:22:12Z] DONE Hosea 7: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:22:12Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_007_chunks.json
+[2026-04-11T14:22:12Z] START Hosea 8 (1-14)
+[2026-04-11T14:22:12Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_008_prompt.txt
+[2026-04-11T14:22:30Z] DONE Hosea 8: 4 chunks | attempts=1 | target=catalog
+[2026-04-11T14:22:30Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_008_chunks.json
+[2026-04-11T14:22:30Z] START Hosea 9 (1-17)
+[2026-04-11T14:22:30Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_009_prompt.txt
+[2026-04-11T14:23:56Z] DONE Hosea 9: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T14:23:56Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_009_chunks.json
+[2026-04-11T14:23:56Z] START Hosea 10 (1-15)
+[2026-04-11T14:23:56Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_010_prompt.txt
+[2026-04-11T14:25:30Z] DONE Hosea 10: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T14:25:30Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_010_chunks.json
+[2026-04-11T14:25:30Z] START Hosea 11 (1-12)
+[2026-04-11T14:25:30Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_011_prompt.txt
+[2026-04-11T14:27:15Z] DONE Hosea 11: 5 chunks | attempts=2 | target=catalog
+[2026-04-11T14:27:15Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_011_chunks.json
+[2026-04-11T14:27:15Z] START Hosea 12 (1-14)
+[2026-04-11T14:27:15Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_012_prompt.txt
+[2026-04-11T14:28:35Z] DONE Hosea 12: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T14:28:35Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_012_chunks.json
+[2026-04-11T14:28:35Z] START Hosea 13 (1-16)
+[2026-04-11T14:28:35Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_013_prompt.txt
+[2026-04-11T14:28:55Z] DONE Hosea 13: 4 chunks | attempts=1 | target=catalog
+[2026-04-11T14:28:55Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_013_chunks.json
+[2026-04-11T14:28:55Z] START Hosea 14 (1-9)
+[2026-04-11T14:28:55Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/hosea/hosea_014_prompt.txt
+[2026-04-11T14:29:09Z] DONE Hosea 14: 3 chunks | attempts=1 | target=catalog
+[2026-04-11T14:29:09Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/hosea/hosea_014_chunks.json
+[2026-04-11T14:29:09Z] START Joel 1 (1-20)
+[2026-04-11T14:29:09Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joel/joel_001_prompt.txt
+[2026-04-11T14:32:28Z] DONE Joel 1: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:32:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joel/joel_001_chunks.json
+[2026-04-11T14:32:28Z] START Joel 2 (1-32)
+[2026-04-11T14:32:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joel/joel_002_prompt.txt
+[2026-04-11T14:34:00Z] DONE Joel 2: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:34:00Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joel/joel_002_chunks.json
+[2026-04-11T14:34:00Z] START Joel 3 (1-21)
+[2026-04-11T14:34:00Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/joel/joel_003_prompt.txt
+[2026-04-11T14:35:26Z] DONE Joel 3: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T14:35:26Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/joel/joel_003_chunks.json
+[2026-04-11T14:35:26Z] START Amos 1 (1-15)
+[2026-04-11T14:35:26Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_001_prompt.txt
+[2026-04-11T14:35:50Z] DONE Amos 1: 6 chunks | attempts=1 | target=catalog
+[2026-04-11T14:35:50Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_001_chunks.json
+[2026-04-11T14:35:50Z] START Amos 2 (1-16)
+[2026-04-11T14:35:50Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_002_prompt.txt
+[2026-04-11T14:37:28Z] DONE Amos 2: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:37:28Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_002_chunks.json
+[2026-04-11T14:37:28Z] START Amos 3 (1-15)
+[2026-04-11T14:37:28Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_003_prompt.txt
+[2026-04-11T14:39:14Z] DONE Amos 3: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:39:14Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_003_chunks.json
+[2026-04-11T14:39:14Z] START Amos 4 (1-13)
+[2026-04-11T14:39:14Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_004_prompt.txt
+[2026-04-11T14:40:51Z] DONE Amos 4: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T14:40:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_004_chunks.json
+[2026-04-11T14:40:51Z] START Amos 5 (1-27)
+[2026-04-11T14:40:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_005_prompt.txt
+[2026-04-11T14:42:51Z] DONE Amos 5: 5 chunks | attempts=2 | target=catalog
+[2026-04-11T14:42:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_005_chunks.json
+[2026-04-11T14:42:51Z] START Amos 6 (1-14)
+[2026-04-11T14:42:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_006_prompt.txt
+[2026-04-11T14:44:37Z] DONE Amos 6: 3 chunks | attempts=2 | target=catalog
+[2026-04-11T14:44:37Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_006_chunks.json
+[2026-04-11T14:44:37Z] START Amos 7 (1-17)
+[2026-04-11T14:44:37Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_007_prompt.txt
+[2026-04-11T14:46:12Z] DONE Amos 7: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:46:12Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_007_chunks.json
+[2026-04-11T14:46:12Z] START Amos 8 (1-14)
+[2026-04-11T14:46:12Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_008_prompt.txt
+[2026-04-11T14:46:31Z] DONE Amos 8: 4 chunks | attempts=1 | target=catalog
+[2026-04-11T14:46:31Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_008_chunks.json
+[2026-04-11T14:46:31Z] START Amos 9 (1-15)
+[2026-04-11T14:46:31Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/amos/amos_009_prompt.txt
+[2026-04-11T14:48:11Z] DONE Amos 9: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:48:11Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/amos/amos_009_chunks.json
+[2026-04-11T14:48:11Z] START Obadiah 1 (1-21)
+[2026-04-11T14:48:11Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/obadiah/obadiah_001_prompt.txt
+[2026-04-11T14:49:51Z] DONE Obadiah 1: 4 chunks | attempts=2 | target=catalog
+[2026-04-11T14:49:51Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/obadiah/obadiah_001_chunks.json
+[2026-04-11T14:49:51Z] START Jonah 1 (1-17)
+[2026-04-11T14:49:51Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/jonah/jonah_001_prompt.txt
+[2026-04-11T14:51:56Z] DONE Jonah 1: 6 chunks | attempts=2 | target=catalog
+[2026-04-11T14:51:56Z] OUTPUT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/chunks/old/jonah/jonah_001_chunks.json
+[2026-04-11T14:51:56Z] START Jonah 2 (1-10)
+[2026-04-11T14:51:56Z] PROMPT /Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog/raw/old/jonah/jonah_002_prompt.txt

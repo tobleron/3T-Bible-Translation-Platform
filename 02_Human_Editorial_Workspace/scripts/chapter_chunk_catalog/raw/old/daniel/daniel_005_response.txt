@@ -1,0 +1,59 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "The Feast and the Writing",
+      "reason": "Describes the banquet, use of temple vessels, and the appearance of the writing hand."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The King's Alarm and Call for Sages",
+      "reason": "Details the king's physical reaction and his offer of reward to those who interpret the writing."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "dialogue",
+      "title": "The Queen's Recommendation",
+      "reason": "The queen advises the king to summon Daniel for his wisdom."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Daniel Brought Before the King",
+      "reason": "The king questions Daniel and repeats the offer of reward."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Daniel's Rebuke",
+      "reason": "Daniel accepts the challenge and recounts Nebuchadnezzar's fall to warn Belshazzar."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 28,
+      "type": "oracle",
+      "title": "The Interpretation of MENE",
+      "reason": "Daniel interprets the words written on the wall."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 31,
+      "type": "story",
+      "title": "The King's Death and Darius's Reign",
+      "reason": "Concludes with Daniel's reward, Belshazzar's death, and the succession of Darius."
+    }
+  ]
+}

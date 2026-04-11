@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "vision",
+      "title": "Vision of Summer Fruit",
+      "reason": "A distinct prophetic vision introducing the theme of Israel's end."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Judgment on Social Injustice",
+      "reason": "A direct address to the oppressors detailing their sins and the coming divine judgment."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 13,
+      "type": "oracle",
+      "title": "Famine for the Word",
+      "reason": "A specific oracle describing a spiritual famine where people seek God's word but fail to find it."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Oath of Samaria and Dan",
+      "reason": "A concluding statement targeting those who swear by the idols of the northern kingdom."
+    }
+  ]
+}

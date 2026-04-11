@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "speech",
+      "title": "Introduction and Persian Kings",
+      "reason": "The angel introduces the prophecy regarding four Persian kings followed by a mighty Greek king."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Conflict Between South and North Kings",
+      "reason": "Detailed description of wars and alliances between the King of the South and King of the North."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 29,
+      "type": "oracle",
+      "title": "The Rise of a Despised Ruler",
+      "reason": "Prophecy concerning a contemptible king who gains power through intrigue and his subsequent conflicts."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 35,
+      "type": "vision",
+      "title": "Persecution of the Covenant People",
+      "reason": "Description of the king's attack on the sanctuary and the suffering of those who know their God."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 39,
+      "type": "oracle",
+      "title": "The Arrogant King Against God",
+      "reason": "Depiction of a king who exalts himself above all gods and honors a god of fortresses."
+    },
+    {
+      "start_verse": 40,
+      "end_verse": 45,
+      "type": "oracle",
+      "title": "The Final Campaign and End",
+      "reason": "The culmination of conflicts involving the South and North, leading to the king's final destruction."
+    }
+  ]
+}

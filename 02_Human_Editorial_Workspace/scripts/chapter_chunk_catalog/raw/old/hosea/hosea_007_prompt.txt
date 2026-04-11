@@ -1,0 +1,65 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Hosea 7:1-16
+
+Chapter text:
+1. When I would heal Israel, Then the iniquity of Ephraim is uncovered, And the evil deeds of Samaria, For they work falsehood; The thief enters in; Raiders ransack outside,
+2. And they do not say to their hearts That I remember all their evil. Now their deeds are all around them; They are before My face.
+3. With their evil they make the king glad, And the princes with their deceptions.
+4. They are all adulterers, Like an oven heated by the baker Who ceases to stir up the fire From the kneading of the dough until it is leavened.
+5. On the day of our king, the princes became sick with the heat of wine; He stretched out his hand with scoffers,
+6. For their hearts are like an oven As they draw near in their plotting; Their anger smolders all night; In the morning it burns like a flaming fire.
+7. All of them are hot like an oven, And they devour their judges; All their kings have fallen. None of them calls on Me.
+8. Ephraim mixes himself with the peoples; Ephraim has become a cake not turned.
+9. Strangers devour his power, Yet he does not know it; Gray hairs also are sprinkled on him, Yet he does not know it.
+10. So the pride of Israel answers against him, Yet they have not returned to Yahweh their God, Nor have they sought Him, for all this.
+11. So Ephraim has become like a silly dove, without a heart of wisdom; They call to Egypt; they go to Assyria.
+12. When they go, I will spread My net over them; I will bring them down like the birds of the sky. I will chastise them in accordance with the report to their congregation.
+13. Woe to them, for they have fled from Me! Destruction is theirs, for they have transgressed against Me! And I would redeem them, but they speak lies against Me.
+14. And they do not cry out to Me in their heart When they wail on their beds; For the sake of grain and new wine they gather together as sojourners; They depart from Me.
+15. Although I disciplined and strengthened their arms, Yet they devise evil against Me.
+16. They turn, but not upward; They are like a deceitful bow; Their princes will fall by the sword Because of the indignation of their tongue. This will be their scoffing in the land of Egypt.
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

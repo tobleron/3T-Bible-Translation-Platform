@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "vision",
+      "title": "Daniel's Vision and the Man in Linen",
+      "reason": "Describes the setting, Daniel's mourning, and the appearance of the glorious man to Daniel alone."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "The Man Speaks to Daniel",
+      "reason": "Contains the dialogue where the man explains the vision's meaning and Daniel's physical reaction."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 19,
+      "type": "dialogue",
+      "title": "Daniel's Weakness and Restoration",
+      "reason": "Depicts Daniel's speechlessness, the man touching his lips, and the strengthening of Daniel."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 21,
+      "type": "oracle",
+      "title": "The Spiritual Battle Revealed",
+      "reason": "Explains the conflict with the prince of Persia and Greece and the role of Michael."
+    }
+  ]
+}

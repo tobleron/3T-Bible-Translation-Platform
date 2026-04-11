@@ -111,6 +111,7 @@ input[type="text"], select, textarea {
   background: #101212;
   color: var(--text);
   padding: 0.72rem 0.85rem;
+  field-sizing: content; /* Modern browser support for auto-growth */
 }
 select {
   appearance: none;
@@ -120,6 +121,28 @@ select {
   background-repeat: no-repeat;
 }
 textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
+
+/* Global Button Hover Effects */
+button, .primary-button, .secondary-button, .tab-button, .tiny-danger-button, .commit-button, .epub-button {
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, filter 150ms ease, transform 100ms ease;
+}
+button:hover:not(:disabled), .primary-button:hover:not(:disabled), .secondary-button:hover:not(:disabled), .tab-button:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.primary-button:hover {
+  background: #d4a973;
+}
+.secondary-button:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--line-strong);
+}
+.tab-button:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.03);
+}
 
 .compact-workspace {
   display: grid;

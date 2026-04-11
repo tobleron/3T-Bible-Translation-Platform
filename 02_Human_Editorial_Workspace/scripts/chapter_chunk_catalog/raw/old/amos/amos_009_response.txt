@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "vision",
+      "title": "Vision of the Lord at the Altar",
+      "reason": "A prophetic vision describing judgment on the temple and the inescapable reach of God's wrath."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "The Lord's Power and Sovereignty",
+      "reason": "A speech emphasizing Yahweh's control over nature and history, including the comparison to other nations."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Oracle of Destruction and Preservation",
+      "reason": "An oracle declaring the destruction of the sinful kingdom while preserving a remnant of Jacob."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 15,
+      "type": "blessing_or_prayer",
+      "title": "Restoration of David's Dynasty",
+      "reason": "A prophetic blessing detailing the future restoration of Israel and the land."
+    }
+  ]
+}

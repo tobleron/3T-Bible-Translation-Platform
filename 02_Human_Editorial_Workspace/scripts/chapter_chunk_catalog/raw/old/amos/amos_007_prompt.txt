@@ -1,0 +1,66 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Amos 7:1-17
+
+Chapter text:
+1. Thus Lord Yahweh showed me, and behold, He was forming a locust-swarm when the spring crop began to come up. And behold, the spring crop was after the king’s mowing.
+2. And it happened when it had completed eating the vegetation of the land, that I said, “Lord Yahweh, please pardon! How can Jacob rise up, For he is small?”
+3. Yahweh relented concerning this. “It shall not be,” said Yahweh.
+4. Thus Lord Yahweh showed me, and behold, Lord Yahweh was calling to contend with them by fire, and it consumed the great deep and began to consume the farm land.
+5. Then I said, “Lord Yahweh, please stop! How can Jacob rise up, for he is small?”
+6. Yahweh relented concerning this. “This too shall not be,” said Lord Yahweh.
+7. Thus He showed me, and behold, the Lord was standing by a wall made with a plumb line, and in His hand was a plumb line.
+8. And Yahweh said to me, “What do you see, Amos?” And I said, “A plumb line.” Then the Lord said, “Behold, I am about to put a plumb line In the midst of My people Israel. I will pass over them no longer.
+9. The high places of Isaac will be desolated And the sanctuaries of Israel laid waste. Then I will rise up against the house of Jeroboam with the sword.”
+10. Then Amaziah, the priest of Bethel, sent word to Jeroboam king of Israel, saying, “Amos has conspired against you in the midst of the house of Israel; the land is unable to endure all his words.
+11. For thus Amos says, ‘Jeroboam will die by the sword, and Israel will certainly go from its land into exile.’”
+12. Then Amaziah said to Amos, “Go, you seer, flee away to the land of Judah, and there eat bread, and there do your prophesying!
+13. But no longer prophesy at Bethel, for it is a sanctuary of the king and a royal house.”
+14. Then Amos answered and said to Amaziah, “I am not a prophet, nor am I the son of a prophet; for I am a herdsman and a grower of sycamore figs.
+15. But Yahweh took me from following the flock, and Yahweh said to me, ‘Go prophesy to My people Israel.’
+16. So now, hear the word of Yahweh: you are saying, ‘You shall not prophesy against Israel, nor shall you drip out words against the house of Isaac.’
+17. Therefore, thus says Yahweh, ‘Your wife will play the harlot in the city, your sons and your daughters will fall by the sword, your land will be divided up by a measuring line, and you yourself will die upon unclean land. Moreover, Israel will certainly go from its land into exile.’”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "Judgment on Ephraim and Call to Return",
+      "reason": "A unified oracle condemning Ephraim's deceit and calling for repentance."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "argument",
+      "title": "Ephraim's False Confidence vs God's Truth",
+      "reason": "An argument contrasting Ephraim's self-perception with Yahweh's historical actions."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Jacob's History and Final Condemnation",
+      "reason": "A narrative summary of Jacob's origins followed by a concluding judgment."
+    }
+  ]
+}

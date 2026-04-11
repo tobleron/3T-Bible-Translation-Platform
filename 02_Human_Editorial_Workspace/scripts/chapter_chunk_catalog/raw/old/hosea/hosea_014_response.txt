@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "exhortation",
+      "title": "Call to Return and Repentance",
+      "reason": "A unified call for Israel to return to God with specific words of confession and trust."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Promise of Restoration",
+      "reason": "God speaks directly about healing, love, and the flourishing of Israel using nature imagery."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 9,
+      "type": "argument",
+      "title": "Conclusion on Wisdom",
+      "reason": "A final exhortation to the wise to understand the preceding words and the nature of God's ways."
+    }
+  ]
+}

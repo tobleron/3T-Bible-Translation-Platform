@@ -1,0 +1,46 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T13:49:34Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 26,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "Song of the Strong City",
+      "reason": "A hymn celebrating God's salvation and the downfall of the proud city."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Trust in Yahweh's Judgments",
+      "reason": "A prayer expressing trust in God's upright path and His establishment of peace."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 18,
+      "type": "argument",
+      "title": "God Alone is Master",
+      "reason": "A theological reflection contrasting God's rule with other masters and the people's spiritual labor."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 21,
+      "type": "oracle",
+      "title": "Promise of Resurrection and Judgment",
+      "reason": "A prophetic declaration of the dead rising and God's final judgment on the earth."
+    }
+  ]
+}

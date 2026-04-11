@@ -1,0 +1,77 @@
+Model profile: qwen3.5 35B A3B thinking model.
+You are segmenting a Old Testament chapter into practical translation chunks.
+
+Source text:
+- Use only the provided LSB chapter text below.
+- Do not rely on memory when verse boundaries or discourse shifts are visible in the provided text.
+
+Goal:
+- Suggest chunk ranges that a human translator can work through as coherent units.
+- Favor complete story, speech, dialogue, parable, genealogy, law, oracle, psalm, vision, argument, exhortation, prayer, or list units.
+- Avoid tiny fragments unless the text naturally breaks there.
+- Keep the number of chunks small but practical.
+- Titles should be short and plain English.
+
+Chapter to segment: Daniel 7:1-28
+
+Chapter text:
+1. In the first year of Belshazzar king of Babylon Daniel saw a dream and visions in his head as he lay on his bed; then he wrote the dream down and said the following summary of the matter.
+2. Daniel answered and said, “I was looking in my vision by night, and behold, the four winds of heaven were stirring up the great sea.
+3. And four great beasts were coming up from the sea, different from one another.
+4. The first was like a lion and had the wings of an eagle. I kept looking until its wings were plucked, and it was lifted up from the ground and made to stand on two feet like a man; and a heart of a man was given to it.
+5. And behold, another beast, a second one in the likeness of a bear. And it was raised up on one side, and three ribs were in its mouth between its teeth; and thus they said to it, ‘Arise, devour much meat!’
+6. After this I kept looking, and behold, another one, like a leopard, which had on its back four wings of a bird; the beast also had four heads, and dominion was given to it.
+7. After this I kept looking in the night visions, and behold, a fourth beast, fearsome and terrifying and extraordinarily strong; and it had large iron teeth. It devoured and crushed and trampled down the remainder with its feet; and it was different from all the beasts that were before it, and it had ten horns.
+8. While I was contemplating the horns, behold, another horn, a little one, came up among them, and three of the first horns were pulled out by the roots before it; and behold, this horn possessed eyes like the eyes of a man and a mouth speaking great boasts.
+9. “I kept looking Until thrones were set up, And the Ancient of Days was seated; His clothing was like white snow And the hair of His head like pure wool. His throne was ablaze with fire, Its wheels were a burning fire.
+10. A river of fire was flowing And coming out from before Him; Thousands upon thousands were attending Him, And myriads upon myriads were standing before Him; The court sat, And the books were opened.
+11. Then I kept looking because of the sound of the great boastful words which the horn was speaking; I kept looking until the beast was killed, and its body was destroyed and given to the burning fire.
+12. As for the rest of the beasts, their dominion was taken away, but an extension of life was given to them for an appointed season of time.
+13. “I kept looking in the night visions, And behold, with the clouds of heaven One like a Son of Man was coming, And He came up to the Ancient of Days And came near before Him.
+14. And to Him was given dominion, Glory, and a kingdom, That all the peoples, nations, and men of every tongue Might serve Him. His dominion is an everlasting dominion Which will not be taken away; And His kingdom is one Which will not be destroyed.
+15. “As for me, Daniel, my spirit was distressed within me, and the visions of my head kept alarming me.
+16. I came near to one of those who were standing by and began seeking out from him the exact meaning of all this. So he said it to me and made known to me the interpretation of these things:
+17. ‘These great beasts, which are four in number, are four kings who will arise from the earth.
+18. But the saints of the Highest One will receive the kingdom and possess the kingdom forever, for all ages to come.’
+19. “Then I desired to know the exact meaning of the fourth beast, which was different from all the others, extraordinarily fearsome, with its teeth of iron and its claws of bronze, and which devoured, crushed, and trampled down the remainder with its feet,
+20. and the meaning of the ten horns that were on its head and the other horn which came up and before which three of them fell, namely, that horn which had eyes and a mouth speaking great boasts and which was larger in appearance than its associates.
+21. I kept looking, and that horn was waging war with the saints and overcoming them
+22. until the Ancient of Days came and judgment was given in favor of the saints of the Highest One, and the season arrived when the saints took possession of the kingdom.
+23. “Thus he said: ‘The fourth beast will be a fourth kingdom on the earth, which will be different from all the other kingdoms and will devour the whole earth and tread it down and crush it.
+24. As for the ten horns, out of this kingdom ten kings will arise; and another will arise after them, and he will be different from the previous ones and will make low three kings.
+25. He will speak words against the Most High and wear down the saints of the Highest One, and he will intend to make changes in seasons and in law; and they will be given into his hand for a time, times, and half a time.
+26. But the court will sit for judgment, and his dominion will be taken away, annihilated and destroyed forever.
+27. Then the reign, the dominion, and the greatness of all the kingdoms under the whole heaven will be given to the people of the saints of the Highest One; His kingdom will be an everlasting kingdom, and all the dominions will serve and obey Him.’
+28. “At this point the matter of this revelation ended. As for me, Daniel, my thoughts were greatly alarming me, and the splendor of my face changed, but I kept the matter in my heart.”
+
+Return strict JSON only with this shape:
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Jesus",
+      "reason": "One concise sentence."
+    }
+  ]
+}
+
+Rules:
+- Use contiguous, non-overlapping ranges.
+- Cover the full chapter from start to end.
+- Allowed chunk types only:
+  story
+  speech
+  dialogue
+  parable
+  genealogy
+  law
+  oracle
+  psalm
+  vision
+  argument
+  exhortation
+  blessing_or_prayer
+  list_or_catalog
+  mixed

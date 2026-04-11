@@ -11,35 +11,35 @@
       "end_verse": 5,
       "type": "speech",
       "title": "Call to Flee from the North",
-      "reason": "A cohesive call to action for Benjamin and Jerusalem to flee impending destruction."
+      "reason": "A cohesive unit of warning and command for Jerusalem's inhabitants to escape impending northern invasion."
     },
     {
       "start_verse": 6,
       "end_verse": 15,
       "type": "oracle",
       "title": "Oracle Against Jerusalem's Corruption",
-      "reason": "A unified prophetic judgment detailing the city's internal decay and God's impending punishment."
+      "reason": "A prophetic declaration detailing the city's internal oppression and superficial religious healing."
     },
     {
       "start_verse": 16,
       "end_verse": 21,
       "type": "argument",
       "title": "Rejection of the Ancient Path",
-      "reason": "An argumentative section contrasting God's call to return with the people's stubborn refusal."
+      "reason": "An argumentative section contrasting the call to return with the people's stubborn refusal."
     },
     {
       "start_verse": 22,
       "end_verse": 26,
-      "type": "vision",
-      "title": "Vision of the Northern Army",
-      "reason": "A vivid description of the invading army from the north and the resulting terror."
+      "type": "speech",
+      "title": "Description of Northern Invaders",
+      "reason": "A vivid speech describing the military might and terror of the approaching enemy nation."
     },
     {
       "start_verse": 27,
       "end_verse": 30,
       "type": "metaphor",
-      "title": "The Refiner's Fire",
-      "reason": "A concluding metaphorical oracle describing Jeremiah as a tester of metals and the people as rejected silver."
+      "title": "Metaphor of Refining Silver",
+      "reason": "A concluding metaphorical oracle describing the prophet's role and the people's stubborn corruption."
     }
   ]
 }

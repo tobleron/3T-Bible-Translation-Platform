@@ -1,0 +1,24 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Judgment on the Unfaithful Wife",
+      "reason": "A continuous oracle where God declares judgment against Israel for her spiritual adultery."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 23,
+      "type": "blessing_or_prayer",
+      "title": "Restoration and New Covenant",
+      "reason": "A prophetic vision of God's future restoration, renewed covenant, and reconciliation with His people."
+    }
+  ]
+}

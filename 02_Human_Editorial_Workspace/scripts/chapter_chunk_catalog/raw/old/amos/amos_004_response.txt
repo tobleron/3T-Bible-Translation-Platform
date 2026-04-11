@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Judgment on the Women of Samaria",
+      "reason": "A cohesive oracle addressing the elite women of Israel and their impending exile."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 11,
+      "type": "list_or_catalog",
+      "title": "Catalog of Divine Warnings",
+      "reason": "A series of five distinct historical judgments where God calls for repentance."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 13,
+      "type": "exhortation",
+      "title": "Call to Prepare to Meet God",
+      "reason": "A concluding call to action followed by a theological description of Yahweh's power."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Nebuchadnezzar's Introduction",
+      "reason": "The king addresses all nations to declare the signs and wonders of God."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 18,
+      "type": "speech",
+      "title": "Nebuchadnezzar's Dream Narrative",
+      "reason": "The king recounts his dream of the great tree and its interpretation by Daniel."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 27,
+      "type": "dialogue",
+      "title": "Daniel's Interpretation and Advice",
+      "reason": "Daniel explains the dream to the king and offers counsel on how to mitigate judgment."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Fulfillment of the Prophecy",
+      "reason": "The narrative describes the king's pride, the divine voice, and his temporary madness."
+    },
+    {
+      "start_verse": 34,
+      "end_verse": 37,
+      "type": "blessing_or_prayer",
+      "title": "Nebuchadnezzar's Praise",
+      "reason": "The king restores his sanity and offers a testimony of God's eternal sovereignty."
+    }
+  ]
+}

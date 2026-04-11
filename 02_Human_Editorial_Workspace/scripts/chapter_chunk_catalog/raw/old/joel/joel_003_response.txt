@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Judgment on Tyre and Philistia",
+      "reason": "A specific oracle addressing the nations of Tyre, Sidon, and Philistia regarding their treatment of Judah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Call to War in the Valley of Decision",
+      "reason": "A series of commands urging nations to gather for judgment and describing the scene of divine war."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "vision",
+      "title": "Cosmic Signs and Restoration of Zion",
+      "reason": "Describes cosmic disturbances followed by the establishment of God's holiness and the future blessing of Judah."
+    }
+  ]
+}

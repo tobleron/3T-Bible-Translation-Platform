@@ -1,0 +1,38 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Introduction to the Oracle",
+      "reason": "Yahweh addresses Israel directly and states the reason for judgment."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 8,
+      "type": "argument",
+      "title": "Rhetorical Questions on Causality",
+      "reason": "A series of rhetorical questions establishing that events have causes and God reveals His plans through prophets."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Judgment on Samaria",
+      "reason": "Command to announce the gathering of enemies and the inevitable plundering of the city."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 15,
+      "type": "exhortation",
+      "title": "Testimony Against the House of Jacob",
+      "reason": "Call to witness against Israel and specific details of punishment on altars and houses."
+    }
+  ]
+}

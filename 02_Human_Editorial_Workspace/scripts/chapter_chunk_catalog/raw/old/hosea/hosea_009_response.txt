@@ -1,0 +1,31 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "Judgment on Israel's Idolatry",
+      "reason": "A unified oracle warning Israel against rejoicing due to their spiritual harlotry and predicting exile."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "argument",
+      "title": "The Days of Punishment",
+      "reason": "An argumentative section describing the corruption of prophets and the loss of fertility as divine judgment."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 17,
+      "type": "speech",
+      "title": "Final Woe to Ephraim",
+      "reason": "A concluding speech detailing the destruction of Ephraim's lineage and their rejection by God."
+    }
+  ]
+}

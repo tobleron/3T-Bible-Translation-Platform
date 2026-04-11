@@ -104,9 +104,9 @@
     <form class="merge-bar" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge" hx-target="#workspace-shell" hx-swap="outerHTML">
       <label class="compact-field tiny-field"><span>from</span><input type="text" name="start_index" value="1"></label>
       <label class="compact-field tiny-field"><span>to</span><input type="text" name="end_index" value="2"></label>
-      <label class="compact-field"><span>Title</span><input type="text" name="title" placeholder="Merged title"></label>
-      <label class="compact-field"><span>Type</span><input type="text" name="chunk_type" placeholder="Optional"></label>
-      <label class="compact-field wide-field"><span>Reason</span><input type="text" name="reason" placeholder="Optional"></label>
+      <label class="compact-field"><span>Title</span><textarea name="title" rows="1" placeholder="Merged title"></textarea></label>
+      <label class="compact-field"><span>Type</span><textarea name="chunk_type" rows="1" placeholder="Optional"></textarea></label>
+      <label class="compact-field wide-field"><span>Reason</span><textarea name="reason" rows="1" placeholder="Optional"></textarea></label>
       <button class="secondary-button" type="submit">Merge</button>
     </form>
     {% endif %}
@@ -218,7 +218,7 @@
           <input type="hidden" name="editor_mode" value="{{ editor_mode }}">
           <label class="compact-field title-field">
             <span>{{ "Review title" if editor_mode == "review" else "Draft title" }}</span>
-            <input type="text" name="draft_title" value="{{ editor_title }}">
+            <textarea name="draft_title" rows="1">{{ editor_title }}</textarea>
           </label>
 
           {% if state.title_alternatives and editor_mode == 'draft' %}
@@ -599,7 +599,7 @@
 
 <script>
 document.addEventListener('htmx:afterSettle', function() {
-  document.querySelectorAll('.verse-editor-textarea').forEach(function(el) { autoResize(el); });
+  document.querySelectorAll('textarea').forEach(function(el) { autoResize(el); });
   var studyBlocks = document.getElementById('study-blocks');
   if (studyBlocks) {
     var fontSize = localStorage.getItem('studyFontSize') || '16';
@@ -618,7 +618,7 @@ document.addEventListener('htmx:afterSettle', function() {
   }
 });
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.verse-editor-textarea').forEach(function(el) { autoResize(el); });
+  document.querySelectorAll('textarea').forEach(function(el) { autoResize(el); });
   var fontSize = localStorage.getItem('studyFontSize') || '16';
   applyStudyFontSize(fontSize);
   var sel = document.getElementById('study-font-size');
@@ -634,20 +634,27 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 function autoResize(el) {
-  // Set initial size
-  el.style.height = (el.scrollHeight + 4) + 'px';
+  if (!el || el.tagName.toLowerCase() !== 'textarea') return;
+
+  var setHeight = function(target) {
+    target.style.height = 'auto';
+    target.style.height = target.scrollHeight + 'px';
+  };
+
+  // Initial set
+  setHeight(el);
+
+  if (el.dataset.autoResizeBound) return;
+  el.dataset.autoResizeBound = '1';
+
   el.addEventListener('input', function() {
-    var el = this;
-    // Save scroll positions to prevent jumping
     var scrollLeft = window.scrollX || window.pageXOffset;
     var scrollTop = window.scrollY || window.pageYOffset;
-    // Resize
-    el.style.height = 'auto';
-    el.style.height = (el.scrollHeight + 4) + 'px';
-    // Restore scroll position
+    setHeight(this);
     window.scrollTo(scrollLeft, scrollTop);
   });
 }
+
 function findSupportFormatField(trigger) {
   var form = trigger.closest('form');
   if (!form) return null;

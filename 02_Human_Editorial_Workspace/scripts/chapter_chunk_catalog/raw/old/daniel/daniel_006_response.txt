@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Daniel's Rise and Accusation",
+      "reason": "Describes Daniel's promotion and the conspirators' search for a charge against him."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "The Decree of the Satraps",
+      "reason": "Contains the dialogue where the conspirators propose and the king signs the law."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Daniel's Prayer and Discovery",
+      "reason": "Narrates Daniel's faithful prayer routine and the conspirators catching him."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Daniel Cast into the Den",
+      "reason": "Details the king's distress, Daniel's sentencing, and the sealing of the den."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Night Watch and Morning Rescue",
+      "reason": "Describes the king's sleepless night and Daniel's miraculous deliverance."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Judgment on Enemies and Royal Decree",
+      "reason": "Concludes with the fate of the accusers and Darius's decree praising Daniel's God."
+    }
+  ]
+}

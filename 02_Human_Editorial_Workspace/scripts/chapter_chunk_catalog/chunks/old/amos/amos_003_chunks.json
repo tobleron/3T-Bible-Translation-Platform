@@ -1,0 +1,46 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T14:39:14Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Amos",
+  "chapter": 3,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 15,
+  "verse_count": 15,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Introduction to the Oracle",
+      "reason": "Yahweh addresses Israel directly and states the reason for judgment."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 8,
+      "type": "argument",
+      "title": "Rhetorical Questions on Causality",
+      "reason": "A series of rhetorical questions establishing that events have causes and God reveals His plans through prophets."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 12,
+      "type": "oracle",
+      "title": "Judgment on Samaria",
+      "reason": "Command to announce the gathering of enemies and the inevitable plundering of the city."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 15,
+      "type": "exhortation",
+      "title": "Testimony Against the House of Jacob",
+      "reason": "Call to witness against Israel and specific details of punishment on altars and houses."
+    }
+  ]
+}
