@@ -126,10 +126,12 @@
       {% endfor %}
       {% if flash_messages %}
       {% for message in flash_messages %}
-      <span class="activity-pill flash-{{ message.accent }}">
+      {% if message.accent == 'red' %}
+      <span class="activity-pill is-error">
         <strong>{{ message.title }}</strong>
-        <span>{{ message.body|truncate(120) }}</span>
+        <span>{{ message.summary|truncate(120) }}</span>
       </span>
+      {% endif %}
       {% endfor %}
       {% endif %}
       <span id="gloss-copied-indicator" class="gloss-copied-indicator" style="display:none;"></span>
@@ -157,11 +159,21 @@
   {% else %}
   <div class="compact-columns">
     <section class="left-workspace">
-      <article class="workspace-card chat-panel panel-focus">
+      {% set justify_range_value = current_chunk_key %}
+      {% if state.justify_draft %}
+        {% set justify_range_value = state.justify_draft.start_verse|string %}
+        {% if state.justify_draft.end_verse != state.justify_draft.start_verse %}
+          {% set justify_range_value = state.justify_draft.start_verse|string ~ "-" ~ state.justify_draft.end_verse|string %}
+        {% endif %}
+      {% endif %}
+      {% set footnote_verse_value = state.footnote_draft.verse if state.footnote_draft else (state.chunk_start or 1) %}
+      {% set editor_verses = review_editor_verses if editor_mode == 'review' else draft_editor_verses %}
+
+      <article class="workspace-card editor-panel panel-focus" data-editor-mode="{{ editor_mode }}">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Draft</p>
-            <h2>Range editor and model chat</h2>
+            <p class="eyebrow">Editor</p>
+            <h2>Chunk text workspace</h2>
           </div>
           <div class="panel-summary">
             <span class="inline-badge">{{ chunk_summary.chunk.type if chunk_summary.chunk else "chunk" }}</span>
@@ -169,15 +181,43 @@
           </div>
         </div>
 
-        <form id="draft-form" class="compact-editor-form"
+        <div class="editor-tab-bar">
+          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <input type="hidden" name="editor_action" value="draft">
+            <button class="tab-button {% if editor_mode == 'draft' %}is-active{% endif %}" type="submit">Draft</button>
+          </form>
+          {% if has_committed_text %}
+          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <input type="hidden" name="editor_action" value="review">
+            <button class="tab-button {% if editor_mode == 'review' %}is-active{% endif %}" type="submit">Review</button>
+          </form>
+          {% endif %}
+          {% if has_committed_text and editor_mode == 'review' %}
+          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <input type="hidden" name="editor_action" value="seed-draft">
+            <button class="secondary-button editor-bridge-button" type="submit">Revise In Draft</button>
+          </form>
+          {% endif %}
+        </div>
+
+        <p class="editor-mode-note">
+          {% if editor_mode == 'review' %}
+          Review shows the committed JSON text. Edits here are stored only as deltas until you commit.
+          {% else %}
+          Draft is the uncommitted working buffer used for model-assisted rewriting.
+          {% endif %}
+        </p>
+
+        <form id="editor-form" class="compact-editor-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
           hx-target="#workspace-shell" hx-swap="outerHTML">
+          <input type="hidden" name="editor_mode" value="{{ editor_mode }}">
           <label class="compact-field title-field">
-            <span>Draft title</span>
-            <input type="text" name="draft_title" value="{{ state.draft_title or (chunk_summary.chunk.title if chunk_summary.chunk else '') }}">
+            <span>{{ "Review title" if editor_mode == "review" else "Draft title" }}</span>
+            <input type="text" name="draft_title" value="{{ editor_title }}">
           </label>
 
-          {% if state.title_alternatives %}
+          {% if state.title_alternatives and editor_mode == 'draft' %}
           <div class="title-alternatives">
             {% for option in state.title_alternatives[:4] %}
             <span class="inline-badge">{{ option }}</span>
@@ -187,26 +227,49 @@
 
           {# Per-verse auto-expanding textareas #}
           <div class="verse-editor-stack">
-            {% for v in draft_editor_verses %}
-            <div class="verse-editor-row">
-              <span class="verse-editor-label">{{ v.verse }}</span>
+            {% for v in editor_verses %}
+            <div class="verse-editor-row {% if editor_mode == 'review' and v.changed %}is-changed{% endif %}">
+              <div class="verse-editor-meta">
+                <span class="verse-editor-label">{{ v.verse }}</span>
+                {% if editor_mode == 'review' and v.changed %}
+                <span class="verse-editor-state">Edited</span>
+                {% endif %}
+              </div>
               <textarea class="verse-editor-textarea" name="verse_{{ v.verse }}" rows="1">{{ v.text }}</textarea>
             </div>
             {% endfor %}
           </div>
 
           <div class="editor-actions">
-            <button class="secondary-button" type="submit">Save draft</button>
-            <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
-              <button class="commit-button" type="submit">Commit</button>
-            </form>
+            <button class="secondary-button" type="submit">{{ "Save review changes" if editor_mode == "review" else "Save draft" }}</button>
+            <button class="commit-button" type="button" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">Commit</button>
             <button class="epub-button" type="button" onclick="generateEpubDownload(this)" {% if pending_writes %}disabled title="Commit all verses first"{% endif %}>Generate EPUB</button>
             <button class="secondary-button" type="button" onclick="showJsonPreview()">JSON</button>
           </div>
         </form>
+      </article>
 
-        <div class="chat-divider"></div>
+      <article class="workspace-card chat-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Chat</p>
+            <h2>Model drafting conversation</h2>
+          </div>
+          <div class="panel-summary">
+            <span class="inline-badge">{{ model_label }} model</span>
+            <span class="muted-line">Chat operates on the draft buffer.</span>
+          </div>
+        </div>
 
+        {% if has_committed_text and not has_draft_work and not state.chat_messages %}
+        <div class="chat-empty chat-bridge-empty">
+          <p>This chunk already has committed JSON text. Use <strong>Revise In Draft</strong> to copy that text into the draft workspace before chatting with the model.</p>
+          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <input type="hidden" name="editor_action" value="seed-draft">
+            <button class="primary-button" type="submit">Revise In Draft</button>
+          </form>
+        </div>
+        {% else %}
         {% if state.chat_messages %}
         <div class="chat-log chat-log-large">
           {% for item in state.chat_messages[-8:] %}
@@ -224,7 +287,7 @@
 
         <form class="compact-chat-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat"
-          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
+          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
           <textarea name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
             <button class="primary-button send-button" type="submit">Send</button>
@@ -234,16 +297,8 @@
               hx-confirm="Clear all chat messages for this chunk?">Clear</button>
           </div>
         </form>
-      </article>
-
-      {% set justify_range_value = current_chunk_key %}
-      {% if state.justify_draft %}
-        {% set justify_range_value = state.justify_draft.start_verse|string %}
-        {% if state.justify_draft.end_verse != state.justify_draft.start_verse %}
-          {% set justify_range_value = state.justify_draft.start_verse|string ~ "-" ~ state.justify_draft.end_verse|string %}
         {% endif %}
-      {% endif %}
-      {% set footnote_verse_value = state.footnote_draft.verse if state.footnote_draft else (state.chunk_start or 1) %}
+      </article>
 
       <article class="workspace-card support-panel">
         <div class="panel-head support-panel-head">
@@ -286,7 +341,7 @@
           <summary>{{ "Continue justification" if state.justify_draft else "Add justification" }}</summary>
           <form class="support-form"
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/justify"
-            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
+            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
             <div class="support-grid support-grid-justify">
               <label class="compact-field support-range-field">
                 <span>Verses</span>
@@ -348,7 +403,7 @@
           <summary>{{ "Continue footnote" if state.footnote_draft else "Add footnote" }}</summary>
           <form class="support-form"
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/footnotes"
-            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#draft-form">
+            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
             <div class="support-grid support-grid-footnote">
               <label class="compact-field">
                 <span>Verse</span>
@@ -581,8 +636,13 @@ function copyTranslationVerse(btn, text) {
 function applyStudyTranslationToDraft(btn) {
   var alias = btn.dataset.translationAlias || '';
   var block = btn.closest('.translation-block');
-  var form = document.getElementById('draft-form');
+  var form = document.getElementById('editor-form');
+  var editorMode = form ? form.querySelector('input[name="editor_mode"]') : null;
   if (!alias || !block || !form) return;
+  if (!editorMode || editorMode.value !== 'draft') {
+    showWorkspaceIndicator('Switch to Draft before loading a translation into the draft buffer.');
+    return;
+  }
   var rows = block.querySelectorAll('.translation-verse-row[data-verse]');
   if (!rows.length) return;
 

@@ -300,7 +300,12 @@ class BrowserWorkbench(WorkbenchApp):
     @staticmethod
     def activity_summary(title: str, body: str) -> str:
         for raw_line in body.splitlines():
-            line = raw_line.strip().strip("─").strip()
+            line = " ".join(
+                raw_line.replace("│", " ")
+                .replace("┆", " ")
+                .replace("•", " ")
+                .split()
+            ).strip("─ ").strip()
             if not line or line.lower() == title.lower():
                 continue
             return line
@@ -313,6 +318,11 @@ class BrowserWorkbench(WorkbenchApp):
         if isinstance(renderable, Panel):
             title = str(renderable.title or "Notice").strip() or "Notice"
             accent = self.infer_history_accent(title)
+            panel_body = renderable.renderable
+            if hasattr(panel_body, "plain"):
+                body = str(panel_body.plain).strip()
+            else:
+                body = self.theme.render_text(panel_body, width=90).strip()
         if not body:
             return
         self.history_entries.append(
@@ -325,7 +335,14 @@ class BrowserWorkbench(WorkbenchApp):
         )
         if len(self.history_entries) > 120:
             self.history_entries = self.history_entries[-120:]
-        self.flash_messages.append({"title": title, "body": body, "accent": accent})
+        self.flash_messages.append(
+            {
+                "title": title,
+                "body": body,
+                "accent": accent,
+                "summary": self.activity_summary(title, body),
+            }
+        )
 
     def flush_ui(self) -> None:
         return
@@ -343,12 +360,17 @@ class BrowserWorkbench(WorkbenchApp):
             if not msg.get("title") or msg["title"].strip().lower() in {"notice", ""}:
                 continue
             body = (msg.get("body") or "").strip()
-            if not body:
+            summary = (msg.get("summary") or self.activity_summary(str(msg.get("title", "")), body)).strip()
+            if not body and not summary:
                 continue
             if deduped:
                 prev = deduped[-1]
-                if prev.get("title") == msg["title"] and prev.get("body", "").strip() == body:
+                if (
+                    prev.get("title") == msg["title"]
+                    and prev.get("summary", "").strip() == summary
+                ):
                     continue
+            msg = {**msg, "summary": summary}
             deduped.append(msg)
         return deduped
 
@@ -403,6 +425,7 @@ class BrowserWorkbench(WorkbenchApp):
     def load_workspace(self, testament: str, book: str, chapter: int, chunk_key: str) -> None:
         start_verse, end_verse = [int(part) for part in chunk_key.split("-", 1)]
         self.open_chunk(book, chapter, start_verse, end_verse)
+        self.state.footnote_draft = None
         self.state.wizard_testament = testament
         self.set_screen("STUDY", mode="COMMAND")
         self.save_state()
@@ -417,6 +440,7 @@ class BrowserWorkbench(WorkbenchApp):
         self.state.chunk_end = None
         self.state.focus_start = None
         self.state.focus_end = None
+        self.state.browser_editor_mode = "draft"
         self.state.chat_messages = []
         self.state.draft_chunk = {}
         self.state.draft_title = ""
@@ -430,6 +454,74 @@ class BrowserWorkbench(WorkbenchApp):
         self.state.mode = "COMMAND"
         self.set_screen("STUDY", mode="COMMAND")
         self.save_state()
+
+    def committed_chunk_title(self) -> str:
+        if not self.has_open_chunk():
+            return ""
+        try:
+            chapter_doc = self.current_chapter()
+            section_index = self.bible_repo.title_section_index(
+                chapter_doc,
+                self.state.chunk_start or 1,
+                self.state.chunk_end or 1,
+            )
+        except Exception:
+            return ""
+        return str(
+            chapter_doc.get("sections", [{}])[section_index].get("headline", "")
+        ).strip()
+
+    def chunk_has_committed_text(self) -> bool:
+        if not self.has_open_chunk():
+            return False
+        chapter_map = self.chapter_verse_map()
+        for verse in range((self.state.chunk_start or 1), (self.state.chunk_end or 1) + 1):
+            if chapter_map.get(verse, "").strip():
+                return True
+        return False
+
+    def has_draft_work(self) -> bool:
+        if self.state.draft_title.strip():
+            return True
+        return any(str(text).strip() for text in self.state.draft_chunk.values())
+
+    def default_editor_mode(self) -> str:
+        return "review" if self.chunk_has_committed_text() else "draft"
+
+    def editor_mode(self) -> str:
+        mode = str(getattr(self.state, "browser_editor_mode", "draft") or "draft").lower()
+        if mode not in {"draft", "review"}:
+            return self.default_editor_mode()
+        return mode
+
+    def set_editor_mode(self, mode: str) -> str:
+        clean = "review" if str(mode).lower() == "review" else "draft"
+        self.state.browser_editor_mode = clean
+        return clean
+
+    def sync_editor_mode(self, *, force_default: bool = False) -> str:
+        if not self.has_open_chunk():
+            self.state.browser_editor_mode = "draft"
+            return "draft"
+        if force_default or self.editor_mode() not in {"draft", "review"}:
+            return self.set_editor_mode(self.default_editor_mode())
+        mode = self.editor_mode()
+        self.state.browser_editor_mode = mode
+        return mode
+
+    def seed_draft_from_committed(self) -> None:
+        if not self.has_open_chunk():
+            return
+        chapter_map = self.chapter_verse_map()
+        for verse in range((self.state.chunk_start or 1), (self.state.chunk_end or 1) + 1):
+            committed = chapter_map.get(verse, "")
+            if committed.strip():
+                self.state.draft_chunk[str(verse)] = committed.strip()
+        committed_title = self.committed_chunk_title()
+        if committed_title:
+            self.state.draft_title = committed_title
+        self.set_editor_mode("draft")
+        self.prepare_browser_commit_state()
 
     def first_chunk_key(self, testament: str, book: str, chapter: int) -> str | None:
         chunks = self.chapter_chunks(testament, book, chapter)
@@ -950,7 +1042,18 @@ class BrowserWorkbench(WorkbenchApp):
         return list(range((self.state.chunk_start or 1), (self.state.chunk_end or 1) + 1))
 
     def draft_editor_verses(self) -> list[dict[str, Any]]:
-        """Return ALL verses in the current chunk (no range filtering)."""
+        """Return draft-only text for the current chunk."""
+        if not self.has_open_chunk():
+            return []
+        start = self.state.chunk_start or 1
+        end = self.state.chunk_end or start
+        verses = []
+        for verse in range(start, end + 1):
+            text = self.state.draft_chunk.get(str(verse), "")
+            verses.append({"verse": verse, "text": (text or "").rstrip()})
+        return verses
+
+    def review_editor_verses(self) -> list[dict[str, Any]]:
         if not self.has_open_chunk():
             return []
         chapter_map = self.chapter_verse_map()
@@ -958,9 +1061,24 @@ class BrowserWorkbench(WorkbenchApp):
         end = self.state.chunk_end or start
         verses = []
         for verse in range(start, end + 1):
-            text = self.state.draft_chunk.get(str(verse), chapter_map.get(verse, ""))
-            verses.append({"verse": verse, "text": (text or "").rstrip()})
+            committed = chapter_map.get(verse, "")
+            key = str(verse)
+            text = self.state.draft_chunk.get(key, committed)
+            verses.append(
+                {
+                    "verse": verse,
+                    "text": (text or "").rstrip(),
+                    "committed": committed.rstrip(),
+                    "changed": key in self.state.draft_chunk and text.strip() != committed.strip(),
+                }
+            )
         return verses
+
+    def editor_title(self, mode: str | None = None) -> str:
+        current_mode = mode or self.editor_mode()
+        if current_mode == "review" and not self.state.draft_title.strip():
+            return self.committed_chunk_title()
+        return self.state.draft_title
 
     def parse_range_draft(self, start: int, end: int, raw_text: str) -> dict[int, str]:
         chapter_map = self.chapter_verse_map()
@@ -1226,6 +1344,9 @@ User message:
     def browser_chat_turn(self, user_message: str) -> None:
         if not self.require_open_chunk():
             return
+        if not self.state.draft_chunk and not self.state.chat_messages and self.chunk_has_committed_text():
+            self.notify("Review text is committed. Use Revise in Draft before chatting.")
+            return
         if not self.state.draft_chunk and not self.state.chat_messages:
             if not self.browser_auto_generate_draft():
                 return
@@ -1401,6 +1522,9 @@ User message:
         chunk_open = self.has_open_chunk()
         if chunk_open:
             self.prepare_browser_commit_state()
+            editor_mode = self.sync_editor_mode()
+        else:
+            editor_mode = "draft"
         editor_start, editor_end = self.current_editor_range() if chunk_open else (0, 0)
         return {
             "navigator": self.navigator_catalog(),
@@ -1440,6 +1564,12 @@ User message:
             "editor_range_end": editor_end,
             "editor_range_options": self.editor_range_options() if chunk_open else [],
             "draft_editor_verses": self.draft_editor_verses() if chunk_open else [],
+            "review_editor_verses": self.review_editor_verses() if chunk_open else [],
+            "editor_mode": editor_mode,
+            "editor_title": self.editor_title(editor_mode) if chunk_open else "",
+            "committed_title": self.committed_chunk_title() if chunk_open else "",
+            "has_draft_work": self.has_draft_work() if chunk_open else False,
+            "has_committed_text": self.chunk_has_committed_text() if chunk_open else False,
             "chunk_sessions": self.chunk_session_list(),
             "justification_entries": self.chunk_justification_entries() if chunk_open else [],
             "footnote_entries": self.chunk_footnote_entries() if chunk_open else [],
@@ -1465,14 +1595,29 @@ User message:
             "book": book,
             "chapter": chapter,
             "chunk": f"{start}-{end}",
-            "title": self.state.draft_title or "",
+            "title": self.state.draft_title or self.committed_chunk_title(),
             "verses": verses,
         }
 
-    def save_draft(self, title: str, verses: dict[int, str]) -> None:
-        self.state.draft_title = title.strip()
-        for verse, text in verses.items():
-            self.state.draft_chunk[str(verse)] = text.strip()
+    def save_draft(self, title: str, verses: dict[int, str], *, editor_mode: str | None = None) -> None:
+        mode = (editor_mode or self.editor_mode()).lower()
+        chapter_map = self.chapter_verse_map()
+        if mode == "review":
+            committed_title = self.committed_chunk_title()
+            cleaned_title = title.strip()
+            self.state.draft_title = "" if cleaned_title == committed_title else cleaned_title
+            for verse, text in verses.items():
+                key = str(verse)
+                cleaned = text.strip()
+                committed = chapter_map.get(verse, "").strip()
+                if cleaned == committed:
+                    self.state.draft_chunk.pop(key, None)
+                else:
+                    self.state.draft_chunk[key] = cleaned
+        else:
+            self.state.draft_title = title.strip()
+            for verse, text in verses.items():
+                self.state.draft_chunk[str(verse)] = text.strip()
         self.prepare_browser_commit_state()
         self.save_state()
 
@@ -1499,6 +1644,8 @@ User message:
             return
 
         self.load_workspace(testament, book, chapter, chunk_key)
+        self.sync_editor_mode(force_default=True)
+        self.save_state()
         # Browser UI shows chunk in banner — skip terminal-style announcement
         return
 

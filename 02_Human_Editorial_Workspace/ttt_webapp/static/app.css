@@ -986,6 +986,54 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
 .chat-user { background: rgba(198,155,98,0.06); }
 .chat-assistant { background: rgba(255,255,255,0.025); }
 
+.editor-panel,
+.chat-panel {
+  display: grid;
+  gap: 0.95rem;
+}
+.editor-tab-bar {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.editor-mode-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+.editor-bridge-button {
+  padding: 0.54rem 0.82rem;
+  font-size: 0.8rem;
+}
+.verse-editor-meta {
+  display: grid;
+  gap: 0.22rem;
+  align-items: start;
+}
+.verse-editor-row.is-changed .verse-editor-textarea {
+  border-bottom-color: rgba(198,155,98,0.28);
+}
+.verse-editor-state {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.08rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(198,155,98,0.22);
+  color: var(--accent-soft);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.chat-bridge-empty {
+  gap: 0.85rem;
+  justify-items: start;
+}
+.chat-bridge-empty strong {
+  color: var(--text);
+}
+
 .support-panel {
   display: grid;
   gap: 0.9rem;
@@ -1259,6 +1307,7 @@ textarea { min-height: 96px; resize: vertical; font-family: var(--serif); }
   .activity-ribbon-group,
   .editor-range-head,
   .editor-range-form,
+  .editor-tab-bar,
   .editor-actions,
   .chat-actions,
   .commit-actions,

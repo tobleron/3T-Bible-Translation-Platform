@@ -58,6 +58,7 @@ def render_workspace(request: Request, wb: BrowserWorkbench, active_tab: str = "
 def apply_draft_form(wb: BrowserWorkbench, form) -> None:
     if not form:
         return
+    editor_mode = str(form.get("editor_mode", wb.editor_mode())).strip().lower() or wb.editor_mode()
     # Check for per-verse textarea fields (verse_N)
     verse_fields = {
         key: str(value)
@@ -75,7 +76,7 @@ def apply_draft_form(wb: BrowserWorkbench, form) -> None:
                     verses[verse_num] = text.strip()
             except (ValueError, IndexError):
                 continue
-        wb.save_draft(str(form.get("draft_title", "")), verses)
+        wb.save_draft(str(form.get("draft_title", "")), verses, editor_mode=editor_mode)
         return
     if "draft_range_text" in form:
         start = int(str(form.get("draft_range_start", wb.current_editor_range()[0])))
@@ -94,7 +95,7 @@ def apply_draft_form(wb: BrowserWorkbench, form) -> None:
     for key, value in form.items():
         if str(key).startswith("verse_"):
             verses[int(str(key).split("_", 1)[1])] = str(value)
-    wb.save_draft(str(form.get("draft_title", "")), verses)
+    wb.save_draft(str(form.get("draft_title", "")), verses, editor_mode=editor_mode)
 
 
 def render_workspace_error(
@@ -293,6 +294,32 @@ async def set_draft_range(
         target_end = int(str(form.get("editor_target_end", wb.current_editor_range()[1])))
         wb.set_editor_range(target_start, target_end)
         wb.activate_tab("draft")
+        return render_workspace(request, wb, active_tab="draft", partial=True)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/mode", response_class=HTMLResponse)
+async def set_editor_mode(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        apply_draft_form(wb, form)
+        action = str(form.get("editor_action", "")).strip().lower()
+        if action == "seed-draft":
+            wb.seed_draft_from_committed()
+        else:
+            wb.set_editor_mode(action or "draft")
+        wb.activate_tab("draft")
+        wb.save_state()
         return render_workspace(request, wb, active_tab="draft", partial=True)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
