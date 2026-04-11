@@ -234,6 +234,12 @@
                 {% if editor_mode == 'review' and v.changed %}
                 <span class="verse-editor-state">Edited</span>
                 {% endif %}
+                {% if editor_mode == 'draft' %}
+                <div class="verse-editor-tools">
+                  <button class="mini-tool-button" type="button" title="Grammar only" onclick="enhanceEditorVerse(this, 'grammar')">G</button>
+                  <button class="mini-tool-button" type="button" title="Concise rewrite" onclick="enhanceEditorVerse(this, 'concise')">C</button>
+                </div>
+                {% endif %}
               </div>
               <textarea class="verse-editor-textarea" name="verse_{{ v.verse }}" rows="1">{{ v.text }}</textarea>
             </div>
@@ -300,6 +306,63 @@
         {% endif %}
       </article>
 
+      <article class="workspace-card editorial-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Editorial Assistant</p>
+            <h2>Isolated sentence-level enhancement</h2>
+          </div>
+          <div class="panel-summary">
+            <span class="inline-badge">No chat memory</span>
+            <span class="muted-line">Focused rewrites with editable prompts.</span>
+          </div>
+        </div>
+
+        <form class="editorial-form"
+          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editorial"
+          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+          <label class="compact-field">
+            <span>Input</span>
+            <textarea id="editorial-input" name="editorial_input" rows="4" placeholder="Paste a sentence, footnote, or justification prose here.">{{ editorial_input }}</textarea>
+          </label>
+
+          <details class="editorial-prompts">
+            <summary>Edit prompts</summary>
+            <div class="editorial-prompt-grid">
+              <label class="compact-field">
+                <span>Grammar only</span>
+                <textarea id="editorial-prompt-grammar" name="editorial_prompt_grammar" rows="4">{{ editorial_prompts.grammar }}</textarea>
+              </label>
+              <label class="compact-field">
+                <span>Concise rewrite</span>
+                <textarea id="editorial-prompt-concise" name="editorial_prompt_concise" rows="4">{{ editorial_prompts.concise }}</textarea>
+              </label>
+              <label class="compact-field">
+                <span>Scholarly rewrite</span>
+                <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="4">{{ editorial_prompts.scholarly }}</textarea>
+              </label>
+            </div>
+          </details>
+
+          <div class="editorial-actions">
+            <button class="secondary-button" type="submit" name="action" value="grammar">Grammar Only</button>
+            <button class="secondary-button" type="submit" name="action" value="concise">Concise</button>
+            <button class="secondary-button" type="submit" name="action" value="scholarly">Scholarly</button>
+            <button class="secondary-button" type="submit" name="action" value="clear">Clear</button>
+          </div>
+
+          {% if editorial_output %}
+          <label class="compact-field editorial-output-field">
+            <span>{{ editorial_output_label or "Editorial output" }}</span>
+            <textarea id="editorial-output" rows="4" readonly>{{ editorial_output }}</textarea>
+          </label>
+          <div class="editorial-actions">
+            <button class="secondary-button" type="button" onclick="copyEditorialOutput()">Copy Output</button>
+          </div>
+          {% endif %}
+        </form>
+      </article>
+
       <article class="workspace-card support-panel">
         <div class="panel-head support-panel-head">
           <div>
@@ -329,6 +392,17 @@
               <p><strong>Decision:</strong> <span class="support-richtext">{{ item.decision_html|safe }}</span></p>
               {% endif %}
               <div class="support-richtext">{{ item.reason_html|safe }}</div>
+              <form class="inline-form support-entry-actions"
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/justify"
+                hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="entry_id" value="{{ item.id }}">
+                <input type="hidden" name="justify_range" value="{{ item.verse_label }}">
+                <input type="hidden" name="source_term" value="{{ item.source_term }}">
+                <input type="hidden" name="decision" value="{{ item.decision }}">
+                <input type="hidden" name="reason" value="{{ item.reason }}">
+                <button class="secondary-button support-edit-button" type="submit">Edit</button>
+              </form>
             </div>
           </details>
           {% endfor %}
@@ -349,6 +423,8 @@
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
+              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'scholarly')" title="Scholarly rewrite">S</button>
+              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'custom')" title="Custom tweak">?</button>
               <span class="support-format-hint">Applies to the focused field.</span>
             </div>
             <div class="support-grid support-grid-justify">
@@ -365,6 +441,11 @@
                 <input type="text" name="decision" value="{{ state.justify_draft.decision if state.justify_draft else '' }}" placeholder="Required" data-inline-format-field>
               </label>
             </div>
+            <input type="hidden" name="entry_id" value="{{ state.justify_draft.entry_id if state.justify_draft and state.justify_draft.entry_id else '' }}">
+            <label class="compact-field">
+              <span>Custom tweak prompt</span>
+              <input type="text" name="justify_custom_prompt" value="{{ state.justify_custom_prompt }}" placeholder="Example: Make this more cautious and formal.">
+            </label>
             <label class="compact-field">
               <span>Reason</span>
               <textarea name="reason" rows="4" placeholder="Why this rendering is right for the selected verse(s)." data-inline-format-field data-inline-format-default>{{ state.justify_draft.reason if state.justify_draft else '' }}</textarea>
@@ -374,7 +455,6 @@
               <div class="support-richtext" data-inline-preview-html></div>
             </div>
             <div class="support-actions">
-              <button class="secondary-button" type="submit" name="action" value="autofill">Autofill</button>
               {% if state.justify_draft %}
               <button class="secondary-button" type="submit" name="action" value="cancel">Cancel</button>
               {% endif %}
@@ -404,6 +484,15 @@
             </summary>
             <div class="support-entry-body">
               <div class="support-richtext">{{ item.content_html|safe }}</div>
+              <form class="inline-form support-entry-actions"
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/footnotes"
+                hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="footnote_verse" value="{{ item.verse }}">
+                <input type="hidden" name="footnote_letter" value="{{ item.letter }}">
+                <input type="hidden" name="footnote_content" value="{{ item.content }}">
+                <button class="secondary-button support-edit-button" type="submit">Edit</button>
+              </form>
             </div>
           </details>
           {% endfor %}
@@ -424,6 +513,8 @@
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
+              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'scholarly')" title="Scholarly rewrite">S</button>
+              <button class="mini-tool-button" type="button" onmousedown="event.preventDefault()" onclick="enhanceSupportField(this, 'custom')" title="Custom tweak">?</button>
               <span class="support-format-hint">Applies to the focused field.</span>
             </div>
             <div class="support-grid support-grid-footnote">
@@ -440,6 +531,10 @@
                 <input type="text" name="footnote_letter" maxlength="3" value="{{ state.footnote_draft.letter if state.footnote_draft else '' }}" placeholder="a">
               </label>
             </div>
+            <label class="compact-field">
+              <span>Custom tweak prompt</span>
+              <input type="text" name="footnote_custom_prompt" value="{{ state.footnote_custom_prompt }}" placeholder="Example: Make this shorter and more formal.">
+            </label>
             <label class="compact-field">
               <span>Content</span>
               <textarea name="footnote_content" rows="3" placeholder="Short footer note." data-inline-format-field data-inline-format-default>{{ state.footnote_draft.content if state.footnote_draft else '' }}</textarea>
@@ -809,6 +904,87 @@ function showWorkspaceIndicator(message) {
   indicator.textContent = message;
   clearTimeout(showWorkspaceIndicator._timer);
   showWorkspaceIndicator._timer = setTimeout(function() { indicator.style.display = 'none'; }, 3000);
+}
+function currentEditorialPromptValues() {
+  return {
+    grammar: (document.getElementById('editorial-prompt-grammar') || {}).value || '',
+    concise: (document.getElementById('editorial-prompt-concise') || {}).value || '',
+    scholarly: (document.getElementById('editorial-prompt-scholarly') || {}).value || ''
+  };
+}
+function chunkEditorialEndpoint() {
+  return window.location.pathname.replace(/\/$/, '') + '/editorial/enhance-field';
+}
+function runEnhancementRequest(payload) {
+  var body = new FormData();
+  Object.keys(payload).forEach(function(key) {
+    body.append(key, payload[key]);
+  });
+  var prompts = currentEditorialPromptValues();
+  body.append('editorial_prompt_grammar', prompts.grammar);
+  body.append('editorial_prompt_concise', prompts.concise);
+  body.append('editorial_prompt_scholarly', prompts.scholarly);
+  return fetch(chunkEditorialEndpoint(), { method: 'POST', body: body })
+    .then(function(response) { return response.json().then(function(data) { return { status: response.status, data: data }; }); })
+    .then(function(result) {
+      if (!result.data || !result.data.ok) {
+        throw new Error((result.data && result.data.message) || 'Enhancement failed.');
+      }
+      return result.data;
+    });
+}
+function enhanceEditorVerse(btn, mode) {
+  var row = btn.closest('.verse-editor-row');
+  var field = row ? row.querySelector('.verse-editor-textarea') : null;
+  if (!field) return;
+  btn.disabled = true;
+  runEnhancementRequest({
+    mode: mode,
+    context_label: 'Bible draft verse',
+    text: field.value || ''
+  }).then(function(data) {
+    field.value = data.text || '';
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    showWorkspaceIndicator((data.label || 'Rewrite') + ' applied.');
+  }).catch(function(err) {
+    showWorkspaceIndicator(err.message || 'Enhancement failed.');
+  }).finally(function() {
+    btn.disabled = false;
+  });
+}
+function enhanceSupportField(trigger, mode) {
+  var field = findSupportFormatField(trigger);
+  if (!field) return;
+  var form = trigger.closest('form');
+  if (!form) return;
+  var customPromptField = form.querySelector('[name="justify_custom_prompt"], [name="footnote_custom_prompt"]');
+  var contextLabel = form.querySelector('[name="reason"]')
+    ? 'translation justification prose'
+    : 'translation footnote prose';
+  trigger.disabled = true;
+  runEnhancementRequest({
+    mode: mode,
+    context_label: contextLabel,
+    text: field.value || '',
+    custom_prompt: customPromptField ? customPromptField.value || '' : ''
+  }).then(function(data) {
+    field.value = data.text || '';
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    showWorkspaceIndicator((data.label || 'Rewrite') + ' applied.');
+  }).catch(function(err) {
+    showWorkspaceIndicator(err.message || 'Enhancement failed.');
+  }).finally(function() {
+    trigger.disabled = false;
+  });
+}
+function copyEditorialOutput() {
+  var field = document.getElementById('editorial-output');
+  if (!field) return;
+  navigator.clipboard.writeText(field.value || '').then(function() {
+    showWorkspaceIndicator('Editorial output copied.');
+  }).catch(function() {
+    showWorkspaceIndicator('Copy failed.');
+  });
 }
 function copyTranslationVerse(btn, text) {
   navigator.clipboard.writeText(text).then(function() {

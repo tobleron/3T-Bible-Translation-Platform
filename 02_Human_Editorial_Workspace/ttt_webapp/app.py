@@ -111,6 +111,15 @@ def render_workspace_error(
     return render_workspace(request, wb, active_tab=active_tab, partial=partial)
 
 
+def _parse_verse_range(raw_value: str, fallback_chunk_key: str) -> tuple[int, int]:
+    raw = (raw_value or fallback_chunk_key).strip() or fallback_chunk_key
+    if "-" in raw:
+        left, right = raw.split("-", 1)
+        return int(left.strip()), int(right.strip())
+    verse = int(raw)
+    return verse, verse
+
+
 @app.get("/workspace/navigate")
 @app.post("/workspace/navigate")
 async def workspace_navigate(request: Request):
@@ -453,16 +462,29 @@ async def justify_stage(
         action = str(form.get("action", "")).strip()
         if action == "cancel":
             wb.cmd_jcancel([])
+        elif action == "edit":
+            start_verse, end_verse = _parse_verse_range(
+                str(form.get("justify_range", chunk_key)),
+                chunk_key,
+            )
+            wb.cmd_justify([f"{start_verse}-{end_verse}" if start_verse != end_verse else str(start_verse)])
+            if wb.state.justify_draft:
+                wb.state.justify_draft.entry_id = str(form.get("entry_id", "")).strip() or None
+                wb.state.justify_draft.source_term = str(form.get("source_term", "")).strip()
+                wb.state.justify_draft.decision = str(form.get("decision", "")).strip()
+                wb.state.justify_draft.reason = str(form.get("reason", "")).strip()
         else:
             verse_range = str(form.get("justify_range", chunk_key)).strip() or chunk_key
             wb.cmd_justify([verse_range])
             if wb.state.justify_draft:
+                wb.state.justify_custom_prompt = str(
+                    form.get("justify_custom_prompt", wb.state.justify_custom_prompt)
+                ).strip()
                 wb.state.justify_draft.source_term = str(form.get("source_term", "")).strip()
                 wb.state.justify_draft.decision = str(form.get("decision", "")).strip()
                 wb.state.justify_draft.reason = str(form.get("reason", "")).strip()
-                if action == "autofill":
-                    wb.cmd_jautofill([])
-                elif action == "stage":
+                wb.state.justify_draft.entry_id = str(form.get("entry_id", "")).strip() or None
+                if action == "stage":
                     wb.cmd_jstage([])
         wb.activate_tab("draft")
         wb.save_state()
@@ -489,10 +511,28 @@ async def footnote_stage(
         if action == "cancel":
             wb.state.footnote_draft = None
             wb.notify("Footnote draft cancelled.")
+        elif action == "edit":
+            verse = int(str(form.get("footnote_verse", "0")).strip() or "0")
+            letter = str(form.get("footnote_letter", "")).strip()
+            content = str(form.get("footnote_content", "")).strip()
+            wb.state.footnote_custom_prompt = str(
+                form.get("footnote_custom_prompt", wb.state.footnote_custom_prompt)
+            ).strip()
+            wb.state.footnote_draft = FootnoteDraft(
+                book=book,
+                chapter=chapter,
+                verse=verse,
+                letter=letter,
+                content=content,
+            )
+            wb.notify("Footnote loaded for editing.")
         else:
             verse = int(str(form.get("footnote_verse", "0")).strip() or "0")
             letter = str(form.get("footnote_letter", "")).strip()
             content = str(form.get("footnote_content", "")).strip()
+            wb.state.footnote_custom_prompt = str(
+                form.get("footnote_custom_prompt", wb.state.footnote_custom_prompt)
+            ).strip()
             wb.state.footnote_draft = FootnoteDraft(
                 book=book,
                 chapter=chapter,
@@ -529,6 +569,86 @@ async def footnote_stage(
         return render_workspace(request, wb, active_tab="draft", partial=True)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial", response_class=HTMLResponse)
+async def editorial_assistant(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        apply_draft_form(wb, form)
+        wb.save_editorial_prompts(
+            {
+                "grammar": str(form.get("editorial_prompt_grammar", "")).strip(),
+                "concise": str(form.get("editorial_prompt_concise", "")).strip(),
+                "scholarly": str(form.get("editorial_prompt_scholarly", "")).strip(),
+            }
+        )
+        wb.state.editorial_input = str(form.get("editorial_input", "")).strip()
+        action = str(form.get("action", "")).strip().lower()
+        if action == "clear":
+            wb.state.editorial_output = ""
+            wb.state.editorial_output_label = ""
+        else:
+            mode = action or "grammar"
+            wb.state.editorial_output = wb.run_editorial_enhancement(
+                source_text=wb.state.editorial_input,
+                mode=mode,
+                context_label="general editorial prose",
+                prompt_override=str(form.get(f"editorial_prompt_{mode}", "")).strip(),
+            )
+            wb.state.editorial_output_label = wb.editorial_mode_label(mode)
+            wb.notify(f"{wb.state.editorial_output_label} ready.")
+        wb.activate_tab("draft")
+        wb.save_state()
+        return render_workspace(request, wb, active_tab="draft", partial=True)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial/enhance-field", response_class=JSONResponse)
+async def enhance_field(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        prompt_updates = {
+            "grammar": str(form.get("editorial_prompt_grammar", "")).strip(),
+            "concise": str(form.get("editorial_prompt_concise", "")).strip(),
+            "scholarly": str(form.get("editorial_prompt_scholarly", "")).strip(),
+        }
+        wb.save_editorial_prompts(prompt_updates)
+        mode = str(form.get("mode", "")).strip().lower()
+        custom_prompt = str(form.get("custom_prompt", "")).strip()
+        context_label = str(form.get("context_label", "")).strip() or "editorial prose"
+        prompt_override = str(form.get("prompt_override", "")).strip()
+        source_text = str(form.get("text", "")).strip()
+        result = wb.run_editorial_enhancement(
+            source_text=source_text,
+            mode=mode,
+            context_label=context_label,
+            prompt_override=prompt_override,
+            custom_prompt=custom_prompt,
+        )
+        wb.save_state()
+        return JSONResponse({"ok": True, "text": result, "label": wb.editorial_mode_label(mode)})
+    except Exception as exc:
+        return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/validate", response_class=HTMLResponse)

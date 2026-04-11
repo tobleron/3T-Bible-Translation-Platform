@@ -131,6 +131,24 @@ class BrowserWorkbench(WorkbenchApp):
     """Headless workbench controller for the browser app."""
 
     _editor_line_re = re.compile(r"(?m)^\s*(\d+)\s*[\.\):-]\s*")
+    _editorial_prompt_defaults = {
+        "grammar": (
+            "You are a precise English copyeditor. Correct only grammar, spelling, punctuation, "
+            "and natural English usage. Preserve wording, tone, meaning, and sentence structure "
+            "as much as possible. Change sentence structure only when the original is clearly "
+            "unacceptable English. Do not add information. Do not remove information."
+        ),
+        "concise": (
+            "You are an editorial compressor. Rewrite the text more concisely while preserving "
+            "the full meaning, all relevant information, and the same theological or technical nuance. "
+            "Do not omit content. Do not broaden or soften claims."
+        ),
+        "scholarly": (
+            "You are an academic editorial assistant. Rephrase the text in a scholarly, professional, "
+            "editorial tone suitable for translation footnotes and justification prose. Preserve the "
+            "writer's intent and factual content. Do not introduce new claims."
+        ),
+    }
 
     def __init__(self) -> None:
         llm_override, fake_mode = self._build_llm_override()
@@ -402,6 +420,107 @@ class BrowserWorkbench(WorkbenchApp):
                 path=self.paths.legacy_prompt_path,
             ),
         ]
+
+    def editorial_prompts(self) -> dict[str, str]:
+        prompts = dict(self._editorial_prompt_defaults)
+        stored = getattr(self.state, "editorial_prompts", {}) or {}
+        if isinstance(stored, dict):
+            for key in ("grammar", "concise", "scholarly"):
+                value = stored.get(key)
+                if isinstance(value, str) and value.strip():
+                    prompts[key] = value.strip()
+        return prompts
+
+    def save_editorial_prompts(self, updates: dict[str, str]) -> None:
+        prompts = self.editorial_prompts()
+        for key, value in updates.items():
+            if key in prompts and isinstance(value, str) and value.strip():
+                prompts[key] = value.strip()
+        self.state.editorial_prompts = prompts
+
+    @staticmethod
+    def editorial_mode_label(mode: str) -> str:
+        labels = {
+            "grammar": "Grammar Only",
+            "concise": "Concise Rewrite",
+            "scholarly": "Scholarly Rewrite",
+            "custom": "Custom Tweak",
+        }
+        return labels.get(str(mode).strip().lower(), "Editorial Output")
+
+    def build_editorial_enhancement_prompt(
+        self,
+        *,
+        source_text: str,
+        instruction: str,
+        context_label: str,
+    ) -> str:
+        return f"""
+You are assisting a Bible translation editor with a focused editorial rewrite.
+
+Instruction:
+{instruction}
+
+Context:
+- Task type: editorial enhancement
+- Content kind: {context_label}
+
+Source text:
+{source_text.strip() or "[blank]"}
+
+Return strict JSON only:
+{{
+  "text": "the revised text only"
+}}
+
+Rules:
+- Return only one revised version.
+- Preserve meaning unless the instruction explicitly asks otherwise.
+- Do not add commentary, notes, bullets, or explanation.
+- Do not wrap the answer in markdown fences.
+""".strip()
+
+    def run_editorial_enhancement(
+        self,
+        *,
+        source_text: str,
+        mode: str,
+        context_label: str,
+        prompt_override: str = "",
+        custom_prompt: str = "",
+    ) -> str:
+        clean_mode = str(mode).strip().lower()
+        text = str(source_text or "").strip()
+        if not text:
+            raise ValueError("Add text before running editorial enhancement.")
+        prompts = self.editorial_prompts()
+        if clean_mode == "custom":
+            instruction = str(custom_prompt or "").strip()
+            if not instruction:
+                raise ValueError("Add a custom prompt before running the custom tweak.")
+        else:
+            instruction = str(prompt_override or "").strip() or prompts.get(clean_mode, "").strip()
+            if clean_mode not in prompts:
+                raise ValueError("Choose a valid editorial enhancement mode.")
+        payload, response, _attempts = self.llm.complete_json(
+            self.build_editorial_enhancement_prompt(
+                source_text=text,
+                instruction=instruction,
+                context_label=context_label,
+            ),
+            required_keys=["text"],
+            temperature=0.2,
+            max_tokens=900,
+            max_attempts=3,
+        )
+        if not isinstance(payload, dict):
+            if str(response).startswith("[ERROR]"):
+                raise ValueError(self.explain_llm_failure(str(response)))
+            raise ValueError("The endpoint did not return a valid editorial enhancement response.")
+        result = str(payload.get("text", "")).strip()
+        if not result:
+            raise ValueError("The model returned an empty editorial enhancement response.")
+        return result
 
     def prompt_payload(self) -> dict[str, str]:
         payload: dict[str, str] = {}
@@ -1710,6 +1829,10 @@ User message:
             "chunk_sessions": self.chunk_session_list(),
             "justification_entries": self.chunk_justification_entries() if chunk_open else [],
             "footnote_entries": self.chunk_footnote_entries() if chunk_open else [],
+            "editorial_prompts": self.editorial_prompts(),
+            "editorial_input": self.state.editorial_input,
+            "editorial_output": self.state.editorial_output,
+            "editorial_output_label": self.state.editorial_output_label,
         }
 
     def json_preview_payload(self) -> dict[str, Any]:

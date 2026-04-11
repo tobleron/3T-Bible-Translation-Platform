@@ -136,6 +136,15 @@ class JustifyCommandsMixin:
             existing_ids,
             entry_id=draft.entry_id,
         )
+        self.state.pending_justification_updates = [
+            item
+            for item in self.state.pending_justification_updates
+            if not (
+                item.book == draft.book
+                and item.chapter == draft.chapter
+                and str(item.entry.get("id", "")).strip() == str(entry.get("id", "")).strip()
+            )
+        ]
         self.state.pending_justification_updates.append(
             PendingJustificationUpdate(book=draft.book, chapter=draft.chapter, entry=entry)
         )

@@ -135,6 +135,23 @@ class FakeLLM:
             }
             return payload, str(payload), 1
 
+        if '"text"' in prompt and "Task type: editorial enhancement" in prompt:
+            source_match = re.search(r"Source text:\s*(.*?)\s*Return strict JSON only:", prompt, re.S)
+            text = source_match.group(1).strip() if source_match else "Edited text."
+            instruction_match = re.search(r"Instruction:\s*(.*?)\s*Context:", prompt, re.S)
+            instruction = instruction_match.group(1).strip().lower() if instruction_match else ""
+            if "copyeditor" in instruction or "grammar" in instruction:
+                result = text.replace(" teh ", " the ").replace(" dont ", " don't ")
+            elif "concise" in instruction or "compressor" in instruction:
+                result = re.sub(r"\s+", " ", text).strip()
+                result = result[: max(len(result) - 10, 1)] if len(result) > 24 else result
+            elif "scholarly" in instruction or "academic" in instruction:
+                result = f"Scholarly: {text}"
+            else:
+                result = f"Revised: {text}"
+            payload = {"text": result.strip()}
+            return payload, str(payload), 1
+
         return {}, "{}", 1
 
 

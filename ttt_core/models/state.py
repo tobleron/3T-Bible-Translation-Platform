@@ -173,6 +173,12 @@ class SessionState:
     chat_messages: list[dict[str, str]] = field(default_factory=list)
     analysis_cache: dict[str, str] = field(default_factory=dict)
     analysis_meta: dict[str, dict[str, Any]] = field(default_factory=dict)
+    editorial_prompts: dict[str, str] = field(default_factory=dict)
+    editorial_input: str = ""
+    editorial_output: str = ""
+    editorial_output_label: str = ""
+    justify_custom_prompt: str = ""
+    footnote_custom_prompt: str = ""
     last_review: ReviewState | None = None
     pending_verse_updates: list[PendingVerseUpdate] = field(default_factory=list)
     pending_title_updates: list[PendingTitleUpdate] = field(default_factory=list)
@@ -239,6 +245,12 @@ class SessionState:
             chat_messages=data.get("chat_messages", []),
             analysis_cache=data.get("analysis_cache", {}),
             analysis_meta=data.get("analysis_meta", {}),
+            editorial_prompts=data.get("editorial_prompts", {}),
+            editorial_input=data.get("editorial_input", ""),
+            editorial_output=data.get("editorial_output", ""),
+            editorial_output_label=data.get("editorial_output_label", ""),
+            justify_custom_prompt=data.get("justify_custom_prompt", ""),
+            footnote_custom_prompt=data.get("footnote_custom_prompt", ""),
             last_review=ReviewState(**review) if review else None,
             pending_verse_updates=[
                 PendingVerseUpdate(**item)
