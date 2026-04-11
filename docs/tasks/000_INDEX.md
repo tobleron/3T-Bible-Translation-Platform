@@ -8,3 +8,4 @@ Current active task list in execution order.
 - [004 Comparison Source Checkbox Panel](./004_comparison_source_checkbox_panel.md)
 - [005 Chunk Boundary and Label Quality Audit](./005_chunk_boundary_and_label_quality_audit.md)
 - [006 Editorial Enhancement and Support Entry Editing](./006_editorial_enhancement_and_support_entry_editing.md)
+- [007 Model Action Feedback, Prompt Tabs, and Chat Context Sources](./007_model_action_feedback_prompt_tabs_and_chat_context_sources.md)
