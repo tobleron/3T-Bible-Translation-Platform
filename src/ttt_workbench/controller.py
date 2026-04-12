@@ -1729,14 +1729,6 @@ Rules:
             for item in self.state.chat_messages[-10:]
         )
         chat_sources = set(self.chat_context_sources())
-        selected_labels = ", ".join(
-            label
-            for label in (
-                "draft" if "draft" in chat_sources else "",
-                "original languages" if "original" in chat_sources else "",
-            )
-            if label
-        ) or "none"
         draft_block = (
             f"""
 
@@ -1756,26 +1748,11 @@ Original languages:
             else ""
         )
         return f"""
-You are a translation assistant helping a Bible translator refine English draft text.
-
-Your task:
-- Respond to the user's request by revising the draft verses as needed.
-- Keep the title short, plain English, suitable as a section heading.
-- Revise only the verses that truly need changes.
-- Output strict JSON only with this shape:
-{{
-  "reply": "short editor-facing response (1-2 sentences)",
-  "title": "short chunk title",
-  "verses": [
-    {{"verse": 1, "text": "revised verse text"}}
-  ]
-}}
+You are a translation assistant helping a Bible translator.
 
 Chunk: {self.state.book} {self.state.chapter}:{start}-{end}
 Title: {self.state.draft_title or "[untitled]"}
-
-Context:
-Sources enabled: {selected_labels}{draft_block}{original_block}
+{draft_block}{original_block}
 Conversation:
 {history or "First message"}
 
@@ -1827,53 +1804,31 @@ Request:
                 return
         prompt = self.build_browser_chat_prompt(user_message)
         self.refresh_active_endpoint()
-        payload, response, _attempts = self.llm.complete_json(
+        response = self.llm.complete(
             prompt,
-            required_keys=["reply", "title", "verses"],
             temperature=0.7,
             max_tokens=2400,
-            max_attempts=3,
         )
         self.state.chat_messages.append({"role": "user", "content": user_message})
-        if isinstance(payload, dict):
-            reply = str(payload.get("reply", "(no reply)")).strip()
-            for verse in payload.get("verses", []):
-                try:
-                    number = int(verse["verse"])
-                except Exception:
-                    continue
-                if "text" in verse:
-                    self.state.draft_chunk[str(number)] = verse["text"].strip()
-            title = str(payload.get("title", "")).strip()
-            if title:
-                self.state.draft_title = title
-            self.state.title_alternatives = [
-                item for item in payload.get("title_alternatives", []) if isinstance(item, str)
-            ]
-            if reply:
-                self.state.chat_messages.append({"role": "assistant", "content": reply})
-            verse_count = len(payload.get("verses", []))
-            summary = reply[:120] if reply else f"Updated {verse_count} verse{'s' if verse_count != 1 else ''}."
-            self.history_entries.append(
-                {"title": "Chat", "body": summary, "accent": "blue"}
-            )
-            self.prepare_browser_commit_state()
-            session = self.current_chunk_session()
-            session["context_loaded"] = True
-            if not session.get("context_snapshot"):
-                session["context_snapshot"] = self.session_context_snapshot()
-            self.persist_current_chunk_session()
-            return
         if str(response).startswith("[ERROR]"):
             self.history_entries.append(
                 {"title": "Chat error", "body": str(response)[:160], "accent": "red"}
             )
             self.print_error(self.explain_llm_failure(str(response)))
             return
-        self.history_entries.append(
-            {"title": "Chat error", "body": "The model response was not valid JSON. No draft changes were applied.", "accent": "red"}
-        )
-        self.print_error("The model response was not valid JSON. No draft changes were applied.")
+        reply = str(response).strip()
+        if reply:
+            self.state.chat_messages.append({"role": "assistant", "content": reply})
+            self.history_entries.append(
+                {"title": "Chat", "body": reply[:160], "accent": "blue"}
+            )
+        session = self.current_chunk_session()
+        session["context_loaded"] = True
+        if not session.get("context_snapshot"):
+            session["context_snapshot"] = self.session_context_snapshot()
+        self.persist_current_chunk_session()
+        self.prepare_browser_commit_state()
+        self.save_state()
 
     def sync_current_chunk_for_commit(self) -> None:
         if not self.has_open_chunk() or not self.state.book or not self.state.chapter:
