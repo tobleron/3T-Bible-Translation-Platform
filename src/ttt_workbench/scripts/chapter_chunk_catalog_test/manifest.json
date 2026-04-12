@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-04-09T15:54:55Z",
+  "updated_at": "2026-04-09T15:57:24Z",
+  "prompt_version": "chapter_chunk_batch_v1",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "chapters": {
+    "matthew:5": {
+      "status": "completed",
+      "testament": "new",
+      "book": "Matthew",
+      "chapter": 5,
+      "attempts_used": 2,
+      "repaired_json": false,
+      "chunk_count": 10,
+      "output_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog_test/chunks/new/matthew/005.json",
+      "response_path": "/Users/r2/Desktop/TTT_Bible/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog_test/raw/new/matthew/005_response.txt",
+      "updated_at": "2026-04-09T15:57:24Z"
+    }
+  }
+}

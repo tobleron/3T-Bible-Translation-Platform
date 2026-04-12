@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="page-shell home-shell">
+  <section class="hero-card">
+    <div>
+      <p class="eyebrow">Workspace</p>
+      <h1>Desktop-first translation editing in the browser.</h1>
+      <p class="lede">Use the navigator-backed workspace for study, drafting, review, JSON commit, and EPUB generation.</p>
+    </div>
+    <div class="hero-actions">
+      {% if state.book and state.chapter and current_chunk_key %}
+      <a class="primary-button" href="/workspace/{{ state.wizard_testament or 'new' }}/{{ state.book|lower|replace(' ', '') }}/{{ state.chapter }}/{{ current_chunk_key }}">Resume {{ state.book }} {{ state.chapter }}:{{ current_chunk_key }}</a>
+      {% endif %}
+      {% if latest_epub %}
+      <a class="secondary-button" href="/epub/recent" title="Download latest: {{ latest_epub.name }}">Download Latest EPUB</a>
+      {% endif %}
+      <a class="secondary-button" href="/settings">Open settings</a>
+    </div>
+  </section>
+
+  {% if flash_messages %}
+  <section class="flash-stack">
+    {% for message in flash_messages %}
+    <article class="flash flash-{{ message.accent }}">
+      <h3>{{ message.title }}</h3>
+      <pre>{{ message.body }}</pre>
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="dashboard-grid">
+    <article class="dashboard-card progress-card wide-card">
+      <h2>Project Progress</h2>
+      
+      <div class="progress-section">
+        <p class="progress-label">Cataloging Progress: <strong>Chunks & Titles Extraction</strong></p>
+        <div class="progress-container">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill catalog-bar" style="width: {{ project_summary.catalog_percent }}%;"></div>
+          </div>
+          <div class="progress-stats">
+            <span class="progress-percent">{{ project_summary.catalog_percent }}%</span>
+            <span class="progress-detail">{{ project_summary.cataloged_chapters }} of {{ project_summary.total_chapters }} chapters cataloged</span>
+          </div>
+        </div>
+        <p class="muted-line">{{ project_summary.total_chunks }} total chunks/titles extracted.</p>
+      </div>
+
+      <div class="progress-section">
+        <p class="progress-label">Translation Progress: <strong>Finalized Committed JSON</strong></p>
+        <div class="progress-container">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill translation-bar" style="width: {{ project_summary.translation_percent }}%;"></div>
+          </div>
+          <div class="progress-stats">
+            <span class="progress-percent">{{ project_summary.translation_percent }}%</span>
+            <span class="progress-detail">{{ project_summary.translated_chapters }} of {{ project_summary.total_chapters }} chapters committed</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="dashboard-card sources-card wide-card">
+      <h2>Data Sources</h2>
+      <p class="lede">Translation is backed by these primary lexical and comparison sources:</p>
+      <ul class="source-list">
+        {% for source in project_summary.sources %}
+        <li>
+          <strong>{{ source.alias }}</strong>
+          <span class="source-name-text">{{ source.name }}</span>
+          <span class="source-path">{{ source.path }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </article>
+  </section>
+</main>
+
+<style>
+  .progress-section { margin-bottom: 2.5rem; }
+  .progress-label { margin-bottom: 0.75rem; font-size: 1.1rem; color: var(--text); }
+  .progress-container { margin: 0.5rem 0; }
+  .progress-bar-bg { background: var(--bg-soft); border-radius: 12px; height: 20px; overflow: hidden; border: 1px solid var(--line); }
+  .progress-bar-fill { height: 100%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+  .catalog-bar { background: linear-gradient(90deg, #3498db, #2980b9); }
+  .translation-bar { background: linear-gradient(90deg, var(--success), #6d8a65); }
+  .progress-stats { display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5rem; }
+  .progress-percent { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+  .progress-detail { color: var(--muted); font-size: 0.95rem; }
+  
+  .source-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.2rem; list-style: none; padding: 0; margin: 1.5rem 0; }
+  .source-list li { 
+    border-left: 4px solid var(--accent); 
+    background: var(--bg-elev); 
+    padding: 1rem; 
+    border-radius: 0 12px 12px 0;
+    border: 1px solid var(--line);
+    border-left-width: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .source-list li strong { color: var(--accent); font-size: 1.1rem; display: block; margin-bottom: 0.25rem; }
+  .source-name-text { color: var(--text); font-size: 0.95rem; }
+  .source-path { display: block; font-family: monospace; font-size: 0.8rem; color: var(--muted); margin-top: 0.6rem; word-break: break-all; opacity: 0.8; }
+  
+  .wide-card { grid-column: 1 / -1; }
+</style>
+{% endblock %}

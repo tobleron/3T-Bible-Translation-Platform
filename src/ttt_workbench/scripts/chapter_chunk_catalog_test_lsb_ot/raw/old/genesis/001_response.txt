@@ -1,0 +1,52 @@
+
+
+<think>
+
+</think>
+
+{
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Creation of Light and Day",
+      "reason": "Describes the first day of creation including the separation of light and darkness."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Creation of the Expanse",
+      "reason": "Describes the second day involving the separation of waters and naming of heaven."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Creation of Land and Vegetation",
+      "reason": "Describes the third day including the gathering of waters and growth of plants."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Creation of Celestial Bodies",
+      "reason": "Describes the fourth day involving the creation of lights to rule day and night."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Creation of Sea Creatures and Birds",
+      "reason": "Describes the fifth day involving the creation of aquatic life and birds with a blessing."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Creation of Land Animals and Man",
+      "reason": "Describes the sixth day including land animals, humanity, their dominion, and food provisions."
+    }
+  ]
+}
