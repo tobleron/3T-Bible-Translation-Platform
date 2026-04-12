@@ -467,8 +467,14 @@ async def set_editor_mode(
         action = str(form.get("editor_action", "")).strip().lower()
         if action == "seed-draft":
             wb.seed_draft_from_committed()
-        else:
-            wb.set_editor_mode(action or "draft")
+            wb.history_entries.append(
+                {"title": "Draft", "body": f"Committed text loaded as draft for {book} {chapter}:{chunk_key}.", "accent": "blue"}
+            )
+        elif action in ("draft", "review"):
+            wb.set_editor_mode(action)
+            wb.history_entries.append(
+                {"title": "Editor", "body": f"Switched to {action.title()} mode for {book} {chapter}:{chunk_key}.", "accent": "blue"}
+            )
         wb.activate_tab("draft")
         wb.save_state()
         return render_workspace(request, wb, active_tab="draft", partial=True)

@@ -1879,6 +1879,11 @@ User message:
             ]
             if reply:
                 self.state.chat_messages.append({"role": "assistant", "content": reply})
+            verse_count = len(payload.get("verses", []))
+            summary = reply[:120] if reply else f"Updated {verse_count} verse{'s' if verse_count != 1 else ''}."
+            self.history_entries.append(
+                {"title": "Chat", "body": summary, "accent": "blue"}
+            )
             self.prepare_browser_commit_state()
             session = self.current_chunk_session()
             session["context_loaded"] = True
@@ -1887,8 +1892,14 @@ User message:
             self.persist_current_chunk_session()
             return
         if str(response).startswith("[ERROR]"):
+            self.history_entries.append(
+                {"title": "Chat error", "body": str(response)[:160], "accent": "red"}
+            )
             self.print_error(self.explain_llm_failure(str(response)))
             return
+        self.history_entries.append(
+            {"title": "Chat error", "body": "The model response was not valid JSON. No draft changes were applied.", "accent": "red"}
+        )
         self.print_error("The model response was not valid JSON. No draft changes were applied.")
 
     def sync_current_chunk_for_commit(self) -> None:
@@ -2116,27 +2127,44 @@ User message:
         mode = (editor_mode or self.editor_mode()).lower()
         chapter_map = self.chapter_verse_map()
         verse_count = len(verses)
+        changed = False
         if mode == "review":
             committed_title = self.committed_chunk_title()
             cleaned_title = title.strip()
+            old_title = self.state.draft_title
             self.state.draft_title = "" if cleaned_title == committed_title else cleaned_title
+            if self.state.draft_title != old_title:
+                changed = True
             for verse, text in verses.items():
                 key = str(verse)
                 cleaned = text.strip()
                 committed = chapter_map.get(verse, "").strip()
+                old = self.state.draft_chunk.get(key, committed)
                 if cleaned == committed:
-                    self.state.draft_chunk.pop(key, None)
-                else:
+                    if key in self.state.draft_chunk:
+                        del self.state.draft_chunk[key]
+                        changed = True
+                elif cleaned != old:
                     self.state.draft_chunk[key] = cleaned
-            self.history_entries.append(
-                {"title": "Review saved", "body": f"{verse_count} verse{'s' if verse_count != 1 else ''} updated for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}", "accent": "green"}
-            )
+                    changed = True
         else:
+            old_title = self.state.draft_title
             self.state.draft_title = title.strip()
+            if self.state.draft_title != old_title:
+                changed = True
             for verse, text in verses.items():
-                self.state.draft_chunk[str(verse)] = text.strip()
+                key = str(verse)
+                old = self.state.draft_chunk.get(key, "")
+                if text.strip() != old:
+                    self.state.draft_chunk[key] = text.strip()
+                    changed = True
+        if changed:
             self.history_entries.append(
                 {"title": "Draft saved", "body": f"{verse_count} verse{'s' if verse_count != 1 else ''} saved for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}", "accent": "green"}
+            )
+        else:
+            self.history_entries.append(
+                {"title": "No changes", "body": f"No new changes to save in {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}.", "accent": "muted"}
             )
         self.prepare_browser_commit_state()
         self.save_state()
