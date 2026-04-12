@@ -67,57 +67,57 @@ run_web() {
   local host="${TTT_WEB_HOST:-127.0.0.1}"
   local port="${TTT_WEB_PORT:-8765}"
   echo "TTT Browser Workbench: http://$host:$port"
-  exec env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
+  exec env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
 }
 
 run_workbench() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" 02_Human_Editorial_Workspace/ttt_workbench.py
+  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" ttt_workbench.ttt_workbench
 }
 
 run_textual_preview() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" 02_Human_Editorial_Workspace/textual_workbench_preview.py
+  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" ttt_workbench.textual_workbench_preview
 }
 
 run_textual() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" 02_Human_Editorial_Workspace/textual_workbench.py
+  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" ttt_workbench.textual_workbench
 }
 
 run_prep_data() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  export PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace${PYTHONPATH:+:$PYTHONPATH}"
-  chmod +x 02_Human_Editorial_Workspace/scripts/prepare_lexical_data.sh
-  exec 02_Human_Editorial_Workspace/scripts/prepare_lexical_data.sh "${@:2}"
+  export PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace${PYTHONPATH:+:$PYTHONPATH}"
+  chmod +x src/ttt_core/scripts/prepare_lexical_data.sh
+  exec src/ttt_core/scripts/prepare_lexical_data.sh "${@:2}"
 }
 
 run_smoke() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" 02_Human_Editorial_Workspace/scripts/stress_test_workbench.py "${@:2}"
-  exec env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" 02_Human_Editorial_Workspace/scripts/ui_integration_test.py
+  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" src/ttt_workbench/scripts/stress_test_workbench.py "${@:2}"
+  exec env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" src/ttt_workbench/scripts/ui_integration_test.py
 }
 
 run_test() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  exec env PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace" "$VENV_PY" -m pytest tests/ -v "${@:2}"
+  exec env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" -m pytest tests/ -v "${@:2}"
 }
 
 run_translate() {
   cd "$ROOT_DIR/01_AI_Translation_Engine"
-  export PYTHONPATH="$ROOT_DIR${PYTHONPATH:+:$PYTHONPATH}"
+  export PYTHONPATH="$ROOT_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
   exec ./translate_verse.sh "${@:2}"
 }
 
 run_analyze() {
   cd "$ROOT_DIR/02_Human_Editorial_Workspace"
-  export PYTHONPATH="$ROOT_DIR:$ROOT_DIR/02_Human_Editorial_Workspace${PYTHONPATH:+:$PYTHONPATH}"
+  export PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace${PYTHONPATH:+:$PYTHONPATH}"
   exec ./analyze_translation.sh "${@:2}"
 }
 
@@ -128,7 +128,7 @@ run_epub() {
 
 run_backup() {
   cd "$ROOT_DIR"
-  exec env PYTHONPATH="$ROOT_DIR" "$VENV_PY" version_control.py "${@:2}"
+  exec env PYTHONPATH="$ROOT_DIR" "$VENV_PY" src/ttt_core/src/ttt_core/version_control.py "${@:2}"
 }
 
 COMMAND="${1:-web}"
