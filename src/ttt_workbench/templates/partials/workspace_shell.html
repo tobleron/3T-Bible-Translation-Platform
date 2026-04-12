@@ -214,7 +214,7 @@
 
         <form id="editor-form" class="compact-editor-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
-          hx-target="#workspace-shell" hx-swap="outerHTML">
+          hx-target="#workspace-shell" hx-swap="outerHTML show:none">
           <input type="hidden" name="editor_mode" value="{{ editor_mode }}">
           <label class="compact-field title-field">
             <span>{{ "Review title" if editor_mode == "review" else "Draft title" }}</span>
@@ -613,7 +613,6 @@ document.addEventListener('htmx:afterSettle', function() {
   initSupportFormattingTools();
   initModelActionForms();
   initChatInput();
-  initEditorFormScrollPreservation();
   initEditorSaveIndicator();
   // Restore last copied indicator after HTMX swap
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
@@ -632,7 +631,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initSupportFormattingTools();
   initModelActionForms();
   initChatInput();
-  initEditorFormScrollPreservation();
   initEditorSaveIndicator();
   // Restore last copied indicator from session storage
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
@@ -1000,38 +998,13 @@ function initChatInput() {
   });
 }
 
-// Preserve scroll position across HTMX swaps for editor form
-function initEditorFormScrollPreservation() {
-  var editorForm = document.getElementById('editor-form');
-  if (!editorForm) return;
-  if (editorForm.dataset.scrollPreserveBound === '1') return;
-  editorForm.dataset.scrollPreserveBound = '1';
-
-  editorForm.addEventListener('htmx:beforeRequest', function(evt) {
-    if (evt.detail.elt !== editorForm) return;
-    var submitter = evt.detail.submitEvent ? evt.detail.submitEvent.submitter : null;
-    if (submitter && submitter.type === 'submit') {
-      sessionStorage.setItem('editorScrollPos', window.scrollY || window.pageYOffset);
-    }
-  });
-}
-
-// Show "Draft saved" indicator after HTMX settle for editor form
+// Show "Draft saved" indicator after editor form HTMX swap
 function initEditorSaveIndicator() {
-  var editorForm = document.getElementById('editor-form');
-  if (!editorForm) return;
-  if (editorForm.dataset.saveIndicatorBound === '1') return;
-  editorForm.dataset.saveIndicatorBound = '1';
-
-  editorForm.addEventListener('htmx:afterSettle', function(evt) {
-    if (evt.detail.elt !== editorForm) return;
-    var savedPos = sessionStorage.getItem('editorScrollPos');
-    if (savedPos !== null) {
-      setTimeout(function() { window.scrollTo(0, parseInt(savedPos, 10)); }, 50);
-      sessionStorage.removeItem('editorScrollPos');
-    }
+  document.addEventListener('htmx:afterSettle', function(evt) {
+    var editorForm = document.getElementById('editor-form');
+    if (!editorForm) return;
     var submitter = evt.detail.submitEvent ? evt.detail.submitEvent.submitter : null;
-    if (submitter && submitter.type === 'submit') {
+    if (submitter && submitter.type === 'submit' && editorForm.contains(submitter)) {
       showWorkspaceIndicator('Draft saved.');
     }
   });
