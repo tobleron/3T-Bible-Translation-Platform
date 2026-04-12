@@ -833,9 +833,11 @@ Rules:
         self.open_chunk(book, chapter, start_verse, end_verse)
         self.state.footnote_draft = None
         self.state.wizard_testament = testament
-        # Populate draft title from committed chunk title if not already set
+        # Populate draft title from chunk catalog, falling back to committed title
         if not self.state.draft_title.strip():
-            self.state.draft_title = self.committed_chunk_title()
+            self.state.draft_title = self._chunk_catalog_title(book, chapter, chunk_key)
+            if not self.state.draft_title.strip():
+                self.state.draft_title = self.committed_chunk_title()
         self.set_screen("STUDY", mode="COMMAND")
         self.save_state()
 
@@ -863,6 +865,13 @@ Rules:
         self.state.mode = "COMMAND"
         self.set_screen("STUDY", mode="COMMAND")
         self.save_state()
+
+    def _chunk_catalog_title(self, book: str, chapter: int, chunk_key: str) -> str:
+        chunks = self.chapter_chunks(self.state.wizard_testament or self.testament() or "new", book, chapter)
+        for chunk in chunks:
+            if f"{chunk.start_verse}-{chunk.end_verse}" == chunk_key:
+                return str(chunk.title).strip()
+        return ""
 
     def committed_chunk_title(self) -> str:
         if not self.has_open_chunk():
