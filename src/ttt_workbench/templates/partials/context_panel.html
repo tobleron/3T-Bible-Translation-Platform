@@ -8,6 +8,7 @@
 
   <section class="study-toolbar" aria-label="Study controls">
     <form class="source-picks" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources" hx-trigger="change delay:120ms from:input" hx-target="#context-panel" hx-swap="outerHTML">
+      {# Row 1: translation/source checkboxes #}
       <div class="source-chip-grid" role="group" aria-label="Comparison sources">
         {% for option in comparison_source_options %}
         <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
@@ -15,20 +16,31 @@
           <span>{{ option.label }}</span>
         </label>
         {% endfor %}
-        <label class="source-chip source-chip-control font-size-control compact-field">
-          <select id="study-font-size" aria-label="Study font size">
-            <option value="12">12px</option>
-            <option value="14">14px</option>
-            <option value="16" selected>16px</option>
-            <option value="18">18px</option>
-          </select>
-        </label>
       </div>
     </form>
+
+    {# Row 2: verse filter + font size #}
+    <div class="study-filter-bar">
+      <label class="compact-field verse-filter-field">
+        <span>Verses</span>
+        <input type="text" id="study-verse-filter" placeholder="e.g. 1-5 or 1,3,5-8" value="">
+      </label>
+      <label class="compact-field font-size-field">
+        <span>Font</span>
+        <select id="study-font-size" aria-label="Study font size">
+          <option value="12">12px</option>
+          <option value="14">14px</option>
+          <option value="16" selected>16px</option>
+          <option value="18">18px</option>
+        </select>
+      </label>
+      <button class="secondary-button" type="button" id="study-verse-filter-apply" onclick="applyStudyVerseFilter()">Apply</button>
+      <button class="secondary-button" type="button" id="study-verse-filter-clear" onclick="clearStudyVerseFilter()">Show All</button>
+    </div>
   </section>
 
   <section class="study-article" aria-label="Study article">
-    <div class="chunk-block-sheet" id="study-blocks" data-font-size="16">
+    <div class="chunk-block-sheet" id="study-blocks" data-font-size="16" data-chunk-start="{{ state.chunk_start or 0 }}" data-chunk-end="{{ state.chunk_end or 0 }}">
       {% for block in study_blocks %}
       {% if block.kind in ('hebrew', 'greek') %}
       <div class="chunk-block lexical-collapsible">

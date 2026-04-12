@@ -160,7 +160,6 @@ class BrowserWorkbench(WorkbenchApp):
         self.fake_llm_mode = fake_mode
         super().__init__(llm_override=llm_override)
         self._configure_runtime_storage()
-        self._sanitize_browser_state()
         self.flash_messages: list[dict[str, str]] = []
         self.chunk_catalog_repo = ChunkCatalogRepository(self.paths, self.bible_repo)
         self.settings_file = self.runtime_state_dir / "web_settings.json"
@@ -169,6 +168,7 @@ class BrowserWorkbench(WorkbenchApp):
         self.web_settings = self._load_web_settings()
         self._resolved_endpoint_cache: str | None = None
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
+        self._sanitize_browser_state()
 
     @staticmethod
     def _build_llm_override() -> tuple[object | None, bool]:
@@ -1829,6 +1829,75 @@ Request:
         self.persist_current_chunk_session()
         self.prepare_browser_commit_state()
         self.save_state()
+
+    def browser_chat_turn_stream(
+        self,
+        user_message: str,
+        token_callback: callable | None = None,
+    ) -> str | None:
+        """Stream a chat response, yielding tokens via *token_callback*.
+
+        Returns the full accumulated reply on success, or ``None`` on error.
+        After the stream completes the full response is persisted to state.
+        """
+        if not self.require_open_chunk():
+            return None
+        if not self.state.draft_chunk and not self.state.chat_messages and self.chunk_has_committed_text():
+            self.notify("Review text is committed. Use Revise in Draft before chatting.")
+            return None
+        if not self.state.draft_chunk and not self.state.chat_messages:
+            if not self.browser_auto_generate_draft():
+                return None
+        prompt = self.build_browser_chat_prompt(user_message)
+        self.refresh_active_endpoint()
+        # Append user message immediately so the assistant reply follows it
+        self.state.chat_messages.append({"role": "user", "content": user_message})
+
+        # Build a multi-turn prompt for the stream API
+        messages = [
+            {"role": "user", "content": prompt},
+        ]
+
+        full_reply: list[str] = []
+        error_occurred = False
+        try:
+            for token in self.llm.stream_generation(
+                "stream",
+                messages,
+                temperature=0.7,
+            ):
+                if token.startswith("[ERROR]"):
+                    error_occurred = True
+                    full_reply.append(token)
+                    break
+                full_reply.append(token)
+                if token_callback:
+                    token_callback(token)
+        except Exception as exc:
+            error_occurred = True
+            full_reply.append(f"[ERROR] Stream failed: {exc}")
+
+        reply = "".join(full_reply).strip()
+        if error_occurred:
+            self.history_entries.append(
+                {"title": "Chat error", "body": reply[:160], "accent": "red"}
+            )
+            self.print_error(self.explain_llm_failure(reply))
+            self.save_state()
+            return None
+        if reply:
+            self.state.chat_messages.append({"role": "assistant", "content": reply})
+            self.history_entries.append(
+                {"title": "Chat", "body": reply[:160], "accent": "blue"}
+            )
+        session = self.current_chunk_session()
+        session["context_loaded"] = True
+        if not session.get("context_snapshot"):
+            session["context_snapshot"] = self.session_context_snapshot()
+        self.persist_current_chunk_session()
+        self.prepare_browser_commit_state()
+        self.save_state()
+        return reply
 
     def sync_current_chunk_for_commit(self) -> None:
         if not self.has_open_chunk() or not self.state.book or not self.state.chapter:

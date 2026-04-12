@@ -4,9 +4,11 @@ import os
 import subprocess
 import time
 from pathlib import Path
+from typing import Generator
 
+import markdown as md_lib
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -18,6 +20,16 @@ from .controller import BrowserWorkbench
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(PACKAGE_DIR / "templates"))
+
+
+def _render_markdown(text: str) -> str:
+    """Convert markdown text to safe HTML."""
+    if not text:
+        return ""
+    return md_lib.markdown(text, extensions=["fenced_code", "tables", "nl2br"])
+
+
+templates.env.filters["markdown"] = _render_markdown
 
 app = FastAPI(title="TTT Browser Workbench")
 app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
@@ -540,6 +552,120 @@ async def chat_turn(
         return render_workspace(request, wb, active_tab="draft", partial=True)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+def _sse_chat_stream(
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+    message: str,
+    chat_context_sources: list[str],
+) -> Generator[str, None, None]:
+    """SSE generator that yields tokens as they arrive from the LLM."""
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        wb.set_chat_context_sources(chat_context_sources)
+        wb.state.mode = "CHAT"
+
+        # Validate prerequisites (same as non-streaming)
+        if not wb.require_open_chunk():
+            yield "event: error\n"
+            yield "data: No chunk open\n\n"
+            return
+        if not wb.state.draft_chunk and not wb.state.chat_messages and wb.chunk_has_committed_text():
+            yield "event: error\n"
+            yield "data: Review text is committed. Use Revise in Draft before chatting.\n\n"
+            return
+        if not wb.state.draft_chunk and not wb.state.chat_messages:
+            if not wb.browser_auto_generate_draft():
+                yield "event: error\n"
+                yield "data: Failed to generate initial draft.\n\n"
+                return
+
+        prompt = wb.build_browser_chat_prompt(message)
+        wb.refresh_active_endpoint()
+        # Record user message immediately
+        wb.state.chat_messages.append({"role": "user", "content": message})
+        wb.save_state()
+
+        # Build messages for stream API
+        messages = [{"role": "user", "content": prompt}]
+
+        full_reply: list[str] = []
+        error_occurred = False
+        try:
+            for token in wb.llm.stream_generation("stream", messages, temperature=0.7):
+                if token.startswith("[ERROR]"):
+                    error_occurred = True
+                    full_reply.append(token)
+                    break
+                full_reply.append(token)
+                # Yield token as SSE event, escaping for SSE format
+                escaped = token.replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
+                yield f"data: {escaped}\n\n"
+        except Exception as exc:
+            error_occurred = True
+            full_reply.append(f"[ERROR] Stream failed: {exc}")
+
+        reply = "".join(full_reply).strip()
+        if error_occurred:
+            wb.history_entries.append(
+                {"title": "Chat error", "body": reply[:160], "accent": "red"}
+            )
+            wb.print_error(wb.explain_llm_failure(reply))
+            wb.save_state()
+            yield "event: error\n"
+            yield f'data: {reply[:200].replace("\n", "\\n")}\n\n'
+            return
+
+        if reply:
+            wb.state.chat_messages.append({"role": "assistant", "content": reply})
+            wb.history_entries.append(
+                {"title": "Chat", "body": reply[:160], "accent": "blue"}
+            )
+        session = wb.current_chunk_session()
+        session["context_loaded"] = True
+        if not session.get("context_snapshot"):
+            session["context_snapshot"] = wb.session_context_snapshot()
+        wb.persist_current_chunk_session()
+        wb.prepare_browser_commit_state()
+        wb.save_state()
+
+        yield "event: done\n"
+        yield f'data: {reply[:200].replace("\n", "\\n")}\n\n'
+    except Exception as exc:
+        yield "event: error\n"
+        yield f'data: {str(exc)[:200].replace("\n", "\\n")}\n\n'
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/stream")
+async def chat_turn_stream(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    """SSE streaming endpoint for chat responses."""
+    form = await request.form()
+    message = str(form.get("message", "")).strip()
+    chat_context_sources = form.getlist("chat_context_sources")
+
+    if not message:
+        return JSONResponse({"error": "No message provided"}, status_code=400)
+
+    return StreamingResponse(
+        _sse_chat_stream(testament, book, chapter, chunk_key, message, chat_context_sources),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/finalize", response_class=HTMLResponse)

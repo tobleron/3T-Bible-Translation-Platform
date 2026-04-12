@@ -277,7 +277,11 @@
           {% for item in state.chat_messages[-8:] %}
           <div class="chat-entry chat-{{ item.role }}">
             <strong>{{ "You" if item.role == "user" else "Model" }}</strong>
+            {% if item.role == "assistant" %}
+            <div class="chat-md">{{ item.content | markdown | safe }}</div>
+            {% else %}
             <p>{{ item.content }}</p>
+            {% endif %}
           </div>
           {% endfor %}
         </div>
@@ -287,9 +291,8 @@
         </div>
         {% endif %}
 
-        <form class="compact-chat-form model-action-form"
-          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat"
-          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+        <form class="compact-chat-form model-action-form" id="chat-stream-form"
+          data-stream-url="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/stream">
           <div class="chat-context-picker">
             <span class="chat-context-label">Include in chat</span>
             <label class="compact-check">
@@ -303,7 +306,7 @@
           </div>
           <textarea id="chat-message-input" name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
-            <button class="primary-button send-button" type="submit" data-loading-label="Processing...">Send</button>
+            <button class="primary-button send-button" type="submit" data-loading-label="Streaming...">Send</button>
             <button class="secondary-button clear-button" type="button"
               hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
               hx-target="#workspace-shell" hx-swap="outerHTML"
@@ -615,6 +618,11 @@ document.addEventListener('htmx:afterSettle', function() {
     applyStudyFontSize(fontSize);
     var sel = document.getElementById('study-font-size');
     if (sel) sel.value = fontSize;
+    // Restore verse filter state
+    var verseFilterVal = localStorage.getItem('studyVerseFilter') || '';
+    var verseFilter = document.getElementById('study-verse-filter');
+    if (verseFilter) verseFilter.value = verseFilterVal;
+    if (verseFilterVal) applyStudyVerseFilter();
   }
   initGlossTooltips();
   initSupportFormattingTools();
@@ -637,6 +645,11 @@ document.addEventListener('DOMContentLoaded', function() {
   applyStudyFontSize(fontSize);
   var sel = document.getElementById('study-font-size');
   if (sel) sel.value = fontSize;
+  // Restore verse filter state
+  var verseFilterVal = localStorage.getItem('studyVerseFilter') || '';
+  var verseFilter = document.getElementById('study-verse-filter');
+  if (verseFilter) verseFilter.value = verseFilterVal;
+  if (verseFilterVal) applyStudyVerseFilter();
   initGlossTooltips();
   initSupportFormattingTools();
   initModelActionForms();
@@ -845,6 +858,93 @@ function applyStudyFontSize(px) {
   el.style.fontSize = px + 'px';
   el.querySelectorAll('.chunk-block-body, .chunk-block-gloss, .translation-verse-text, .translation-verse-num, .lexical-summary').forEach(function(b) { b.style.fontSize = px + 'px'; });
 }
+
+/* ── Study verse filter ── */
+function parseVerseSpec(spec) {
+  var verses = [];
+  var parts = spec.split(',');
+  for (var i = 0; i < parts.length; i++) {
+    var part = parts[i].trim();
+    if (!part) continue;
+    if (part.indexOf('-') !== -1) {
+      var dashIdx = part.indexOf('-');
+      var start = parseInt(part.substring(0, dashIdx).trim(), 10);
+      var end = parseInt(part.substring(dashIdx + 1).trim(), 10);
+      if (!isNaN(start) && !isNaN(end) && start > 0 && end > 0) {
+        var lo = Math.min(start, end), hi = Math.max(start, end);
+        for (var v = lo; v <= hi; v++) verses.push(v);
+      }
+    } else {
+      var v = parseInt(part, 10);
+      if (!isNaN(v) && v > 0) verses.push(v);
+    }
+  }
+  return verses;
+}
+
+function applyStudyVerseFilter() {
+  var input = document.getElementById('study-verse-filter');
+  if (!input) return;
+  var spec = input.value.trim();
+  if (!spec) { clearStudyVerseFilter(); return; }
+  localStorage.setItem('studyVerseFilter', spec);
+  var allowed = parseVerseSpec(spec);
+  if (allowed.length === 0) return;
+  var allowedSet = {};
+  for (var i = 0; i < allowed.length; i++) allowedSet[allowed[i]] = true;
+
+  var sheet = document.getElementById('study-blocks');
+  if (!sheet) return;
+  var chunkStart = parseInt(sheet.getAttribute('data-chunk-start') || '0', 10);
+  var chunkEnd = parseInt(sheet.getAttribute('data-chunk-end') || '0', 10);
+
+  var blocks = sheet.querySelectorAll('.chunk-block');
+  for (var i = 0; i < blocks.length; i++) {
+    var block = blocks[i];
+    // Translation blocks: check individual verse rows
+    if (block.classList.contains('translation-block')) {
+      var verseRows = block.querySelectorAll('.translation-verse-row');
+      var anyVisible = false;
+      for (var j = 0; j < verseRows.length; j++) {
+        var vr = verseRows[j];
+        var vNum = parseInt(vr.getAttribute('data-verse') || '0', 10);
+        var show = (vNum in allowedSet);
+        vr.style.display = show ? '' : 'none';
+        if (show) anyVisible = true;
+      }
+      // Also show the block header if any verse is visible
+      block.style.display = anyVisible ? '' : 'none';
+    } else {
+      // Original language blocks: show if any verse in chunk range overlaps
+      var showBlock = false;
+      if (chunkStart > 0 && chunkEnd > 0) {
+        for (var v = chunkStart; v <= chunkEnd; v++) {
+          if (v in allowedSet) { showBlock = true; break; }
+        }
+      } else {
+        showBlock = true; // fallback: show all
+      }
+      block.style.display = showBlock ? '' : 'none';
+    }
+  }
+}
+
+function clearStudyVerseFilter() {
+  var input = document.getElementById('study-verse-filter');
+  if (input) input.value = '';
+  localStorage.removeItem('studyVerseFilter');
+  var sheet = document.getElementById('study-blocks');
+  if (!sheet) return;
+  var blocks = sheet.querySelectorAll('.chunk-block');
+  for (var i = 0; i < blocks.length; i++) {
+    blocks[i].style.display = '';
+    var verseRows = blocks[i].querySelectorAll('.translation-verse-row');
+    for (var j = 0; j < verseRows.length; j++) {
+      verseRows[j].style.display = '';
+    }
+  }
+}
+
 function showJsonPreview() {
   var overlay = document.getElementById('jsonModal');
   overlay.style.display = 'flex';
@@ -985,13 +1085,15 @@ function initModelActionForms() {
   });
 }
 
-// Chat textarea: Enter to send, Shift+Enter for newline, clear after send
+// Chat textarea: Enter to send, Shift+Enter for newline, SSE streaming
 function initChatInput() {
-  var chatForm = document.querySelector('.compact-chat-form');
+  var chatForm = document.getElementById('chat-stream-form');
   var chatInput = document.getElementById('chat-message-input');
   if (!chatForm || !chatInput) return;
-  if (chatInput.dataset.chatInputBound === '1') return;
-  chatInput.dataset.chatInputBound = '1';
+  if (chatForm.dataset.streamBound === '1') return;
+  chatForm.dataset.streamBound = '1';
+
+  var currentController = null; // For aborting in-flight streams
 
   chatInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -1003,19 +1105,33 @@ function initChatInput() {
     }
   });
 
-  chatForm.addEventListener('submit', function() {
+  chatForm.addEventListener('submit', function(e) {
+    e.preventDefault();
     var text = chatInput.value.trim();
-    chatForm.dataset.lastMessage = text;
-    setTimeout(function() { chatInput.value = ''; chatInput.dispatchEvent(new Event('input', { bubbles: true })); }, 100);
-  });
-
-  // Optimistically show user message before HTMX request
-  chatForm.addEventListener('htmx:beforeRequest', function() {
-    var text = chatForm.dataset.lastMessage || '';
     if (!text) return;
+    var streamUrl = chatForm.dataset.streamUrl;
+    if (!streamUrl) return;
+
+    // Abort any in-flight stream
+    if (currentController) { currentController.abort(); currentController = null; }
+
+    var sendBtn = chatForm.querySelector('.send-button');
+    var originalBtnText = sendBtn ? sendBtn.textContent : 'Send';
+    if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = sendBtn.dataset.loadingLabel || 'Streaming...'; }
+
+    // Collect context sources
+    var ctxSources = [];
+    chatForm.querySelectorAll('input[name="chat_context_sources"]:checked').forEach(function(cb) {
+      ctxSources.push(cb.value);
+    });
+
+    // Clear input
+    chatInput.value = '';
+    chatInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+    // Show user message
     var chatLog = document.querySelector('.chat-log');
     if (!chatLog) {
-      // No chat log yet — replace the empty state
       var emptyEl = null;
       var sib = chatForm.previousElementSibling;
       while (sib) { if (sib.classList && sib.classList.contains('chat-empty')) { emptyEl = sib; break; } sib = sib.previousElementSibling; }
@@ -1023,31 +1139,156 @@ function initChatInput() {
         chatLog = document.createElement('div');
         chatLog.className = 'chat-log chat-log-large';
         emptyEl.parentNode.replaceChild(chatLog, emptyEl);
-      } else {
-        return;
       }
     }
-    var entry = document.createElement('div');
-    entry.className = 'chat-entry chat-user chat-entry-optimistic';
-    entry.innerHTML = '<strong>You</strong><p>' + text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
-    chatLog.appendChild(entry);
-    chatLog.scrollTop = chatLog.scrollHeight;
-  });
-
-  // Remove optimistic message if request fails
-  chatForm.addEventListener('htmx:responseError', function() {
-    var chatLog = document.querySelector('.chat-log');
     if (chatLog) {
-      var opt = chatLog.querySelector('.chat-entry-optimistic');
-      if (opt) opt.remove();
+      var userEntry = document.createElement('div');
+      userEntry.className = 'chat-entry chat-user';
+      userEntry.innerHTML = '<strong>You</strong><p>' + escapeHtml(text) + '</p>';
+      chatLog.appendChild(userEntry);
+      chatLog.scrollTop = chatLog.scrollHeight;
     }
-    var saved = chatForm.dataset.lastMessage || '';
-    if (saved) { chatInput.value = saved; chatInput.dispatchEvent(new Event('input', { bubbles: true })); }
+
+    // Create assistant entry with streaming cursor
+    var assistantEntry = document.createElement('div');
+    assistantEntry.className = 'chat-entry chat-assistant';
+    assistantEntry.innerHTML = '<strong>Model</strong><div class="chat-md" id="chat-stream-buffer"><span class="chat-cursor">▊</span></div>';
+    if (chatLog) {
+      chatLog.appendChild(assistantEntry);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    var mdBuffer = document.getElementById('chat-stream-buffer');
+    var accumulatedHtml = '';
+
+    // Build form data for streaming endpoint
+    var formData = new FormData();
+    formData.append('message', text);
+    ctxSources.forEach(function(s) { formData.append('chat_context_sources', s); });
+
+    currentController = new AbortController();
+
+    fetch(streamUrl, {
+      method: 'POST',
+      body: formData,
+      signal: currentController.signal,
+    })
+    .then(function(response) {
+      if (!response.ok) throw new Error('Stream request failed: ' + response.status);
+      var reader = response.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = '';
+
+      function processChunk() {
+        return reader.read().then(function(result) {
+          if (result.done) return;
+          buffer += decoder.decode(result.value, { stream: true });
+
+          // Parse SSE events from buffer
+          var lines = buffer.split('\n');
+          buffer = lines.pop() || ''; // keep incomplete line
+
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            if (line.startsWith('event: ')) {
+              var eventType = line.substring(7).trim();
+              if (eventType === 'done' || eventType === 'error') {
+                // Remove cursor, render final markdown
+                if (mdBuffer) {
+                  // Next data line will be the summary, we can skip it
+                }
+                continue;
+              }
+            } else if (line.startsWith('data: ')) {
+              var data = line.substring(6);
+              if (data) {
+                // Unescape for SSE
+                var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
+                accumulatedHtml += escapeHtml(unescaped);
+                if (mdBuffer) {
+                  mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedHtml);
+                  chatLog.scrollTop = chatLog.scrollHeight;
+                }
+              }
+            }
+          }
+          return processChunk();
+        });
+      }
+      return processChunk();
+    })
+    .then(function() {
+      // Finalize: render with markdown
+      if (mdBuffer) {
+        mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedHtml);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+    })
+    .catch(function(err) {
+      if (err.name === 'AbortError') return;
+      if (mdBuffer) {
+        mdBuffer.innerHTML = '<p style="color:#c66;">Stream interrupted: ' + escapeHtml(err.message) + '</p>';
+      }
+    })
+    .finally(function() {
+      currentController = null;
+      if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = originalBtnText; }
+    });
+  });
+}
+
+function escapeHtml(text) {
+  var div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function renderMarkdownWithCollapsedThinking(rawText) {
+  // Step 1: Collapse <think>...</think> blocks BEFORE escaping
+  var processed = rawText;
+  var thinkingPattern = /<think>([\s\S]*?)<\/think>/g;
+  processed = processed.replace(thinkingPattern, function(match, content) {
+    return '<details class="thinking-block"><summary>Thinking…</summary><div class="thinking-content">' + escapeHtml(content) + '</div></details>\n';
   });
 
-  chatForm.addEventListener('htmx:afterSettle', function() {
-    chatForm.dataset.lastMessage = '';
+  // Check if there are any remaining thinking tags (unclosed)
+  var openThinkIdx = processed.indexOf('<think>');
+  if (openThinkIdx !== -1) {
+    // Unclosed thinking block — collapse everything from <think> onward
+    processed = processed.substring(0, openThinkIdx) +
+      '<details class="thinking-block" open><summary>Thinking…</summary><div class="thinking-content">' +
+      escapeHtml(processed.substring(openThinkIdx)) + '</div></details>';
+    return processed;
+  }
+
+  // Step 2: Apply basic markdown formatting to non-HTML parts
+  // Bold: **text** or __text__
+  processed = processed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  processed = processed.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  // Italic: *text* or _text_
+  processed = processed.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+  // Inline code: `text`
+  processed = processed.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Headings
+  processed = processed.replace(/^### (.+)$/gm, '<h4>$1</h4>');
+  processed = processed.replace(/^## (.+)$/gm, '<h3>$1</h3>');
+  processed = processed.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+  // Horizontal rules
+  processed = processed.replace(/^---$/gm, '<hr>');
+  // Unordered list items
+  processed = processed.replace(/^[-*] (.+)$/gm, '<li>$1</li>');
+  // Wrap consecutive <li> in <ul>
+  processed = processed.replace(/(<li>.*?<\/li>\n?)+/g, function(match) {
+    if (match.indexOf('<ul>') !== -1) return match;
+    return '<ul>' + match + '</ul>';
   });
+  // Blockquotes
+  processed = processed.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Wrap remaining text lines in <p>
+  processed = processed.replace(/^(?!<[a-z/])((?!<\/?(?:ul|li|h[2-4]|strong|em|code|details|summary|div|p|blockquote|hr)[>\s]).+)$/gm, '<p>$1</p>');
+  // Convert double newlines to <br>
+  processed = processed.replace(/\n{2,}/g, '<br><br>');
+  return processed;
 }
 
 // Show "Draft saved" indicator after editor form HTMX swap

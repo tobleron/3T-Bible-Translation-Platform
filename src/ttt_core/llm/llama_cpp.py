@@ -180,26 +180,59 @@ class LlamaCppClient:
 
         try:
             if "/v1" in self.base_url:
-                url = f"{self.base_url}/completions"
+                # OpenAI-compatible endpoint: /v1/chat/completions
+                chat_payload = {
+                    "messages": [{"role": "user", "content": prompt_text}],
+                    "temperature": temperature,
+                    "max_tokens": 4096,
+                    "stream": True,
+                }
+                url = f"{self.base_url}/chat/completions"
+                with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=300) as resp:
+                    resp.raise_for_status()
+                    for line in resp.iter_lines():
+                        if not line:
+                            continue
+                        line_str = line.decode("utf-8")
+                        if not line_str.startswith("data: "):
+                            continue
+                        data_str = line_str[6:]
+                        if data_str.strip() == "[DONE]":
+                            break
+                        try:
+                            data = json.loads(data_str)
+                        except json.JSONDecodeError:
+                            continue
+                        # OpenAI chat format: choices[0].delta.content
+                        choices = data.get("choices", [])
+                        if choices:
+                            content = choices[0].get("delta", {}).get("content", "")
+                            if content:
+                                yield content
+                            if choices[0].get("finish_reason"):
+                                break
             else:
+                # llama.cpp native /completion endpoint
                 url = f"{self.base_url}/completion"
-                
-            with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=300) as resp:
-                resp.raise_for_status()
-                for line in resp.iter_lines():
-                    if not line:
-                        continue
-                    line_str = line.decode("utf-8")
-                    if line_str.startswith("data: "):
-                        data = json.loads(line_str[6:])
-                        if "content" in data:
-                            yield data["content"]
-                        if data.get("stop"):
-                            stats = {
-                                "tokens_predicted": data.get("tokens_predicted"),
-                                "generation_settings": data.get("generation_settings"),
-                            }
-                            yield f"__STATS_BLOCK__{json.dumps(stats)}__END_STATS__"
+                with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=300) as resp:
+                    resp.raise_for_status()
+                    for line in resp.iter_lines():
+                        if not line:
+                            continue
+                        line_str = line.decode("utf-8")
+                        if line_str.startswith("data: "):
+                            try:
+                                data = json.loads(line_str[6:])
+                            except json.JSONDecodeError:
+                                continue
+                            if "content" in data:
+                                yield data["content"]
+                            if data.get("stop"):
+                                stats = {
+                                    "tokens_predicted": data.get("tokens_predicted"),
+                                    "generation_settings": data.get("generation_settings"),
+                                }
+                                yield f"__STATS_BLOCK__{json.dumps(stats)}__END_STATS__"
         except Exception as exc:
             yield f"\n[ERROR] llama.cpp generation failed: {exc}"
 
