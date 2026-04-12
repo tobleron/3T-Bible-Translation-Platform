@@ -997,7 +997,49 @@ function initChatInput() {
   });
 
   chatForm.addEventListener('submit', function() {
+    var text = chatInput.value.trim();
+    chatForm.dataset.lastMessage = text;
     setTimeout(function() { chatInput.value = ''; chatInput.dispatchEvent(new Event('input', { bubbles: true })); }, 100);
+  });
+
+  // Optimistically show user message before HTMX request
+  chatForm.addEventListener('htmx:beforeRequest', function() {
+    var text = chatForm.dataset.lastMessage || '';
+    if (!text) return;
+    var chatLog = document.querySelector('.chat-log');
+    if (!chatLog) {
+      // No chat log yet — replace the empty state
+      var emptyEl = null;
+      var sib = chatForm.previousElementSibling;
+      while (sib) { if (sib.classList && sib.classList.contains('chat-empty')) { emptyEl = sib; break; } sib = sib.previousElementSibling; }
+      if (emptyEl) {
+        chatLog = document.createElement('div');
+        chatLog.className = 'chat-log chat-log-large';
+        emptyEl.parentNode.replaceChild(chatLog, emptyEl);
+      } else {
+        return;
+      }
+    }
+    var entry = document.createElement('div');
+    entry.className = 'chat-entry chat-user chat-entry-optimistic';
+    entry.innerHTML = '<strong>You</strong><p>' + text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
+    chatLog.appendChild(entry);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  });
+
+  // Remove optimistic message if request fails
+  chatForm.addEventListener('htmx:responseError', function() {
+    var chatLog = document.querySelector('.chat-log');
+    if (chatLog) {
+      var opt = chatLog.querySelector('.chat-entry-optimistic');
+      if (opt) opt.remove();
+    }
+    var saved = chatForm.dataset.lastMessage || '';
+    if (saved) { chatInput.value = saved; chatInput.dispatchEvent(new Event('input', { bubbles: true })); }
+  });
+
+  chatForm.addEventListener('htmx:afterSettle', function() {
+    chatForm.dataset.lastMessage = '';
   });
 }
 
