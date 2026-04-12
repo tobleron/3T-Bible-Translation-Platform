@@ -77,6 +77,7 @@ class LlamaCppClient:
             "prompt": prompt,
             "temperature": temperature,
             "n_predict": max_tokens,
+            "num_ctx": 4096,
             "stream": False,
         }
         if stop:
@@ -134,6 +135,7 @@ class LlamaCppClient:
         payload = {
             "prompt": prompt_text,
             "temperature": temperature,
+            "num_ctx": 4096,
             "stream": True,
             "n_predict": 4096,
         }

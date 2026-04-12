@@ -558,14 +558,7 @@ class BrowserWorkbench(WorkbenchApp):
         context_label: str,
     ) -> str:
         return f"""
-You are assisting a Bible translation editor with a focused editorial rewrite.
-
-Instruction:
 {instruction}
-
-Context:
-- Task type: editorial enhancement
-- Content kind: {context_label}
 
 Source text:
 {source_text.strip() or "[blank]"}
@@ -577,7 +570,6 @@ Return strict JSON only:
 
 Rules:
 - Return only one revised version.
-- Preserve meaning unless the instruction explicitly asks otherwise.
 - Do not add commentary, notes, bullets, or explanation.
 - Do not wrap the answer in markdown fences.
 """.strip()
@@ -612,7 +604,7 @@ Rules:
                 context_label=context_label,
             ),
             required_keys=["text"],
-            temperature=0.2,
+            temperature=0.7,
             max_tokens=900,
             max_attempts=3,
         )
@@ -1736,10 +1728,6 @@ Rules:
             f"{item['role'].upper()}: {item['content']}"
             for item in self.state.chat_messages[-10:]
         )
-        ledger = "\n".join(self.ledger_lines()) or "None yet."
-        session = self.current_chunk_session()
-        include_context = not bool(session.get("context_loaded"))
-        context_block = self.session_context_snapshot() if include_context else ""
         chat_sources = set(self.chat_context_sources())
         selected_labels = ", ".join(
             label
@@ -1752,61 +1740,46 @@ Rules:
         draft_block = (
             f"""
 
-Current draft for the full chunk (verses {start}-{end}):
+Draft:
 {self.selected_range_draft_text()}
-""".rstrip()
+"""
             if "draft" in chat_sources
             else ""
         )
         original_block = (
             f"""
 
-Original-language context:
+Original languages:
 {self.original_language_chat_context_snapshot()}
-""".rstrip()
+"""
             if "original" in chat_sources
             else ""
         )
         return f"""
-You are assisting a Bible translator in a browser-based editorial workbench.
+You are a translation assistant helping a Bible translator refine English draft text.
 
-Rules:
-- Keep the title short, usable as a section heading, and plain English.
-- Revise only the verses inside the chunk unless the user explicitly asks for wider changes.
+Your task:
+- Respond to the user's request by revising the draft verses as needed.
+- Keep the title short, plain English, suitable as a section heading.
+- Revise only the verses that truly need changes.
 - Output strict JSON only with this shape:
 {{
-  "reply": "short editor-facing response",
-  "title": "short title",
+  "reply": "short editor-facing response (1-2 sentences)",
+  "title": "short chunk title",
   "verses": [
-    {{"verse": 1, "text": "..." }}
+    {{"verse": 1, "text": "revised verse text"}}
   ]
 }}
 
-Current chunk: {self.state.book} {self.state.chapter}:{start}-{end}
+Chunk: {self.state.book} {self.state.chapter}:{start}-{end}
+Title: {self.state.draft_title or "[untitled]"}
 
-Current draft title:
-{self.state.draft_title or "[untitled]"}
+Context:
+Sources enabled: {selected_labels}{draft_block}{original_block}
+Conversation:
+{history or "First message"}
 
-Chat context sources selected by the user:
-{selected_labels}
-{draft_block}
-{original_block}
-
-Approved terminology ledger:
-{ledger}
-
-Terminology consistency (approved decisions only):
-{self.terminology_prompt_block()}
-
-Conversation so far:
-{history or "None"}
-{f'''
-
-Load this chunk context now. This context is only provided at session start:
-{context_block}
-''' if include_context else ""}
-
-User message:
+Request:
 {user_message}
 """.strip()
 
@@ -1815,7 +1788,7 @@ User message:
         payload, response, _attempts = self.llm.complete_json(
             self.build_initial_draft_prompt(),
             required_keys=["reply", "title", "verses"],
-            temperature=0.25,
+            temperature=0.7,
             max_tokens=2600,
             max_attempts=3,
         )
@@ -1857,7 +1830,7 @@ User message:
         payload, response, _attempts = self.llm.complete_json(
             prompt,
             required_keys=["reply", "title", "verses"],
-            temperature=0.3,
+            temperature=0.7,
             max_tokens=2400,
             max_attempts=3,
         )
