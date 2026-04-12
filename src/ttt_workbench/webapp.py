@@ -294,11 +294,24 @@ def home(request: Request):
             },
         )
 
-    # Automatically resume if we have a book, chapter, and chunk
+    # Automatically resume if we have a book, chapter, and a VALID chunk
     if wb.state.book and wb.state.chapter and wb.current_chunk_key():
         testament = wb.state.wizard_testament or wb.testament() or "new"
+        book = wb.state.book
+        chapter = wb.state.chapter
+        stale_key = wb.current_chunk_key()
+        valid_chunks = {
+            f"{item.start_verse}-{item.end_verse}"
+            for item in wb.chapter_chunks(testament, book, chapter)
+        }
+        if valid_chunks and stale_key in valid_chunks:
+            return RedirectResponse(
+                url=f"/workspace/{testament}/{normalize_book_key(book)}/{chapter}/{stale_key}",
+                status_code=302,
+            )
+        # Stale chunk — redirect to chapter page instead (will auto-select first chunk)
         return RedirectResponse(
-            url=f"/workspace/{testament}/{normalize_book_key(wb.state.book)}/{wb.state.chapter}/{wb.current_chunk_key()}",
+            url=f"/workspace/{testament}/{normalize_book_key(book)}/{chapter}",
             status_code=302,
         )
 
@@ -331,6 +344,18 @@ def workspace_chapter(request: Request, testament: str, book: str, chapter: int,
 def workspace(request: Request, testament: str, book: str, chapter: int, chunk_key: str, tab: str = "study"):
     wb = controller()
     book = resolve_book_name(wb, testament, book)
+    # Validate chunk_key against catalog
+    valid_chunks = {
+        f"{item.start_verse}-{item.end_verse}"
+        for item in wb.chapter_chunks(testament, book, chapter)
+    }
+    if valid_chunks and chunk_key not in valid_chunks:
+        # Redirect to first chunk in catalog
+        first_chunk = next(iter(valid_chunks))
+        return RedirectResponse(
+            url=f"/workspace/{testament}/{normalize_book_key(book)}/{chapter}/{first_chunk}",
+            status_code=302,
+        )
     wb.open_or_select_chunk(testament, book, chapter, chunk_key)
     wb.activate_tab(tab)
     wb.save_state()

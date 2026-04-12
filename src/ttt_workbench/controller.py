@@ -2154,6 +2154,11 @@ User message:
             self.state.wizard_testament = testament
             self.state.wizard_book = book
             self.state.wizard_chapter = chapter
+            # Still refresh the draft title from catalog
+            if not self.state.draft_title.strip():
+                self.state.draft_title = self._chunk_catalog_title(book, chapter, chunk_key)
+                if not self.state.draft_title.strip():
+                    self.state.draft_title = self.committed_chunk_title()
             return
 
         self.load_workspace(testament, book, chapter, chunk_key)
