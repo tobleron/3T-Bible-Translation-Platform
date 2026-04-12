@@ -2128,12 +2128,16 @@ User message:
                     self.state.draft_chunk.pop(key, None)
                 else:
                     self.state.draft_chunk[key] = cleaned
-            self.add_history_entry("Review saved", f"{verse_count} verse{'s' if verse_count != 1 else ''} updated for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}")
+            self.history_entries.append(
+                {"title": "Review saved", "body": f"{verse_count} verse{'s' if verse_count != 1 else ''} updated for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}", "accent": "green"}
+            )
         else:
             self.state.draft_title = title.strip()
             for verse, text in verses.items():
                 self.state.draft_chunk[str(verse)] = text.strip()
-            self.add_history_entry("Draft saved", f"{verse_count} verse{'s' if verse_count != 1 else ''} saved for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}")
+            self.history_entries.append(
+                {"title": "Draft saved", "body": f"{verse_count} verse{'s' if verse_count != 1 else ''} saved for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}", "accent": "green"}
+            )
         self.prepare_browser_commit_state()
         self.save_state()
 
