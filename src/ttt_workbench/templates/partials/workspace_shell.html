@@ -305,7 +305,7 @@
           </div>
           <textarea id="chat-message-input" name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
-            <button class="primary-button send-button" type="submit" data-loading-label="Sending...">Send</button>
+            <button class="primary-button send-button" type="submit" data-loading-label="Processing...">Send</button>
             <button class="secondary-button clear-button" type="button"
               hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
               hx-target="#workspace-shell" hx-swap="outerHTML"
@@ -614,6 +614,9 @@ document.addEventListener('htmx:afterSettle', function() {
   initModelActionForms();
   initChatInput();
   initEditorSaveIndicator();
+  // Scroll chat log to bottom after swap
+  var chatLog = document.querySelector('.chat-log');
+  if (chatLog) { chatLog.scrollTop = chatLog.scrollHeight; }
   // Restore last copied indicator after HTMX swap
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
   if (lastCopied) {
