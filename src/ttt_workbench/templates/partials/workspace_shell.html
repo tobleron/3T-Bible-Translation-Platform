@@ -844,7 +844,7 @@ function applyStudyFontSize(px) {
   var el = document.getElementById('study-blocks');
   if (!el) return;
   el.style.fontSize = px + 'px';
-  el.querySelectorAll('.chunk-block-body, .chunk-block-gloss').forEach(function(b) { b.style.fontSize = px + 'px'; });
+  el.querySelectorAll('.chunk-block-body, .chunk-block-gloss, .translation-verse-text, .translation-verse-num, .lexical-summary').forEach(function(b) { b.style.fontSize = px + 'px'; });
 }
 function showJsonPreview() {
   var overlay = document.getElementById('jsonModal');

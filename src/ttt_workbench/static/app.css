@@ -431,29 +431,40 @@ button:active:not(:disabled) {
   padding-bottom: 0.2rem;
 }
 
-/* Lexical collapse for Hebrew/Greek blocks */
-.lexical-collapse {
+/* Lexical collapsible: Hebrew/Greek text collapses, English gloss stays visible */
+.lexical-collapsible {
   border-top: 1px solid rgba(255,255,255,0.04);
   padding: 0.5rem 0;
 }
-.lexical-collapse > summary {
+.lexical-collapsible:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.lexical-body-collapse {
+  border: none;
+  padding: 0;
+}
+.lexical-body-collapse > summary {
   display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  align-items: center;
+  gap: 0.45rem;
+  align-items: baseline;
+  flex-wrap: wrap;
   cursor: pointer;
   list-style: none;
   user-select: none;
+  font-size: 0.8rem;
 }
-.lexical-collapse > summary::-webkit-details-marker { display: none; }
-.lexical-collapse > summary::before {
+.lexical-body-collapse > summary::-webkit-details-marker { display: none; }
+.lexical-body-collapse > summary::before {
   content: '▸';
   display: inline-block;
   transition: transform 150ms ease;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
-.lexical-collapse[open] > summary::before {
+.lexical-body-collapse[open] > summary::before {
   transform: rotate(90deg);
 }
 

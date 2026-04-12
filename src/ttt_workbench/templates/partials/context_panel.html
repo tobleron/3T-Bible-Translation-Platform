@@ -31,18 +31,18 @@
     <div class="chunk-block-sheet" id="study-blocks" data-font-size="16">
       {% for block in study_blocks %}
       {% if block.kind in ('hebrew', 'greek') %}
-      <details class="chunk-block lexical-collapse">
-        <summary class="chunk-block-head">
-          <div class="chunk-block-heading">
+      <div class="chunk-block lexical-collapsible">
+        <details class="lexical-body-collapse">
+          <summary class="lexical-summary">
             <span class="verse-tag">{{ block.label }}</span>
             {% if block.caption %}
             <span class="context-meta">{{ block.caption }}</span>
             {% endif %}
-          </div>
-        </summary>
-        {% if block.text %}
-        <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
-        {% endif %}
+          </summary>
+          {% if block.text %}
+          <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% endif %}">{{ block.text }}</div>
+          {% endif %}
+        </details>
         {% if block.gloss_tokens %}
         <div class="chunk-block-gloss">
           {% for gt in block.gloss_tokens %}
@@ -51,7 +51,7 @@
           {% endfor %}
         </div>
         {% endif %}
-      </details>
+      </div>
       {% else %}
       <div class="chunk-block{% if block.kind == 'translation' %} translation-block{% endif %}"{% if block.kind == 'translation' %} data-translation-alias="{{ block.label }}"{% endif %}>
         <div class="chunk-block-head">
@@ -68,7 +68,7 @@
           {% endif %}
         </div>
         {% if block.text %}
-        <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
+        <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% elif block.kind == 'translation' %}translation{% endif %}">{{ block.text }}</div>
         {% endif %}
         {% if block.gloss_tokens %}
         <div class="chunk-block-gloss">
