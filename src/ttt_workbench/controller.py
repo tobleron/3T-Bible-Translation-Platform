@@ -833,6 +833,9 @@ Rules:
         self.open_chunk(book, chapter, start_verse, end_verse)
         self.state.footnote_draft = None
         self.state.wizard_testament = testament
+        # Populate draft title from committed chunk title if not already set
+        if not self.state.draft_title.strip():
+            self.state.draft_title = self.committed_chunk_title()
         self.set_screen("STUDY", mode="COMMAND")
         self.save_state()
 

@@ -74,7 +74,6 @@
       <label class="compact-select chunk-select">
         <span>Chunk</span>
         <select name="chunk" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
-          <option value="">Overview</option>
           {% for chunk in chapter_chunks %}
           {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
           <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>{{ chunk.start_verse }}-{{ chunk.end_verse }} {{ chunk.title }}</option>
@@ -602,6 +601,15 @@
 <script>
 document.addEventListener('htmx:afterSettle', function() {
   document.querySelectorAll('textarea').forEach(function(el) { autoResize(el); });
+  // Delayed autoResize after swap to set heights correctly without scroll jump
+  requestAnimationFrame(function() {
+    document.querySelectorAll('textarea').forEach(function(el) {
+      if (el.dataset.autoResizeBound) {
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px';
+      }
+    });
+  });
   var studyBlocks = document.getElementById('study-blocks');
   if (studyBlocks) {
     var fontSize = localStorage.getItem('studyFontSize') || '16';
@@ -1045,13 +1053,34 @@ function initChatInput() {
 
 // Show "Draft saved" indicator after editor form HTMX swap
 function initEditorSaveIndicator() {
-  document.addEventListener('htmx:afterSettle', function(evt) {
-    var editorForm = document.getElementById('editor-form');
-    if (!editorForm) return;
-    var submitter = evt.detail.submitEvent ? evt.detail.submitEvent.submitter : null;
-    if (submitter && submitter.type === 'submit' && editorForm.contains(submitter)) {
+  var editorForm = document.getElementById('editor-form');
+  if (!editorForm) return;
+  if (editorForm.dataset.saveBound === '1') return;
+  editorForm.dataset.saveBound = '1';
+
+  var scrollPos = null;
+  editorForm.addEventListener('htmx:beforeRequest', function() {
+    scrollPos = window.scrollY || window.pageYOffset;
+  });
+  editorForm.addEventListener('htmx:afterOnLoad', function() {
+    if (scrollPos !== null) {
+      window.scrollTo(0, scrollPos);
+      scrollPos = null;
+    }
+  });
+  editorForm.addEventListener('htmx:afterSettle', function() {
+    if (scrollPos !== null) {
+      window.scrollTo(0, scrollPos);
+      scrollPos = null;
+    }
+    var submitter = editorForm._lastSubmitter || null;
+    if (submitter && submitter.type === 'submit') {
       showWorkspaceIndicator('Draft saved.');
     }
+    editorForm._lastSubmitter = null;
+  });
+  editorForm.addEventListener('submit', function(e) {
+    editorForm._lastSubmitter = e.submitter || null;
   });
 }
 function switchEditorialTab(button, tabName) {

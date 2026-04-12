@@ -251,14 +251,24 @@ async def workspace_navigate(request: Request):
             else chapter_options[0]
         )
 
-    valid_chunks = {
-        f"{item.start_verse}-{item.end_verse}"
+    valid_chunks = [
+        (f"{item.start_verse}-{item.end_verse}", item)
         for item in wb.chapter_chunks(testament, selected_book, selected_chapter)
-    }
-    if chunk and chunk in valid_chunks:
+    ]
+    valid_chunk_keys = {k for k, _ in valid_chunks}
+    first_chunk_key = valid_chunks[0][0] if valid_chunks else ""
+
+    if chunk and chunk in valid_chunk_keys:
         wb.open_or_select_chunk(testament, selected_book, selected_chapter, chunk)
         wb.save_state()
         return render_workspace(request, wb, active_tab="study", partial=True)
+
+    # Auto-select first chunk when none specified
+    if first_chunk_key:
+        wb.open_or_select_chunk(testament, selected_book, selected_chapter, first_chunk_key)
+        wb.save_state()
+        return render_workspace(request, wb, active_tab="study", partial=True)
+
     wb.select_chapter(testament, selected_book, selected_chapter)
     return render_workspace(request, wb, active_tab="study", partial=True)
 
