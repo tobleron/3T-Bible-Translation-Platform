@@ -1,2 +1,0 @@
-# Required for SBLGNT parsing and Strong's mapping
-git+https://github.com/morphgnt/sblgnt.git

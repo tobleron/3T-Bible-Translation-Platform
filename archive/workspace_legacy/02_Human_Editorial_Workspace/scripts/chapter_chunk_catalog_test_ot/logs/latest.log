@@ -1,4 +1,0 @@
-[2026-04-09T15:57:39Z] Run start: 1 chapters | model=Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf | endpoint=http://192.168.1.186:8080
-[2026-04-09T15:57:39Z] START Genesis 1 (1-31)
-[2026-04-09T15:59:59Z] DONE Genesis 1: 6 chunks
-[2026-04-09T15:59:59Z] Run complete.

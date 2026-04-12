@@ -3,8 +3,8 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENV_PY="$ROOT_DIR/.venv/bin/python"
-SCRIPT="$ROOT_DIR/02_Human_Editorial_Workspace/scripts/generate_chapter_chunks.py"
-OUTPUT_DIR="$ROOT_DIR/02_Human_Editorial_Workspace/scripts/chapter_chunk_catalog"
+SCRIPT="$ROOT_DIR/src/ttt_workbench/scripts/generate_chapter_chunks.py"
+OUTPUT_DIR="$ROOT_DIR/output/ai_sessions/chapter_chunk_catalog"
 
 if [[ ! -x "$VENV_PY" ]]; then
   echo "Missing virtualenv python at $VENV_PY" >&2

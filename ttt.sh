@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENV_DIR="$ROOT_DIR/.venv"
 VENV_PY="$VENV_DIR/bin/python"
-WORKBENCH_REQUIREMENTS="$ROOT_DIR/02_Human_Editorial_Workspace/requirements-workbench.txt"
+WORKBENCH_REQUIREMENTS="$ROOT_DIR/requirements-workbench.txt"
 WORKBENCH_HASH_FILE="$VENV_DIR/.workbench_requirements.sha256"
 
 show_help() {
@@ -61,74 +61,82 @@ ensure_workbench_env() {
   fi
 }
 
+python_env() {
+  printf '%s:%s%s' "$ROOT_DIR/src" "$ROOT_DIR" "${PYTHONPATH:+:$PYTHONPATH}"
+}
+
 run_web() {
   cd "$ROOT_DIR"
   ensure_workbench_env
   local host="${TTT_WEB_HOST:-127.0.0.1}"
   local port="${TTT_WEB_PORT:-8765}"
   echo "TTT Browser Workbench: http://$host:$port"
-  exec env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
 }
 
 run_workbench() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" ttt_workbench.ttt_workbench
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/ttt_workbench.py"
 }
 
 run_textual_preview() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" ttt_workbench.textual_workbench_preview
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/textual_workbench_preview.py"
 }
 
 run_textual() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" ttt_workbench.textual_workbench
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/textual_workbench.py"
 }
 
 run_prep_data() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  export PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace${PYTHONPATH:+:$PYTHONPATH}"
-  chmod +x src/ttt_core/scripts/prepare_lexical_data.sh
-  exec src/ttt_core/scripts/prepare_lexical_data.sh "${@:2}"
+  export PYTHONPATH="$(python_env)"
+  chmod +x src/ttt_workbench/scripts/prepare_lexical_data.sh
+  exec src/ttt_workbench/scripts/prepare_lexical_data.sh "${@:2}"
 }
 
 run_smoke() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" src/ttt_workbench/scripts/stress_test_workbench.py "${@:2}"
-  exec env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" src/ttt_workbench/scripts/ui_integration_test.py
+  export TTT_WEBAPP_FAKE_LLM=1
+  env PYTHONPATH="$(python_env)" "$VENV_PY" src/ttt_workbench/scripts/stress_test_workbench.py "${@:2}"
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" src/ttt_workbench/scripts/ui_integration_test.py
 }
 
 run_test() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  exec env PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace" "$VENV_PY" -m pytest tests/ -v "${@:2}"
+  export TTT_WEBAPP_FAKE_LLM=1
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" -m pytest tests/ -v "${@:2}"
 }
 
 run_translate() {
-  cd "$ROOT_DIR/01_AI_Translation_Engine"
-  export PYTHONPATH="$ROOT_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
+  cd "$ROOT_DIR/archive/workspace_legacy/01_AI_Translation_Engine"
+  export PYTHONPATH="$(python_env)"
   exec ./translate_verse.sh "${@:2}"
 }
 
 run_analyze() {
-  cd "$ROOT_DIR/02_Human_Editorial_Workspace"
-  export PYTHONPATH="$ROOT_DIR/src/02_Human_Editorial_Workspace${PYTHONPATH:+:$PYTHONPATH}"
+  cd "$ROOT_DIR/archive/workspace_legacy/02_Human_Editorial_Workspace"
+  export PYTHONPATH="$(python_env)"
   exec ./analyze_translation.sh "${@:2}"
 }
 
 run_epub() {
-  cd "$ROOT_DIR/03_EPUB_Production"
-  exec ./make_epub.sh "${@:2}"
+  cd "$ROOT_DIR"
+  ensure_workbench_env
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" src/ttt_epub/generate_epub.py "${@:2}"
 }
 
 run_backup() {
   cd "$ROOT_DIR"
-  exec env PYTHONPATH="$ROOT_DIR" "$VENV_PY" src/ttt_core/src/ttt_core/version_control.py "${@:2}"
+  ensure_workbench_env
+  exec env PYTHONPATH="$(python_env)" "$VENV_PY" version_control.py "${@:2}"
 }
 
 COMMAND="${1:-web}"

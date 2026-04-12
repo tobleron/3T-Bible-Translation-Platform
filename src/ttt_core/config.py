@@ -1,7 +1,8 @@
 """Unified configuration loader.
 
-Reads ``config/default_config.yaml`` from the project root and overlays
-environment variables prefixed with ``TTT_``.
+Reads the legacy root ``config.yaml`` when present, then overlays
+``config/default_config.yaml`` and finally environment variables
+prefixed with ``TTT_``.
 """
 
 from __future__ import annotations
@@ -23,7 +24,8 @@ def load_config(project_root: Path | None = None) -> dict[str, Any]:
     Priority (highest first):
     1. ``TTT_`` environment variables
     2. ``config/default_config.yaml`` at *project_root*
-    3. Sensible defaults
+    3. legacy ``config.yaml`` at *project_root*
+    4. Sensible defaults
     """
     if project_root is None:
         project_root = _detect_project_root()
@@ -31,9 +33,11 @@ def load_config(project_root: Path | None = None) -> dict[str, Any]:
     _load_dotenv(project_root / ".env")
     cfg = _defaults(project_root)
 
-    # 2. Config directory (overrides defaults)
-    root_cfg = _load_yaml(project_root / "config" / "default_config.yaml")
-    cfg = _deep_merge(cfg, root_cfg)
+    legacy_cfg = _load_yaml(project_root / "config.yaml")
+    cfg = _deep_merge(cfg, legacy_cfg)
+
+    config_dir_cfg = _load_yaml(project_root / "config" / "default_config.yaml")
+    cfg = _deep_merge(cfg, config_dir_cfg)
 
     # 1. Environment variables (highest priority)
     cfg = _apply_env_overrides(cfg)

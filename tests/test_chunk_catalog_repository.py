@@ -34,13 +34,13 @@ def write_chapter_payload(
 
 def test_merge_consecutive_chunks_updates_chapter_and_book_bundle(tmp_path: Path) -> None:
     repo_root = tmp_path / "repo"
-    workspace_dir = repo_root / "02_Human_Editorial_Workspace"
-    paths = ProjectPaths(workspace_dir=workspace_dir, repo_root=repo_root)
+    paths = ProjectPaths(repo_root=repo_root)
     repository = ChunkCatalogRepository(paths, bible_repo=object())  # type: ignore[arg-type]
 
     chapter_path = (
-        workspace_dir
-        / "scripts"
+        repo_root
+        / "data"
+        / "final"
         / "chapter_chunk_catalog"
         / "chunks"
         / "old"
@@ -98,9 +98,11 @@ def test_merge_consecutive_chunks_updates_chapter_and_book_bundle(tmp_path: Path
     ]
 
     book_path = (
-        workspace_dir
-        / "scripts"
-        / "chapter_chunk_catalog_books"
+        repo_root
+        / "data"
+        / "final"
+        / "chapter_chunk_catalog"
+        / "books"
         / "old"
         / "genesis_chunks.json"
     )

@@ -1,2 +1,0 @@
-"""TTT interactive translation workbench."""
-

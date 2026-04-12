@@ -8,7 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = (
     ROOT
-    / "02_Human_Editorial_Workspace"
+    / "src"
+    / "ttt_workbench"
     / "scripts"
     / "aggregate_chunk_catalog_books.py"
 )
