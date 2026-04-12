@@ -120,18 +120,17 @@
         <strong>{{ item.title }}</strong>
         <span>{{ item.summary }}</span>
       </span>
-      {% else %}
-      <span class="activity-pill is-muted">No recent activity.</span>
       {% endfor %}
       {% if flash_messages %}
       {% for message in flash_messages %}
-      {% if message.accent == 'red' %}
-      <span class="activity-pill is-error">
+      <span class="activity-pill {% if message.accent == 'red' %}is-error{% endif %}">
         <strong>{{ message.title }}</strong>
         <span>{{ message.summary|truncate(120) }}</span>
       </span>
-      {% endif %}
       {% endfor %}
+      {% endif %}
+      {% if not activity_items and not flash_messages %}
+      <span class="activity-pill is-muted">No recent activity.</span>
       {% endif %}
       <span id="gloss-copied-indicator" class="gloss-copied-indicator" style="display:none;"></span>
     </div>
