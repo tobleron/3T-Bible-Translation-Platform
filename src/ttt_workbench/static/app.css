@@ -426,7 +426,35 @@ button:active:not(:disabled) {
   color: var(--accent-soft);
   margin-top: 0.12rem;
   padding-top: 0;
-  border-top: 0;
+}
+.chunk-block-gloss:last-child {
+  padding-bottom: 0.2rem;
+}
+
+/* Lexical collapse for Hebrew/Greek blocks */
+.lexical-collapse {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 0.5rem 0;
+}
+.lexical-collapse > summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.lexical-collapse > summary::-webkit-details-marker { display: none; }
+.lexical-collapse > summary::before {
+  content: '▸';
+  display: inline-block;
+  transition: transform 150ms ease;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.lexical-collapse[open] > summary::before {
+  transform: rotate(90deg);
 }
 
 /* Session panel */

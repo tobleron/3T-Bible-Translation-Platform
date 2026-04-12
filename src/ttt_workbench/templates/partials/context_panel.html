@@ -30,6 +30,29 @@
   <section class="study-article" aria-label="Study article">
     <div class="chunk-block-sheet" id="study-blocks" data-font-size="16">
       {% for block in study_blocks %}
+      {% if block.kind in ('hebrew', 'greek') %}
+      <details class="chunk-block lexical-collapse">
+        <summary class="chunk-block-head">
+          <div class="chunk-block-heading">
+            <span class="verse-tag">{{ block.label }}</span>
+            {% if block.caption %}
+            <span class="context-meta">{{ block.caption }}</span>
+            {% endif %}
+          </div>
+        </summary>
+        {% if block.text %}
+        <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% else %}translation{% endif %}">{{ block.text }}</div>
+        {% endif %}
+        {% if block.gloss_tokens %}
+        <div class="chunk-block-gloss">
+          {% for gt in block.gloss_tokens %}
+          <span class="gloss-word" data-surface="{{ gt.surface }}" data-gloss="{{ gt.gloss }}">{{ gt.gloss }}</span>
+          {% if not loop.last %}<span class="gloss-sep"> | </span>{% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </details>
+      {% else %}
       <div class="chunk-block{% if block.kind == 'translation' %} translation-block{% endif %}"{% if block.kind == 'translation' %} data-translation-alias="{{ block.label }}"{% endif %}>
         <div class="chunk-block-head">
           <div class="chunk-block-heading">
@@ -68,6 +91,7 @@
         </div>
         {% endif %}
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   </section>
