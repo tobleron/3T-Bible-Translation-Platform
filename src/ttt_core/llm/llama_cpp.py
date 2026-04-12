@@ -83,7 +83,7 @@ class LlamaCppClient:
         if stop:
             payload["stop"] = stop
         data = json.dumps(payload).encode("utf-8")
-        
+
         # Determine endpoint. llama.cpp legacy /completion vs /v1/completions
         if "/v1" in self.base_url:
             url = f"{self.base_url}/completions"
@@ -98,6 +98,46 @@ class LlamaCppClient:
         try:
             with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
                 payload = json.loads(response.read().decode("utf-8"))
+            return self._extract_content(payload)
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")
+            # /v1/completions may not exist — fall back to chat endpoint
+            if exc.code == 404 and "/v1" in self.base_url:
+                return self._complete_via_chat(prompt, temperature, max_tokens, stop, timeout_seconds)
+            return f"[ERROR] llama.cpp HTTP {exc.code}: {detail}"
+        except TimeoutError:
+            return f"[ERROR] llama.cpp request timed out after {timeout_seconds}s"
+        except Exception as exc:
+            return f"[ERROR] llama.cpp request failed: {exc}"
+
+    def _complete_via_chat(
+        self,
+        prompt: str,
+        temperature: float,
+        max_tokens: int,
+        stop: list[str] | None,
+        timeout_seconds: int,
+    ) -> str:
+        """Fallback: use /v1/chat/completions when /v1/completions is unavailable."""
+        chat_payload = {
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "stream": False,
+        }
+        if stop:
+            chat_payload["stop"] = stop
+        data = json.dumps(chat_payload).encode("utf-8")
+        url = f"{self.base_url}/chat/completions"
+        request = urllib.request.Request(
+            url,
+            data=data,
+            headers=self._get_headers(),
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            return self._extract_content(payload)
         except urllib.error.HTTPError as exc:
             detail = exc.read().decode("utf-8", errors="replace")
             return f"[ERROR] llama.cpp HTTP {exc.code}: {detail}"
@@ -105,8 +145,6 @@ class LlamaCppClient:
             return f"[ERROR] llama.cpp request timed out after {timeout_seconds}s"
         except Exception as exc:
             return f"[ERROR] llama.cpp request failed: {exc}"
-
-        return self._extract_content(payload)
 
     # ------------------------------------------------------------------
     # Streaming completion
