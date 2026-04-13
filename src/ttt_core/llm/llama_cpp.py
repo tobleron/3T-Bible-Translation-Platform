@@ -30,9 +30,23 @@ class LlamaCppClient:
                 base_url = llm_cfg.get("base_url", "http://192.168.1.186:8081/v1")
             if api_key is None:
                 api_key = llm_cfg.get("api_key")
+        else:
+            cfg = load_config()
+            llm_cfg = cfg.get("llama_cpp", {})
 
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
+
+        # Stream timeout: config > env > default 1800s (30 min)
+        import os
+        env_timeout = os.environ.get("TTT_LLAMA_CPP_STREAM_TIMEOUT")
+        if env_timeout is not None:
+            try:
+                self.stream_timeout_seconds = int(env_timeout)
+            except ValueError:
+                self.stream_timeout_seconds = 1800
+        else:
+            self.stream_timeout_seconds = llm_cfg.get("stream_timeout_seconds", 1800)
 
     def _get_headers(self) -> dict[str, str]:
         headers = {"Content-Type": "application/json"}
@@ -159,6 +173,7 @@ class LlamaCppClient:
 
         Yields tokens as they arrive.  If a ``stop`` event is detected,
         yields a ``__STATS_BLOCK__…__END_STATS__`` marker.
+        Retries once on timeout before giving up.
         """
         if isinstance(prompt_or_messages, list):
             prompt_text = ""
@@ -178,63 +193,79 @@ class LlamaCppClient:
             "n_predict": 8192,
         }
 
-        try:
-            if "/v1" in self.base_url:
-                # OpenAI-compatible endpoint: /v1/chat/completions
-                chat_payload = {
-                    "messages": [{"role": "user", "content": prompt_text}],
-                    "temperature": temperature,
-                    "max_tokens": 8192,
-                    "stream": True,
-                }
-                url = f"{self.base_url}/chat/completions"
-                with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=600) as resp:
-                    resp.raise_for_status()
-                    for line in resp.iter_lines():
-                        if not line:
-                            continue
-                        line_str = line.decode("utf-8")
-                        if not line_str.startswith("data: "):
-                            continue
-                        data_str = line_str[6:]
-                        if data_str.strip() == "[DONE]":
-                            break
-                        try:
-                            data = json.loads(data_str)
-                        except json.JSONDecodeError:
-                            continue
-                        # OpenAI chat format: choices[0].delta.content
-                        choices = data.get("choices", [])
-                        if choices:
-                            content = choices[0].get("delta", {}).get("content", "")
-                            if content:
-                                yield content
-                            if choices[0].get("finish_reason"):
+        timeout = self.stream_timeout_seconds
+        max_retries = 2  # initial attempt + 1 retry on timeout
+
+        for attempt in range(max_retries):
+            try:
+                if "/v1" in self.base_url:
+                    # OpenAI-compatible endpoint: /v1/chat/completions
+                    chat_payload = {
+                        "messages": [{"role": "user", "content": prompt_text}],
+                        "temperature": temperature,
+                        "max_tokens": 8192,
+                        "stream": True,
+                    }
+                    url = f"{self.base_url}/chat/completions"
+                    with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
+                        resp.raise_for_status()
+                        for line in resp.iter_lines():
+                            if not line:
+                                continue
+                            line_str = line.decode("utf-8")
+                            if not line_str.startswith("data: "):
+                                continue
+                            data_str = line_str[6:]
+                            if data_str.strip() == "[DONE]":
                                 break
-            else:
-                # llama.cpp native /completion endpoint
-                url = f"{self.base_url}/completion"
-                with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=600) as resp:
-                    resp.raise_for_status()
-                    for line in resp.iter_lines():
-                        if not line:
-                            continue
-                        line_str = line.decode("utf-8")
-                        if line_str.startswith("data: "):
                             try:
-                                data = json.loads(line_str[6:])
+                                data = json.loads(data_str)
                             except json.JSONDecodeError:
                                 continue
-                            if "content" in data:
-                                yield data["content"]
-                            if data.get("stop"):
-                                stats = {
-                                    "tokens_predicted": data.get("tokens_predicted"),
-                                    "generation_settings": data.get("generation_settings"),
-                                }
-                                yield f"__STATS_BLOCK__{json.dumps(stats)}__END_STATS__"
-        except Exception as exc:
-            yield f"\n[ERROR] llama.cpp generation failed: {exc}"
+                            # OpenAI chat format: choices[0].delta.content
+                            choices = data.get("choices", [])
+                            if choices:
+                                content = choices[0].get("delta", {}).get("content", "")
+                                if content:
+                                    yield content
+                                if choices[0].get("finish_reason"):
+                                    break
+                else:
+                    # llama.cpp native /completion endpoint
+                    url = f"{self.base_url}/completion"
+                    with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
+                        resp.raise_for_status()
+                        for line in resp.iter_lines():
+                            if not line:
+                                continue
+                            line_str = line.decode("utf-8")
+                            if line_str.startswith("data: "):
+                                try:
+                                    data = json.loads(line_str[6:])
+                                except json.JSONDecodeError:
+                                    continue
+                                if "content" in data:
+                                    yield data["content"]
+                                if data.get("stop"):
+                                    stats = {
+                                        "tokens_predicted": data.get("tokens_predicted"),
+                                        "generation_settings": data.get("generation_settings"),
+                                    }
+                                    yield f"__STATS_BLOCK__{json.dumps(stats)}__END_STATS__"
+                # Success — exit the retry loop
+                return
+
+            except requests.exceptions.Timeout:
+                if attempt < max_retries - 1:
+                    # Retry on timeout
+                    continue
+                yield f"\n[ERROR] llama.cpp stream timed out after {timeout}s (attempt {attempt + 1}/{max_retries}). Check that the server is running and responsive."
+            except requests.exceptions.ConnectionError as exc:
+                yield f"\n[ERROR] llama.cpp connection refused at {self.base_url}: {exc}"
+                return
+            except Exception as exc:
+                yield f"\n[ERROR] llama.cpp generation failed: {exc}"
+                return
 
     # ------------------------------------------------------------------
     # JSON-mode completion with repair

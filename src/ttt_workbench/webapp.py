@@ -1018,6 +1018,36 @@ def clear_chunk_session(request: Request, testament: str, book: str, chapter: in
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/delete/{index}", response_class=HTMLResponse)
+def delete_chat_message(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str, index: int
+):
+    """Delete a single chat message (and its paired response if it's a user message)."""
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        messages = wb.state.chat_messages
+        deleted_role = ""
+        if 0 <= index < len(messages):
+            role = messages[index].get("role", "")
+            deleted_role = role
+            # Remove the target message
+            messages.pop(index)
+            # If it was a user message, also remove the immediately following assistant reply
+            if role == "user" and index < len(messages):
+                if messages[index].get("role") == "assistant":
+                    messages.pop(index)
+            wb.history_entries.append(
+                {"title": "Chat", "body": f"Deleted {deleted_role} message at index {index}", "accent": "blue"}
+            )
+            wb.persist_current_chunk_session()
+            wb.save_state()
+        return render_workspace(request, wb, active_tab="draft", partial=True)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
 @app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-preview", response_class=JSONResponse)
 def json_preview(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
     wb = controller()

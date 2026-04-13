@@ -571,6 +571,51 @@ button:active:not(:disabled) {
   color: var(--danger);
 }
 
+/* Stop button for chat streaming */
+.stop-button {
+  border-radius: 5px;
+  border: 1px solid var(--danger);
+  background: rgba(205,92,92,0.12);
+  color: var(--danger);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  min-height: 1.85rem;
+  padding: 0 0.65rem;
+}
+.stop-button:hover {
+  background: rgba(205,92,92,0.22);
+}
+
+/* Chat entry head with trash button */
+.chat-entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chat-delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, background 0.15s;
+}
+.chat-entry:hover .chat-delete-btn {
+  opacity: 0.5;
+}
+.chat-delete-btn:hover {
+  opacity: 1;
+  color: var(--danger);
+  background: rgba(205,92,92,0.1);
+}
+
 /* Study block fonts — English same size as original */
 .chunk-block-body {
   font-size: 16px;

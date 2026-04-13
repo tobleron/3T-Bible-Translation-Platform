@@ -10,6 +10,7 @@
 llama_cpp:
   base_url: "http://192.168.1.186:8081/v1"
   api_key: "" # Set TTT_LLAMA_CPP_API_KEY environment variable
+  stream_timeout_seconds: 1800  # Timeout for streaming generation (30 min). Set TTT_LLAMA_CPP_STREAM_TIMEOUT env var to override.
 
 openai:
   # Recommended: export OPENAI_API_KEY=sk-...

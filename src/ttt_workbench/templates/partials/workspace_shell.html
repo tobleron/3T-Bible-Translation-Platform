@@ -235,7 +235,6 @@
         <div class="panel-head">
           <div>
             <p class="eyebrow">Chat</p>
-            <h2>Model drafting conversation</h2>
           </div>
           <div class="panel-summary">
             <span class="inline-badge">{{ model_label }} model</span>
@@ -254,9 +253,12 @@
         {% else %}
         {% if state.chat_messages %}
         <div class="chat-log chat-log-large">
-          {% for item in state.chat_messages[-8:] %}
+          {% for item in state.chat_messages %}
           <div class="chat-entry chat-{{ item.role }}">
-            <strong>{{ "You" if item.role == "user" else "Model" }}</strong>
+            <div class="chat-entry-head">
+              <strong>{{ "You" if item.role == "user" else "Model" }}</strong>
+              <button class="chat-delete-btn" type="button" title="Delete this message{% if item.role == 'user' %} and its response{% endif %}" data-msg-idx="{{ loop.index0 }}" data-msg-role="{{ item.role }}">&times;</button>
+            </div>
             {% if item.role == "assistant" %}
             <div class="chat-md">{{ item.content | markdown | safe }}</div>
             {% else %}
@@ -287,6 +289,7 @@
           <textarea id="chat-message-input" name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
             <button class="primary-button send-button" type="submit" data-loading-label="Streaming...">Send</button>
+            <button class="stop-button" type="button" id="chat-stop-button" style="display:none;" title="Stop streaming response">Stop</button>
             <button class="secondary-button clear-button" type="button"
               hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
               hx-target="#workspace-shell" hx-swap="outerHTML"
@@ -300,7 +303,6 @@
         <div class="panel-head">
           <div>
             <p class="eyebrow">Editorial Assistant</p>
-            <h2>Isolated sentence-level enhancement</h2>
           </div>
           <div class="panel-summary">
             <span class="inline-badge">No chat memory</span>
@@ -371,7 +373,6 @@
         <div class="panel-head support-panel-head">
           <div>
             <p class="eyebrow">Justifications</p>
-            <h2>Decision notes for this chunk</h2>
           </div>
           <span class="inline-badge">{{ justification_entries|length }} item{% if justification_entries|length != 1 %}s{% endif %}</span>
         </div>
@@ -474,7 +475,6 @@
         <div class="panel-head support-panel-head">
           <div>
             <p class="eyebrow">Footnotes</p>
-            <h2>Footer notes for this chunk</h2>
           </div>
           <span class="inline-badge">{{ footnote_entries|length }} item{% if footnote_entries|length != 1 %}s{% endif %}</span>
         </div>
@@ -1074,6 +1074,26 @@ function initChatInput() {
   chatForm.dataset.streamBound = '1';
 
   var currentController = null; // For aborting in-flight streams
+  var stopBtn = document.getElementById('chat-stop-button');
+
+  // Wire up stop button
+  if (stopBtn) {
+    stopBtn.addEventListener('click', function() {
+      if (currentController) { currentController.abort(); currentController = null; }
+    });
+  }
+
+  // Wire up trash buttons (delegated)
+  var chatLog = document.querySelector('.chat-log');
+  if (chatLog) {
+    chatLog.addEventListener('click', function(e) {
+      var btn = e.target.closest('.chat-delete-btn');
+      if (!btn) return;
+      var idx = parseInt(btn.getAttribute('data-msg-idx'), 10);
+      if (isNaN(idx)) return;
+      deleteChatMessage(idx);
+    });
+  }
 
   chatInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -1098,6 +1118,9 @@ function initChatInput() {
     var sendBtn = chatForm.querySelector('.send-button');
     var originalBtnText = sendBtn ? sendBtn.textContent : 'Send';
     if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = sendBtn.dataset.loadingLabel || 'Streaming...'; }
+
+    // Show stop button
+    if (stopBtn) stopBtn.style.display = '';
 
     // Collect context sources
     var ctxSources = [];
@@ -1124,7 +1147,7 @@ function initChatInput() {
     if (chatLog) {
       var userEntry = document.createElement('div');
       userEntry.className = 'chat-entry chat-user';
-      userEntry.innerHTML = '<strong>You</strong><p>' + escapeHtml(text) + '</p>';
+      userEntry.innerHTML = '<div class="chat-entry-head"><strong>You</strong><button class="chat-delete-btn" type="button" title="Delete this message and its response" data-msg-idx="__TEMP_USER__">&times;</button></div><p>' + escapeHtml(text) + '</p>';
       chatLog.appendChild(userEntry);
       chatLog.scrollTop = chatLog.scrollHeight;
     }
@@ -1132,7 +1155,7 @@ function initChatInput() {
     // Create assistant entry with streaming cursor
     var assistantEntry = document.createElement('div');
     assistantEntry.className = 'chat-entry chat-assistant';
-    assistantEntry.innerHTML = '<strong>Model</strong><div class="chat-md" id="chat-stream-buffer"><span class="chat-cursor">▊</span></div>';
+    assistantEntry.innerHTML = '<div class="chat-entry-head"><strong>Model</strong><button class="chat-delete-btn" type="button" title="Delete this response" data-msg-idx="__TEMP_ASSISTANT__">&times;</button></div><div class="chat-md" id="chat-stream-buffer"><span class="chat-cursor">▊</span></div>';
     if (chatLog) {
       chatLog.appendChild(assistantEntry);
       chatLog.scrollTop = chatLog.scrollHeight;
@@ -1205,16 +1228,76 @@ function initChatInput() {
       }
     })
     .catch(function(err) {
-      if (err.name === 'AbortError') return;
+      if (err.name === 'AbortError') {
+        // User stopped — remove the partial assistant entry AND the user message from DOM
+        // (neither was persisted to backend state since stream didn't complete)
+        var chatLog = document.querySelector('.chat-log');
+        if (chatLog) {
+          var entries = chatLog.querySelectorAll('.chat-entry');
+          for (var i = entries.length - 1; i >= 0; i--) {
+            var entry = entries[i];
+            if (entry.classList.contains('chat-assistant') && entry.querySelector('.chat-cursor')) {
+              entry.remove();
+              break;
+            }
+          }
+          // Remove the last user entry too (the one whose response we stopped)
+          var allEntries = chatLog.querySelectorAll('.chat-entry');
+          for (var j = allEntries.length - 1; j >= 0; j--) {
+            if (allEntries[j].classList.contains('chat-user')) {
+              allEntries[j].remove();
+              break;
+            }
+          }
+        }
+        return;
+      }
       if (mdBuffer) {
         mdBuffer.innerHTML = '<p style="color:#c66;">Stream interrupted: ' + escapeHtml(err.message) + '</p>';
       }
     })
     .finally(function() {
       currentController = null;
+      if (stopBtn) stopBtn.style.display = 'none';
       if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = originalBtnText; }
     });
   });
+}
+
+// Delete a chat message by index (calls backend, then re-renders workspace)
+function deleteChatMessage(index) {
+  var chatForm = document.getElementById('chat-stream-form');
+  if (!chatForm) return;
+  var streamUrl = chatForm.dataset.streamUrl;
+  if (!streamUrl) return;
+  // Build delete URL from stream URL base
+  var deleteUrl = streamUrl.replace('/chat/stream', '/chat/delete/' + index);
+
+  // Save scroll position to prevent jump
+  var scrollX = window.scrollX;
+  var scrollY = window.scrollY;
+
+  fetch(deleteUrl, { method: 'POST' })
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('Delete failed: ' + resp.status);
+      return resp.text();
+    })
+    .then(function(html) {
+      // Replace the entire workspace shell with the returned partial
+      var shell = document.getElementById('workspace-shell');
+      if (shell) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        shell.outerHTML = tmp.firstElementChild.outerHTML;
+        // Reinit chat input after swap
+        initChatInput();
+        // Restore scroll position
+        window.scrollTo(scrollX, scrollY);
+      }
+    })
+    .catch(function(err) {
+      console.error('deleteChatMessage error:', err);
+    });
 }
 
 function escapeHtml(text) {
