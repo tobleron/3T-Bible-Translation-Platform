@@ -21,10 +21,7 @@
       {% if chunk_summary.chunk %}
       <div class="nav-inline-banner">
         <span class="eyebrow">Workspace</span>
-        <strong>{{ chunk_summary.chunk.title }}</strong>
-        <span class="inline-badge">{{ chunk_summary.chunk.type }}</span>
         <span class="inline-badge">{{ model_label }} model</span>
-        <span class="muted-line">{{ chunk_summary.range_label }}</span>
       </div>
       {% elif selected_book and selected_chapter %}
       <div class="nav-inline-banner is-muted">
@@ -82,22 +79,6 @@
       </label>
     </div>
 
-    {# Row 3: chunk outline as horizontal scroll strip #}
-    {% if chapter_chunks %}
-    <div class="chunk-outline-strip">
-      {% for chunk in chapter_chunks %}
-      {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
-      <a class="chunk-strip-item {% if key == current_chunk_key %}is-active{% endif %}"
-        hx-get="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ key }}"
-        hx-target="#workspace-shell" hx-swap="outerHTML">
-        <span class="chunk-strip-index">{{ loop.index }}</span>
-        <span class="chunk-strip-range">{{ chunk.start_verse }}-{{ chunk.end_verse }}</span>
-        <span class="chunk-strip-title">{{ chunk.title }}</span>
-      </a>
-      {% endfor %}
-    </div>
-    {% endif %}
-
     {# Merge bar (hidden by default, toggled with ⚡) #}
     {% if chapter_chunks|length >= 2 %}
     <form class="merge-bar" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge" hx-target="#workspace-shell" hx-swap="outerHTML">
@@ -111,8 +92,8 @@
     {% endif %}
   </section>
 
-  {# Persistent activity bar — always visible #}
-  <section class="workspace-card activity-ribbon">
+  {# Activity toast notification #}
+  <section class="workspace-card activity-ribbon" data-toast-autohide="4000">
     <div class="activity-ribbon-group">
       <span class="activity-ribbon-label">Activity</span>
       {% for item in activity_items %}
@@ -175,7 +156,6 @@
         <div class="panel-head">
           <div>
             <p class="eyebrow">Editor</p>
-            <h2>Chunk text workspace</h2>
           </div>
           <div class="panel-summary">
             <span class="inline-badge">{{ chunk_summary.chunk.type if chunk_summary.chunk else "chunk" }}</span>
@@ -1569,4 +1549,24 @@ function generateEpubDownload(btn) {
       btn.textContent = originalLabel;
     });
 }
+
+// Activity toast auto-hide with hover pause
+(function() {
+  var toast = document.querySelector('.activity-ribbon');
+  if (!toast) return;
+  var hideDelay = parseInt(toast.getAttribute('data-toast-autohide'), 10) || 4000;
+  var hideTimer = null;
+  function scheduleHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function() {
+      toast.classList.add('fade-out');
+    }, hideDelay);
+  }
+  function cancelHide() {
+    clearTimeout(hideTimer);
+  }
+  toast.addEventListener('mouseenter', cancelHide);
+  toast.addEventListener('mouseleave', scheduleHide);
+  scheduleHide();
+})();
 </script>

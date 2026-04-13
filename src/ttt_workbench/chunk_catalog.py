@@ -22,6 +22,7 @@ class ChunkCatalogRepository:
             self.paths.repo_root / "data" / "final" / "chapter_chunk_catalog" / "books"
         )
         self._committed_section_cache: dict[tuple[str, str, int], dict[str, Any] | None] = {}
+        self._status_map_cache: dict[tuple[str, str], tuple[dict[int, int], float]] = {}
 
     def _chapter_path(self, testament: str, book: str, chapter: int) -> Path:
         key = normalize_book_key(book)
@@ -144,6 +145,17 @@ class ChunkCatalogRepository:
         return self._parse_chunks(payload.get("chunks", []))
 
     def chunk_status_map(self, testament: str, book: str) -> dict[int, int]:
+        cache_key = (testament, book)
+        chapter_root = self.chapter_dir / testament / normalize_book_key(book)
+        current_mtime = chapter_root.stat().st_mtime if chapter_root.exists() else 0.0
+
+        cached = self._status_map_cache.get(cache_key)
+        if cached is not None:
+            prev_result, prev_mtime = cached
+            if prev_mtime == current_mtime:
+                return prev_result
+
+        # Rebuild
         chapter_counts: dict[int, int] = {}
         book_payload = self._load_book_payload(testament, book)
         if book_payload:
@@ -154,7 +166,6 @@ class ChunkCatalogRepository:
                     if int(chapter_item.get("chapter", 0)) > 0
                 }
             )
-        chapter_root = self.chapter_dir / testament / normalize_book_key(book)
         if chapter_root.exists():
             for path in sorted(chapter_root.glob("*_chunks.json")):
                 try:
@@ -164,6 +175,8 @@ class ChunkCatalogRepository:
                     continue
                 if chapter > 0:
                     chapter_counts[chapter] = len(payload.get("chunks", []))
+
+        self._status_map_cache[cache_key] = (chapter_counts, current_mtime)
         return chapter_counts
 
     def _load_book_payload(self, testament: str, book: str) -> dict | None:

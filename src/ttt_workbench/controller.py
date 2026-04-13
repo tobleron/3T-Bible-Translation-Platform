@@ -1747,7 +1747,7 @@ Original languages:
             if "original" in chat_sources
             else ""
         )
-        return f"""
+        prompt = f"""
 You are a translation assistant helping a Bible translator.
 
 Chunk: {self.state.book} {self.state.chapter}:{start}-{end}
@@ -1759,6 +1759,13 @@ Conversation:
 Request:
 {user_message}
 """.strip()
+        # DEBUG: log prompt to console for troubleshooting
+        import sys
+        print(f"\n=== CHAT PROMPT DEBUG (sources={chat_sources}, draft_in_sources={'draft' in chat_sources}, orig_in_sources={'original' in chat_sources}) ===", file=sys.stderr, flush=True)
+        print(prompt[:500], file=sys.stderr, flush=True)
+        print("... [truncated] ...", file=sys.stderr, flush=True)
+        print(f"=== END CHAT PROMPT DEBUG (len={len(prompt)}) ===\n", file=sys.stderr, flush=True)
+        return prompt
 
     def browser_auto_generate_draft(self) -> bool:
         self.refresh_active_endpoint()

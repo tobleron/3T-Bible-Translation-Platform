@@ -71,7 +71,7 @@ class LlamaCppClient:
         temperature: float = 0.35,
         max_tokens: int = 2048,
         stop: list[str] | None = None,
-        timeout_seconds: int = 300,
+        timeout_seconds: int = 600,
     ) -> str:
         payload = {
             "prompt": prompt,
@@ -173,9 +173,9 @@ class LlamaCppClient:
         payload = {
             "prompt": prompt_text,
             "temperature": temperature,
-            "num_ctx": 4096,
+            "num_ctx": 8192,
             "stream": True,
-            "n_predict": 4096,
+            "n_predict": 8192,
         }
 
         try:
@@ -184,11 +184,11 @@ class LlamaCppClient:
                 chat_payload = {
                     "messages": [{"role": "user", "content": prompt_text}],
                     "temperature": temperature,
-                    "max_tokens": 4096,
+                    "max_tokens": 8192,
                     "stream": True,
                 }
                 url = f"{self.base_url}/chat/completions"
-                with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=300) as resp:
+                with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=600) as resp:
                     resp.raise_for_status()
                     for line in resp.iter_lines():
                         if not line:
@@ -214,7 +214,7 @@ class LlamaCppClient:
             else:
                 # llama.cpp native /completion endpoint
                 url = f"{self.base_url}/completion"
-                with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=300) as resp:
+                with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=600) as resp:
                     resp.raise_for_status()
                     for line in resp.iter_lines():
                         if not line:
@@ -247,7 +247,7 @@ class LlamaCppClient:
         temperature: float = 0.2,
         max_tokens: int = 2048,
         max_attempts: int = 3,
-        timeout_seconds: int = 300,
+        timeout_seconds: int = 600,
     ) -> tuple[dict | list | None, str, int]:
         """Return ``(parsed_json, raw_response, attempts_used)``.
 
