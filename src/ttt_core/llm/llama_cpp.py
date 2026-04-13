@@ -188,9 +188,9 @@ class LlamaCppClient:
         payload = {
             "prompt": prompt_text,
             "temperature": temperature,
-            "num_ctx": 8192,
+            "num_ctx": 131072,
             "stream": True,
-            "n_predict": 8192,
+            "n_predict": 32768,
         }
 
         timeout = self.stream_timeout_seconds
@@ -203,10 +203,11 @@ class LlamaCppClient:
                     chat_payload = {
                         "messages": [{"role": "user", "content": prompt_text}],
                         "temperature": temperature,
-                        "max_tokens": 8192,
+                        "max_tokens": 32768,
                         "stream": True,
                     }
                     url = f"{self.base_url}/chat/completions"
+                    _in_thinking = False  # Track whether we're inside a reasoning block
                     with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
@@ -222,11 +223,23 @@ class LlamaCppClient:
                                 data = json.loads(data_str)
                             except json.JSONDecodeError:
                                 continue
-                            # OpenAI chat format: choices[0].delta.content
+                            # OpenAI chat format: choices[0].delta.content + choices[0].delta.reasoning_content
                             choices = data.get("choices", [])
                             if choices:
-                                content = choices[0].get("delta", {}).get("content", "")
+                                delta = choices[0].get("delta", {})
+                                # llama.cpp sends reasoning_content (between <think> and </think>) separately
+                                reasoning = delta.get("reasoning_content", "")
+                                content = delta.get("content", "")
+                                if reasoning:
+                                    # Wrap reasoning content in think tags for the renderer
+                                    if not _in_thinking:
+                                        yield "<think>"
+                                        _in_thinking = True
+                                    yield reasoning
                                 if content:
+                                    if _in_thinking:
+                                        yield "</think>"
+                                        _in_thinking = False
                                     yield content
                                 if choices[0].get("finish_reason"):
                                     break

@@ -1155,14 +1155,13 @@ function initChatInput() {
     // Create assistant entry with streaming cursor
     var assistantEntry = document.createElement('div');
     assistantEntry.className = 'chat-entry chat-assistant';
-    assistantEntry.innerHTML = '<div class="chat-entry-head"><strong>Model</strong><button class="chat-delete-btn" type="button" title="Delete this response" data-msg-idx="__TEMP_ASSISTANT__">&times;</button></div><div class="chat-md" id="chat-stream-buffer"><span class="chat-cursor">▊</span></div>';
+    assistantEntry.innerHTML = '<div class="chat-entry-head"><strong>Model</strong><button class="chat-delete-btn" type="button" title="Delete this response" data-msg-idx="__TEMP_ASSISTANT__">&times;</button></div><div class="chat-md" id="chat-stream-buffer"></div>';
     if (chatLog) {
       chatLog.appendChild(assistantEntry);
       chatLog.scrollTop = chatLog.scrollHeight;
     }
 
     var mdBuffer = document.getElementById('chat-stream-buffer');
-    var accumulatedHtml = '';
 
     // Build form data for streaming endpoint
     var formData = new FormData();
@@ -1170,6 +1169,104 @@ function initChatInput() {
     ctxSources.forEach(function(s) { formData.append('chat_context_sources', s); });
 
     currentController = new AbortController();
+
+    // Incremental streaming state — avoids full innerHTML re-renders
+    var streamState = {
+      thinkingEl: null,          // <details> element
+      thinkingContentEl: null,   // .thinking-content div
+      outputEl: null,            // div for content after thinking
+      thinkingStarted: false,    // have we seen <think>?
+      thinkingDone: false,       // have we seen </think>?
+      userOpenedThinking: false, // did user manually open the block?
+      userScrollPos: null,       // saved scrollTop of thinking content
+    };
+
+    // Only auto-scroll the chat log if user is near the bottom
+    var chatLogEl = chatLog;
+    function autoScrollChatLog() {
+      if (!chatLogEl) return;
+      var threshold = 100;
+      if (chatLogEl.scrollHeight - chatLogEl.scrollTop - chatLogEl.clientHeight <= threshold) {
+        chatLogEl.scrollTop = chatLogEl.scrollHeight;
+      }
+    }
+
+    // Create thinking block elements
+    function ensureThinking() {
+      if (streamState.thinkingEl) return;
+      var details = document.createElement('details');
+      details.className = 'thinking-block is-streaming';
+      var summary = document.createElement('summary');
+      summary.textContent = 'Thinking\u2026';
+      summary.addEventListener('click', function() {
+        // Toggle user preference — next token won't override
+        setTimeout(function() {
+          streamState.userOpenedThinking = details.open;
+          // Restore scroll position if they just opened it
+          if (details.open && streamState.thinkingContentEl && streamState.userScrollPos !== null) {
+            streamState.thinkingContentEl.scrollTop = streamState.userScrollPos;
+          }
+        }, 0);
+      });
+      var contentDiv = document.createElement('div');
+      contentDiv.className = 'thinking-content';
+      // Save scroll position before updates
+      contentDiv.addEventListener('scroll', function() {
+        streamState.userScrollPos = contentDiv.scrollTop;
+      });
+      details.appendChild(summary);
+      details.appendChild(contentDiv);
+      // Keep open by default while streaming so user can see progress
+      details.open = true;
+      mdBuffer.appendChild(details);
+      streamState.thinkingEl = details;
+      streamState.thinkingContentEl = contentDiv;
+    }
+
+    // Create output element for content after thinking
+    function ensureOutput() {
+      if (streamState.outputEl) return;
+      var div = document.createElement('div');
+      div.className = 'chat-output-streaming';
+      mdBuffer.appendChild(div);
+      streamState.outputEl = div;
+    }
+
+    // Append text to the right element (thinking or output)
+    function appendStreamingText(text) {
+      if (!text) return;
+      // If thinking is done, output gets appended to output element
+      if (streamState.thinkingDone) {
+        ensureOutput();
+        // Use document fragment for safety with HTML entities
+        var span = document.createElement('span');
+        span.textContent = text;
+        streamState.outputEl.appendChild(span);
+      } else if (streamState.thinkingStarted) {
+        // We're inside thinking — append to thinking content
+        // Save scroll position if it's at the bottom (user auto-following)
+        if (streamState.thinkingContentEl) {
+          var el = streamState.thinkingContentEl;
+          var wasAtBottom = el.scrollHeight - el.scrollTop - el.clientHeight <= 30;
+          var textNode = document.createTextNode(text);
+          el.appendChild(textNode);
+          // Only auto-scroll if user was at the bottom
+          if (wasAtBottom) {
+            el.scrollTop = el.scrollHeight;
+          }
+        }
+      } else {
+        // Haven't seen thinking yet — this is plain output text
+        ensureOutput();
+        var span2 = document.createElement('span');
+        span2.textContent = text;
+        streamState.outputEl.appendChild(span2);
+      }
+    }
+
+    // Check if accumulated raw text contains complete thinking markers
+    // and process them incrementally
+    var _processedUpTo = 0; // how many chars of accumulatedRaw we've already handled
 
     fetch(streamUrl, {
       method: 'POST',
@@ -1181,6 +1278,7 @@ function initChatInput() {
       var reader = response.body.getReader();
       var decoder = new TextDecoder();
       var buffer = '';
+      var accumulatedRaw = '';
 
       function processChunk() {
         return reader.read().then(function(result) {
@@ -1193,25 +1291,69 @@ function initChatInput() {
 
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
+            // SSE comment lines (starting with :) are keepalives from server — silently skip
+            if (line.startsWith(':')) continue;
             if (line.startsWith('event: ')) {
               var eventType = line.substring(7).trim();
-              if (eventType === 'done' || eventType === 'error') {
-                // Remove cursor, render final markdown
-                if (mdBuffer) {
-                  // Next data line will be the summary, we can skip it
-                }
-                continue;
-              }
+              if (eventType === 'done' || eventType === 'error') continue;
             } else if (line.startsWith('data: ')) {
               var data = line.substring(6);
               if (data) {
-                // Unescape for SSE
                 var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
-                accumulatedHtml += escapeHtml(unescaped);
-                if (mdBuffer) {
-                  mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedHtml);
-                  chatLog.scrollTop = chatLog.scrollHeight;
+                accumulatedRaw += unescaped;
+
+                // Process new text incrementally
+                var newRaw = accumulatedRaw.substring(_processedUpTo);
+                _processedUpTo = accumulatedRaw.length;
+
+                // Check for thinking start/end markers in the new text
+                var remaining = newRaw;
+
+                while (remaining.length > 0) {
+                  if (!streamState.thinkingStarted) {
+                    // Look for <think> in remaining text
+                    var thinkStartIdx = remaining.indexOf('<think>');
+                    if (thinkStartIdx !== -1) {
+                      // Text before thinking is output
+                      if (thinkStartIdx > 0) {
+                        appendStreamingText(remaining.substring(0, thinkStartIdx));
+                      }
+                      streamState.thinkingStarted = true;
+                      ensureThinking();
+                      remaining = remaining.substring(thinkStartIdx + 8); // skip <think>
+                    } else {
+                      // No thinking yet — all is output
+                      appendStreamingText(remaining);
+                      remaining = '';
+                    }
+                  } else if (!streamState.thinkingDone) {
+                    // We're inside thinking — look for </think>
+                    var thinkEndIdx = remaining.indexOf('</think>');
+                    if (thinkEndIdx !== -1) {
+                      // Text before </think> is thinking content
+                      if (thinkEndIdx > 0) {
+                        appendStreamingText(remaining.substring(0, thinkEndIdx));
+                      }
+                      streamState.thinkingDone = true;
+                      remaining = remaining.substring(thinkEndIdx + 9); // skip </think>
+                      // Mark thinking as no longer streaming
+                      if (streamState.thinkingEl) {
+                        streamState.thinkingEl.classList.remove('is-streaming');
+                        streamState.thinkingEl.removeAttribute('open');
+                      }
+                    } else {
+                      // Still inside thinking — all remaining is thinking content
+                      appendStreamingText(remaining);
+                      remaining = '';
+                    }
+                  } else {
+                    // Thinking done — all remaining is output
+                    appendStreamingText(remaining);
+                    remaining = '';
+                  }
                 }
+
+                autoScrollChatLog();
               }
             }
           }
@@ -1221,11 +1363,30 @@ function initChatInput() {
       return processChunk();
     })
     .then(function() {
-      // Finalize: render with markdown
-      if (mdBuffer) {
-        mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedHtml);
-        chatLog.scrollTop = chatLog.scrollHeight;
+      // Finalize: collapse any still-open thinking, apply markdown formatting
+      if (streamState.thinkingEl && streamState.thinkingEl.classList.contains('is-streaming')) {
+        streamState.thinkingEl.classList.remove('is-streaming');
+        streamState.thinkingEl.removeAttribute('open');
       }
+      // Apply markdown to thinking content
+      if (streamState.thinkingContentEl) {
+        var thinkingText = streamState.thinkingContentEl.textContent || '';
+        if (thinkingText.trim()) {
+          streamState.thinkingContentEl.innerHTML = renderMarkdownLite(thinkingText);
+        }
+      }
+      // Apply markdown to output content
+      if (streamState.outputEl) {
+        var outputText = streamState.outputEl.textContent || '';
+        if (outputText.trim()) {
+          streamState.outputEl.innerHTML = renderMarkdownLite(outputText);
+        }
+      }
+      // If we never saw thinking, the accumulated raw is all output — render it properly
+      if (!streamState.thinkingStarted && mdBuffer) {
+        mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedRaw);
+      }
+      chatLog.scrollTop = chatLog.scrollHeight;
     })
     .catch(function(err) {
       if (err.name === 'AbortError') {
@@ -1306,52 +1467,103 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-function renderMarkdownWithCollapsedThinking(rawText) {
-  // Step 1: Collapse <think>...</think> blocks BEFORE escaping
-  var processed = rawText;
-  var thinkingPattern = /<think>([\s\S]*?)<\/think>/g;
-  processed = processed.replace(thinkingPattern, function(match, content) {
-    return '<details class="thinking-block"><summary>Thinking…</summary><div class="thinking-content">' + escapeHtml(content) + '</div></details>\n';
-  });
+// Lightweight markdown renderer for finalized streaming content
+function renderMarkdownLite(text) {
+  if (!text || !text.trim()) return '';
+  var html = escapeHtml(text);
 
-  // Check if there are any remaining thinking tags (unclosed)
-  var openThinkIdx = processed.indexOf('<think>');
-  if (openThinkIdx !== -1) {
-    // Unclosed thinking block — collapse everything from <think> onward
-    processed = processed.substring(0, openThinkIdx) +
-      '<details class="thinking-block" open><summary>Thinking…</summary><div class="thinking-content">' +
-      escapeHtml(processed.substring(openThinkIdx)) + '</div></details>';
-    return processed;
-  }
-
-  // Step 2: Apply basic markdown formatting to non-HTML parts
   // Bold: **text** or __text__
-  processed = processed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  processed = processed.replace(/__(.+?)__/g, '<strong>$1</strong>');
-  // Italic: *text* or _text_
-  processed = processed.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  // Italic: *text* or _text_ (not inside words)
+  html = html.replace(/(^|\s)\*(\S.+?\S)\*(\s|$)/g, '$1<em>$2</em>$3');
+  html = html.replace(/(^|\s)_(\S.+?\S)_(\s|$)/g, '$1<em>$2</em>$3');
   // Inline code: `text`
-  processed = processed.replace(/`([^`]+)`/g, '<code>$1</code>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
   // Headings
-  processed = processed.replace(/^### (.+)$/gm, '<h4>$1</h4>');
-  processed = processed.replace(/^## (.+)$/gm, '<h3>$1</h3>');
-  processed = processed.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^## (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^# (.+)$/gm, '<h2>$1</h2>');
   // Horizontal rules
-  processed = processed.replace(/^---$/gm, '<hr>');
+  html = html.replace(/^---$/gm, '<hr>');
   // Unordered list items
-  processed = processed.replace(/^[-*] (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/^[-*] (.+)$/gm, '<li>$1</li>');
   // Wrap consecutive <li> in <ul>
-  processed = processed.replace(/(<li>.*?<\/li>\n?)+/g, function(match) {
+  html = html.replace(/(<li>.*?<\/li>\s*)+/g, function(match) {
     if (match.indexOf('<ul>') !== -1) return match;
-    return '<ul>' + match + '</ul>';
+    return '<ul>' + match.trim() + '</ul>';
   });
   // Blockquotes
-  processed = processed.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
-  // Wrap remaining text lines in <p>
-  processed = processed.replace(/^(?!<[a-z/])((?!<\/?(?:ul|li|h[2-4]|strong|em|code|details|summary|div|p|blockquote|hr)[>\s]).+)$/gm, '<p>$1</p>');
-  // Convert double newlines to <br>
-  processed = processed.replace(/\n{2,}/g, '<br><br>');
-  return processed;
+  html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Paragraphs: wrap standalone lines
+  html = html.replace(/\n{2,}/g, '</p><p>');
+  html = '<p>' + html + '</p>';
+  // Clean up empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  return html;
+}
+
+function renderMarkdownWithCollapsedThinking(rawText) {
+  // Pipeline: extract thinking blocks → escape text → light markdown on output text only
+  if (!rawText) return '';
+
+  var parts = [];
+  var remaining = rawText;
+
+  // Extract all thinking blocks (closed and unclosed)
+  while (true) {
+    var idx = remaining.indexOf('<think>');
+    if (idx === -1) break; // no more thinking
+
+    var closeTag = '</think>';
+    var closeIdx = remaining.indexOf(closeTag, idx);
+    if (closeIdx === -1) {
+      // Unclosed thinking — rest is all thinking content (still streaming)
+      if (idx > 0) {
+        parts.push(escapeHtml(remaining.substring(0, idx)));
+      }
+      // Keep open while streaming so user can see progress
+      parts.push(
+        '<details class="thinking-block is-streaming" open>' +
+        '<summary>Thinking…</summary>' +
+        '<div class="thinking-content">' + escapeHtml(remaining.substring(idx)) + '</div>' +
+        '</details>'
+      );
+      remaining = '';
+      break;
+    }
+
+    // Closed thinking block — collapsed by default
+    if (idx > 0) {
+      parts.push(escapeHtml(remaining.substring(0, idx)));
+    }
+    var content = remaining.substring(idx + 8, closeIdx);
+    parts.push(
+      '<details class="thinking-block">' +
+      '<summary>Thinking…</summary>' +
+      '<div class="thinking-content">' + escapeHtml(content) + '</div>' +
+      '</details>'
+    );
+    remaining = remaining.substring(closeIdx + closeTag.length);
+  }
+
+  // Escape remaining non-thinking text
+  if (remaining) {
+    parts.push(escapeHtml(remaining));
+  }
+
+  var html = parts.join('');
+
+  // Light markdown on the full HTML string
+  // (only bold, italic, inline code — these are safe on already-escaped text)
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Newlines to <br> for display
+  html = html.replace(/\n/g, '<br>');
+
+  return html;
 }
 
 // Show "Draft saved" indicator after editor form HTMX swap
