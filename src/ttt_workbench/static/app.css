@@ -1295,6 +1295,25 @@ button:active:not(:disabled) {
   font-weight: 600;
 }
 
+/* Tables in streaming output */
+.chat-output-streaming table {
+  font-size: 0.82rem;
+  border-collapse: collapse;
+  margin: 0.45rem 0;
+  width: auto;
+  max-width: 100%;
+}
+.chat-output-streaming th, .chat-output-streaming td {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: left;
+}
+.chat-output-streaming th {
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* Streaming cursor animation */
 .chat-cursor {
   display: inline-block;
