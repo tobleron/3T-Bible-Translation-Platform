@@ -602,67 +602,71 @@ async def _sse_chat_stream(
         token_count = 0
         print(f"[SSE SERVER] About to call stream_generation(), endpoint={wb.llm.base_url}, prompt_len={len(prompt)}, message={message[:80]!r}", file=sys.stderr, flush=True)
 
-        # Run blocking stream_generation in thread pool, with periodic keepalive pings
-        loop = asyncio.get_running_loop()
-        token_gen = wb.llm.stream_generation("stream", messages, temperature=0.7)
-        import threading
-
-        # Shared state between threads
-        result_holder = {"token": None, "exception": None, "done": False}
-
-        def _next_token():
+        # Run blocking stream_generation in a single background thread with a queue
+        from queue import Queue, Empty
+        token_queue = Queue()
+        
+        def _stream_worker():
             try:
-                result_holder["token"] = next(token_gen)
-            except StopIteration:
-                result_holder["done"] = True
+                for token in wb.llm.stream_generation("stream", messages, temperature=0.7, max_tokens=16384):
+                    token_queue.put(("token", token))
+                token_queue.put(("done", None))
             except Exception as exc:
-                result_holder["exception"] = str(exc)
+                token_queue.put(("exception", str(exc)))
+
+        import threading
+        worker_thread = threading.Thread(target=_stream_worker, daemon=True)
+        worker_thread.start()
+
+        import time as _time
+        last_token_time = _time.monotonic()
+        max_wait = 600  # seconds
 
         while True:
-            # Start the blocking call in a thread
-            thread = threading.Thread(target=_next_token, daemon=True)
-            thread.start()
-            import time as _time
-            wait_start = _time.monotonic()
-            max_wait = 300  # seconds — MoE models can pause between tokens for complex output
+            try:
+                # Poll the queue with a short timeout to allow keepalive pings
+                kind, value = token_queue.get(timeout=10)
+                
+                if kind == "done":
+                    break
+                if kind == "exception":
+                    error_occurred = True
+                    full_reply.append(f"[ERROR] {value}")
+                    break
+                
+                token = value
+                last_token_time = _time.monotonic()
 
-            # Wait for it with periodic keepalive pings
-            while not result_holder["done"] and result_holder["token"] is None and result_holder["exception"] is None:
-                thread.join(timeout=10)
-                if thread.is_alive():
-                    # Still waiting — send SSE comment keepalive (ignored by browser but resets timeout)
-                    elapsed = _time.monotonic() - wait_start
-                    if elapsed > max_wait:
-                        result_holder["exception"] = f"No token received in {max_wait}s — model may have hung up"
-                        print(f"[SSE SERVER] TIMEOUT: {result_holder['exception']}", file=sys.stderr, flush=True)
-                        break
-                    yield f": waiting for LLM ({elapsed:.0f}s)\n\n"
-                    await asyncio.sleep(0)  # flush
-
-            if result_holder["exception"]:
-                error_occurred = True
-                full_reply.append(f"[ERROR] {result_holder['exception']}")
-                break
-            if result_holder["done"]:
-                break
-
-            token = result_holder["token"]
-            result_holder["token"] = None  # reset for next iteration
-
-            if token.startswith("[ERROR]"):
-                error_occurred = True
+                if token.startswith("[ERROR]"):
+                    error_occurred = True
+                    full_reply.append(token)
+                    print(f"[SSE SERVER] ERROR token received: {token[:120]}", file=sys.stderr, flush=True)
+                    break
+                    
                 full_reply.append(token)
-                print(f"[SSE SERVER] ERROR token received: {token[:120]}", file=sys.stderr, flush=True)
-                break
-            full_reply.append(token)
-            token_count += 1
-            if token_count % 20 == 1 or token_count <= 3:
-                print(f"[SSE SERVER] Token #{token_count}: {token[:60]!r}", file=sys.stderr, flush=True)
-            escaped = token.replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
-            yield f"data: {escaped}\n\n"
+                token_count += 1
+                if token_count % 10 == 1 or token_count <= 5:
+                    print(f"[SSE SERVER] Token #{token_count}: {token[:60]!r} (Reply len: {len(''.join(full_reply))})", file=sys.stderr, flush=True)
+                
+                escaped = token.replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
+                yield f"data: {escaped}\n\n"
+                
+            except Empty:
+                # No token received in 10s — send keepalive
+                elapsed = _time.monotonic() - last_token_time
+                if elapsed > max_wait:
+                    error_occurred = True
+                    full_reply.append(f"[ERROR] No token received in {max_wait}s — model may have hung up")
+                    print(f"[SSE SERVER] TIMEOUT after {max_wait}s", file=sys.stderr, flush=True)
+                    break
+                
+                yield f": waiting for LLM ({elapsed:.0f}s)\n\n"
+                if int(elapsed) % 60 == 0:
+                     print(f"[SSE SERVER] STILL WAITING after {elapsed:.0f}s for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
+                await asyncio.sleep(0)  # flush
 
         reply = "".join(full_reply).strip()
-        print(f"[SSE SERVER] Stream complete. Tokens sent: {token_count}, Reply length: {len(reply)}, Error: {error_occurred}", file=sys.stderr, flush=True)
+        print(f"[SSE SERVER] Stream complete for {book} {chapter}:{chunk_key}. Tokens sent: {token_count}, Reply length: {len(reply)}, Error: {error_occurred}", file=sys.stderr, flush=True)
         if error_occurred:
             wb.history_entries.append(
                 {"title": "Chat error", "body": reply[:160], "accent": "red"}
@@ -685,7 +689,7 @@ async def _sse_chat_stream(
         wb.prepare_browser_commit_state()
         wb.save_state()
 
-        yield "event: done\ndata: " + reply[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
+        yield "event: done\ndata: [DONE]\n\n"
     except Exception as exc:
         yield "event: error\ndata: " + str(exc)[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
 

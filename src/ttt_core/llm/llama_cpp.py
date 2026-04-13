@@ -91,7 +91,7 @@ class LlamaCppClient:
             "prompt": prompt,
             "temperature": temperature,
             "n_predict": max_tokens,
-            "num_ctx": 4096,
+            "num_ctx": 32768,
             "stream": False,
         }
         if stop:
@@ -168,6 +168,7 @@ class LlamaCppClient:
         model_name: str,
         prompt_or_messages: str | list[dict[str, str]],
         temperature: float,
+        max_tokens: int = 16384,
     ) -> Generator[str, None, None]:
         """Connects to llama.cpp's /completion endpoint with streaming.
 
@@ -175,7 +176,10 @@ class LlamaCppClient:
         yields a ``__STATS_BLOCK__…__END_STATS__`` marker.
         Retries once on timeout before giving up.
         """
+        # We prefer passing the list of messages directly to chat endpoints
         if isinstance(prompt_or_messages, list):
+            messages_list = prompt_or_messages
+            # For the legacy text-based prompt fallback
             prompt_text = ""
             for msg in prompt_or_messages:
                 role = msg.get("role", "user")
@@ -184,12 +188,7 @@ class LlamaCppClient:
             prompt_text += "\n\nASSISTANT:"
         else:
             prompt_text = prompt_or_messages
-
-        payload = {
-            "prompt": prompt_text,
-            "temperature": temperature,
-            "stream": True,
-        }
+            messages_list = [{"role": "user", "content": prompt_text}]
 
         timeout = self.stream_timeout_seconds
         max_retries = 2  # initial attempt + 1 retry on timeout
@@ -199,8 +198,9 @@ class LlamaCppClient:
                 if "/v1" in self.base_url:
                     # OpenAI-compatible endpoint: /v1/chat/completions
                     chat_payload = {
-                        "messages": [{"role": "user", "content": prompt_text}],
+                        "messages": messages_list,
                         "temperature": temperature,
+                        "max_tokens": max_tokens,
                         "stream": True,
                     }
                     url = f"{self.base_url}/chat/completions"
@@ -240,10 +240,20 @@ class LlamaCppClient:
                                     yield content
                                 if choices[0].get("finish_reason"):
                                     break
+                    if _in_thinking:
+                        yield "</think>"
                 else:
                     # llama.cpp native /completion endpoint
                     url = f"{self.base_url}/completion"
-                    with requests.post(url, json=payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
+                    # Add n_predict and num_ctx to native payload
+                    native_payload = {
+                        "prompt": prompt_text,
+                        "temperature": temperature,
+                        "n_predict": max_tokens,
+                        "num_ctx": 32768,
+                        "stream": True,
+                    }
+                    with requests.post(url, json=native_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
                             if not line:

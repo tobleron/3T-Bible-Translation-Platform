@@ -1316,14 +1316,27 @@ function initChatInput() {
     }
 
     // Append text to the right element (thinking or output)
+    var _lastRenderTime = 0;
     function appendStreamingText(text) {
       if (!text) return;
+      var now = Date.now();
+      
       // If thinking is done, output gets appended to output element
       if (streamState.thinkingDone) {
         ensureOutput();
-        // Accumulate raw text and re-render with markdown after each append
+        // Accumulate raw text
         streamState.outputEl._rawText = (streamState.outputEl._rawText || '') + text;
-        streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+        
+        // Throttled render: every 250ms for performance, or if text is small
+        if (now - _lastRenderTime > 250 || streamState.outputEl._rawText.length < 500) {
+          streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+          _lastRenderTime = now;
+        } else {
+          // Just append text node for speed during heavy streaming
+          var textNode = document.createTextNode(text);
+          streamState.outputEl.appendChild(textNode);
+        }
+        
         // Restore scroll if user was at bottom
         if (streamState.outputEl._wasAtBottom) {
           streamState.outputEl.scrollTop = streamState.outputEl.scrollHeight;
@@ -1333,8 +1346,19 @@ function initChatInput() {
         if (streamState.thinkingContentEl) {
           var el = streamState.thinkingContentEl;
           var wasAtBottom = el.scrollHeight - el.scrollTop - el.clientHeight <= 30;
-          var textNode = document.createTextNode(text);
-          el.appendChild(textNode);
+          
+          // Accumulate raw text for thinking!
+          el._rawText = (el._rawText || '') + text;
+          
+          // Throttled render for thinking too
+          if (now - _lastRenderTime > 250 || el._rawText.length < 500) {
+            el.innerHTML = renderMarkdownLite(el._rawText);
+            _lastRenderTime = now;
+          } else {
+            var textNode = document.createTextNode(text);
+            el.appendChild(textNode);
+          }
+          
           if (wasAtBottom) {
             el.scrollTop = el.scrollHeight;
           }
@@ -1343,7 +1367,15 @@ function initChatInput() {
         // Haven't seen thinking yet — this is plain output text
         ensureOutput();
         streamState.outputEl._rawText = (streamState.outputEl._rawText || '') + text;
-        streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+        
+        if (now - _lastRenderTime > 250 || streamState.outputEl._rawText.length < 500) {
+          streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+          _lastRenderTime = now;
+        } else {
+          var textNode = document.createTextNode(text);
+          streamState.outputEl.appendChild(textNode);
+        }
+        
         if (streamState.outputEl._wasAtBottom) {
           streamState.outputEl.scrollTop = streamState.outputEl.scrollHeight;
         }
@@ -1420,11 +1452,15 @@ function initChatInput() {
           var streamFinished = false;
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            // SSE comment lines (starting with :) are keepalives from server — silently skip
-            if (line.startsWith(':')) continue;
+            // SSE comment lines (starting with :) are keepalives from server — log them to monitor
+            if (line.startsWith(':')) {
+              _mon._log('Keepalive: ' + line.substring(1).trim());
+              continue;
+            }
             if (line.startsWith('event: ')) {
               var eventType = line.substring(7).trim();
               console.log('[SSE] Event received:', eventType);
+              _mon._log('Event: ' + eventType);
               if (eventType === 'done' || eventType === 'error') {
                 streamFinished = true; // server signaled completion
                 console.log('[SSE] Stream finished via event:', eventType);
@@ -1433,6 +1469,13 @@ function initChatInput() {
             } else if (line.startsWith('data: ')) {
               var data = line.substring(6);
               if (data) {
+                // Check for llama.cpp's [DONE] signal or our manual event: done data
+                if (data.trim() === '[DONE]') {
+                  console.log('[SSE] Received data: [DONE]');
+                  _mon._log('Received [DONE] from server');
+                  streamFinished = true;
+                  continue;
+                }
                 var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
                 _mon.token(unescaped); // track token timing
                 accumulatedRaw += unescaped;
@@ -1535,11 +1578,21 @@ function initChatInput() {
       try {
         console.log('[STREAM] .finally() started');
         _mon._log('.finally() started');
-        // Collapse thinking
-        if (streamState.thinkingEl && streamState.thinkingEl.classList.contains('is-streaming')) {
+        
+        // Finalize thinking block
+        if (streamState.thinkingEl) {
           streamState.thinkingEl.classList.remove('is-streaming');
-          streamState.thinkingEl.removeAttribute('open');
+          // If it was never "done", it might be an error or truncation, but we still close it
+          if (!streamState.thinkingDone) {
+            _mon._log('Thinking block force-closed in finally');
+            streamState.thinkingDone = true; 
+          }
+          // Only collapse if user hasn't explicitly opened it to read
+          if (!streamState.userOpenedThinking) {
+             streamState.thinkingEl.open = false; 
+          }
         }
+        
         // Final markdown pass on thinking content
         if (streamState.thinkingContentEl && streamState.thinkingContentEl._rawText) {
           streamState.thinkingContentEl.innerHTML = renderMarkdownLite(streamState.thinkingContentEl._rawText);
@@ -1555,6 +1608,7 @@ function initChatInput() {
         try { chatLog.scrollTop = chatLog.scrollHeight; } catch(e) {}
         // Clean up stopped chat entries
         if (currentController && currentController.signal.aborted) {
+          _mon._log('Stream was aborted by user');
           try {
             var chatLog2 = document.querySelector('.chat-log');
             if (chatLog2) {
@@ -1579,11 +1633,18 @@ function initChatInput() {
       function restoreButtons() {
         try {
           currentController = null;
-          var sb = document.getElementById('chat-stop-button');
-          if (!sb) sb = document.querySelector('.stop-button');
-          if (sb) { sb.style.display = 'none'; console.log('[STREAM] Stop hidden'); }
+          var sb = document.getElementById('chat-stop-button') || document.querySelector('.stop-button');
+          if (sb) {
+            sb.style.display = 'none';
+            // Force remove from DOM if it persists for some reason
+            if (sb.classList.contains('is-visible')) sb.classList.remove('is-visible');
+          }
           var fb = document.querySelector('.send-button');
-          if (fb) { fb.disabled = false; fb.textContent = 'Send'; console.log('[STREAM] Send restored'); }
+          if (fb) {
+            fb.disabled = false;
+            fb.textContent = fb.dataset.originalLabel || 'Send';
+            fb.classList.remove('is-loading');
+          }
           _mon._log('Buttons restored');
         } catch(e) {
           console.error('[STREAM] Error restoring buttons:', e);
@@ -1594,6 +1655,7 @@ function initChatInput() {
       // Double-check after DOM settles
       setTimeout(restoreButtons, 200);
       setTimeout(restoreButtons, 1000);
+      setTimeout(restoreButtons, 3000); // triple check
     });
   });
 }
