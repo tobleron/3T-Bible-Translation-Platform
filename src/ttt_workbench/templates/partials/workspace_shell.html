@@ -1181,6 +1181,83 @@ function initChatInput() {
       userScrollPos: null,       // saved scrollTop of thinking content
     };
 
+    // ===== STREAM MONITOR =====
+    var _mon = {
+      startTime: null,
+      lastTokenTime: null,
+      tokenCount: 0,
+      thinkingStartTime: null,
+      thinkingEndTime: null,
+      contentStartTime: null,
+      gaps: [],
+      events: [],
+      _log: function(msg) {
+        var elapsed = this.startTime ? ((Date.now() - this.startTime) / 1000).toFixed(1) : '0.0';
+        console.log('[MONITOR] [' + elapsed + 's] ' + msg);
+        this.events.push({ t: elapsed, msg: msg });
+        // ALSO write visible log to a debug element on the page
+        var debugEl = document.getElementById('stream-debug-log');
+        if (!debugEl) {
+          debugEl = document.createElement('div');
+          debugEl.id = 'stream-debug-log';
+          debugEl.style.cssText = 'font-size:11px;color:#f90;background:rgba(0,0,0,0.3);padding:4px 8px;margin-top:8px;border-radius:4px;max-height:200px;overflow-y:auto;font-family:monospace;white-space:pre-wrap;';
+          if (mdBuffer && mdBuffer.parentNode) {
+            mdBuffer.parentNode.insertBefore(debugEl, mdBuffer.nextSibling);
+          }
+        }
+        debugEl.textContent += '[' + elapsed + 's] ' + msg + '\n';
+        debugEl.scrollTop = debugEl.scrollHeight;
+      },
+      start: function() {
+        this.startTime = Date.now();
+        this.lastTokenTime = Date.now();
+        this._log('Stream started');
+      },
+      token: function(token) {
+        this.tokenCount++;
+        var gap = Date.now() - this.lastTokenTime;
+        if (gap > 5000) {
+          this.gaps.push({ after: this.tokenCount - 1, gap: (gap / 1000).toFixed(1) + 's' });
+        }
+        this.lastTokenTime = Date.now();
+      },
+      thinkingStart: function() {
+        this.thinkingStartTime = Date.now();
+        this._log('Thinking started');
+      },
+      thinkingEnd: function() {
+        this.thinkingEndTime = Date.now();
+        this._log('Thinking ended (duration: ' + ((this.thinkingEndTime - this.thinkingStartTime) / 1000).toFixed(1) + 's)');
+      },
+      contentStart: function() {
+        this.contentStartTime = Date.now();
+        this._log('Content (response) started');
+      },
+      complete: function(reason) {
+        var total = ((Date.now() - this.startTime) / 1000).toFixed(1);
+        var thinkingDur = this.thinkingEndTime ? ((this.thinkingEndTime - this.thinkingStartTime) / 1000).toFixed(1) : 'N/A';
+        this._log('=== STREAM COMPLETE ===');
+        this._log('Total time: ' + total + 's | Tokens: ' + this.tokenCount);
+        this._log('Thinking: ' + thinkingDur + 's | Content: ' + (this.contentStartTime ? ((Date.now() - this.contentStartTime) / 1000).toFixed(1) : 'N/A') + 's');
+        if (this.gaps.length > 0) {
+          this._log('Token gaps >5s: ' + JSON.stringify(this.gaps));
+        }
+        this._log('Final reason: ' + reason);
+        // Print full timeline
+        this._log('Timeline:');
+        for (var i = 0; i < this.events.length; i++) {
+          console.log('  [' + this.events[i].t + 's] ' + this.events[i].msg);
+        }
+      },
+      error: function(err) {
+        this._log('ERROR: ' + err.message);
+        this.complete('error: ' + err.message);
+      }
+    };
+
+    // Start monitoring now that _mon is fully defined
+    _mon.start();
+
     // Only auto-scroll the chat log if user is near the bottom
     var chatLogEl = chatLog;
     function autoScrollChatLog() {
@@ -1228,6 +1305,12 @@ function initChatInput() {
       if (streamState.outputEl) return;
       var div = document.createElement('div');
       div.className = 'chat-output-streaming';
+      div.style.cssText = 'white-space:pre-wrap;word-break:break-word;';
+      div._rawText = '';
+      div._wasAtBottom = true;
+      div.addEventListener('scroll', function() {
+        div._wasAtBottom = div.scrollHeight - div.scrollTop - div.clientHeight <= 30;
+      });
       mdBuffer.appendChild(div);
       streamState.outputEl = div;
     }
@@ -1238,19 +1321,20 @@ function initChatInput() {
       // If thinking is done, output gets appended to output element
       if (streamState.thinkingDone) {
         ensureOutput();
-        // Use document fragment for safety with HTML entities
-        var span = document.createElement('span');
-        span.textContent = text;
-        streamState.outputEl.appendChild(span);
+        // Accumulate raw text and re-render with markdown after each append
+        streamState.outputEl._rawText = (streamState.outputEl._rawText || '') + text;
+        streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+        // Restore scroll if user was at bottom
+        if (streamState.outputEl._wasAtBottom) {
+          streamState.outputEl.scrollTop = streamState.outputEl.scrollHeight;
+        }
       } else if (streamState.thinkingStarted) {
         // We're inside thinking — append to thinking content
-        // Save scroll position if it's at the bottom (user auto-following)
         if (streamState.thinkingContentEl) {
           var el = streamState.thinkingContentEl;
           var wasAtBottom = el.scrollHeight - el.scrollTop - el.clientHeight <= 30;
           var textNode = document.createTextNode(text);
           el.appendChild(textNode);
-          // Only auto-scroll if user was at the bottom
           if (wasAtBottom) {
             el.scrollTop = el.scrollHeight;
           }
@@ -1258,9 +1342,11 @@ function initChatInput() {
       } else {
         // Haven't seen thinking yet — this is plain output text
         ensureOutput();
-        var span2 = document.createElement('span');
-        span2.textContent = text;
-        streamState.outputEl.appendChild(span2);
+        streamState.outputEl._rawText = (streamState.outputEl._rawText || '') + text;
+        streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+        if (streamState.outputEl._wasAtBottom) {
+          streamState.outputEl.scrollTop = streamState.outputEl.scrollHeight;
+        }
       }
     }
 
@@ -1280,26 +1366,73 @@ function initChatInput() {
       var buffer = '';
       var accumulatedRaw = '';
 
+      // Polling button restoration — runs every 200ms to ensure buttons are always correct
+      var _streamDone = false;
+      var _buttonPoll = setInterval(function() {
+        var sb = document.getElementById('chat-stop-button') || document.querySelector('.stop-button');
+        var fb = document.querySelector('.send-button');
+        var shouldHide = !_streamDone; // hide stop button only when stream is done
+        if (_streamDone) {
+          if (sb && sb.style.display !== 'none') { sb.style.display = 'none'; console.log('[POLL] Stop hidden'); }
+          if (fb && !fb.disabled) { /* already enabled */ }
+          if (fb && fb.disabled) { fb.disabled = false; fb.textContent = 'Send'; console.log('[POLL] Send enabled'); }
+          // If both buttons are in correct state, stop polling
+          if ((!sb || sb.style.display === 'none') && fb && !fb.disabled) {
+            clearInterval(_buttonPoll);
+            console.log('[POLL] Buttons correct, stopped polling');
+          }
+        }
+      }, 200);
+
+      // Heartbeat: track last activity, reject Promise chain on 300s silence (5 min — matches server tolerance)
+      var lastActivityTime = Date.now();
+      var heartbeatCheck = function() {
+        if (Date.now() - lastActivityTime > 300000) {
+          return Promise.reject(new Error('Model stopped responding (no data for 5 min)'));
+        }
+        return null; // no timeout yet
+      };
+
+      function readWithTimeout() {
+        // Check heartbeat before each read
+        var expired = heartbeatCheck();
+        if (expired) return expired;
+
+        // Race the actual read against a safety timeout (6 min)
+        var readPromise = reader.read();
+        var safetyTimeout = new Promise(function(_, reject) {
+          setTimeout(function() { reject(new Error('Stream timed out (6 minutes)')); }, 360000);
+        });
+        return Promise.race([readPromise, safetyTimeout]);
+      }
+
       function processChunk() {
-        return reader.read().then(function(result) {
-          if (result.done) return;
+        return readWithTimeout().then(function(result) {
+          if (result && result.done) return 'done'; // stream complete
+          if (!result) return 'timeout'; // safety timeout or heartbeat expired
           buffer += decoder.decode(result.value, { stream: true });
+          lastActivityTime = Date.now(); // reset heartbeat on any data
 
           // Parse SSE events from buffer
           var lines = buffer.split('\n');
           buffer = lines.pop() || ''; // keep incomplete line
 
+          var streamFinished = false;
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             // SSE comment lines (starting with :) are keepalives from server — silently skip
             if (line.startsWith(':')) continue;
             if (line.startsWith('event: ')) {
               var eventType = line.substring(7).trim();
-              if (eventType === 'done' || eventType === 'error') continue;
+              if (eventType === 'done' || eventType === 'error') {
+                streamFinished = true; // server signaled completion
+                continue;
+              }
             } else if (line.startsWith('data: ')) {
               var data = line.substring(6);
               if (data) {
                 var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
+                _mon.token(unescaped); // track token timing
                 accumulatedRaw += unescaped;
 
                 // Process new text incrementally
@@ -1320,9 +1453,13 @@ function initChatInput() {
                       }
                       streamState.thinkingStarted = true;
                       ensureThinking();
+                      _mon.thinkingStart();
                       remaining = remaining.substring(thinkStartIdx + 8); // skip <think>
                     } else {
                       // No thinking yet — all is output
+                      if (!streamState.thinkingStarted && !streamState.thinkingDone) {
+                        _mon.contentStart();
+                      }
                       appendStreamingText(remaining);
                       remaining = '';
                     }
@@ -1336,6 +1473,9 @@ function initChatInput() {
                       }
                       streamState.thinkingDone = true;
                       remaining = remaining.substring(thinkEndIdx + 9); // skip </think>
+                      _mon.thinkingEnd();
+                      // Content starts after thinking
+                      _mon.contentStart();
                       // Mark thinking as no longer streaming
                       if (streamState.thinkingEl) {
                         streamState.thinkingEl.classList.remove('is-streaming');
@@ -1357,70 +1497,98 @@ function initChatInput() {
               }
             }
           }
+          // If server signaled completion via "event: done", don't recurse
+          if (streamFinished) return 'done';
           return processChunk();
         });
       }
       return processChunk();
     })
-    .then(function() {
-      // Finalize: collapse any still-open thinking, apply markdown formatting
-      if (streamState.thinkingEl && streamState.thinkingEl.classList.contains('is-streaming')) {
-        streamState.thinkingEl.classList.remove('is-streaming');
-        streamState.thinkingEl.removeAttribute('open');
+    .then(function(completionReason) {
+      _streamDone = true; // signal polling to restore buttons
+      if (completionReason === 'timeout') {
+        _mon.complete('safety timeout or heartbeat expired');
+      } else {
+        _mon.complete('normal completion (result.done or event:done)');
       }
-      // Apply markdown to thinking content
-      if (streamState.thinkingContentEl) {
-        var thinkingText = streamState.thinkingContentEl.textContent || '';
-        if (thinkingText.trim()) {
-          streamState.thinkingContentEl.innerHTML = renderMarkdownLite(thinkingText);
-        }
-      }
-      // Apply markdown to output content
-      if (streamState.outputEl) {
-        var outputText = streamState.outputEl.textContent || '';
-        if (outputText.trim()) {
-          streamState.outputEl.innerHTML = renderMarkdownLite(outputText);
-        }
-      }
-      // If we never saw thinking, the accumulated raw is all output — render it properly
-      if (!streamState.thinkingStarted && mdBuffer) {
-        mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedRaw);
-      }
-      chatLog.scrollTop = chatLog.scrollHeight;
     })
     .catch(function(err) {
+      _streamDone = true; // signal polling even on error
       if (err.name === 'AbortError') {
-        // User stopped — remove the partial assistant entry AND the user message from DOM
-        // (neither was persisted to backend state since stream didn't complete)
-        var chatLog = document.querySelector('.chat-log');
-        if (chatLog) {
-          var entries = chatLog.querySelectorAll('.chat-entry');
-          for (var i = entries.length - 1; i >= 0; i--) {
-            var entry = entries[i];
-            if (entry.classList.contains('chat-assistant') && entry.querySelector('.chat-cursor')) {
-              entry.remove();
-              break;
-            }
-          }
-          // Remove the last user entry too (the one whose response we stopped)
-          var allEntries = chatLog.querySelectorAll('.chat-entry');
-          for (var j = allEntries.length - 1; j >= 0; j--) {
-            if (allEntries[j].classList.contains('chat-user')) {
-              allEntries[j].remove();
-              break;
-            }
-          }
-        }
+        _mon.complete('user stopped (AbortError)');
         return;
       }
+      _mon.error(err);
       if (mdBuffer) {
-        mdBuffer.innerHTML = '<p style="color:#c66;">Stream interrupted: ' + escapeHtml(err.message) + '</p>';
+        mdBuffer.innerHTML += '<p style="color:#c66; margin-top:0.5rem;">⚠ Stream interrupted: ' + escapeHtml(err.message) + '</p>';
       }
+      console.warn('[SSE] Error:', err);
     })
     .finally(function() {
-      currentController = null;
-      if (stopBtn) stopBtn.style.display = 'none';
-      if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = originalBtnText; }
+      _streamDone = true; // ensure polling knows stream is done
+      try { clearInterval(_buttonPoll); } catch(e) {}
+      try {
+        console.log('[STREAM] .finally() started');
+        _mon._log('.finally() started');
+        // Collapse thinking
+        if (streamState.thinkingEl && streamState.thinkingEl.classList.contains('is-streaming')) {
+          streamState.thinkingEl.classList.remove('is-streaming');
+          streamState.thinkingEl.removeAttribute('open');
+        }
+        // Final markdown pass on thinking content
+        if (streamState.thinkingContentEl && streamState.thinkingContentEl._rawText) {
+          streamState.thinkingContentEl.innerHTML = renderMarkdownLite(streamState.thinkingContentEl._rawText);
+        }
+        // Final markdown pass on output content
+        if (streamState.outputEl && streamState.outputEl._rawText) {
+          streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+        }
+        // Fallback: if no thinking/output elements exist, render accumulatedRaw
+        if (!streamState.thinkingStarted && !streamState.outputEl && mdBuffer) {
+          mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedRaw);
+        }
+        try { chatLog.scrollTop = chatLog.scrollHeight; } catch(e) {}
+        // Clean up stopped chat entries
+        if (currentController && currentController.signal.aborted) {
+          try {
+            var chatLog2 = document.querySelector('.chat-log');
+            if (chatLog2) {
+              var entries = chatLog2.querySelectorAll('.chat-entry');
+              for (var i = entries.length - 1; i >= 0; i--) {
+                if (entries[i].classList.contains('chat-assistant') && entries[i].querySelector('.chat-cursor')) {
+                  entries[i].remove(); break;
+                }
+              }
+              var allE = chatLog2.querySelectorAll('.chat-entry');
+              for (var j = allE.length - 1; j >= 0; j--) {
+                if (allE[j].classList.contains('chat-user')) { allE[j].remove(); break; }
+              }
+            }
+          } catch(e) {}
+        }
+      } catch(e) {
+        console.error('[STREAM] Error in finalize logic:', e);
+        _mon._log('ERROR in .finally(): ' + e.message);
+      }
+      // Deferred button restoration — ensures DOM has settled
+      function restoreButtons() {
+        try {
+          currentController = null;
+          var sb = document.getElementById('chat-stop-button');
+          if (!sb) sb = document.querySelector('.stop-button');
+          if (sb) { sb.style.display = 'none'; console.log('[STREAM] Stop hidden'); }
+          var fb = document.querySelector('.send-button');
+          if (fb) { fb.disabled = false; fb.textContent = 'Send'; console.log('[STREAM] Send restored'); }
+          _mon._log('Buttons restored');
+        } catch(e) {
+          console.error('[STREAM] Error restoring buttons:', e);
+          _mon._log('ERROR restoring: ' + e.message);
+        }
+      }
+      restoreButtons();
+      // Double-check after DOM settles
+      setTimeout(restoreButtons, 200);
+      setTimeout(restoreButtons, 1000);
     });
   });
 }
@@ -1468,9 +1636,18 @@ function escapeHtml(text) {
 }
 
 // Lightweight markdown renderer for finalized streaming content
+// No <p> wrapping — lets container's white-space:pre-wrap handle line breaks naturally
 function renderMarkdownLite(text) {
   if (!text || !text.trim()) return '';
   var html = escapeHtml(text);
+
+  // Headings (must come before other rules to avoid interference)
+  html = html.replace(/^###### (.+)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^##### (.+)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
 
   // Bold: **text** or __text__
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -1480,14 +1657,12 @@ function renderMarkdownLite(text) {
   html = html.replace(/(^|\s)_(\S.+?\S)_(\s|$)/g, '$1<em>$2</em>$3');
   // Inline code: `text`
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-  // Headings
-  html = html.replace(/^### (.+)$/gm, '<h4>$1</h4>');
-  html = html.replace(/^## (.+)$/gm, '<h3>$1</h3>');
-  html = html.replace(/^# (.+)$/gm, '<h2>$1</h2>');
   // Horizontal rules
   html = html.replace(/^---$/gm, '<hr>');
   // Unordered list items
   html = html.replace(/^[-*] (.+)$/gm, '<li>$1</li>');
+  // Numbered list items
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
   // Wrap consecutive <li> in <ul>
   html = html.replace(/(<li>.*?<\/li>\s*)+/g, function(match) {
     if (match.indexOf('<ul>') !== -1) return match;
@@ -1495,11 +1670,10 @@ function renderMarkdownLite(text) {
   });
   // Blockquotes
   html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
-  // Paragraphs: wrap standalone lines
-  html = html.replace(/\n{2,}/g, '</p><p>');
-  html = '<p>' + html + '</p>';
-  // Clean up empty paragraphs
-  html = html.replace(/<p>\s*<\/p>/g, '');
+  // Double newlines → <br><br> for visible paragraph spacing
+  html = html.replace(/\n{2,}/g, '<br><br>');
+  // Single newlines → <br> (pre-wrap would handle these, but this ensures spacing)
+  html = html.replace(/\n/g, '<br>');
   return html;
 }
 

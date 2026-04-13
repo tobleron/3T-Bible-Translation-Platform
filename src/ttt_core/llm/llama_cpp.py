@@ -188,9 +188,7 @@ class LlamaCppClient:
         payload = {
             "prompt": prompt_text,
             "temperature": temperature,
-            "num_ctx": 131072,
             "stream": True,
-            "n_predict": 32768,
         }
 
         timeout = self.stream_timeout_seconds
@@ -203,7 +201,6 @@ class LlamaCppClient:
                     chat_payload = {
                         "messages": [{"role": "user", "content": prompt_text}],
                         "temperature": temperature,
-                        "max_tokens": 32768,
                         "stream": True,
                     }
                     url = f"{self.base_url}/chat/completions"

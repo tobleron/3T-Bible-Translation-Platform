@@ -554,71 +554,122 @@ async def chat_turn(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-def _sse_chat_stream(
+async def _sse_chat_stream(
     testament: str,
     book: str,
     chapter: int,
     chunk_key: str,
     message: str,
     chat_context_sources: list[str],
-) -> Generator[str, None, None]:
-    """SSE generator that yields tokens as they arrive from the LLM."""
+):
+    """SSE async generator that yields tokens as they arrive from the LLM."""
+    import sys, asyncio
+
+    print(f"[SSE SERVER] _sse_chat_stream STARTED for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
+    yield ": connected\n\n"
+    await asyncio.sleep(0)  # Force flush
+    print(f"[SSE SERVER] Ping sent", file=sys.stderr, flush=True)
     wb = controller()
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         wb.set_chat_context_sources(chat_context_sources)
         wb.state.mode = "CHAT"
+        print(f"[SSE SERVER] Chunk opened", file=sys.stderr, flush=True)
 
         # Validate prerequisites (same as non-streaming)
         if not wb.require_open_chunk():
-            yield "event: error\n"
-            yield "data: No chunk open\n\n"
+            yield "event: error\ndata: No chunk open\n\n"
             return
         if not wb.state.draft_chunk and not wb.state.chat_messages and wb.chunk_has_committed_text():
-            yield "event: error\n"
-            yield "data: Review text is committed. Use Revise in Draft before chatting.\n\n"
+            yield "event: error\ndata: Review text is committed. Use Revise in Draft before chatting.\n\n"
             return
         if not wb.state.draft_chunk and not wb.state.chat_messages:
             if not wb.browser_auto_generate_draft():
-                yield "event: error\n"
-                yield "data: Failed to generate initial draft.\n\n"
+                yield "event: error\ndata: Failed to generate initial draft.\n\n"
                 return
+        print(f"[SSE SERVER] Prerequisites passed", file=sys.stderr, flush=True)
 
         prompt = wb.build_browser_chat_prompt(message)
         wb.refresh_active_endpoint()
-        # Record user message immediately
         wb.state.chat_messages.append({"role": "user", "content": message})
         wb.save_state()
 
-        # Build messages for stream API
         messages = [{"role": "user", "content": prompt}]
 
         full_reply: list[str] = []
         error_occurred = False
-        try:
-            for token in wb.llm.stream_generation("stream", messages, temperature=0.7):
-                if token.startswith("[ERROR]"):
-                    error_occurred = True
-                    full_reply.append(token)
-                    break
+        token_count = 0
+        print(f"[SSE SERVER] About to call stream_generation(), endpoint={wb.llm.base_url}, prompt_len={len(prompt)}, message={message[:80]!r}", file=sys.stderr, flush=True)
+
+        # Run blocking stream_generation in thread pool, with periodic keepalive pings
+        loop = asyncio.get_running_loop()
+        token_gen = wb.llm.stream_generation("stream", messages, temperature=0.7)
+        import threading
+
+        # Shared state between threads
+        result_holder = {"token": None, "exception": None, "done": False}
+
+        def _next_token():
+            try:
+                result_holder["token"] = next(token_gen)
+            except StopIteration:
+                result_holder["done"] = True
+            except Exception as exc:
+                result_holder["exception"] = str(exc)
+
+        while True:
+            # Start the blocking call in a thread
+            thread = threading.Thread(target=_next_token, daemon=True)
+            thread.start()
+            import time as _time
+            wait_start = _time.monotonic()
+            max_wait = 300  # seconds — MoE models can pause between tokens for complex output
+
+            # Wait for it with periodic keepalive pings
+            while not result_holder["done"] and result_holder["token"] is None and result_holder["exception"] is None:
+                thread.join(timeout=10)
+                if thread.is_alive():
+                    # Still waiting — send SSE comment keepalive (ignored by browser but resets timeout)
+                    elapsed = _time.monotonic() - wait_start
+                    if elapsed > max_wait:
+                        result_holder["exception"] = f"No token received in {max_wait}s — model may have hung up"
+                        print(f"[SSE SERVER] TIMEOUT: {result_holder['exception']}", file=sys.stderr, flush=True)
+                        break
+                    yield f": waiting for LLM ({elapsed:.0f}s)\n\n"
+                    await asyncio.sleep(0)  # flush
+
+            if result_holder["exception"]:
+                error_occurred = True
+                full_reply.append(f"[ERROR] {result_holder['exception']}")
+                break
+            if result_holder["done"]:
+                break
+
+            token = result_holder["token"]
+            result_holder["token"] = None  # reset for next iteration
+
+            if token.startswith("[ERROR]"):
+                error_occurred = True
                 full_reply.append(token)
-                # Yield token as SSE event, escaping for SSE format
-                escaped = token.replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
-                yield f"data: {escaped}\n\n"
-        except Exception as exc:
-            error_occurred = True
-            full_reply.append(f"[ERROR] Stream failed: {exc}")
+                print(f"[SSE SERVER] ERROR token received: {token[:120]}", file=sys.stderr, flush=True)
+                break
+            full_reply.append(token)
+            token_count += 1
+            if token_count % 20 == 1 or token_count <= 3:
+                print(f"[SSE SERVER] Token #{token_count}: {token[:60]!r}", file=sys.stderr, flush=True)
+            escaped = token.replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
+            yield f"data: {escaped}\n\n"
 
         reply = "".join(full_reply).strip()
+        print(f"[SSE SERVER] Stream complete. Tokens sent: {token_count}, Reply length: {len(reply)}, Error: {error_occurred}", file=sys.stderr, flush=True)
         if error_occurred:
             wb.history_entries.append(
                 {"title": "Chat error", "body": reply[:160], "accent": "red"}
             )
             wb.print_error(wb.explain_llm_failure(reply))
             wb.save_state()
-            yield "event: error\n"
-            yield f'data: {reply[:200].replace("\n", "\\n")}\n\n'
+            yield "event: error\ndata: " + reply[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
             return
 
         if reply:
@@ -634,11 +685,9 @@ def _sse_chat_stream(
         wb.prepare_browser_commit_state()
         wb.save_state()
 
-        yield "event: done\n"
-        yield f'data: {reply[:200].replace("\n", "\\n")}\n\n'
+        yield "event: done\ndata: " + reply[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
     except Exception as exc:
-        yield "event: error\n"
-        yield f'data: {str(exc)[:200].replace("\n", "\\n")}\n\n'
+        yield "event: error\ndata: " + str(exc)[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/stream")

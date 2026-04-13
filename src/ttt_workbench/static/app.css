@@ -1350,6 +1350,25 @@ button:active:not(:disabled) {
   overflow-y: auto;
 }
 
+/* Streaming thinking block — pulsing summary animation */
+.chat-md details.thinking-block.is-streaming summary {
+  animation: thinkingPulse 1.5s ease-in-out infinite;
+}
+@keyframes thinkingPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.chat-md details.thinking-block.is-streaming summary::after {
+  content: " ▊";
+  display: inline;
+  animation: cursorBlink 0.8s step-end infinite;
+  color: var(--muted);
+}
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .editor-panel,
 .chat-panel {
   display: grid;

@@ -70,6 +70,16 @@ run_web() {
   ensure_workbench_env
   local host="${TTT_WEB_HOST:-127.0.0.1}"
   local port="${TTT_WEB_PORT:-8765}"
+
+  # Kill any existing processes on the target port
+  local pids
+  pids="$(lsof -ti :"$port" 2>/dev/null || true)"
+  if [[ -n "$pids" ]]; then
+    echo "Killing existing processes on port $port (PIDs: $pids)"
+    echo "$pids" | xargs kill -9 2>/dev/null || true
+    sleep 1
+  fi
+
   echo "TTT Browser Workbench: http://$host:$port"
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
 }
@@ -77,18 +87,22 @@ run_web() {
 run_workbench() {
   cd "$ROOT_DIR"
   ensure_workbench_env
+  # Kill any existing process from the same script
+  pkill -f "ttt_workbench.py" 2>/dev/null || true
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/ttt_workbench.py"
 }
 
 run_textual_preview() {
   cd "$ROOT_DIR"
   ensure_workbench_env
+  pkill -f "textual_workbench_preview.py" 2>/dev/null || true
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/textual_workbench_preview.py"
 }
 
 run_textual() {
   cd "$ROOT_DIR"
   ensure_workbench_env
+  pkill -f "textual_workbench.py" 2>/dev/null || true
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/textual_workbench.py"
 }
 
@@ -97,6 +111,7 @@ run_prep_data() {
   ensure_workbench_env
   export PYTHONPATH="$(python_env)"
   chmod +x src/ttt_workbench/scripts/prepare_lexical_data.sh
+  pkill -f "prepare_lexical_data" 2>/dev/null || true
   exec src/ttt_workbench/scripts/prepare_lexical_data.sh "${@:2}"
 }
 
@@ -118,24 +133,28 @@ run_test() {
 run_translate() {
   cd "$ROOT_DIR/archive/workspace_legacy/01_AI_Translation_Engine"
   export PYTHONPATH="$(python_env)"
+  pkill -f "translate_verse" 2>/dev/null || true
   exec ./translate_verse.sh "${@:2}"
 }
 
 run_analyze() {
   cd "$ROOT_DIR/archive/workspace_legacy/02_Human_Editorial_Workspace"
   export PYTHONPATH="$(python_env)"
+  pkill -f "analyze_translation" 2>/dev/null || true
   exec ./analyze_translation.sh "${@:2}"
 }
 
 run_epub() {
   cd "$ROOT_DIR"
   ensure_workbench_env
+  pkill -f "generate_epub" 2>/dev/null || true
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" src/ttt_epub/generate_epub.py "${@:2}"
 }
 
 run_backup() {
   cd "$ROOT_DIR"
   ensure_workbench_env
+  pkill -f "version_control.py" 2>/dev/null || true
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" version_control.py "${@:2}"
 }
 
