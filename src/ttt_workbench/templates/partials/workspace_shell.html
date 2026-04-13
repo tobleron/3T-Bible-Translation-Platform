@@ -1195,18 +1195,6 @@ function initChatInput() {
         var elapsed = this.startTime ? ((Date.now() - this.startTime) / 1000).toFixed(1) : '0.0';
         console.log('[MONITOR] [' + elapsed + 's] ' + msg);
         this.events.push({ t: elapsed, msg: msg });
-        // ALSO write visible log to a debug element on the page
-        var debugEl = document.getElementById('stream-debug-log');
-        if (!debugEl) {
-          debugEl = document.createElement('div');
-          debugEl.id = 'stream-debug-log';
-          debugEl.style.cssText = 'font-size:11px;color:#f90;background:rgba(0,0,0,0.3);padding:4px 8px;margin-top:8px;border-radius:4px;max-height:200px;overflow-y:auto;font-family:monospace;white-space:pre-wrap;';
-          if (mdBuffer && mdBuffer.parentNode) {
-            mdBuffer.parentNode.insertBefore(debugEl, mdBuffer.nextSibling);
-          }
-        }
-        debugEl.textContent += '[' + elapsed + 's] ' + msg + '\n';
-        debugEl.scrollTop = debugEl.scrollHeight;
       },
       start: function() {
         this.startTime = Date.now();
@@ -1293,8 +1281,8 @@ function initChatInput() {
       });
       details.appendChild(summary);
       details.appendChild(contentDiv);
-      // Keep open by default while streaming so user can see progress
-      details.open = true;
+      // Keep closed by default while streaming as requested by user
+      details.open = false;
       mdBuffer.appendChild(details);
       streamState.thinkingEl = details;
       streamState.thinkingContentEl = contentDiv;
