@@ -14,6 +14,10 @@ from typing import Any
 import yaml
 
 
+DEFAULT_LLAMA_CPP_BASE_URL = "http://10.0.0.1:8080/v1"
+DEFAULT_LLAMA_CPP_STREAM_TIMEOUT_SECONDS = 1800
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
@@ -87,8 +91,9 @@ def _defaults(root: Path) -> dict[str, Any]:
             "assets": str(root / "resources" / "assets"),
         },
         "llama_cpp": {
-            "base_url": "http://192.168.1.186:8080",
+            "base_url": DEFAULT_LLAMA_CPP_BASE_URL,
             "api_key": os.environ.get("TTT_LLAMA_CPP_API_KEY", ""),
+            "stream_timeout_seconds": DEFAULT_LLAMA_CPP_STREAM_TIMEOUT_SECONDS,
         },
         "openai": {
             "api_key": os.environ.get("OPENAI_API_KEY", ""),

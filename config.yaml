@@ -8,8 +8,9 @@
 # LLM Providers
 # ---------------------------------------------------------------------------
 llama_cpp:
-  base_url: "http://192.168.1.186:8081/v1"
-  api_key: "" # Set TTT_LLAMA_CPP_API_KEY environment variable
+  base_url: "http://10.0.0.1:8080/v1"
+  # Direct WireGuard endpoint; no auth proxy/API key is used for local llama.cpp.
+  api_key: ""
   stream_timeout_seconds: 1800  # Timeout for streaming generation (30 min). Set TTT_LLAMA_CPP_STREAM_TIMEOUT env var to override.
 
 openai:

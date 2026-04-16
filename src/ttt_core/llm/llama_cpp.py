@@ -9,7 +9,7 @@ from typing import Generator
 
 import requests
 
-from ttt_core.config import load_config
+from ttt_core.config import DEFAULT_LLAMA_CPP_BASE_URL, load_config
 from ttt_core.utils.common import extract_json_payload
 
 
@@ -27,7 +27,7 @@ class LlamaCppClient:
             cfg = load_config()
             llm_cfg = cfg.get("llama_cpp", {})
             if base_url is None:
-                base_url = llm_cfg.get("base_url", "http://192.168.1.186:8081/v1")
+                base_url = llm_cfg.get("base_url", DEFAULT_LLAMA_CPP_BASE_URL)
             if api_key is None:
                 api_key = llm_cfg.get("api_key")
         else:

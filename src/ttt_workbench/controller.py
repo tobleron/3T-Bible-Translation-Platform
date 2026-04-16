@@ -6,8 +6,6 @@ import os
 import re
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
@@ -133,8 +131,6 @@ class PromptSetting:
 class BrowserWorkbench(WorkbenchApp):
     """Headless workbench controller for the browser app."""
 
-    ENDPOINT_MODES = {"manual", "lan", "remote", "auto"}
-
     _editor_line_re = re.compile(r"(?m)^\s*(\d+)\s*[\.\):-]\s*")
     _editorial_prompt_defaults = {
         "grammar": (
@@ -166,7 +162,6 @@ class BrowserWorkbench(WorkbenchApp):
         self.chunk_sessions_file = self.runtime_state_dir / "chunk_sessions.json"
         self.chunk_sessions = self._load_chunk_sessions()
         self.web_settings = self._load_web_settings()
-        self._resolved_endpoint_cache: str | None = None
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
         self._sanitize_browser_state()
 
@@ -230,9 +225,6 @@ class BrowserWorkbench(WorkbenchApp):
     def _load_web_settings(self) -> dict[str, Any]:
         defaults = {
             "base_url": self.llm.base_url,
-            "endpoint_mode": "auto",
-            "lan_base_url": self.llm.base_url,
-            "remote_base_url": "http://r21984.duckdns.org:8081/v1",
             "selected_sources": ["LSB", "ESV"],
         }
         if not self.settings_file.exists():
@@ -243,25 +235,19 @@ class BrowserWorkbench(WorkbenchApp):
             return defaults
         if not isinstance(payload, dict):
             return defaults
-        merged = {**defaults, **payload}
-        mode = str(merged.get("endpoint_mode", defaults["endpoint_mode"])).strip().lower()
-        if "endpoint_mode" not in payload and str(merged.get("remote_base_url", "")).strip():
-            mode = "auto"
-        if (
-            mode == "manual"
-            and str(merged.get("remote_base_url", "")).strip()
-            and self._normalize_endpoint_url(str(merged.get("base_url", "")))
-            == self._normalize_endpoint_url(str(merged.get("lan_base_url", "")))
-        ):
-            mode = "auto"
-        merged["endpoint_mode"] = mode if mode in self.ENDPOINT_MODES else defaults["endpoint_mode"]
+        merged = {
+            "base_url": self._normalize_endpoint_url(
+                str(payload.get("base_url") or defaults["base_url"])
+            ),
+            "selected_sources": payload.get("selected_sources", defaults["selected_sources"]),
+        }
         if (
             not self.fake_llm_mode
             and "fake-llm.local" in str(merged.get("base_url", ""))
         ):
             merged["base_url"] = defaults["base_url"]
-            merged["lan_base_url"] = defaults["lan_base_url"]
         if merged != payload:
+            self.settings_file.parent.mkdir(parents=True, exist_ok=True)
             self.settings_file.write_text(json.dumps(merged, indent=2), encoding="utf-8")
         return merged
 
@@ -269,62 +255,22 @@ class BrowserWorkbench(WorkbenchApp):
     def _normalize_endpoint_url(value: str) -> str:
         return value.strip().rstrip("/")
 
-    def _probe_endpoint(self, base_url: str) -> bool:
-        url = self._normalize_endpoint_url(base_url)
-        if not url:
-            return False
-        if self.fake_llm_mode:
-            return "fake-llm.local" in url or url == self._normalize_endpoint_url(self.llm.base_url)
-        client = LlamaCppClient(base_url=url, api_key=getattr(self.llm, "api_key", None))
-        model_url = f"{url}/models" if "/v1" in url else f"{url}/v1/models"
-        request = urllib.request.Request(model_url, headers=client._get_headers())
-        try:
-            with urllib.request.urlopen(request, timeout=5):
-                return True
-        except urllib.error.HTTPError as exc:
-            return exc.code in {401, 403}
-        except Exception:
-            return False
-
     def resolve_active_base_url(self, refresh: bool = False) -> str:
-        if not refresh and self._resolved_endpoint_cache:
-            return self._resolved_endpoint_cache
-        manual = self._normalize_endpoint_url(str(self.web_settings.get("base_url", self.llm.base_url)))
-        lan = self._normalize_endpoint_url(str(self.web_settings.get("lan_base_url", manual)))
-        remote = self._normalize_endpoint_url(str(self.web_settings.get("remote_base_url", "")))
-        mode = str(self.web_settings.get("endpoint_mode", "auto")).strip().lower()
-        if mode not in self.ENDPOINT_MODES:
-            mode = "auto"
-
-        if mode == "lan":
-            resolved = lan or manual
-        elif mode == "remote":
-            resolved = remote or manual
-        elif mode == "auto":
-            if lan and self._probe_endpoint(lan):
-                resolved = lan
-            elif remote and self._probe_endpoint(remote):
-                resolved = remote
-            else:
-                resolved = lan or remote or manual
-        else:
-            resolved = manual
-
-        self._resolved_endpoint_cache = resolved or manual
-        return self._resolved_endpoint_cache
+        return self._normalize_endpoint_url(str(self.web_settings.get("base_url", self.llm.base_url)))
 
     def refresh_active_endpoint(self) -> str:
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
         return self.llm.base_url
 
     def save_web_settings(self, payload: dict[str, Any]) -> None:
-        self.web_settings = {**self.web_settings, **payload}
-        for key in ("base_url", "lan_base_url", "remote_base_url"):
-            if key in self.web_settings:
-                self.web_settings[key] = self._normalize_endpoint_url(str(self.web_settings[key]))
-        mode = str(self.web_settings.get("endpoint_mode", "auto")).strip().lower()
-        self.web_settings["endpoint_mode"] = mode if mode in self.ENDPOINT_MODES else "auto"
-        self._resolved_endpoint_cache = None
+        selected_sources = payload.get("selected_sources", self.web_settings.get("selected_sources", []))
+        self.web_settings = {
+            "base_url": self._normalize_endpoint_url(
+                str(payload.get("base_url", self.web_settings.get("base_url", self.llm.base_url)))
+            ),
+            "selected_sources": selected_sources,
+        }
+        self.settings_file.parent.mkdir(parents=True, exist_ok=True)
         self.settings_file.write_text(
             json.dumps(self.web_settings, indent=2), encoding="utf-8"
         )
@@ -346,6 +292,7 @@ class BrowserWorkbench(WorkbenchApp):
         return clean
 
     def _save_chunk_sessions(self) -> None:
+        self.chunk_sessions_file.parent.mkdir(parents=True, exist_ok=True)
         self.chunk_sessions_file.write_text(
             json.dumps(self.chunk_sessions, indent=2), encoding="utf-8"
         )
@@ -1098,6 +1045,14 @@ Rules:
         """Join gloss parts, skipping empty ones. Returns empty string if nothing."""
         return " ".join(p.strip() for p in pieces if p.strip()).strip()
 
+    @staticmethod
+    def _literal_gloss_token(token: dict[str, str], lexicon: dict[str, str]) -> dict[str, str] | None:
+        gloss = lexicon.get(token.get("strong_id", ""), "").replace("<br>", "; ").strip(" ;")
+        surface = token.get("surface", "").strip()
+        if not gloss:
+            return None
+        return {"gloss": gloss, "surface": surface}
+
     def lexical_ref(self, verse: int, *, corpus: str = "") -> str:
         """Build a lexical reference key using corpus-specific book codes."""
         from ttt_core.utils import lexical_book_code
@@ -1155,15 +1110,18 @@ Rules:
 
             # Build Hebrew block: surface text + per-token gloss data
             heb_surface_parts = []
-            heb_gloss_tokens: list[dict[str, str]] = []
+            heb_gloss_lines: list[dict[str, Any]] = []
             has_hebrew = False
             for verse in range(start_verse, end_verse + 1):
                 tokens = hebrew.get(self.lexical_ref(verse, corpus="hebrew_ot"), [])
                 surfaces = [t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()]
-                for t in tokens:
-                    gloss = heb_lexicon.get(t.get("strong_id", ""), "")
-                    if gloss:
-                        heb_gloss_tokens.append({"gloss": gloss, "surface": t.get("surface", "").strip()})
+                gloss_tokens = [
+                    gloss_token
+                    for t in tokens
+                    if (gloss_token := self._literal_gloss_token(t, heb_lexicon))
+                ]
+                if gloss_tokens:
+                    heb_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
                 if surfaces:
                     has_hebrew = True
                     heb_surface_parts.append(" ".join(surfaces))
@@ -1180,21 +1138,24 @@ Rules:
                     "label": "Hebrew",
                     "caption": "Masoretic Text (WLC)",
                     "text": self._chunk_join(heb_surface_parts),
-                    "gloss_tokens": heb_gloss_tokens,
+                    "gloss_lines": heb_gloss_lines,
                     "kind": "hebrew",
                 })
 
             # Build LXX block
             lxx_surface_parts = []
-            lxx_gloss_tokens: list[dict[str, str]] = []
+            lxx_gloss_lines: list[dict[str, Any]] = []
             has_lxx = False
             for verse in range(start_verse, end_verse + 1):
                 tokens = lxx.get(self.lexical_ref(verse, corpus="greek_ot_lxx"), [])
                 surfaces = [t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()]
-                for t in tokens:
-                    gloss = lxx_lexicon.get(t.get("strong_id", ""), "")
-                    if gloss:
-                        lxx_gloss_tokens.append({"gloss": gloss, "surface": t.get("surface", "").strip()})
+                gloss_tokens = [
+                    gloss_token
+                    for t in tokens
+                    if (gloss_token := self._literal_gloss_token(t, lxx_lexicon))
+                ]
+                if gloss_tokens:
+                    lxx_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
                 if surfaces:
                     has_lxx = True
                     lxx_surface_parts.append(" ".join(surfaces))
@@ -1205,7 +1166,7 @@ Rules:
                     "label": "LXX Greek",
                     "caption": "Septuagint (Rahlfs 1935)",
                     "text": lxx_text,
-                    "gloss_tokens": lxx_gloss_tokens,
+                    "gloss_lines": lxx_gloss_lines,
                     "kind": "greek",
                 })
         else:
@@ -1224,21 +1185,24 @@ Rules:
             greek_lexicon = self.lexical_repo.fetch_lexicon_glosses("greek_nt", list(greek_strongs))
 
             greek_surface_parts = []
-            greek_gloss_tokens: list[dict[str, str]] = []
+            greek_gloss_lines: list[dict[str, Any]] = []
             for verse in range(start_verse, end_verse + 1):
                 tokens = greek.get(self.lexical_ref(verse, corpus="greek_nt"), [])
                 surfaces = [t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()]
-                for t in tokens:
-                    gloss = greek_lexicon.get(t.get("strong_id", ""), "")
-                    if gloss:
-                        greek_gloss_tokens.append({"gloss": gloss, "surface": t.get("surface", "").strip()})
+                gloss_tokens = [
+                    gloss_token
+                    for t in tokens
+                    if (gloss_token := self._literal_gloss_token(t, greek_lexicon))
+                ]
+                if gloss_tokens:
+                    greek_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
                 greek_surface_parts.append(" ".join(surfaces) if surfaces else "[no data]")
 
             blocks.append({
                 "label": "SBLGNT Greek",
                 "caption": "SBL Greek New Testament",
                 "text": self._chunk_join(greek_surface_parts),
-                "gloss_tokens": greek_gloss_tokens,
+                "gloss_lines": greek_gloss_lines,
                 "kind": "greek",
             })
 
@@ -1675,8 +1639,16 @@ Rules:
                     str(item).strip() or "[blank]" for item in block.get("verse_texts", [])
                 ).strip()
             lines.append(block_text or "[blank]")
-            if block.get("gloss"):
-                lines.append(f"  Literal gloss: {block['gloss']}")
+            gloss_lines = block.get("gloss_lines") or []
+            if gloss_lines:
+                for gloss_line in gloss_lines:
+                    gloss_text = " / ".join(
+                        str(item.get("gloss", "")).strip()
+                        for item in gloss_line.get("tokens", [])
+                        if str(item.get("gloss", "")).strip()
+                    )
+                    if gloss_text:
+                        lines.append(f"  {gloss_line.get('verse')}. Literal gloss: {gloss_text}")
             lines.append("")
         return "\n".join(lines).strip()
 
@@ -1694,15 +1666,15 @@ Rules:
             caption = str(block.get("caption", "")).strip()
             lines.append(f"{label}{f' ({caption})' if caption else ''}:")
             lines.append(str(block.get("text", "")).strip() or "[blank]")
-            gloss_tokens = block.get("gloss_tokens") or []
-            if gloss_tokens:
+            gloss_lines = block.get("gloss_lines") or []
+            for gloss_line in gloss_lines:
                 gloss_preview = ", ".join(
                     f"{str(item.get('surface', '')).strip()}={str(item.get('gloss', '')).strip()}"
-                    for item in gloss_tokens[:20]
+                    for item in gloss_line.get("tokens", [])[:20]
                     if str(item.get("surface", "")).strip() and str(item.get("gloss", "")).strip()
                 )
                 if gloss_preview:
-                    lines.append(f"Gloss aid: {gloss_preview}")
+                    lines.append(f"Gloss aid {gloss_line.get('verse')}: {gloss_preview}")
             lines.append("")
         return "\n".join(lines).strip()
 
@@ -1756,15 +1728,9 @@ Title: {self.state.draft_title or "[untitled]"}
 Conversation:
 {history or "First message"}
 
-Request:
-{user_message}
-""".strip()
-        # DEBUG: log prompt to console for troubleshooting
-        import sys
-        print(f"\n=== CHAT PROMPT DEBUG (sources={chat_sources}, draft_in_sources={'draft' in chat_sources}, orig_in_sources={'original' in chat_sources}) ===", file=sys.stderr, flush=True)
-        print(prompt[:500], file=sys.stderr, flush=True)
-        print("... [truncated] ...", file=sys.stderr, flush=True)
-        print(f"=== END CHAT PROMPT DEBUG (len={len(prompt)}) ===\n", file=sys.stderr, flush=True)
+        Request:
+        {user_message}
+        """.strip()
         return prompt
 
     def browser_auto_generate_draft(self) -> bool:
@@ -1836,75 +1802,6 @@ Request:
         self.persist_current_chunk_session()
         self.prepare_browser_commit_state()
         self.save_state()
-
-    def browser_chat_turn_stream(
-        self,
-        user_message: str,
-        token_callback: callable | None = None,
-    ) -> str | None:
-        """Stream a chat response, yielding tokens via *token_callback*.
-
-        Returns the full accumulated reply on success, or ``None`` on error.
-        After the stream completes the full response is persisted to state.
-        """
-        if not self.require_open_chunk():
-            return None
-        if not self.state.draft_chunk and not self.state.chat_messages and self.chunk_has_committed_text():
-            self.notify("Review text is committed. Use Revise in Draft before chatting.")
-            return None
-        if not self.state.draft_chunk and not self.state.chat_messages:
-            if not self.browser_auto_generate_draft():
-                return None
-        prompt = self.build_browser_chat_prompt(user_message)
-        self.refresh_active_endpoint()
-        # Append user message immediately so the assistant reply follows it
-        self.state.chat_messages.append({"role": "user", "content": user_message})
-
-        # Build a multi-turn prompt for the stream API
-        messages = [
-            {"role": "user", "content": prompt},
-        ]
-
-        full_reply: list[str] = []
-        error_occurred = False
-        try:
-            for token in self.llm.stream_generation(
-                "stream",
-                messages,
-                temperature=0.7,
-            ):
-                if token.startswith("[ERROR]"):
-                    error_occurred = True
-                    full_reply.append(token)
-                    break
-                full_reply.append(token)
-                if token_callback:
-                    token_callback(token)
-        except Exception as exc:
-            error_occurred = True
-            full_reply.append(f"[ERROR] Stream failed: {exc}")
-
-        reply = "".join(full_reply).strip()
-        if error_occurred:
-            self.history_entries.append(
-                {"title": "Chat error", "body": reply[:160], "accent": "red"}
-            )
-            self.print_error(self.explain_llm_failure(reply))
-            self.save_state()
-            return None
-        if reply:
-            self.state.chat_messages.append({"role": "assistant", "content": reply})
-            self.history_entries.append(
-                {"title": "Chat", "body": reply[:160], "accent": "blue"}
-            )
-        session = self.current_chunk_session()
-        session["context_loaded"] = True
-        if not session.get("context_snapshot"):
-            session["context_snapshot"] = self.session_context_snapshot()
-        self.persist_current_chunk_session()
-        self.prepare_browser_commit_state()
-        self.save_state()
-        return reply
 
     def sync_current_chunk_for_commit(self) -> None:
         if not self.has_open_chunk() or not self.state.book or not self.state.chapter:

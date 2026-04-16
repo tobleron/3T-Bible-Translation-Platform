@@ -1,5 +1,5 @@
 """Re-export LLM clients from ttt_core for backward compatibility."""
 
-from ttt_core.llm import LlamaCppClient
+from ttt_core.llm import LlamaCppClient, OpenAIClient
 
-__all__ = ["LlamaCppClient"]
+__all__ = ["LlamaCppClient", "OpenAIClient"]

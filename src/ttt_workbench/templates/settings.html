@@ -23,26 +23,10 @@
     {% endif %}
     <form method="post" action="/settings/save" class="settings-form">
       <label class="field">
-        <span>Active endpoint URL</span>
+        <span>llama.cpp endpoint URL</span>
         <input type="text" name="base_url" value="{{ endpoint_url }}">
       </label>
-      <label class="field">
-        <span>Endpoint mode</span>
-        <select name="endpoint_mode">
-          <option value="manual" {% if endpoint_mode == 'manual' %}selected{% endif %}>Manual</option>
-          <option value="lan" {% if endpoint_mode == 'lan' %}selected{% endif %}>LAN only</option>
-          <option value="remote" {% if endpoint_mode == 'remote' %}selected{% endif %}>Remote only</option>
-          <option value="auto" {% if endpoint_mode == 'auto' %}selected{% endif %}>Auto: LAN then remote</option>
-        </select>
-      </label>
-      <label class="field">
-        <span>LAN endpoint URL</span>
-        <input type="text" name="lan_base_url" value="{{ lan_endpoint_url }}" placeholder="http://192.168.1.186:8081/v1">
-      </label>
-      <label class="field">
-        <span>Remote endpoint URL</span>
-        <input type="text" name="remote_base_url" value="{{ remote_endpoint_url }}" placeholder="http://r21984.duckdns.org:8081/v1">
-      </label>
+      <p class="muted-line">Use the direct WireGuard endpoint, normally http://10.0.0.1:8080/v1.</p>
       <p class="muted-line">Detected models: {{ ", ".join(model_names) }}</p>
       <label class="field">
         <span>Chunk schema</span>

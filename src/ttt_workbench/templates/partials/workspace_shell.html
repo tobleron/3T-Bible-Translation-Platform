@@ -288,8 +288,10 @@
           </div>
           <textarea id="chat-message-input" name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
           <div class="chat-actions">
-            <button class="primary-button send-button" type="submit" data-loading-label="Streaming...">Send</button>
-            <button class="stop-button" type="button" id="chat-stop-button" style="display:none;" title="Stop streaming response">Stop</button>
+            <div class="chat-send-group">
+              <button class="primary-button send-button" type="submit" data-loading-label="Streaming...">Send</button>
+              <button class="stop-button-square" type="button" id="chat-stop-button" style="display:none;" title="Stop streaming response" aria-label="Stop streaming response"></button>
+            </div>
             <button class="secondary-button clear-button" type="button"
               hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
               hx-target="#workspace-shell" hx-swap="outerHTML"
@@ -1073,13 +1075,152 @@ function initChatInput() {
   if (chatForm.dataset.streamBound === '1') return;
   chatForm.dataset.streamBound = '1';
 
-  var currentController = null; // For aborting in-flight streams
-  var stopBtn = document.getElementById('chat-stop-button');
+  // Use window-level tracking for streaming state to survive HTMX swaps
+  window._tttStreaming = window._tttStreaming || {
+    controller: null,
+    done: false,
+    poll: null,
+    streamId: 0,
+    activeStreamId: 0,
+    htmxSwapOccurred: false,
+    lastDomCheck: Date.now()
+  };
+
+  // MutationObserver to detect if #workspace-shell is replaced mid-stream (HTMX swap)
+  // This would kill all our DOM references and event listeners
+  window._tttStreaming.domObserver = window._tttStreaming.domObserver || (function() {
+    var observer = null;
+    var lastCheck = Date.now();
+    var lastButtonState = 'unknown';
+    var pollTimer = null;
+
+    function checkAndLogButtonState(label) {
+      var sb = document.getElementById('chat-stop-button');
+      var form = document.getElementById('chat-stream-form');
+      var fb = form ? form.querySelector('.send-button') : null;
+      var state = {
+        time: new Date().toISOString(),
+        label: label,
+        stopBtnDisplay: sb ? sb.style.display : 'element_not_found',
+        stopBtnExists: !!sb,
+        sendBtnDisabled: fb ? fb.disabled : 'element_not_found',
+        sendBtnExists: !!fb,
+        sendBtnText: fb ? fb.textContent : 'element_not_found',
+        streamId: window._tttStreaming ? window._tttStreaming.activeStreamId : 'no_state',
+        doneFlag: window._tttStreaming ? window._tttStreaming.done : 'no_state',
+        pollRunning: window._tttStreaming && window._tttStreaming.poll ? 'yes' : 'no'
+      };
+      console.log('[DOM-WATCH]', JSON.stringify(state));
+      return state;
+    }
+
+    function startPolling() {
+      if (pollTimer) return;
+      console.log('[DOM-WATCH] Starting button state polling every 500ms');
+      pollTimer = setInterval(function() {
+        var state = checkAndLogButtonState('interval_check');
+        // Detect stuck state: send button disabled but stream marked as done
+        if (state.sendBtnExists && state.sendBtnDisabled && window._tttStreaming && window._tttStreaming.done) {
+          console.log('[DOM-WATCH] ⚠️ STUCK STATE DETECTED: Send button disabled but done=true!');
+        }
+      }, 500);
+    }
+
+    function stopPolling() {
+      if (pollTimer) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+        console.log('[DOM-WATCH] Stopped button state polling');
+      }
+    }
+
+    // Watch for #workspace-shell replacement
+    function setupObserver() {
+      var workspaceShell = document.getElementById('workspace-shell');
+      if (!workspaceShell) {
+        console.log('[DOM-WATCH] #workspace-shell not found, skipping observer');
+        return;
+      }
+      if (observer) {
+        observer.disconnect();
+      }
+      observer = new MutationObserver(function(mutations) {
+        console.log('[DOM-WATCH] MutationObserver fired, mutations:', mutations.length);
+        for (var i = 0; i < mutations.length; i++) {
+          var mutation = mutations[i];
+          if (mutation.type === 'childList') {
+            mutation.removedNodes.forEach(function(node) {
+              if (node.nodeType === 1 && node.id === 'workspace-shell') {
+                console.log('[DOM-WATCH] 🚨 CRITICAL: #workspace-shell was REMOVED from DOM!');
+                console.log('[DOM-WATCH] This means HTMX replaced our workspace mid-stream!');
+                window._tttStreaming.htmxSwapOccurred = true;
+                checkAndLogButtonState('post_htmx_swap');
+              }
+            });
+          }
+        }
+      });
+      observer.observe(workspaceShell.parentNode || document.body, { childList: true, subtree: true });
+      console.log('[DOM-WATCH] MutationObserver started on parent of #workspace-shell');
+    }
+
+    // Auto-setup on first call
+    setupObserver();
+    startPolling();
+
+    return {
+      checkAndLogButtonState: checkAndLogButtonState,
+      setupObserver: setupObserver,
+      startPolling: startPolling,
+      stopPolling: stopPolling
+    };
+  }());
+
+  function resetChatButtons() {
+    console.log('[RESET] resetChatButtons called at', new Date().toISOString());
+    console.log('[RESET] Current streamId:', window._tttStreaming.activeStreamId);
+    window._tttStreaming.done = true;
+    if (window._tttStreaming.controller) {
+      console.log('[RESET] Aborting controller');
+      window._tttStreaming.controller.abort();
+      window._tttStreaming.controller = null;
+    }
+
+    // Always find fresh elements in the current DOM
+    var sb = document.getElementById('chat-stop-button');
+    if (sb) {
+      sb.style.display = 'none';
+      sb.classList.remove('is-animating');
+    }
+
+    var form = document.getElementById('chat-stream-form');
+    var fb = form ? form.querySelector('.send-button') : document.querySelector('.send-button');
+    if (fb) {
+      // Check if element is actually in the DOM (not detached)
+      var isConnected = fb === document.querySelector('.send-button');
+      if (!isConnected) {
+        console.log('[RESET] ⚠️ Send button found but is NOT connected to DOM (detached/stale reference)!');
+      }
+      fb.disabled = false;
+      fb.textContent = fb.dataset.originalLabel || 'Send';
+      fb.classList.remove('is-loading');
+      console.log('[RESET] Send button re-enabled (isConnected=' + isConnected + ')');
+    } else {
+      console.log('[RESET] ⚠️ Send button NOT FOUND in DOM!');
+    }
+
+    if (window._tttStreaming.poll) {
+      clearInterval(window._tttStreaming.poll);
+      window._tttStreaming.poll = null;
+      console.log('[RESET] Cleared poll interval');
+    }
+  }
 
   // Wire up stop button
+  var stopBtn = document.getElementById('chat-stop-button');
   if (stopBtn) {
     stopBtn.addEventListener('click', function() {
-      if (currentController) { currentController.abort(); currentController = null; }
+      resetChatButtons();
     });
   }
 
@@ -1113,14 +1254,23 @@ function initChatInput() {
     if (!streamUrl) return;
 
     // Abort any in-flight stream
-    if (currentController) { currentController.abort(); currentController = null; }
+    if (window._tttStreaming.controller) { 
+      window._tttStreaming.controller.abort(); 
+      window._tttStreaming.controller = null; 
+    }
 
     var sendBtn = chatForm.querySelector('.send-button');
-    var originalBtnText = sendBtn ? sendBtn.textContent : 'Send';
+    if (sendBtn && !sendBtn.dataset.originalLabel) {
+      sendBtn.dataset.originalLabel = sendBtn.textContent;
+    }
     if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = sendBtn.dataset.loadingLabel || 'Streaming...'; }
 
-    // Show stop button
-    if (stopBtn) stopBtn.style.display = '';
+    // Show and animate stop button
+    var stopBtnFresh = document.getElementById('chat-stop-button');
+    if (stopBtnFresh) {
+      stopBtnFresh.style.display = 'flex';
+      stopBtnFresh.classList.add('is-animating');
+    }
 
     // Collect context sources
     var ctxSources = [];
@@ -1155,20 +1305,26 @@ function initChatInput() {
     // Create assistant entry with streaming cursor
     var assistantEntry = document.createElement('div');
     assistantEntry.className = 'chat-entry chat-assistant';
-    assistantEntry.innerHTML = '<div class="chat-entry-head"><strong>Model</strong><button class="chat-delete-btn" type="button" title="Delete this response" data-msg-idx="__TEMP_ASSISTANT__">&times;</button></div><div class="chat-md" id="chat-stream-buffer"></div>';
+    assistantEntry.innerHTML = '<div class="chat-entry-head"><strong>Model</strong><button class="chat-delete-btn" type="button" title="Delete this response" data-msg-idx="__TEMP_ASSISTANT__">&times;</button></div><div class="chat-md" data-chat-stream-buffer></div>';
     if (chatLog) {
       chatLog.appendChild(assistantEntry);
       chatLog.scrollTop = chatLog.scrollHeight;
     }
 
-    var mdBuffer = document.getElementById('chat-stream-buffer');
+    var mdBuffer = assistantEntry.querySelector('[data-chat-stream-buffer]');
 
     // Build form data for streaming endpoint
     var formData = new FormData();
     formData.append('message', text);
     ctxSources.forEach(function(s) { formData.append('chat_context_sources', s); });
 
-    currentController = new AbortController();
+    window._tttStreaming.controller = new AbortController();
+    window._tttStreaming.done = false;
+    window._tttStreaming.streamId++;
+    var thisStreamId = window._tttStreaming.streamId;
+    window._tttStreaming.activeStreamId = thisStreamId;
+    console.log('[STREAM-' + thisStreamId + '] 🚀 Stream STARTED at', new Date().toISOString());
+    console.log('[STREAM-' + thisStreamId + '] 📍 Initial button state:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('stream_start')));
 
     // Incremental streaming state — avoids full innerHTML re-renders
     var streamState = {
@@ -1377,9 +1533,11 @@ function initChatInput() {
     fetch(streamUrl, {
       method: 'POST',
       body: formData,
-      signal: currentController.signal,
+      signal: window._tttStreaming.controller.signal,
     })
     .then(function(response) {
+      console.log('[STREAM-' + thisStreamId + '] ✅ fetch() response received at', new Date().toISOString());
+      console.log('[STREAM-' + thisStreamId + '] 📍 Button state after fetch:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('post_fetch')));
       if (!response.ok) throw new Error('Stream request failed: ' + response.status);
       var reader = response.body.getReader();
       var decoder = new TextDecoder();
@@ -1387,22 +1545,32 @@ function initChatInput() {
       var accumulatedRaw = '';
 
       // Polling button restoration — runs every 200ms to ensure buttons are always correct
-      var _streamDone = false;
-      var _buttonPoll = setInterval(function() {
-        var sb = document.getElementById('chat-stop-button') || document.querySelector('.stop-button');
-        var fb = document.querySelector('.send-button');
-        var shouldHide = !_streamDone; // hide stop button only when stream is done
-        if (_streamDone) {
-          if (sb && sb.style.display !== 'none') { sb.style.display = 'none'; console.log('[POLL] Stop hidden'); }
-          if (fb && !fb.disabled) { /* already enabled */ }
-          if (fb && fb.disabled) { fb.disabled = false; fb.textContent = 'Send'; console.log('[POLL] Send enabled'); }
-          // If both buttons are in correct state, stop polling
-          if ((!sb || sb.style.display === 'none') && fb && !fb.disabled) {
-            clearInterval(_buttonPoll);
-            console.log('[POLL] Buttons correct, stopped polling');
+      (function(streamId) {
+        window._tttStreaming.poll = setInterval(function() {
+          var sb = document.getElementById('chat-stop-button');
+          var form = document.getElementById('chat-stream-form');
+          var fb = form ? form.querySelector('.send-button') : document.querySelector('.send-button');
+          if (window._tttStreaming.done) {
+            if (sb && sb.style.display !== 'none') {
+              sb.style.display = 'none';
+              sb.classList.remove('is-animating');
+              console.log('[POLL-' + streamId + '] Stop hidden');
+            }
+            if (fb && fb.disabled) {
+              fb.disabled = false;
+              fb.textContent = fb.dataset.originalLabel || 'Send';
+              fb.classList.remove('is-loading');
+              console.log('[POLL-' + streamId + '] Send enabled');
+            }
+            // If both buttons are in correct state, stop polling
+            if ((!sb || sb.style.display === 'none') && (!fb || !fb.disabled)) {
+              clearInterval(window._tttStreaming.poll);
+              window._tttStreaming.poll = null;
+              console.log('[POLL-' + streamId + '] Buttons correct, stopped polling');
+            }
           }
-        }
-      }, 200);
+        }, 200);
+      })(thisStreamId);
 
       // Heartbeat: track last activity, reject Promise chain on 300s silence (5 min — matches server tolerance)
       var lastActivityTime = Date.now();
@@ -1412,6 +1580,68 @@ function initChatInput() {
         }
         return null; // no timeout yet
       };
+
+      // FALLBACK TIMER: Force button reset if stream appears stuck
+       // This handles edge cases where Promise chain completes but button doesn't reset
+       var fallbackTimer = null;
+       function scheduleFallbackTimer(ms) {
+         if (fallbackTimer) clearTimeout(fallbackTimer);
+         fallbackTimer = setTimeout(function() {
+           console.log('[STREAM-' + thisStreamId + '] ⏰ FALLBACK TIMER fired - forcing button reset');
+           console.log('[STREAM-' + thisStreamId + '] 📍 Button state at fallback:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('fallback_timer')));
+           forceResetButtons();
+         }, ms);
+         console.log('[STREAM-' + thisStreamId + '] ⏰ Fallback timer scheduled for ' + ms + 'ms');
+       }
+
+       // INACTIVITY FALLBACK: If no actual content tokens for 15 seconds, assume stuck
+       var lastContentTime = Date.now();
+       var inactivityFallback = null;
+       function scheduleInactivityFallback() {
+         if (inactivityFallback) clearTimeout(inactivityFallback);
+         inactivityFallback = setTimeout(function() {
+           var elapsed = (Date.now() - lastContentTime) / 1000;
+           console.log('[STREAM-' + thisStreamId + '] ⏰⏰ INACTIVITY FALLBACK fired after ' + elapsed + 's of no content');
+           console.log('[STREAM-' + thisStreamId + '] 📍 Button state at inactivity fallback:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('inactivity_fallback')));
+           forceResetButtons();
+         }, 15000); // 15 seconds of no content
+       }
+       scheduleInactivityFallback();
+
+       scheduleFallbackTimer(90000); // 90 second ultimate fallback
+
+      // FORCE RESET: Completely reset button state, bypassing all checks
+      function forceResetButtons() {
+        console.log('[STREAM-' + thisStreamId + '] 🔨 forceResetButtons() called');
+        window._tttStreaming.done = true;
+
+        // Kill any pending polls
+        if (window._tttStreaming.poll) {
+          clearInterval(window._tttStreaming.poll);
+          window._tttStreaming.poll = null;
+        }
+
+        // Force re-enable send button by querying fresh from document
+        var allButtons = document.querySelectorAll('.send-button');
+        console.log('[STREAM-' + thisStreamId + '] 🔨 Found ' + allButtons.length + ' send buttons in DOM');
+        allButtons.forEach(function(btn) {
+          console.log('[STREAM-' + thisStreamId + '] 🔨 Force-enabling button: ' + btn.textContent + ' disabled=' + btn.disabled);
+          btn.disabled = false;
+          btn.textContent = btn.dataset.originalLabel || 'Send';
+          btn.classList.remove('is-loading');
+        });
+
+        // Hide stop button
+        var stopBtns = document.querySelectorAll('#chat-stop-button');
+        stopBtns.forEach(function(btn) {
+          btn.style.display = 'none';
+          btn.classList.remove('is-animating');
+        });
+
+        // DO NOT abort controller here - this would kill the stream prematurely!
+        // Only abort in .catch() or explicit stop button click
+        console.log('[STREAM-' + thisStreamId + '] 🔨 forceResetButtons() complete');
+      }
 
       function readWithTimeout() {
         // Check heartbeat before each read
@@ -1426,114 +1656,168 @@ function initChatInput() {
         return Promise.race([readPromise, safetyTimeout]);
       }
 
+      // Parse all remaining content in buffer (for when stream ends but buffer still has thinking tokens)
+      function parseRemainingBuffer() {
+        console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: buffer has ' + buffer.length + ' chars');
+        if (!buffer || buffer.length === 0) {
+          console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: buffer is empty');
+          return;
+        }
+        console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: buffer preview=' + buffer.substring(0, 300).replace(/\n/g, '\\n'));
+        // Process all remaining buffer as SSE lines
+        var lines = buffer.split('\n');
+        buffer = ''; // Clear buffer
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i];
+          console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: processing line ' + i + ': ' + line.substring(0, 100).replace(/\n/g, '\\n'));
+          if (!line || line.startsWith(':')) continue; // skip empty and comments
+          if (line.startsWith('event: ')) continue; // skip event lines
+          if (line.startsWith('data: ')) {
+            var data = line.substring(6);
+            if (data && data.trim() === '[DONE]') {
+              console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: found [DONE] marker');
+              continue; // skip [DONE] marker
+            }
+            // Process token
+            var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
+            accumulatedRaw += unescaped;
+            _mon.token(unescaped);
+            console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: unescaped=' + unescaped.substring(0, 100).replace(/\n/g, '\\n'));
+            // Process thinking markers
+            var remaining = unescaped;
+            while (remaining.length > 0) {
+              console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: remaining loop, thinkingStarted=' + streamState.thinkingStarted + ', thinkingDone=' + streamState.thinkingDone);
+              if (!streamState.thinkingStarted) {
+                var thinkStartIdx = remaining.indexOf('<think>');
+                console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: no thinking started yet, looking for <think>, found at=' + thinkStartIdx);
+                if (thinkStartIdx !== -1) {
+                  if (thinkStartIdx > 0) {
+                    appendStreamingText(remaining.substring(0, thinkStartIdx));
+                  }
+                  streamState.thinkingStarted = true;
+                  ensureThinking();
+                  _mon.thinkingStart();
+                  remaining = remaining.substring(thinkStartIdx + 8);
+                } else {
+                  if (!streamState.thinkingStarted && !streamState.thinkingDone) {
+                    _mon.contentStart();
+                  }
+                  appendStreamingText(remaining);
+                  remaining = '';
+                }
+              } else if (!streamState.thinkingDone) {
+                var thinkEndIdx = remaining.indexOf('</think>');
+                console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: thinking in progress, looking for </think>, found at=' + thinkEndIdx);
+                if (thinkEndIdx !== -1) {
+                  if (thinkEndIdx > 0) {
+                    appendStreamingText(remaining.substring(0, thinkEndIdx));
+                  }
+                  streamState.thinkingDone = true;
+                  remaining = remaining.substring(thinkEndIdx + 9);
+                  _mon.thinkingEnd();
+                  _mon.contentStart();
+                  if (streamState.thinkingEl) {
+                    streamState.thinkingEl.classList.remove('is-streaming');
+                    streamState.thinkingEl.removeAttribute('open');
+                  }
+                } else {
+                  console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: </think> NOT FOUND in remaining, appending to thinking, remaining will be empty');
+                  appendStreamingText(remaining);
+                  remaining = '';
+                }
+              } else {
+                console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer: thinking done, appending to output');
+                appendStreamingText(remaining);
+                remaining = '';
+              }
+            }
+          }
+        }
+        console.log('[SSE-' + thisStreamId + '] parseRemainingBuffer complete: thinkingStarted=' + streamState.thinkingStarted + ', thinkingDone=' + streamState.thinkingDone);
+        console.log('[SSE-' + thisStreamId + '] accumulatedRaw total length=' + (accumulatedRaw ? accumulatedRaw.length : 0));
+        autoScrollChatLog();
+      }
+
       function processChunk() {
         return readWithTimeout().then(function(result) {
-          if (result && result.done) return 'done'; // stream complete
-          if (!result) return 'timeout'; // safety timeout or heartbeat expired
-          buffer += decoder.decode(result.value, { stream: true });
-          lastActivityTime = Date.now(); // reset heartbeat on any data
+          if (result && result.done) {
+             return 'done'; // Stream ended - let Promise chain handle button reset
+          }
+          if (!result) return 'timeout';
 
-          // Parse SSE events from buffer
+          buffer += decoder.decode(result.value, { stream: true });
+          lastActivityTime = Date.now();
+          lastContentTime = Date.now();
+
           var lines = buffer.split('\n');
-          buffer = lines.pop() || ''; // keep incomplete line
+          buffer = lines.pop() || '';
 
           var streamFinished = false;
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            // SSE comment lines (starting with :) are keepalives from server — log them to monitor
-            if (line.startsWith(':')) {
-              _mon._log('Keepalive: ' + line.substring(1).trim());
-              continue;
-            }
+            if (line.startsWith(':')) continue;
             if (line.startsWith('event: ')) {
               var eventType = line.substring(7).trim();
-              console.log('[SSE] Event received:', eventType);
-              _mon._log('Event: ' + eventType);
               if (eventType === 'done' || eventType === 'error') {
-                streamFinished = true; // server signaled completion
-                console.log('[SSE] Stream finished via event:', eventType);
+                streamFinished = true;
                 continue;
               }
             } else if (line.startsWith('data: ')) {
               var data = line.substring(6);
+              if (data && data.trim() === '[DONE]') {
+                streamFinished = true;
+                continue;
+              }
               if (data) {
-                // Check for llama.cpp's [DONE] signal or our manual event: done data
-                if (data.trim() === '[DONE]') {
-                  console.log('[SSE] Received data: [DONE]');
-                  _mon._log('Received [DONE] from server');
-                  streamFinished = true;
-                  continue;
-                }
                 var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
-                _mon.token(unescaped); // track token timing
+                _mon.token(unescaped);
                 accumulatedRaw += unescaped;
 
-                // Process new text incrementally
                 var newRaw = accumulatedRaw.substring(_processedUpTo);
                 _processedUpTo = accumulatedRaw.length;
 
-                // Check for thinking start/end markers in the new text
                 var remaining = newRaw;
-
                 while (remaining.length > 0) {
                   if (!streamState.thinkingStarted) {
-                    // Look for <think> in remaining text
                     var thinkStartIdx = remaining.indexOf('<think>');
                     if (thinkStartIdx !== -1) {
-                      // Text before thinking is output
-                      if (thinkStartIdx > 0) {
-                        appendStreamingText(remaining.substring(0, thinkStartIdx));
-                      }
+                      if (thinkStartIdx > 0) appendStreamingText(remaining.substring(0, thinkStartIdx));
                       streamState.thinkingStarted = true;
                       ensureThinking();
                       _mon.thinkingStart();
-                      remaining = remaining.substring(thinkStartIdx + 8); // skip <think>
+                      remaining = remaining.substring(thinkStartIdx + 8);
                     } else {
-                      // No thinking yet — all is output
-                      if (!streamState.thinkingStarted && !streamState.thinkingDone) {
-                        _mon.contentStart();
-                      }
+                      if (!streamState.thinkingStarted && !streamState.thinkingDone) _mon.contentStart();
                       appendStreamingText(remaining);
                       remaining = '';
                     }
                   } else if (!streamState.thinkingDone) {
-                    // We're inside thinking — look for </think>
                     var thinkEndIdx = remaining.indexOf('</think>');
                     if (thinkEndIdx !== -1) {
-                      // Text before </think> is thinking content
-                      if (thinkEndIdx > 0) {
-                        appendStreamingText(remaining.substring(0, thinkEndIdx));
-                      }
+                      if (thinkEndIdx > 0) appendStreamingText(remaining.substring(0, thinkEndIdx));
                       streamState.thinkingDone = true;
-                      remaining = remaining.substring(thinkEndIdx + 9); // skip </think>
+                      remaining = remaining.substring(thinkEndIdx + 9);
                       _mon.thinkingEnd();
-                      // Content starts after thinking
                       _mon.contentStart();
-                      // Mark thinking as no longer streaming
                       if (streamState.thinkingEl) {
                         streamState.thinkingEl.classList.remove('is-streaming');
                         streamState.thinkingEl.removeAttribute('open');
                       }
                     } else {
-                      // Still inside thinking — all remaining is thinking content
                       appendStreamingText(remaining);
                       remaining = '';
                     }
                   } else {
-                    // Thinking done — all remaining is output
                     appendStreamingText(remaining);
                     remaining = '';
                   }
                 }
-
                 autoScrollChatLog();
               }
             }
           }
-          // If server signaled completion via "event: done", don't recurse
           if (streamFinished) {
-            console.log('[SSE] Exiting processChunk() — streamFinished=true');
-            return 'done';
+            return 'done'; // Don't call forceResetButtons here - let Promise chain handle it
           }
           return processChunk();
         });
@@ -1541,7 +1825,8 @@ function initChatInput() {
       return processChunk();
     })
     .then(function(completionReason) {
-      _streamDone = true; // signal polling to restore buttons
+      // Delay button reset to ensure final output is fully rendered
+      setTimeout(function() { forceResetButtons(); }, 500);
       if (completionReason === 'timeout') {
         _mon.complete('safety timeout or heartbeat expired');
       } else {
@@ -1549,7 +1834,8 @@ function initChatInput() {
       }
     })
     .catch(function(err) {
-      _streamDone = true; // signal polling even on error
+      // Delay button reset to ensure final output is rendered even on error
+      setTimeout(function() { forceResetButtons(); }, 500);
       if (err.name === 'AbortError') {
         _mon.complete('user stopped (AbortError)');
         return;
@@ -1558,44 +1844,37 @@ function initChatInput() {
       if (mdBuffer) {
         mdBuffer.innerHTML += '<p style="color:#c66; margin-top:0.5rem;">⚠ Stream interrupted: ' + escapeHtml(err.message) + '</p>';
       }
-      console.warn('[SSE] Error:', err);
     })
     .finally(function() {
-      _streamDone = true; // ensure polling knows stream is done
-      try { clearInterval(_buttonPoll); } catch(e) {}
+      window._tttStreaming.done = true;
+      if (window._tttStreaming.poll) {
+        clearInterval(window._tttStreaming.poll);
+        window._tttStreaming.poll = null;
+      }
+      _mon._log('.finally() started');
+
       try {
-        console.log('[STREAM] .finally() started');
-        _mon._log('.finally() started');
-        
-        // Finalize thinking block
         if (streamState.thinkingEl) {
           streamState.thinkingEl.classList.remove('is-streaming');
-          // If it was never "done", it might be an error or truncation, but we still close it
           if (!streamState.thinkingDone) {
             _mon._log('Thinking block force-closed in finally');
-            streamState.thinkingDone = true; 
+            streamState.thinkingDone = true;
           }
-          // Only collapse if user hasn't explicitly opened it to read
           if (!streamState.userOpenedThinking) {
-             streamState.thinkingEl.open = false; 
+            streamState.thinkingEl.open = false;
           }
         }
-        
-        // Final markdown pass on thinking content
         if (streamState.thinkingContentEl && streamState.thinkingContentEl._rawText) {
           streamState.thinkingContentEl.innerHTML = renderMarkdownLite(streamState.thinkingContentEl._rawText);
         }
-        // Final markdown pass on output content
         if (streamState.outputEl && streamState.outputEl._rawText) {
           streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
         }
-        // Fallback: if no thinking/output elements exist, render accumulatedRaw
         if (!streamState.thinkingStarted && !streamState.outputEl && mdBuffer) {
           mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedRaw);
         }
         try { chatLog.scrollTop = chatLog.scrollHeight; } catch(e) {}
-        // Clean up stopped chat entries
-        if (currentController && currentController.signal.aborted) {
+        if (window._tttStreaming.controller && window._tttStreaming.controller.signal.aborted) {
           _mon._log('Stream was aborted by user');
           try {
             var chatLog2 = document.querySelector('.chat-log');
@@ -1614,36 +1893,11 @@ function initChatInput() {
           } catch(e) {}
         }
       } catch(e) {
-        console.error('[STREAM] Error in finalize logic:', e);
         _mon._log('ERROR in .finally(): ' + e.message);
       }
-      // Deferred button restoration — ensures DOM has settled
-      function restoreButtons() {
-        try {
-          currentController = null;
-          var sb = document.getElementById('chat-stop-button') || document.querySelector('.stop-button');
-          if (sb) {
-            sb.style.display = 'none';
-            // Force remove from DOM if it persists for some reason
-            if (sb.classList.contains('is-visible')) sb.classList.remove('is-visible');
-          }
-          var fb = document.querySelector('.send-button');
-          if (fb) {
-            fb.disabled = false;
-            fb.textContent = fb.dataset.originalLabel || 'Send';
-            fb.classList.remove('is-loading');
-          }
-          _mon._log('Buttons restored');
-        } catch(e) {
-          console.error('[STREAM] Error restoring buttons:', e);
-          _mon._log('ERROR restoring: ' + e.message);
-        }
-      }
-      restoreButtons();
-      // Double-check after DOM settles
-      setTimeout(restoreButtons, 200);
-      setTimeout(restoreButtons, 1000);
-      setTimeout(restoreButtons, 3000); // triple check
+
+      setTimeout(function() { forceResetButtons(); }, 200);
+      setTimeout(function() { forceResetButtons(); }, 1000);
     });
   });
 }

@@ -428,6 +428,12 @@ button:active:not(:disabled) {
   padding-bottom: 0.2rem;
 }
 
+.source-chip:has(input:checked) {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(198,155,98,0.14);
+}
+
 /* Lexical collapsible: Hebrew/Greek text collapses, English gloss stays visible */
 .lexical-collapsible {
   border-top: 1px solid rgba(255,255,255,0.04);
@@ -571,22 +577,6 @@ button:active:not(:disabled) {
   color: var(--danger);
 }
 
-/* Stop button for chat streaming */
-.stop-button {
-  border-radius: 5px;
-  border: 1px solid var(--danger);
-  background: rgba(205,92,92,0.12);
-  color: var(--danger);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.8rem;
-  min-height: 1.85rem;
-  padding: 0 0.65rem;
-}
-.stop-button:hover {
-  background: rgba(205,92,92,0.22);
-}
-
 /* Chat entry head with trash button */
 .chat-entry-head {
   display: flex;
@@ -642,6 +632,17 @@ button:active:not(:disabled) {
   margin-top: 0.12rem;
   padding-top: 0;
   border-top: 0;
+}
+.gloss-verse-list {
+  display: grid;
+  gap: 0.18rem;
+}
+.gloss-verse-row {
+  align-items: start;
+}
+.gloss-verse-text {
+  color: #e2c06e;
+  font-family: var(--serif);
 }
 .gloss-word {
   cursor: pointer;
@@ -1117,6 +1118,54 @@ button:active:not(:disabled) {
 }
 
 .editor-actions,
+.chat-send-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.stop-button-square {
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  background-color: rgba(185, 63, 63, 0.14);
+  border: 2px solid rgba(205, 92, 92, 0.72);
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease;
+  position: relative;
+}
+.stop-button-square::before {
+  content: "";
+  width: 0.58rem;
+  height: 0.58rem;
+  background-color: var(--danger);
+  border-radius: 2px;
+  transition: transform 150ms ease;
+}
+.stop-button-square:hover {
+  border-color: var(--danger);
+  background-color: rgba(185, 63, 63, 0.24);
+}
+.stop-button-square:hover::before {
+  transform: scale(1.1);
+}
+.stop-button-square:active {
+  transform: scale(0.95);
+}
+
+/* Animation for the circular border during streaming */
+@keyframes stop-button-pulse {
+  0% { border-color: rgba(205, 92, 92, 0.68); box-shadow: 0 0 0 0 rgba(205, 92, 92, 0.22); }
+  50% { border-color: var(--danger); box-shadow: 0 0 0 5px rgba(205, 92, 92, 0.11); }
+  100% { border-color: rgba(205, 92, 92, 0.68); box-shadow: 0 0 0 0 rgba(205, 92, 92, 0.22); }
+}
+.stop-button-square.is-animating {
+  animation: stop-button-pulse 2s infinite ease-in-out;
+}
 .chat-actions,
 .commit-actions {
   display: flex;

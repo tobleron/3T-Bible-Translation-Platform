@@ -84,17 +84,18 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
 
         sources_response = client.post(
             "/workspace/old/genesis/1/1-5/study/sources",
-            data=[("selected_sources", "LSB")],
+            data={"selected_sources": ["LSB", "ESV"]},
         )
         try:
             assert sources_response.status_code == 200
             assert "context-panel" in sources_response.text
             assert "LSB" in sources_response.text
+            assert 'value="LSB" checked' in sources_response.text
+            assert 'value="ESV" checked' in sources_response.text
             assert "Apply sources" not in sources_response.text
         finally:
             sources_response.close()
     reset_controller()
-
 
 def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
@@ -134,7 +135,7 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
         assert_clean(
             client.post(
                 "/workspace/old/genesis/1/1-5/study/sources",
-                data=[("selected_sources", "LSB"), ("selected_sources", "ESV")],
+                data={"selected_sources": ["LSB", "ESV"]},
             )
         )
         draft_text = assert_clean(
@@ -211,6 +212,9 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
 
         assert "EPUB generated successfully" in epub_text
         assert "Comparison sources and lexical context" in chunk_text
+        assert "gloss-verse-row" in chunk_text
+        assert "gloss-verse-text" in chunk_text
+        assert "data-gloss=\"ba.Ra" not in chunk_text
         assert "Creation of Light and Day One" in chunk_text
         assert "Draft saved." in draft_text
         assert "Creation of Light and Day One" in range_text

@@ -9,15 +9,16 @@ import requests
 
 from ttt_core.llm import LlamaCppClient
 from ttt_core.config import load_config
+from ttt_core.data.repositories import ProjectPaths, SourceRepository
 
 # ==== Configuration ====
 CFG = load_config()
-PATHS = CFG.get('paths', {})
+PATHS = ProjectPaths()
+SOURCE_REPO = SourceRepository(PATHS)
 
-FLAT_BIBLES_DIR = PATHS.get('processed_bibles', 'data/processed')
-INSTRUCTIONS_FILE = os.path.join(PATHS.get('prompts', 'resources/prompts'), 'instructions_bible_crafter_prompt.txt')
-CHAT_SESSION_DIR = PATHS.get('ai_sessions', 'output/ai_sessions')
-OUTPUT_DIR = PATHS.get('reports', 'output/reports')
+INSTRUCTIONS_FILE = PATHS.legacy_prompt_path
+CHAT_SESSION_DIR = PATHS.sessions_dir
+OUTPUT_DIR = PATHS.reports_dir
 
 LLAMA_CPP_CLIENT = LlamaCppClient()
 
@@ -30,55 +31,8 @@ def random_chunk_id(prefix):
     yyy = prefix.upper()
     return f"chunk_id_{nnn}{xxx}{yyy}"
 
-def extract_verses(bible_file, book, chapter, v_start, v_end):
-    with open(bible_file, 'r', encoding='utf-8') as f:
-        verses = json.load(f)
-    results = []
-    for v in verses:
-        if (v['book'].lower() == book.lower()
-                and int(v['chapter']) == int(chapter)
-                and int(v_start) <= int(v['verse']) <= int(v_end)):
-            results.append((int(v['verse']), v['text']))
-    results.sort()
-    return results
-
 def fetch_llm_models():
     return LLAMA_CPP_CLIENT.list_models()
-
-def ollama_generate(model, prompt):
-    try:
-        data = {
-            "model": model,
-            "prompt": prompt,
-            "stream": True
-        }
-        # Stream must be True in both data and requests.post
-        resp = requests.post(OLLAMA_GENERATE_API, json=data, stream=True, timeout=None)
-        resp.raise_for_status()
-        output_text = ""
-        for line in resp.iter_lines(decode_unicode=True):
-            if not line.strip():
-                continue
-            # Ollama streams each chunk as a JSON line: {"response": "...", ...}
-            try:
-                j = json.loads(line)
-                token = j.get("response", "")
-                print(token, end="", flush=True)  # Print live!
-                output_text += token
-            except Exception as ex:
-                print(f"\n[Streaming Parse Error]: {ex}")
-        print()  # Final newline after streaming
-        return output_text
-    except Exception as e:
-        print(f"Error generating output from Ollama: {e}")
-        return None
-
-def get_file_prefix(filename):
-    # Extracts the 3-letter code (like 'CSB') from filenames like '3_CSB_Bible_flat.json'
-    parts = filename.split('_')
-    if len(parts) >= 2:
-        return parts[1][:3].upper()
-    return "UNK"
 
 def main():
     os.makedirs(CHAT_SESSION_DIR, exist_ok=True)
@@ -86,48 +40,43 @@ def main():
 
     chunk_addr = input("Enter chunk address (BookName:Chapter:Verse-Range, e.g., Matthew:1:1-17): ").strip()
     try:
-        book, chapter, verse_range = chunk_addr.split(':')
-        v_start, v_end = verse_range.replace('-', '_').split('_')
+        book, chapter_str, verse_range_str = chunk_addr.split(':')
+        chapter = int(chapter_str)
+        v_start, v_end = map(int, verse_range_str.replace('-', '_').split('_'))
     except ValueError:
         print("Invalid format! Example: Matthew:1:1-17")
         return
 
-    flat_bibles = sorted(
-        [f for f in glob.glob(os.path.join(FLAT_BIBLES_DIR, '*_Bible_flat.json')) if not os.path.basename(f).startswith('_')],
-        key=lambda x: os.path.basename(x)
-    )
-
-    if not flat_bibles:
-        print(f"No flat bibles found in {FLAT_BIBLES_DIR}!")
+    available_sources = SOURCE_REPO.list_sources()
+    if not available_sources:
+        print("No source translations found!")
         return
 
     print("\nAvailable Source Translations:")
-    for i, f in enumerate(flat_bibles, 1):
-        print(f"[{i}] {os.path.basename(f)}")
+    for i, alias in enumerate(available_sources, 1):
+        print(f"[{i}] {alias}")
 
     selection = input("\nSelect translations to use (e.g., 1,3,5 or 'all'): ").strip().lower()
     
     if selection == 'all' or selection == '':
-        selected_bibles = flat_bibles
+        selected_aliases = available_sources
     else:
         try:
             indices = [int(x.strip()) - 1 for x in selection.split(',')]
-            selected_bibles = [flat_bibles[i] for i in indices if 0 <= i < len(flat_bibles)]
+            selected_aliases = [available_sources[i] for i in indices if 0 <= i < len(available_sources)]
         except (ValueError, IndexError):
             print("Invalid selection! Using all translations.")
-            selected_bibles = flat_bibles
+            selected_aliases = available_sources
 
     chunk_outputs = []
-    for bible_file in selected_bibles:
-        filename = os.path.basename(bible_file)
-        prefix = get_file_prefix(filename)
-        chunk_id = random_chunk_id(prefix)
-        verses = extract_verses(bible_file, book, chapter, v_start, v_end)
+    for alias in selected_aliases:
+        chunk_id = random_chunk_id(alias[:3])
+        verses = SOURCE_REPO.verse_range(alias, book, chapter, v_start, v_end)
         if not verses:
             continue
         chunk_text = [f"{chunk_id}"]
-        for verse_num, verse_text in verses:
-            chunk_text.append(f"{verse_num}. {verse_text}")
+        for verse_num in sorted(verses):
+            chunk_text.append(f"{verse_num}. {verses[verse_num]}")
         chunk_outputs.append('\n'.join(chunk_text))
 
     if not chunk_outputs:

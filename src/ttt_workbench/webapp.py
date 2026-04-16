@@ -4,7 +4,6 @@ import os
 import subprocess
 import time
 from pathlib import Path
-from typing import Generator
 
 import markdown as md_lib
 from fastapi import FastAPI, Form, Request
@@ -13,7 +12,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from ttt_core.utils import normalize_book_key
-from ttt_core.models import FootnoteDraft, JustificationDraft, PendingFootnoteUpdate
+from ttt_core.models import (
+    FootnoteDraft,
+    JustificationDraft,
+    PendingFootnoteUpdate,
+    PendingJustificationUpdate,
+)
 
 from .controller import BrowserWorkbench
 
@@ -690,7 +694,9 @@ async def _sse_chat_stream(
         wb.save_state()
 
         yield "event: done\ndata: [DONE]\n\n"
+        print(f"[SSE SERVER] Final [DONE] event sent", file=sys.stderr, flush=True)
     except Exception as exc:
+        print(f"[SSE SERVER] EXCEPTION in generator: {exc}", file=sys.stderr, flush=True)
         yield "event: error\ndata: " + str(exc)[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
 
 
@@ -1075,24 +1081,22 @@ def clear_chunk_session(request: Request, testament: str, book: str, chapter: in
 def delete_chat_message(
     request: Request, testament: str, book: str, chapter: int, chunk_key: str, index: int
 ):
-    """Delete a single chat message (and its paired response if it's a user message)."""
+    """Delete a chat message and every later message in the same conversation."""
     wb = controller()
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         messages = wb.state.chat_messages
-        deleted_role = ""
         if 0 <= index < len(messages):
             role = messages[index].get("role", "")
-            deleted_role = role
-            # Remove the target message
-            messages.pop(index)
-            # If it was a user message, also remove the immediately following assistant reply
-            if role == "user" and index < len(messages):
-                if messages[index].get("role") == "assistant":
-                    messages.pop(index)
+            removed_count = len(messages) - index
+            del messages[index:]
             wb.history_entries.append(
-                {"title": "Chat", "body": f"Deleted {deleted_role} message at index {index}", "accent": "blue"}
+                {
+                    "title": "Chat",
+                    "body": f"Deleted {role or 'chat'} message and {removed_count - 1} later message(s).",
+                    "accent": "blue",
+                }
             )
             wb.persist_current_chunk_session()
             wb.save_state()
@@ -1118,9 +1122,6 @@ def settings_page(request: Request):
         {
             "prompt_payload": wb.prompt_payload(),
             "endpoint_url": wb.llm.base_url,
-            "endpoint_mode": wb.web_settings.get("endpoint_mode", "auto"),
-            "lan_endpoint_url": wb.web_settings.get("lan_base_url", wb.llm.base_url),
-            "remote_endpoint_url": wb.web_settings.get("remote_base_url", ""),
             "flash_messages": wb.flash_messages,
             "model_names": wb.safe_list_models(),
         },
@@ -1135,9 +1136,6 @@ async def settings_save(request: Request):
         wb.save_web_settings(
             {
                 "base_url": str(form.get("base_url", wb.llm.base_url)).strip(),
-                "endpoint_mode": str(form.get("endpoint_mode", wb.web_settings.get("endpoint_mode", "auto"))).strip().lower(),
-                "lan_base_url": str(form.get("lan_base_url", wb.web_settings.get("lan_base_url", wb.llm.base_url))).strip(),
-                "remote_base_url": str(form.get("remote_base_url", wb.web_settings.get("remote_base_url", ""))).strip(),
             }
         )
         wb.save_prompt_payload(
@@ -1157,9 +1155,6 @@ async def settings_save(request: Request):
         {
             "prompt_payload": wb.prompt_payload(),
             "endpoint_url": wb.llm.base_url,
-            "endpoint_mode": wb.web_settings.get("endpoint_mode", "auto"),
-            "lan_endpoint_url": wb.web_settings.get("lan_base_url", wb.llm.base_url),
-            "remote_endpoint_url": wb.web_settings.get("remote_base_url", ""),
             "flash_messages": wb.flash_messages,
             "model_names": wb.safe_list_models(),
         },
@@ -1179,9 +1174,6 @@ def settings_test_endpoint(request: Request):
         {
             "prompt_payload": wb.prompt_payload(),
             "endpoint_url": wb.llm.base_url,
-            "endpoint_mode": wb.web_settings.get("endpoint_mode", "auto"),
-            "lan_endpoint_url": wb.web_settings.get("lan_base_url", wb.llm.base_url),
-            "remote_endpoint_url": wb.web_settings.get("remote_base_url", ""),
             "flash_messages": wb.flash_messages,
             "model_names": models,
         },

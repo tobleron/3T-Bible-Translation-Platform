@@ -14,11 +14,12 @@ fi
 echo "Starting full Bible chunk extraction..."
 echo "Script: $SCRIPT"
 echo "Output: $OUTPUT_DIR"
-echo "Endpoint: http://192.168.1.186:8081/v1"
+BASE_URL="${TTT_LLAMA_CPP_BASE_URL:-http://10.0.0.1:8080/v1}"
+echo "Endpoint: $BASE_URL"
 echo
 
 exec "$VENV_PY" "$SCRIPT" \
   --testament all \
   --output-dir "$OUTPUT_DIR" \
-  --base-url "http://192.168.1.186:8081/v1" \
+  --base-url "$BASE_URL" \
   "$@"

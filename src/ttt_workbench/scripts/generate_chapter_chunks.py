@@ -32,6 +32,7 @@ from ttt_core.data.repositories import (
     ProjectPaths,
     SourceRepository,
 )
+from ttt_core.config import DEFAULT_LLAMA_CPP_BASE_URL
 from ttt_core.llm import LlamaCppClient
 from ttt_core.utils import (
     ensure_parent,
@@ -588,8 +589,8 @@ def parse_args() -> argparse.Namespace:
         default=str(default_output_dir),
         help="Directory for generated chapter chunk files and logs.",
     )
-    parser.add_argument("--base-url", default="http://192.168.1.186:8081/v1")
-    parser.add_argument("--api-key", help="API key for the auth proxy.")
+    parser.add_argument("--base-url", default=DEFAULT_LLAMA_CPP_BASE_URL)
+    parser.add_argument("--api-key", help="Optional API key for OpenAI-compatible endpoints that require one.")
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--max-tokens", type=int, default=1800)
     parser.add_argument("--max-attempts", type=int, default=3)
