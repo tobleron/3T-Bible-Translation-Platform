@@ -1344,6 +1344,24 @@ button:active:not(:disabled) {
   font-weight: 600;
 }
 
+.final-output-stream {
+  margin-top: 0.45rem;
+}
+
+.final-output-stream-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.chat-output-streaming {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 /* Tables in streaming output */
 .chat-output-streaming table {
   font-size: 0.82rem;

@@ -1419,7 +1419,7 @@ function initChatInput() {
       var details = document.createElement('details');
       details.className = 'thinking-block is-streaming';
       var summary = document.createElement('summary');
-      summary.textContent = 'Thinking\u2026';
+      summary.textContent = 'Thinking Stream';
       summary.addEventListener('click', function() {
         // Toggle user preference — next token won't override
         setTimeout(function() {
@@ -1449,6 +1449,11 @@ function initChatInput() {
     function ensureOutput() {
       if (streamState.outputEl) return;
       clearStreamStatus();
+      var wrap = document.createElement('div');
+      wrap.className = 'final-output-stream';
+      var label = document.createElement('div');
+      label.className = 'final-output-stream-label';
+      label.textContent = 'Finalized output stream';
       var div = document.createElement('div');
       div.className = 'chat-output-streaming';
       div.style.cssText = 'white-space:pre-wrap;word-break:break-word;';
@@ -1457,7 +1462,9 @@ function initChatInput() {
       div.addEventListener('scroll', function() {
         div._wasAtBottom = div.scrollHeight - div.scrollTop - div.clientHeight <= 30;
       });
-      mdBuffer.appendChild(div);
+      wrap.appendChild(label);
+      wrap.appendChild(div);
+      mdBuffer.appendChild(wrap);
       streamState.outputEl = div;
     }
 
@@ -2039,7 +2046,7 @@ function renderMarkdownWithCollapsedThinking(rawText) {
       // Keep open while streaming so user can see progress
       parts.push(
         '<details class="thinking-block is-streaming" open>' +
-        '<summary>Thinking…</summary>' +
+        '<summary>Thinking Stream</summary>' +
         '<div class="thinking-content">' + escapeHtml(remaining.substring(idx)) + '</div>' +
         '</details>'
       );
@@ -2054,7 +2061,7 @@ function renderMarkdownWithCollapsedThinking(rawText) {
     var content = remaining.substring(idx + 8, closeIdx);
     parts.push(
       '<details class="thinking-block">' +
-      '<summary>Thinking…</summary>' +
+      '<summary>Thinking Stream</summary>' +
       '<div class="thinking-content">' + escapeHtml(content) + '</div>' +
       '</details>'
     );
