@@ -169,6 +169,7 @@ class LlamaCppClient:
         prompt_or_messages: str | list[dict[str, str]],
         temperature: float,
         max_tokens: int = 16384,
+        stop_event: object | None = None,
     ) -> Generator[str, None, None]:
         """Connects to llama.cpp's /completion endpoint with streaming.
 
@@ -193,8 +194,13 @@ class LlamaCppClient:
         timeout = self.stream_timeout_seconds
         max_retries = 2  # initial attempt + 1 retry on timeout
 
+        def should_stop() -> bool:
+            return bool(stop_event and getattr(stop_event, "is_set", lambda: False)())
+
         for attempt in range(max_retries):
             try:
+                if should_stop():
+                    return
                 if "/v1" in self.base_url:
                     # OpenAI-compatible endpoint: /v1/chat/completions
                     chat_payload = {
@@ -208,6 +214,8 @@ class LlamaCppClient:
                     with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
+                            if should_stop():
+                                return
                             if not line:
                                 continue
                             line_str = line.decode("utf-8")
@@ -230,13 +238,21 @@ class LlamaCppClient:
                                 if reasoning:
                                     # Wrap reasoning content in think tags for the renderer
                                     if not _in_thinking:
+                                        if should_stop():
+                                            return
                                         yield "<think>"
                                         _in_thinking = True
+                                    if should_stop():
+                                        return
                                     yield reasoning
                                 if content:
                                     if _in_thinking:
+                                        if should_stop():
+                                            return
                                         yield "</think>"
                                         _in_thinking = False
+                                    if should_stop():
+                                        return
                                     yield content
                                 if choices[0].get("finish_reason"):
                                     break
@@ -256,6 +272,8 @@ class LlamaCppClient:
                     with requests.post(url, json=native_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
+                            if should_stop():
+                                return
                             if not line:
                                 continue
                             line_str = line.decode("utf-8")
@@ -265,6 +283,8 @@ class LlamaCppClient:
                                 except json.JSONDecodeError:
                                     continue
                                 if "content" in data:
+                                    if should_stop():
+                                        return
                                     yield data["content"]
                                 if data.get("stop"):
                                     stats = {

@@ -559,6 +559,7 @@ async def chat_turn(
 
 
 async def _sse_chat_stream(
+    request: Request,
     testament: str,
     book: str,
     chapter: int,
@@ -589,9 +590,13 @@ async def _sse_chat_stream(
             yield "event: error\ndata: Review text is committed. Use Revise in Draft before chatting.\n\n"
             return
         if not wb.state.draft_chunk and not wb.state.chat_messages:
+            yield "event: status\ndata: Preparing initial draft before chat streaming...\n\n"
+            await asyncio.sleep(0)
             if not wb.browser_auto_generate_draft():
                 yield "event: error\ndata: Failed to generate initial draft.\n\n"
                 return
+            yield "event: status\ndata: Initial draft prepared. Starting chat response...\n\n"
+            await asyncio.sleep(0)
         print(f"[SSE SERVER] Prerequisites passed", file=sys.stderr, flush=True)
 
         prompt = wb.build_browser_chat_prompt(message)
@@ -610,26 +615,42 @@ async def _sse_chat_stream(
         from queue import Queue, Empty
         token_queue = Queue()
         
+        import threading
+        stop_event = threading.Event()
+
         def _stream_worker():
             try:
-                for token in wb.llm.stream_generation("stream", messages, temperature=0.7, max_tokens=16384):
+                for token in wb.llm.stream_generation(
+                    "stream",
+                    messages,
+                    temperature=0.7,
+                    max_tokens=4096,
+                    stop_event=stop_event,
+                ):
+                    if stop_event.is_set():
+                        break
                     token_queue.put(("token", token))
                 token_queue.put(("done", None))
             except Exception as exc:
                 token_queue.put(("exception", str(exc)))
 
-        import threading
         worker_thread = threading.Thread(target=_stream_worker, daemon=True)
         worker_thread.start()
 
         import time as _time
         last_token_time = _time.monotonic()
         max_wait = 600  # seconds
+        client_disconnected = False
 
         while True:
+            if await request.is_disconnected():
+                stop_event.set()
+                client_disconnected = True
+                print(f"[SSE SERVER] Client disconnected; stopping stream for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
+                break
             try:
                 # Poll the queue with a short timeout to allow keepalive pings
-                kind, value = token_queue.get(timeout=10)
+                kind, value = token_queue.get(timeout=1)
                 
                 if kind == "done":
                     break
@@ -656,6 +677,11 @@ async def _sse_chat_stream(
                 yield f"data: {escaped}\n\n"
                 
             except Empty:
+                if await request.is_disconnected():
+                    stop_event.set()
+                    client_disconnected = True
+                    print(f"[SSE SERVER] Client disconnected while waiting; stopping stream for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
+                    break
                 # No token received in 10s — send keepalive
                 elapsed = _time.monotonic() - last_token_time
                 if elapsed > max_wait:
@@ -670,6 +696,9 @@ async def _sse_chat_stream(
                 await asyncio.sleep(0)  # flush
 
         reply = "".join(full_reply).strip()
+        if client_disconnected:
+            print(f"[SSE SERVER] Stream abandoned by client for {book} {chapter}:{chunk_key}. Partial length: {len(reply)}", file=sys.stderr, flush=True)
+            return
         print(f"[SSE SERVER] Stream complete for {book} {chapter}:{chunk_key}. Tokens sent: {token_count}, Reply length: {len(reply)}, Error: {error_occurred}", file=sys.stderr, flush=True)
         if error_occurred:
             wb.history_entries.append(
@@ -717,7 +746,7 @@ async def chat_turn_stream(
         return JSONResponse({"error": "No message provided"}, status_code=400)
 
     return StreamingResponse(
-        _sse_chat_stream(testament, book, chapter, chunk_key, message, chat_context_sources),
+        _sse_chat_stream(request, testament, book, chapter, chunk_key, message, chat_context_sources),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",

@@ -1363,6 +1363,13 @@ button:active:not(:disabled) {
   font-weight: 600;
 }
 
+.chat-stream-status {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 0.15rem 0;
+}
+
 /* Streaming cursor animation */
 .chat-cursor {
   display: inline-block;

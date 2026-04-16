@@ -1331,6 +1331,7 @@ function initChatInput() {
       thinkingEl: null,          // <details> element
       thinkingContentEl: null,   // .thinking-content div
       outputEl: null,            // div for content after thinking
+      statusEl: null,            // transient server-side preparation status
       thinkingStarted: false,    // have we seen <think>?
       thinkingDone: false,       // have we seen </think>?
       userOpenedThinking: false, // did user manually open the block?
@@ -1447,6 +1448,7 @@ function initChatInput() {
     // Create output element for content after thinking
     function ensureOutput() {
       if (streamState.outputEl) return;
+      clearStreamStatus();
       var div = document.createElement('div');
       div.className = 'chat-output-streaming';
       div.style.cssText = 'white-space:pre-wrap;word-break:break-word;';
@@ -1457,6 +1459,25 @@ function initChatInput() {
       });
       mdBuffer.appendChild(div);
       streamState.outputEl = div;
+    }
+
+    function showStreamStatus(text) {
+      if (!mdBuffer || !text) return;
+      if (!streamState.statusEl) {
+        var div = document.createElement('div');
+        div.className = 'chat-stream-status';
+        mdBuffer.appendChild(div);
+        streamState.statusEl = div;
+      }
+      streamState.statusEl.textContent = text;
+      autoScrollChatLog();
+    }
+
+    function clearStreamStatus() {
+      if (streamState.statusEl && streamState.statusEl.parentNode) {
+        streamState.statusEl.parentNode.removeChild(streamState.statusEl);
+      }
+      streamState.statusEl = null;
     }
 
     // Append text to the right element (thinking or output)
@@ -1580,35 +1601,6 @@ function initChatInput() {
         }
         return null; // no timeout yet
       };
-
-      // FALLBACK TIMER: Force button reset if stream appears stuck
-       // This handles edge cases where Promise chain completes but button doesn't reset
-       var fallbackTimer = null;
-       function scheduleFallbackTimer(ms) {
-         if (fallbackTimer) clearTimeout(fallbackTimer);
-         fallbackTimer = setTimeout(function() {
-           console.log('[STREAM-' + thisStreamId + '] ⏰ FALLBACK TIMER fired - forcing button reset');
-           console.log('[STREAM-' + thisStreamId + '] 📍 Button state at fallback:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('fallback_timer')));
-           forceResetButtons();
-         }, ms);
-         console.log('[STREAM-' + thisStreamId + '] ⏰ Fallback timer scheduled for ' + ms + 'ms');
-       }
-
-       // INACTIVITY FALLBACK: If no actual content tokens for 15 seconds, assume stuck
-       var lastContentTime = Date.now();
-       var inactivityFallback = null;
-       function scheduleInactivityFallback() {
-         if (inactivityFallback) clearTimeout(inactivityFallback);
-         inactivityFallback = setTimeout(function() {
-           var elapsed = (Date.now() - lastContentTime) / 1000;
-           console.log('[STREAM-' + thisStreamId + '] ⏰⏰ INACTIVITY FALLBACK fired after ' + elapsed + 's of no content');
-           console.log('[STREAM-' + thisStreamId + '] 📍 Button state at inactivity fallback:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('inactivity_fallback')));
-           forceResetButtons();
-         }, 15000); // 15 seconds of no content
-       }
-       scheduleInactivityFallback();
-
-       scheduleFallbackTimer(90000); // 90 second ultimate fallback
 
       // FORCE RESET: Completely reset button state, bypassing all checks
       function forceResetButtons() {
@@ -1753,23 +1745,37 @@ function initChatInput() {
           buffer = lines.pop() || '';
 
           var streamFinished = false;
+          var eventType = 'message';
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (line.startsWith(':')) continue;
             if (line.startsWith('event: ')) {
-              var eventType = line.substring(7).trim();
+              eventType = line.substring(7).trim() || 'message';
               if (eventType === 'done' || eventType === 'error') {
                 streamFinished = true;
-                continue;
               }
+              continue;
             } else if (line.startsWith('data: ')) {
               var data = line.substring(6);
               if (data && data.trim() === '[DONE]') {
                 streamFinished = true;
+                eventType = 'message';
                 continue;
               }
               if (data) {
                 var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
+                if (eventType === 'status') {
+                  showStreamStatus(unescaped);
+                  eventType = 'message';
+                  continue;
+                }
+                if (eventType === 'error') {
+                  clearStreamStatus();
+                  appendStreamingText('Stream error: ' + unescaped);
+                  eventType = 'message';
+                  continue;
+                }
+                clearStreamStatus();
                 _mon.token(unescaped);
                 accumulatedRaw += unescaped;
 
