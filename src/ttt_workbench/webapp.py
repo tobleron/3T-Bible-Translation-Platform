@@ -589,14 +589,6 @@ async def _sse_chat_stream(
         if not wb.state.draft_chunk and not wb.state.chat_messages and wb.chunk_has_committed_text():
             yield "event: error\ndata: Review text is committed. Use Revise in Draft before chatting.\n\n"
             return
-        if not wb.state.draft_chunk and not wb.state.chat_messages:
-            yield "event: status\ndata: Preparing initial draft before chat streaming...\n\n"
-            await asyncio.sleep(0)
-            if not wb.browser_auto_generate_draft():
-                yield "event: error\ndata: Failed to generate initial draft.\n\n"
-                return
-            yield "event: status\ndata: Initial draft prepared. Starting chat response...\n\n"
-            await asyncio.sleep(0)
         print(f"[SSE SERVER] Prerequisites passed", file=sys.stderr, flush=True)
 
         prompt = wb.build_browser_chat_prompt(message)

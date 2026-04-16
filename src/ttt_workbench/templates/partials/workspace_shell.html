@@ -238,7 +238,6 @@
           </div>
           <div class="panel-summary">
             <span class="inline-badge">{{ model_label }} model</span>
-            <span class="muted-line">Chat operates on the draft buffer.</span>
           </div>
         </div>
 
@@ -1331,7 +1330,6 @@ function initChatInput() {
       thinkingEl: null,          // <details> element
       thinkingContentEl: null,   // .thinking-content div
       outputEl: null,            // div for content after thinking
-      statusEl: null,            // transient server-side preparation status
       thinkingStarted: false,    // have we seen <think>?
       thinkingDone: false,       // have we seen </think>?
       userOpenedThinking: false, // did user manually open the block?
@@ -1448,7 +1446,11 @@ function initChatInput() {
     // Create output element for content after thinking
     function ensureOutput() {
       if (streamState.outputEl) return;
-      clearStreamStatus();
+      if (streamState.thinkingEl && !streamState.thinkingStarted && streamState.thinkingEl.parentNode) {
+        streamState.thinkingEl.parentNode.removeChild(streamState.thinkingEl);
+        streamState.thinkingEl = null;
+        streamState.thinkingContentEl = null;
+      }
       var wrap = document.createElement('div');
       wrap.className = 'final-output-stream';
       var label = document.createElement('div');
@@ -1468,24 +1470,16 @@ function initChatInput() {
       streamState.outputEl = div;
     }
 
-    function showStreamStatus(text) {
+    function showStreamError(text) {
       if (!mdBuffer || !text) return;
-      if (!streamState.statusEl) {
-        var div = document.createElement('div');
-        div.className = 'chat-stream-status';
-        mdBuffer.appendChild(div);
-        streamState.statusEl = div;
-      }
-      streamState.statusEl.textContent = text;
+      var div = document.createElement('div');
+      div.className = 'chat-stream-error';
+      div.textContent = text;
+      mdBuffer.appendChild(div);
       autoScrollChatLog();
     }
 
-    function clearStreamStatus() {
-      if (streamState.statusEl && streamState.statusEl.parentNode) {
-        streamState.statusEl.parentNode.removeChild(streamState.statusEl);
-      }
-      streamState.statusEl = null;
-    }
+    ensureThinking();
 
     // Append text to the right element (thinking or output)
     var _lastRenderTime = 0;
@@ -1771,18 +1765,11 @@ function initChatInput() {
               }
               if (data) {
                 var unescaped = data.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\"/g, '"');
-                if (eventType === 'status') {
-                  showStreamStatus(unescaped);
-                  eventType = 'message';
-                  continue;
-                }
                 if (eventType === 'error') {
-                  clearStreamStatus();
-                  appendStreamingText('Stream error: ' + unescaped);
+                  showStreamError('Stream error: ' + unescaped);
                   eventType = 'message';
                   continue;
                 }
-                clearStreamStatus();
                 _mon.token(unescaped);
                 accumulatedRaw += unescaped;
 
