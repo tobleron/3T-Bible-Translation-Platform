@@ -14,3 +14,6 @@ Make buttons feel faster by replacing less DOM and rebinding fewer handlers.
 - New interactions prefer `#editor-panel`, `#chat-panel`, or `#context-panel` where the server response supports it.
 - Full workspace swaps remain available when multiple panels must be refreshed.
 
+## Status
+
+Completed. Editor, chat, context, support-note, footnote, and prompt-engineering interactions now target panel-sized swaps where the response supports it. Full `#workspace-shell` swaps remain for navigation and chunk merge, which legitimately refresh multiple regions.

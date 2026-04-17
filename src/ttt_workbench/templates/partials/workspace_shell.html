@@ -53,7 +53,7 @@
       {% set footnote_verse_value = state.footnote_draft.verse if state.footnote_draft else (state.chunk_start or 1) %}
       {% include "partials/editor_panel.html" %}
 
-      <article class="workspace-card prompt-engineering-panel editorial-panel">
+      <article id="prompt-engineering-panel" class="workspace-card prompt-engineering-panel editorial-panel">
         <div class="panel-head">
           <div>
             <p class="eyebrow">Prompt Engineering</p>
@@ -65,7 +65,7 @@
 
         <form class="editorial-form model-action-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editorial"
-          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
+          hx-target="#prompt-engineering-panel" hx-select="#prompt-engineering-panel" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
           <div class="editorial-tab-bar">
             <button class="tab-button is-active" type="button" data-editorial-tab="run" onclick="switchEditorialTab(this, 'run')">Run</button>
             <button class="tab-button" type="button" data-editorial-tab="prompts" onclick="switchEditorialTab(this, 'prompts')">Prompts</button>

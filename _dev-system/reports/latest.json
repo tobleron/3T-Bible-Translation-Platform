@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-17T23:05:31.792075+00:00",
+  "generated_at": "2026-04-17T23:08:40.491588+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
     "files_scanned": 134,
@@ -81,26 +81,26 @@
       "path": "src/ttt_workbench/webapp.py",
       "role": "browser-route",
       "language": "python",
-      "loc": 1326,
-      "risk": 28.07,
+      "loc": 1333,
+      "risk": 28.23,
       "preferred_loc": 760,
       "hard_loc": 1300,
-      "branches": 187,
+      "branches": 188,
       "max_nesting": 6,
-      "mutable_state": 264,
+      "mutable_state": 266,
       "imports": 27,
-      "callables": 69,
+      "callables": 70,
       "findings": [
         {
           "severity": "medium",
           "kind": "size",
-          "message": "1326 LOC exceeds preferred 760 LOC for role `browser-route`.",
+          "message": "1333 LOC exceeds preferred 760 LOC for role `browser-route`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "1326 LOC exceeds hard ceiling 1300 LOC for role `browser-route`.",
+          "message": "1333 LOC exceeds hard ceiling 1300 LOC for role `browser-route`.",
           "line": null
         }
       ]
@@ -842,6 +842,21 @@
       "findings": []
     },
     {
+      "path": "tests/test_webapp_fake_mode.py",
+      "role": "test",
+      "language": "python",
+      "loc": 261,
+      "risk": 4.77,
+      "preferred_loc": 520,
+      "hard_loc": 900,
+      "branches": 18,
+      "max_nesting": 2,
+      "mutable_state": 29,
+      "imports": 10,
+      "callables": 13,
+      "findings": []
+    },
+    {
       "path": "src/ttt_workbench/commands/justify.py",
       "role": "general-python",
       "language": "python",
@@ -914,21 +929,6 @@
       "mutable_state": 13,
       "imports": 4,
       "callables": 2,
-      "findings": []
-    },
-    {
-      "path": "tests/test_webapp_fake_mode.py",
-      "role": "test",
-      "language": "python",
-      "loc": 237,
-      "risk": 4.36,
-      "preferred_loc": 520,
-      "hard_loc": 900,
-      "branches": 15,
-      "max_nesting": 2,
-      "mutable_state": 25,
-      "imports": 9,
-      "callables": 11,
       "findings": []
     },
     {

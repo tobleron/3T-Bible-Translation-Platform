@@ -1475,6 +1475,15 @@ def job_status(job_id: str):
     return JSONResponse({"ok": True, "job": _job_payload(job)})
 
 
+@app.post("/jobs/{job_id}/cancel", response_class=JSONResponse)
+def job_cancel(job_id: str):
+    cancelled = _JOB_RUNNER.cancel(job_id)
+    job = _JOB_RUNNER.get(job_id)
+    if job is None:
+        return JSONResponse({"ok": False, "message": "Job not found."}, status_code=404)
+    return JSONResponse({"ok": True, "cancelled": cancelled, "job": _job_payload(job)})
+
+
 @app.get("/jobs", response_class=JSONResponse)
 def jobs_index():
     return {

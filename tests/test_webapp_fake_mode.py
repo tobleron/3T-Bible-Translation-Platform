@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
+import time
 from types import SimpleNamespace
 
 from fastapi.testclient import TestClient
@@ -74,6 +75,34 @@ def test_epub_background_job_endpoint_reports_status(monkeypatch) -> None:
             assert payload["job"]["status"] in {"running", "completed"}
         finally:
             status_response.close()
+    reset_controller()
+
+
+def test_background_job_cancel_endpoint(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+
+    def slow_run(*args, **kwargs):
+        time.sleep(0.25)
+        return SimpleNamespace(returncode=0, stdout="EPUB ok\n", stderr="")
+
+    monkeypatch.setattr(appmod.subprocess, "run", slow_run)
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post("/epub/jobs/generate")
+        try:
+            assert response.status_code == 202
+            job_id = response.json()["job"]["job_id"]
+        finally:
+            response.close()
+
+        cancel_response = client.post(f"/jobs/{job_id}/cancel")
+        try:
+            assert cancel_response.status_code == 200
+            payload = cancel_response.json()
+            assert payload["ok"] is True
+            assert payload["job"]["status"] in {"cancelled", "completed"}
+        finally:
+            cancel_response.close()
     reset_controller()
 
 

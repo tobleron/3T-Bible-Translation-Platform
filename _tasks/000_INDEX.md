@@ -4,8 +4,6 @@ Current active task list in execution order.
 
 - [Task procedures](./TASKS.md)
 - [005 Chunk Boundary and Label Quality Audit](./005_chunk_boundary_and_label_quality_audit.md)
-- [012 Reduce Large HTMX Workspace Swaps](./012_reduce_large_htmx_workspace_swaps.md)
-- [015 Add Background Jobs for Slow Actions](./015_background_jobs_for_slow_actions.md)
 - [016 Formalize Chat Stream Frontend Controller](./016_chat_stream_frontend_controller.md)
 - [017 Lazy Render Heavy Panels](./017_lazy_render_heavy_panels.md)
 - [019 Split CSS by Feature](./019_split_css_by_feature.md)
