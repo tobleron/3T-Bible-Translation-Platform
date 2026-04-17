@@ -631,6 +631,8 @@ button:active:not(:disabled) {
   padding: 0.5rem 0;
   border-top: 1px solid rgba(255,255,255,0.04);
   background: transparent;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 9rem;
 }
 .chunk-block:first-child {
   padding-top: 0;
@@ -2141,6 +2143,8 @@ input[type="submit"].is-loading {
   display: grid;
   gap: 0.35rem;
   padding: 0.1rem 0 0.55rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 7rem;
 }
 .support-entry-actions {
   margin-top: 0.15rem;

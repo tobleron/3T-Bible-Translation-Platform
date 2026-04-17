@@ -14,3 +14,6 @@ Reduce initial DOM work for every workspace page.
 - Hidden or collapsed panels avoid unnecessary heavy rendering where practical.
 - Study/source sections remain readable and stable.
 
+## Status
+
+Completed. The JSON browser modal is now created by the lazy panel controller only when opened, book/chapter JSON is still fetched on demand, and heavier study/support blocks use rendering containment while preserving readable layout.

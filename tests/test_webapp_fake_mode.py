@@ -272,6 +272,7 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
 
         assert "EPUB generated successfully" in epub_text
         assert "Comparison sources and lexical context" in chunk_text
+        assert "jsonModal" not in chunk_text
         assert "gloss-verse-row" in chunk_text
         assert "gloss-verse-text" in chunk_text
         assert "data-gloss=\"ba.Ra" not in chunk_text

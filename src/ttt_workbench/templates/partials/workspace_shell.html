@@ -355,20 +355,6 @@
   {% endif %}
 </div>
 
-{# JSON browser modal #}
-<div class="json-modal-overlay" id="jsonModal" style="display:none;" onclick="hideJsonPreview(event)">
-  <div class="json-modal-content" onclick="event.stopPropagation()">
-    <div class="json-modal-head">
-      <h3 id="jsonModalTitle">Book JSON</h3>
-      <button class="json-modal-close" type="button" onclick="hideJsonPreview()">&times;</button>
-    </div>
-    <div class="json-browser-layout">
-      <nav class="json-tree" id="jsonTree" aria-label="Book JSON chapters"></nav>
-      <pre class="json-modal-body" id="jsonPreviewBody">Loading...</pre>
-    </div>
-  </div>
-</div>
-
 <div class="workspace-toast" id="workspaceToast" role="status" aria-live="polite"></div>
 
 <script>
@@ -651,62 +637,6 @@ function clearStudyVerseFilter() {
   updatePromptEngineeringPreview();
 }
 
-function showBookJsonBrowser() {
-  var overlay = document.getElementById('jsonModal');
-  overlay.style.display = 'flex';
-  var body = document.getElementById('jsonPreviewBody');
-  var tree = document.getElementById('jsonTree');
-  var title = document.getElementById('jsonModalTitle');
-  if (title) title.textContent = 'Book JSON';
-  body.textContent = 'Loading...';
-  if (tree) tree.textContent = 'Loading...';
-  fetch(window.location.pathname + '/json-book-tree')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (!tree) return data;
-      if (title) title.textContent = (data.book || 'Book') + ' JSON';
-      tree.innerHTML = '';
-      var heading = document.createElement('div');
-      heading.className = 'json-tree-heading';
-      heading.textContent = data.book || 'Selected book';
-      tree.appendChild(heading);
-      (data.chapters || []).forEach(function(item, index) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'json-tree-item' + (index === 0 ? ' is-active' : '');
-        btn.textContent = 'Chapter ' + item.chapter;
-        btn.dataset.chapter = item.chapter;
-        btn.addEventListener('click', function() {
-          tree.querySelectorAll('.json-tree-item').forEach(function(el) { el.classList.remove('is-active'); });
-          btn.classList.add('is-active');
-          loadBookJsonChapter(item.chapter);
-        });
-        tree.appendChild(btn);
-      });
-      if (data.chapters && data.chapters.length) {
-        loadBookJsonChapter(data.chapters[0].chapter);
-      } else {
-        body.textContent = 'No JSON chapters found for this book.';
-      }
-    })
-    .catch(function(err) { body.textContent = 'Failed to load JSON: ' + err.message; });
-}
-function showJsonPreview() {
-  showBookJsonBrowser();
-}
-function loadBookJsonChapter(chapter) {
-  var body = document.getElementById('jsonPreviewBody');
-  if (!body) return;
-  body.textContent = 'Loading chapter ' + chapter + '...';
-  fetch(window.location.pathname + '/json-book-chapter/' + encodeURIComponent(chapter))
-    .then(function(r) { return r.json(); })
-    .then(function(data) { body.textContent = JSON.stringify(data, null, 2); })
-    .catch(function(err) { body.textContent = 'Failed to load chapter JSON: ' + err.message; });
-}
-function hideJsonPreview(e) {
-  if (e && e.target !== e.currentTarget) return;
-  document.getElementById('jsonModal').style.display = 'none';
-}
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideJsonPreview(); hideGlossTooltip(); }
 });

@@ -32,3 +32,7 @@ def test_static_interaction_layer_is_served() -> None:
         chat_response = client.get("/static/js/chat_stream_controller.js")
         assert chat_response.status_code == 200
         assert "TTTChatStreamController" in chat_response.text
+
+        lazy_response = client.get("/static/js/lazy_panels.js")
+        assert lazy_response.status_code == 200
+        assert "TTTLazyPanels" in lazy_response.text
