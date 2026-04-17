@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T20:20:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Leviticus",
+  "chapter": 9,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 24,
+  "verse_count": 24,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Moses commands the offerings",
+      "reason": "Narrative introduction of the eighth day event and Moses' instructions to Aaron and the people."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Aaron offers his own sacrifices",
+      "reason": "Detailed account of Aaron performing the sin and burnt offerings for himself."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Aaron offers the people's sacrifices",
+      "reason": "Continuation of the ritual focusing on the peace offerings and grain offering for the congregation."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Blessing and divine fire",
+      "reason": "Conclusion of the ceremony with Aaron's blessing, Moses and Aaron entering the tent, and God's fire consuming the offering."
+    }
+  ]
+}

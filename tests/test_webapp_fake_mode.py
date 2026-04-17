@@ -138,10 +138,17 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
                 data={"selected_sources": ["LSB", "ESV"]},
             )
         )
+        revision_text = assert_clean(
+            client.post(
+                "/workspace/old/genesis/1/1-5/editor/mode",
+                data={"editor_action": "seed-draft"},
+            )
+        )
         draft_text = assert_clean(
             client.post(
-                "/workspace/old/genesis/1/1-5/draft/save",
+                "/workspace/old/genesis/1/1-5/draft/autosave",
                 data={
+                    "editor_mode": "draft",
                     "draft_title": "Creation of Light and Day One",
                     "draft_range_start": "1",
                     "draft_range_end": "5",
@@ -159,6 +166,7 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
             client.post(
                 "/workspace/old/genesis/1/1-5/draft/range",
                 data={
+                    "editor_mode": "draft",
                     "draft_title": "Creation of Light and Day One",
                     "draft_range_start": "1",
                     "draft_range_end": "5",
@@ -179,10 +187,14 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
                 "/workspace/old/genesis/1/1-5/chat/prompt-text",
             )
         )
+        json_tree_text = assert_clean(client.get("/workspace/old/genesis/1/1-5/json-book-tree"))
+        json_chapter_text = assert_clean(client.get("/workspace/old/genesis/1/1-5/json-book-chapter/1"))
+        chapter_json_tree_text = assert_clean(client.get("/workspace/old/genesis/1/json-book-tree"))
         commit_text = assert_clean(
             client.post(
                 "/workspace/old/genesis/1/1-5/commit/apply",
                 data={
+                    "editor_mode": "draft",
                     "draft_title": "Creation of Light and Day One",
                     "draft_range_start": "1",
                     "draft_range_end": "5",
@@ -205,10 +217,18 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
         assert "gloss-verse-text" in chunk_text
         assert "data-gloss=\"ba.Ra" not in chunk_text
         assert "Creation of Light and Day One" in chunk_text
-        assert "Draft saved." in draft_text
+        assert "data-editor-mode=\"draft\"" in revision_text
+        assert '"ok":true' in draft_text.replace(" ", "")
+        assert "Save Draft" not in revision_text
+        assert "workspace-shell" not in draft_text
         assert "Creation of Light and Day One" in range_text
-        assert "workspace-shell" in commit_text
-        assert "Refined verse 3." in commit_text
+        assert '"book":"Genesis"' in json_tree_text.replace(" ", "")
+        assert '"chapter":1' in json_chapter_text.replace(" ", "")
+        assert '"book":"Genesis"' in chapter_json_tree_text.replace(" ", "")
+        assert "editor-panel" in commit_text
+        assert "workspace-shell" not in commit_text
+        assert "data-editor-mode=\"committed\"" in commit_text
+        assert "Start Revision" in commit_text
         assert "workspace-shell" in rollback_text
         assert "Creation of Light and Day One" in resume_text
     reset_controller()

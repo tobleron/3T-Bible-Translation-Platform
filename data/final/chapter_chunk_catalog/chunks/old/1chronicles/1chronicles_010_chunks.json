@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:22:09Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 10,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 14,
+  "verse_count": 14,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Death of Saul and his sons",
+      "reason": "Describes the battle at Gilboa where Saul and his three sons fall in combat."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Recovery of Saul's body",
+      "reason": "Narrates the Philistines stripping the bodies and the men of Jabesh-gilead retrieving them for burial."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 14,
+      "type": "argument",
+      "title": "Reason for Saul's death",
+      "reason": "Provides theological explanation for the kingdom passing to David due to Saul's unfaithfulness."
+    }
+  ]
+}

@@ -1,76 +1,94 @@
-# TTT Bible Translation Project: Comprehensive Workflow Guide
+# 3T Bible Translation Platform: Workflow Guide
 
 ## 1. Project Overview
-The **TTT (Theological Truth Translation) Bible Project** is a high-fidelity Bible translation workflow that combines Local Large Language Models (LLMs) with expert human editorial oversight. The goal is to produce a refined, justified, and consistent Bible translation delivered in a professional EPUB format.
 
-### **Core Objective**
-To use multiple source translations and original Greek/Hebrew texts (via LLMs) to generate a new translation, which is then refined by a human editor and compiled into a production-ready EPUB.
+The 3T Bible Translation Platform is a browser-based translation workbench for drafting, reviewing, justifying, and publishing Bible translation work with local or networked LLM endpoints.
 
----
+The active application is the browser workbench launched by:
 
-## 2. Infrastructure & LLM Setup
-The project uses **llama.cpp** (and optionally OpenAI) for translation and analysis.
+```bash
+./ttt.sh web
+```
 
-*   **Primary Endpoint:** `http://10.0.0.1:8080/v1` over WireGuard (configured in `config.yaml`, `.env`, or `TTT_LLAMA_CPP_BASE_URL`).
-*   **Authentication:** No API key is required for the direct WireGuard llama.cpp endpoint.
-*   **Client Logic:** Unified clients in `src/ttt_core/llm/`.
-    *   `LlamaCppClient`: Handles local llama.cpp server communication.
-    *   `OpenAIClient`: Handles OpenAI API communication.
+## 2. LLM Setup
 
----
+The platform uses a llama.cpp-compatible OpenAI API endpoint by default and can also use OpenAI when configured.
 
-## 3. Directory Structure & Modern Workflow
+Configuration is loaded from built-in defaults, root `config.yaml`, optional local config, `.env`, and environment overrides.
 
-The project is organized into modular packages under the `src/` directory.
+Common overrides:
 
-### **Core Modules (`src/ttt_core/`)**
-*   **`ttt_core.config`**: Unified configuration loader (merges `config.yaml`, environment variables, and defaults).
-*   **`ttt_core.data.repositories`**: Centralized data access for:
-    *   `BibleRepository`: Main translation storage (`data/final/_HOLY_BIBLE/`).
-    *   `SourceRepository`: Reference translations (`data/processed/`).
-    *   `JustificationRepository`: LLM-generated justifications.
-    *   `LexicalRepository`: Greek/Hebrew lexical data via SQLite.
-*   **`ttt_core.llm`**: Unified LLM clients.
-*   **`ttt_core.models`**: Shared data structures (dataclasses).
+```bash
+export TTT_LLAMA_CPP_BASE_URL="http://127.0.0.1:8080/v1"
+export TTT_LLAMA_CPP_API_KEY=""
+export TTT_LLAMA_CPP_STREAM_TIMEOUT="1800"
+```
 
-### **AI Translation Engine (`src/ttt_engine/`)**
-*   `TTT_Bible_crafter.py`: The main CLI tool for generating translations. It feeds source Bibles and prompts to the LLM.
-*   `bible_analysis.py`: Tool for side-by-side comparison of different translations for a given passage.
+Use environment variables for API keys. Do not commit credentials.
 
-### **Human Editorial Workspace (`src/ttt_workbench/` & `src/ttt_webapp/`)**
-*   **Workbench (TUI):** A Textual-based terminal interface for reviewing and editing translations. Run via `python3 -m ttt_workbench`.
-*   **Web App (GUI):** A FastAPI + HTMX web interface providing a modern editing environment. Run via `python3 src/ttt_workbench/webapp.py` (or similar entry point).
+## 3. Active Modules
 
-### **EPUB Production (`src/ttt_epub/`)**
-*   Tools for converting finalized JSON chapters into professional EPUB files.
-*   `generate_epub.py`: The assembly engine.
+### Browser Workbench
 
----
+- `src/ttt_workbench/webapp.py`: FastAPI routes and HTMX endpoints.
+- `src/ttt_workbench/controller.py`: browser controller and persistent workbench state.
+- `src/ttt_workbench/chainlit_app.py`: mounted Chainlit chat UI.
+- `src/ttt_workbench/templates/`: Jinja templates.
+- `src/ttt_workbench/static/`: browser CSS.
+- `src/ttt_webapp/`: compatibility imports for existing launcher paths.
 
-## 4. Operational Sequence (The "Standard Day")
+### Core
 
-1.  **Select a Passage:** Choose a chapter to translate.
-2.  **Run AI Engine:** Use `python3 src/ttt_engine/TTT_Bible_crafter.py`.
-    *   Enter chunk address (e.g., `John:1:1-18`).
-    *   Select source translations for context.
-    *   Choose LLM model.
-3.  **Review & Edit:** Use the **Workbench** or **Web App** to review the AI's output, justifications, and lexical data.
-4.  **Finalize:** Once the translation is approved, it is saved to the `BibleRepository`.
-5.  **Build EPUB:** Run the EPUB generation scripts in `src/ttt_epub/` to produce the final ebook.
+- `src/ttt_core/config.py`: configuration loader.
+- `src/ttt_core/data/repositories.py`: Bible, source, justification, lexical, and backup repositories.
+- `src/ttt_core/llm/`: llama.cpp and OpenAI-compatible clients.
+- `src/ttt_core/models/`: shared dataclasses and state objects.
 
----
+### EPUB
 
-## 5. Utilities & Maintenance
+- `src/ttt_epub/generate_epub.py`: EPUB build entry point.
+- `src/ttt_epub/epub_builder.py`: EPUB assembly.
+- `src/ttt_epub/validator.py`: output validation helpers.
 
-### **Version Control & Backups**
-*   **Tool:** `version_control.py` (located in the root).
-*   **Function:** Creates timestamped, versioned copies of the entire project in the `version_backup/` folder.
-*   **Internal Backups:** `ttt_core.utils.backup` provides atomic writes and per-file backup sets in `.ttt_workbench/backups/`.
+### Data
 
-### **Data Converters**
-*   Located in `src/ttt_converters/`.
-*   Used to ingest new Bible formats (SQLite, XML, USFM, etc.) and convert them to the internal "flat JSON" format used by the `SourceRepository`.
+- `data/processed/`: flat Bible reference JSON files.
+- `data/final/_HOLY_BIBLE/`: editable platform Bible data.
+- `data/final/chapter_chunk_catalog/`: chapter chunk metadata used by the browser.
+- `data/raw/_Original_Languages/HEBREW/morphhb_xml/`: Hebrew source-language data.
+- `src/ttt_workbench/sblgnt/`: Greek SBLGNT / MorphGNT data used by the workbench.
 
----
-**Document Version:** 1.1  
-**Updated:** Tuesday, April 14, 2026
+## 4. Main Workflow
+
+1. Start the browser workbench with `./ttt.sh web`.
+2. Open a chapter/chunk in the browser.
+3. Review source translations and original-language context.
+4. Use chat and editorial tools to draft or revise text.
+5. Commit approved changes to `data/final/_HOLY_BIBLE/`.
+6. Build an EPUB with `./ttt.sh epub`.
+
+## 5. Repository Hygiene
+
+The GitHub repository should include only the runnable platform, tests, documentation, flat Bible data, editable workspace Bible data, and original-language source data.
+
+Excluded from Git:
+
+- `.env`
+- `.venv/`
+- `.ttt_workbench/`
+- `output/`
+- `archive/`
+- `version_backup/`
+- raw cloned `data/raw/bible_databases/`
+- cache directories and compiled Python files
+
+## 6. Checks
+
+```bash
+./ttt.sh test
+.venv/bin/python -m pytest tests -q
+.venv/bin/python -m compileall -q src tests
+```
+
+**Document Version:** 2.0  
+**Updated:** April 18, 2026

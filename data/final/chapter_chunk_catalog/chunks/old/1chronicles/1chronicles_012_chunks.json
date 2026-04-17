@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:25:16Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 12,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 40,
+  "verse_count": 40,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "list_or_catalog",
+      "title": "Benjaminites at Ziklag",
+      "reason": "A catalog of names and families from Benjamin who joined David."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 15,
+      "type": "list_or_catalog",
+      "title": "Gadites in the Wilderness",
+      "reason": "A description of the Gadite warriors and a list of their leaders."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 22,
+      "type": "story",
+      "title": "Defectors Join David",
+      "reason": "Narrative accounts of Benjamites, Judahites, and Manassites joining David."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 37,
+      "type": "list_or_catalog",
+      "title": "Tribal Numbers at Hebron",
+      "reason": "A detailed statistical list of warriors from various tribes arriving at Hebron."
+    },
+    {
+      "start_verse": 38,
+      "end_verse": 40,
+      "type": "story",
+      "title": "David Crowned King",
+      "reason": "Narrative conclusion describing the unity of Israel and the celebration."
+    }
+  ]
+}

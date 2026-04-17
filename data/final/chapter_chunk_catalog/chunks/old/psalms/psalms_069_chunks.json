@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:47:38Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 69,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 36,
+  "verse_count": 36,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "speech",
+      "title": "Lament and Suffering",
+      "reason": "The psalmist describes his distress, enemies, and social isolation."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 29,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Deliverance and Judgment",
+      "reason": "A plea for God's help followed by a curse on the enemies."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 36,
+      "type": "psalm",
+      "title": "Vow of Praise and Future Hope",
+      "reason": "A transition to thanksgiving and a prophecy regarding Zion."
+    }
+  ]
+}

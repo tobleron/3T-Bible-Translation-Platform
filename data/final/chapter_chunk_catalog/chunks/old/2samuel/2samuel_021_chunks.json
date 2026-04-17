@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T23:49:16Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Samuel",
+  "chapter": 21,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Famine and Atonement with Gibeonites",
+      "reason": "A complete narrative unit covering the famine, the negotiation with the Gibeonites, the execution of Saul's descendants, Rizpah's vigil, and the burial of Saul and Jonathan."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 22,
+      "type": "list_or_catalog",
+      "title": "Wars Against the Giants",
+      "reason": "A catalog of four distinct battles where David's men defeated specific giants from Gath."
+    }
+  ]
+}

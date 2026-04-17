@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:13:34Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Judges",
+  "chapter": 18,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Danites Seek Land and Priest",
+      "reason": "Introduction of the tribe of Dan seeking territory and their encounter with Micah's Levite priest."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 10,
+      "type": "story",
+      "title": "Scouts Report on Laish",
+      "reason": "The five spies discover the security of Laish and report back to encourage the tribe."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Danites March to Ephraim",
+      "reason": "The main force of 600 men sets out and arrives at Micah's house."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "dialogue",
+      "title": "The Priest is Recruited",
+      "reason": "The spies reveal the idols to their kin and persuade the Levite priest to join them."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Flight from Micah",
+      "reason": "The Danites flee with the idols and priest while Micah confronts them but yields to their strength."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Conquest of Laish and Establishment of Dan",
+      "reason": "The tribe destroys Laish, rebuilds it as Dan, and establishes the idolatrous priesthood."
+    }
+  ]
+}

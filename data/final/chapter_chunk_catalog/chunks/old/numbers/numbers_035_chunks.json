@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:44:34Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 35,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 34,
+  "verse_count": 34,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Cities for the Levites",
+      "reason": "Divine instruction regarding the allocation of cities and pasture lands to the Levites."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 34,
+      "type": "law",
+      "title": "Cities of Refuge and Legal Judgments",
+      "reason": "Detailed statutes concerning the selection of cities of refuge, distinctions between accidental and intentional killing, and judicial procedures."
+    }
+  ]
+}

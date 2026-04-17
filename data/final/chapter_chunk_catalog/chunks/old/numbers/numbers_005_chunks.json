@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T20:59:45Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 5,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Leapers Sent Outside the Camp",
+      "reason": "Narrative account of the command and execution regarding unclean persons."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "law",
+      "title": "Law of Restitution for Sins",
+      "reason": "Divine instruction on confessing sins and making financial restitution to victims or the priest."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 31,
+      "type": "law",
+      "title": "Law of Jealousy for Suspected Adultery",
+      "reason": "Detailed legal procedure and ritual for testing a wife suspected of unfaithfulness."
+    }
+  ]
+}

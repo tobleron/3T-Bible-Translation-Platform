@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T06:49:55Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 123,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 4,
+  "verse_count": 4,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "blessing_or_prayer",
+      "title": "Lifting Eyes to God",
+      "reason": "The psalmist lifts his eyes to God and compares the posture of dependence to that of slaves waiting for their master."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 4,
+      "type": "blessing_or_prayer",
+      "title": "Petition for Grace",
+      "reason": "The psalmist pleads for God's grace due to being filled with contempt and mockery from the proud."
+    }
+  ]
+}

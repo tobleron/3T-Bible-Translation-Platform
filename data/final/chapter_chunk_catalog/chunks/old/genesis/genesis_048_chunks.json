@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T18:14:50Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 48,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Jacob's Recall of Rachel and Joseph's Arrival",
+      "reason": "Narrative introduction covering Joseph's arrival and Jacob's recollection of Rachel's death."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Joseph Brings Sons to Jacob for Blessing",
+      "reason": "Dialogue and action describing the positioning of Ephraim and Manasseh before Jacob."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 20,
+      "type": "blessing_or_prayer",
+      "title": "Jacob's Blessing of the Grandsons",
+      "reason": "The formal blessing speech and the specific act of crossing hands to favor Ephraim."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "exhortation",
+      "title": "Jacob's Final Words to Joseph",
+      "reason": "Jacob's final instructions regarding his death and the gift of Shechem to Joseph."
+    }
+  ]
+}

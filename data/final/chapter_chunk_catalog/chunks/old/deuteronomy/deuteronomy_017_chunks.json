@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T23:27:01Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 17,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 20,
+  "verse_count": 20,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "law",
+      "title": "Laws on Sacrifices and Idolatry",
+      "reason": "Establishes regulations for sacrificial animals and the judicial process for idolaters."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 13,
+      "type": "law",
+      "title": "Laws on Judicial Appeals",
+      "reason": "Describes the procedure for difficult cases and the authority of Levitical priests."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 20,
+      "type": "law",
+      "title": "Laws on the King",
+      "reason": "Outlines qualifications and restrictions for the future king of Israel."
+    }
+  ]
+}

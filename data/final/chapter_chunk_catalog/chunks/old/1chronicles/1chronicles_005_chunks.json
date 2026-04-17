@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:14:03Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 5,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 26,
+  "verse_count": 26,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "argument",
+      "title": "Transfer of Birthright",
+      "reason": "Introductory explanation regarding the shift of birthright from Reuben to Joseph and Judah."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 10,
+      "type": "genealogy",
+      "title": "Genealogy of Reuben",
+      "reason": "Lineage of Reuben's sons and their descendants, concluding with their settlement in Gilead."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "genealogy",
+      "title": "Genealogy of Gad",
+      "reason": "Lineage of Gad's sons and their settlement in Bashan and Gilead."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 22,
+      "type": "story",
+      "title": "War Against the Hagrites",
+      "reason": "Narrative of the military campaign by Reuben, Gad, and half-Manasseh against the Hagrites."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 26,
+      "type": "story",
+      "title": "Exile of Half-Manasseh",
+      "reason": "Account of the half-tribe of Manasseh's lineage, their unfaithfulness, and subsequent exile."
+    }
+  ]
+}

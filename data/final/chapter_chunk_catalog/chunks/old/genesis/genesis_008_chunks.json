@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T16:41:14Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 8,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "The Waters Recede",
+      "reason": "Describes the subsiding of the flood waters and the ark resting on Ararat."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Noah Sends Out Birds",
+      "reason": "Details Noah's testing of the earth with a raven and dove until the ground dried."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 19,
+      "type": "speech",
+      "title": "God Commands Exit",
+      "reason": "Contains God's direct instruction for Noah and the animals to leave the ark."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 22,
+      "type": "mixed",
+      "title": "Noah's Sacrifice and God's Promise",
+      "reason": "Combines Noah's offering with God's oracle regarding the seasons and covenant."
+    }
+  ]
+}

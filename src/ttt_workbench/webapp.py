@@ -57,6 +57,42 @@ def resolve_book_name(wb: BrowserWorkbench, testament: str, raw_book: str) -> st
     return raw_book
 
 
+def book_json_tree_payload(wb: BrowserWorkbench, testament: str, book: str, chapter: int) -> dict:
+    chapters = []
+    wb.bible_repo._build_index()
+    book_key = normalize_book_key(book)
+    indexed = [
+        (chapter_num, path)
+        for (indexed_book, chapter_num), path in wb.bible_repo._index.items()
+        if indexed_book == book_key and wb.bible_repo._path_testament(path) == testament
+    ]
+    for chapter_num, path in sorted(indexed):
+        chapters.append(
+            {
+                "chapter": chapter_num,
+                "path": str(path),
+                "selected": chapter_num == chapter,
+            }
+        )
+    return {"ok": True, "testament": testament, "book": book, "chapters": chapters}
+
+
+def book_json_chapter_payload(wb: BrowserWorkbench, book: str, target_chapter: int) -> JSONResponse:
+    try:
+        chapter_file = wb.bible_repo.load_chapter(book, target_chapter, allow_scaffold=False)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "message": str(exc)}, status_code=404)
+    return JSONResponse(
+        {
+            "ok": True,
+            "book": book,
+            "chapter": target_chapter,
+            "path": str(chapter_file.path),
+            "json": chapter_file.doc,
+        }
+    )
+
+
 def render_page(request: Request, template_name: str, context: dict, status_code: int = 200):
     if "settings_config" not in context:
         context["settings_config"] = controller().settings_payload()
@@ -78,6 +114,12 @@ def render_workspace(request: Request, wb: BrowserWorkbench, active_tab: str = "
 
 def render_chat_panel(request: Request, wb: BrowserWorkbench):
     response = render_page(request, "partials/chat_panel.html", wb.workspace_payload(active_tab="draft"))
+    wb.clear_flash()
+    return response
+
+
+def render_editor_panel(request: Request, wb: BrowserWorkbench):
+    response = render_page(request, "partials/editor_panel.html", wb.workspace_payload(active_tab="draft"))
     wb.clear_flash()
     return response
 
@@ -367,6 +409,22 @@ def workspace_chapter(request: Request, testament: str, book: str, chapter: int,
     return render_workspace(request, wb, active_tab=tab)
 
 
+@app.get("/workspace/{testament}/{book}/{chapter}/json-book-tree", response_class=JSONResponse)
+def chapter_json_book_tree(request: Request, testament: str, book: str, chapter: int):
+    wb = controller()
+    book = resolve_book_name(wb, testament, book)
+    wb.select_chapter(testament, book, chapter)
+    return JSONResponse(book_json_tree_payload(wb, testament, book, chapter))
+
+
+@app.get("/workspace/{testament}/{book}/{chapter}/json-book-chapter/{target_chapter}", response_class=JSONResponse)
+def chapter_json_book_chapter(request: Request, testament: str, book: str, chapter: int, target_chapter: int):
+    wb = controller()
+    book = resolve_book_name(wb, testament, book)
+    wb.select_chapter(testament, book, chapter)
+    return book_json_chapter_payload(wb, book, target_chapter)
+
+
 @app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}", response_class=HTMLResponse)
 def workspace(request: Request, testament: str, book: str, chapter: int, chunk_key: str, tab: str = "study"):
     wb = controller()
@@ -449,9 +507,29 @@ async def save_draft(
         apply_draft_form(wb, form)
         wb.notify("Draft saved.")
         wb.activate_tab("draft")
-        return render_workspace(request, wb, active_tab="draft", partial=True)
+        return render_editor_panel(request, wb)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/autosave", response_class=JSONResponse)
+async def autosave_draft(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        apply_draft_form(wb, form)
+        wb.activate_tab("draft")
+        return JSONResponse({"ok": True, "message": "Draft saved."})
+    except Exception as exc:
+        return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/range", response_class=HTMLResponse)
@@ -472,7 +550,7 @@ async def set_draft_range(
         target_end = int(str(form.get("editor_target_end", wb.current_editor_range()[1])))
         wb.set_editor_range(target_start, target_end)
         wb.activate_tab("draft")
-        return render_workspace(request, wb, active_tab="draft", partial=True)
+        return render_editor_panel(request, wb)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
@@ -490,8 +568,9 @@ async def set_editor_mode(
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        apply_draft_form(wb, form)
         action = str(form.get("editor_action", "")).strip().lower()
+        if action in ("draft", "review"):
+            apply_draft_form(wb, form)
         if action == "seed-draft":
             wb.seed_draft_from_committed()
             wb.history_entries.append(
@@ -504,7 +583,63 @@ async def set_editor_mode(
             )
         wb.activate_tab("draft")
         wb.save_state()
-        return render_workspace(request, wb, active_tab="draft", partial=True)
+        return render_editor_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/lock", response_class=HTMLResponse)
+async def editor_lock(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    wb = controller()
+    form = await request.form()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        apply_draft_form(wb, form)
+        wb.lock_editor()
+        return render_editor_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/unlock", response_class=HTMLResponse)
+async def editor_unlock(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        wb.unlock_editor()
+        return render_editor_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/revise", response_class=HTMLResponse)
+async def editor_revise(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        wb.start_revision()
+        return render_editor_panel(request, wb)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
@@ -941,6 +1076,7 @@ async def editorial_assistant(
                 "grammar": str(form.get("editorial_prompt_grammar", "")).strip(),
                 "concise": str(form.get("editorial_prompt_concise", "")).strip(),
                 "scholarly": str(form.get("editorial_prompt_scholarly", "")).strip(),
+                "copyable": str(form.get("editorial_prompt_copyable", "")).strip(),
             }
         )
         wb.state.editorial_input = str(form.get("editorial_input", "")).strip()
@@ -982,6 +1118,7 @@ async def enhance_field(
             "grammar": str(form.get("editorial_prompt_grammar", "")).strip(),
             "concise": str(form.get("editorial_prompt_concise", "")).strip(),
             "scholarly": str(form.get("editorial_prompt_scholarly", "")).strip(),
+            "copyable": str(form.get("editorial_prompt_copyable", "")).strip(),
         }
         wb.save_editorial_prompts(prompt_updates)
         mode = str(form.get("mode", "")).strip().lower()
@@ -1029,9 +1166,18 @@ async def apply_commit(
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         apply_draft_form(wb, form)
+        had_writes = bool(wb.build_commit_plan())
         wb.cmd_commit([])
+        
+        # After cmd_commit, we clear the draft which sets the state to 'committed'
+        wb.clear_current_draft_after_commit()
+        
+        # Double check it is indeed committed
+        wb.state.browser_editor_state = "committed"
+        wb.state.browser_editor_mode = "review"
+        
         wb.save_state()
-        return render_workspace(request, wb, active_tab="commit", partial=True)
+        return render_editor_panel(request, wb)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="commit")
 
@@ -1096,6 +1242,29 @@ def json_preview(request: Request, testament: str, book: str, chapter: int, chun
     book = resolve_book_name(wb, testament, book)
     wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
     return JSONResponse(wb.json_preview_payload())
+
+
+@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-tree", response_class=JSONResponse)
+def json_book_tree(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+    wb = controller()
+    book = resolve_book_name(wb, testament, book)
+    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+    return JSONResponse(book_json_tree_payload(wb, testament, book, chapter))
+
+
+@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-chapter/{target_chapter}", response_class=JSONResponse)
+def json_book_chapter(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+    target_chapter: int,
+):
+    wb = controller()
+    book = resolve_book_name(wb, testament, book)
+    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+    return book_json_chapter_payload(wb, book, target_chapter)
 
 
 @app.get("/settings", response_class=HTMLResponse)

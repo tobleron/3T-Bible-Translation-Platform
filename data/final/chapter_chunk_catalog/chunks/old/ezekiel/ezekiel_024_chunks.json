@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T12:32:06Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezekiel",
+  "chapter": 24,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Date and Siege Announcement",
+      "reason": "Establishes the specific date of the prophecy and the historical context of the Babylonian siege."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 14,
+      "type": "parable",
+      "title": "Parable of the Boiling Pot",
+      "reason": "Contains a complete symbolic narrative using a cooking pot to illustrate Jerusalem's impending judgment."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Ezekiel's Silent Grief",
+      "reason": "Describes the command for Ezekiel to mourn his wife silently and the subsequent explanation of its meaning."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 27,
+      "type": "oracle",
+      "title": "Restoration of Speech",
+      "reason": "Concludes with a prophecy regarding the messenger who will bring news and Ezekiel's mouth opening."
+    }
+  ]
+}

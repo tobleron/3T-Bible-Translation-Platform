@@ -55,4 +55,7 @@
         </select>
     </label>
   </form>
+  {% if selected_book %}
+  <button class="secondary-button workspace-json-button" type="button" onclick="showBookJsonBrowser()" title="Browse selected book JSON">JSON</button>
+  {% endif %}
 </div>

@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:35:19Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Proverbs",
+  "chapter": 15,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 33,
+  "verse_count": 33,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "list_or_catalog",
+      "title": "Wisdom in Speech and Observation",
+      "reason": "A series of short proverbs contrasting wise and foolish speech with divine observation."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "list_or_catalog",
+      "title": "Wisdom in Daily Conduct",
+      "reason": "A collection of proverbs regarding the tongue, discipline, and household wealth."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Wisdom in Heart and Relationships",
+      "reason": "Proverbs focusing on the human heart, family dynamics, and emotional states."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 30,
+      "type": "list_or_catalog",
+      "title": "Wisdom in Decision and Action",
+      "reason": "A sequence of sayings about planning, answers, paths, and social interactions."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 33,
+      "type": "exhortation",
+      "title": "The Path to Wisdom",
+      "reason": "Concluding verses emphasizing the value of reproof and the fear of Yahweh."
+    }
+  ]
+}

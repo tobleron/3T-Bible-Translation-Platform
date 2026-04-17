@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T04:18:07Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 20,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 20,
+  "verse_count": 20,
+  "attempts_used": 3,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "Exhortations Before Battle",
+      "reason": "A continuous speech by the priest and officers encouraging the troops and granting exemptions."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 18,
+      "type": "law",
+      "title": "Rules for Conquering Cities",
+      "reason": "Legal instructions distinguishing between distant cities and local Canaanite nations regarding peace terms and destruction."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 20,
+      "type": "law",
+      "title": "Rules for Siege Warfare",
+      "reason": "Specific regulations concerning the treatment of trees during a prolonged siege."
+    }
+  ]
+}

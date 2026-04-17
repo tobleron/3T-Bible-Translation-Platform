@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:17:06Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Esther",
+  "chapter": 1,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The King's Feast and Vashti's Banquet",
+      "reason": "Describes the grand feast held by King Ahasuerus and the separate feast for women."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Vashti Refuses the King's Call",
+      "reason": "Narrates the king's command to bring Vashti and her refusal."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "dialogue",
+      "title": "The King Consults His Advisors",
+      "reason": "Contains the king's question to his wise men and Memucan's detailed argument."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 22,
+      "type": "story",
+      "title": "The Decree is Issued",
+      "reason": "Describes the king's acceptance of the advice and the sending of letters to all provinces."
+    }
+  ]
+}

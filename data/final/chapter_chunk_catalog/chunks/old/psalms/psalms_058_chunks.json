@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:35:36Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 58,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Accusation against the Wicked",
+      "reason": "The psalmist addresses the 'gods' and 'sons of men,' describing their inherent unrighteousness and comparing them to a deaf serpent."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Divine Judgment",
+      "reason": "A series of petitions asking God to shatter the teeth of the wicked and sweep them away like water or thorns."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Conclusion on Vengeance",
+      "reason": "The psalm concludes with the righteous rejoicing at God's vengeance and a declaration that God truly judges on earth."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T08:25:08Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Song of Solomon",
+  "chapter": 8,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 14,
+  "verse_count": 14,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "The Woman's Longing for Intimacy",
+      "reason": "A continuous speech expressing the woman's desire to be with her beloved in a familiar setting."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "The Oath and Description of Love",
+      "reason": "A speech containing an oath to the daughters of Jerusalem followed by a poetic description of love's power."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "dialogue",
+      "title": "The Brothers and the Sister",
+      "reason": "A dialogue between the woman's brothers regarding their sister's future and her response to them."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 12,
+      "type": "dialogue",
+      "title": "The Vineyard Comparison",
+      "reason": "A dialogue where the woman compares Solomon's vineyard to her own relationship."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "The Call and Response",
+      "reason": "A brief exchange where the woman calls to her beloved and he responds with an invitation."
+    }
+  ]
+}

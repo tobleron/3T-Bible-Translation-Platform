@@ -567,6 +567,58 @@ button:active:not(:disabled) {
   background: rgba(255,255,255,0.018);
   box-shadow: inset 0 -1px 0 rgba(198,155,98,0.26);
 }
+.editor-save-status {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+.editor-save-status[data-state="saving"],
+.editor-save-status[data-state="dirty"] {
+  color: var(--accent-soft);
+}
+.editor-save-status[data-state="saved"] {
+  color: var(--success);
+}
+.editor-save-status[data-state="error"] {
+  color: var(--danger);
+}
+.review-readonly-stack {
+  display: grid;
+  gap: 0.7rem;
+}
+.review-title-row {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  flex-wrap: wrap;
+  color: var(--text);
+}
+.review-title-label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.verse-review-body {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.verse-review-text,
+.verse-review-draft {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5;
+}
+.verse-review-draft {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.verse-review-draft span {
+  color: var(--accent-soft);
+  font-weight: 600;
+}
 
 /* Chunk-level study blocks */
 .chunk-block-sheet {
@@ -732,6 +784,12 @@ button:active:not(:disabled) {
 }
 .commit-button:hover {
   filter: brightness(1.1);
+}
+.commit-button.success, .commit-button.success:disabled {
+  background: var(--success);
+  opacity: 1;
+  color: #171310;
+  cursor: default;
 }
 
 .epub-button {
@@ -1008,7 +1066,11 @@ button:active:not(:disabled) {
   letter-spacing: 0.02em;
 }
 
-/* JSON preview modal */
+.workspace-json-button {
+  flex: 0 0 auto;
+}
+
+/* JSON browser modal */
 .json-modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -1024,7 +1086,7 @@ button:active:not(:disabled) {
   border: 1px solid var(--line-strong);
   border-radius: 18px;
   width: 90%;
-  max-width: 900px;
+  max-width: 1080px;
   max-height: 85vh;
   display: flex;
   flex-direction: column;
@@ -1059,6 +1121,40 @@ button:active:not(:disabled) {
   background: var(--line);
   color: var(--text);
 }
+.json-browser-layout {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(0, 1fr);
+  min-height: 0;
+}
+.json-tree {
+  border-right: 1px solid var(--line);
+  padding: 0.9rem;
+  overflow: auto;
+  max-height: calc(85vh - 60px);
+}
+.json-tree-heading {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+}
+.json-tree-item {
+  width: 100%;
+  justify-content: flex-start;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  min-height: 2rem;
+  padding: 0.42rem 0.55rem;
+}
+.json-tree-item:hover,
+.json-tree-item.is-active {
+  background: rgba(255,255,255,0.07);
+  color: var(--accent);
+}
 .json-modal-body {
   padding: 1rem 1.2rem;
   overflow: auto;
@@ -1067,6 +1163,36 @@ button:active:not(:disabled) {
   line-height: 1.5;
   font-family: monospace;
   color: var(--text);
+}
+.workspace-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.1rem;
+  transform: translate(-50%, 10px);
+  z-index: 1100;
+  min-height: 2rem;
+  max-width: min(420px, calc(100vw - 2rem));
+  display: flex;
+  align-items: center;
+  padding: 0.48rem 0.78rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(14, 16, 16, 0.94);
+  color: var(--text);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.34);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.workspace-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.workspace-toast.is-success {
+  border-color: var(--success);
+}
+.workspace-toast.is-error {
+  border-color: var(--danger);
 }
 
 .merge-bar {

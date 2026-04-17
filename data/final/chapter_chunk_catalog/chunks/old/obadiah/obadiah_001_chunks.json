@@ -1,0 +1,46 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T14:49:51Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Obadiah",
+  "chapter": 1,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "vision",
+      "title": "Vision of Yahweh against Edom",
+      "reason": "The opening vision declaring God's judgment on Edom's arrogance."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "Oracle of Total Ruin",
+      "reason": "A prophetic oracle detailing the complete destruction and shame awaiting Edom."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Exhortation on Edom's Betrayal",
+      "reason": "Specific commands to the Edomites regarding their hostile actions during Jerusalem's calamity."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "argument",
+      "title": "Argument of Retribution and Restoration",
+      "reason": "The theological conclusion regarding the Day of Yahweh, judgment on nations, and restoration for Jacob."
+    }
+  ]
+}

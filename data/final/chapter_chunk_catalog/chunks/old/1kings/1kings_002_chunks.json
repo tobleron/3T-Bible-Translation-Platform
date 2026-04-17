@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T23:57:39Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Kings",
+  "chapter": 2,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 46,
+  "verse_count": 46,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "speech",
+      "title": "David's Final Instructions to Solomon",
+      "reason": "A continuous speech where David gives specific commands regarding Joab, Barzillai, and Shimei."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Death of David and Accession of Solomon",
+      "reason": "Narrative summary of David's death, reign duration, and Solomon's secure establishment on the throne."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Adonijah's Request and Execution",
+      "reason": "A complete narrative unit covering Adonijah's request to Bathsheba, Solomon's reaction, and the execution of Adonijah."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Removal of Abiathar and Joab",
+      "reason": "Narrative sequence detailing the removal of Abiathar from the priesthood and the execution of Joab."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 46,
+      "type": "story",
+      "title": "Shimei's Exile and Execution",
+      "reason": "A complete story arc showing Shimei's exile, his violation of the oath, and his subsequent execution."
+    }
+  ]
+}

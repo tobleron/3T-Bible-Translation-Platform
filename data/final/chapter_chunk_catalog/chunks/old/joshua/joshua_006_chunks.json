@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T09:19:33Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Joshua",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "God's Instructions for Jericho",
+      "reason": "Describes the initial divine command and specific tactical instructions given to Joshua."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 14,
+      "type": "story",
+      "title": "The Six Days of Marching",
+      "reason": "Narrates the execution of the first six days where the army marched around the city once daily."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "story",
+      "title": "The Seventh Day and Conquest",
+      "reason": "Covers the climax of the event with seven marches, the shout, the wall falling, and the city's destruction."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Rahab and Her Family Saved",
+      "reason": "Details the specific rescue of Rahab's household and the burning of the city."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 27,
+      "type": "law",
+      "title": "The Curse on Jericho",
+      "reason": "Records Joshua's oath regarding the future rebuilding of the city and concludes with Yahweh's presence."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:06:49Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 35,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 28,
+  "verse_count": 28,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "speech",
+      "title": "Call for Divine Help",
+      "reason": "A unified prayer invoking God's intervention and declaring His unique power."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 17,
+      "type": "speech",
+      "title": "Complaint Against Enemies",
+      "reason": "A description of false witnesses and a plea for deliverance from their ravages."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "speech",
+      "title": "Promise of Praise and Accusation",
+      "reason": "A vow to praise God publicly followed by a specific accusation against the enemies' deceit."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 28,
+      "type": "speech",
+      "title": "Petition for Vindication",
+      "reason": "A concluding prayer asking God to judge the case and a declaration of future praise."
+    }
+  ]
+}

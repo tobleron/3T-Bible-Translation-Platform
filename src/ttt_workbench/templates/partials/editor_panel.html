@@ -1,0 +1,86 @@
+{% set editor_state = state.browser_editor_state or 'editing' %}
+{% set is_committed = editor_state == 'committed' %}
+{% set is_locked = editor_state == 'locked' %}
+{% set is_editing = editor_state == 'editing' %}
+{% set panel_editor_mode = 'committed' if is_committed else ('locked' if is_locked else 'draft') %}
+
+{% set editor_verses = review_editor_verses if is_committed else draft_editor_verses %}
+
+<article id="editor-panel" class="workspace-card editor-panel panel-focus" data-editor-state="{{ editor_state }}" data-editor-mode="{{ panel_editor_mode }}">
+  <div class="panel-head">
+    <div>
+      <p class="eyebrow">Editor</p>
+    </div>
+    <div class="panel-summary">
+      <span class="inline-badge">{{ chunk_summary.chunk.type if chunk_summary.chunk else "chunk" }}</span>
+      <span class="muted-line">{{ chunk_summary.range_label }}</span>
+      {% if is_editing %}
+      <span class="editor-save-status" id="editor-save-status" data-state="saved">Editing</span>
+      {% elif is_locked %}
+      <span class="editor-save-status" id="editor-save-status" data-state="saved">Locked 🔒</span>
+      {% else %}
+      <span class="editor-save-status" id="editor-save-status" data-state="saved">Committed ✅</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <form id="editor-form" class="compact-editor-form"
+    data-autosave-url="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/autosave">
+    <input type="hidden" name="editor_mode" value="{{ 'review' if is_committed else 'draft' }}">
+    <input type="hidden" name="draft_range_start" value="{{ state.chunk_start or editor_range_start }}">
+    <input type="hidden" name="draft_range_end" value="{{ state.chunk_end or editor_range_end }}">
+    
+    <label class="compact-field title-field">
+      <span>{{ 'Committed title' if is_committed else 'Draft title' }}</span>
+      <textarea name="draft_title" rows="1" {{ 'readonly' if not is_editing }}>{{ editor_title }}</textarea>
+    </label>
+
+    {% if is_editing and state.title_alternatives %}
+    <div class="title-alternatives">
+      {% for option in state.title_alternatives[:4] %}
+      <span class="inline-badge">{{ option }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="verse-editor-stack">
+      {% for v in editor_verses %}
+      <div class="verse-editor-row">
+        <div class="verse-editor-meta">
+          <span class="verse-editor-label">{{ v.verse }}</span>
+        </div>
+        {% if is_editing %}
+        <textarea class="verse-editor-textarea" name="verse_{{ v.verse }}" rows="1">{{ v.text }}</textarea>
+        {% else %}
+        <input type="hidden" name="verse_{{ v.verse }}" value="{{ v.text }}">
+        <div class="verse-review-body">
+          <p class="verse-review-text">{{ v.text or "[blank]" }}</p>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="editor-actions">
+      {% if is_editing %}
+        <button class="primary-button" type="button" 
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/lock" 
+                hx-target="#editor-panel" hx-swap="outerHTML" hx-include="#editor-form">Lock Draft</button>
+      {% elif is_locked %}
+        <button class="secondary-button" type="button" 
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/unlock" 
+                hx-target="#editor-panel" hx-swap="outerHTML">🔓 Unlock</button>
+        <button class="commit-button" type="button" 
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" 
+                hx-target="#editor-panel" hx-swap="outerHTML" hx-include="#editor-form"
+                data-loading-label="Committing...">Commit</button>
+      {% elif is_committed %}
+        <button class="secondary-button" type="button" 
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/revise" 
+                hx-target="#editor-panel" hx-swap="outerHTML">Start Revision</button>
+        <button class="commit-button success" type="button" disabled>Committed</button>
+        <button class="epub-button" type="button" onclick="generateEpubDownload(this)">Generate EPUB</button>
+      {% endif %}
+    </div>
+  </form>
+</article>

@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T10:51:11Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Jeremiah",
+  "chapter": 12,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 17,
+  "verse_count": 17,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "speech",
+      "title": "Jeremiah's Complaint and God's Answer",
+      "reason": "A unified dialogue where Jeremiah questions God about the prosperity of the wicked and receives a challenge to persevere."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 13,
+      "type": "oracle",
+      "title": "Judgment on Judah's Vineyard",
+      "reason": "God describes the desolation of His inheritance and the judgment coming upon the land due to its evil."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "Promise Regarding Neighboring Nations",
+      "reason": "A specific prophecy concerning the fate of Israel's neighbors and their potential restoration or destruction."
+    }
+  ]
+}

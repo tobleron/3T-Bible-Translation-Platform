@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:40:09Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 35,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 27,
+  "verse_count": 27,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 19,
+      "type": "story",
+      "title": "Josiah's Passover Celebration",
+      "reason": "Describes the preparation, execution, and significance of King Josiah's Passover."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Josiah's Death at Megiddo",
+      "reason": "Narrates Josiah's encounter with Neco of Egypt, his wounding, death, and the subsequent lament."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 27,
+      "type": "list_or_catalog",
+      "title": "Summary of Josiah's Reign",
+      "reason": "Provides a concluding summary referencing the records of his deeds and acts."
+    }
+  ]
+}

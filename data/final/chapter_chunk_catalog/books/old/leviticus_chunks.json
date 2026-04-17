@@ -1,0 +1,914 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-10T11:02:43Z",
+  "testament": "old",
+  "book": "Leviticus",
+  "book_key": "leviticus",
+  "chapters": [
+    {
+      "chapter": 1,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 17,
+          "type": "law",
+          "title": "Instructions for the Burnt Offering",
+          "reason": "This section contains a continuous legal instruction from Yahweh to Moses regarding the procedures for three types of burnt offerings: herd, flock, and birds."
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 3,
+          "type": "law",
+          "title": "Grain Offering of Fine Flour",
+          "reason": "Establishes the basic requirements for a grain offering and the priest's portion."
+        },
+        {
+          "start_verse": 4,
+          "end_verse": 10,
+          "type": "law",
+          "title": "Baked Grain Offerings",
+          "reason": "Details specific preparations for grain offerings baked in an oven, on a griddle, or in a pan."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 13,
+          "type": "law",
+          "title": "Seasoning and Leaven Rules",
+          "reason": "Sets prohibitions against leaven and honey while mandating the use of salt."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 16,
+          "type": "law",
+          "title": "First Fruits Offering",
+          "reason": "Describes the specific procedure for bringing early ripened grain as a grain offering."
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "law",
+          "title": "Peace Offering from the Herd",
+          "reason": "Describes the procedure for a herd animal sacrifice."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 11,
+          "type": "law",
+          "title": "Peace Offering from the Flock",
+          "reason": "Describes the procedure for a sheep or lamb sacrifice."
+        },
+        {
+          "start_verse": 12,
+          "end_verse": 17,
+          "type": "law",
+          "title": "Peace Offering from the Goat and Final Statute",
+          "reason": "Describes the procedure for a goat sacrifice and concludes with dietary restrictions."
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 12,
+          "type": "law",
+          "title": "Sin Offering for the Anointed Priest",
+          "reason": "Establishes the procedure for a priest's unintentional sin."
+        },
+        {
+          "start_verse": 13,
+          "end_verse": 21,
+          "type": "law",
+          "title": "Sin Offering for the Congregation",
+          "reason": "Details the ritual when the whole assembly sins unintentionally."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 26,
+          "type": "law",
+          "title": "Sin Offering for a Leader",
+          "reason": "Prescribes the goat sacrifice for a ruler's unintentional sin."
+        },
+        {
+          "start_verse": 27,
+          "end_verse": 31,
+          "type": "law",
+          "title": "Sin Offering for Common People with Goat",
+          "reason": "Outlines the offering for an individual from the common people."
+        },
+        {
+          "start_verse": 32,
+          "end_verse": 35,
+          "type": "law",
+          "title": "Sin Offering for Common People with Lamb",
+          "reason": "Specifies the alternative offering using a female lamb."
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 13,
+          "type": "law",
+          "title": "Sin Offering for Unintentional Sins",
+          "reason": "A continuous legal section detailing four specific cases of unintentional sin and the corresponding tiered offerings based on the sinner's financial ability."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 19,
+          "type": "law",
+          "title": "Guilt Offering for Holy Things",
+          "reason": "A distinct legal unit introduced by a new divine address to Moses, covering the specific restitution required for sins against holy things and general unintentional violations."
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "law",
+          "title": "Law of the Guilt Offering for Deceit",
+          "reason": "A complete legal unit detailing restitution and sacrifice for specific sins against God and neighbor."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 13,
+          "type": "law",
+          "title": "Law of the Burnt Offering",
+          "reason": "A distinct legal section instructing priests on the maintenance and ritual of the burnt offering."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 18,
+          "type": "law",
+          "title": "Law of the Grain Offering",
+          "reason": "A complete legal unit covering the preparation, consumption, and holiness of the grain offering."
+        },
+        {
+          "start_verse": 19,
+          "end_verse": 23,
+          "type": "law",
+          "title": "Law of the Priest's Grain Offering",
+          "reason": "A specific legal instruction regarding the daily offering brought by the anointed priest."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 30,
+          "type": "law",
+          "title": "Law of the Sin Offering",
+          "reason": "A comprehensive legal section detailing the slaughter, consumption, and disposal of the sin offering."
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 10,
+          "type": "law",
+          "title": "Laws on Guilt and Grain Offerings",
+          "reason": "Defines the procedure for the guilt offering and specifies which parts of grain offerings belong to the priests."
+        },
+        {
+          "start_verse": 11,
+          "end_verse": 21,
+          "type": "law",
+          "title": "Laws on Peace Offerings",
+          "reason": "Details the types of peace offerings, consumption rules for thanksgiving and votive sacrifices, and purity requirements."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 27,
+          "type": "law",
+          "title": "Laws on Fat and Blood",
+          "reason": "Prohibits eating fat and blood from specific animals with the penalty of being cut off."
+        },
+        {
+          "start_verse": 28,
+          "end_verse": 36,
+          "type": "law",
+          "title": "Priestly Portions",
+          "reason": "Establishes the specific portions of the peace offerings designated for Aaron and his sons as a perpetual statute."
+        },
+        {
+          "start_verse": 37,
+          "end_verse": 38,
+          "type": "speech",
+          "title": "Summary of Laws at Sinai",
+          "reason": "Concludes the chapter by summarizing all preceding laws and anchoring them to the event at Mount Sinai."
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "story",
+          "title": "Assembly and Preparation",
+          "reason": "Moses gathers the congregation and announces God's command to consecrate Aaron."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 13,
+          "type": "story",
+          "title": "Clothing the Priests",
+          "reason": "Moses washes and clothes Aaron and his sons with priestly garments."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 17,
+          "type": "story",
+          "title": "Sin Offering Ritual",
+          "reason": "The bull is sacrificed for the sin offering and burned outside the camp."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 21,
+          "type": "story",
+          "title": "Burnt Offering Ritual",
+          "reason": "The first ram is sacrificed as a burnt offering for atonement."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 29,
+          "type": "story",
+          "title": "Ram of Ordination",
+          "reason": "The second ram is sacrificed with blood applied to priests and offerings waved."
+        },
+        {
+          "start_verse": 30,
+          "end_verse": 31,
+          "type": "story",
+          "title": "Final Anointing",
+          "reason": "Oil and blood are sprinkled to consecrate the priests and their garments."
+        },
+        {
+          "start_verse": 32,
+          "end_verse": 36,
+          "type": "exhortation",
+          "title": "Instructions for Seven Days",
+          "reason": "Moses instructs the priests on eating the remainder and staying at the tent."
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "story",
+          "title": "Moses commands the offerings",
+          "reason": "Narrative introduction of the eighth day event and Moses' instructions to Aaron and the people."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 17,
+          "type": "story",
+          "title": "Aaron offers his own sacrifices",
+          "reason": "Detailed account of Aaron performing the sin and burnt offerings for himself."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 21,
+          "type": "story",
+          "title": "Aaron offers the people's sacrifices",
+          "reason": "Continuation of the ritual focusing on the peace offerings and grain offering for the congregation."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 24,
+          "type": "story",
+          "title": "Blessing and divine fire",
+          "reason": "Conclusion of the ceremony with Aaron's blessing, Moses and Aaron entering the tent, and God's fire consuming the offering."
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "story",
+          "title": "Death of Nadab and Abihu",
+          "reason": "Narrative account of the priests' death and Moses' instructions to Aaron."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 11,
+          "type": "law",
+          "title": "Wine Prohibition for Priests",
+          "reason": "Divine command regarding wine and distinguishing holy from profane."
+        },
+        {
+          "start_verse": 12,
+          "end_verse": 15,
+          "type": "law",
+          "title": "Priestly Food Portions",
+          "reason": "Regulations on where and how priests must eat the grain and peace offerings."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 20,
+          "type": "dialogue",
+          "title": "Moses and Aaron Discuss Sin Offering",
+          "reason": "Dialogue concerning the missing sin offering goat and Aaron's explanation."
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "law",
+          "title": "Land Animals: Clean and Unclean",
+          "reason": "Introduction to dietary laws for land animals with specific examples of unclean creatures."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 12,
+          "type": "law",
+          "title": "Aquatic Animals: Clean and Unclean",
+          "reason": "Criteria for edible water creatures based on fins and scales."
+        },
+        {
+          "start_verse": 13,
+          "end_verse": 23,
+          "type": "list_or_catalog",
+          "title": "Birds and Flying Swarming Things",
+          "reason": "Catalog of detestable birds followed by specific edible flying insects."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 38,
+          "type": "law",
+          "title": "Purity Regulations for Swarming Things",
+          "reason": "Rules regarding contact with carcasses of swarming things and their effect on vessels and food."
+        },
+        {
+          "start_verse": 39,
+          "end_verse": 40,
+          "type": "law",
+          "title": "Unclean Food Animals",
+          "reason": "Specific regulations for animals that die naturally."
+        },
+        {
+          "start_verse": 41,
+          "end_verse": 45,
+          "type": "exhortation",
+          "title": "Call to Holiness",
+          "reason": "Summary of the swarming laws linked to the theological command for holiness."
+        },
+        {
+          "start_verse": 46,
+          "end_verse": 47,
+          "type": "speech",
+          "title": "Conclusion of the Law",
+          "reason": "Formal summary statement defining the scope and purpose of the preceding laws."
+        }
+      ]
+    },
+    {
+      "chapter": 12,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "law",
+          "title": "Laws on Postpartum Purity",
+          "reason": "A complete legal unit detailing the purification process for a woman after childbirth."
+        }
+      ]
+    },
+    {
+      "chapter": 13,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "law",
+          "title": "Initial Examination of Skin Infection",
+          "reason": "Establishes the procedure for a priest to examine a swelling or scab and determine isolation periods."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 17,
+          "type": "law",
+          "title": "Diagnosis of Chronic Leprosy",
+          "reason": "Defines criteria for chronic leprosy and the specific conditions under which a person is pronounced clean or unclean."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 23,
+          "type": "law",
+          "title": "Leprosy in Boils",
+          "reason": "Outlines the examination process for a healed boil that develops a bright spot."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 28,
+          "type": "law",
+          "title": "Leprosy in Burns",
+          "reason": "Describes the protocol for examining a burn that develops a reddish-white bright spot."
+        },
+        {
+          "start_verse": 29,
+          "end_verse": 37,
+          "type": "law",
+          "title": "Leprosy of the Head or Beard",
+          "reason": "Details the examination and isolation process for a scaly infection on the head or beard."
+        },
+        {
+          "start_verse": 38,
+          "end_verse": 44,
+          "type": "law",
+          "title": "Bright Spots and Baldness",
+          "reason": "Distinguishes between eczema and leprosy in cases of faded white spots or infection on a bald head."
+        },
+        {
+          "start_verse": 45,
+          "end_verse": 46,
+          "type": "law",
+          "title": "Appearance of the Leprous Man",
+          "reason": "Specifies the clothing and behavior required for a person declared unclean with leprosy."
+        },
+        {
+          "start_verse": 47,
+          "end_verse": 59,
+          "type": "law",
+          "title": "Leprosy in Garments and Leather",
+          "reason": "Provides the complete procedure for examining, isolating, washing, or burning garments affected by a leprous mark."
+        }
+      ]
+    },
+    {
+      "chapter": 14,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 32,
+          "type": "law",
+          "title": "Law for Cleansing a Leper",
+          "reason": "A complete legal procedure detailing the ritual for cleansing a person with leprosy, including provisions for the wealthy and the poor."
+        },
+        {
+          "start_verse": 33,
+          "end_verse": 57,
+          "type": "law",
+          "title": "Law for Cleansing a Leprous House",
+          "reason": "A continuous legal section covering the diagnosis, isolation, and cleansing of a house with a leprous mark, concluding with a summary statement."
+        }
+      ]
+    },
+    {
+      "chapter": 15,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 15,
+          "type": "law",
+          "title": "Law on Male Discharge",
+          "reason": "Establishes the uncleanness of a male discharge and the required purification rituals."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 18,
+          "type": "law",
+          "title": "Law on Seminal Emission",
+          "reason": "Defines the uncleanness resulting from a seminal emission for men and women."
+        },
+        {
+          "start_verse": 19,
+          "end_verse": 24,
+          "type": "law",
+          "title": "Law on Menstrual Impurity",
+          "reason": "Details the uncleanness of a woman during her menstrual period and its transmission."
+        },
+        {
+          "start_verse": 25,
+          "end_verse": 30,
+          "type": "law",
+          "title": "Law on Irregular Female Discharge",
+          "reason": "Describes the regulations for a woman with a prolonged blood discharge."
+        },
+        {
+          "start_verse": 31,
+          "end_verse": 33,
+          "type": "exhortation",
+          "title": "Summary and Conclusion",
+          "reason": "Summarizes the purpose of these laws to preserve the tabernacle and lists the covered cases."
+        }
+      ]
+    },
+    {
+      "chapter": 16,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 28,
+          "type": "story",
+          "title": "The Day of Atonement Ritual",
+          "reason": "Describes the complete sequence of actions performed by Aaron on the Day of Atonement."
+        },
+        {
+          "start_verse": 29,
+          "end_verse": 34,
+          "type": "law",
+          "title": "Perpetual Statute for Atonement",
+          "reason": "Establishes the annual ordinance and requirements for future priests."
+        }
+      ]
+    },
+    {
+      "chapter": 17,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "law",
+          "title": "Sacrifices in the Camp",
+          "reason": "Yahweh commands that all slaughterings must be brought to the tent of meeting as peace offerings to avoid bloodguiltiness."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 14,
+          "type": "law",
+          "title": "Prohibition on Eating Blood",
+          "reason": "The text establishes the rule that both Israelites and sojourners must not eat blood because life is in the blood."
+        },
+        {
+          "start_verse": 15,
+          "end_verse": 16,
+          "type": "law",
+          "title": "Ritual Purity for Unclean Meat",
+          "reason": "Instructions are given for those who eat an animal that died naturally or was torn by beasts to wash and bathe."
+        }
+      ]
+    },
+    {
+      "chapter": 18,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 5,
+          "type": "speech",
+          "title": "Introduction to the Laws",
+          "reason": "Yahweh introduces the statutes and judgments to Moses for Israel."
+        },
+        {
+          "start_verse": 6,
+          "end_verse": 18,
+          "type": "list_or_catalog",
+          "title": "Incest Prohibitions",
+          "reason": "A detailed catalog of relatives whose nakedness is to be uncovered."
+        },
+        {
+          "start_verse": 19,
+          "end_verse": 23,
+          "type": "law",
+          "title": "Specific Sexual Laws",
+          "reason": "Laws regarding menstrual impurity, neighbor's wife, Molech, males, and animals."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 30,
+          "type": "argument",
+          "title": "Consequences and Exhortation",
+          "reason": "Explanation of the land's defilement and the warning to keep the statutes."
+        }
+      ]
+    },
+    {
+      "chapter": 19,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 37,
+          "type": "law",
+          "title": "The Holiness Code",
+          "reason": "A continuous collection of statutes and ethical commands given by Yahweh to Moses for the Israelites."
+        }
+      ]
+    },
+    {
+      "chapter": 20,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 6,
+          "type": "law",
+          "title": "Judgments for Molech and Mediums",
+          "reason": "Introduces the section with divine speech regarding specific capital offenses against God's holiness."
+        },
+        {
+          "start_verse": 7,
+          "end_verse": 8,
+          "type": "exhortation",
+          "title": "Call to Holiness",
+          "reason": "A transitional command urging the people to set themselves apart based on God's nature."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 21,
+          "type": "law",
+          "title": "Family and Sexual Purity Laws",
+          "reason": "A detailed catalog of specific familial and sexual transgressions with their corresponding penalties."
+        },
+        {
+          "start_verse": 22,
+          "end_verse": 26,
+          "type": "argument",
+          "title": "Reasons for Separation",
+          "reason": "Explains the theological basis for the laws by contrasting Israel with the nations and promising the land."
+        },
+        {
+          "start_verse": 27,
+          "end_verse": 27,
+          "type": "law",
+          "title": "Judgment on Mediums",
+          "reason": "Concludes the chapter with a specific legal ruling on mediums and spiritists."
+        }
+      ]
+    },
+    {
+      "chapter": 21,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 9,
+          "type": "law",
+          "title": "Priests and Dead Relatives",
+          "reason": "General laws for priests regarding mourning and marriage."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 15,
+          "type": "law",
+          "title": "The High Priest's Restrictions",
+          "reason": "Specific regulations for the high priest regarding mourning and wife selection."
+        },
+        {
+          "start_verse": 16,
+          "end_verse": 23,
+          "type": "law",
+          "title": "Physical Defects in Priests",
+          "reason": "Laws concerning physical defects preventing priests from offering sacrifices."
+        },
+        {
+          "start_verse": 24,
+          "end_verse": 24,
+          "type": "story",
+          "title": "Moses Delivers the Message",
+          "reason": "Narrative conclusion stating Moses communicated the laws to Aaron and Israel."
+        }
+      ]
+    },
+    {
+      "chapter": 22,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 16,
+          "type": "law",
+          "title": "Laws on Holy Gifts for Priests",
+          "reason": "A continuous legal section addressing priestly purity and consumption of holy offerings."
+        },
+        {
+          "start_verse": 17,
+          "end_verse": 25,
+          "type": "law",
+          "title": "Qualifications for Sacrificial Animals",
+          "reason": "A distinct legal unit specifying physical requirements for burnt and peace offerings."
+        },
+        {
+          "start_verse": 26,
+          "end_verse": 33,
+          "type": "law",
+          "title": "Laws on Young Animals and Thanksgiving",
+          "reason": "A final legal section covering timing for young animals, slaughter rules, and thanksgiving offerings."
+        }
+      ]
+    },
+    {
+      "chapter": 23,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "law",
+          "title": "Introduction and Passover Feast",
+          "reason": "Establishes the holy convocations framework and details the Passover and Unleavened Bread."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 22,
+          "type": "law",
+          "title": "First Fruits and Weeks Feast",
+          "reason": "Describes the wave sheaf offering, the counting to Pentecost, and the harvest gleaning laws."
+        },
+        {
+          "start_verse": 23,
+          "end_verse": 32,
+          "type": "law",
+          "title": "Feast of Trumpets and Day of Atonement",
+          "reason": "Outlines the seventh month festivals including the trumpet blast and the solemn day of atonement."
+        },
+        {
+          "start_verse": 33,
+          "end_verse": 44,
+          "type": "law",
+          "title": "Feast of Booths and Conclusion",
+          "reason": "Details the seven-day feast of tabernacles, its rituals, and concludes with Moses delivering the instructions."
+        }
+      ]
+    },
+    {
+      "chapter": 24,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 9,
+          "type": "law",
+          "title": "Laws on Bread and Lamp",
+          "reason": "Divine instructions regarding the perpetual lamp and showbread."
+        },
+        {
+          "start_verse": 10,
+          "end_verse": 12,
+          "type": "story",
+          "title": "The Blasphemer Brought to Moses",
+          "reason": "Narrative account of a specific incident leading to judicial inquiry."
+        },
+        {
+          "start_verse": 13,
+          "end_verse": 22,
+          "type": "law",
+          "title": "Laws on Retribution and Blasphemy",
+          "reason": "Divine decrees concerning the punishment for cursing God and striking others."
+        },
+        {
+          "start_verse": 23,
+          "end_verse": 23,
+          "type": "story",
+          "title": "Execution of the Law",
+          "reason": "Narrative conclusion describing the fulfillment of the command."
+        }
+      ]
+    },
+    {
+      "chapter": 25,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 7,
+          "type": "law",
+          "title": "The Sabbath Year for the Land",
+          "reason": "Establishes the command for the land to rest every seventh year."
+        },
+        {
+          "start_verse": 8,
+          "end_verse": 17,
+          "type": "law",
+          "title": "The Jubilee Year and Land Sales",
+          "reason": "Describes the counting of years to the fiftieth year and regulations for buying and selling land."
+        },
+        {
+          "start_verse": 18,
+          "end_verse": 22,
+          "type": "exhortation",
+          "title": "Promise of Blessing in the Jubilee",
+          "reason": "Addresses the concern of food supply during the fallow years with a divine promise."
+        },
+        {
+          "start_verse": 23,
+          "end_verse": 34,
+          "type": "law",
+          "title": "Redemption of Land and Houses",
+          "reason": "Details the rules for redeeming land sold due to poverty and specific laws regarding city houses."
+        },
+        {
+          "start_verse": 35,
+          "end_verse": 43,
+          "type": "law",
+          "title": "Treatment of a Poor Brother",
+          "reason": "Instructs on sustaining a poor relative without usury and treating him as a hired worker."
+        },
+        {
+          "start_verse": 44,
+          "end_verse": 46,
+          "type": "law",
+          "title": "Acquisition of Foreign Slaves",
+          "reason": "Distinguishes between Israelite servants and permanent slaves acquired from surrounding nations."
+        },
+        {
+          "start_verse": 47,
+          "end_verse": 55,
+          "type": "law",
+          "title": "Redemption of a Sold Brother",
+          "reason": "Explains the process for redeeming an Israelite who sold himself to a foreigner and concludes with the theological basis."
+        }
+      ]
+    },
+    {
+      "chapter": 26,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 13,
+          "type": "law",
+          "title": "Statutes and Blessings",
+          "reason": "A cohesive unit of laws regarding idols and sabbaths followed by the blessings for obedience."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 26,
+          "type": "oracle",
+          "title": "Warnings of Punishment",
+          "reason": "A progressive oracle detailing the curses and punishments that will follow disobedience."
+        },
+        {
+          "start_verse": 27,
+          "end_verse": 39,
+          "type": "oracle",
+          "title": "Severe Discipline and Exile",
+          "reason": "The climax of the curses describing extreme famine, exile, and psychological terror."
+        },
+        {
+          "start_verse": 40,
+          "end_verse": 45,
+          "type": "speech",
+          "title": "Promise of Restoration",
+          "reason": "A speech outlining the conditions for confession and God's promise to remember His covenant."
+        },
+        {
+          "start_verse": 46,
+          "end_verse": 46,
+          "type": "list_or_catalog",
+          "title": "Chapter Conclusion",
+          "reason": "A concluding statement identifying the text as statutes given at Mount Sinai."
+        }
+      ]
+    },
+    {
+      "chapter": 27,
+      "chunks": [
+        {
+          "start_verse": 1,
+          "end_verse": 8,
+          "type": "law",
+          "title": "Valuation of Persons",
+          "reason": "Introduction and specific silver valuations for men, women, and children based on age."
+        },
+        {
+          "start_verse": 9,
+          "end_verse": 13,
+          "type": "law",
+          "title": "Valuation of Animals",
+          "reason": "Rules for consecrating clean and unclean animals and their redemption."
+        },
+        {
+          "start_verse": 14,
+          "end_verse": 25,
+          "type": "law",
+          "title": "Valuation of Houses and Fields",
+          "reason": "Procedures for consecrating houses and fields of possession or purchase."
+        },
+        {
+          "start_verse": 26,
+          "end_verse": 33,
+          "type": "law",
+          "title": "Firstborns, Devoted Items, and Tithes",
+          "reason": "Specific laws regarding firstborn animals, devoted things, and the tithe of land and livestock."
+        },
+        {
+          "start_verse": 34,
+          "end_verse": 34,
+          "type": "speech",
+          "title": "Chapter Conclusion",
+          "reason": "Final summary statement attributing the commandments to Moses at Sinai."
+        }
+      ]
+    }
+  ]
+}

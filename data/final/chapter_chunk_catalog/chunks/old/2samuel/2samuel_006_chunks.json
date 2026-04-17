@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T12:36:25Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Samuel",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 12,
+      "type": "story",
+      "title": "The Ark's Journey and Delay",
+      "reason": "Narrative of the first attempt to move the ark, Uzzah's death, and the temporary stay at Obed-edom's house."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 19,
+      "type": "story",
+      "title": "The Ark Enters Jerusalem",
+      "reason": "Description of the successful procession, David's dancing, and the distribution of food to the people."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 23,
+      "type": "dialogue",
+      "title": "David and Michal Confronted",
+      "reason": "Dialogue between David and Michal regarding his celebration followed by the narrative conclusion of her childlessness."
+    }
+  ]
+}

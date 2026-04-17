@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:37:11Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 28,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "mixed",
+      "title": "Isaac's Blessing and Esau's Reaction",
+      "reason": "Combines Isaac's command to Jacob with the narrative of Esau's response."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 19,
+      "type": "vision",
+      "title": "Jacob's Dream at Bethel",
+      "reason": "Covers the journey to Haran, the dream of the ladder, and Jacob's reaction."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 22,
+      "type": "blessing_or_prayer",
+      "title": "Jacob's Vow",
+      "reason": "Contains the specific vow and promise made by Jacob to God."
+    }
+  ]
+}

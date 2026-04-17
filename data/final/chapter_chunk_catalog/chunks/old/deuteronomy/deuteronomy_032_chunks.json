@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T09:07:37Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 32,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 52,
+  "verse_count": 52,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 43,
+      "type": "speech",
+      "title": "Song of Moses",
+      "reason": "A unified poetic speech containing an oracle, argument, and blessing."
+    },
+    {
+      "start_verse": 44,
+      "end_verse": 47,
+      "type": "story",
+      "title": "Moses Delivers the Song",
+      "reason": "Narrative account of Moses presenting the song and giving final exhortations."
+    },
+    {
+      "start_verse": 48,
+      "end_verse": 52,
+      "type": "story",
+      "title": "Moses' Death Foretold",
+      "reason": "Divine instruction to Moses regarding his death and view of the Promised Land."
+    }
+  ]
+}

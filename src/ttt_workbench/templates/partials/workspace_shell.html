@@ -51,84 +51,7 @@
         {% endif %}
       {% endif %}
       {% set footnote_verse_value = state.footnote_draft.verse if state.footnote_draft else (state.chunk_start or 1) %}
-      {% set editor_verses = review_editor_verses if editor_mode == 'review' else draft_editor_verses %}
-
-      <article class="workspace-card editor-panel panel-focus" data-editor-mode="{{ editor_mode }}">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Editor</p>
-          </div>
-          <div class="panel-summary">
-            <span class="inline-badge">{{ chunk_summary.chunk.type if chunk_summary.chunk else "chunk" }}</span>
-            <span class="muted-line">{{ chunk_summary.range_label }}</span>
-          </div>
-        </div>
-
-        <div class="editor-tab-bar">
-          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-            <input type="hidden" name="editor_action" value="draft">
-            <button class="tab-button {% if editor_mode == 'draft' %}is-active{% endif %}" type="submit">Draft</button>
-          </form>
-          {% if has_committed_text %}
-          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-            <input type="hidden" name="editor_action" value="review">
-            <button class="tab-button {% if editor_mode == 'review' %}is-active{% endif %}" type="submit">Review</button>
-          </form>
-          {% endif %}
-          {% if has_committed_text and editor_mode == 'review' %}
-          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-            <input type="hidden" name="editor_action" value="seed-draft">
-            <button class="secondary-button editor-bridge-button" type="submit">Revise In Draft</button>
-          </form>
-          {% endif %}
-        </div>
-
-        {% if editor_mode == 'review' %}
-        <p class="editor-mode-note">
-          Review shows the committed JSON text. Edits here are stored only as deltas until you commit.
-        </p>
-        {% endif %}
-
-        <form id="editor-form" class="compact-editor-form"
-          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
-          hx-target="#workspace-shell" hx-swap="outerHTML show:none">
-          <input type="hidden" name="editor_mode" value="{{ editor_mode }}">
-          <label class="compact-field title-field">
-            <span>{{ "Review title" if editor_mode == "review" else "Draft title" }}</span>
-            <textarea name="draft_title" rows="1">{{ editor_title }}</textarea>
-          </label>
-
-          {% if state.title_alternatives and editor_mode == 'draft' %}
-          <div class="title-alternatives">
-            {% for option in state.title_alternatives[:4] %}
-            <span class="inline-badge">{{ option }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-
-          {# Per-verse auto-expanding textareas #}
-          <div class="verse-editor-stack">
-            {% for v in editor_verses %}
-            <div class="verse-editor-row {% if editor_mode == 'review' and v.changed %}is-changed{% endif %}">
-              <div class="verse-editor-meta">
-                <span class="verse-editor-label">{{ v.verse }}</span>
-                {% if editor_mode == 'review' and v.changed %}
-                <span class="verse-editor-state">Edited</span>
-                {% endif %}
-              </div>
-              <textarea class="verse-editor-textarea" name="verse_{{ v.verse }}" rows="1">{{ v.text }}</textarea>
-            </div>
-            {% endfor %}
-          </div>
-
-          <div class="editor-actions">
-            <button class="secondary-button" id="save-draft-button" type="submit" data-loading-label="Saving...">{{ "Save review changes" if editor_mode == "review" else "Save draft" }}</button>
-            <button class="commit-button" type="button" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">Commit</button>
-            <button class="epub-button" type="button" onclick="generateEpubDownload(this)" {% if pending_writes %}disabled title="Commit all verses first"{% endif %}>Generate EPUB</button>
-            <button class="secondary-button" type="button" onclick="showJsonPreview()">JSON</button>
-          </div>
-        </form>
-      </article>
+      {% include "partials/editor_panel.html" %}
 
       <article class="workspace-card prompt-engineering-panel editorial-panel">
         <div class="panel-head">
@@ -163,7 +86,10 @@
                 <input type="checkbox" id="prompt-mode-scholarly" value="scholarly" data-prompt-mode>
                 <span>Scholarly</span>
               </label>
-              <button class="secondary-button" type="button" onclick="clearPromptEngineeringCombined()">Clear</button>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-mode-copyable" value="copyable" data-prompt-mode>
+                <span>Verse-Copy</span>
+              </label>
             </div>
 
             <div class="prompt-context-picker">
@@ -203,6 +129,7 @@
 
             <div class="prompt-engineering-actions">
               <button class="copy-square-button" type="button" onclick="copyPromptEngineeringCombined(this)" aria-label="Copy combined prompt" title="Copy combined prompt">⧉</button>
+              <button class="secondary-button" type="button" onclick="clearPromptEngineeringCombined()">Clear</button>
               <button class="primary-button" type="button" onclick="injectPromptEngineeringIntoChat()">Inject Into Chat</button>
             </div>
           </section>
@@ -220,6 +147,10 @@
               <label class="compact-field">
                 <span>Scholarly rewrite</span>
                 <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="5" data-auto-resize>{{ editorial_prompts.scholarly }}</textarea>
+              </label>
+              <label class="compact-field">
+                <span>Verse-Copy</span>
+                <textarea id="editorial-prompt-copyable" name="editorial_prompt_copyable" rows="5" data-auto-resize>{{ editorial_prompts.copyable }}</textarea>
               </label>
             </div>
           </section>
@@ -424,16 +355,21 @@
   {% endif %}
 </div>
 
-{# JSON preview modal #}
+{# JSON browser modal #}
 <div class="json-modal-overlay" id="jsonModal" style="display:none;" onclick="hideJsonPreview(event)">
   <div class="json-modal-content" onclick="event.stopPropagation()">
     <div class="json-modal-head">
-      <h3>Committed JSON Preview</h3>
+      <h3 id="jsonModalTitle">Book JSON</h3>
       <button class="json-modal-close" type="button" onclick="hideJsonPreview()">&times;</button>
     </div>
-    <pre class="json-modal-body" id="jsonPreviewBody">Loading...</pre>
+    <div class="json-browser-layout">
+      <nav class="json-tree" id="jsonTree" aria-label="Book JSON chapters"></nav>
+      <pre class="json-modal-body" id="jsonPreviewBody">Loading...</pre>
+    </div>
   </div>
 </div>
+
+<div class="workspace-toast" id="workspaceToast" role="status" aria-live="polite"></div>
 
 <script>
 document.addEventListener('htmx:afterSettle', function() {
@@ -462,9 +398,10 @@ document.addEventListener('htmx:afterSettle', function() {
   initGlossTooltips();
   initSupportFormattingTools();
   initModelActionForms();
+  initHtmxActionFeedback();
   initPromptEngineering();
   initChatInput();
-  initEditorSaveIndicator();
+  initEditorAutosave();
   // Scroll chat log to bottom after swap
   var chatLog = document.querySelector('.chat-log');
   if (chatLog) { chatLog.scrollTop = chatLog.scrollHeight; }
@@ -489,9 +426,10 @@ document.addEventListener('DOMContentLoaded', function() {
   initGlossTooltips();
   initSupportFormattingTools();
   initModelActionForms();
+  initHtmxActionFeedback();
   initPromptEngineering();
   initChatInput();
-  initEditorSaveIndicator();
+  initEditorAutosave();
   // Restore last copied indicator from session storage
   var lastCopied = sessionStorage.getItem('lastGlossCopied');
   if (lastCopied) {
@@ -778,15 +716,57 @@ function clearStudyVerseFilter() {
   updatePromptEngineeringPreview();
 }
 
-function showJsonPreview() {
+function showBookJsonBrowser() {
   var overlay = document.getElementById('jsonModal');
   overlay.style.display = 'flex';
   var body = document.getElementById('jsonPreviewBody');
+  var tree = document.getElementById('jsonTree');
+  var title = document.getElementById('jsonModalTitle');
+  if (title) title.textContent = 'Book JSON';
   body.textContent = 'Loading...';
-  fetch(window.location.pathname + '/json-preview')
+  if (tree) tree.textContent = 'Loading...';
+  fetch(window.location.pathname + '/json-book-tree')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!tree) return data;
+      if (title) title.textContent = (data.book || 'Book') + ' JSON';
+      tree.innerHTML = '';
+      var heading = document.createElement('div');
+      heading.className = 'json-tree-heading';
+      heading.textContent = data.book || 'Selected book';
+      tree.appendChild(heading);
+      (data.chapters || []).forEach(function(item, index) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'json-tree-item' + (index === 0 ? ' is-active' : '');
+        btn.textContent = 'Chapter ' + item.chapter;
+        btn.dataset.chapter = item.chapter;
+        btn.addEventListener('click', function() {
+          tree.querySelectorAll('.json-tree-item').forEach(function(el) { el.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          loadBookJsonChapter(item.chapter);
+        });
+        tree.appendChild(btn);
+      });
+      if (data.chapters && data.chapters.length) {
+        loadBookJsonChapter(data.chapters[0].chapter);
+      } else {
+        body.textContent = 'No JSON chapters found for this book.';
+      }
+    })
+    .catch(function(err) { body.textContent = 'Failed to load JSON: ' + err.message; });
+}
+function showJsonPreview() {
+  showBookJsonBrowser();
+}
+function loadBookJsonChapter(chapter) {
+  var body = document.getElementById('jsonPreviewBody');
+  if (!body) return;
+  body.textContent = 'Loading chapter ' + chapter + '...';
+  fetch(window.location.pathname + '/json-book-chapter/' + encodeURIComponent(chapter))
     .then(function(r) { return r.json(); })
     .then(function(data) { body.textContent = JSON.stringify(data, null, 2); })
-    .catch(function(err) { body.textContent = 'Failed to load JSON: ' + err.message; });
+    .catch(function(err) { body.textContent = 'Failed to load chapter JSON: ' + err.message; });
 }
 function hideJsonPreview(e) {
   if (e && e.target !== e.currentTarget) return;
@@ -880,13 +860,15 @@ function copyGlossWord(btn, text) {
 function showGlossCopiedIndicator(text) {
   showWorkspaceIndicator('Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : ''));
 }
-function showWorkspaceIndicator(message) {
-  var indicator = document.getElementById('gloss-copied-indicator');
+function showWorkspaceIndicator(message, tone) {
+  var indicator = document.getElementById('workspaceToast');
   if (!indicator) return;
-  indicator.style.display = 'inline';
+  indicator.className = 'workspace-toast is-visible' + (tone ? ' is-' + tone : '');
   indicator.textContent = message;
   clearTimeout(showWorkspaceIndicator._timer);
-  showWorkspaceIndicator._timer = setTimeout(function() { indicator.style.display = 'none'; }, 3000);
+  showWorkspaceIndicator._timer = setTimeout(function() {
+    indicator.classList.remove('is-visible');
+  }, 3000);
 }
 function setModelButtonBusy(button, loadingLabel) {
   if (!button) return null;
@@ -903,6 +885,50 @@ function setModelButtonBusy(button, loadingLabel) {
       button.textContent = button.dataset.originalLabel || button.textContent;
     }
   };
+}
+function initHtmxActionFeedback() {
+  if (window.tttHtmxActionFeedbackBound) return;
+  window.tttHtmxActionFeedbackBound = true;
+  document.body.addEventListener('htmx:beforeRequest', function(event) {
+    var el = event.detail && event.detail.elt;
+    var button = el && el.matches && el.matches('[data-loading-label]') ? el : null;
+    if (!button && el && el.querySelector) button = el.querySelector('[data-loading-label]');
+    if (!button) return;
+    button.dataset.originalLabel = button.dataset.originalLabel || button.textContent;
+    button.disabled = true;
+    button.classList.add('is-loading');
+    button.textContent = button.getAttribute('data-loading-label') || 'Working...';
+  });
+  document.body.addEventListener('htmx:afterRequest', function(event) {
+    var el = event.detail && event.detail.elt;
+    var button = el && el.matches && el.matches('[data-loading-label]') ? el : null;
+    if (!button && el && el.querySelector) button = el.querySelector('[data-loading-label]');
+    if (button) {
+      button.disabled = false;
+      button.classList.remove('is-loading');
+      button.textContent = button.dataset.originalLabel || button.textContent;
+    }
+    var ok = event.detail && event.detail.successful;
+    if (!ok) {
+      showWorkspaceIndicator('Action failed.', 'error');
+      return;
+    }
+    var path = '';
+    if (event.detail && event.detail.pathInfo) {
+      path = event.detail.pathInfo.requestPath || '';
+    }
+    if (!path && event.detail && event.detail.xhr) {
+      path = event.detail.xhr.responseURL || '';
+    }
+    if (path.indexOf('/commit/apply') !== -1) {
+      showWorkspaceIndicator('Draft committed.', 'success');
+    } else if (path.indexOf('/editor/mode') !== -1) {
+      showWorkspaceIndicator('Draft ready.', 'success');
+    }
+  });
+  document.body.addEventListener('htmx:responseError', function() {
+    showWorkspaceIndicator('Action failed.', 'error');
+  });
 }
 function initModelActionForms() {
   document.querySelectorAll('.model-action-form').forEach(function(form) {
@@ -1926,36 +1952,56 @@ function renderMarkdownWithCollapsedThinking(rawText) {
   return html;
 }
 
-// Show "Draft saved" indicator after editor form HTMX swap
-function initEditorSaveIndicator() {
+function setEditorSaveStatus(state, label) {
+  var status = document.getElementById('editor-save-status');
+  if (!status) return;
+  status.dataset.state = state;
+  status.textContent = label;
+}
+function initEditorAutosave() {
   var editorForm = document.getElementById('editor-form');
   if (!editorForm) return;
-  if (editorForm.dataset.saveBound === '1') return;
-  editorForm.dataset.saveBound = '1';
-
-  var scrollPos = null;
-  editorForm.addEventListener('htmx:beforeRequest', function() {
-    scrollPos = window.scrollY || window.pageYOffset;
-  });
-  editorForm.addEventListener('htmx:afterOnLoad', function() {
-    if (scrollPos !== null) {
-      window.scrollTo(0, scrollPos);
-      scrollPos = null;
-    }
-  });
-  editorForm.addEventListener('htmx:afterSettle', function() {
-    if (scrollPos !== null) {
-      window.scrollTo(0, scrollPos);
-      scrollPos = null;
-    }
-    var submitter = editorForm._lastSubmitter || null;
-    if (submitter && submitter.type === 'submit') {
-      showWorkspaceIndicator('Draft saved.');
-    }
-    editorForm._lastSubmitter = null;
-  });
-  editorForm.addEventListener('submit', function(e) {
-    editorForm._lastSubmitter = e.submitter || null;
+  if (editorForm.dataset.autosaveBound === '1') return;
+  editorForm.dataset.autosaveBound = '1';
+  var timer = null;
+  var controller = null;
+  var autosaveUrl = editorForm.getAttribute('data-autosave-url');
+  if (!autosaveUrl) return;
+  function autosave() {
+    clearTimeout(timer);
+    timer = null;
+    if (controller) controller.abort();
+    controller = new AbortController();
+    setEditorSaveStatus('saving', 'Saving...');
+    fetch(autosaveUrl, {
+      method: 'POST',
+      body: new FormData(editorForm),
+      signal: controller.signal,
+      headers: { 'X-Requested-With': 'fetch' }
+    })
+      .then(function(response) {
+        if (!response.ok) throw new Error('Autosave failed.');
+        return response.json();
+      })
+      .then(function() {
+        setEditorSaveStatus('saved', 'Saved ✓');
+      })
+      .catch(function(err) {
+        if (err.name === 'AbortError') return;
+        setEditorSaveStatus('error', 'Save failed');
+        showWorkspaceIndicator(err.message || 'Autosave failed.', 'error');
+      });
+  }
+  function scheduleAutosave() {
+    setEditorSaveStatus('dirty', 'Unsaved');
+    clearTimeout(timer);
+    timer = setTimeout(autosave, 900);
+  }
+  editorForm.querySelectorAll('textarea').forEach(function(field) {
+    field.addEventListener('input', scheduleAutosave);
+    field.addEventListener('blur', function() {
+      if (timer) autosave();
+    });
   });
 }
 function switchEditorialTab(button, tabName) {
@@ -1979,7 +2025,8 @@ function currentEditorialPromptValues() {
   return {
     grammar: (document.getElementById('editorial-prompt-grammar') || {}).value || '',
     concise: (document.getElementById('editorial-prompt-concise') || {}).value || '',
-    scholarly: (document.getElementById('editorial-prompt-scholarly') || {}).value || ''
+    scholarly: (document.getElementById('editorial-prompt-scholarly') || {}).value || '',
+    copyable: (document.getElementById('editorial-prompt-copyable') || {}).value || ''
   };
 }
 window.tttPromptEngineeringContexts = window.tttPromptEngineeringContexts || {};
@@ -2131,12 +2178,19 @@ async function buildPromptEngineeringText() {
   await ensurePromptEngineeringContexts();
   var parts = [];
   var prompts = currentEditorialPromptValues();
+  var copyableText = '';
+
   selectedPromptEngineeringModes().forEach(function(mode) {
-    var text = (prompts[mode.key] || '').trim();
-    if (text) {
-      parts.push(text);
+    if (mode.key === 'copyable') {
+      copyableText = (prompts.copyable || 'Output verse(s) in plain text code block.').trim();
+    } else {
+      var text = (prompts[mode.key] || '').trim();
+      if (text) {
+        parts.push(text);
+      }
     }
   });
+
   selectedPromptEngineeringContexts().forEach(function(meta) {
     var text = '';
     if (meta.key === 'draft') {
@@ -2149,9 +2203,18 @@ async function buildPromptEngineeringText() {
     }
     text = (text || '').trim();
     if (text) {
-      parts.push(meta.key === 'filtered' ? text : meta.label + ':\n' + text);
+      if (meta.key === 'filtered') {
+        parts.push(text);
+      } else {
+        parts.push(meta.label + ':\n' + text);
+      }
     }
   });
+
+  if (copyableText) {
+    parts.push(copyableText);
+  }
+
   return parts.join('\n\n');
 }
 function updatePromptEngineeringPreview() {
@@ -2173,7 +2236,7 @@ function initPromptEngineering() {
     return;
   }
   panel.dataset.promptEngineeringBound = '1';
-  panel.querySelectorAll('[data-prompt-context], [data-prompt-mode], #editorial-prompt-grammar, #editorial-prompt-concise, #editorial-prompt-scholarly').forEach(function(el) {
+  panel.querySelectorAll('[data-prompt-context], [data-prompt-mode], #editorial-prompt-grammar, #editorial-prompt-concise, #editorial-prompt-scholarly, #editorial-prompt-copyable').forEach(function(el) {
     el.addEventListener('input', updatePromptEngineeringPreview);
     el.addEventListener('change', updatePromptEngineeringPreview);
   });

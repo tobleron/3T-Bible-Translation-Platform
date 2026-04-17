@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T12:39:20Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Samuel",
+  "chapter": 8,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 18,
+  "verse_count": 18,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "David's Conquests and Spoils",
+      "reason": "Describes military victories over Philistines, Moab, and Zobah, including the capture of bronze and gold."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Diplomacy and Further Victories",
+      "reason": "Details Toi's tribute from Hamath, David's dedication of spoils to Yahweh, and the subjugation of Edom."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 18,
+      "type": "list_or_catalog",
+      "title": "Summary of Reign and Officials",
+      "reason": "Summarizes David's just rule and lists the key administrative and military officials in his court."
+    }
+  ]
+}

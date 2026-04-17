@@ -166,6 +166,7 @@ class SessionState:
     focus_start: int | None = None
     focus_end: int | None = None
     browser_editor_mode: str = "draft"
+    browser_editor_state: str = "editing"
     menu_index: int = 0
     history_panel_open: bool = False
     draft_chunk: dict[str, str] = field(default_factory=dict)
@@ -239,6 +240,7 @@ class SessionState:
             focus_start=data.get("focus_start"),
             focus_end=data.get("focus_end"),
             browser_editor_mode=data.get("browser_editor_mode", "draft"),
+            browser_editor_state=data.get("browser_editor_state", "editing"),
             menu_index=data.get("menu_index", 0),
             history_panel_open=data.get("history_panel_open", False),
             draft_chunk=data.get("draft_chunk", {}),

@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T19:37:19Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 20,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 26,
+  "verse_count": 26,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 17,
+      "type": "law",
+      "title": "The Ten Commandments",
+      "reason": "Contains the direct speech of God delivering the core moral laws to Israel."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "story",
+      "title": "The People's Reaction",
+      "reason": "Describes the physical reaction of the people to the theophany and their dialogue with Moses."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 26,
+      "type": "law",
+      "title": "Instructions on Altars",
+      "reason": "God gives specific instructions to Moses regarding the construction and use of altars."
+    }
+  ]
+}

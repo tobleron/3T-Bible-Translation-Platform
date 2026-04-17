@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T09:57:52Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Judges",
+  "chapter": 8,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 35,
+  "verse_count": 35,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "dialogue",
+      "title": "Ephraim's Complaint and Gideon's Reply",
+      "reason": "A complete dialogue unit where Ephraim confronts Gideon and he responds with a diplomatic argument that resolves the tension."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Pursuit of Midian Kings and Retribution at Succoth and Penuel",
+      "reason": "A continuous narrative sequence covering the pursuit across the Jordan, the interaction with Succoth and Penuel, the battle at Karkor, and the subsequent vengeance."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 21,
+      "type": "dialogue",
+      "title": "Execution of Zebah and Zalmunna",
+      "reason": "A focused dialogue scene between Gideon and the captured kings regarding their victims at Tabor, culminating in their execution."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 28,
+      "type": "mixed",
+      "title": "Offer of Kingship and the Ephod",
+      "reason": "A mixed unit containing a speech offering kingship, Gideon's argument rejecting it, his request for gold, and the narrative result of the ephod becoming a snare."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Gideon's Death and Israel's Apostasy",
+      "reason": "A concluding narrative block covering Gideon's family details, his death, burial, and the immediate spiritual decline of Israel after his passing."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:14:29Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 148,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 14,
+  "verse_count": 14,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "list_or_catalog",
+      "title": "Praise from the Heavens",
+      "reason": "A call to celestial beings and elements to praise God based on His creative command."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "list_or_catalog",
+      "title": "Praise from the Earth",
+      "reason": "A call to earthly creatures and human leaders to praise God."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 14,
+      "type": "blessing_or_prayer",
+      "title": "Praise for Israel's Exaltation",
+      "reason": "A concluding statement on God's high name and His exaltation of His people."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T06:05:04Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 82,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 8,
+  "verse_count": 8,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "God's Judgment on the Gods",
+      "reason": "Introduces the setting and poses a rhetorical question regarding divine injustice."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "exhortation",
+      "title": "Call for Justice",
+      "reason": "Commands the gods to act justly toward the poor and describes their current state of confusion."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "The Fate of the Gods",
+      "reason": "Declares their divine status but pronounces their inevitable mortality like men."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 8,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Divine Judgment",
+      "reason": "Concludes with a plea to God to judge the earth and inherit the nations."
+    }
+  ]
+}

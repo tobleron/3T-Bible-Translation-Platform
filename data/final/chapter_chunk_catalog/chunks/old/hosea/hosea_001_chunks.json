@@ -1,0 +1,53 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T14:17:14Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Hosea",
+  "chapter": 1,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "speech",
+      "title": "Introduction and Call to Hosea",
+      "reason": "Establishes the historical context and introduces the divine command for Hosea's symbolic marriage."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Birth of Jezreel",
+      "reason": "Narrates the birth of the first son and the oracle explaining his name as a judgment on the house of Jehu."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Birth of Lo-ruhamah",
+      "reason": "Describes the birth of the daughter and the oracle declaring God's withheld compassion on Israel while promising it for Judah."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 9,
+      "type": "story",
+      "title": "Birth of Lo-ammi",
+      "reason": "Records the birth of the third child and the oracle declaring the broken covenant relationship between God and Israel."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 11,
+      "type": "oracle",
+      "title": "Restoration of Israel and Judah",
+      "reason": "Concludes the chapter with a prophetic promise of restoration, numbering, and unity for both kingdoms."
+    }
+  ]
+}

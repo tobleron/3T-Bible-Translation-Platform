@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:24:50Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Samuel",
+  "chapter": 1,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 28,
+  "verse_count": 28,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Elkanah's Family and Hannah's Distress",
+      "reason": "Introduces the family background and the conflict between Hannah and Peninnah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 18,
+      "type": "dialogue",
+      "title": "Hannah's Prayer and Eli's Response",
+      "reason": "Depicts Hannah's silent prayer, her misunderstanding by Eli, and his blessing."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Birth of Samuel and the Vow Fulfilled",
+      "reason": "Narrates the conception, birth, naming of Samuel, and Hannah's decision to wait until weaning."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Presentation of Samuel at the Temple",
+      "reason": "Describes Hannah bringing Samuel to Shiloh and dedicating him to Yahweh."
+    }
+  ]
+}

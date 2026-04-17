@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T18:01:48Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 42,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 38,
+  "verse_count": 38,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Jacob Sends Sons to Egypt",
+      "reason": "Describes the family's decision to travel to Egypt for grain due to famine."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "Joseph Tests His Brothers",
+      "reason": "Records the initial confrontation and Joseph's accusation of spying."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Joseph Imprisons and Releases Brothers",
+      "reason": "Details the three-day confinement, the selection of Simeon, and the release with grain."
+    },
+    {
+      "start_verse": 26,
+      "end_verse": 35,
+      "type": "story",
+      "title": "The Brothers Discover the Money",
+      "reason": "Narrates the journey home and the discovery of their silver in the sacks."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 38,
+      "type": "dialogue",
+      "title": "Jacob's Reaction to the News",
+      "reason": "Captures Jacob's despair and Reuben's offer regarding Benjamin."
+    }
+  ]
+}

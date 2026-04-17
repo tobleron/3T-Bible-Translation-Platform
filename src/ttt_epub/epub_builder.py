@@ -12,12 +12,13 @@ from validator import validate_all_json_files
 def build_bible_epub(
     root: Path,
     holy_dir: Path,
+    output_dir: Path | None = None,
     generate_md: bool = False,
     generate_txt: bool = False,
 ):
     validate_all_json_files(holy_dir)
     if not holy_dir.exists():
-        raise SystemExit("✗ `_HOLY_BIBLE` folder not found.")
+        raise SystemExit(f"✗ `_HOLY_BIBLE` folder not found at {holy_dir}")
 
     CFG      = load_config(root)
     TITLE    = CFG["meta"]["epub_title"]
@@ -27,6 +28,15 @@ def build_bible_epub(
     EPUB_NAME= f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.epub"
     MD_NAME  = f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.md"
     TXT_NAME = f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.txt"
+
+    if output_dir:
+        epub_path = output_dir / EPUB_NAME
+        md_path   = output_dir / MD_NAME
+        txt_path  = output_dir / TXT_NAME
+    else:
+        epub_path = Path(EPUB_NAME)
+        md_path   = Path(MD_NAME)
+        txt_path  = Path(TXT_NAME)
 
     FMT      = CFG["formatting"]
     FOOT     = CFG.get("footnotes", {})
@@ -63,10 +73,11 @@ def build_bible_epub(
         glossary=GLOSSARY,
     )
 
-    epub.write_epub(EPUB_NAME, book)
-    print("✓ EPUB created:", EPUB_NAME)
-    _maybe_write_markdown(generate_md, md_lines, CFG, chap_map, MD_NAME)
-    _maybe_write_txt(generate_txt, txt_lines, TXT_NAME)
+    epub.write_epub(epub_path, book)
+    print("✓ EPUB created:", epub_path)
+    _maybe_write_markdown(generate_md, md_lines, CFG, chap_map, md_path)
+    _maybe_write_txt(generate_txt, txt_lines, txt_path)
+
 
 def _collect_intro_pages(holy_dir: Path):
     intro_pages = []

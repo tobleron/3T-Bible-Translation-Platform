@@ -1,6 +1,95 @@
 import chainlit as cl
 import sys
 
+
+def _thinking_block(content: str) -> str:
+    return f"<details><summary>Thinking..</summary>\n\n{content.strip()}\n\n</details>"
+
+
+def _reply_display_parts(text: str):
+    token = text or ""
+    while token:
+        before, marker, after = token.partition("<think>")
+        if before:
+            yield "answer", before
+        if not marker:
+            break
+        thinking, end_marker, token = after.partition("</think>")
+        if thinking:
+            yield "thinking", thinking
+        if not end_marker:
+            break
+
+
+async def _stream_model_reply(wb, messages):
+    full_reply = []
+    assistant_msg = None
+    error_occurred = False
+    is_thinking = False
+    thinking_tokens = []
+
+    async def ensure_assistant_msg():
+        nonlocal assistant_msg
+        if assistant_msg is None:
+            assistant_msg = cl.Message(content="")
+            await assistant_msg.send()
+        return assistant_msg
+
+    try:
+        for raw_token in wb.llm.stream_generation(
+            wb.active_model_name(),
+            messages,
+            temperature=0.7,
+            max_tokens=None,
+        ):
+            if raw_token.startswith("[ERROR]"):
+                full_reply.append(raw_token)
+                error_occurred = True
+                break
+
+            full_reply.append(raw_token)
+            token = raw_token
+
+            while token:
+                if is_thinking:
+                    before, marker, after = token.partition("</think>")
+                    if before:
+                        thinking_tokens.append(before)
+                    if marker:
+                        is_thinking = False
+                        await cl.Message(
+                            content=_thinking_block("".join(thinking_tokens)),
+                            author="Assistant",
+                        ).send()
+                        thinking_tokens = []
+                        token = after
+                        continue
+                    break
+
+                before, marker, after = token.partition("<think>")
+                if before:
+                    msg = await ensure_assistant_msg()
+                    await msg.stream_token(before)
+                if marker:
+                    is_thinking = True
+                    token = after
+                    continue
+                break
+
+        if is_thinking and thinking_tokens:
+            await cl.Message(
+                content=_thinking_block("".join(thinking_tokens)),
+                author="Assistant",
+            ).send()
+
+    except Exception as exc:
+        print(f"[CHAINLIT ERROR] {exc}", file=sys.stderr)
+        full_reply.append(f"\n[ERROR] {exc}")
+        error_occurred = True
+
+    return "".join(full_reply).strip(), error_occurred, assistant_msg
+
+
 @cl.on_chat_start
 async def on_chat_start():
     from ttt_workbench.webapp import controller
@@ -16,9 +105,15 @@ async def on_chat_start():
     if wb.state.chat_messages:
         for msg in wb.state.chat_messages:
             author = "User" if msg["role"] == "user" else "Assistant"
-            # We skip thinking blocks in the history load for simplicity, 
-            # or we could try to parse them back. For now, just the text.
-            await cl.Message(content=msg["content"], author=author).send()
+            content = msg["content"]
+            if msg["role"] != "assistant" or "<think>" not in content:
+                await cl.Message(content=content, author=author).send()
+                continue
+            for part_type, part_content in _reply_display_parts(content):
+                if part_type == "thinking":
+                    await cl.Message(content=_thinking_block(part_content), author=author).send()
+                elif part_content.strip():
+                    await cl.Message(content=part_content.strip(), author=author).send()
 
 @cl.on_message
 async def on_message(message: cl.Message):
@@ -28,11 +123,6 @@ async def on_message(message: cl.Message):
     
     if not wb.require_open_chunk():
         await cl.Message(content="Error: No active chunk is open in the workbench.").send()
-        return
-
-    # Validations from the original chat implementation
-    if not wb.state.draft_chunk and not wb.state.chat_messages and wb.chunk_has_committed_text():
-        await cl.Message(content="Review text is committed. Use Revise in Draft before chatting.").send()
         return
 
     # Send only the visible chat session history plus the user's current message.
@@ -48,66 +138,12 @@ async def on_message(message: cl.Message):
     wb.save_state()
     wb.refresh_active_endpoint()
 
-    # We will use Chainlit's streaming mechanism
-    msg = cl.Message(content="")
-    await msg.send()
-
-    full_reply = []
-    error_occurred = False
-    
-    try:
-        is_thinking = False
-        thinking_step = None
-        
-        for token in wb.llm.stream_generation(
-            wb.active_model_name(),
-            messages,
-            temperature=0.7,
-            max_tokens=None,
-        ):
-            if token.startswith("[ERROR]"):
-                full_reply.append(token)
-                error_occurred = True
-                break
-            
-            full_reply.append(token)
-            
-            # Map <think> / </think> boundaries to Chainlit Steps
-            if "<think>" in token:
-                if not is_thinking:
-                    is_thinking = True
-                    thinking_step = cl.Step(name="Thinking Process", type="run")
-                    await thinking_step.send()
-                token = token.replace("<think>", "")
-                if not token:
-                    continue
-            elif "</think>" in token:
-                if is_thinking:
-                    is_thinking = False
-                    if thinking_step:
-                        parts = token.split("</think>")
-                        if parts[0]:
-                            await thinking_step.stream_token(parts[0])
-                        await thinking_step.update()
-                        token = parts[1] if len(parts) > 1 else ""
-                else:
-                    token = token.replace("</think>", "")
-                if not token:
-                    continue
-            
-            if is_thinking and thinking_step:
-                await thinking_step.stream_token(token)
-            else:
-                await msg.stream_token(token)
-            
-    except Exception as exc:
-        print(f"[CHAINLIT ERROR] {exc}", file=sys.stderr)
-        full_reply.append(f"\n[ERROR] {exc}")
-        error_occurred = True
-
-    reply = "".join(full_reply).strip()
+    reply, error_occurred, msg = await _stream_model_reply(wb, messages)
 
     if error_occurred:
+        if msg is None:
+            msg = cl.Message(content="")
+            await msg.send()
         wb.history_entries.append({"title": "Chat error", "body": reply[:160], "accent": "red"})
         wb.print_error(wb.explain_llm_failure(reply))
         await msg.stream_token(f"\n\n**Error:** {wb.explain_llm_failure(reply)}")
@@ -125,4 +161,5 @@ async def on_message(message: cl.Message):
     wb.prepare_browser_commit_state()
     wb.save_state()
 
-    await msg.update()
+    if msg is not None:
+        await msg.update()

@@ -1,0 +1,39 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T14:35:26Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Joel",
+  "chapter": 3,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "oracle",
+      "title": "Judgment on Tyre and Philistia",
+      "reason": "A specific oracle addressing the nations of Tyre, Sidon, and Philistia regarding their treatment of Judah."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "exhortation",
+      "title": "Call to War in the Valley of Decision",
+      "reason": "A series of commands urging nations to gather for judgment and describing the scene of divine war."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "vision",
+      "title": "Cosmic Signs and Restoration of Zion",
+      "reason": "Describes cosmic disturbances followed by the establishment of God's holiness and the future blessing of Judah."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:33:46Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 31,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 21,
+  "verse_count": 21,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 1,
+      "type": "story",
+      "title": "Destruction of High Places",
+      "reason": "Describes the completion of religious reforms across Judah and Benjamin."
+    },
+    {
+      "start_verse": 2,
+      "end_verse": 4,
+      "type": "law",
+      "title": "Restoration of Priestly Divisions",
+      "reason": "Details Hezekiah's organization of priests and Levites for temple service."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Collection of Tithes and Offerings",
+      "reason": "Narrates the people's generous response and the gathering of tithes over four months."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "dialogue",
+      "title": "Review of the Heaps",
+      "reason": "Hezekiah inspects the offerings and receives a report from the chief priest."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 19,
+      "type": "list_or_catalog",
+      "title": "Administration of Temple Stores",
+      "reason": "Lists the officials appointed to manage and distribute the contributions."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Hezekiah's Faithful Service",
+      "reason": "Concludes with a summary of Hezekiah's consistent dedication to God."
+    }
+  ]
+}

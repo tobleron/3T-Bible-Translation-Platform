@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:40:12Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Proverbs",
+  "chapter": 19,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 29,
+  "verse_count": 29,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Wealth and Friends",
+      "reason": "A collection of proverbs contrasting the poor and rich, focusing on social relationships."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 12,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Discernment and Authority",
+      "reason": "Proverbs regarding the value of wisdom, the consequences of lying, and the nature of a king's favor."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Family and Discipline",
+      "reason": "Instructions concerning the home, marriage, parental discipline, and the value of counsel."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 29,
+      "type": "list_or_catalog",
+      "title": "Wisdom on Character and Justice",
+      "reason": "Final proverbs covering the will of God, the sluggard, the scoffer, and divine judgment."
+    }
+  ]
+}

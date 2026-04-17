@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:03:35Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 32,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "blessing_or_prayer",
+      "title": "Blessing of the Forgiven",
+      "reason": "Introduces the psalm with a declaration of blessedness for those whose sins are forgiven."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Personal Confession and Forgiveness",
+      "reason": "Describes the physical toll of unconfessed sin and the relief found in acknowledging it to God."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "exhortation",
+      "title": "Call to Prayer and Promise of Safety",
+      "reason": "Urges the holy ones to pray while God is accessible and describes God as a protective hiding place."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "argument",
+      "title": "Divine Guidance versus Stubbornness",
+      "reason": "Contrasts the wisdom of God's instruction with the stubbornness of beasts and the sorrow of the wicked."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 11,
+      "type": "exhortation",
+      "title": "Call to Rejoice",
+      "reason": "Concludes with a direct command for the righteous to rejoice in Yahweh."
+    }
+  ]
+}

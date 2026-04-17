@@ -1,0 +1,32 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T14:18:38Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Hosea",
+  "chapter": 2,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 13,
+      "type": "speech",
+      "title": "Judgment on the Unfaithful Wife",
+      "reason": "A continuous oracle where God declares judgment against Israel for her spiritual adultery."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 23,
+      "type": "blessing_or_prayer",
+      "title": "Restoration and New Covenant",
+      "reason": "A prophetic vision of God's future restoration, renewed covenant, and reconciliation with His people."
+    }
+  ]
+}

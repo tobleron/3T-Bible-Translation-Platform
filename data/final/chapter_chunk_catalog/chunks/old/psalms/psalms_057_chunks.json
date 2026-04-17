@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:34:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 57,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "psalm",
+      "title": "Prayer for Deliverance in Distress",
+      "reason": "A continuous plea for God's help and protection while surrounded by enemies."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "blessing_or_prayer",
+      "title": "Confident Praise and Thanksgiving",
+      "reason": "A declaration of trust leading into a vow to praise God among the nations."
+    }
+  ]
+}

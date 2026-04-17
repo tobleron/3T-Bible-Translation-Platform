@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:14:52Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 19,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 11,
+  "verse_count": 11,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Jehoshaphat's Return and Reform",
+      "reason": "Narrative of the king returning to Jerusalem, receiving rebuke from Jehu, and initiating spiritual reform."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 7,
+      "type": "law",
+      "title": "Appointment of Judges in Cities",
+      "reason": "Establishment of judicial systems in fortified cities with specific instructions on divine accountability."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "mixed",
+      "title": "Judicial Council in Jerusalem",
+      "reason": "Organization of the central court in Jerusalem with Levites and priests, including final exhortations."
+    }
+  ]
+}

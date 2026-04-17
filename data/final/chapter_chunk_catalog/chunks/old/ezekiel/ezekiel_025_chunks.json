@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T12:33:35Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezekiel",
+  "chapter": 25,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 17,
+  "verse_count": 17,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "oracle",
+      "title": "Oracle Against Ammon",
+      "reason": "A complete prophetic oracle directed at the sons of Ammon with a specific reason and judgment."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "oracle",
+      "title": "Oracle Against Moab",
+      "reason": "A distinct prophetic oracle targeting Moab and Seir with specific cities mentioned."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "oracle",
+      "title": "Oracle Against Edom",
+      "reason": "A complete prophetic unit concerning Edom's vengeance against Judah."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 17,
+      "type": "oracle",
+      "title": "Oracle Against Philistia",
+      "reason": "The final distinct prophetic unit in this section targeting the Philistines."
+    }
+  ]
+}

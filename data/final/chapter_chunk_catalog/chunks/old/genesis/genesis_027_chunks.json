@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:35:46Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 27,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 46,
+  "verse_count": 46,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Isaac's Plan to Bless Esau",
+      "reason": "Establishes the setting and Isaac's request for game before his death."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "Rebekah's Scheme with Jacob",
+      "reason": "Contains the conversation between Rebekah and Jacob and their preparation for the deception."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 29,
+      "type": "story",
+      "title": "Jacob Deceives Isaac and Receives Blessing",
+      "reason": "Narrates the encounter where Jacob impersonates Esau and receives the patriarchal blessing."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 41,
+      "type": "story",
+      "title": "Esau's Return and Lament",
+      "reason": "Describes Esau's arrival, Isaac's reaction, the second blessing for Esau, and Esau's anger."
+    },
+    {
+      "start_verse": 42,
+      "end_verse": 46,
+      "type": "exhortation",
+      "title": "Rebekah Sends Jacob to Haran",
+      "reason": "Concludes with Rebekah's instruction for Jacob to flee and her complaint about the local women."
+    }
+  ]
+}

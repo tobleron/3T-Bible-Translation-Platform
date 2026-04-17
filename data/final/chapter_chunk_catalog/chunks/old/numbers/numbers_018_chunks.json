@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:18:39Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 18,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 32,
+  "verse_count": 32,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Instructions to Aaron and the Levites",
+      "reason": "Yahweh defines the distinct roles of the priests and Levites regarding the sanctuary service."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 19,
+      "type": "law",
+      "title": "Priestly Portions and Offerings",
+      "reason": "Detailed regulations concerning the holy gifts, tithes, and firstborn animals given to Aaron's household."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 24,
+      "type": "speech",
+      "title": "Levites as Inheritance",
+      "reason": "Yahweh explains that the Levites receive the tithe as their inheritance instead of land."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 32,
+      "type": "law",
+      "title": "Tithe of the Tithe",
+      "reason": "Instructions for the Levites to offer a portion of their tithe to Aaron as a contribution."
+    }
+  ]
+}

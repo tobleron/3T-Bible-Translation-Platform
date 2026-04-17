@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T04:45:50Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 17,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 15,
+  "verse_count": 15,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "David's Plea for Vindication",
+      "reason": "The psalmist opens with a prayer asking God to judge his cause and keep him safe as He tests his heart."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Description of the Wicked Enemies",
+      "reason": "The speaker describes the attitude and actions of his enemies, comparing them to a lion ready to tear."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 15,
+      "type": "blessing_or_prayer",
+      "title": "Confidence in God's Presence",
+      "reason": "The psalm concludes with a declaration of hope to behold God's face and be satisfied upon waking."
+    }
+  ]
+}

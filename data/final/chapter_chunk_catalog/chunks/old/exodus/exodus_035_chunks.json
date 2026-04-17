@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T19:59:12Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 35,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 35,
+  "verse_count": 35,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "law",
+      "title": "Sabbath Command",
+      "reason": "Moses establishes the Sabbath law with specific penalties and prohibitions."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 29,
+      "type": "exhortation",
+      "title": "Call for Contributions",
+      "reason": "Moses calls for materials and the people respond with generous offerings."
+    },
+    {
+      "start_verse": 30,
+      "end_verse": 35,
+      "type": "speech",
+      "title": "Appointment of Bezalel and Oholiab",
+      "reason": "Moses announces the divine selection and gifting of specific craftsmen."
+    }
+  ]
+}

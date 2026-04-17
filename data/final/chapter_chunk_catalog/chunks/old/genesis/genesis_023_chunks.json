@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:04:55Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 23,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 20,
+  "verse_count": 20,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Death of Sarah",
+      "reason": "Narrative introduction of Sarah's age and death in Hebron."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 19,
+      "type": "dialogue",
+      "title": "Purchase of the Cave",
+      "reason": "Extended negotiation between Abraham and the sons of Heth regarding the burial site."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Completion of Purchase",
+      "reason": "Final legal confirmation and transfer of title for the field and cave."
+    }
+  ]
+}

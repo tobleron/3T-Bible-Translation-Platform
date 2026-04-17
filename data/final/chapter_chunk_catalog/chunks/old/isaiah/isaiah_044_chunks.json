@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T10:07:21Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 44,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 28,
+  "verse_count": 28,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "speech",
+      "title": "Promise to Jacob and Israel",
+      "reason": "Yahweh addresses Jacob directly with promises of the Spirit and declares His uniqueness as the First and Last."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 20,
+      "type": "argument",
+      "title": "Folly of Idol Makers",
+      "reason": "A satirical argument describing how craftsmen make idols from wood and fire, highlighting their lack of insight."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "exhortation",
+      "title": "Call to Remember and Rejoice",
+      "reason": "Yahweh urges Jacob to remember his redemption and calls all creation to shout for joy."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 28,
+      "type": "oracle",
+      "title": "Yahweh as Creator and Cyrus as Shepherd",
+      "reason": "An oracle declaring Yahweh's sovereignty over creation and His specific plan to use Cyrus for Jerusalem's restoration."
+    }
+  ]
+}

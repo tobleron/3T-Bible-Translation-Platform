@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:05:48Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Judges",
+  "chapter": 13,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 25,
+  "verse_count": 25,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 2,
+      "type": "story",
+      "title": "Israel's Oppression and Manoah's Family",
+      "reason": "Sets the historical context of Philistine oppression and introduces the barren couple."
+    },
+    {
+      "start_verse": 3,
+      "end_verse": 7,
+      "type": "vision",
+      "title": "Angel Appears to the Woman",
+      "reason": "Records the first divine announcement of Samson's birth and his Nazirite vows to the mother."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Manoah Prays and Receives Instruction",
+      "reason": "Describes Manoah's prayer for clarification and the angel's reiteration of the dietary laws."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Sacrifice and Divine Revelation",
+      "reason": "Narrates the meal preparation, the miraculous ascent of the angel, and the couple's realization of God's presence."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Birth and Empowerment of Samson",
+      "reason": "Concludes the narrative with the birth of the child and the initial stirring of the Spirit."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:27:29Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Esther",
+  "chapter": 8,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 17,
+  "verse_count": 17,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 4,
+      "type": "story",
+      "title": "Esther's Plea and the King's Favor",
+      "reason": "Describes the transfer of Haman's estate to Esther and Mordecai, followed by Esther's emotional appeal for her people."
+    },
+    {
+      "start_verse": 5,
+      "end_verse": 8,
+      "type": "dialogue",
+      "title": "The Request to Repeal the Decree",
+      "reason": "Contains Esther's specific request and the King's response granting Mordecai authority to write a new decree."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "law",
+      "title": "The New Decree Issued",
+      "reason": "Details the writing, sealing, and dispatching of the royal letters granting the Jews permission to defend themselves."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 17,
+      "type": "story",
+      "title": "Mordecai's Promotion and Jewish Joy",
+      "reason": "Narrates Mordecai's entrance in royal robes, the celebration in Susa, and the widespread conversion of peoples to Judaism."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:18:27Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Judges",
+  "chapter": 21,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 25,
+  "verse_count": 25,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "The Oath and the Crisis",
+      "reason": "Describes the oath at Mizpah and the Israelites' distress over the missing tribe of Benjamin."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "story",
+      "title": "War on Jabesh-gilead",
+      "reason": "Narrates the search for a tribe that missed the oath and the subsequent slaughter of Jabesh-gilead to find wives."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Shiloh Solution",
+      "reason": "Details the elders' plan for the remaining Benjamites to seize wives during a feast at Shiloh."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Conclusion and Epilogue",
+      "reason": "Summarizes the dispersal of the tribes and states the theological observation about the lack of a king."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T16:06:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Samuel",
+  "chapter": 14,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 33,
+  "verse_count": 33,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Joab Plans the Return",
+      "reason": "Narrative introduction of Joab's strategy and preparation of the woman."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "The Woman's Plea to the King",
+      "reason": "Extended dialogue where the woman presents her case and draws a parallel to Absalom."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 20,
+      "type": "dialogue",
+      "title": "The King Questions the Woman",
+      "reason": "Direct exchange where the king reveals Joab's involvement."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Absalom Returns to Jerusalem",
+      "reason": "Narrative of the king's command and Absalom's initial return with restrictions."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 28,
+      "type": "story",
+      "title": "Absalom's Appearance and Waiting",
+      "reason": "Descriptive narrative about Absalom's beauty and his two-year wait."
+    },
+    {
+      "start_verse": 29,
+      "end_verse": 32,
+      "type": "story",
+      "title": "Absalom Forces Joab's Hand",
+      "reason": "Narrative of Absalom burning the field to compel Joab to visit him."
+    },
+    {
+      "start_verse": 33,
+      "end_verse": 33,
+      "type": "story",
+      "title": "Reconciliation with the King",
+      "reason": "Conclusion of the narrative where Absalom is fully restored to the king's presence."
+    }
+  ]
+}

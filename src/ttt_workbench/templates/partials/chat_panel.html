@@ -8,15 +8,6 @@
     </div>
   </div>
 
-  {% if has_committed_text and not has_draft_work and not state.chat_messages %}
-  <div class="chat-empty chat-bridge-empty">
-    <p>This chunk already has committed JSON text. Use <strong>Revise In Draft</strong> to copy that text into the draft workspace before chatting with the model.</p>
-    <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-      <input type="hidden" name="editor_action" value="seed-draft">
-      <button class="primary-button" type="submit">Revise In Draft</button>
-    </form>
-  </div>
-  {% else %}
   <script>
   window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
   </script>
@@ -64,5 +55,4 @@
   <div class="chainlit-container">
     <iframe src="/chat?workbench_chat_session={{ active_chat_session_id }}"></iframe>
   </div>
-  {% endif %}
 </article>

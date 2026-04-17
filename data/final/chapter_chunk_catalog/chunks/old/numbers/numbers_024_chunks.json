@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:27:32Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 24,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 25,
+  "verse_count": 25,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "blessing_or_prayer",
+      "title": "Balaam's Third Oracle on Israel",
+      "reason": "A complete prophetic blessing describing Israel's prosperity and victory."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Balak's Anger and Balaam's Response",
+      "reason": "A narrative exchange where Balak complains and Balaam explains his constraint."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 19,
+      "type": "oracle",
+      "title": "Balaam's Fourth Oracle on the Messiah",
+      "reason": "A distinct prophetic vision concerning a future ruler from Jacob."
+    },
+    {
+      "start_verse": 20,
+      "end_verse": 24,
+      "type": "oracle",
+      "title": "Oracles Against Amalek, Kenite, and Kittim",
+      "reason": "A series of short prophetic judgments against specific nations."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 25,
+      "type": "story",
+      "title": "Departure of Balaam and Balak",
+      "reason": "The concluding narrative action ending the chapter."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T04:10:30Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Job",
+  "chapter": 30,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 15,
+      "type": "speech",
+      "title": "Mockery by the Young and Wicked",
+      "reason": "Job describes how younger men mock him and their fathers, detailing their wretched state and how they now oppress him."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 23,
+      "type": "speech",
+      "title": "Physical Affliction and Divine Anger",
+      "reason": "Job laments his internal suffering, physical decay, and the perception that God has loosed His bowstring against him."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 31,
+      "type": "speech",
+      "title": "Irony of Suffering and Final Lament",
+      "reason": "Job questions if the wretched cry out to him, recalls his past compassion, and concludes with his total despair and changed music."
+    }
+  ]
+}

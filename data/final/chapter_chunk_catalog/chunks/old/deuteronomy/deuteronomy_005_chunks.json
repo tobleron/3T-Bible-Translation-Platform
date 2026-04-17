@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:53:51Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 5,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 33,
+  "verse_count": 33,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "speech",
+      "title": "Moses Summons Israel",
+      "reason": "Moses introduces the covenant and context of the law."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 21,
+      "type": "law",
+      "title": "The Ten Commandments",
+      "reason": "Direct speech containing the core laws given by God."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 27,
+      "type": "dialogue",
+      "title": "People's Reaction to the Voice",
+      "reason": "Narration of the people's fear and request for Moses as mediator."
+    },
+    {
+      "start_verse": 28,
+      "end_verse": 31,
+      "type": "speech",
+      "title": "God's Response to the People",
+      "reason": "God acknowledges their fear and instructs Moses to teach them."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 33,
+      "type": "exhortation",
+      "title": "Call to Obedience",
+      "reason": "Final charge to the people to follow the commandments carefully."
+    }
+  ]
+}

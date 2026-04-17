@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T18:31:15Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Exodus",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 9,
+      "type": "dialogue",
+      "title": "The Three Signs",
+      "reason": "Moses questions his authority and Yahweh provides three miraculous signs to validate his mission."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 17,
+      "type": "dialogue",
+      "title": "Moses' Objections and Aaron's Appointment",
+      "reason": "Moses hesitates due to his speech impediment, leading Yahweh to appoint Aaron as his spokesman."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Departure for Egypt",
+      "reason": "Moses returns to Jethro, receives permission, and travels back to Egypt with his family."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "oracle",
+      "title": "Instructions for Pharaoh",
+      "reason": "Yahweh instructs Moses on the message to deliver and warns of the hardening of Pharaoh's heart."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 26,
+      "type": "story",
+      "title": "The Encounter at the Lodging Place",
+      "reason": "A dramatic incident where Yahweh seeks to kill Moses and Zipporah performs circumcision."
+    },
+    {
+      "start_verse": 27,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Meeting Aaron and the People",
+      "reason": "Aaron meets Moses, they gather the elders, perform signs, and the people believe."
+    }
+  ]
+}

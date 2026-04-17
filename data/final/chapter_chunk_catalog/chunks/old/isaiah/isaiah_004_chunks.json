@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T08:31:00Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 6,
+  "verse_count": 6,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 1,
+      "type": "speech",
+      "title": "Women's Promise to One Man",
+      "reason": "A specific dialogue where seven women propose a unique arrangement to one man."
+    },
+    {
+      "start_verse": 2,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "Restoration of Zion and the Branch",
+      "reason": "A prophetic declaration describing the glory of the Branch, the holiness of the remnant, and God's protective canopy."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:15:51Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 149,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 9,
+  "verse_count": 9,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "psalm",
+      "title": "Call to Praise and Joy",
+      "reason": "The psalm opens with a call for Israel to sing a new song and rejoice in their Maker, culminating in the promise of salvation for the afflicted."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 9,
+      "type": "oracle",
+      "title": "Vengeance on the Nations",
+      "reason": "The text shifts to describe the holy ones executing judgment and vengeance upon the nations as a divine mandate."
+    }
+  ]
+}

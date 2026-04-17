@@ -15,22 +15,14 @@ Usage:
   ./ttt.sh                Launch the browser workbench
   ./ttt.sh web            Launch the browser workbench
   ./ttt.sh web-fake       Launch the browser workbench with fake LLM responses
-  ./ttt.sh textual        Launch the Textual workbench
-  ./ttt.sh workbench      Launch the legacy terminal workbench
-  ./ttt.sh textual-preview  Launch the Textual UI prototype
   ./ttt.sh prep-data      Download/build offline lexical data
   ./ttt.sh smoke          Run the scripted workbench smoke test
   ./ttt.sh test           Run the ttt_core unit tests
-  ./ttt.sh translate      Run the legacy AI translation wrapper
-  ./ttt.sh analyze        Run the legacy editorial analysis wrapper
-  ./ttt.sh epub           Run the legacy EPUB builder wrapper
-  ./ttt.sh backup         Create a versioned project backup
+  ./ttt.sh epub           Build EPUB output
   ./ttt.sh help           Show this help
 
 Notes:
   - The default command is `web`.
-  - Use `./ttt.sh workbench` for the legacy line-based shell.
-  - Inside the workbench, use `/epub-gen` to build EPUB output from committed JSON.
   - `prep-data --background` runs lexical data preparation in the background.
 EOF
 }
@@ -84,28 +76,6 @@ run_web() {
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
 }
 
-run_workbench() {
-  cd "$ROOT_DIR"
-  ensure_workbench_env
-  # Kill any existing process from the same script
-  pkill -f "ttt_workbench.py" 2>/dev/null || true
-  exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/ttt_workbench.py"
-}
-
-run_textual_preview() {
-  cd "$ROOT_DIR"
-  ensure_workbench_env
-  pkill -f "textual_workbench_preview.py" 2>/dev/null || true
-  exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/textual_workbench_preview.py"
-}
-
-run_textual() {
-  cd "$ROOT_DIR"
-  ensure_workbench_env
-  pkill -f "textual_workbench.py" 2>/dev/null || true
-  exec env PYTHONPATH="$(python_env)" "$VENV_PY" "$ROOT_DIR/src/ttt_workbench/textual_workbench.py"
-}
-
 run_prep_data() {
   cd "$ROOT_DIR"
   ensure_workbench_env
@@ -130,32 +100,11 @@ run_test() {
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" -m pytest tests/ -v "${@:2}"
 }
 
-run_translate() {
-  cd "$ROOT_DIR/archive/workspace_legacy/01_AI_Translation_Engine"
-  export PYTHONPATH="$(python_env)"
-  pkill -f "translate_verse" 2>/dev/null || true
-  exec ./translate_verse.sh "${@:2}"
-}
-
-run_analyze() {
-  cd "$ROOT_DIR/archive/workspace_legacy/02_Human_Editorial_Workspace"
-  export PYTHONPATH="$(python_env)"
-  pkill -f "analyze_translation" 2>/dev/null || true
-  exec ./analyze_translation.sh "${@:2}"
-}
-
 run_epub() {
   cd "$ROOT_DIR"
   ensure_workbench_env
   pkill -f "generate_epub" 2>/dev/null || true
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" src/ttt_epub/generate_epub.py "${@:2}"
-}
-
-run_backup() {
-  cd "$ROOT_DIR"
-  ensure_workbench_env
-  pkill -f "version_control.py" 2>/dev/null || true
-  exec env PYTHONPATH="$(python_env)" "$VENV_PY" version_control.py "${@:2}"
 }
 
 COMMAND="${1:-web}"
@@ -168,15 +117,6 @@ case "$COMMAND" in
     export TTT_WEBAPP_FAKE_LLM=1
     run_web "$@"
     ;;
-  workbench)
-    run_workbench "$@"
-    ;;
-  textual-preview)
-    run_textual_preview "$@"
-    ;;
-  textual)
-    run_textual "$@"
-    ;;
   prep-data)
     run_prep_data "$@"
     ;;
@@ -186,17 +126,8 @@ case "$COMMAND" in
   test)
     run_test "$@"
     ;;
-  translate)
-    run_translate "$@"
-    ;;
-  analyze)
-    run_analyze "$@"
-    ;;
   epub)
     run_epub "$@"
-    ;;
-  backup)
-    run_backup "$@"
     ;;
   help|-h|--help)
     show_help

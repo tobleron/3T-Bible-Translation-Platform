@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:57:41Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 5,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 14,
+  "verse_count": 14,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Solomon Assembles the Leaders",
+      "reason": "Narrative introduction of Solomon bringing holy items and gathering Israel for the ark's transfer."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 10,
+      "type": "story",
+      "title": "The Ark Enters the Temple",
+      "reason": "Detailed account of the Levites carrying the ark into the Holy of Holies and its contents."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 14,
+      "type": "story",
+      "title": "The Glory Fills the House",
+      "reason": "Description of the priests and singers praising God until His glory fills the temple in a cloud."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T09:13:35Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Joshua",
+  "chapter": 2,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 24,
+  "verse_count": 24,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Spies Enter Jericho and Hide",
+      "reason": "Describes the arrival of the spies, their lodging with Rahab, and her initial deception of the king's men."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Rahab's Confession and Request",
+      "reason": "Contains Rahab's speech declaring faith in Yahweh and her plea for the safety of her family."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 21,
+      "type": "story",
+      "title": "The Agreement and Escape Plan",
+      "reason": "Details the physical escape via the window, the terms of the scarlet cord, and the spies' departure."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Return to Joshua",
+      "reason": "Concludes the narrative with the spies hiding for three days and reporting back to Joshua."
+    }
+  ]
+}

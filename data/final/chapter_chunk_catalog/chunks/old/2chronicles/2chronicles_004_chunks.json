@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:56:15Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "2 Chronicles",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 22,
+  "verse_count": 22,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "list_or_catalog",
+      "title": "Description of the Sea and Lavers",
+      "reason": "Describes the construction and placement of the bronze sea, oxen, lavers, lampstands, tables, and court doors."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Completion of Utensils by Huram-abi",
+      "reason": "Details the specific work done by Huram-abi, including pillars and networks, and notes where the items were cast."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 22,
+      "type": "list_or_catalog",
+      "title": "Furniture of the Inner Sanctuary",
+      "reason": "Lists the golden altar, tables, lampstands, and various gold utensils used inside the temple."
+    }
+  ]
+}

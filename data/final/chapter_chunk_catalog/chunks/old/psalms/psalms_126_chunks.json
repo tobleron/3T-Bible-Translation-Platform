@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T06:54:04Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 126,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 6,
+  "verse_count": 6,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "psalm",
+      "title": "Remembrance of Restoration",
+      "reason": "Describes the joy of returning captives and acknowledges God's great deeds."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 6,
+      "type": "blessing_or_prayer",
+      "title": "Prayer for Future Restoration",
+      "reason": "Contains a petition for restoration and an exhortation on the joy following labor."
+    }
+  ]
+}

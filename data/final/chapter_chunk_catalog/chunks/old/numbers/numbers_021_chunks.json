@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T21:23:00Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Numbers",
+  "chapter": 21,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 35,
+  "verse_count": 35,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Conquest of Arad and Hormah",
+      "reason": "A complete narrative unit describing the conflict with the Canaanite king and the resulting vow."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 9,
+      "type": "story",
+      "title": "The Fiery Serpents and Bronze Serpent",
+      "reason": "A coherent narrative block covering the people's complaint, the plague of serpents, and the remedy."
+    },
+    {
+      "start_verse": 10,
+      "end_verse": 20,
+      "type": "list_or_catalog",
+      "title": "Journey to Moab and Song of the Well",
+      "reason": "A travel itinerary interspersed with a specific song celebrating the well."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 31,
+      "type": "story",
+      "title": "Defeat of Sihon King of the Amorites",
+      "reason": "A complete narrative arc involving diplomatic negotiation, battle, and the poetic record of victory."
+    },
+    {
+      "start_verse": 32,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Conquest of Jazer and Bashan",
+      "reason": "A concluding narrative segment detailing the capture of Jazer and the defeat of Og."
+    }
+  ]
+}

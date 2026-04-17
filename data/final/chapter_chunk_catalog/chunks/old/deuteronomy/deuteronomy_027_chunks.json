@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T05:47:00Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Deuteronomy",
+  "chapter": 27,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 26,
+  "verse_count": 26,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "law",
+      "title": "Instructions for the Stones and Altar",
+      "reason": "Moses commands the people to set up stones with the law and build an altar on Mount Ebal."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Call to Listen and Obey",
+      "reason": "Moses and the priests address Israel to become a people for Yahweh and listen to His voice."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "speech",
+      "title": "Placement of Tribes for Blessing and Curse",
+      "reason": "Moses instructs which tribes stand on Gerizim to bless and which on Ebal to curse."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 26,
+      "type": "list_or_catalog",
+      "title": "The Twelve Curses",
+      "reason": "A series of twelve specific curses pronounced by the Levites with the people's response."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T03:24:28Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Esther",
+  "chapter": 6,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 14,
+  "verse_count": 14,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "The King's Sleep and Haman's Arrival",
+      "reason": "Describes the king finding Mordecai's record and summoning Haman who arrives to request Mordecai's execution."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 11,
+      "type": "dialogue",
+      "title": "Haman's Proposal and the King's Command",
+      "reason": "Contains Haman's internal monologue, his suggestion for honoring a man, and the king's specific order to honor Mordecai."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 14,
+      "type": "story",
+      "title": "Haman's Humiliation and the Feast Call",
+      "reason": "Narrates Haman returning home in mourning, his wife's counsel regarding Mordecai, and the arrival of eunuchs for Esther's feast."
+    }
+  ]
+}

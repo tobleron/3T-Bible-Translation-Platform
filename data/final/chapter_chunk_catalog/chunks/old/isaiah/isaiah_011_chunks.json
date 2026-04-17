@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T08:40:15Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 11,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 16,
+  "verse_count": 16,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 10,
+      "type": "oracle",
+      "title": "The Messiah and the Peaceful Kingdom",
+      "reason": "Describes the coming ruler from Jesse's line and the resulting harmony in creation."
+    },
+    {
+      "start_verse": 11,
+      "end_verse": 16,
+      "type": "oracle",
+      "title": "The Gathering of the Remnant",
+      "reason": "Details the Lord's second gathering of His people from distant lands and their return."
+    }
+  ]
+}

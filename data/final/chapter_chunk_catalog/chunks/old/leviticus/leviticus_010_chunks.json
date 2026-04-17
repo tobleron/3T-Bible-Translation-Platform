@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T20:21:37Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Leviticus",
+  "chapter": 10,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 20,
+  "verse_count": 20,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Death of Nadab and Abihu",
+      "reason": "Narrative account of the priests' death and Moses' instructions to Aaron."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "law",
+      "title": "Wine Prohibition for Priests",
+      "reason": "Divine command regarding wine and distinguishing holy from profane."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "law",
+      "title": "Priestly Food Portions",
+      "reason": "Regulations on where and how priests must eat the grain and peace offerings."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 20,
+      "type": "dialogue",
+      "title": "Moses and Aaron Discuss Sin Offering",
+      "reason": "Dialogue concerning the missing sin offering goat and Aaron's explanation."
+    }
+  ]
+}

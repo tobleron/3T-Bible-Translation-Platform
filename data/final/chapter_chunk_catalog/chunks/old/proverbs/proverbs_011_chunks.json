@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T07:29:32Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Proverbs",
+  "chapter": 11,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "list_or_catalog",
+      "title": "Contrasts on Justice and Integrity",
+      "reason": "A series of parallel proverbs contrasting the fate of the righteous and wicked regarding justice."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 11,
+      "type": "list_or_catalog",
+      "title": "Deliverance and Community Impact",
+      "reason": "Continues the catalog of proverbs focusing on how righteousness affects personal rescue and city stability."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 17,
+      "type": "list_or_catalog",
+      "title": "Wisdom in Speech and Action",
+      "reason": "A collection of sayings on discretion, counsel, guarantees, and the effects of kindness versus cruelty."
+    },
+    {
+      "start_verse": 18,
+      "end_verse": 23,
+      "type": "list_or_catalog",
+      "title": "Wages and Desires",
+      "reason": "Proverbs contrasting the deceptive wages of the wicked with the true reward of the righteous."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 30,
+      "type": "list_or_catalog",
+      "title": "Generosity and Fruitfulness",
+      "reason": "A sequence of proverbs on giving, seeking good, trusting in riches, and winning souls."
+    },
+    {
+      "start_verse": 31,
+      "end_verse": 31,
+      "type": "exhortation",
+      "title": "Final Warning",
+      "reason": "A concluding rhetorical question summarizing the judgment of both the righteous and the wicked."
+    }
+  ]
+}

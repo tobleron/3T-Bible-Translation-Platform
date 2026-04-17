@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T05:12:42Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 39,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 13,
+  "verse_count": 13,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "speech",
+      "title": "Vow of Silence and Anguish",
+      "reason": "The psalmist describes his initial vow to guard his speech and the resulting internal anguish that led him to speak."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Reflection on Human Transience",
+      "reason": "A prayer asking for awareness of life's brevity and a description of human existence as vanity and shadow."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Petition for Deliverance",
+      "reason": "The psalmist pleads for relief from transgressions and the plague of God's hand, acknowledging divine chastisement."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 13,
+      "type": "blessing_or_prayer",
+      "title": "Final Plea for Mercy",
+      "reason": "A concluding prayer asking God to hear his cry and grant a moment of joy before death."
+    }
+  ]
+}

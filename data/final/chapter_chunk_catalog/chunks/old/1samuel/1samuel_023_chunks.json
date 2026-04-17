@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-10T10:57:43Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Samuel",
+  "chapter": 23,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 29,
+  "verse_count": 29,
+  "attempts_used": 1,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "David Saves Keilah",
+      "reason": "A complete narrative unit where David seeks God's direction and delivers the city of Keilah from the Philistines."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 13,
+      "type": "story",
+      "title": "David Escapes Saul at Keilah",
+      "reason": "A continuous narrative block detailing the arrival of Abiathar, Saul's pursuit, David's inquiry about the city's loyalty, and their subsequent departure."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 18,
+      "type": "story",
+      "title": "Jonathan Strengthens David",
+      "reason": "A distinct scene focusing on the relationship between Jonathan and David, including their covenant at Horesh."
+    },
+    {
+      "start_verse": 19,
+      "end_verse": 24,
+      "type": "dialogue",
+      "title": "The Ziphites Betray David",
+      "reason": "A focused exchange between the Ziphites and Saul regarding David's location, followed by their movement to Maon."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 29,
+      "type": "story",
+      "title": "The Rock of Escape",
+      "reason": "The climax of the chase where David and Saul encircle each other on a mountain, interrupted by the Philistine raid."
+    }
+  ]
+}

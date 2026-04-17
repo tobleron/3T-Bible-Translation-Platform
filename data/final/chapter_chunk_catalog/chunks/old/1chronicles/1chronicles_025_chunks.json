@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T01:44:10Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "1 Chronicles",
+  "chapter": 25,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 31,
+  "verse_count": 31,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "list_or_catalog",
+      "title": "Selection and Organization of Musicians",
+      "reason": "Describes the selection of sons of Asaph, Heman, and Jeduthun for temple service and their total number."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 31,
+      "type": "list_or_catalog",
+      "title": "Casting Lots for Duties",
+      "reason": "Details the casting of lots to assign responsibilities among the twenty-four groups of musicians."
+    }
+  ]
+}

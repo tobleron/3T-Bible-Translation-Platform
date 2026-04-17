@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:40:16Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 30,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 43,
+  "verse_count": 43,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "story",
+      "title": "Rachel and Bilhah's Children",
+      "reason": "Describes Rachel giving her maid Bilhah to Jacob and the birth of Dan and Naphtali."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 13,
+      "type": "story",
+      "title": "Leah and Zilpah's Children",
+      "reason": "Describes Leah giving her maid Zilpah to Jacob and the birth of Gad and Asher."
+    },
+    {
+      "start_verse": 14,
+      "end_verse": 21,
+      "type": "story",
+      "title": "Mandrakes and Leah's Children",
+      "reason": "Narrates the exchange of mandrakes between Rachel and Leah leading to the birth of Issachar, Zebulun, and Dinah."
+    },
+    {
+      "start_verse": 22,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Rachel's Son Joseph",
+      "reason": "Describes God opening Rachel's womb and the birth of Joseph."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 34,
+      "type": "dialogue",
+      "title": "Jacob Requests Departure",
+      "reason": "Contains the negotiation between Jacob and Laban regarding wages for leaving."
+    },
+    {
+      "start_verse": 35,
+      "end_verse": 43,
+      "type": "story",
+      "title": "Jacob's Flocks Increase",
+      "reason": "Details the separation of flocks and Jacob's method to increase his wealth."
+    }
+  ]
+}

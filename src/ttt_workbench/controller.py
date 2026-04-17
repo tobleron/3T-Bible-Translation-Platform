@@ -150,6 +150,7 @@ class BrowserWorkbench(WorkbenchApp):
             "editorial tone suitable for translation footnotes and justification prose. Preserve the "
             "writer's intent and factual content. Do not introduce new claims."
         ),
+        "copyable": "Output verse(s) in plain text code block.",
     }
 
     def __init__(self) -> None:
@@ -1040,12 +1041,37 @@ Rules:
         self.open_chunk(book, chapter, start_verse, end_verse)
         self.state.footnote_draft = None
         self.state.wizard_testament = testament
-        # Populate draft title from chunk catalog, falling back to committed title
+        # Populate the visible title without treating committed text as draft work.
         if not self.state.draft_title.strip():
-            self.state.draft_title = self._chunk_catalog_title(book, chapter, chunk_key)
+            self.state.draft_title = self.committed_chunk_title()
             if not self.state.draft_title.strip():
-                self.state.draft_title = self.committed_chunk_title()
+                self.state.draft_title = self._chunk_catalog_title(book, chapter, chunk_key)
+        
+        # Initialize editor state machine
+        if self.chunk_has_committed_text() and not self.has_draft_work():
+            self.state.browser_editor_state = "committed"
+            self.state.browser_editor_mode = "review"
+        else:
+            self.state.browser_editor_state = "editing"
+            self.state.browser_editor_mode = "draft"
+
         self.set_screen("STUDY", mode="COMMAND")
+        self.save_state()
+
+    def lock_editor(self) -> None:
+        self.state.browser_editor_state = "locked"
+        self.save_state()
+
+    def unlock_editor(self) -> None:
+        self.state.browser_editor_state = "editing"
+        self.save_state()
+
+    def start_revision(self) -> None:
+        if self.state.browser_editor_state == "committed":
+            if not self.has_draft_work():
+                self.seed_draft_from_committed()
+        self.state.browser_editor_state = "editing"
+        self.state.browser_editor_mode = "draft"
         self.save_state()
 
     def select_chapter(self, testament: str, book: str, chapter: int) -> None:
@@ -1059,6 +1085,7 @@ Rules:
         self.state.focus_start = None
         self.state.focus_end = None
         self.state.browser_editor_mode = "draft"
+        self.state.browser_editor_state = "editing"
         self.state.chat_messages = []
         self.state.draft_chunk = {}
         self.state.draft_title = ""
@@ -1106,9 +1133,16 @@ Rules:
         return False
 
     def has_draft_work(self) -> bool:
-        if self.state.draft_title.strip():
-            return True
-        return any(str(text).strip() for text in self.state.draft_chunk.values())
+        if not self.has_open_chunk():
+            return False
+        # Only consider draft work within the current chunk boundaries
+        for verse in range((self.state.chunk_start or 1), (self.state.chunk_end or 1) + 1):
+            if str(self.state.draft_chunk.get(str(verse), "")).strip():
+                return True
+        draft_title = (self.state.draft_title or "").strip()
+        if draft_title and self.chunk_has_committed_text():
+            return draft_title != self.committed_chunk_title()
+        return bool(draft_title)
 
     def default_editor_mode(self) -> str:
         return "review" if self.chunk_has_committed_text() else "draft"
@@ -1127,9 +1161,29 @@ Rules:
     def sync_editor_mode(self, *, force_default: bool = False) -> str:
         if not self.has_open_chunk():
             self.state.browser_editor_mode = "draft"
+            self.state.browser_editor_state = "editing"
             return "draft"
+        
+        # If we are already in committed state, stick with it
+        if self.state.browser_editor_state == "committed":
+            self.state.browser_editor_mode = "review"
+            return "review"
+
+        # If we have committed text and NO draft work, and we are NOT actively editing, default to committed
+        if self.chunk_has_committed_text() and not self.has_draft_work() and self.state.browser_editor_state != "editing":
+            self.state.browser_editor_state = "committed"
+            self.state.browser_editor_mode = "review"
+            return "review"
+
         if force_default or self.editor_mode() not in {"draft", "review"}:
-            return self.set_editor_mode(self.default_editor_mode())
+            mode = self.default_editor_mode()
+            self.state.browser_editor_mode = mode
+            if mode == "review":
+                 self.state.browser_editor_state = "committed"
+            else:
+                 self.state.browser_editor_state = "editing"
+            return mode
+
         mode = self.editor_mode()
         self.state.browser_editor_mode = mode
         return mode
@@ -1145,6 +1199,7 @@ Rules:
         committed_title = self.committed_chunk_title()
         if committed_title:
             self.state.draft_title = committed_title
+        self.state.browser_editor_state = "editing"
         self.set_editor_mode("draft")
         self.prepare_browser_commit_state()
 
@@ -1787,20 +1842,22 @@ Rules:
         for verse in range(start, end + 1):
             committed = chapter_map.get(verse, "")
             key = str(verse)
-            text = self.state.draft_chunk.get(key, committed)
+            draft_text = self.state.draft_chunk.get(key, "")
+            changed = key in self.state.draft_chunk and draft_text.strip() != committed.strip()
             verses.append(
                 {
                     "verse": verse,
-                    "text": (text or "").rstrip(),
+                    "text": (committed or "").rstrip(),
                     "committed": committed.rstrip(),
-                    "changed": key in self.state.draft_chunk and text.strip() != committed.strip(),
+                    "draft_text": (draft_text or "").rstrip(),
+                    "changed": changed,
                 }
             )
         return verses
 
     def editor_title(self, mode: str | None = None) -> str:
         current_mode = mode or self.editor_mode()
-        if current_mode == "review" and not self.state.draft_title.strip():
+        if current_mode == "review":
             return self.committed_chunk_title()
         return self.state.draft_title
 
@@ -2295,11 +2352,13 @@ Rules:
         book = self.state.book or self.state.wizard_book or ""
         chapter = self.state.chapter or self.state.wizard_chapter or 0
         chunk_open = self.has_open_chunk()
+        
+        # Ensure editor state machine is synchronized
         if chunk_open:
             self.prepare_browser_commit_state()
-            editor_mode = self.sync_editor_mode()
-        else:
-            editor_mode = "draft"
+            self.sync_editor_mode()
+        
+        editor_mode = self.state.browser_editor_mode or "draft"
         editor_start, editor_end = self.current_editor_range() if chunk_open else (0, 0)
         model_names = self.safe_list_models() if chunk_open else []
         return {
@@ -2390,39 +2449,23 @@ Rules:
 
     def save_draft(self, title: str, verses: dict[int, str], *, editor_mode: str | None = None) -> None:
         mode = (editor_mode or self.editor_mode()).lower()
-        chapter_map = self.chapter_verse_map()
+        if mode == "review":
+            self.history_entries.append(
+                {"title": "Review is read-only", "body": "Start a revision before editing committed text.", "accent": "muted"}
+            )
+            return
         verse_count = len(verses)
         changed = False
-        if mode == "review":
-            committed_title = self.committed_chunk_title()
-            cleaned_title = title.strip()
-            old_title = self.state.draft_title
-            self.state.draft_title = "" if cleaned_title == committed_title else cleaned_title
-            if self.state.draft_title != old_title:
+        old_title = self.state.draft_title
+        self.state.draft_title = title.strip()
+        if self.state.draft_title != old_title:
+            changed = True
+        for verse, text in verses.items():
+            key = str(verse)
+            old = self.state.draft_chunk.get(key, "")
+            if text.strip() != old:
+                self.state.draft_chunk[key] = text.strip()
                 changed = True
-            for verse, text in verses.items():
-                key = str(verse)
-                cleaned = text.strip()
-                committed = chapter_map.get(verse, "").strip()
-                old = self.state.draft_chunk.get(key, committed)
-                if cleaned == committed:
-                    if key in self.state.draft_chunk:
-                        del self.state.draft_chunk[key]
-                        changed = True
-                elif cleaned != old:
-                    self.state.draft_chunk[key] = cleaned
-                    changed = True
-        else:
-            old_title = self.state.draft_title
-            self.state.draft_title = title.strip()
-            if self.state.draft_title != old_title:
-                changed = True
-            for verse, text in verses.items():
-                key = str(verse)
-                old = self.state.draft_chunk.get(key, "")
-                if text.strip() != old:
-                    self.state.draft_chunk[key] = text.strip()
-                    changed = True
         if changed:
             self.history_entries.append(
                 {"title": "Draft saved", "body": f"{verse_count} verse{'s' if verse_count != 1 else ''} saved for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}", "accent": "green"}
@@ -2431,6 +2474,19 @@ Rules:
             self.history_entries.append(
                 {"title": "No changes", "body": f"No new changes to save in {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}.", "accent": "muted"}
             )
+        self.prepare_browser_commit_state()
+        self.save_state()
+
+    def clear_current_draft_after_commit(self) -> None:
+        if not self.has_open_chunk():
+            return
+        start = self.state.chunk_start or 1
+        end = self.state.chunk_end or start
+        for verse in range(start, end + 1):
+            self.state.draft_chunk.pop(str(verse), None)
+        self.state.draft_title = ""
+        self.state.browser_editor_state = "committed"
+        self.state.browser_editor_mode = "review"
         self.prepare_browser_commit_state()
         self.save_state()
 
@@ -2454,11 +2510,11 @@ Rules:
             self.state.wizard_testament = testament
             self.state.wizard_book = book
             self.state.wizard_chapter = chapter
-            # Still refresh the draft title from catalog
+            # Still refresh the visible title without treating committed text as draft work.
             if not self.state.draft_title.strip():
-                self.state.draft_title = self._chunk_catalog_title(book, chapter, chunk_key)
+                self.state.draft_title = self.committed_chunk_title()
                 if not self.state.draft_title.strip():
-                    self.state.draft_title = self.committed_chunk_title()
+                    self.state.draft_title = self._chunk_catalog_title(book, chapter, chunk_key)
             return
 
         self.load_workspace(testament, book, chapter, chunk_key)

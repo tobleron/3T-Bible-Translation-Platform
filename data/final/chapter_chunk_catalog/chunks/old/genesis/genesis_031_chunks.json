@@ -1,0 +1,58 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:45:02Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 31,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 55,
+  "verse_count": 55,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 3,
+      "type": "story",
+      "title": "Jacob's Decision to Return",
+      "reason": "Narrative introduction of the conflict and divine command."
+    },
+    {
+      "start_verse": 4,
+      "end_verse": 16,
+      "type": "dialogue",
+      "title": "Conversation with Rachel and Leah",
+      "reason": "Jacob explains his situation to his wives and their response."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 23,
+      "type": "story",
+      "title": "The Flight and Pursuit",
+      "reason": "Jacob's departure, Rachel's theft of idols, and Laban's pursuit."
+    },
+    {
+      "start_verse": 24,
+      "end_verse": 35,
+      "type": "story",
+      "title": "Laban Confronts Jacob",
+      "reason": "Divine warning to Laban and the search for the stolen idols."
+    },
+    {
+      "start_verse": 36,
+      "end_verse": 42,
+      "type": "argument",
+      "title": "Jacob's Defense",
+      "reason": "Jacob details his twenty years of service and grievances against Laban."
+    },
+    {
+      "start_verse": 43,
+      "end_verse": 55,
+      "type": "dialogue",
+      "title": "The Covenant at Mizpah",
+      "reason": "Laban's response, the establishment of the boundary marker, and their parting."
+    }
+  ]
+}

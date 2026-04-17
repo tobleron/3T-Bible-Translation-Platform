@@ -1,0 +1,30 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T12:00:17Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezekiel",
+  "chapter": 2,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 10,
+  "verse_count": 10,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 7,
+      "type": "speech",
+      "title": "Commissioning of the Prophet",
+      "reason": "God speaks directly to Ezekiel, defining his mission and audience."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 10,
+      "type": "vision",
+      "title": "The Scroll of Lamentations",
+      "reason": "Ezekiel sees a hand holding a scroll containing words of judgment."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T09:01:45Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Isaiah",
+  "chapter": 27,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 13,
+  "verse_count": 13,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "oracle",
+      "title": "Yahweh's Victory and the Vineyard",
+      "reason": "Describes Yahweh defeating Leviathan and establishing a vineyard of delight for Israel."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 11,
+      "type": "argument",
+      "title": "Punishment and Atonement Explained",
+      "reason": "Explains the nature of Yahweh's discipline against Israel and the resulting atonement through the destruction of idols."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 13,
+      "type": "blessing_or_prayer",
+      "title": "Gathering of the Remnant",
+      "reason": "Prophesies the final gathering of Israel from exile and their worship in Jerusalem."
+    }
+  ]
+}

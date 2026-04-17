@@ -1,0 +1,44 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T17:57:11Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 39,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 23,
+  "verse_count": 23,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 6,
+      "type": "story",
+      "title": "Joseph in Potiphar's House",
+      "reason": "Describes Joseph's rise to authority and Yahweh's blessing on Potiphar's household."
+    },
+    {
+      "start_verse": 7,
+      "end_verse": 12,
+      "type": "story",
+      "title": "Joseph and Potiphar's Wife",
+      "reason": "Narrates the temptation of Joseph by his master's wife and his flight."
+    },
+    {
+      "start_verse": 13,
+      "end_verse": 20,
+      "type": "story",
+      "title": "Joseph Accused and Imprisoned",
+      "reason": "Details the wife's false accusation using Joseph's garment and his subsequent imprisonment."
+    },
+    {
+      "start_verse": 21,
+      "end_verse": 23,
+      "type": "story",
+      "title": "Joseph in Prison",
+      "reason": "Describes Yahweh's presence with Joseph and his appointment as overseer of the jail."
+    }
+  ]
+}

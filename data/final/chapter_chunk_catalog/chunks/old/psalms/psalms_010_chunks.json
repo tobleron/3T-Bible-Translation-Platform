@@ -1,0 +1,39 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T13:47:31Z",
+  "base_url": "http://192.168.1.186:8081/v1",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Psalms",
+  "chapter": 10,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 18,
+  "verse_count": 18,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "source": "model-generated",
+  "status": "generated",
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 11,
+      "type": "speech",
+      "title": "Complaint about the Wicked",
+      "reason": "The psalmist describes the arrogance and oppression of the wicked who deny God's presence."
+    },
+    {
+      "start_verse": 12,
+      "end_verse": 15,
+      "type": "exhortation",
+      "title": "Call for Divine Intervention",
+      "reason": "The speaker urges Yahweh to arise and judge the wicked who have forgotten Him."
+    },
+    {
+      "start_verse": 16,
+      "end_verse": 18,
+      "type": "blessing_or_prayer",
+      "title": "Declaration of God's Kingship",
+      "reason": "The passage concludes with a declaration of Yahweh's eternal reign and a prayer for justice."
+    }
+  ]
+}

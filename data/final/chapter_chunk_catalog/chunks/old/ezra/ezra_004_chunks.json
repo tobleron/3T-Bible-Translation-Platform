@@ -1,0 +1,51 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-11T02:46:39Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Ezra",
+  "chapter": 4,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 24,
+  "verse_count": 24,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 5,
+      "type": "story",
+      "title": "Adversaries and Initial Obstacles",
+      "reason": "Describes the initial attempt by adversaries to join the building effort and their subsequent discouragement of the work under Cyrus and Darius."
+    },
+    {
+      "start_verse": 6,
+      "end_verse": 7,
+      "type": "story",
+      "title": "Accusations Under Ahasuerus and Artaxerxes",
+      "reason": "Summarizes written accusations against Judah during the reigns of Ahasuerus and Artaxerxes."
+    },
+    {
+      "start_verse": 8,
+      "end_verse": 16,
+      "type": "speech",
+      "title": "Letter from Rehum and Shimshai",
+      "reason": "Contains the full text of the letter sent to King Artaxerxes detailing the history and potential threat of the Jews rebuilding Jerusalem."
+    },
+    {
+      "start_verse": 17,
+      "end_verse": 22,
+      "type": "speech",
+      "title": "King Artaxerxes' Decree",
+      "reason": "Records the king's response, his findings from the records, and his command to halt the rebuilding."
+    },
+    {
+      "start_verse": 23,
+      "end_verse": 24,
+      "type": "story",
+      "title": "Work Halted Until Darius",
+      "reason": "Describes the immediate enforcement of the decree and the cessation of work until the second year of Darius."
+    }
+  ]
+}

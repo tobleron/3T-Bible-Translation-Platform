@@ -1,0 +1,65 @@
+{
+  "prompt_version": "chapter_chunk_batch_v1",
+  "generated_at": "2026-04-09T18:00:15Z",
+  "base_url": "http://192.168.1.186:8080",
+  "model_name": "Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K.gguf",
+  "book": "Genesis",
+  "chapter": 41,
+  "testament": "old",
+  "verse_start": 1,
+  "verse_end": 57,
+  "verse_count": 57,
+  "attempts_used": 2,
+  "repaired_json": false,
+  "chunks": [
+    {
+      "start_verse": 1,
+      "end_verse": 8,
+      "type": "vision",
+      "title": "Pharaoh's Dreams",
+      "reason": "Describes the two dreams of Pharaoh and his initial reaction."
+    },
+    {
+      "start_verse": 9,
+      "end_verse": 14,
+      "type": "dialogue",
+      "title": "Joseph Summoned",
+      "reason": "The cupbearer recalls Joseph's gift and Pharaoh sends for him."
+    },
+    {
+      "start_verse": 15,
+      "end_verse": 24,
+      "type": "dialogue",
+      "title": "Pharaoh Relates the Dream",
+      "reason": "Pharaoh recounts the dream details to Joseph."
+    },
+    {
+      "start_verse": 25,
+      "end_verse": 36,
+      "type": "speech",
+      "title": "Joseph's Interpretation and Plan",
+      "reason": "Joseph interprets the dreams and proposes a management plan."
+    },
+    {
+      "start_verse": 37,
+      "end_verse": 45,
+      "type": "story",
+      "title": "Joseph's Promotion",
+      "reason": "Pharaoh accepts the plan and elevates Joseph to power."
+    },
+    {
+      "start_verse": 46,
+      "end_verse": 52,
+      "type": "story",
+      "title": "Years of Plenty and Family",
+      "reason": "Joseph administers the land during plenty and has children."
+    },
+    {
+      "start_verse": 53,
+      "end_verse": 57,
+      "type": "story",
+      "title": "The Famine Begins",
+      "reason": "The famine arrives and Joseph's grain stores sustain Egypt."
+    }
+  ]
+}
