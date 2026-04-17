@@ -2,11 +2,11 @@
 
 ## Why This Exists
 
-`src/ttt_workbench/static/app.css` is a `style` file with an estimated risk score of `2.73`.
+`src/ttt_workbench/static/app.css` is a `style` file with an estimated risk score of `2.75`.
 
 ## Metrics
 
-- LOC: `2461` (preferred `900`, hard ceiling `1400`)
+- LOC: `2478` (preferred `900`, hard ceiling `1400`)
 - Language: `css`
 - Branches: `0`
 - Max nesting: `0`
@@ -16,8 +16,8 @@
 
 ## Findings
 
-- `medium` `size`: 2461 LOC exceeds preferred 900 LOC for role `style`.
-- `high` `size`: 2461 LOC exceeds hard ceiling 1400 LOC for role `style`.
+- `medium` `size`: 2478 LOC exceeds preferred 900 LOC for role `style`.
+- `high` `size`: 2478 LOC exceeds hard ceiling 1400 LOC for role `style`.
 
 ## Suggested Handling
 

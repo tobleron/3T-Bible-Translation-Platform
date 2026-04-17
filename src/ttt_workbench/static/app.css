@@ -1,3 +1,16 @@
+/*
+ * Shipping stylesheet section map:
+ * 1. Theme tokens and reset
+ * 2. Topbar, settings dialog, and shared primitives
+ * 3. Workspace layout, navigation, editor, study context, and JSON browser
+ * 4. Chat, streaming markdown, prompt engineering, and support notes
+ * 5. Commit, EPUB, jobs, and responsive states
+ *
+ * Keep this file build-free. When a feature area grows, move that contiguous
+ * section to the matching file described in static/css/README.md and link it
+ * directly from base.html after app.css.
+ */
+
 :root,
 :root[data-theme="workbench-dark"] {
   --bg: #111313;
@@ -183,12 +196,14 @@
   --danger: #f07178;
 }
 
+/* 1. Theme Tokens And Reset */
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; background: radial-gradient(circle at top, color-mix(in srgb, var(--bg-soft) 78%, black 22%) 0%, var(--bg) 40%, color-mix(in srgb, var(--bg) 68%, black 32%) 100%); color: var(--text); font-family: var(--sans); }
 a { color: inherit; text-decoration: none; }
 pre { white-space: pre-wrap; font-family: var(--sans); margin: 0; }
 button, input, textarea { font: inherit; }
 
+/* 2. Topbar, Settings, And Shared Primitives */
 .app-topbar {
   position: sticky;
   top: 0;
@@ -448,6 +463,7 @@ button:active:not(:disabled) {
   background: rgba(255,255,255,0.03);
 }
 
+/* 3. Workspace Layout, Navigation, Editor, Study Context, And JSON Browser */
 .compact-workspace {
   display: grid;
   gap: 0.6rem;
@@ -816,6 +832,7 @@ button:active:not(:disabled) {
   cursor: not-allowed;
 }
 
+/* 4. Chat, Streaming Markdown, Prompt Engineering, And Support Notes */
 .chat-actions {
   display: flex;
   gap: 0.5rem;
@@ -1447,6 +1464,7 @@ button:active:not(:disabled) {
   font-size: 0.76rem;
   letter-spacing: 0.02em;
 }
+/* 5. Commit, EPUB, Jobs, And Responsive States */
 .committed-inline {
   color: var(--muted);
   line-height: 1.35;
