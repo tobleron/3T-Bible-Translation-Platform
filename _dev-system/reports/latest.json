@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-04-17T23:21:48.184576+00:00",
+  "generated_at": "2026-04-17T23:23:38.521319+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
     "files_scanned": 137,
     "tasks_generated": 12,
-    "highest_risk": 71.83
+    "highest_risk": 73.84
   },
   "tasks": [
     "_dev-tasks/D001_src_ttt_workbench_controller_py.md",
@@ -25,26 +25,26 @@
       "path": "src/ttt_workbench/controller.py",
       "role": "browser-controller",
       "language": "python",
-      "loc": 2225,
-      "risk": 71.83,
+      "loc": 2292,
+      "risk": 73.84,
       "preferred_loc": 850,
       "hard_loc": 1600,
-      "branches": 603,
+      "branches": 620,
       "max_nesting": 6,
-      "mutable_state": 604,
+      "mutable_state": 625,
       "imports": 27,
-      "callables": 148,
+      "callables": 153,
       "findings": [
         {
           "severity": "medium",
           "kind": "size",
-          "message": "2225 LOC exceeds preferred 850 LOC for role `browser-controller`.",
+          "message": "2292 LOC exceeds preferred 850 LOC for role `browser-controller`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "2225 LOC exceeds hard ceiling 1600 LOC for role `browser-controller`.",
+          "message": "2292 LOC exceeds hard ceiling 1600 LOC for role `browser-controller`.",
           "line": null
         }
       ]

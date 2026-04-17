@@ -164,6 +164,8 @@ class BrowserWorkbench(WorkbenchApp):
         self.chunk_sessions_file = self.runtime_state_dir / "chunk_sessions.json"
         self.chunk_sessions = self._load_chunk_sessions()
         self.web_settings = self._load_web_settings()
+        self._source_support_cache: dict[str, str] = {}
+        self._source_availability_cache: dict[tuple[str, str, int], bool] = {}
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
         self._sanitize_browser_state()
 
@@ -1300,16 +1302,34 @@ Rules:
         return cards
 
     def source_support_label(self, alias: str) -> str:
+        if alias in self._source_support_cache:
+            return self._source_support_cache[alias]
         mapping = self.source_repo._load_source(alias)
         has_ot = any(book == normalize_book_key("Genesis") for (book, _chapter, _verse) in mapping)
         has_nt = any(book == normalize_book_key("Matthew") for (book, _chapter, _verse) in mapping)
         if has_ot and has_nt:
-            return "OT + NT"
-        if has_nt:
-            return "NT only"
-        if has_ot:
-            return "OT only"
-        return "Partial"
+            label = "OT + NT"
+        elif has_nt:
+            label = "NT only"
+        elif has_ot:
+            label = "OT only"
+        else:
+            label = "Partial"
+        self._source_support_cache[alias] = label
+        return label
+
+    def source_available_for_chapter(self, alias: str, book: str, chapter: int) -> bool:
+        if not book or not chapter:
+            return False
+        book_key = normalize_book_key(book)
+        cache_key = (alias, book_key, chapter)
+        if cache_key not in self._source_availability_cache:
+            alias_map = self.source_repo._load_source(alias)
+            self._source_availability_cache[cache_key] = any(
+                key_book == book_key and key_chapter == chapter
+                for (key_book, key_chapter, _verse) in alias_map.keys()
+            )
+        return self._source_availability_cache[cache_key]
 
     def comparison_source_options(self) -> list[dict[str, str | bool]]:
         current_testament = self.state.wizard_testament or self.testament() or "new"
@@ -1341,15 +1361,7 @@ Rules:
                 continue
             if alias in {"WLC"}:
                 continue
-            alias_map = self.source_repo._load_source(alias)
-            available_here = bool(
-                current_book
-                and current_chapter
-                and any(
-                    key_book == normalize_book_key(current_book) and key_chapter == current_chapter
-                    for (key_book, key_chapter, _verse) in alias_map.keys()
-                )
-            )
+            available_here = self.source_available_for_chapter(alias, current_book, current_chapter)
             support = self.source_support_label(alias)
             options.append(
                 {
@@ -2422,6 +2434,66 @@ Rules:
             "editorial_output": self.state.editorial_output,
             "editorial_output_label": self.state.editorial_output_label,
         }
+
+    def _panel_base_payload(self, *, active_tab: str = "draft") -> dict[str, Any]:
+        testament = self.state.wizard_testament or self.testament() or "new"
+        book = self.state.book or self.state.wizard_book or ""
+        chapter = self.state.chapter or self.state.wizard_chapter or 0
+        return {
+            "show_workspace_topbar": bool(book and chapter),
+            "state": self.state,
+            "selected_testament": testament,
+            "selected_book": book,
+            "selected_chapter": chapter,
+            "active_tab": active_tab,
+            "current_chunk_key": self.current_chunk_key() or "",
+            "settings_config": self.settings_payload(),
+        }
+
+    def chat_panel_payload(self) -> dict[str, Any]:
+        payload = self._panel_base_payload(active_tab="draft")
+        chunk_open = self.has_open_chunk()
+        payload.update(
+            {
+                "active_provider_label": self.active_provider_label(),
+                "active_model_name": self.active_model_name(),
+                "current_chat_sessions": self.current_chunk_chat_sessions() if chunk_open else [],
+                "active_chat_session_id": self.active_chat_session_id() if chunk_open else "",
+            }
+        )
+        return payload
+
+    def editor_panel_payload(self) -> dict[str, Any]:
+        payload = self._panel_base_payload(active_tab="draft")
+        chunk_open = self.has_open_chunk()
+        if chunk_open:
+            self.prepare_browser_commit_state()
+            self.sync_editor_mode()
+        editor_mode = self.state.browser_editor_mode or "draft"
+        editor_start, editor_end = self.current_editor_range() if chunk_open else (0, 0)
+        payload.update(
+            {
+                "chunk_summary": self.current_chunk_summary(),
+                "editor_range_start": editor_start,
+                "editor_range_end": editor_end,
+                "draft_editor_verses": self.draft_editor_verses() if chunk_open else [],
+                "review_editor_verses": self.review_editor_verses() if chunk_open else [],
+                "editor_mode": editor_mode,
+                "editor_title": self.editor_title(editor_mode) if chunk_open else "",
+            }
+        )
+        return payload
+
+    def context_panel_payload(self) -> dict[str, Any]:
+        payload = self._panel_base_payload(active_tab="study")
+        chunk_open = self.has_open_chunk()
+        payload.update(
+            {
+                "comparison_source_options": self.comparison_source_options(),
+                "study_blocks": self.chunk_study_blocks() if chunk_open else [],
+            }
+        )
+        return payload
 
     def json_preview_payload(self) -> dict[str, Any]:
         """Return the committed JSON as it would appear in the output file."""

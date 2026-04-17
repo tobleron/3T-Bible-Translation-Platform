@@ -140,13 +140,13 @@ def render_workspace(request: Request, wb: BrowserWorkbench, active_tab: str = "
 
 
 def render_chat_panel(request: Request, wb: BrowserWorkbench):
-    response = render_page(request, "partials/chat_panel.html", wb.workspace_payload(active_tab="draft"))
+    response = render_page(request, "partials/chat_panel.html", wb.chat_panel_payload())
     wb.clear_flash()
     return response
 
 
 def render_editor_panel(request: Request, wb: BrowserWorkbench):
-    response = render_page(request, "partials/editor_panel.html", wb.workspace_payload(active_tab="draft"))
+    response = render_page(request, "partials/editor_panel.html", wb.editor_panel_payload())
     wb.clear_flash()
     return response
 
@@ -508,7 +508,7 @@ async def study_sources(
         wb.set_selected_sources(selected)
         wb.activate_tab("study")
         wb.save_state()
-        payload = wb.workspace_payload(active_tab="study")
+        payload = wb.context_panel_payload()
         return templates.TemplateResponse(
             request,
             "partials/context_panel.html",

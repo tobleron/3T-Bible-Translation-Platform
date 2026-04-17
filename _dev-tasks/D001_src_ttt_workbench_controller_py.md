@@ -2,22 +2,22 @@
 
 ## Why This Exists
 
-`src/ttt_workbench/controller.py` is a `browser-controller` file with an estimated risk score of `71.83`.
+`src/ttt_workbench/controller.py` is a `browser-controller` file with an estimated risk score of `73.84`.
 
 ## Metrics
 
-- LOC: `2225` (preferred `850`, hard ceiling `1600`)
+- LOC: `2292` (preferred `850`, hard ceiling `1600`)
 - Language: `python`
-- Branches: `603`
+- Branches: `620`
 - Max nesting: `6`
-- Mutable assignments: `604`
+- Mutable assignments: `625`
 - Imports: `27`
-- Callables/classes: `148`
+- Callables/classes: `153`
 
 ## Findings
 
-- `medium` `size`: 2225 LOC exceeds preferred 850 LOC for role `browser-controller`.
-- `high` `size`: 2225 LOC exceeds hard ceiling 1600 LOC for role `browser-controller`.
+- `medium` `size`: 2292 LOC exceeds preferred 850 LOC for role `browser-controller`.
+- `high` `size`: 2292 LOC exceeds hard ceiling 1600 LOC for role `browser-controller`.
 
 ## Suggested Handling
 
