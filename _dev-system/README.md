@@ -44,7 +44,9 @@ Excluded:
 
 ## How To Use Tasks
 
-Open `_dev-tasks/`, pick one advisory task, make the smallest coherent change, then run:
+Use `_tasks/TASKS.md` for the main human task workflow.
+
+For analyzer-generated maintenance work, open `_dev-tasks/`, pick one advisory task, make the smallest coherent change, then run:
 
 ```bash
 ./ttt.sh test
@@ -52,4 +54,3 @@ Open `_dev-tasks/`, pick one advisory task, make the smallest coherent change, t
 ```
 
 Tasks are guidance, not mandatory failures. The analyzer is conservative because `controller.py`, `webapp.py`, data repositories, and EPUB generation are intentionally coordination-heavy modules.
-
