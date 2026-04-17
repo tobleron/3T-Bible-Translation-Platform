@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-17T23:17:02.704301+00:00",
+  "generated_at": "2026-04-17T23:21:48.184576+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
-    "files_scanned": 136,
+    "files_scanned": 137,
     "tasks_generated": 12,
     "highest_risk": 71.83
   },
@@ -827,6 +827,21 @@
       "findings": []
     },
     {
+      "path": "tests/test_playwright_responsiveness.py",
+      "role": "test",
+      "language": "python",
+      "loc": 90,
+      "risk": 4.82,
+      "preferred_loc": 520,
+      "hard_loc": 900,
+      "branches": 11,
+      "max_nesting": 4,
+      "mutable_state": 15,
+      "imports": 12,
+      "callables": 6,
+      "findings": []
+    },
+    {
       "path": "src/ttt_workbench/scripts/convert_archive_bible_to_flat.py",
       "role": "tool-script",
       "language": "python",
@@ -1460,7 +1475,7 @@
       "path": "requirements-workbench.txt",
       "role": "general-python",
       "language": "text",
-      "loc": 11,
+      "loc": 12,
       "risk": 1.0,
       "preferred_loc": 430,
       "hard_loc": 760,

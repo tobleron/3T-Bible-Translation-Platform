@@ -14,3 +14,6 @@ Catch button responsiveness, duplicate submits, stream cleanup, and panel swap r
 - Tests verify stream send/stop controls.
 - Tests verify small panel swaps do not replace the full workspace unnecessarily.
 
+## Status
+
+Completed. Playwright is now part of the workbench test dependencies. Browser tests cover HTMX chat-panel button loading/recovery, workspace-preserving panel swaps, Chainlit iframe stability, and chat stream controller send/stop recovery behavior.
