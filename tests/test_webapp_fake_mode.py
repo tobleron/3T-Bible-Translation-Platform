@@ -246,6 +246,9 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
                 "/workspace/old/genesis/1/1-5/chat/prompt-text",
             )
         )
+        interactive_state_payload = client.get(
+            "/workspace/old/genesis/1/1-5/interactive-state"
+        ).json()
         json_tree_text = assert_clean(client.get("/workspace/old/genesis/1/1-5/json-book-tree"))
         json_chapter_text = assert_clean(client.get("/workspace/old/genesis/1/1-5/json-book-chapter/1"))
         chapter_json_tree_text = assert_clean(client.get("/workspace/old/genesis/1/json-book-tree"))
@@ -282,6 +285,10 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
         assert "Save Draft" not in revision_text
         assert "workspace-shell" not in draft_text
         assert "Creation of Light and Day One" in range_text
+        assert interactive_state_payload["ok"] is True
+        assert interactive_state_payload["workspace"]["chunk_key"] == "1-5"
+        assert interactive_state_payload["editor"]["range_start"] == 1
+        assert "draft" in interactive_state_payload["chat"]["context_sources"]
         assert '"book":"Genesis"' in json_tree_text.replace(" ", "")
         assert '"chapter":1' in json_chapter_text.replace(" ", "")
         assert '"book":"Genesis"' in chapter_json_tree_text.replace(" ", "")

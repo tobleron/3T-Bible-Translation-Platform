@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-17T23:26:14.242756+00:00",
+  "generated_at": "2026-04-17T23:27:56.849712+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
     "files_scanned": 139,
@@ -81,26 +81,26 @@
       "path": "src/ttt_workbench/webapp.py",
       "role": "browser-route",
       "language": "python",
-      "loc": 1333,
-      "risk": 28.23,
+      "loc": 1371,
+      "risk": 29.07,
       "preferred_loc": 760,
       "hard_loc": 1300,
-      "branches": 188,
+      "branches": 197,
       "max_nesting": 6,
-      "mutable_state": 266,
+      "mutable_state": 270,
       "imports": 27,
-      "callables": 70,
+      "callables": 71,
       "findings": [
         {
           "severity": "medium",
           "kind": "size",
-          "message": "1333 LOC exceeds preferred 760 LOC for role `browser-route`.",
+          "message": "1371 LOC exceeds preferred 760 LOC for role `browser-route`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "1333 LOC exceeds hard ceiling 1300 LOC for role `browser-route`.",
+          "message": "1371 LOC exceeds hard ceiling 1300 LOC for role `browser-route`.",
           "line": null
         }
       ]
@@ -875,13 +875,13 @@
       "path": "tests/test_webapp_fake_mode.py",
       "role": "test",
       "language": "python",
-      "loc": 262,
-      "risk": 4.77,
+      "loc": 269,
+      "risk": 4.79,
       "preferred_loc": 520,
       "hard_loc": 900,
       "branches": 18,
       "max_nesting": 2,
-      "mutable_state": 29,
+      "mutable_state": 30,
       "imports": 10,
       "callables": 13,
       "findings": []

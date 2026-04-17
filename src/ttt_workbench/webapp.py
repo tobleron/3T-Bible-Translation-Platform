@@ -757,6 +757,46 @@ async def get_chat_prompt_text(
         return JSONResponse({"error": str(exc)}, status_code=500)
 
 
+@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/interactive-state", response_class=JSONResponse)
+def interactive_state(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+    wb = controller()
+    book = resolve_book_name(wb, testament, book)
+    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+    chunk_open = wb.has_open_chunk()
+    editor_mode = wb.editor_mode() if chunk_open else "draft"
+    return JSONResponse(
+        {
+            "ok": True,
+            "workspace": {
+                "testament": testament,
+                "book": book,
+                "chapter": chapter,
+                "chunk_key": wb.current_chunk_key() or chunk_key,
+                "chunk_open": chunk_open,
+            },
+            "editor": {
+                "mode": editor_mode,
+                "state": wb.state.browser_editor_state or "editing",
+                "range_start": wb.state.chunk_start or 0,
+                "range_end": wb.state.chunk_end or 0,
+                "has_draft_work": wb.has_draft_work() if chunk_open else False,
+                "has_committed_text": wb.chunk_has_committed_text() if chunk_open else False,
+            },
+            "chat": {
+                "active_session_id": wb.active_chat_session_id() if chunk_open else "",
+                "session_count": len(wb.current_chunk_chat_sessions()) if chunk_open else 0,
+                "context_sources": wb.chat_context_sources(),
+            },
+            "study": {
+                "selected_sources": wb.selected_sources(),
+            },
+            "jobs": {
+                "active": [_job_payload(job) for job in _JOB_RUNNER.active_jobs()],
+            },
+        }
+    )
+
+
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/clear", response_class=HTMLResponse)
 async def clear_chat_history(
