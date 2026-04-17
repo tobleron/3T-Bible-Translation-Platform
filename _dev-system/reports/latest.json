@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-17T23:23:38.521319+00:00",
+  "generated_at": "2026-04-17T23:26:14.242756+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
-    "files_scanned": 137,
+    "files_scanned": 139,
     "tasks_generated": 12,
     "highest_risk": 73.84
   },
@@ -443,6 +443,21 @@
       "mutable_state": 47,
       "imports": 2,
       "callables": 10,
+      "findings": []
+    },
+    {
+      "path": "src/ttt_workbench/scripts/audit_chunk_catalog_quality.py",
+      "role": "data-repository",
+      "language": "python",
+      "loc": 192,
+      "risk": 8.41,
+      "preferred_loc": 620,
+      "hard_loc": 1000,
+      "branches": 43,
+      "max_nesting": 4,
+      "mutable_state": 52,
+      "imports": 11,
+      "callables": 11,
       "findings": []
     },
     {
@@ -1244,6 +1259,21 @@
       "mutable_state": 12,
       "imports": 8,
       "callables": 10,
+      "findings": []
+    },
+    {
+      "path": "tests/test_chunk_catalog_quality_audit.py",
+      "role": "test",
+      "language": "python",
+      "loc": 70,
+      "risk": 1.52,
+      "preferred_loc": 520,
+      "hard_loc": 900,
+      "branches": 0,
+      "max_nesting": 0,
+      "mutable_state": 13,
+      "imports": 5,
+      "callables": 4,
       "findings": []
     },
     {

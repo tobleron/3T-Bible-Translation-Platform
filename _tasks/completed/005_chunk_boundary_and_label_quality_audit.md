@@ -38,3 +38,7 @@ The current generator is producing structurally valid JSON, but a full-bible pas
 - The generated chunk dataset has a documented quality-review pass
 - Problematic chapters are identified before aggregation or app integration depends on them blindly
 - Review work is focused on flagged chapters instead of manual inspection of the entire Bible
+
+## Status
+
+Completed. Added `audit_chunk_catalog_quality.py`, unit tests, and a generated quality audit report at `data/final/chapter_chunk_catalog/quality_audit_report.json`. Current report scans 886 chapters, marks 757 safe, and flags 129 for focused manual review.
