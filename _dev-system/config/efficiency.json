@@ -1,0 +1,163 @@
+{
+  "version": "3t-python-1.0.0",
+  "project": "3T-Bible-Translation-Platform",
+  "scanned_roots": [
+    "src",
+    "tests"
+  ],
+  "extra_files": [
+    "ttt.sh",
+    ".chainlit/config.toml",
+    "config.yaml",
+    "requirements-workbench.txt",
+    "README.md",
+    "PROJECT_GUIDE.md"
+  ],
+  "entry_points": [
+    "src/ttt_workbench/webapp.py",
+    "src/ttt_workbench/controller.py",
+    "src/ttt_workbench/chainlit_app.py",
+    "src/ttt_epub/generate_epub.py",
+    "ttt.sh"
+  ],
+  "exclusions": {
+    "folders": [
+      ".git",
+      ".venv",
+      ".pytest_cache",
+      ".ruff_cache",
+      ".ttt_workbench",
+      "__pycache__",
+      "_dev-system",
+      "_dev-tasks",
+      "_scripts",
+      "archive",
+      "data",
+      "output",
+      "resources",
+      "runtime",
+      "sblgnt",
+      "state",
+      "version_backup"
+    ],
+    "file_globs": [
+      "*.pyc",
+      "*.pyo",
+      "*.db",
+      "*.db-shm",
+      "*.db-wal",
+      "*.epub",
+      ".DS_Store",
+      "Thumbs.db"
+    ]
+  },
+  "settings": {
+    "base_loc_limit": 420,
+    "hard_ceiling_loc": 950,
+    "soft_floor_loc": 380,
+    "min_extracted_module_loc": 180,
+    "max_path_depth": 5,
+    "max_tasks": 12,
+    "branch_weight": 0.08,
+    "nesting_weight": 0.55,
+    "state_weight": 0.025,
+    "import_weight": 0.018,
+    "callable_weight": 0.025,
+    "path_depth_weight": 0.2
+  },
+  "roles": {
+    "browser-controller": {
+      "preferred_loc": 850,
+      "hard_loc": 1600,
+      "desc": "Browser state transitions, editor/session orchestration, commit workflows."
+    },
+    "browser-route": {
+      "preferred_loc": 760,
+      "hard_loc": 1300,
+      "desc": "FastAPI route handlers, template rendering, SSE streaming."
+    },
+    "template": {
+      "preferred_loc": 260,
+      "hard_loc": 420,
+      "desc": "Jinja/HTML templates and partials."
+    },
+    "style": {
+      "preferred_loc": 900,
+      "hard_loc": 1400,
+      "desc": "CSS styling for the browser workbench."
+    },
+    "llm-client": {
+      "preferred_loc": 420,
+      "hard_loc": 700,
+      "desc": "LLM endpoint clients, stream adapters, and prompt transport."
+    },
+    "data-repository": {
+      "preferred_loc": 620,
+      "hard_loc": 1000,
+      "desc": "File-backed Bible, chunk, session, and project path repositories."
+    },
+    "epub-builder": {
+      "preferred_loc": 460,
+      "hard_loc": 760,
+      "desc": "EPUB/Markdown/plain-text export pipeline."
+    },
+    "compat-shim": {
+      "preferred_loc": 80,
+      "hard_loc": 140,
+      "desc": "Compatibility import wrappers that preserve public module paths."
+    },
+    "test": {
+      "preferred_loc": 520,
+      "hard_loc": 900,
+      "desc": "Pytest coverage."
+    },
+    "tool-script": {
+      "preferred_loc": 420,
+      "hard_loc": 720,
+      "desc": "One-off or repeatable project utility scripts."
+    },
+    "config": {
+      "preferred_loc": 260,
+      "hard_loc": 500,
+      "desc": "Configuration, docs, and shell launchers."
+    },
+    "general-python": {
+      "preferred_loc": 430,
+      "hard_loc": 760,
+      "desc": "General Python modules."
+    }
+  },
+  "forbidden_patterns": [
+    {
+      "pattern": "auth proxy",
+      "severity": "high",
+      "message": "Do not reintroduce the deprecated auth proxy. Use the direct llama.cpp endpoint."
+    },
+    {
+      "pattern": "TTT_LLAMA_CPP_API_KEY=",
+      "severity": "high",
+      "message": "Do not hard-code API keys. Use environment variables or .env."
+    },
+    {
+      "pattern": "sk-",
+      "severity": "high",
+      "message": "Potential secret/token pattern."
+    },
+    {
+      "pattern": "git reset --hard",
+      "severity": "medium",
+      "message": "Destructive Git command should not be baked into project scripts."
+    },
+    {
+      "pattern": "git checkout --",
+      "severity": "medium",
+      "message": "Destructive checkout should not be baked into project scripts."
+    }
+  ],
+  "protected_paths": [
+    "src/ttt_webapp/app.py",
+    "src/ttt_webapp/controller.py",
+    "src/ttt_workbench/webapp.py",
+    "src/ttt_workbench/controller.py"
+  ]
+}
