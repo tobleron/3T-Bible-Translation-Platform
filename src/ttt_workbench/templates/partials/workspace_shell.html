@@ -83,13 +83,11 @@
           {% endif %}
         </div>
 
+        {% if editor_mode == 'review' %}
         <p class="editor-mode-note">
-          {% if editor_mode == 'review' %}
           Review shows the committed JSON text. Edits here are stored only as deltas until you commit.
-          {% else %}
-          Draft is the uncommitted working buffer used for model-assisted rewriting.
-          {% endif %}
         </p>
+        {% endif %}
 
         <form id="editor-form" class="compact-editor-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/save"
@@ -173,6 +171,10 @@
               <label class="compact-check">
                 <input type="checkbox" id="prompt-context-draft" value="draft" data-prompt-context>
                 <span>Draft</span>
+              </label>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-filtered" value="filtered" data-prompt-context>
+                <span>Filtered</span>
               </label>
               {% if selected_testament == 'old' %}
               <label class="compact-check">
@@ -1986,6 +1988,7 @@ window.tttPromptEngineeringPreviewSeq = 0;
 function promptEngineeringContextMeta() {
   return [
     { id: 'prompt-context-draft', key: 'draft', label: 'Draft' },
+    { id: 'prompt-context-filtered', key: 'filtered', label: 'Filtered' },
     { id: 'prompt-context-hebrew', key: 'hebrew', label: 'Hebrew' },
     { id: 'prompt-context-hebrew-en', key: 'hebrew-en', label: 'Hebrew Literal' },
     { id: 'prompt-context-greek', key: 'greek', label: 'Greek' },
@@ -2038,12 +2041,22 @@ function filteredDraftVerseNumbers() {
 }
 function syncPromptEngineeringDraftAvailability() {
   var draftCheck = document.getElementById('prompt-context-draft');
-  if (!draftCheck) return;
-  var verses = filteredDraftVerseNumbers();
-  var enabled = verses.length > 0;
-  draftCheck.disabled = !enabled;
-  draftCheck.title = enabled ? 'Use draft verses: ' + verses.join(', ') : 'No draft verses are available.';
-  if (!enabled) draftCheck.checked = false;
+  if (draftCheck) {
+    var verses = filteredDraftVerseNumbers();
+    var enabled = verses.length > 0;
+    draftCheck.disabled = !enabled;
+    draftCheck.title = enabled ? 'Use draft verses: ' + verses.join(', ') : 'No draft verses are available.';
+    if (!enabled) draftCheck.checked = false;
+  }
+  var filteredCheck = document.getElementById('prompt-context-filtered');
+  if (filteredCheck) {
+    var hasTranslations = !!document.querySelector('#study-blocks .translation-block[data-translation-alias]');
+    filteredCheck.disabled = !hasTranslations;
+    filteredCheck.title = hasTranslations
+      ? 'Use selected Study translations; respects the active verse filter.'
+      : 'Select at least one Study translation first.';
+    if (!hasTranslations) filteredCheck.checked = false;
+  }
 }
 function promptEngineeringAllowedVerseSet() {
   var spec = currentStudyVerseFilterSpec();
@@ -2061,6 +2074,28 @@ function filterPromptContextByStudyVerses(text) {
     return match && allowed[parseInt(match[1], 10)];
   }).join('\n');
 }
+function currentStudySelectedTranslationsPromptText() {
+  var allowed = promptEngineeringAllowedVerseSet();
+  var blocks = document.querySelectorAll('#study-blocks .translation-block[data-translation-alias]');
+  var sections = [];
+  blocks.forEach(function(block) {
+    var alias = (block.getAttribute('data-translation-alias') || '').trim();
+    if (!alias) return;
+    var lines = [];
+    block.querySelectorAll('.translation-verse-row[data-verse]').forEach(function(row) {
+      var verse = parseInt(row.getAttribute('data-verse') || '0', 10);
+      if (!verse || (allowed && !allowed[verse])) return;
+      var textEl = row.querySelector('.translation-verse-text');
+      var text = textEl ? (textEl.textContent || '').trim() : '';
+      if (!text || text === '[no text]') return;
+      lines.push(verse + '. ' + text);
+    });
+    if (lines.length) {
+      sections.push(alias + ':\n' + lines.join('\n'));
+    }
+  });
+  return sections.join('\n\n');
+}
 function currentDraftPromptText() {
   var verses = filteredDraftVerseNumbers();
   if (!verses.length) return '';
@@ -2075,7 +2110,7 @@ function currentDraftPromptText() {
 }
 function promptEngineeringNeedsFetchedContexts() {
   return selectedPromptEngineeringContexts().some(function(meta) {
-    return meta.key !== 'draft';
+    return meta.key !== 'draft' && meta.key !== 'filtered';
   });
 }
 async function ensurePromptEngineeringContexts() {
@@ -2106,13 +2141,15 @@ async function buildPromptEngineeringText() {
     var text = '';
     if (meta.key === 'draft') {
       text = currentDraftPromptText();
+    } else if (meta.key === 'filtered') {
+      text = currentStudySelectedTranslationsPromptText();
     } else {
       text = (window.tttPromptEngineeringContexts || {})[meta.key] || '';
       text = filterPromptContextByStudyVerses(text);
     }
     text = (text || '').trim();
     if (text) {
-      parts.push(meta.label + ':\n' + text);
+      parts.push(meta.key === 'filtered' ? text : meta.label + ':\n' + text);
     }
   });
   return parts.join('\n\n');
