@@ -1657,8 +1657,8 @@ button:active:not(:disabled) {
 }
 .chainlit-container {
   display: grid;
-  min-height: 340px;
-  height: min(42vh, 460px);
+  min-height: 620px;
+  height: min(72vh, 820px);
 }
 .chainlit-container iframe {
   width: 100%;
@@ -1671,6 +1671,71 @@ button:active:not(:disabled) {
   gap: 0.7rem;
   align-items: center;
   flex-wrap: wrap;
+}
+.chat-toolbar {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.025);
+}
+.chat-model-form,
+.chat-session-form {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.chat-model-form {
+  flex: 0 0 7rem;
+}
+.chat-endpoint-select {
+  width: 7rem;
+}
+.chat-session-form {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.chat-session-select {
+  width: 100%;
+  min-width: 0;
+}
+.chat-toolbar select {
+  width: 100%;
+}
+.chat-toolbar .compact-danger-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.chat-toolbar .icon-button {
+  align-self: flex-end;
+}
+.icon-button {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 1.9rem;
+  min-width: 2rem;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.icon-button svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: currentColor;
+}
+.icon-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(247,184,75,0.08);
 }
 .prompt-context-picker {
   display: flex;
@@ -2219,23 +2284,18 @@ button:active:not(:disabled) {
   .committed-inline {
     grid-column: 1;
   }
-}
-
-.clear-history-btn {
-    font-size: 0.75rem;
-    color: var(--error-color, #dc3545);
-    background: transparent;
-    border: 1px solid currentColor;
-    border-radius: 4px;
-    padding: 2px 6px;
-    margin-left: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    line-height: 1;
-}
-
-.clear-history-btn:hover {
-    background: var(--error-color, #dc3545);
-    color: white;
+  .chat-toolbar,
+  .chat-model-form,
+  .chat-session-form {
+    flex-wrap: wrap;
+  }
+  .chat-model-form,
+  .chat-session-form,
+  .chat-endpoint-select,
+  .chat-session-select {
+    flex: 1 1 100%;
+  }
+  .chat-endpoint-select {
+    width: 100%;
+  }
 }

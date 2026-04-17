@@ -171,7 +171,7 @@
             <div class="prompt-context-picker">
               <span class="chat-context-label">Include</span>
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-draft" value="draft" data-prompt-context disabled>
+                <input type="checkbox" id="prompt-context-draft" value="draft" data-prompt-context>
                 <span>Draft</span>
               </label>
               {% if selected_testament == 'old' %}
@@ -224,39 +224,7 @@
         </form>
       </article>
 
-      <article class="workspace-card chat-panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Chat</p>
-          </div>
-          <div class="panel-summary chat-panel-summary">
-            <span class="inline-badge">{{ model_label }} model</span>
-            <button class="text-btn clear-history-btn" 
-                    hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/clear"
-                    hx-confirm="Are you sure you want to permanently clear the persistent workbench history for this chunk? This will also reset the chat interface."
-                    title="Delete all persistent messages in the workbench state">
-              Clear History
-            </button>
-          </div>
-        </div>
-
-        {% if has_committed_text and not has_draft_work and not state.chat_messages %}
-        <div class="chat-empty chat-bridge-empty">
-          <p>This chunk already has committed JSON text. Use <strong>Revise In Draft</strong> to copy that text into the draft workspace before chatting with the model.</p>
-          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-            <input type="hidden" name="editor_action" value="seed-draft">
-            <button class="primary-button" type="submit">Revise In Draft</button>
-          </form>
-        </div>
-        {% else %}
-        <script>
-        window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
-        </script>
-        <div class="chainlit-container">
-          <iframe src="/chat"></iframe>
-        </div>
-        {% endif %}
-      </article>
+      {% include "partials/chat_panel.html" %}
 
       <script>
       window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
@@ -2017,11 +1985,11 @@ window.tttPromptEngineeringContextsFetched = false;
 window.tttPromptEngineeringPreviewSeq = 0;
 function promptEngineeringContextMeta() {
   return [
-    { id: 'prompt-context-draft', key: 'draft', label: 'DRAFT', end: 'DRAFT' },
-    { id: 'prompt-context-hebrew', key: 'hebrew', label: 'HEBREW', end: 'HEBREW' },
-    { id: 'prompt-context-hebrew-en', key: 'hebrew-en', label: 'HEBREW LITERAL', end: 'HEBREW LITERAL' },
-    { id: 'prompt-context-greek', key: 'greek', label: 'GREEK', end: 'GREEK' },
-    { id: 'prompt-context-greek-en', key: 'greek-en', label: 'GREEK LITERAL', end: 'GREEK LITERAL' }
+    { id: 'prompt-context-draft', key: 'draft', label: 'Draft' },
+    { id: 'prompt-context-hebrew', key: 'hebrew', label: 'Hebrew' },
+    { id: 'prompt-context-hebrew-en', key: 'hebrew-en', label: 'Hebrew Literal' },
+    { id: 'prompt-context-greek', key: 'greek', label: 'Greek' },
+    { id: 'prompt-context-greek-en', key: 'greek-en', label: 'Greek Literal' }
   ];
 }
 function selectedPromptEngineeringContexts() {
@@ -2031,15 +1999,9 @@ function selectedPromptEngineeringContexts() {
   });
 }
 function selectedPromptEngineeringModes() {
-  var labels = {
-    grammar: 'GRAMMAR ONLY PROMPT',
-    concise: 'CONCISE PROMPT',
-    scholarly: 'SCHOLARLY PROMPT'
-  };
   return Array.from(document.querySelectorAll('[data-prompt-mode]:checked')).map(function(cb) {
     return {
-      key: cb.value,
-      label: labels[cb.value] || 'PROMPT'
+      key: cb.value
     };
   });
 }
@@ -2048,19 +2010,31 @@ function currentStudyVerseFilterSpec() {
 }
 function filteredDraftVerseNumbers() {
   var spec = currentStudyVerseFilterSpec();
-  if (!spec) return [];
-  var parsed = parseVerseSpec(spec);
+  var parsed = spec ? parseVerseSpec(spec) : [];
   var seen = {};
   var verses = [];
-  parsed.forEach(function(v) {
+  if (parsed.length) {
+    parsed.forEach(function(v) {
+      if (seen[v]) return;
+      var field = document.querySelector('.verse-editor-textarea[name="verse_' + v + '"]');
+      if (field) {
+        seen[v] = true;
+        verses.push(v);
+      }
+    });
+    return verses;
+  }
+  document.querySelectorAll('.verse-editor-textarea[name^="verse_"]').forEach(function(field) {
+    var match = (field.getAttribute('name') || '').match(/^verse_(\d+)$/);
+    if (!match) return;
+    var v = parseInt(match[1], 10);
     if (seen[v]) return;
-    var field = document.querySelector('.verse-editor-textarea[name="verse_' + v + '"]');
     if (field) {
       seen[v] = true;
       verses.push(v);
     }
   });
-  return verses;
+  return verses.sort(function(a, b) { return a - b; });
 }
 function syncPromptEngineeringDraftAvailability() {
   var draftCheck = document.getElementById('prompt-context-draft');
@@ -2068,8 +2042,24 @@ function syncPromptEngineeringDraftAvailability() {
   var verses = filteredDraftVerseNumbers();
   var enabled = verses.length > 0;
   draftCheck.disabled = !enabled;
-  draftCheck.title = enabled ? 'Use filtered draft verses: ' + verses.join(', ') : 'Apply a study verse filter first.';
+  draftCheck.title = enabled ? 'Use draft verses: ' + verses.join(', ') : 'No draft verses are available.';
   if (!enabled) draftCheck.checked = false;
+}
+function promptEngineeringAllowedVerseSet() {
+  var spec = currentStudyVerseFilterSpec();
+  var parsed = spec ? parseVerseSpec(spec) : [];
+  if (!parsed.length) return null;
+  var allowed = {};
+  parsed.forEach(function(v) { allowed[v] = true; });
+  return allowed;
+}
+function filterPromptContextByStudyVerses(text) {
+  var allowed = promptEngineeringAllowedVerseSet();
+  if (!allowed) return text;
+  return String(text || '').split(/\r?\n/).filter(function(line) {
+    var match = line.match(/^\s*(\d+)\.\s+/);
+    return match && allowed[parseInt(match[1], 10)];
+  }).join('\n');
 }
 function currentDraftPromptText() {
   var verses = filteredDraftVerseNumbers();
@@ -2081,7 +2071,7 @@ function currentDraftPromptText() {
       lines.push(v + '. ' + field.value.trim());
     }
   });
-  return lines.join('\n\n');
+  return lines.join('\n');
 }
 function promptEngineeringNeedsFetchedContexts() {
   return selectedPromptEngineeringContexts().some(function(meta) {
@@ -2109,7 +2099,7 @@ async function buildPromptEngineeringText() {
   selectedPromptEngineeringModes().forEach(function(mode) {
     var text = (prompts[mode.key] || '').trim();
     if (text) {
-      parts.push(mode.label + ':\n' + text);
+      parts.push(text);
     }
   });
   selectedPromptEngineeringContexts().forEach(function(meta) {
@@ -2118,10 +2108,11 @@ async function buildPromptEngineeringText() {
       text = currentDraftPromptText();
     } else {
       text = (window.tttPromptEngineeringContexts || {})[meta.key] || '';
+      text = filterPromptContextByStudyVerses(text);
     }
     text = (text || '').trim();
     if (text) {
-      parts.push(meta.label + ':\n' + text + '\n[End ' + meta.end + ']');
+      parts.push(meta.label + ':\n' + text);
     }
   });
   return parts.join('\n\n');

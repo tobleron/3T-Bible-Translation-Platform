@@ -1,0 +1,61 @@
+{% if flash_messages %}
+<div class="flash-stack settings-flash-stack">
+  {% for message in flash_messages %}
+  <article class="flash flash-{{ message.accent }}">
+    <h3>{{ message.title }}</h3>
+    <pre>{{ message.body }}</pre>
+  </article>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form method="post" action="/settings/save" class="settings-form settings-dialog-form"
+  hx-post="/settings/save" hx-target="#settings-dialog-body" hx-swap="innerHTML">
+  {% if model_names %}
+  <p class="muted-line settings-model-line">Detected models: {{ ", ".join(model_names) }}</p>
+  {% endif %}
+
+  <div class="settings-provider-grid">
+    <section class="settings-provider-block">
+      <label class="settings-provider-choice">
+        <input type="radio" name="endpoint_provider" value="local" {% if settings_config.endpoint_provider == "local" %}checked{% endif %}>
+        <span>Local</span>
+      </label>
+      <label class="field">
+        <span>Base URL</span>
+        <input type="text" name="local_base_url" value="{{ settings_config.local_base_url }}" placeholder="http://10.0.0.1:8080/v1">
+      </label>
+      <label class="field">
+        <span>API key</span>
+        <input type="password" name="local_api_key" value="{{ settings_config.local_api_key }}" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Model</span>
+        <input type="text" name="local_model" value="{{ settings_config.local_model }}" placeholder="Detected local model">
+      </label>
+    </section>
+
+    <section class="settings-provider-block">
+      <label class="settings-provider-choice">
+        <input type="radio" name="endpoint_provider" value="cloud" {% if settings_config.endpoint_provider == "cloud" %}checked{% endif %}>
+        <span>OpenAI Compatible</span>
+      </label>
+      <label class="field">
+        <span>Base URL</span>
+        <input type="text" name="cloud_base_url" value="{{ settings_config.cloud_base_url }}" placeholder="https://api.openai.com/v1">
+      </label>
+      <label class="field">
+        <span>API key</span>
+        <input type="password" name="cloud_api_key" value="{{ settings_config.cloud_api_key }}" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Model</span>
+        <input type="text" name="cloud_model" value="{{ settings_config.cloud_model }}" placeholder="gpt-4.1-mini">
+      </label>
+    </section>
+  </div>
+
+  <div class="settings-dialog-actions">
+    <button class="primary-button" type="submit">Save</button>
+  </div>
+</form>

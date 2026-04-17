@@ -1,0 +1,4 @@
+#new-chat-button,
+#new-chat-dialog {
+  display: none !important;
+}

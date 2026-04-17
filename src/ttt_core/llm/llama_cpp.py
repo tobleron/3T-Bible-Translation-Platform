@@ -36,6 +36,7 @@ class LlamaCppClient:
 
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
+        self.model_name = ""
 
         # Stream timeout: config > env > default 1800s (30 min)
         import os
@@ -83,17 +84,22 @@ class LlamaCppClient:
         prompt: str,
         *,
         temperature: float = 0.35,
-        max_tokens: int = 2048,
+        max_tokens: int | None = 16384,
         stop: list[str] | None = None,
         timeout_seconds: int = 600,
     ) -> str:
         payload = {
             "prompt": prompt,
             "temperature": temperature,
-            "n_predict": max_tokens,
-            "num_ctx": 32768,
             "stream": False,
         }
+        if self.model_name and "/v1" in self.base_url:
+            payload["model"] = self.model_name
+        if max_tokens is not None:
+            payload["n_predict"] = max_tokens
+        # We should avoid hardcoding num_ctx if we want to use server defaults,
+        # but if we must, 32768 is a decent modern default.
+        # payload["num_ctx"] = 32768 
         if stop:
             payload["stop"] = stop
         data = json.dumps(payload).encode("utf-8")
@@ -139,6 +145,8 @@ class LlamaCppClient:
             "max_tokens": max_tokens,
             "stream": False,
         }
+        if self.model_name:
+            chat_payload["model"] = self.model_name
         if stop:
             chat_payload["stop"] = stop
         data = json.dumps(chat_payload).encode("utf-8")
@@ -168,7 +176,7 @@ class LlamaCppClient:
         model_name: str,
         prompt_or_messages: str | list[dict[str, str]],
         temperature: float,
-        max_tokens: int = 16384,
+        max_tokens: int | None = 16384,
         stop_event: object | None = None,
     ) -> Generator[str, None, None]:
         """Connects to llama.cpp's /completion endpoint with streaming.
@@ -203,12 +211,20 @@ class LlamaCppClient:
                     return
                 if "/v1" in self.base_url:
                     # OpenAI-compatible endpoint: /v1/chat/completions
+                    selected_model = (
+                        model_name
+                        if model_name and model_name not in {"stream", "llama.cpp-model"}
+                        else getattr(self, "model_name", "")
+                    )
                     chat_payload = {
                         "messages": messages_list,
                         "temperature": temperature,
-                        "max_tokens": max_tokens,
                         "stream": True,
                     }
+                    if selected_model:
+                        chat_payload["model"] = selected_model
+                    if max_tokens is not None:
+                        chat_payload["max_tokens"] = max_tokens
                     url = f"{self.base_url}/chat/completions"
                     _in_thinking = False  # Track whether we're inside a reasoning block
                     with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
@@ -265,10 +281,10 @@ class LlamaCppClient:
                     native_payload = {
                         "prompt": prompt_text,
                         "temperature": temperature,
-                        "n_predict": max_tokens,
-                        "num_ctx": 32768,
                         "stream": True,
                     }
+                    if max_tokens is not None:
+                        native_payload["n_predict"] = max_tokens
                     with requests.post(url, json=native_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
@@ -316,7 +332,7 @@ class LlamaCppClient:
         *,
         required_keys: list[str] | None = None,
         temperature: float = 0.2,
-        max_tokens: int = 2048,
+        max_tokens: int | None = 16384,
         max_attempts: int = 3,
         timeout_seconds: int = 600,
     ) -> tuple[dict | list | None, str, int]:

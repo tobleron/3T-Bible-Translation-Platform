@@ -76,6 +76,12 @@ def render_workspace(request: Request, wb: BrowserWorkbench, active_tab: str = "
     return response
 
 
+def render_chat_panel(request: Request, wb: BrowserWorkbench):
+    response = render_page(request, "partials/chat_panel.html", wb.workspace_payload(active_tab="draft"))
+    wb.clear_flash()
+    return response
+
+
 def apply_draft_form(wb: BrowserWorkbench, form) -> None:
     if not form:
         return
@@ -602,13 +608,108 @@ async def clear_chat_history(
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        wb.state.chat_messages = []
+        wb.clear_current_chunk_session()
         wb.save_state()
         
         # Return the updated panel summary via HTMX or just a success message
         return HTMLResponse(content='<span class="inline-badge">History Cleared</span> <script>window.location.reload();</script>')
     except Exception as exc:
         return HTMLResponse(content=f"Error: {exc}", status_code=500)
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/new", response_class=HTMLResponse)
+async def new_chat_session(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        wb.new_current_chunk_chat_session()
+        wb.notify("New chat session opened for this chunk.")
+        return render_chat_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/switch", response_class=HTMLResponse)
+async def switch_chat_session(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        session_id = str(form.get("chat_session_id", "")).strip()
+        if not wb.switch_current_chunk_chat_session(session_id):
+            wb.print_error("Chat session not found.")
+        return render_chat_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/delete", response_class=HTMLResponse)
+async def delete_chat_session(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        wb.delete_current_chunk_chat_session()
+        return render_chat_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
+
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/model", response_class=HTMLResponse)
+async def update_chat_model(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    form = await request.form()
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        current = wb.settings_payload()
+        next_provider = str(form.get("endpoint_provider", current.get("endpoint_provider", "local"))).strip()
+        active_model = str(form.get("active_model", current.get("active_model", ""))).strip()
+        if next_provider != str(current.get("endpoint_provider", "local")):
+            active_model = ""
+        wb.save_web_settings(
+            {
+                "endpoint_provider": next_provider,
+                "local_base_url": current.get("local_base_url", ""),
+                "local_api_key": current.get("local_api_key", ""),
+                "local_model": current.get("local_model", ""),
+                "cloud_base_url": current.get("cloud_base_url", "https://api.openai.com/v1"),
+                "cloud_api_key": current.get("cloud_api_key", ""),
+                "cloud_model": current.get("cloud_model", "gpt-4.1-mini"),
+                "active_model": active_model,
+            }
+        )
+        wb.safe_list_models()
+        wb.notify(f"Chat endpoint set to {wb.active_provider_label()} / {wb.active_model_name()}.")
+        return render_chat_panel(request, wb)
+    except Exception as exc:
+        return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/finalize", response_class=HTMLResponse)
@@ -1022,8 +1123,10 @@ async def settings_save(request: Request):
                 "endpoint_provider": str(form.get("endpoint_provider", "local")).strip(),
                 "local_base_url": str(form.get("local_base_url", wb.llm.base_url)).strip(),
                 "local_api_key": str(form.get("local_api_key", "")).strip(),
+                "local_model": str(form.get("local_model", "")).strip(),
                 "cloud_base_url": str(form.get("cloud_base_url", "")).strip(),
                 "cloud_api_key": str(form.get("cloud_api_key", "")).strip(),
+                "cloud_model": str(form.get("cloud_model", "")).strip(),
             }
         )
         wb.notify("Settings saved.")

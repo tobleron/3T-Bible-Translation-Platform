@@ -10,6 +10,9 @@
       {# Row 1: translation/source checkboxes #}
       <div class="source-chip-grid" role="group" aria-label="Comparison sources">
         {% for option in comparison_source_options %}
+        {% if option.separator %}
+        <div class="source-chip-separator" role="separator" aria-label="More sources"></div>
+        {% else %}
         <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
           <input type="checkbox" name="selected_sources" value="{{ option.alias }}" {% if option.selected %}checked{% endif %} {% if option.disabled %}disabled{% endif %}
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources"
@@ -19,6 +22,7 @@
             hx-include="closest form">
           <span>{{ option.label }}</span>
         </label>
+        {% endif %}
         {% endfor %}
       </div>
     </form>
@@ -55,8 +59,15 @@
             <span class="context-meta">{{ block.caption }}</span>
             {% endif %}
           </summary>
-          {% if block.text %}
-          <div class="chunk-block-body context-script {% if block.kind == 'hebrew' %}hebrew{% elif block.kind == 'greek' %}greek{% endif %}">{{ block.text }}</div>
+          {% if block.verse_lines %}
+          <div class="translation-verses lexical-verse-list">
+            {% for line in block.verse_lines %}
+            <div class="translation-verse-row" data-verse="{{ line.verse }}">
+              <span class="translation-verse-num">{{ line.verse }}</span>
+              <span class="translation-verse-text original-verse-text {{ block.kind }}" {% if block.kind == 'hebrew' %}dir="rtl"{% endif %}>{{ line.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
           {% endif %}
         </details>
         {% if block.gloss_lines %}

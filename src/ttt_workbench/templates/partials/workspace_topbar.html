@@ -1,0 +1,58 @@
+{% set book_items = navigator.get(selected_testament, []) %}
+{% set nav_state = namespace(selected_item=None) %}
+{% for item in book_items %}
+  {% if item.name == selected_book and (item.chapters or item.first_ready_chapter) %}
+    {% set nav_state.selected_item = item %}
+  {% endif %}
+{% endfor %}
+{% if nav_state.selected_item is none %}
+  {% for item in book_items %}
+    {% if nav_state.selected_item is none and (item.chapters or item.first_ready_chapter) %}
+      {% set nav_state.selected_item = item %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% set chapter_options = nav_state.selected_item.chapters if nav_state.selected_item and nav_state.selected_item.chapters else ([nav_state.selected_item.first_ready_chapter] if nav_state.selected_item and nav_state.selected_item.first_ready_chapter else []) %}
+
+<div class="workspace-topbar">
+  {% if chapter_chunks|length >= 2 %}
+  <button class="merge-toggle secondary-button" type="button" onclick="document.querySelector('.merge-bar')?.classList.toggle('is-visible')" title="Merge chunks">⚡</button>
+  {% endif %}
+  <form class="compact-nav-form workspace-nav-form">
+    <label class="compact-select">
+      <span>Testament</span>
+        <select name="testament" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
+          {% for testament_name in ("old", "new") %}
+          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>{{ testament_name.title() }}</option>
+          {% endfor %}
+        </select>
+    </label>
+    <label class="compact-select">
+      <span>Book</span>
+        <select name="book" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
+          {% for item in book_items %}
+          {% if item.chapters or item.first_ready_chapter %}
+          <option value="{{ item.name }}" {% if item.name == selected_book %}selected{% endif %}>{{ item.name }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+    </label>
+    <label class="compact-select">
+      <span>Chapter</span>
+        <select name="chapter" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
+          {% for chapter_value in chapter_options %}
+          <option value="{{ chapter_value }}" {% if chapter_value == selected_chapter %}selected{% endif %}>{{ chapter_value }}</option>
+          {% endfor %}
+        </select>
+    </label>
+    <label class="compact-select chunk-select">
+      <span>Chunk</span>
+        <select name="chunk" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
+          {% for chunk in chapter_chunks %}
+          {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
+          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>{{ chunk.start_verse }}-{{ chunk.end_verse }} {{ chunk.title }}</option>
+          {% endfor %}
+        </select>
+    </label>
+  </form>
+</div>

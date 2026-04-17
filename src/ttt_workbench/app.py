@@ -112,11 +112,13 @@ class WorkbenchApp(
         self.just_repo = JustificationRepository(self.paths, self.bible_repo)
         self.llm = llm_override if llm_override is not None else LlamaCppClient()
         detected_models = self.llm.list_models() if hasattr(self.llm, "list_models") else []
-        if detected_models and detected_models[0] != "llama.cpp-model":
+        if detected_models:
             self.model_name = detected_models[0]
         else:
-            self.model_name = "Qwen3.5 35B A3B Thinking"
+            self.model_name = "llama.cpp-model"
         self.model_label = self.compact_model_name(self.model_name)
+        if hasattr(self.llm, "model_name"):
+            self.llm.model_name = self.model_name
         self.app_version = "v0.2"
         self.legacy_prompt = self.paths.legacy_prompt_path.read_text(encoding="utf-8") if self.paths.legacy_prompt_path.exists() else ""
         self.state = self._load_state()

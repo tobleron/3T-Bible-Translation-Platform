@@ -1,0 +1,68 @@
+<article id="chat-panel" class="workspace-card chat-panel">
+  <div class="panel-head">
+    <div>
+      <p class="eyebrow">Chat</p>
+    </div>
+    <div class="panel-summary chat-panel-summary">
+      <span class="inline-badge">{{ active_provider_label }} · {{ active_model_name }}</span>
+    </div>
+  </div>
+
+  {% if has_committed_text and not has_draft_work and not state.chat_messages %}
+  <div class="chat-empty chat-bridge-empty">
+    <p>This chunk already has committed JSON text. Use <strong>Revise In Draft</strong> to copy that text into the draft workspace before chatting with the model.</p>
+    <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+      <input type="hidden" name="editor_action" value="seed-draft">
+      <button class="primary-button" type="submit">Revise In Draft</button>
+    </form>
+  </div>
+  {% else %}
+  <script>
+  window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
+  </script>
+  <div class="chat-toolbar">
+    <form class="chat-model-form"
+      hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/model"
+      hx-target="#chat-panel" hx-swap="outerHTML">
+      <label class="compact-field chat-endpoint-select">
+        <span>Endpoint</span>
+        <select name="endpoint_provider" onchange="this.form.requestSubmit()">
+          <option value="local" {% if settings_config.endpoint_provider == "local" %}selected{% endif %}>Local</option>
+          <option value="cloud" {% if settings_config.endpoint_provider == "cloud" %}selected{% endif %}>OpenAI</option>
+        </select>
+      </label>
+    </form>
+
+    <div class="chat-session-form">
+      <label class="compact-field chat-session-select">
+        <span>Session</span>
+        <select name="chat_session_id"
+          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/switch"
+          hx-trigger="change"
+          hx-target="#chat-panel"
+          hx-swap="outerHTML">
+          {% for session in current_chat_sessions %}
+          <option value="{{ session.id }}" {% if session.is_active %}selected{% endif %}>{{ session.title }} · {{ session.message_count }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+    <button class="icon-button chat-new-button" type="button"
+      hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/new"
+      hx-target="#chat-panel" hx-swap="outerHTML"
+      title="New chat session" aria-label="New chat session">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M5 3.5h9.25a1 1 0 1 1 0 2H6.5v12h12v-7.75a1 1 0 1 1 2 0V18.5a1 1 0 0 1-1 1h-14a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z"/>
+        <path d="M17.9 3.35a1.2 1.2 0 0 1 1.7 0l1.05 1.05a1.2 1.2 0 0 1 0 1.7l-8.2 8.2a1 1 0 0 1-.44.25l-3.05.84a.75.75 0 0 1-.92-.92l.84-3.05a1 1 0 0 1 .25-.44l8.77-7.63Z"/>
+      </svg>
+    </button>
+    <button class="tiny-danger-button compact-danger-button" type="button"
+      hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/delete"
+      hx-target="#chat-panel" hx-swap="outerHTML">Delete</button>
+  </div>
+
+  <div class="chainlit-container">
+    <iframe src="/chat?workbench_chat_session={{ active_chat_session_id }}"></iframe>
+  </div>
+  {% endif %}
+</article>

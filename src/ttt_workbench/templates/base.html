@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TTT Browser Workbench</title>
+  <title>Tell The Truth Bible Translation Platform</title>
   <script>
     (function () {
       var savedTheme = localStorage.getItem('tttTheme') || 'workbench-dark';
@@ -20,26 +20,40 @@
 <body>
   <header class="app-topbar">
     <div class="brand-block">
-      <a href="/?home=1" class="brand-link">TTT Browser Workbench</a>
-      <span class="brand-subtitle">Local editorial workstation</span>
+      <a href="/?home=1" class="brand-link">TTT</a>
     </div>
+    {% if show_workspace_topbar %}
+    <div id="workspace-session-controls" class="workspace-session-controls">
+    {% include "partials/workspace_topbar.html" %}
+    </div>
+    {% endif %}
     <div class="topbar-controls">
-      <select id="theme-select" aria-label="Select interface theme">
-        <option value="workbench-dark">Workbench Dark</option>
-        <option value="gruvbox-hard">Gruvbox Dark Hard</option>
-        <option value="github-dark-hc">GitHub Dark High Contrast</option>
+      <a href="/?home=1" class="top-link">Home</a>
+      <a href="/resume" class="top-link">Workspace</a>
+      <button class="top-link top-link-button" type="button" onclick="document.getElementById('settings-dialog')?.showModal()">Settings</button>
+      <select id="theme-select" class="topbar-theme-select" aria-label="Select interface theme">
+        <option value="workbench-dark">Workbench</option>
+        <option value="gruvbox-hard">Gruvbox</option>
+        <option value="github-dark-hc">GitHub HC</option>
         <option value="dracula">Dracula</option>
         <option value="one-dark">One Dark</option>
-        <option value="catppuccin-mocha">Catppuccin Mocha</option>
+        <option value="catppuccin-mocha">Mocha</option>
         <option value="nord">Nord</option>
       </select>
-      <nav class="top-actions">
-        <a href="/?home=1" class="top-link">Home</a>
-        <a href="/resume" class="top-link">Workspace</a>
-        <a href="/settings" class="top-link">Settings</a>
-      </nav>
     </div>
   </header>
+  <dialog id="settings-dialog" class="settings-dialog">
+    <div class="settings-dialog-head">
+      <div>
+        <p class="eyebrow">Settings</p>
+        <h2>Endpoint Configuration</h2>
+      </div>
+      <button class="secondary-button" type="button" onclick="document.getElementById('settings-dialog')?.close()" aria-label="Close settings">Close</button>
+    </div>
+    <div id="settings-dialog-body">
+      {% include "partials/settings_dialog_body.html" %}
+    </div>
+  </dialog>
   {% block body %}{% endblock %}
   <script>
     (function () {

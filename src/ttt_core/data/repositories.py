@@ -880,7 +880,7 @@ class LexicalRepository:
                         clean = clean.split(';')[0].split('/')[0].strip()
                         clean = _re.sub(r'\s+', ' ', clean)
                         # Filter out grammatical artifacts (no real English meaning)
-                        if clean and clean.lower() not in _SKIP_GLOSSES:
+                        if clean and clean.lower() not in _SKIP_GLOSSES and sid not in result:
                             result[sid] = clean
         except sqlite3.Error:
             pass

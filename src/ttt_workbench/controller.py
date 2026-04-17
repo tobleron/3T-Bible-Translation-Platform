@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+import hashlib
 import json
 import os
 import re
@@ -225,6 +226,13 @@ class BrowserWorkbench(WorkbenchApp):
     def _load_web_settings(self) -> dict[str, Any]:
         defaults = {
             "base_url": self.llm.base_url,
+            "endpoint_provider": "local",
+            "local_base_url": self.llm.base_url,
+            "local_api_key": "",
+            "local_model": getattr(self, "model_name", ""),
+            "cloud_base_url": "https://api.openai.com/v1",
+            "cloud_api_key": "",
+            "cloud_model": "gpt-4.1-mini",
             "selected_sources": ["LSB", "ESV"],
         }
         if not self.settings_file.exists():
@@ -235,10 +243,23 @@ class BrowserWorkbench(WorkbenchApp):
             return defaults
         if not isinstance(payload, dict):
             return defaults
+        endpoint_provider = str(payload.get("endpoint_provider") or defaults["endpoint_provider"]).strip().lower()
+        if endpoint_provider not in {"local", "cloud"}:
+            endpoint_provider = "local"
+        local_base_url = self._normalize_endpoint_url(
+            str(payload.get("local_base_url") or payload.get("base_url") or defaults["local_base_url"])
+        )
+        cloud_base_url = self._normalize_endpoint_url(str(payload.get("cloud_base_url") or defaults["cloud_base_url"]))
+        active_base_url = cloud_base_url if endpoint_provider == "cloud" and cloud_base_url else local_base_url
         merged = {
-            "base_url": self._normalize_endpoint_url(
-                str(payload.get("base_url") or defaults["base_url"])
-            ),
+            "base_url": active_base_url,
+            "endpoint_provider": endpoint_provider,
+            "local_base_url": local_base_url,
+            "local_api_key": str(payload.get("local_api_key") or defaults["local_api_key"]),
+            "local_model": str(payload.get("local_model") or defaults["local_model"]),
+            "cloud_base_url": cloud_base_url,
+            "cloud_api_key": str(payload.get("cloud_api_key") or defaults["cloud_api_key"]),
+            "cloud_model": str(payload.get("cloud_model") or defaults["cloud_model"]),
             "selected_sources": payload.get("selected_sources", defaults["selected_sources"]),
         }
         if (
@@ -260,14 +281,53 @@ class BrowserWorkbench(WorkbenchApp):
 
     def refresh_active_endpoint(self) -> str:
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
+        provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
+        api_key = self.web_settings.get("cloud_api_key" if provider == "cloud" else "local_api_key", "")
+        if hasattr(self.llm, "api_key"):
+            self.llm.api_key = str(api_key or "")
+        if hasattr(self.llm, "model_name"):
+            self.llm.model_name = self.active_model_name()
         return self.llm.base_url
+
+    def active_model_name(self) -> str:
+        provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
+        key = "cloud_model" if provider == "cloud" else "local_model"
+        model = str(self.web_settings.get(key, "")).strip()
+        return model or self.model_name
+
+    def active_provider_label(self) -> str:
+        provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
+        return "OpenAI" if provider == "cloud" else "Local"
 
     def save_web_settings(self, payload: dict[str, Any]) -> None:
         selected_sources = payload.get("selected_sources", self.web_settings.get("selected_sources", []))
+        endpoint_provider = str(payload.get("endpoint_provider", self.web_settings.get("endpoint_provider", "local"))).strip().lower()
+        if endpoint_provider not in {"local", "cloud"}:
+            endpoint_provider = "local"
+        local_base_url = self._normalize_endpoint_url(
+            str(payload.get("local_base_url", payload.get("base_url", self.web_settings.get("local_base_url", self.llm.base_url))))
+        )
+        cloud_base_url = self._normalize_endpoint_url(
+            str(payload.get("cloud_base_url", self.web_settings.get("cloud_base_url", "")))
+        )
+        active_base_url = cloud_base_url if endpoint_provider == "cloud" and cloud_base_url else local_base_url
+        local_model = str(payload.get("local_model", self.web_settings.get("local_model", self.model_name))).strip()
+        cloud_model = str(payload.get("cloud_model", self.web_settings.get("cloud_model", "gpt-4.1-mini"))).strip()
+        active_model = str(payload.get("active_model", "")).strip()
+        if active_model:
+            if endpoint_provider == "cloud":
+                cloud_model = active_model
+            else:
+                local_model = active_model
         self.web_settings = {
-            "base_url": self._normalize_endpoint_url(
-                str(payload.get("base_url", self.web_settings.get("base_url", self.llm.base_url)))
-            ),
+            "base_url": active_base_url,
+            "endpoint_provider": endpoint_provider,
+            "local_base_url": local_base_url,
+            "local_api_key": str(payload.get("local_api_key", self.web_settings.get("local_api_key", ""))),
+            "local_model": local_model,
+            "cloud_base_url": cloud_base_url,
+            "cloud_api_key": str(payload.get("cloud_api_key", self.web_settings.get("cloud_api_key", ""))),
+            "cloud_model": cloud_model,
             "selected_sources": selected_sources,
         }
         self.settings_file.parent.mkdir(parents=True, exist_ok=True)
@@ -275,6 +335,19 @@ class BrowserWorkbench(WorkbenchApp):
             json.dumps(self.web_settings, indent=2), encoding="utf-8"
         )
         self.refresh_active_endpoint()
+
+    def settings_payload(self) -> dict[str, Any]:
+        return {
+            "endpoint_provider": self.web_settings.get("endpoint_provider", "local"),
+            "local_base_url": self.web_settings.get("local_base_url", self.llm.base_url),
+            "local_api_key": self.web_settings.get("local_api_key", ""),
+            "local_model": self.web_settings.get("local_model", self.model_name),
+            "cloud_base_url": self.web_settings.get("cloud_base_url", ""),
+            "cloud_api_key": self.web_settings.get("cloud_api_key", ""),
+            "cloud_model": self.web_settings.get("cloud_model", "gpt-4.1-mini"),
+            "active_model": self.active_model_name(),
+            "active_base_url": self.resolve_active_base_url(),
+        }
 
     def _load_chunk_sessions(self) -> dict[str, dict[str, Any]]:
         if not self.chunk_sessions_file.exists():
@@ -310,21 +383,74 @@ class BrowserWorkbench(WorkbenchApp):
         range_key = chunk_key or self.current_chunk_key() or ""
         if not (testament_name and book_name and chapter_number and range_key):
             return None
+        internal_id = self.current_chunk_internal_id(testament_name, book_name, chapter_number, range_key)
+        return f"{testament_name}|{normalize_book_key(book_name)}|{chapter_number}|{range_key}|{internal_id}"
+
+    def legacy_chunk_session_key(
+        self,
+        testament: str | None = None,
+        book: str | None = None,
+        chapter: int | None = None,
+        chunk_key: str | None = None,
+    ) -> str | None:
+        testament_name = testament or self.state.wizard_testament or self.testament() or ""
+        book_name = book or self.state.book or ""
+        chapter_number = chapter or self.state.chapter or 0
+        range_key = chunk_key or self.current_chunk_key() or ""
+        if not (testament_name and book_name and chapter_number and range_key):
+            return None
         return f"{testament_name}|{normalize_book_key(book_name)}|{chapter_number}|{range_key}"
 
     def current_chunk_session(self) -> dict[str, Any]:
         key = self.chunk_session_key()
         if not key:
             return {}
+        legacy_key = self.legacy_chunk_session_key()
+        if key not in self.chunk_sessions and legacy_key and legacy_key in self.chunk_sessions:
+            self.chunk_sessions[key] = self.chunk_sessions.pop(legacy_key)
         if key not in self.chunk_sessions:
             self.chunk_sessions[key] = {
+                "active_session_id": uuid4().hex[:10],
+                "sessions": {},
+            }
+        record = self.chunk_sessions[key]
+        if "sessions" not in record:
+            session_id = str(record.get("active_session_id") or uuid4().hex[:10])
+            record = {
+                "active_session_id": session_id,
+                "sessions": {
+                    session_id: {
+                        "title": self.chunk_chat_session_title(1),
+                        "messages": list(record.get("messages", [])),
+                        "context_loaded": bool(record.get("context_loaded")),
+                        "context_snapshot": str(record.get("context_snapshot", "")),
+                        "focus_start": record.get("focus_start", self.state.focus_start),
+                        "focus_end": record.get("focus_end", self.state.focus_end),
+                    }
+                },
+            }
+            self.chunk_sessions[key] = record
+        active_id = str(record.get("active_session_id") or "")
+        sessions = record.setdefault("sessions", {})
+        if not active_id or active_id not in sessions:
+            active_id = uuid4().hex[:10]
+            record["active_session_id"] = active_id
+            sessions[active_id] = {
+                "title": self.chunk_chat_session_title(len(sessions) + 1),
                 "messages": [],
                 "context_loaded": False,
                 "context_snapshot": "",
                 "focus_start": self.state.focus_start,
                 "focus_end": self.state.focus_end,
             }
-        return self.chunk_sessions[key]
+        return sessions[active_id]
+
+    def active_chat_session_id(self) -> str:
+        key = self.chunk_session_key()
+        if not key:
+            return ""
+        self.current_chunk_session()
+        return str(self.chunk_sessions.get(key, {}).get("active_session_id", ""))
 
     def load_chunk_session(
         self,
@@ -334,7 +460,9 @@ class BrowserWorkbench(WorkbenchApp):
         chunk_key: str,
     ) -> None:
         key = self.chunk_session_key(testament, book, chapter, chunk_key)
-        session = self.chunk_sessions.get(key or "", {})
+        if key:
+            self.current_chunk_session()
+        session = self.current_chunk_session() if key else {}
         messages = session.get("messages", [])
         self.state.chat_messages = messages if isinstance(messages, list) else []
         focus_start = session.get("focus_start")
@@ -347,22 +475,137 @@ class BrowserWorkbench(WorkbenchApp):
         key = self.chunk_session_key()
         if not key:
             return
-        self.chunk_sessions[key] = {
-            "messages": list(self.state.chat_messages),
-            "context_loaded": bool(self.current_chunk_session().get("context_loaded")),
-            "context_snapshot": str(self.current_chunk_session().get("context_snapshot", "")),
-            "focus_start": self.state.focus_start,
-            "focus_end": self.state.focus_end,
-        }
+        session = self.current_chunk_session()
+        session["messages"] = list(self.state.chat_messages)
+        session["context_loaded"] = bool(session.get("context_loaded"))
+        session["context_snapshot"] = str(session.get("context_snapshot", ""))
+        session["focus_start"] = self.state.focus_start
+        session["focus_end"] = self.state.focus_end
         self._save_chunk_sessions()
 
     def clear_current_chunk_session(self) -> None:
         key = self.chunk_session_key()
-        if key and key in self.chunk_sessions:
-            self.chunk_sessions.pop(key, None)
+        if key:
+            session = self.current_chunk_session()
+            session["messages"] = []
+            session["context_loaded"] = False
+            session["context_snapshot"] = ""
             self._save_chunk_sessions()
         self.state.chat_messages = []
         self.notify("Cleared the saved chat session for this chunk.")
+
+    def abbreviated_book_name(self, book: str | None = None) -> str:
+        raw = (book or self.state.book or "").strip()
+        if not raw:
+            return "Chunk"
+        compact = re.sub(r"[^A-Za-z0-9 ]+", " ", raw)
+        compact = re.sub(r"\s+", " ", compact).strip()
+        direct = {
+            "genesis": "Gen", "exodus": "Ex", "leviticus": "Lev", "numbers": "Num",
+            "deuteronomy": "Deut", "joshua": "Josh", "judges": "Judg", "ruth": "Ruth",
+            "1 samuel": "1Sam", "2 samuel": "2Sam", "1 kings": "1Kgs", "2 kings": "2Kgs",
+            "1 chronicles": "1Chr", "2 chronicles": "2Chr", "ezra": "Ezra", "nehemiah": "Neh",
+            "esther": "Esth", "job": "Job", "psalms": "Ps", "psalm": "Ps", "proverbs": "Prov",
+            "ecclesiastes": "Eccl", "song of songs": "Song", "isaiah": "Isa", "jeremiah": "Jer",
+            "lamentations": "Lam", "ezekiel": "Ezek", "daniel": "Dan", "hosea": "Hos",
+            "joel": "Joel", "amos": "Amos", "obadiah": "Obad", "jonah": "Jonah", "micah": "Mic",
+            "nahum": "Nah", "habakkuk": "Hab", "zephaniah": "Zeph", "haggai": "Hag",
+            "zechariah": "Zech", "malachi": "Mal", "matthew": "Matt", "mark": "Mark",
+            "luke": "Luke", "john": "John", "acts": "Acts", "romans": "Rom",
+            "1 corinthians": "1Cor", "2 corinthians": "2Cor", "galatians": "Gal",
+            "ephesians": "Eph", "philippians": "Phil", "colossians": "Col",
+            "1 thessalonians": "1Th", "2 thessalonians": "2Th", "1 timothy": "1Tim",
+            "2 timothy": "2Tim", "titus": "Titus", "philemon": "Phlm", "hebrews": "Heb",
+            "james": "Jas", "1 peter": "1Pet", "2 peter": "2Pet", "1 john": "1Jn",
+            "2 john": "2Jn", "3 john": "3Jn", "jude": "Jude", "revelation": "Rev",
+        }
+        key = compact.lower()
+        if key in direct:
+            return direct[key]
+        parts = compact.split()
+        if len(parts) == 1:
+            return parts[0][:4].title()
+        prefix = parts[0] if parts[0].isdigit() else ""
+        words = parts[1:] if prefix else parts
+        initials = "".join(word[0].upper() for word in words if word.lower() not in {"of", "the", "and"})
+        return f"{prefix}{initials[:4]}" or "Chunk"
+
+    def chunk_chat_session_title(self, index: int) -> str:
+        book = self.abbreviated_book_name()
+        chapter = self.state.chapter or 0
+        chunk_range = self.current_chunk_key() or "range"
+        return f"{book}_{chapter}_{chunk_range}_{index}"
+
+    def new_current_chunk_chat_session(self) -> str:
+        key = self.chunk_session_key()
+        if not key:
+            return ""
+        self.current_chunk_session()
+        record = self.chunk_sessions[key]
+        sessions = record.setdefault("sessions", {})
+        session_id = uuid4().hex[:10]
+        record["active_session_id"] = session_id
+        sessions[session_id] = {
+            "title": self.chunk_chat_session_title(len(sessions) + 1),
+            "messages": [],
+            "context_loaded": False,
+            "context_snapshot": "",
+            "focus_start": self.state.focus_start,
+            "focus_end": self.state.focus_end,
+        }
+        self.state.chat_messages = []
+        self._save_chunk_sessions()
+        self.save_state()
+        return session_id
+
+    def delete_current_chunk_chat_session(self) -> None:
+        key = self.chunk_session_key()
+        if not key:
+            return
+        self.current_chunk_session()
+        record = self.chunk_sessions[key]
+        sessions = record.setdefault("sessions", {})
+        active_id = str(record.get("active_session_id", ""))
+        if active_id and active_id in sessions:
+            sessions.pop(active_id, None)
+        if sessions:
+            next_id = next(reversed(sessions))
+            record["active_session_id"] = next_id
+            session = sessions[next_id]
+            messages = session.get("messages", [])
+            self.state.chat_messages = messages if isinstance(messages, list) else []
+        else:
+            session_id = uuid4().hex[:10]
+            record["active_session_id"] = session_id
+            sessions[session_id] = {
+                "title": self.chunk_chat_session_title(1),
+                "messages": [],
+                "context_loaded": False,
+                "context_snapshot": "",
+                "focus_start": self.state.focus_start,
+                "focus_end": self.state.focus_end,
+            }
+            self.state.chat_messages = []
+        self._save_chunk_sessions()
+        self.save_state()
+        self.notify("Deleted the active chat session.")
+
+    def switch_current_chunk_chat_session(self, session_id: str) -> bool:
+        key = self.chunk_session_key()
+        if not key:
+            return False
+        self.current_chunk_session()
+        record = self.chunk_sessions[key]
+        sessions = record.setdefault("sessions", {})
+        if session_id not in sessions:
+            return False
+        record["active_session_id"] = session_id
+        session = sessions[session_id]
+        messages = session.get("messages", [])
+        self.state.chat_messages = messages if isinstance(messages, list) else []
+        self._save_chunk_sessions()
+        self.save_state()
+        return True
 
     def save_state(self) -> None:
         if self.has_open_chunk():
@@ -686,6 +929,31 @@ Rules:
             return None
         return f"{self.state.chunk_start}-{self.state.chunk_end}"
 
+    def current_chunk_internal_id(
+        self,
+        testament: str | None = None,
+        book: str | None = None,
+        chapter: int | None = None,
+        chunk_key: str | None = None,
+    ) -> str:
+        testament_name = testament or self.state.wizard_testament or self.testament() or ""
+        book_name = book or self.state.book or ""
+        chapter_number = chapter or self.state.chapter or 0
+        range_key = chunk_key or self.current_chunk_key() or ""
+        title = self._chunk_catalog_title(book_name, chapter_number, range_key) if book_name and chapter_number and range_key else ""
+        if not title:
+            title = self.state.draft_title.strip() or self.committed_chunk_title()
+        basis = "|".join(
+            [
+                str(testament_name).strip().lower(),
+                normalize_book_key(book_name),
+                str(chapter_number),
+                str(range_key).strip(),
+                re.sub(r"\s+", " ", str(title or "").strip().lower()),
+            ]
+        )
+        return f"chunk-{hashlib.sha1(basis.encode('utf-8')).hexdigest()[:12]}"
+
     def navigator_catalog(self) -> dict[str, Any]:
         payload: dict[str, Any] = {"old": [], "new": []}
         for testament in ("old", "new"):
@@ -993,8 +1261,29 @@ Rules:
         current_book = self.state.book or ""
         current_chapter = self.state.chapter or 0
         selected = set(self.selected_sources())
+        preferred_order = [
+            "NIV",
+            "ESV",
+            "LSB",
+            "CSB",
+            "NKJV",
+            "NET",
+            "TLV",
+            "KJV",
+            "LSV",
+            "BSB",
+            "LEB",
+            "NJB",
+        ]
+        available_aliases = [alias for alias in self.comparison_sources() if alias not in {"WLC"}]
+        preferred = [alias for alias in preferred_order if alias in available_aliases]
+        remaining = [alias for alias in available_aliases if alias not in preferred]
+        ordered_aliases = preferred + (["__separator__"] if preferred and remaining else []) + remaining
         options: list[dict[str, str | bool]] = []
-        for alias in self.comparison_sources():
+        for alias in ordered_aliases:
+            if alias == "__separator__":
+                options.append({"alias": alias, "label": "", "support": "", "selected": False, "available_here": False, "disabled": True, "separator": True})
+                continue
             if alias in {"WLC"}:
                 continue
             alias_map = self.source_repo._load_source(alias)
@@ -1015,6 +1304,7 @@ Rules:
                     "selected": alias in selected,
                     "available_here": available_here,
                     "disabled": current_testament == "old" and support == "NT only",
+                    "separator": False,
                 }
             )
         return options
@@ -1047,11 +1337,38 @@ Rules:
 
     @staticmethod
     def _literal_gloss_token(token: dict[str, str], lexicon: dict[str, str]) -> dict[str, str] | None:
-        gloss = lexicon.get(token.get("strong_id", ""), "").replace("<br>", "; ").strip(" ;")
-        surface = token.get("surface", "").strip()
+        gloss = ""
+        for key in BrowserWorkbench._strong_lookup_keys(token.get("strong_id", "")):
+            gloss = lexicon.get(key, "")
+            if gloss:
+                break
+        if not gloss:
+            gloss = token.get("gloss", "")
+        gloss = gloss.replace("<br>", "; ").replace("_", " ").strip(" ;")
+        surface = BrowserWorkbench._clean_original_surface(token.get("surface", ""))
         if not gloss:
             return None
         return {"gloss": gloss, "surface": surface}
+
+    @staticmethod
+    def _strong_lookup_keys(value: str) -> list[str]:
+        strong_id = str(value or "").strip()
+        if not strong_id:
+            return []
+        keys = [strong_id]
+        if strong_id.lower() not in keys:
+            keys.append(strong_id.lower())
+        match = re.match(r"^([HG]\d+)(?:[_-]?[A-Za-z]+)?$", strong_id)
+        if match:
+            base = match.group(1)
+            for key in (base, strong_id[:1] + strong_id[1:].lower().replace("_", "")):
+                if key and key not in keys:
+                    keys.append(key)
+        return keys
+
+    @staticmethod
+    def _clean_original_surface(value: str) -> str:
+        return str(value or "").strip().replace("\\׃", "׃")
 
     def lexical_ref(self, verse: int, *, corpus: str = "") -> str:
         """Build a lexical reference key using corpus-specific book codes."""
@@ -1099,10 +1416,10 @@ Rules:
             for verse in range(start_verse, end_verse + 1):
                 for t in hebrew.get(self.lexical_ref(verse, corpus="hebrew_ot"), []):
                     if t.get("strong_id"):
-                        heb_strongs.add(t["strong_id"])
+                        heb_strongs.update(self._strong_lookup_keys(t["strong_id"]))
                 for t in lxx.get(self.lexical_ref(verse, corpus="greek_ot_lxx"), []):
                     if t.get("strong_id"):
-                        lxx_strongs.add(t["strong_id"])
+                        lxx_strongs.update(self._strong_lookup_keys(t["strong_id"]))
 
             # Look up real English from lexicon
             heb_lexicon = self.lexical_repo.fetch_lexicon_glosses("hebrew_ot", list(heb_strongs))
@@ -1110,11 +1427,16 @@ Rules:
 
             # Build Hebrew block: surface text + per-token gloss data
             heb_surface_parts = []
+            heb_verse_lines: list[dict[str, Any]] = []
             heb_gloss_lines: list[dict[str, Any]] = []
             has_hebrew = False
             for verse in range(start_verse, end_verse + 1):
                 tokens = hebrew.get(self.lexical_ref(verse, corpus="hebrew_ot"), [])
-                surfaces = [t.get("surface", "").strip() for t in tokens if t.get("surface", "").strip()]
+                surfaces = [
+                    surface
+                    for t in tokens
+                    if (surface := self._clean_original_surface(t.get("surface", "")))
+                ]
                 gloss_tokens = [
                     gloss_token
                     for t in tokens
@@ -1122,28 +1444,27 @@ Rules:
                 ]
                 if gloss_tokens:
                     heb_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
-                if surfaces:
+                verse_text = " ".join(surfaces)
+                if not verse_text:
+                    verse_text = self._fallback_verse_text(verse) or "[no data]"
+                if verse_text and verse_text != "[no data]":
                     has_hebrew = True
-                    heb_surface_parts.append(" ".join(surfaces))
-                else:
-                    fallback = self._fallback_verse_text(verse)
-                    if fallback:
-                        has_hebrew = True
-                        heb_surface_parts.append(fallback)
-                    else:
-                        heb_surface_parts.append("[no data]")
+                heb_surface_parts.append(verse_text)
+                heb_verse_lines.append({"verse": verse, "text": verse_text})
 
             if has_hebrew:
                 blocks.append({
                     "label": "Hebrew",
                     "caption": "Masoretic Text (WLC)",
                     "text": self._chunk_join(heb_surface_parts),
+                    "verse_lines": heb_verse_lines,
                     "gloss_lines": heb_gloss_lines,
                     "kind": "hebrew",
                 })
 
             # Build LXX block
             lxx_surface_parts = []
+            lxx_verse_lines: list[dict[str, Any]] = []
             lxx_gloss_lines: list[dict[str, Any]] = []
             has_lxx = False
             for verse in range(start_verse, end_verse + 1):
@@ -1156,9 +1477,11 @@ Rules:
                 ]
                 if gloss_tokens:
                     lxx_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
-                if surfaces:
+                verse_text = " ".join(surfaces) if surfaces else "[no data]"
+                if verse_text != "[no data]":
                     has_lxx = True
-                    lxx_surface_parts.append(" ".join(surfaces))
+                lxx_surface_parts.append(verse_text)
+                lxx_verse_lines.append({"verse": verse, "text": verse_text})
 
             lxx_text = self._chunk_join(lxx_surface_parts) if has_lxx else ""
             if lxx_text and lxx_text != "[missing]":
@@ -1166,6 +1489,7 @@ Rules:
                     "label": "LXX Greek",
                     "caption": "Septuagint (Rahlfs 1935)",
                     "text": lxx_text,
+                    "verse_lines": lxx_verse_lines,
                     "gloss_lines": lxx_gloss_lines,
                     "kind": "greek",
                 })
@@ -1181,10 +1505,11 @@ Rules:
             for verse in range(start_verse, end_verse + 1):
                 for t in greek.get(self.lexical_ref(verse, corpus="greek_nt"), []):
                     if t.get("strong_id"):
-                        greek_strongs.add(t["strong_id"])
+                        greek_strongs.update(self._strong_lookup_keys(t["strong_id"]))
             greek_lexicon = self.lexical_repo.fetch_lexicon_glosses("greek_nt", list(greek_strongs))
 
             greek_surface_parts = []
+            greek_verse_lines: list[dict[str, Any]] = []
             greek_gloss_lines: list[dict[str, Any]] = []
             for verse in range(start_verse, end_verse + 1):
                 tokens = greek.get(self.lexical_ref(verse, corpus="greek_nt"), [])
@@ -1196,12 +1521,15 @@ Rules:
                 ]
                 if gloss_tokens:
                     greek_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
-                greek_surface_parts.append(" ".join(surfaces) if surfaces else "[no data]")
+                verse_text = " ".join(surfaces) if surfaces else "[no data]"
+                greek_surface_parts.append(verse_text)
+                greek_verse_lines.append({"verse": verse, "text": verse_text})
 
             blocks.append({
                 "label": "SBLGNT Greek",
                 "caption": "SBL Greek New Testament",
                 "text": self._chunk_join(greek_surface_parts),
+                "verse_lines": greek_verse_lines,
                 "gloss_lines": greek_gloss_lines,
                 "kind": "greek",
             })
@@ -1583,8 +1911,25 @@ Rules:
         except Exception as exc:
             self.print_error(f"Model discovery failed: {exc}")
             return [self.model_name]
-        if models:
-            return models
+        clean = [str(model).strip() for model in models if str(model).strip()]
+        if clean:
+            active = self.active_model_name()
+            provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
+            if provider == "cloud" and active and active not in clean:
+                clean.insert(0, active)
+            discovered = next((model for model in clean if model != "llama.cpp-model"), clean[0])
+            if discovered:
+                self.model_name = (
+                    active
+                    if provider == "cloud" and active and active != "llama.cpp-model"
+                    else discovered
+                )
+                self.model_label = self.compact_model_name(self.model_name)
+                if hasattr(self.llm, "model_name"):
+                    self.llm.model_name = self.model_name
+                if provider == "local" and discovered != "llama.cpp-model":
+                    self.web_settings["local_model"] = discovered
+            return clean
         return [self.model_name]
 
     def commit_history_entries(self) -> list[dict[str, str | bool]]:
@@ -1692,46 +2037,7 @@ Rules:
         return "\n\n".join(blocks).strip() or "[blank]"
 
     def build_browser_chat_prompt(self, user_message: str) -> str:
-        if not self.require_open_chunk():
-            return ""
-        start = self.state.chunk_start or 1
-        end = self.state.chunk_end or start
-        history = "\n".join(
-            f"{item['role'].upper()}: {item['content']}"
-            for item in self.state.chat_messages[-10:]
-        )
-        chat_sources = set(self.chat_context_sources())
-        draft_block = (
-            f"""
-
-Draft:
-{self.selected_range_draft_text()}
-"""
-            if "draft" in chat_sources
-            else ""
-        )
-        original_block = (
-            f"""
-
-Original languages:
-{self.original_language_chat_context_snapshot()}
-"""
-            if "original" in chat_sources
-            else ""
-        )
-        prompt = f"""
-You are a translation assistant helping a Bible translator.
-
-Chunk: {self.state.book} {self.state.chapter}:{start}-{end}
-Title: {self.state.draft_title or "[untitled]"}
-{draft_block}{original_block}
-Conversation:
-{history or "First message"}
-
-        Request:
-        {user_message}
-        """.strip()
-        return prompt
+        return str(user_message or "").strip()
 
     def browser_auto_generate_draft(self) -> bool:
         self.refresh_active_endpoint()
@@ -1739,7 +2045,7 @@ Conversation:
             self.build_initial_draft_prompt(),
             required_keys=["reply", "title", "verses"],
             temperature=0.7,
-            max_tokens=2600,
+            max_tokens=None,
             max_attempts=3,
         )
         if not isinstance(payload, dict):
@@ -1780,7 +2086,7 @@ Conversation:
         response = self.llm.complete(
             prompt,
             temperature=0.7,
-            max_tokens=2400,
+            max_tokens=None,
         )
         self.state.chat_messages.append({"role": "user", "content": user_message})
         if str(response).startswith("[ERROR]"):
@@ -1921,19 +2227,68 @@ Conversation:
         sessions: list[dict[str, Any]] = []
         for key, session in self.chunk_sessions.items():
             parts = key.split("|")
-            if len(parts) == 4:
-                testament_name, book_key, chapter_num, chunk_range = parts
+            if len(parts) in {4, 5}:
+                testament_name, book_key, chapter_num, chunk_range = parts[:4]
+                internal_id = parts[4] if len(parts) == 5 else ""
+                sessions_map = session.get("sessions") if isinstance(session.get("sessions"), dict) else {}
+                active_id = str(session.get("active_session_id", ""))
+                if sessions_map:
+                    message_count = sum(
+                        len(item.get("messages", []))
+                        for item in sessions_map.values()
+                        if isinstance(item, dict)
+                    )
+                    chat_count = len(sessions_map)
+                    context_loaded = any(
+                        bool(item.get("context_loaded"))
+                        for item in sessions_map.values()
+                        if isinstance(item, dict)
+                    )
+                else:
+                    message_count = len(session.get("messages", []))
+                    chat_count = 1 if message_count else 0
+                    context_loaded = session.get("context_loaded", False)
                 book_display = book_key.replace("_", " ").title()
                 sessions.append({
                     "session_key": key,
+                    "chunk_internal_id": internal_id,
+                    "active_session_id": active_id,
                     "testament": testament_name,
                     "book": book_display,
                     "chapter": int(chapter_num),
                     "chunk_range": chunk_range,
-                    "message_count": len(session.get("messages", [])),
-                    "context_loaded": session.get("context_loaded", False),
+                    "message_count": message_count,
+                    "chat_count": chat_count,
+                    "context_loaded": context_loaded,
                 })
         return sessions
+
+    def current_chunk_chat_sessions(self) -> list[dict[str, Any]]:
+        key = self.chunk_session_key()
+        if not key:
+            return []
+        self.current_chunk_session()
+        record = self.chunk_sessions.get(key, {})
+        active_id = str(record.get("active_session_id", ""))
+        sessions = record.get("sessions", {})
+        if not isinstance(sessions, dict):
+            return []
+        items: list[dict[str, Any]] = []
+        for index, (session_id, session) in enumerate(sessions.items(), start=1):
+            if not isinstance(session, dict):
+                continue
+            title = str(session.get("title") or "")
+            if not title or re.fullmatch(r"Chat\s+\d+", title):
+                title = self.chunk_chat_session_title(index)
+            items.append(
+                {
+                    "id": session_id,
+                    "title": title,
+                    "message_count": len(session.get("messages", [])),
+                    "is_active": session_id == active_id,
+                }
+            )
+        return items
 
     def workspace_payload(self, active_tab: str = "study") -> dict[str, Any]:
         testament = self.state.wizard_testament or self.testament() or "new"
@@ -1946,7 +2301,9 @@ Conversation:
         else:
             editor_mode = "draft"
         editor_start, editor_end = self.current_editor_range() if chunk_open else (0, 0)
+        model_names = self.safe_list_models() if chunk_open else []
         return {
+            "show_workspace_topbar": bool(book and chapter),
             "navigator": self.navigator_catalog(),
             "state": self.state,
             "selected_testament": testament,
@@ -1975,12 +2332,17 @@ Conversation:
                 for job in self.job_runner.all_jobs()
             ],
             "current_chunk_key": self.current_chunk_key() or "",
+            "current_chunk_internal_id": self.current_chunk_internal_id() if chunk_open else "",
             "comparison_sources": self.comparison_sources(),
             "comparison_source_options": self.comparison_source_options(),
             "selected_sources": self.selected_sources(),
             "chat_context_sources": self.chat_context_sources(),
             "commit_history": self.commit_history_entries(),
             "model_label": self.model_label,
+            "active_provider_label": self.active_provider_label(),
+            "active_model_name": self.active_model_name(),
+            "model_names": model_names,
+            "settings_config": self.settings_payload(),
             "editor_range_start": editor_start,
             "editor_range_end": editor_end,
             "editor_range_options": self.editor_range_options() if chunk_open else [],
@@ -1992,6 +2354,8 @@ Conversation:
             "has_draft_work": self.has_draft_work() if chunk_open else False,
             "has_committed_text": self.chunk_has_committed_text() if chunk_open else False,
             "chunk_sessions": self.chunk_session_list(),
+            "current_chat_sessions": self.current_chunk_chat_sessions() if chunk_open else [],
+            "active_chat_session_id": self.active_chat_session_id() if chunk_open else "",
             "justification_entries": self.chunk_justification_entries() if chunk_open else [],
             "footnote_entries": self.chunk_footnote_entries() if chunk_open else [],
             "editorial_prompts": self.editorial_prompts(),

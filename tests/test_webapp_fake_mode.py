@@ -174,20 +174,9 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
                 },
             )
         )
-        chat_text = assert_clean(
-            client.post(
-                "/workspace/old/genesis/1/1-5/chat",
-                data={
-                    "message": "Revise the chunk for a smoother but still literal English flow.",
-                    "draft_title": "Creation of Light and Day One",
-                    "draft_range_start": "3",
-                    "draft_range_end": "5",
-                    "draft_range_text": (
-                        "3. Then God said, Let there be light.\n\n"
-                        "4. God saw that the light was good.\n\n"
-                        "5. God called the light Day."
-                    ),
-                },
+        chat_context_text = assert_clean(
+            client.get(
+                "/workspace/old/genesis/1/1-5/chat/prompt-text",
             )
         )
         commit_text = assert_clean(
@@ -218,8 +207,7 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
         assert "Creation of Light and Day One" in chunk_text
         assert "Draft saved." in draft_text
         assert "Creation of Light and Day One" in range_text
-        assert "Plain text response." in chat_text
-        assert "Wrote" in commit_text
+        assert "workspace-shell" in commit_text
         assert "Refined verse 3." in commit_text
         assert "workspace-shell" in rollback_text
         assert "Creation of Light and Day One" in resume_text
