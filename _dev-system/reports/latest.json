@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-17T23:08:40.491588+00:00",
+  "generated_at": "2026-04-17T23:12:41.643238+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
-    "files_scanned": 134,
+    "files_scanned": 135,
     "tasks_generated": 12,
     "highest_risk": 71.83
   },
@@ -53,8 +53,8 @@
       "path": "src/ttt_workbench/templates/partials/workspace_shell.html",
       "role": "template",
       "language": "template",
-      "loc": 2255,
-      "risk": 8.67,
+      "loc": 2062,
+      "risk": 7.93,
       "preferred_loc": 260,
       "hard_loc": 420,
       "branches": 0,
@@ -66,13 +66,13 @@
         {
           "severity": "medium",
           "kind": "size",
-          "message": "2255 LOC exceeds preferred 260 LOC for role `template`.",
+          "message": "2062 LOC exceeds preferred 260 LOC for role `template`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "2255 LOC exceeds hard ceiling 420 LOC for role `template`.",
+          "message": "2062 LOC exceeds hard ceiling 420 LOC for role `template`.",
           "line": null
         }
       ]
@@ -1190,13 +1190,13 @@
       "path": "tests/test_webapp_smoke.py",
       "role": "test",
       "language": "python",
-      "loc": 22,
-      "risk": 2.0,
+      "loc": 25,
+      "risk": 2.03,
       "preferred_loc": 520,
       "hard_loc": 900,
       "branches": 3,
       "max_nesting": 1,
-      "mutable_state": 4,
+      "mutable_state": 5,
       "imports": 2,
       "callables": 3,
       "findings": []
@@ -1922,6 +1922,21 @@
       "findings": []
     },
     {
+      "path": "src/ttt_workbench/static/js/chat_stream_controller.js",
+      "role": "general-python",
+      "language": "text",
+      "loc": 158,
+      "risk": 1.0,
+      "preferred_loc": 430,
+      "hard_loc": 760,
+      "branches": 0,
+      "max_nesting": 0,
+      "mutable_state": 0,
+      "imports": 0,
+      "callables": 0,
+      "findings": []
+    },
+    {
       "path": "src/ttt_workbench/static/js/workspace_bootstrap.js",
       "role": "general-python",
       "language": "text",
@@ -1940,7 +1955,7 @@
       "path": "src/ttt_workbench/templates/base.html",
       "role": "template",
       "language": "template",
-      "loc": 83,
+      "loc": 84,
       "risk": 1.0,
       "preferred_loc": 260,
       "hard_loc": 420,

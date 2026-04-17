@@ -14,3 +14,6 @@ Make stream start, stop, timeout, thinking rendering, markdown rendering, and bu
 - Markdown rendering is throttled during streaming.
 - Send/stop buttons recover on done, abort, error, and timeout.
 
+## Status
+
+Completed. Chat stream state, DOM recovery, button restoration, and markdown throttling now live in `static/js/chat_stream_controller.js`; the existing fetch/SSE path delegates to that controller while preserving the current parser behavior.

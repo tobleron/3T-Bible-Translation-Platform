@@ -843,145 +843,15 @@ function initChatInput() {
   if (chatForm.dataset.streamBound === '1') return;
   chatForm.dataset.streamBound = '1';
 
-  // Use window-level tracking for streaming state to survive HTMX swaps
-  window._tttStreaming = window._tttStreaming || {
-    controller: null,
-    done: false,
-    poll: null,
-    streamId: 0,
-    activeStreamId: 0,
-    htmxSwapOccurred: false,
-    lastDomCheck: Date.now()
-  };
-
-  // MutationObserver to detect if #workspace-shell is replaced mid-stream (HTMX swap)
-  // This would kill all our DOM references and event listeners
-  window._tttStreaming.domObserver = window._tttStreaming.domObserver || (function() {
-    var observer = null;
-    var lastCheck = Date.now();
-    var lastButtonState = 'unknown';
-    var pollTimer = null;
-
-    function checkAndLogButtonState(label) {
-      var sb = document.getElementById('chat-stop-button');
-      var form = document.getElementById('chat-stream-form');
-      var fb = form ? form.querySelector('.send-button') : null;
-      var state = {
-        time: new Date().toISOString(),
-        label: label,
-        stopBtnDisplay: sb ? sb.style.display : 'element_not_found',
-        stopBtnExists: !!sb,
-        sendBtnDisabled: fb ? fb.disabled : 'element_not_found',
-        sendBtnExists: !!fb,
-        sendBtnText: fb ? fb.textContent : 'element_not_found',
-        streamId: window._tttStreaming ? window._tttStreaming.activeStreamId : 'no_state',
-        doneFlag: window._tttStreaming ? window._tttStreaming.done : 'no_state',
-        pollRunning: window._tttStreaming && window._tttStreaming.poll ? 'yes' : 'no'
-      };
-      console.log('[DOM-WATCH]', JSON.stringify(state));
-      return state;
-    }
-
-    function startPolling() {
-      if (pollTimer) return;
-      console.log('[DOM-WATCH] Starting button state polling every 500ms');
-      pollTimer = setInterval(function() {
-        var state = checkAndLogButtonState('interval_check');
-        // Detect stuck state: send button disabled but stream marked as done
-        if (state.sendBtnExists && state.sendBtnDisabled && window._tttStreaming && window._tttStreaming.done) {
-          console.log('[DOM-WATCH] ⚠️ STUCK STATE DETECTED: Send button disabled but done=true!');
-        }
-      }, 500);
-    }
-
-    function stopPolling() {
-      if (pollTimer) {
-        clearInterval(pollTimer);
-        pollTimer = null;
-        console.log('[DOM-WATCH] Stopped button state polling');
-      }
-    }
-
-    // Watch for #workspace-shell replacement
-    function setupObserver() {
-      var workspaceShell = document.getElementById('workspace-shell');
-      if (!workspaceShell) {
-        console.log('[DOM-WATCH] #workspace-shell not found, skipping observer');
-        return;
-      }
-      if (observer) {
-        observer.disconnect();
-      }
-      observer = new MutationObserver(function(mutations) {
-        console.log('[DOM-WATCH] MutationObserver fired, mutations:', mutations.length);
-        for (var i = 0; i < mutations.length; i++) {
-          var mutation = mutations[i];
-          if (mutation.type === 'childList') {
-            mutation.removedNodes.forEach(function(node) {
-              if (node.nodeType === 1 && node.id === 'workspace-shell') {
-                console.log('[DOM-WATCH] 🚨 CRITICAL: #workspace-shell was REMOVED from DOM!');
-                console.log('[DOM-WATCH] This means HTMX replaced our workspace mid-stream!');
-                window._tttStreaming.htmxSwapOccurred = true;
-                checkAndLogButtonState('post_htmx_swap');
-              }
-            });
-          }
-        }
-      });
-      observer.observe(workspaceShell.parentNode || document.body, { childList: true, subtree: true });
-      console.log('[DOM-WATCH] MutationObserver started on parent of #workspace-shell');
-    }
-
-    // Auto-setup on first call
-    setupObserver();
-    startPolling();
-
-    return {
-      checkAndLogButtonState: checkAndLogButtonState,
-      setupObserver: setupObserver,
-      startPolling: startPolling,
-      stopPolling: stopPolling
-    };
-  }());
+  var chatStreamController = window.TTTChatStreamController;
+  if (!chatStreamController) return;
+  var chatStreamState = chatStreamController.state();
+  chatStreamController.ensureDomWatch();
 
   function resetChatButtons() {
     console.log('[RESET] resetChatButtons called at', new Date().toISOString());
-    console.log('[RESET] Current streamId:', window._tttStreaming.activeStreamId);
-    window._tttStreaming.done = true;
-    if (window._tttStreaming.controller) {
-      console.log('[RESET] Aborting controller');
-      window._tttStreaming.controller.abort();
-      window._tttStreaming.controller = null;
-    }
-
-    // Always find fresh elements in the current DOM
-    var sb = document.getElementById('chat-stop-button');
-    if (sb) {
-      sb.style.display = 'none';
-      sb.classList.remove('is-animating');
-    }
-
-    var form = document.getElementById('chat-stream-form');
-    var fb = form ? form.querySelector('.send-button') : document.querySelector('.send-button');
-    if (fb) {
-      // Check if element is actually in the DOM (not detached)
-      var isConnected = fb === document.querySelector('.send-button');
-      if (!isConnected) {
-        console.log('[RESET] ⚠️ Send button found but is NOT connected to DOM (detached/stale reference)!');
-      }
-      fb.disabled = false;
-      fb.textContent = fb.dataset.originalLabel || 'Send';
-      fb.classList.remove('is-loading');
-      console.log('[RESET] Send button re-enabled (isConnected=' + isConnected + ')');
-    } else {
-      console.log('[RESET] ⚠️ Send button NOT FOUND in DOM!');
-    }
-
-    if (window._tttStreaming.poll) {
-      clearInterval(window._tttStreaming.poll);
-      window._tttStreaming.poll = null;
-      console.log('[RESET] Cleared poll interval');
-    }
+    console.log('[RESET] Current streamId:', chatStreamState.activeStreamId);
+    chatStreamController.restoreControls();
   }
 
   // Wire up stop button
@@ -1022,9 +892,9 @@ function initChatInput() {
     if (!streamUrl) return;
 
     // Abort any in-flight stream
-    if (window._tttStreaming.controller) { 
-      window._tttStreaming.controller.abort(); 
-      window._tttStreaming.controller = null; 
+    if (chatStreamState.controller) { 
+      chatStreamState.controller.abort(); 
+      chatStreamState.controller = null; 
     }
 
     var sendBtn = chatForm.querySelector('.send-button');
@@ -1086,13 +956,10 @@ function initChatInput() {
     formData.append('message', text);
     ctxSources.forEach(function(s) { formData.append('chat_context_sources', s); });
 
-    window._tttStreaming.controller = new AbortController();
-    window._tttStreaming.done = false;
-    window._tttStreaming.streamId++;
-    var thisStreamId = window._tttStreaming.streamId;
-    window._tttStreaming.activeStreamId = thisStreamId;
+    var streamHandle = chatStreamController.startStream();
+    var thisStreamId = streamHandle.streamId;
     console.log('[STREAM-' + thisStreamId + '] 🚀 Stream STARTED at', new Date().toISOString());
-    console.log('[STREAM-' + thisStreamId + '] 📍 Initial button state:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('stream_start')));
+    console.log('[STREAM-' + thisStreamId + '] 📍 Initial button state:', JSON.stringify(chatStreamState.domObserver.checkAndLogButtonState('stream_start')));
 
     // Incremental streaming state — avoids full innerHTML re-renders
     var streamState = {
@@ -1251,26 +1118,16 @@ function initChatInput() {
     ensureThinking();
 
     // Append text to the right element (thinking or output)
-    var _lastRenderTime = 0;
+    var markdownThrottler = chatStreamController.createMarkdownThrottler(renderMarkdownLite, 250);
     function appendStreamingText(text) {
       if (!text) return;
-      var now = Date.now();
       
       // If thinking is done, output gets appended to output element
       if (streamState.thinkingDone) {
         ensureOutput();
         // Accumulate raw text
         streamState.outputEl._rawText = (streamState.outputEl._rawText || '') + text;
-        
-        // Throttled render: every 250ms for performance, or if text is small
-        if (now - _lastRenderTime > 250 || streamState.outputEl._rawText.length < 500) {
-          streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
-          _lastRenderTime = now;
-        } else {
-          // Just append text node for speed during heavy streaming
-          var textNode = document.createTextNode(text);
-          streamState.outputEl.appendChild(textNode);
-        }
+        markdownThrottler.render(streamState.outputEl, text, streamState.outputEl._rawText);
         
         // Restore scroll if user was at bottom
         if (streamState.outputEl._wasAtBottom) {
@@ -1284,15 +1141,7 @@ function initChatInput() {
           
           // Accumulate raw text for thinking!
           el._rawText = (el._rawText || '') + text;
-          
-          // Throttled render for thinking too
-          if (now - _lastRenderTime > 250 || el._rawText.length < 500) {
-            el.innerHTML = renderMarkdownLite(el._rawText);
-            _lastRenderTime = now;
-          } else {
-            var textNode = document.createTextNode(text);
-            el.appendChild(textNode);
-          }
+          markdownThrottler.render(el, text, el._rawText);
           
           if (wasAtBottom) {
             el.scrollTop = el.scrollHeight;
@@ -1302,14 +1151,7 @@ function initChatInput() {
         // Haven't seen thinking yet — this is plain output text
         ensureOutput();
         streamState.outputEl._rawText = (streamState.outputEl._rawText || '') + text;
-        
-        if (now - _lastRenderTime > 250 || streamState.outputEl._rawText.length < 500) {
-          streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
-          _lastRenderTime = now;
-        } else {
-          var textNode = document.createTextNode(text);
-          streamState.outputEl.appendChild(textNode);
-        }
+        markdownThrottler.render(streamState.outputEl, text, streamState.outputEl._rawText);
         
         if (streamState.outputEl._wasAtBottom) {
           streamState.outputEl.scrollTop = streamState.outputEl.scrollHeight;
@@ -1324,44 +1166,18 @@ function initChatInput() {
     fetch(streamUrl, {
       method: 'POST',
       body: formData,
-      signal: window._tttStreaming.controller.signal,
+      signal: streamHandle.controller.signal,
     })
     .then(function(response) {
       console.log('[STREAM-' + thisStreamId + '] ✅ fetch() response received at', new Date().toISOString());
-      console.log('[STREAM-' + thisStreamId + '] 📍 Button state after fetch:', JSON.stringify(window._tttStreaming.domObserver.checkAndLogButtonState('post_fetch')));
+      console.log('[STREAM-' + thisStreamId + '] 📍 Button state after fetch:', JSON.stringify(chatStreamState.domObserver.checkAndLogButtonState('post_fetch')));
       if (!response.ok) throw new Error('Stream request failed: ' + response.status);
       var reader = response.body.getReader();
       var decoder = new TextDecoder();
       var buffer = '';
       var accumulatedRaw = '';
 
-      // Polling button restoration — runs every 200ms to ensure buttons are always correct
-      (function(streamId) {
-        window._tttStreaming.poll = setInterval(function() {
-          var sb = document.getElementById('chat-stop-button');
-          var form = document.getElementById('chat-stream-form');
-          var fb = form ? form.querySelector('.send-button') : document.querySelector('.send-button');
-          if (window._tttStreaming.done) {
-            if (sb && sb.style.display !== 'none') {
-              sb.style.display = 'none';
-              sb.classList.remove('is-animating');
-              console.log('[POLL-' + streamId + '] Stop hidden');
-            }
-            if (fb && fb.disabled) {
-              fb.disabled = false;
-              fb.textContent = fb.dataset.originalLabel || 'Send';
-              fb.classList.remove('is-loading');
-              console.log('[POLL-' + streamId + '] Send enabled');
-            }
-            // If both buttons are in correct state, stop polling
-            if ((!sb || sb.style.display === 'none') && (!fb || !fb.disabled)) {
-              clearInterval(window._tttStreaming.poll);
-              window._tttStreaming.poll = null;
-              console.log('[POLL-' + streamId + '] Buttons correct, stopped polling');
-            }
-          }
-        }, 200);
-      })(thisStreamId);
+      chatStreamController.startRecoveryPoll(thisStreamId);
 
       // Heartbeat: track last activity, reject Promise chain on 300s silence (5 min — matches server tolerance)
       var lastActivityTime = Date.now();
@@ -1375,33 +1191,7 @@ function initChatInput() {
       // FORCE RESET: Completely reset button state, bypassing all checks
       function forceResetButtons() {
         console.log('[STREAM-' + thisStreamId + '] 🔨 forceResetButtons() called');
-        window._tttStreaming.done = true;
-
-        // Kill any pending polls
-        if (window._tttStreaming.poll) {
-          clearInterval(window._tttStreaming.poll);
-          window._tttStreaming.poll = null;
-        }
-
-        // Force re-enable send button by querying fresh from document
-        var allButtons = document.querySelectorAll('.send-button');
-        console.log('[STREAM-' + thisStreamId + '] 🔨 Found ' + allButtons.length + ' send buttons in DOM');
-        allButtons.forEach(function(btn) {
-          console.log('[STREAM-' + thisStreamId + '] 🔨 Force-enabling button: ' + btn.textContent + ' disabled=' + btn.disabled);
-          btn.disabled = false;
-          btn.textContent = btn.dataset.originalLabel || 'Send';
-          btn.classList.remove('is-loading');
-        });
-
-        // Hide stop button
-        var stopBtns = document.querySelectorAll('#chat-stop-button');
-        stopBtns.forEach(function(btn) {
-          btn.style.display = 'none';
-          btn.classList.remove('is-animating');
-        });
-
-        // DO NOT abort controller here - this would kill the stream prematurely!
-        // Only abort in .catch() or explicit stop button click
+        chatStreamController.restoreControls({ abort: false });
         console.log('[STREAM-' + thisStreamId + '] 🔨 forceResetButtons() complete');
       }
 
@@ -1615,10 +1405,10 @@ function initChatInput() {
       }
     })
     .finally(function() {
-      window._tttStreaming.done = true;
-      if (window._tttStreaming.poll) {
-        clearInterval(window._tttStreaming.poll);
-        window._tttStreaming.poll = null;
+      chatStreamState.done = true;
+      if (chatStreamState.poll) {
+        clearInterval(chatStreamState.poll);
+        chatStreamState.poll = null;
       }
       _mon._log('.finally() started');
 
@@ -1634,16 +1424,16 @@ function initChatInput() {
           }
         }
         if (streamState.thinkingContentEl && streamState.thinkingContentEl._rawText) {
-          streamState.thinkingContentEl.innerHTML = renderMarkdownLite(streamState.thinkingContentEl._rawText);
+          markdownThrottler.flush(streamState.thinkingContentEl, streamState.thinkingContentEl._rawText);
         }
         if (streamState.outputEl && streamState.outputEl._rawText) {
-          streamState.outputEl.innerHTML = renderMarkdownLite(streamState.outputEl._rawText);
+          markdownThrottler.flush(streamState.outputEl, streamState.outputEl._rawText);
         }
         if (!streamState.thinkingStarted && !streamState.outputEl && mdBuffer) {
           mdBuffer.innerHTML = renderMarkdownWithCollapsedThinking(accumulatedRaw);
         }
         try { chatLog.scrollTop = chatLog.scrollHeight; } catch(e) {}
-        if (window._tttStreaming.controller && window._tttStreaming.controller.signal.aborted) {
+        if (chatStreamState.controller && chatStreamState.controller.signal.aborted) {
           _mon._log('Stream was aborted by user');
           try {
             var chatLog2 = document.querySelector('.chat-log');
