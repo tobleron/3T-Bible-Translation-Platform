@@ -80,13 +80,13 @@ For a completed task:
 
 1. Update the task file with a short `Status` or completion note if useful.
 2. Update `_tasks/000_INDEX.md`.
-3. Keep the task file in `_tasks/` unless the project later adopts `completed/`, `pending/`, and `postponed/` subfolders.
+3. Move completed or obsolete task files to `_tasks/completed/`.
 4. Mention verification results in the commit or final work summary.
 
 ## Folder Policy
 
 - `_tasks/`: main human-authored project tasks.
+- `_tasks/completed/`: completed or obsolete main project tasks.
 - `_dev-tasks/`: generated advisory maintenance tasks.
 - `_dev-system/`: analyzer implementation, config, and reports.
 - `_scripts/`: small project maintenance runners.
-

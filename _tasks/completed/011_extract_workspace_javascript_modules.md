@@ -14,3 +14,6 @@ Reduce the size and fragility of the workspace template and make browser behavio
 - `base.html` loads the shared module.
 - Future work can move chat, autosave, support formatting, JSON browser, and prompt-builder code into separate modules.
 
+## Status
+
+Completed. Shared interaction code now lives in `app_interactions.js`, and workspace lifecycle/bootstrap wiring now lives in `workspace_bootstrap.js`. The remaining inline workspace functions are narrower candidates for later task-specific extraction.

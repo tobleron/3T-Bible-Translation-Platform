@@ -372,71 +372,6 @@
 <div class="workspace-toast" id="workspaceToast" role="status" aria-live="polite"></div>
 
 <script>
-document.addEventListener('htmx:afterSettle', function() {
-  document.querySelectorAll('textarea').forEach(function(el) { autoResize(el); });
-  // Delayed autoResize after swap to set heights correctly without scroll jump
-  requestAnimationFrame(function() {
-    document.querySelectorAll('textarea').forEach(function(el) {
-      if (el.dataset.autoResizeBound) {
-        el.style.height = 'auto';
-        el.style.height = el.scrollHeight + 'px';
-      }
-    });
-  });
-  var studyBlocks = document.getElementById('study-blocks');
-  if (studyBlocks) {
-    var fontSize = localStorage.getItem('studyFontSize') || '16';
-    applyStudyFontSize(fontSize);
-    var sel = document.getElementById('study-font-size');
-    if (sel) sel.value = fontSize;
-    // Restore verse filter state
-    var verseFilterVal = localStorage.getItem('studyVerseFilter') || '';
-    var verseFilter = document.getElementById('study-verse-filter');
-    if (verseFilter) verseFilter.value = verseFilterVal;
-    if (verseFilterVal) applyStudyVerseFilter();
-  }
-  initGlossTooltips();
-  initSupportFormattingTools();
-  initModelActionForms();
-  initHtmxActionFeedback();
-  initPromptEngineering();
-  initChatInput();
-  initEditorAutosave();
-  // Scroll chat log to bottom after swap
-  var chatLog = document.querySelector('.chat-log');
-  if (chatLog) { chatLog.scrollTop = chatLog.scrollHeight; }
-  // Restore last copied indicator after HTMX swap
-  var lastCopied = sessionStorage.getItem('lastGlossCopied');
-  if (lastCopied) {
-    showGlossCopiedIndicator(lastCopied);
-    sessionStorage.removeItem('lastGlossCopied');
-  }
-});
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('textarea').forEach(function(el) { autoResize(el); });
-  var fontSize = localStorage.getItem('studyFontSize') || '16';
-  applyStudyFontSize(fontSize);
-  var sel = document.getElementById('study-font-size');
-  if (sel) sel.value = fontSize;
-  // Restore verse filter state
-  var verseFilterVal = localStorage.getItem('studyVerseFilter') || '';
-  var verseFilter = document.getElementById('study-verse-filter');
-  if (verseFilter) verseFilter.value = verseFilterVal;
-  if (verseFilterVal) applyStudyVerseFilter();
-  initGlossTooltips();
-  initSupportFormattingTools();
-  initModelActionForms();
-  initHtmxActionFeedback();
-  initPromptEngineering();
-  initChatInput();
-  initEditorAutosave();
-  // Restore last copied indicator from session storage
-  var lastCopied = sessionStorage.getItem('lastGlossCopied');
-  if (lastCopied) {
-    showGlossCopiedIndicator(lastCopied);
-    sessionStorage.removeItem('lastGlossCopied');
-  }
-});
 function autoResize(el) {
   if (!el || el.tagName.toLowerCase() !== 'textarea') return;
   if (!el.matches('.verse-editor-textarea, [data-inline-format-field], [data-auto-resize]')) return;
@@ -885,50 +820,6 @@ function setModelButtonBusy(button, loadingLabel) {
       button.textContent = button.dataset.originalLabel || button.textContent;
     }
   };
-}
-function initHtmxActionFeedback() {
-  if (window.tttHtmxActionFeedbackBound) return;
-  window.tttHtmxActionFeedbackBound = true;
-  document.body.addEventListener('htmx:beforeRequest', function(event) {
-    var el = event.detail && event.detail.elt;
-    var button = el && el.matches && el.matches('[data-loading-label]') ? el : null;
-    if (!button && el && el.querySelector) button = el.querySelector('[data-loading-label]');
-    if (!button) return;
-    button.dataset.originalLabel = button.dataset.originalLabel || button.textContent;
-    button.disabled = true;
-    button.classList.add('is-loading');
-    button.textContent = button.getAttribute('data-loading-label') || 'Working...';
-  });
-  document.body.addEventListener('htmx:afterRequest', function(event) {
-    var el = event.detail && event.detail.elt;
-    var button = el && el.matches && el.matches('[data-loading-label]') ? el : null;
-    if (!button && el && el.querySelector) button = el.querySelector('[data-loading-label]');
-    if (button) {
-      button.disabled = false;
-      button.classList.remove('is-loading');
-      button.textContent = button.dataset.originalLabel || button.textContent;
-    }
-    var ok = event.detail && event.detail.successful;
-    if (!ok) {
-      showWorkspaceIndicator('Action failed.', 'error');
-      return;
-    }
-    var path = '';
-    if (event.detail && event.detail.pathInfo) {
-      path = event.detail.pathInfo.requestPath || '';
-    }
-    if (!path && event.detail && event.detail.xhr) {
-      path = event.detail.xhr.responseURL || '';
-    }
-    if (path.indexOf('/commit/apply') !== -1) {
-      showWorkspaceIndicator('Draft committed.', 'success');
-    } else if (path.indexOf('/editor/mode') !== -1) {
-      showWorkspaceIndicator('Draft ready.', 'success');
-    }
-  });
-  document.body.addEventListener('htmx:responseError', function() {
-    showWorkspaceIndicator('Action failed.', 'error');
-  });
 }
 function initModelActionForms() {
   document.querySelectorAll('.model-action-form').forEach(function(form) {

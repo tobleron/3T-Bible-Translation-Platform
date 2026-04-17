@@ -3,26 +3,15 @@
 Current active task list in execution order.
 
 - [Task procedures](./TASKS.md)
-- [001 Aggregate Chapter Chunk Data by Book](./001_aggregate_chapter_chunk_data_by_book.md)
-- [002 Source and Workspace Cleanup Pass](./002_source_and_workspace_cleanup_pass.md)
-- [003 Full Migration to FastAPI + Jinja2 + HTMX](./003_full_migration_fastapi_jinja_htmx.md)
-- [004 Comparison Source Checkbox Panel](./004_comparison_source_checkbox_panel.md)
 - [005 Chunk Boundary and Label Quality Audit](./005_chunk_boundary_and_label_quality_audit.md)
-- [006 Editorial Enhancement and Support Entry Editing](./006_editorial_enhancement_and_support_entry_editing.md)
-- [007 Model Action Feedback, Prompt Tabs, and Chat Context Sources](./007_model_action_feedback_prompt_tabs_and_chat_context_sources.md)
-- [008 Streaming Chat Termination & Thinking Placement](./008_streaming_chat_fix.md)
-- [009 Keep HTMX/Jinja and Avoid Premature React Migration](./009_keep_htmx_jinja_avoid_premature_react.md)
-- [010 Adopt Lightweight Local State Controllers](./010_adopt_lightweight_local_state_controllers.md)
-- [011 Extract Workspace JavaScript Modules](./011_extract_workspace_javascript_modules.md)
 - [012 Reduce Large HTMX Workspace Swaps](./012_reduce_large_htmx_workspace_swaps.md)
-- [013 Centralize HTMX Busy and Error States](./013_centralize_htmx_busy_error_states.md)
-- [014 Use Native HTMX Sync and Disabled Controls](./014_use_native_htmx_sync_disabled_controls.md)
 - [015 Add Background Jobs for Slow Actions](./015_background_jobs_for_slow_actions.md)
 - [016 Formalize Chat Stream Frontend Controller](./016_chat_stream_frontend_controller.md)
 - [017 Lazy Render Heavy Panels](./017_lazy_render_heavy_panels.md)
-- [018 Add Frontend Performance Instrumentation](./018_frontend_performance_instrumentation.md)
 - [019 Split CSS by Feature](./019_split_css_by_feature.md)
 - [020 Add Playwright Responsiveness Tests](./020_playwright_responsiveness_tests.md)
 - [021 Optimize Server Route Rendering](./021_optimize_server_route_rendering.md)
 - [022 Add JSON APIs for Interactive Controls](./022_json_apis_for_interactive_controls.md)
 - [023 Standardize Professional UI States](./023_standardize_professional_ui_states.md)
+
+Completed tasks are archived under [`completed/`](./completed/).

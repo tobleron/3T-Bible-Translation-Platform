@@ -24,3 +24,7 @@ def test_static_interaction_layer_is_served() -> None:
         response = client.get("/static/js/app_interactions.js")
         assert response.status_code == 200
         assert "TTTInteractions" in response.text
+
+        bootstrap_response = client.get("/static/js/workspace_bootstrap.js")
+        assert bootstrap_response.status_code == 200
+        assert "TTTWorkspaceBootstrap" in bootstrap_response.text
