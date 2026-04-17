@@ -15,71 +15,6 @@
 {% set chapter_options = nav_state.selected_item.chapters if nav_state.selected_item and nav_state.selected_item.chapters else ([nav_state.selected_item.first_ready_chapter] if nav_state.selected_item and nav_state.selected_item.first_ready_chapter else []) %}
 
 <div class="compact-workspace">
-  <section class="workspace-card navigator-bar">
-    {# Row 1: heading + banner merged #}
-    <div class="navigator-bar-head">
-      {% if chunk_summary.chunk %}
-      <div class="nav-inline-banner">
-        <span class="eyebrow">Workspace</span>
-        <span class="inline-badge">{{ model_label }} model</span>
-      </div>
-      {% elif selected_book and selected_chapter %}
-      <div class="nav-inline-banner is-muted">
-        <span class="eyebrow">Workspace</span>
-        <strong>{{ selected_book }} {{ selected_chapter }}</strong>
-        <span class="muted-line">Choose a chunk to start editing.</span>
-      </div>
-      {% else %}
-      <div>
-        <p class="eyebrow">Workspace</p>
-        <h1>Chat-First Editing Surface</h1>
-      </div>
-      {% endif %}
-      {% if chapter_chunks|length >= 2 %}
-      <button class="merge-toggle secondary-button" type="button" onclick="this.closest('.navigator-bar').querySelector('.merge-bar').classList.toggle('is-visible')" title="Merge chunks">⚡</button>
-      {% endif %}
-    </div>
-
-    {# Row 2: condensed selectors #}
-    <div class="compact-nav-form">
-      <label class="compact-select">
-        <span>Testament</span>
-        <select name="testament" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
-          {% for testament_name in ("old", "new") %}
-          <option value="{{ testament_name }}" {% if selected_testament == testament_name %}selected{% endif %}>{{ testament_name.title() }}</option>
-          {% endfor %}
-        </select>
-      </label>
-      <label class="compact-select">
-        <span>Book</span>
-        <select name="book" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
-          {% for item in book_items %}
-          {% if item.chapters or item.first_ready_chapter %}
-          <option value="{{ item.name }}" {% if item.name == selected_book %}selected{% endif %}>{{ item.name }}</option>
-          {% endif %}
-          {% endfor %}
-        </select>
-      </label>
-      <label class="compact-select">
-        <span>Chapter</span>
-        <select name="chapter" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
-          {% for chapter_value in chapter_options %}
-          <option value="{{ chapter_value }}" {% if chapter_value == selected_chapter %}selected{% endif %}>{{ chapter_value }}</option>
-          {% endfor %}
-        </select>
-      </label>
-      <label class="compact-select chunk-select">
-        <span>Chunk</span>
-        <select name="chunk" hx-get="/workspace/navigate" hx-target="#workspace-shell" hx-swap="outerHTML" hx-trigger="change" hx-include="closest .compact-nav-form">
-          {% for chunk in chapter_chunks %}
-          {% set key = chunk.start_verse|string ~ "-" ~ chunk.end_verse|string %}
-          <option value="{{ key }}" {% if key == current_chunk_key %}selected{% endif %}>{{ chunk.start_verse }}-{{ chunk.end_verse }} {{ chunk.title }}</option>
-          {% endfor %}
-        </select>
-      </label>
-    </div>
-
-    {# Merge bar (hidden by default, toggled with ⚡) #}
     {% if chapter_chunks|length >= 2 %}
     <form class="merge-bar" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge" hx-target="#workspace-shell" hx-swap="outerHTML">
       <label class="compact-field tiny-field"><span>from</span><input type="text" name="start_index" value="1"></label>
@@ -90,40 +25,6 @@
       <button class="secondary-button" type="submit">Merge</button>
     </form>
     {% endif %}
-  </section>
-
-  {# Activity toast notification #}
-  <section class="workspace-card activity-ribbon" data-toast-autohide="4000">
-    <div class="activity-ribbon-group">
-      <span class="activity-ribbon-label">Activity</span>
-      {% for item in activity_items %}
-      <span class="activity-pill {% if item.accent == 'red' %}is-error{% endif %}">
-        <strong>{{ item.title }}</strong>
-        <span>{{ item.summary }}</span>
-      </span>
-      {% endfor %}
-      {% if flash_messages %}
-      {% for message in flash_messages %}
-      <span class="activity-pill {% if message.accent == 'red' %}is-error{% endif %}">
-        <strong>{{ message.title }}</strong>
-        <span>{{ message.summary|truncate(120) }}</span>
-      </span>
-      {% endfor %}
-      {% endif %}
-      {% if not activity_items and not flash_messages %}
-      <span class="activity-pill is-muted">No recent activity.</span>
-      {% endif %}
-      <span id="gloss-copied-indicator" class="gloss-copied-indicator" style="display:none;"></span>
-    </div>
-    {% if jobs %}
-    <div class="activity-ribbon-group">
-      <span class="activity-ribbon-label">Jobs</span>
-      {% for job in jobs %}
-      <span class="activity-pill"><strong>{{ job.label }}</strong><span>{{ job.status }} · {{ job.elapsed }}</span></span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </section>
 
   {% if not current_chunk_key %}
   <section class="workspace-card chapter-overview-card">
@@ -231,83 +132,13 @@
         </form>
       </article>
 
-      <article class="workspace-card chat-panel">
+      <article class="workspace-card prompt-engineering-panel editorial-panel">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Chat</p>
+            <p class="eyebrow">Prompt Engineering</p>
           </div>
           <div class="panel-summary">
-            <span class="inline-badge">{{ model_label }} model</span>
-          </div>
-        </div>
-
-        {% if has_committed_text and not has_draft_work and not state.chat_messages %}
-        <div class="chat-empty chat-bridge-empty">
-          <p>This chunk already has committed JSON text. Use <strong>Revise In Draft</strong> to copy that text into the draft workspace before chatting with the model.</p>
-          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
-            <input type="hidden" name="editor_action" value="seed-draft">
-            <button class="primary-button" type="submit">Revise In Draft</button>
-          </form>
-        </div>
-        {% else %}
-        {% if state.chat_messages %}
-        <div class="chat-log chat-log-large">
-          {% for item in state.chat_messages %}
-          <div class="chat-entry chat-{{ item.role }}">
-            <div class="chat-entry-head">
-              <strong>{{ "You" if item.role == "user" else "Model" }}</strong>
-              <button class="chat-delete-btn" type="button" title="Delete this message{% if item.role == 'user' %} and its response{% endif %}" data-msg-idx="{{ loop.index0 }}" data-msg-role="{{ item.role }}">&times;</button>
-            </div>
-            {% if item.role == "assistant" %}
-            <div class="chat-md">{{ item.content | markdown | safe }}</div>
-            {% else %}
-            <p>{{ item.content }}</p>
-            {% endif %}
-          </div>
-          {% endfor %}
-        </div>
-        {% else %}
-        <div class="chat-empty">
-          <p>Ask for a first draft, tighten wording, unify terminology, smooth rhythm, or revise the currently selected verse range.</p>
-        </div>
-        {% endif %}
-
-        <form class="compact-chat-form model-action-form" id="chat-stream-form"
-          data-stream-url="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/stream">
-          <div class="chat-context-picker">
-            <span class="chat-context-label">Include in chat</span>
-            <label class="compact-check">
-              <input type="checkbox" name="chat_context_sources" value="draft" {% if 'draft' in chat_context_sources %}checked{% endif %}>
-              <span>Draft</span>
-            </label>
-            <label class="compact-check">
-              <input type="checkbox" name="chat_context_sources" value="original" {% if 'original' in chat_context_sources %}checked{% endif %}>
-              <span>Original languages</span>
-            </label>
-          </div>
-          <textarea id="chat-message-input" name="message" rows="4" placeholder="Example: Tighten this draft, keep it literal, and preserve the title."></textarea>
-          <div class="chat-actions">
-            <div class="chat-send-group">
-              <button class="primary-button send-button" type="submit" data-loading-label="Streaming...">Send</button>
-              <button class="stop-button-square" type="button" id="chat-stop-button" style="display:none;" title="Stop streaming response" aria-label="Stop streaming response"></button>
-            </div>
-            <button class="secondary-button clear-button" type="button"
-              hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/session/clear"
-              hx-target="#workspace-shell" hx-swap="outerHTML"
-              hx-confirm="Clear all chat messages for this chunk?">Clear</button>
-          </div>
-        </form>
-        {% endif %}
-      </article>
-
-      <article class="workspace-card editorial-panel">
-        <div class="panel-head">
-          <div>
-            <p class="eyebrow">Editorial Assistant</p>
-          </div>
-          <div class="panel-summary">
-            <span class="inline-badge">No chat memory</span>
-            <span class="muted-line">Focused rewrites with editable prompts.</span>
+            <span class="inline-badge">Prompt builder</span>
           </div>
         </div>
 
@@ -320,55 +151,116 @@
           </div>
 
           <section class="editorial-tab-panel is-active" data-editorial-panel="run">
-            <div class="editorial-verse-loader">
-              <label class="compact-field tiny-field">
-                <span>Verse</span>
-                <input type="text" id="editorial-verse-input" placeholder="e.g. 3 or 3-5">
+            <div class="prompt-context-picker">
+              <span class="chat-context-label">Prompts</span>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-mode-grammar" value="grammar" data-prompt-mode>
+                <span>Grammar Only</span>
               </label>
-              <button class="secondary-button editorial-load-button" type="button" onclick="loadVersesIntoEditorial()">Load</button>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-mode-concise" value="concise" data-prompt-mode>
+                <span>Concise</span>
+              </label>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-mode-scholarly" value="scholarly" data-prompt-mode>
+                <span>Scholarly</span>
+              </label>
+              <button class="secondary-button" type="button" onclick="clearPromptEngineeringCombined()">Clear</button>
             </div>
 
-            <label class="compact-field">
-              <span>Input</span>
-              <textarea id="editorial-input" name="editorial_input" rows="4" placeholder="Paste a sentence, footnote, or justification prose here.">{{ editorial_input }}</textarea>
+            <div class="prompt-context-picker">
+              <span class="chat-context-label">Include</span>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-draft" value="draft" data-prompt-context disabled>
+                <span>Draft</span>
+              </label>
+              {% if selected_testament == 'old' %}
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-hebrew" value="hebrew" data-prompt-context>
+                <span>HEB</span>
+              </label>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-hebrew-en" value="hebrew-en" data-prompt-context>
+                <span>HEB-EN</span>
+              </label>
+              {% endif %}
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-greek" value="greek" data-prompt-context>
+                <span>GRK</span>
+              </label>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-greek-en" value="greek-en" data-prompt-context>
+                <span>GRK-EN</span>
+              </label>
+            </div>
+
+            <label class="compact-field prompt-preview-field">
+              <span>Combined prompt</span>
+              <textarea id="prompt-engineering-preview" rows="7" readonly data-auto-resize></textarea>
             </label>
 
-            <div class="editorial-actions">
-              <button class="secondary-button" type="submit" name="action" value="grammar" data-loading-label="Improving...">Grammar Only</button>
-              <button class="secondary-button" type="submit" name="action" value="concise" data-loading-label="Condensing...">Concise</button>
-              <button class="secondary-button" type="submit" name="action" value="scholarly" data-loading-label="Rephrasing...">Scholarly</button>
-              <button class="secondary-button" type="submit" name="action" value="clear">Clear</button>
+            <div class="prompt-engineering-actions">
+              <button class="copy-square-button" type="button" onclick="copyPromptEngineeringCombined(this)" aria-label="Copy combined prompt" title="Copy combined prompt">⧉</button>
+              <button class="primary-button" type="button" onclick="injectPromptEngineeringIntoChat()">Inject Into Chat</button>
             </div>
-
-            {% if editorial_output %}
-            <label class="compact-field editorial-output-field">
-              <span>{{ editorial_output_label or "Editorial output" }}</span>
-              <textarea id="editorial-output" rows="4" readonly>{{ editorial_output }}</textarea>
-            </label>
-            <div class="editorial-actions">
-              <button class="secondary-button" type="button" onclick="copyEditorialOutput()">Copy Output</button>
-            </div>
-            {% endif %}
           </section>
 
           <section class="editorial-tab-panel" data-editorial-panel="prompts" hidden>
             <div class="editorial-prompt-grid">
               <label class="compact-field">
                 <span>Grammar only</span>
-                <textarea id="editorial-prompt-grammar" name="editorial_prompt_grammar" rows="5">{{ editorial_prompts.grammar }}</textarea>
+                <textarea id="editorial-prompt-grammar" name="editorial_prompt_grammar" rows="5" data-auto-resize>{{ editorial_prompts.grammar }}</textarea>
               </label>
               <label class="compact-field">
                 <span>Concise rewrite</span>
-                <textarea id="editorial-prompt-concise" name="editorial_prompt_concise" rows="5">{{ editorial_prompts.concise }}</textarea>
+                <textarea id="editorial-prompt-concise" name="editorial_prompt_concise" rows="5" data-auto-resize>{{ editorial_prompts.concise }}</textarea>
               </label>
               <label class="compact-field">
                 <span>Scholarly rewrite</span>
-                <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="5">{{ editorial_prompts.scholarly }}</textarea>
+                <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="5" data-auto-resize>{{ editorial_prompts.scholarly }}</textarea>
               </label>
             </div>
           </section>
         </form>
       </article>
+
+      <article class="workspace-card chat-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Chat</p>
+          </div>
+          <div class="panel-summary chat-panel-summary">
+            <span class="inline-badge">{{ model_label }} model</span>
+            <button class="text-btn clear-history-btn" 
+                    hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/clear"
+                    hx-confirm="Are you sure you want to permanently clear the persistent workbench history for this chunk? This will also reset the chat interface."
+                    title="Delete all persistent messages in the workbench state">
+              Clear History
+            </button>
+          </div>
+        </div>
+
+        {% if has_committed_text and not has_draft_work and not state.chat_messages %}
+        <div class="chat-empty chat-bridge-empty">
+          <p>This chunk already has committed JSON text. Use <strong>Revise In Draft</strong> to copy that text into the draft workspace before chatting with the model.</p>
+          <form class="inline-form" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/mode" hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            <input type="hidden" name="editor_action" value="seed-draft">
+            <button class="primary-button" type="submit">Revise In Draft</button>
+          </form>
+        </div>
+        {% else %}
+        <script>
+        window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
+        </script>
+        <div class="chainlit-container">
+          <iframe src="/chat"></iframe>
+        </div>
+        {% endif %}
+      </article>
+
+      <script>
+      window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
+      </script>
 
       <article class="workspace-card support-panel">
         <div class="panel-head support-panel-head">
@@ -424,12 +316,8 @@
             hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
             <div class="support-format-bar">
               <span class="support-format-label">Format</span>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text">Italic</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'bold')" title="Bold selected text">Bold</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
-              <span class="support-format-hint">Applies to the focused field.</span>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text"><i>I</i></button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'bold')" title="Bold selected text"><strong>B</strong></button>
             </div>
             <div class="support-grid support-grid-justify">
               <label class="compact-field support-range-field">
@@ -472,13 +360,12 @@
         </details>
       </article>
 
-      <article class="workspace-card support-panel">
-        <div class="panel-head support-panel-head">
-          <div>
-            <p class="eyebrow">Footnotes</p>
-          </div>
-          <span class="inline-badge">{{ footnote_entries|length }} item{% if footnote_entries|length != 1 %}s{% endif %}</span>
-        </div>
+      <article class="workspace-card support-panel footnote-panel">
+        <details class="footnote-panel-collapse"{% if state.footnote_draft %} open{% endif %}>
+          <summary class="footnote-panel-summary">
+            <span class="eyebrow">Footnotes</span>
+            <span class="inline-badge">{{ footnote_entries|length }} item{% if footnote_entries|length != 1 %}s{% endif %}</span>
+          </summary>
 
         {% if footnote_entries %}
         <div class="support-entry-list">
@@ -515,12 +402,8 @@
             hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
             <div class="support-format-bar">
               <span class="support-format-label">Format</span>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text">Italic</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'bold')" title="Bold selected text">Bold</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sup')" title="Superscript selected text">Sup</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'sub')" title="Subscript selected text">Sub</button>
-              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'br')" title="Insert line break">Break</button>
-              <span class="support-format-hint">Applies to the focused field.</span>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text"><i>I</i></button>
+              <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'bold')" title="Bold selected text"><strong>B</strong></button>
             </div>
             <div class="support-grid support-grid-footnote">
               <label class="compact-field">
@@ -559,6 +442,7 @@
               <button class="primary-button" type="submit" name="action" value="stage">Stage</button>
             </div>
           </form>
+        </details>
         </details>
       </article>
     </section>
@@ -608,6 +492,7 @@ document.addEventListener('htmx:afterSettle', function() {
   initGlossTooltips();
   initSupportFormattingTools();
   initModelActionForms();
+  initPromptEngineering();
   initChatInput();
   initEditorSaveIndicator();
   // Scroll chat log to bottom after swap
@@ -634,6 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initGlossTooltips();
   initSupportFormattingTools();
   initModelActionForms();
+  initPromptEngineering();
   initChatInput();
   initEditorSaveIndicator();
   // Restore last copied indicator from session storage
@@ -645,6 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function autoResize(el) {
   if (!el || el.tagName.toLowerCase() !== 'textarea') return;
+  if (!el.matches('.verse-editor-textarea, [data-inline-format-field], [data-auto-resize]')) return;
 
   var setHeight = function(target) {
     target.style.height = 'auto';
@@ -691,16 +578,6 @@ function applySupportFormat(trigger, kind) {
     wrapOpen = '<strong>';
     wrapClose = '</strong>';
     placeholder = 'text';
-  } else if (kind === 'sup') {
-    wrapOpen = '<sup>';
-    wrapClose = '</sup>';
-    placeholder = '2';
-  } else if (kind === 'sub') {
-    wrapOpen = '<sub>';
-    wrapClose = '</sub>';
-    placeholder = '2';
-  } else if (kind === 'br') {
-    insertText = '<br>';
   } else {
     return;
   }
@@ -896,18 +773,21 @@ function applyStudyVerseFilter() {
       // Also show the block header if any verse is visible
       block.style.display = anyVisible ? '' : 'none';
     } else {
-      // Original language blocks: show if any verse in chunk range overlaps
+      // Original language blocks: show matching verse rows, hide the rest.
+      var verseRows = block.querySelectorAll('.translation-verse-row[data-verse]');
       var showBlock = false;
-      if (chunkStart > 0 && chunkEnd > 0) {
-        for (var v = chunkStart; v <= chunkEnd; v++) {
-          if (v in allowedSet) { showBlock = true; break; }
-        }
-      } else {
-        showBlock = true; // fallback: show all
+      for (var j = 0; j < verseRows.length; j++) {
+        var vr = verseRows[j];
+        var vNum = parseInt(vr.getAttribute('data-verse') || '0', 10);
+        var show = (vNum in allowedSet);
+        vr.style.display = show ? '' : 'none';
+        if (show) showBlock = true;
       }
       block.style.display = showBlock ? '' : 'none';
     }
   }
+  syncPromptEngineeringDraftAvailability();
+  updatePromptEngineeringPreview();
 }
 
 function clearStudyVerseFilter() {
@@ -924,6 +804,8 @@ function clearStudyVerseFilter() {
       verseRows[j].style.display = '';
     }
   }
+  syncPromptEngineeringDraftAvailability();
+  updatePromptEngineeringPreview();
 }
 
 function showJsonPreview() {
@@ -2117,6 +1999,11 @@ function switchEditorialTab(button, tabName) {
     panel.hidden = !active;
     panel.classList.toggle('is-active', active);
   });
+  requestAnimationFrame(function() {
+    form.querySelectorAll('textarea[data-auto-resize]').forEach(function(field) {
+      autoResize(field);
+    });
+  });
 }
 function currentEditorialPromptValues() {
   return {
@@ -2125,55 +2012,165 @@ function currentEditorialPromptValues() {
     scholarly: (document.getElementById('editorial-prompt-scholarly') || {}).value || ''
   };
 }
-function chunkEditorialEndpoint() {
-  return window.location.pathname.replace(/\/$/, '') + '/editorial/enhance-field';
+window.tttPromptEngineeringContexts = window.tttPromptEngineeringContexts || {};
+window.tttPromptEngineeringContextsFetched = false;
+window.tttPromptEngineeringPreviewSeq = 0;
+function promptEngineeringContextMeta() {
+  return [
+    { id: 'prompt-context-draft', key: 'draft', label: 'DRAFT', end: 'DRAFT' },
+    { id: 'prompt-context-hebrew', key: 'hebrew', label: 'HEBREW', end: 'HEBREW' },
+    { id: 'prompt-context-hebrew-en', key: 'hebrew-en', label: 'HEBREW LITERAL', end: 'HEBREW LITERAL' },
+    { id: 'prompt-context-greek', key: 'greek', label: 'GREEK', end: 'GREEK' },
+    { id: 'prompt-context-greek-en', key: 'greek-en', label: 'GREEK LITERAL', end: 'GREEK LITERAL' }
+  ];
 }
-function loadVersesIntoEditorial() {
-  var verseSpec = (document.getElementById('editorial-verse-input') || {}).value || '';
-  var editorialInput = document.getElementById('editorial-input');
-  if (!verseSpec || !editorialInput) return;
-  var form = document.getElementById('editor-form');
-  if (!form) return;
-
+function selectedPromptEngineeringContexts() {
+  return promptEngineeringContextMeta().filter(function(meta) {
+    var cb = document.getElementById(meta.id);
+    return cb && cb.checked;
+  });
+}
+function selectedPromptEngineeringModes() {
+  var labels = {
+    grammar: 'GRAMMAR ONLY PROMPT',
+    concise: 'CONCISE PROMPT',
+    scholarly: 'SCHOLARLY PROMPT'
+  };
+  return Array.from(document.querySelectorAll('[data-prompt-mode]:checked')).map(function(cb) {
+    return {
+      key: cb.value,
+      label: labels[cb.value] || 'PROMPT'
+    };
+  });
+}
+function currentStudyVerseFilterSpec() {
+  return (localStorage.getItem('studyVerseFilter') || '').trim();
+}
+function filteredDraftVerseNumbers() {
+  var spec = currentStudyVerseFilterSpec();
+  if (!spec) return [];
+  var parsed = parseVerseSpec(spec);
+  var seen = {};
   var verses = [];
-  var parts = verseSpec.split(/[\s,]+/);
-  for (var i = 0; i < parts.length; i++) {
-    var part = parts[i].trim();
-    if (!part) continue;
-    var rangeMatch = part.match(/^(\d+)\s*-\s*(\d+)$/);
-    if (rangeMatch) {
-      var start = parseInt(rangeMatch[1], 10);
-      var end = parseInt(rangeMatch[2], 10);
-      for (var v = start; v <= end; v++) { verses.push(v); }
-    } else {
-      var num = parseInt(part, 10);
-      if (!isNaN(num)) verses.push(num);
-    }
-  }
-  if (!verses.length) {
-    showWorkspaceIndicator('Invalid verse range.');
-    return;
-  }
-
-  var scrollLeft = window.scrollX || window.pageXOffset;
-  var scrollTop = window.scrollY || window.pageYOffset;
-  var texts = [];
-  verses.forEach(function(v) {
-    var ta = form.querySelector('textarea[name="verse_' + v + '"]');
-    if (ta && ta.value) {
-      texts.push(ta.value);
+  parsed.forEach(function(v) {
+    if (seen[v]) return;
+    var field = document.querySelector('.verse-editor-textarea[name="verse_' + v + '"]');
+    if (field) {
+      seen[v] = true;
+      verses.push(v);
     }
   });
-
-  window.scrollTo(scrollLeft, scrollTop);
-  if (!texts.length) {
-    showWorkspaceIndicator('No draft text found for ' + verseSpec + '.');
+  return verses;
+}
+function syncPromptEngineeringDraftAvailability() {
+  var draftCheck = document.getElementById('prompt-context-draft');
+  if (!draftCheck) return;
+  var verses = filteredDraftVerseNumbers();
+  var enabled = verses.length > 0;
+  draftCheck.disabled = !enabled;
+  draftCheck.title = enabled ? 'Use filtered draft verses: ' + verses.join(', ') : 'Apply a study verse filter first.';
+  if (!enabled) draftCheck.checked = false;
+}
+function currentDraftPromptText() {
+  var verses = filteredDraftVerseNumbers();
+  if (!verses.length) return '';
+  var lines = [];
+  verses.forEach(function(v) {
+    var field = document.querySelector('.verse-editor-textarea[name="verse_' + v + '"]');
+    if (field && (field.value || '').trim()) {
+      lines.push(v + '. ' + field.value.trim());
+    }
+  });
+  return lines.join('\n\n');
+}
+function promptEngineeringNeedsFetchedContexts() {
+  return selectedPromptEngineeringContexts().some(function(meta) {
+    return meta.key !== 'draft';
+  });
+}
+async function ensurePromptEngineeringContexts() {
+  if (window.tttPromptEngineeringContextsFetched || !promptEngineeringNeedsFetchedContexts()) return;
+  var endpoint = window.tttPromptEngineeringEndpoint;
+  if (!endpoint) return;
+  try {
+    var res = await fetch(endpoint);
+    if (res.ok) {
+      window.tttPromptEngineeringContexts = await res.json();
+      window.tttPromptEngineeringContextsFetched = true;
+    }
+  } catch (e) {
+    console.error('Failed to fetch prompt engineering context', e);
+  }
+}
+async function buildPromptEngineeringText() {
+  await ensurePromptEngineeringContexts();
+  var parts = [];
+  var prompts = currentEditorialPromptValues();
+  selectedPromptEngineeringModes().forEach(function(mode) {
+    var text = (prompts[mode.key] || '').trim();
+    if (text) {
+      parts.push(mode.label + ':\n' + text);
+    }
+  });
+  selectedPromptEngineeringContexts().forEach(function(meta) {
+    var text = '';
+    if (meta.key === 'draft') {
+      text = currentDraftPromptText();
+    } else {
+      text = (window.tttPromptEngineeringContexts || {})[meta.key] || '';
+    }
+    text = (text || '').trim();
+    if (text) {
+      parts.push(meta.label + ':\n' + text + '\n[End ' + meta.end + ']');
+    }
+  });
+  return parts.join('\n\n');
+}
+function updatePromptEngineeringPreview() {
+  var preview = document.getElementById('prompt-engineering-preview');
+  if (!preview) return;
+  var seq = ++window.tttPromptEngineeringPreviewSeq;
+  buildPromptEngineeringText().then(function(text) {
+    if (seq !== window.tttPromptEngineeringPreviewSeq) return;
+    preview.value = text;
+    preview.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+}
+function initPromptEngineering() {
+  var panel = document.querySelector('.prompt-engineering-panel');
+  if (!panel) return;
+  syncPromptEngineeringDraftAvailability();
+  if (panel.dataset.promptEngineeringBound === '1') {
+    updatePromptEngineeringPreview();
     return;
   }
-
-  editorialInput.value = texts.join(' ');
-  editorialInput.dispatchEvent(new Event('input', { bubbles: true }));
-  showWorkspaceIndicator('Loaded ' + verseSpec + ' into Editorial Assistant.');
+  panel.dataset.promptEngineeringBound = '1';
+  panel.querySelectorAll('[data-prompt-context], [data-prompt-mode], #editorial-prompt-grammar, #editorial-prompt-concise, #editorial-prompt-scholarly').forEach(function(el) {
+    el.addEventListener('input', updatePromptEngineeringPreview);
+    el.addEventListener('change', updatePromptEngineeringPreview);
+  });
+  document.querySelectorAll('.verse-editor-textarea').forEach(function(el) {
+    el.addEventListener('input', function() {
+      var draftCheck = document.getElementById('prompt-context-draft');
+      if (draftCheck && draftCheck.checked) updatePromptEngineeringPreview();
+    });
+  });
+  updatePromptEngineeringPreview();
+}
+function clearPromptEngineeringCombined() {
+  document.querySelectorAll('[data-prompt-context], [data-prompt-mode]').forEach(function(cb) {
+    cb.checked = false;
+  });
+  var preview = document.getElementById('prompt-engineering-preview');
+  if (preview) {
+    preview.value = '';
+    preview.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  syncPromptEngineeringDraftAvailability();
+  showWorkspaceIndicator('Combined prompt cleared.');
+}
+function chunkEditorialEndpoint() {
+  return window.location.pathname.replace(/\/$/, '') + '/editorial/enhance-field';
 }
 function runEnhancementRequest(payload) {
   var body = new FormData();
@@ -2237,13 +2234,53 @@ function enhanceSupportField(trigger, mode) {
     if (busy) busy.restore();
   });
 }
-function copyEditorialOutput() {
-  var field = document.getElementById('editorial-output');
-  if (!field) return;
-  navigator.clipboard.writeText(field.value || '').then(function() {
-    showWorkspaceIndicator('Editorial output copied.');
+function showCopySuccess(btn) {
+  if (!btn) return;
+  if (!btn.dataset.originalLabel) {
+    btn.dataset.originalLabel = btn.textContent;
+  }
+  btn.textContent = '✓';
+  btn.classList.add('copied');
+  setTimeout(function() {
+    btn.textContent = btn.dataset.originalLabel || '⧉';
+    btn.classList.remove('copied');
+  }, 1400);
+}
+function copyPromptEngineeringCombined(btn) {
+  buildPromptEngineeringText().then(function(text) {
+    return navigator.clipboard.writeText(text || '').then(function() {
+      showCopySuccess(btn);
+      showWorkspaceIndicator('Combined prompt copied.');
+    });
   }).catch(function() {
     showWorkspaceIndicator('Copy failed.');
+  });
+}
+function injectPromptEngineeringIntoChat() {
+  buildPromptEngineeringText().then(function(text) {
+    if (!text.trim()) {
+      showWorkspaceIndicator('Add input or select context before injecting.');
+      return;
+    }
+    var iframe = document.querySelector('.chainlit-container iframe');
+    if (!iframe) {
+      showWorkspaceIndicator('Open the chat panel before injecting.');
+      return;
+    }
+    var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+    var textarea = innerDoc ? innerDoc.querySelector('#chat-input') : null;
+    if (!textarea) {
+      showWorkspaceIndicator('Chat input is still loading.');
+      return;
+    }
+    var ownerWindow = textarea.ownerDocument && textarea.ownerDocument.defaultView ? textarea.ownerDocument.defaultView : window;
+    var nativeSetter = Object.getOwnPropertyDescriptor(ownerWindow.HTMLTextAreaElement.prototype, 'value').set;
+    nativeSetter.call(textarea, text);
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    textarea.focus();
+    showWorkspaceIndicator('Combined prompt injected into chat.');
+  }).catch(function() {
+    showWorkspaceIndicator('Inject failed.');
   });
 }
 function copyTranslationVerse(btn, text) {

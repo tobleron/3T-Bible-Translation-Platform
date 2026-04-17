@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -10,6 +11,7 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from chainlit.utils import mount_chainlit
 
 from ttt_core.utils import normalize_book_key
 from ttt_core.models import (
@@ -37,6 +39,7 @@ templates.env.filters["markdown"] = _render_markdown
 
 app = FastAPI(title="TTT Browser Workbench")
 app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
+mount_chainlit(app=app, target=str(PACKAGE_DIR / "chainlit_app.py"), path="/chat")
 _CONTROLLER: BrowserWorkbench | None = None
 
 
@@ -55,6 +58,8 @@ def resolve_book_name(wb: BrowserWorkbench, testament: str, raw_book: str) -> st
 
 
 def render_page(request: Request, template_name: str, context: dict, status_code: int = 200):
+    if "settings_config" not in context:
+        context["settings_config"] = controller().settings_payload()
     return templates.TemplateResponse(
         request,
         template_name,
@@ -530,222 +535,80 @@ async def merge_chapter_chunks(
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
     return render_workspace(request, wb, active_tab="study", partial=True)
-
-
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat", response_class=HTMLResponse)
-async def chat_turn(
+@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/prompt-text", response_class=JSONResponse)
+async def get_chat_prompt_text(
     request: Request,
     testament: str,
     book: str,
     chapter: int,
     chunk_key: str,
 ):
-    form = await request.form()
-    message = str(form.get("message", "")).strip()
     wb = controller()
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        apply_draft_form(wb, form)
-        wb.set_chat_context_sources(form.getlist("chat_context_sources"))
-        wb.activate_tab("draft")
-        if message:
-            wb.state.mode = "CHAT"
-            wb.browser_chat_turn(message)
-            wb.save_state()
-        return render_workspace(request, wb, active_tab="draft", partial=True)
-    except Exception as exc:
-        return render_workspace_error(request, wb, exc, active_tab="draft")
-
-
-async def _sse_chat_stream(
-    request: Request,
-    testament: str,
-    book: str,
-    chapter: int,
-    chunk_key: str,
-    message: str,
-    chat_context_sources: list[str],
-):
-    """SSE async generator that yields tokens as they arrive from the LLM."""
-    import sys, asyncio
-
-    print(f"[SSE SERVER] _sse_chat_stream STARTED for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
-    yield ": connected\n\n"
-    await asyncio.sleep(0)  # Force flush
-    print(f"[SSE SERVER] Ping sent", file=sys.stderr, flush=True)
-    wb = controller()
-    try:
-        book = resolve_book_name(wb, testament, book)
-        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        wb.set_chat_context_sources(chat_context_sources)
-        wb.state.mode = "CHAT"
-        print(f"[SSE SERVER] Chunk opened", file=sys.stderr, flush=True)
-
-        # Validate prerequisites (same as non-streaming)
-        if not wb.require_open_chunk():
-            yield "event: error\ndata: No chunk open\n\n"
-            return
-        if not wb.state.draft_chunk and not wb.state.chat_messages and wb.chunk_has_committed_text():
-            yield "event: error\ndata: Review text is committed. Use Revise in Draft before chatting.\n\n"
-            return
-        print(f"[SSE SERVER] Prerequisites passed", file=sys.stderr, flush=True)
-
-        prompt = wb.build_browser_chat_prompt(message)
-        wb.refresh_active_endpoint()
-        wb.state.chat_messages.append({"role": "user", "content": message})
-        wb.save_state()
-
-        messages = [{"role": "user", "content": prompt}]
-
-        full_reply: list[str] = []
-        error_occurred = False
-        token_count = 0
-        print(f"[SSE SERVER] About to call stream_generation(), endpoint={wb.llm.base_url}, prompt_len={len(prompt)}, message={message[:80]!r}", file=sys.stderr, flush=True)
-
-        # Run blocking stream_generation in a single background thread with a queue
-        from queue import Queue, Empty
-        token_queue = Queue()
         
-        import threading
-        stop_event = threading.Event()
+        blocks = wb.chunk_study_blocks()
+        payload = {}
+        def verse_line_text(lines: list[dict]) -> str:
+            formatted = []
+            for line in lines:
+                verse = line.get("verse")
+                text = str(line.get("text", "")).strip()
+                if verse and text:
+                    formatted.append(f"{verse}. {text}")
+            return "\n".join(formatted)
 
-        def _stream_worker():
-            try:
-                for token in wb.llm.stream_generation(
-                    "stream",
-                    messages,
-                    temperature=0.7,
-                    max_tokens=4096,
-                    stop_event=stop_event,
-                ):
-                    if stop_event.is_set():
-                        break
-                    token_queue.put(("token", token))
-                token_queue.put(("done", None))
-            except Exception as exc:
-                token_queue.put(("exception", str(exc)))
+        def clean_gloss_text(text: str) -> str:
+            text = re.sub(r"\s*;\s*;\s*", "; ", str(text or ""))
+            text = re.sub(r"\s*;\s*$", "", text)
+            return re.sub(r"\s+", " ", text).strip()
 
-        worker_thread = threading.Thread(target=_stream_worker, daemon=True)
-        worker_thread.start()
-
-        import time as _time
-        last_token_time = _time.monotonic()
-        max_wait = 600  # seconds
-        client_disconnected = False
-
-        while True:
-            if await request.is_disconnected():
-                stop_event.set()
-                client_disconnected = True
-                print(f"[SSE SERVER] Client disconnected; stopping stream for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
-                break
-            try:
-                # Poll the queue with a short timeout to allow keepalive pings
-                kind, value = token_queue.get(timeout=1)
+        for block in blocks:
+            kind = str(block.get("kind", "")).lower()
+            if kind in {"hebrew", "greek"}:
+                verse_lines = block.get("verse_lines") or []
+                payload[kind] = verse_line_text(verse_lines) or str(block.get("text", "")).strip()
                 
-                if kind == "done":
-                    break
-                if kind == "exception":
-                    error_occurred = True
-                    full_reply.append(f"[ERROR] {value}")
-                    break
-                
-                token = value
-                last_token_time = _time.monotonic()
+                gloss_lines = block.get("gloss_lines") or []
+                en_lines = []
+                for gloss_line in gloss_lines:
+                    verse = gloss_line.get("verse")
+                    words = [
+                        gloss
+                        for t in gloss_line.get("tokens", [])
+                        if (gloss := clean_gloss_text(t.get("gloss", "")))
+                    ]
+                    if words:
+                        en_lines.append(f"{verse}. {' '.join(words)}")
+                if en_lines:
+                    payload[f"{kind}-en"] = "\n".join(en_lines)
 
-                if token.startswith("[ERROR]"):
-                    error_occurred = True
-                    full_reply.append(token)
-                    print(f"[SSE SERVER] ERROR token received: {token[:120]}", file=sys.stderr, flush=True)
-                    break
-                    
-                full_reply.append(token)
-                token_count += 1
-                if token_count % 10 == 1 or token_count <= 5:
-                    print(f"[SSE SERVER] Token #{token_count}: {token[:60]!r} (Reply len: {len(''.join(full_reply))})", file=sys.stderr, flush=True)
-                
-                escaped = token.replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
-                yield f"data: {escaped}\n\n"
-                
-            except Empty:
-                if await request.is_disconnected():
-                    stop_event.set()
-                    client_disconnected = True
-                    print(f"[SSE SERVER] Client disconnected while waiting; stopping stream for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
-                    break
-                # No token received in 10s — send keepalive
-                elapsed = _time.monotonic() - last_token_time
-                if elapsed > max_wait:
-                    error_occurred = True
-                    full_reply.append(f"[ERROR] No token received in {max_wait}s — model may have hung up")
-                    print(f"[SSE SERVER] TIMEOUT after {max_wait}s", file=sys.stderr, flush=True)
-                    break
-                
-                yield f": waiting for LLM ({elapsed:.0f}s)\n\n"
-                if int(elapsed) % 60 == 0:
-                     print(f"[SSE SERVER] STILL WAITING after {elapsed:.0f}s for {book} {chapter}:{chunk_key}", file=sys.stderr, flush=True)
-                await asyncio.sleep(0)  # flush
-
-        reply = "".join(full_reply).strip()
-        if client_disconnected:
-            print(f"[SSE SERVER] Stream abandoned by client for {book} {chapter}:{chunk_key}. Partial length: {len(reply)}", file=sys.stderr, flush=True)
-            return
-        print(f"[SSE SERVER] Stream complete for {book} {chapter}:{chunk_key}. Tokens sent: {token_count}, Reply length: {len(reply)}, Error: {error_occurred}", file=sys.stderr, flush=True)
-        if error_occurred:
-            wb.history_entries.append(
-                {"title": "Chat error", "body": reply[:160], "accent": "red"}
-            )
-            wb.print_error(wb.explain_llm_failure(reply))
-            wb.save_state()
-            yield "event: error\ndata: " + reply[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
-            return
-
-        if reply:
-            wb.state.chat_messages.append({"role": "assistant", "content": reply})
-            wb.history_entries.append(
-                {"title": "Chat", "body": reply[:160], "accent": "blue"}
-            )
-        session = wb.current_chunk_session()
-        session["context_loaded"] = True
-        if not session.get("context_snapshot"):
-            session["context_snapshot"] = wb.session_context_snapshot()
-        wb.persist_current_chunk_session()
-        wb.prepare_browser_commit_state()
-        wb.save_state()
-
-        yield "event: done\ndata: [DONE]\n\n"
-        print(f"[SSE SERVER] Final [DONE] event sent", file=sys.stderr, flush=True)
+        return JSONResponse(payload)
     except Exception as exc:
-        print(f"[SSE SERVER] EXCEPTION in generator: {exc}", file=sys.stderr, flush=True)
-        yield "event: error\ndata: " + str(exc)[:200].replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + "\n\n"
+        return JSONResponse({"error": str(exc)}, status_code=500)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/stream")
-async def chat_turn_stream(
+
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/clear", response_class=HTMLResponse)
+async def clear_chat_history(
     request: Request,
     testament: str,
     book: str,
     chapter: int,
     chunk_key: str,
 ):
-    """SSE streaming endpoint for chat responses."""
-    form = await request.form()
-    message = str(form.get("message", "")).strip()
-    chat_context_sources = form.getlist("chat_context_sources")
-
-    if not message:
-        return JSONResponse({"error": "No message provided"}, status_code=400)
-
-    return StreamingResponse(
-        _sse_chat_stream(request, testament, book, chapter, chunk_key, message, chat_context_sources),
-        media_type="text/event-stream",
-        headers={
-            "Cache-Control": "no-cache",
-            "Connection": "keep-alive",
-            "X-Accel-Buffering": "no",
-        },
-    )
+    wb = controller()
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        wb.state.chat_messages = []
+        wb.save_state()
+        
+        # Return the updated panel summary via HTMX or just a success message
+        return HTMLResponse(content='<span class="inline-badge">History Cleared</span> <script>window.location.reload();</script>')
+    except Exception as exc:
+        return HTMLResponse(content=f"Error: {exc}", status_code=500)
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/finalize", response_class=HTMLResponse)
@@ -1141,7 +1004,7 @@ def settings_page(request: Request):
         request,
         "settings.html",
         {
-            "prompt_payload": wb.prompt_payload(),
+            "settings_config": wb.settings_payload(),
             "endpoint_url": wb.llm.base_url,
             "flash_messages": wb.flash_messages,
             "model_names": wb.safe_list_models(),
@@ -1156,25 +1019,32 @@ async def settings_save(request: Request):
     try:
         wb.save_web_settings(
             {
-                "base_url": str(form.get("base_url", wb.llm.base_url)).strip(),
-            }
-        )
-        wb.save_prompt_payload(
-            {
-                "chunk_schema": str(form.get("chunk_schema", "")),
-                "ot_chunk": str(form.get("ot_chunk", "")),
-                "nt_chunk": str(form.get("nt_chunk", "")),
-                "legacy_analysis": str(form.get("legacy_analysis", "")),
+                "endpoint_provider": str(form.get("endpoint_provider", "local")).strip(),
+                "local_base_url": str(form.get("local_base_url", wb.llm.base_url)).strip(),
+                "local_api_key": str(form.get("local_api_key", "")).strip(),
+                "cloud_base_url": str(form.get("cloud_base_url", "")).strip(),
+                "cloud_api_key": str(form.get("cloud_api_key", "")).strip(),
             }
         )
         wb.notify("Settings saved.")
     except Exception as exc:
         wb.print_error(str(exc))
+    if request.headers.get("hx-request"):
+        return render_page(
+            request,
+            "partials/settings_dialog_body.html",
+            {
+                "settings_config": wb.settings_payload(),
+                "endpoint_url": wb.llm.base_url,
+                "flash_messages": wb.flash_messages,
+                "model_names": wb.safe_list_models(),
+            },
+        )
     return render_page(
         request,
         "settings.html",
         {
-            "prompt_payload": wb.prompt_payload(),
+            "settings_config": wb.settings_payload(),
             "endpoint_url": wb.llm.base_url,
             "flash_messages": wb.flash_messages,
             "model_names": wb.safe_list_models(),
@@ -1193,7 +1063,7 @@ def settings_test_endpoint(request: Request):
         request,
         "settings.html",
         {
-            "prompt_payload": wb.prompt_payload(),
+            "settings_config": wb.settings_payload(),
             "endpoint_url": wb.llm.base_url,
             "flash_messages": wb.flash_messages,
             "model_names": models,
