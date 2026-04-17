@@ -108,6 +108,81 @@
   --danger: #bf616a;
 }
 
+:root[data-theme="tokyo-night"] {
+  --bg: #0f111a;
+  --bg-elev: #161925;
+  --bg-soft: #1f2335;
+  --line: #3b4261;
+  --line-strong: #565f89;
+  --text: #f2f5ff;
+  --muted: #a9b1d6;
+  --accent: #e0af68;
+  --accent-soft: #bb9af7;
+  --success: #9ece6a;
+  --warn: #e0af68;
+  --danger: #f7768e;
+}
+
+:root[data-theme="rose-pine"] {
+  --bg: #191724;
+  --bg-elev: #1f1d2e;
+  --bg-soft: #26233a;
+  --line: #403d52;
+  --line-strong: #6e6a86;
+  --text: #f5f0f7;
+  --muted: #c7c2d4;
+  --accent: #f6c177;
+  --accent-soft: #ebbcba;
+  --success: #9ccfd8;
+  --warn: #f6c177;
+  --danger: #eb6f92;
+}
+
+:root[data-theme="solarized-dark"] {
+  --bg: #002b36;
+  --bg-elev: #073642;
+  --bg-soft: #0b3d49;
+  --line: #586e75;
+  --line-strong: #839496;
+  --text: #fdf6e3;
+  --muted: #d6cfb8;
+  --accent: #b58900;
+  --accent-soft: #cb4b16;
+  --success: #859900;
+  --warn: #b58900;
+  --danger: #dc322f;
+}
+
+:root[data-theme="monokai"] {
+  --bg: #1b1d1e;
+  --bg-elev: #242629;
+  --bg-soft: #2d2f34;
+  --line: #4a4d52;
+  --line-strong: #6b6f78;
+  --text: #f8f8f2;
+  --muted: #cfcfc2;
+  --accent: #ffd866;
+  --accent-soft: #fc9867;
+  --success: #a6e22e;
+  --warn: #ffd866;
+  --danger: #ff6188;
+}
+
+:root[data-theme="ayu-dark"] {
+  --bg: #0f1419;
+  --bg-elev: #14191f;
+  --bg-soft: #1f252e;
+  --line: #3e4b59;
+  --line-strong: #5c6773;
+  --text: #f3f4f5;
+  --muted: #b8c0c9;
+  --accent: #ffb454;
+  --accent-soft: #e6b673;
+  --success: #aad94c;
+  --warn: #ffb454;
+  --danger: #f07178;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; background: radial-gradient(circle at top, color-mix(in srgb, var(--bg-soft) 78%, black 22%) 0%, var(--bg) 40%, color-mix(in srgb, var(--bg) 68%, black 32%) 100%); color: var(--text); font-family: var(--sans); }
 a { color: inherit; text-decoration: none; }
@@ -145,7 +220,9 @@ button, input, textarea { font: inherit; }
 .top-link-button {
   border: 0;
   background: transparent;
-  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
   cursor: pointer;
 }
 .workspace-session-controls {
@@ -178,7 +255,7 @@ button, input, textarea { font: inherit; }
   min-height: 1.9rem;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
 }
 #theme-select {
   border-radius: 5px;
@@ -626,6 +703,9 @@ button:active:not(:disabled) {
   cursor: pointer;
   font-weight: 600;
   min-height: 1.85rem;
+  padding: 0.32rem 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.3;
 }
 .tiny-danger-button:hover {
   background: var(--danger);
@@ -646,6 +726,9 @@ button:active:not(:disabled) {
   background: var(--success);
   color: #171310;
   min-height: 1.85rem;
+  padding: 0.32rem 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.3;
 }
 .commit-button:hover {
   filter: brightness(1.1);
@@ -659,6 +742,9 @@ button:active:not(:disabled) {
   background: transparent;
   color: var(--text);
   min-height: 1.85rem;
+  padding: 0.32rem 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.3;
 }
 .epub-button:hover:not(:disabled) {
   background: var(--accent);
