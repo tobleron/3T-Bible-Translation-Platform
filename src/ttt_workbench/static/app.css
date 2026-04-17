@@ -2081,11 +2081,16 @@ button:active:not(:disabled) {
   border-color: var(--success);
   color: var(--success);
 }
+.is-loading,
 .model-action-form button.is-loading,
 .mini-tool-button.is-loading,
 .support-enhance-button.is-loading {
   opacity: 0.8;
   cursor: wait;
+}
+button.is-loading,
+input[type="submit"].is-loading {
+  position: relative;
 }
 
 .support-panel {

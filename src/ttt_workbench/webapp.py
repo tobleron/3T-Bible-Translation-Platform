@@ -4,6 +4,7 @@ import os
 import re
 import subprocess
 import time
+import uuid
 from pathlib import Path
 
 import markdown as md_lib
@@ -22,6 +23,7 @@ from ttt_core.models import (
 )
 
 from .controller import BrowserWorkbench
+from .background_jobs import Job, JobRunner
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
@@ -41,6 +43,17 @@ app = FastAPI(title="TTT Browser Workbench")
 app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
 mount_chainlit(app=app, target=str(PACKAGE_DIR / "chainlit_app.py"), path="/chat")
 _CONTROLLER: BrowserWorkbench | None = None
+_JOB_RUNNER = JobRunner(max_workers=2)
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    started_at = time.perf_counter()
+    response = await call_next(request)
+    duration_ms = (time.perf_counter() - started_at) * 1000
+    response.headers["Server-Timing"] = f"app;dur={duration_ms:.1f}"
+    response.headers["X-TTT-Render-Ms"] = f"{duration_ms:.1f}"
+    return response
 
 
 def controller() -> BrowserWorkbench:
@@ -48,6 +61,20 @@ def controller() -> BrowserWorkbench:
     if _CONTROLLER is None:
         _CONTROLLER = BrowserWorkbench()
     return _CONTROLLER
+
+
+def _job_payload(job: Job) -> dict:
+    return {
+        "job_id": job.job_id,
+        "label": job.label,
+        "status": job.status.value,
+        "result": job.result,
+        "error": job.error,
+        "elapsed": job.elapsed,
+        "elapsed_display": job.elapsed_display,
+        "started_at": job.started_at,
+        "finished_at": job.finished_at,
+    }
 
 
 def resolve_book_name(wb: BrowserWorkbench, testament: str, raw_book: str) -> str:
@@ -1407,6 +1434,54 @@ def epub_generate_download(request: Request):
     if request.headers.get("x-requested-with", "").lower() == "fetch":
         return JSONResponse({"ok": False, "message": message}, status_code=500)
     return RedirectResponse(url="/epub", status_code=302)
+
+
+@app.post("/epub/jobs/generate", response_class=JSONResponse)
+def epub_generate_job():
+    """Start EPUB generation as a background job for responsive UI clients."""
+    wb = controller()
+    work_dir = wb.paths.repo_root
+    cmd = [
+        str(wb.preferred_python()),
+        str(wb.paths.repo_root / "src" / "ttt_epub" / "generate_epub.py"),
+        "--md",
+        "--txt",
+    ]
+
+    def target() -> dict:
+        started_at = time.monotonic()
+        result = subprocess.run(cmd, cwd=work_dir, capture_output=True, text=True, check=False)
+        recent = wb.recent_epubs()
+        latest = recent[0] if recent else None
+        return {
+            "ok": result.returncode == 0,
+            "command": " ".join(cmd),
+            "stdout": (result.stdout or "").strip(),
+            "stderr": (result.stderr or "").strip(),
+            "exit_code": result.returncode,
+            "duration": time.monotonic() - started_at,
+            "latest_epub": str(getattr(latest, "path", latest)) if latest else None,
+        }
+
+    job = _JOB_RUNNER.submit(Job(job_id=uuid.uuid4().hex, label="epub-generate", target=target))
+    return JSONResponse({"ok": True, "job": _job_payload(job)}, status_code=202)
+
+
+@app.get("/jobs/{job_id}", response_class=JSONResponse)
+def job_status(job_id: str):
+    job = _JOB_RUNNER.get(job_id)
+    if job is None:
+        return JSONResponse({"ok": False, "message": "Job not found."}, status_code=404)
+    return JSONResponse({"ok": True, "job": _job_payload(job)})
+
+
+@app.get("/jobs", response_class=JSONResponse)
+def jobs_index():
+    return {
+        "ok": True,
+        "active": [_job_payload(job) for job in _JOB_RUNNER.active_jobs()],
+        "recent": [_job_payload(job) for job in _JOB_RUNNER.recent_jobs()],
+    }
 
 
 @app.get("/healthz")

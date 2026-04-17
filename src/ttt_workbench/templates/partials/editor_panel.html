@@ -65,19 +65,22 @@
       {% if is_editing %}
         <button class="primary-button" type="button" 
                 hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/lock" 
-                hx-target="#editor-panel" hx-swap="outerHTML" hx-include="#editor-form">Lock Draft</button>
+                hx-target="#editor-panel" hx-swap="outerHTML" hx-include="#editor-form"
+                hx-sync="#editor-form:drop" hx-disabled-elt="this" data-loading-label="Locking...">Lock Draft</button>
       {% elif is_locked %}
         <button class="secondary-button" type="button" 
                 hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/unlock" 
-                hx-target="#editor-panel" hx-swap="outerHTML">🔓 Unlock</button>
+                hx-target="#editor-panel" hx-swap="outerHTML"
+                hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="Unlocking...">🔓 Unlock</button>
         <button class="commit-button" type="button" 
                 hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/commit/apply" 
                 hx-target="#editor-panel" hx-swap="outerHTML" hx-include="#editor-form"
-                data-loading-label="Committing...">Commit</button>
+                hx-sync="#editor-form:drop" hx-disabled-elt="this" data-loading-label="Committing...">Commit</button>
       {% elif is_committed %}
         <button class="secondary-button" type="button" 
                 hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editor/revise" 
-                hx-target="#editor-panel" hx-swap="outerHTML">Start Revision</button>
+                hx-target="#editor-panel" hx-swap="outerHTML"
+                hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="Preparing...">Start Revision</button>
         <button class="commit-button success" type="button" disabled>Committed</button>
         <button class="epub-button" type="button" onclick="generateEpubDownload(this)">Generate EPUB</button>
       {% endif %}

@@ -8,6 +8,8 @@ def test_home_loads() -> None:
         response = client.get("/")
         assert response.status_code == 200
         assert "Tell The Truth Bible Translation Platform" in response.text
+        assert response.headers.get("server-timing", "").startswith("app;dur=")
+        assert response.headers.get("x-ttt-render-ms")
 
 
 def test_settings_loads() -> None:
@@ -15,3 +17,10 @@ def test_settings_loads() -> None:
         response = client.get("/settings")
         assert response.status_code == 200
         assert "Endpoint Configuration" in response.text
+
+
+def test_static_interaction_layer_is_served() -> None:
+    with TestClient(app) as client:
+        response = client.get("/static/js/app_interactions.js")
+        assert response.status_code == 200
+        assert "TTTInteractions" in response.text

@@ -19,7 +19,8 @@
             hx-trigger="change"
             hx-target="#context-panel"
             hx-swap="outerHTML"
-            hx-include="closest form">
+            hx-include="closest form"
+            hx-sync="closest form:replace">
           <span>{{ option.label }}</span>
         </label>
         {% endif %}

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-17T22:43:57.859812+00:00",
+  "generated_at": "2026-04-17T22:59:21.083849+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
-    "files_scanned": 131,
+    "files_scanned": 133,
     "tasks_generated": 12,
     "highest_risk": 71.83
   },
@@ -81,20 +81,26 @@
       "path": "src/ttt_workbench/webapp.py",
       "role": "browser-route",
       "language": "python",
-      "loc": 1264,
-      "risk": 27.09,
+      "loc": 1326,
+      "risk": 28.07,
       "preferred_loc": 760,
       "hard_loc": 1300,
-      "branches": 182,
+      "branches": 187,
       "max_nesting": 6,
-      "mutable_state": 249,
-      "imports": 24,
-      "callables": 63,
+      "mutable_state": 264,
+      "imports": 27,
+      "callables": 69,
       "findings": [
         {
           "severity": "medium",
           "kind": "size",
-          "message": "1264 LOC exceeds preferred 760 LOC for role `browser-route`.",
+          "message": "1326 LOC exceeds preferred 760 LOC for role `browser-route`.",
+          "line": null
+        },
+        {
+          "severity": "high",
+          "kind": "size",
+          "message": "1326 LOC exceeds hard ceiling 1300 LOC for role `browser-route`.",
           "line": null
         }
       ]
@@ -125,8 +131,8 @@
       "path": "src/ttt_workbench/static/app.css",
       "role": "style",
       "language": "css",
-      "loc": 2452,
-      "risk": 2.72,
+      "loc": 2457,
+      "risk": 2.73,
       "preferred_loc": 900,
       "hard_loc": 1400,
       "branches": 0,
@@ -138,13 +144,13 @@
         {
           "severity": "medium",
           "kind": "size",
-          "message": "2452 LOC exceeds preferred 900 LOC for role `style`.",
+          "message": "2457 LOC exceeds preferred 900 LOC for role `style`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "2452 LOC exceeds hard ceiling 1400 LOC for role `style`.",
+          "message": "2457 LOC exceeds hard ceiling 1400 LOC for role `style`.",
           "line": null
         }
       ]
@@ -914,15 +920,15 @@
       "path": "tests/test_webapp_fake_mode.py",
       "role": "test",
       "language": "python",
-      "loc": 210,
-      "risk": 3.97,
+      "loc": 237,
+      "risk": 4.36,
       "preferred_loc": 520,
       "hard_loc": 900,
-      "branches": 12,
+      "branches": 15,
       "max_nesting": 2,
-      "mutable_state": 20,
+      "mutable_state": 25,
       "imports": 9,
-      "callables": 10,
+      "callables": 11,
       "findings": []
     },
     {
@@ -1199,15 +1205,15 @@
       "path": "tests/test_webapp_smoke.py",
       "role": "test",
       "language": "python",
-      "loc": 12,
-      "risk": 1.85,
+      "loc": 19,
+      "risk": 1.98,
       "preferred_loc": 520,
       "hard_loc": 900,
-      "branches": 2,
+      "branches": 3,
       "max_nesting": 1,
-      "mutable_state": 2,
+      "mutable_state": 3,
       "imports": 2,
-      "callables": 2,
+      "callables": 3,
       "findings": []
     },
     {
@@ -1886,10 +1892,40 @@
       "findings": []
     },
     {
+      "path": "src/ttt_workbench/static/css/README.md",
+      "role": "config",
+      "language": "markdown",
+      "loc": 12,
+      "risk": 1.0,
+      "preferred_loc": 260,
+      "hard_loc": 500,
+      "branches": 0,
+      "max_nesting": 0,
+      "mutable_state": 0,
+      "imports": 0,
+      "callables": 0,
+      "findings": []
+    },
+    {
+      "path": "src/ttt_workbench/static/js/app_interactions.js",
+      "role": "general-python",
+      "language": "text",
+      "loc": 156,
+      "risk": 1.0,
+      "preferred_loc": 430,
+      "hard_loc": 760,
+      "branches": 0,
+      "max_nesting": 0,
+      "mutable_state": 0,
+      "imports": 0,
+      "callables": 0,
+      "findings": []
+    },
+    {
       "path": "src/ttt_workbench/templates/base.html",
       "role": "template",
       "language": "template",
-      "loc": 81,
+      "loc": 82,
       "risk": 1.0,
       "preferred_loc": 260,
       "hard_loc": 420,
@@ -1934,7 +1970,7 @@
       "path": "src/ttt_workbench/templates/partials/chat_panel.html",
       "role": "template",
       "language": "template",
-      "loc": 55,
+      "loc": 57,
       "risk": 1.0,
       "preferred_loc": 260,
       "hard_loc": 420,
@@ -1949,7 +1985,7 @@
       "path": "src/ttt_workbench/templates/partials/context_panel.html",
       "role": "template",
       "language": "template",
-      "loc": 134,
+      "loc": 135,
       "risk": 1.0,
       "preferred_loc": 260,
       "hard_loc": 420,
@@ -1964,7 +2000,7 @@
       "path": "src/ttt_workbench/templates/partials/editor_panel.html",
       "role": "template",
       "language": "template",
-      "loc": 79,
+      "loc": 82,
       "risk": 1.0,
       "preferred_loc": 260,
       "hard_loc": 420,

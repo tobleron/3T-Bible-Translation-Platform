@@ -2,21 +2,22 @@
 
 ## Why This Exists
 
-`src/ttt_workbench/webapp.py` is a `browser-route` file with an estimated risk score of `27.09`.
+`src/ttt_workbench/webapp.py` is a `browser-route` file with an estimated risk score of `28.07`.
 
 ## Metrics
 
-- LOC: `1264` (preferred `760`, hard ceiling `1300`)
+- LOC: `1326` (preferred `760`, hard ceiling `1300`)
 - Language: `python`
-- Branches: `182`
+- Branches: `187`
 - Max nesting: `6`
-- Mutable assignments: `249`
-- Imports: `24`
-- Callables/classes: `63`
+- Mutable assignments: `264`
+- Imports: `27`
+- Callables/classes: `69`
 
 ## Findings
 
-- `medium` `size`: 1264 LOC exceeds preferred 760 LOC for role `browser-route`.
+- `medium` `size`: 1326 LOC exceeds preferred 760 LOC for role `browser-route`.
+- `high` `size`: 1326 LOC exceeds hard ceiling 1300 LOC for role `browser-route`.
 
 ## Suggested Handling
 

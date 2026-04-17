@@ -16,7 +16,7 @@
 
 <div class="compact-workspace">
     {% if chapter_chunks|length >= 2 %}
-    <form class="merge-bar" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge" hx-target="#workspace-shell" hx-swap="outerHTML">
+    <form class="merge-bar" hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/chunks/merge" hx-target="#workspace-shell" hx-swap="outerHTML" hx-sync="this:drop">
       <label class="compact-field tiny-field"><span>from</span><input type="text" name="start_index" value="1"></label>
       <label class="compact-field tiny-field"><span>to</span><input type="text" name="end_index" value="2"></label>
       <label class="compact-field"><span>Title</span><textarea name="title" rows="1" placeholder="Merged title"></textarea></label>
@@ -65,7 +65,7 @@
 
         <form class="editorial-form model-action-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editorial"
-          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+          hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
           <div class="editorial-tab-bar">
             <button class="tab-button is-active" type="button" data-editorial-tab="run" onclick="switchEditorialTab(this, 'run')">Run</button>
             <button class="tab-button" type="button" data-editorial-tab="prompts" onclick="switchEditorialTab(this, 'prompts')">Prompts</button>
@@ -163,7 +163,7 @@
       window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
       </script>
 
-      <article class="workspace-card support-panel">
+      <article id="justification-panel" class="workspace-card support-panel">
         <div class="panel-head support-panel-head">
           <div>
             <p class="eyebrow">Justifications</p>
@@ -193,7 +193,7 @@
               <div class="support-richtext">{{ item.reason_html|safe }}</div>
               <form class="inline-form support-entry-actions"
                 hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/justify"
-                hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+                hx-target="#justification-panel" hx-select="#justification-panel" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
                 <input type="hidden" name="entry_id" value="{{ item.id }}">
                 <input type="hidden" name="justify_range" value="{{ item.verse_spec }}">
                 <input type="hidden" name="source_term" value="{{ item.source_term }}">
@@ -214,7 +214,7 @@
           <summary>{{ "Continue justification" if state.justify_draft else "Add justification" }}</summary>
           <form class="support-form"
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/justify"
-            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            hx-target="#justification-panel" hx-select="#justification-panel" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
             <div class="support-format-bar">
               <span class="support-format-label">Format</span>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text"><i>I</i></button>
@@ -261,7 +261,7 @@
         </details>
       </article>
 
-      <article class="workspace-card support-panel footnote-panel">
+      <article id="footnote-panel" class="workspace-card support-panel footnote-panel">
         <details class="footnote-panel-collapse"{% if state.footnote_draft %} open{% endif %}>
           <summary class="footnote-panel-summary">
             <span class="eyebrow">Footnotes</span>
@@ -281,7 +281,7 @@
               <div class="support-richtext">{{ item.content_html|safe }}</div>
               <form class="inline-form support-entry-actions"
                 hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/footnotes"
-                hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+                hx-target="#footnote-panel" hx-select="#footnote-panel" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
                 <input type="hidden" name="footnote_verse" value="{{ item.verse }}">
                 <input type="hidden" name="footnote_letter" value="{{ item.letter }}">
                 <input type="hidden" name="footnote_content" value="{{ item.content }}">
@@ -300,7 +300,7 @@
           <summary>{{ "Continue footnote" if state.footnote_draft else "Add footnote" }}</summary>
           <form class="support-form"
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/footnotes"
-            hx-target="#workspace-shell" hx-swap="outerHTML" hx-include="#editor-form">
+            hx-target="#footnote-panel" hx-select="#footnote-panel" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
             <div class="support-format-bar">
               <span class="support-format-label">Format</span>
               <button class="support-format-button" type="button" onmousedown="event.preventDefault()" onclick="applySupportFormat(this, 'italic')" title="Italicize selected text"><i>I</i></button>

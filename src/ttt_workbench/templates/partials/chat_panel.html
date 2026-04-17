@@ -14,7 +14,7 @@
   <div class="chat-toolbar">
     <form class="chat-model-form"
       hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/model"
-      hx-target="#chat-panel" hx-swap="outerHTML">
+      hx-target="#chat-panel" hx-swap="outerHTML" hx-sync="this:replace">
       <label class="compact-field chat-endpoint-select">
         <span>Endpoint</span>
         <select name="endpoint_provider" onchange="this.form.requestSubmit()">
@@ -31,7 +31,7 @@
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/switch"
           hx-trigger="change"
           hx-target="#chat-panel"
-          hx-swap="outerHTML">
+          hx-swap="outerHTML" hx-sync="this:replace">
           {% for session in current_chat_sessions %}
           <option value="{{ session.id }}" {% if session.is_active %}selected{% endif %}>{{ session.title }} · {{ session.message_count }}</option>
           {% endfor %}
@@ -41,6 +41,7 @@
     <button class="icon-button chat-new-button" type="button"
       hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/new"
       hx-target="#chat-panel" hx-swap="outerHTML"
+      hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="New"
       title="New chat session" aria-label="New chat session">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M5 3.5h9.25a1 1 0 1 1 0 2H6.5v12h12v-7.75a1 1 0 1 1 2 0V18.5a1 1 0 0 1-1 1h-14a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z"/>
@@ -49,7 +50,8 @@
     </button>
     <button class="tiny-danger-button compact-danger-button" type="button"
       hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/delete"
-      hx-target="#chat-panel" hx-swap="outerHTML">Delete</button>
+      hx-target="#chat-panel" hx-swap="outerHTML"
+      hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="Deleting...">Delete</button>
   </div>
 
   <div class="chainlit-container">

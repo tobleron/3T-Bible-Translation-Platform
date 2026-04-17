@@ -47,6 +47,36 @@ def test_home_page_does_not_emit_no_open_chunk_errors(monkeypatch) -> None:
     reset_controller()
 
 
+def test_epub_background_job_endpoint_reports_status(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    monkeypatch.setattr(
+        appmod.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=0, stdout="EPUB ok\n", stderr=""),
+    )
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post("/epub/jobs/generate")
+        try:
+            assert response.status_code == 202
+            payload = response.json()
+            assert payload["ok"] is True
+            job_id = payload["job"]["job_id"]
+        finally:
+            response.close()
+
+        status_response = client.get(f"/jobs/{job_id}")
+        try:
+            assert status_response.status_code == 200
+            payload = status_response.json()
+            assert payload["ok"] is True
+            assert payload["job"]["label"] == "epub-generate"
+            assert payload["job"]["status"] in {"running", "completed"}
+        finally:
+            status_response.close()
+    reset_controller()
+
+
 def test_chapter_route_lists_saved_chunks_with_compact_navigator(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
     reset_controller()
