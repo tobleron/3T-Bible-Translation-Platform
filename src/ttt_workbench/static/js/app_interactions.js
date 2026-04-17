@@ -26,7 +26,7 @@
     }
     var indicator = document.getElementById('workspaceToast');
     if (!indicator) return;
-    indicator.className = 'workspace-toast is-visible' + (tone ? ' is-' + tone : '');
+    indicator.className = 'workspace-toast is-visible is-' + (tone || 'info');
     indicator.textContent = message;
     clearTimeout(toast._timer);
     toast._timer = setTimeout(function () {

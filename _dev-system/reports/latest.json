@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-17T23:27:56.849712+00:00",
+  "generated_at": "2026-04-17T23:29:37.132743+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
     "files_scanned": 139,
@@ -53,8 +53,8 @@
       "path": "src/ttt_workbench/templates/partials/workspace_shell.html",
       "role": "template",
       "language": "template",
-      "loc": 1993,
-      "risk": 7.67,
+      "loc": 2004,
+      "risk": 7.71,
       "preferred_loc": 260,
       "hard_loc": 420,
       "branches": 0,
@@ -66,13 +66,13 @@
         {
           "severity": "medium",
           "kind": "size",
-          "message": "1993 LOC exceeds preferred 260 LOC for role `template`.",
+          "message": "2004 LOC exceeds preferred 260 LOC for role `template`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "1993 LOC exceeds hard ceiling 420 LOC for role `template`.",
+          "message": "2004 LOC exceeds hard ceiling 420 LOC for role `template`.",
           "line": null
         }
       ]
@@ -131,8 +131,8 @@
       "path": "src/ttt_workbench/static/app.css",
       "role": "style",
       "language": "css",
-      "loc": 2478,
-      "risk": 2.75,
+      "loc": 2484,
+      "risk": 2.76,
       "preferred_loc": 900,
       "hard_loc": 1400,
       "branches": 0,
@@ -144,13 +144,13 @@
         {
           "severity": "medium",
           "kind": "size",
-          "message": "2478 LOC exceeds preferred 900 LOC for role `style`.",
+          "message": "2484 LOC exceeds preferred 900 LOC for role `style`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "2478 LOC exceeds hard ceiling 1400 LOC for role `style`.",
+          "message": "2484 LOC exceeds hard ceiling 1400 LOC for role `style`.",
           "line": null
         }
       ]
@@ -1220,13 +1220,13 @@
       "path": "tests/test_webapp_smoke.py",
       "role": "test",
       "language": "python",
-      "loc": 28,
-      "risk": 2.05,
+      "loc": 32,
+      "risk": 2.08,
       "preferred_loc": 520,
       "hard_loc": 900,
       "branches": 3,
       "max_nesting": 1,
-      "mutable_state": 6,
+      "mutable_state": 7,
       "imports": 2,
       "callables": 3,
       "findings": []

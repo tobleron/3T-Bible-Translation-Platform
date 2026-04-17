@@ -2,11 +2,11 @@
 
 ## Why This Exists
 
-`src/ttt_workbench/templates/partials/workspace_shell.html` is a `template` file with an estimated risk score of `7.67`.
+`src/ttt_workbench/templates/partials/workspace_shell.html` is a `template` file with an estimated risk score of `7.71`.
 
 ## Metrics
 
-- LOC: `1993` (preferred `260`, hard ceiling `420`)
+- LOC: `2004` (preferred `260`, hard ceiling `420`)
 - Language: `template`
 - Branches: `0`
 - Max nesting: `0`
@@ -16,8 +16,8 @@
 
 ## Findings
 
-- `medium` `size`: 1993 LOC exceeds preferred 260 LOC for role `template`.
-- `high` `size`: 1993 LOC exceeds hard ceiling 420 LOC for role `template`.
+- `medium` `size`: 2004 LOC exceeds preferred 260 LOC for role `template`.
+- `high` `size`: 2004 LOC exceeds hard ceiling 420 LOC for role `template`.
 
 ## Suggested Handling
 

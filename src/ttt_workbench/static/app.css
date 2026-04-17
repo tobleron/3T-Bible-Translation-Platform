@@ -1210,6 +1210,12 @@ button:active:not(:disabled) {
 .workspace-toast.is-success {
   border-color: var(--success);
 }
+.workspace-toast.is-info {
+  border-color: var(--accent-soft);
+}
+.workspace-toast.is-warning {
+  border-color: var(--warn);
+}
 .workspace-toast.is-error {
   border-color: var(--danger);
 }

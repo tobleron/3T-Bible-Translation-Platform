@@ -24,6 +24,7 @@ def test_static_interaction_layer_is_served() -> None:
         response = client.get("/static/js/app_interactions.js")
         assert response.status_code == 200
         assert "TTTInteractions" in response.text
+        assert "is-' + (tone || 'info')" in response.text
 
         bootstrap_response = client.get("/static/js/workspace_bootstrap.js")
         assert bootstrap_response.status_code == 200
@@ -36,3 +37,7 @@ def test_static_interaction_layer_is_served() -> None:
         lazy_response = client.get("/static/js/lazy_panels.js")
         assert lazy_response.status_code == 200
         assert "TTTLazyPanels" in lazy_response.text
+
+        css_response = client.get("/static/app.css")
+        assert css_response.status_code == 200
+        assert ".workspace-toast.is-info" in css_response.text

@@ -726,9 +726,13 @@ function showGlossCopiedIndicator(text) {
   showWorkspaceIndicator('Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : ''));
 }
 function showWorkspaceIndicator(message, tone) {
+  if (window.TTTInteractions && window.TTTInteractions.toast) {
+    window.TTTInteractions.toast(message, tone || 'info');
+    return;
+  }
   var indicator = document.getElementById('workspaceToast');
   if (!indicator) return;
-  indicator.className = 'workspace-toast is-visible' + (tone ? ' is-' + tone : '');
+  indicator.className = 'workspace-toast is-visible is-' + (tone || 'info');
   indicator.textContent = message;
   clearTimeout(showWorkspaceIndicator._timer);
   showWorkspaceIndicator._timer = setTimeout(function() {
@@ -741,11 +745,13 @@ function setModelButtonBusy(button, loadingLabel) {
     button.dataset.originalLabel = button.textContent;
   }
   button.disabled = true;
+  button.setAttribute('aria-busy', 'true');
   button.classList.add('is-loading');
   button.textContent = loadingLabel || 'Working...';
   return {
     restore: function() {
       button.disabled = false;
+      button.removeAttribute('aria-busy');
       button.classList.remove('is-loading');
       button.textContent = button.dataset.originalLabel || button.textContent;
     }
@@ -2045,7 +2051,10 @@ function generateEpubDownload(btn) {
   var originalLabel = btn.dataset.label || btn.textContent;
   btn.dataset.label = originalLabel;
   btn.disabled = true;
+  btn.setAttribute('aria-busy', 'true');
+  btn.classList.add('is-loading');
   btn.textContent = 'Generating...';
+  showWorkspaceIndicator('Generating EPUB...', 'info');
 
   fetch('/epub/generate-download', {
     method: 'POST',
@@ -2081,13 +2090,15 @@ function generateEpubDownload(btn) {
       setTimeout(function() {
         window.URL.revokeObjectURL(url);
       }, 1000);
-      showWorkspaceIndicator('Downloaded ' + filename + '.');
+      showWorkspaceIndicator('Downloaded ' + filename + '.', 'success');
     })
     .catch(function(err) {
-      showWorkspaceIndicator(err.message || 'EPUB generation failed.');
+      showWorkspaceIndicator(err.message || 'EPUB generation failed.', 'error');
     })
     .finally(function() {
       btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      btn.classList.remove('is-loading');
       btn.textContent = originalLabel;
     });
 }
