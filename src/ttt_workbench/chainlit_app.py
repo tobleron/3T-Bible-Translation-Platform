@@ -6,6 +6,10 @@ def _thinking_block(content: str) -> str:
     return f"<details><summary>Thinking..</summary>\n\n{content.strip()}\n\n</details>"
 
 
+def _streaming_thinking_block(content: str) -> str:
+    return f"<details open><summary>Thinking..</summary>\n\n{content.strip()}\n\n</details>"
+
+
 def _reply_display_parts(text: str):
     token = text or ""
     while token:
@@ -39,9 +43,14 @@ async def _stream_model_reply(wb, messages):
     async def ensure_thinking_msg():
         nonlocal thinking_msg
         if thinking_msg is None:
-            thinking_msg = cl.Message(content="Thinking..")
+            thinking_msg = cl.Message(content=_streaming_thinking_block(""))
             await thinking_msg.send()
         return thinking_msg
+
+    async def update_thinking_msg():
+        msg = await ensure_thinking_msg()
+        msg.content = _streaming_thinking_block("".join(thinking_tokens))
+        await msg.update()
 
     async def finalize_thinking_msg():
         nonlocal thinking_msg
@@ -71,8 +80,7 @@ async def _stream_model_reply(wb, messages):
                     before, marker, after = token.partition("</think>")
                     if before:
                         thinking_tokens.append(before)
-                        msg = await ensure_thinking_msg()
-                        await msg.stream_token(before)
+                        await update_thinking_msg()
                     if marker:
                         is_thinking = False
                         await finalize_thinking_msg()

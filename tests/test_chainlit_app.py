@@ -23,6 +23,14 @@ def test_thinking_block_label_is_not_chainlit_used_step() -> None:
     )
 
 
+def test_streaming_thinking_block_is_open_details() -> None:
+    assert chainlit_app._streaming_thinking_block("check source") == (
+        "<details open><summary>Thinking..</summary>\n\n"
+        "check source\n\n"
+        "</details>"
+    )
+
+
 def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
     events: list[tuple[str, str]] = []
 
@@ -64,9 +72,15 @@ def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
     assert reply == "<think>checking source</think>```text\nVerse output.\n```"
     assert msg is not None
     assert events[:4] == [
-        ("message.send", "Thinking.."),
-        ("message.token", "checking"),
-        ("message.token", " source"),
+        ("message.send", "<details open><summary>Thinking..</summary>\n\n\n\n</details>"),
+        (
+            "message.update",
+            "<details open><summary>Thinking..</summary>\n\nchecking\n\n</details>",
+        ),
+        (
+            "message.update",
+            "<details open><summary>Thinking..</summary>\n\nchecking source\n\n</details>",
+        ),
         (
             "message.update",
             "<details><summary>Thinking..</summary>\n\nchecking source\n\n</details>",
