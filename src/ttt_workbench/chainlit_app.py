@@ -7,7 +7,7 @@ def _thinking_block(content: str) -> str:
 
 
 def _streaming_thinking_block(content: str) -> str:
-    return f"<details open><summary>Thinking..</summary>\n\n{content.strip()}\n\n</details>"
+    return _thinking_block(content)
 
 
 def _reply_display_parts(text: str):
