@@ -11,10 +11,6 @@
 
 <form method="post" action="/settings/save" class="settings-form settings-dialog-form"
   hx-post="/settings/save" hx-target="#settings-dialog-body" hx-swap="innerHTML">
-  {% if model_names %}
-  <p class="muted-line settings-model-line">Detected models: {{ ", ".join(model_names) }}</p>
-  {% endif %}
-
   <div class="settings-provider-grid">
     <section class="settings-provider-block">
       <label class="settings-provider-choice">
@@ -31,7 +27,12 @@
       </label>
       <label class="field">
         <span>Model</span>
-        <input type="text" name="local_model" value="{{ settings_config.local_model }}" placeholder="Detected local model">
+        <select name="local_model">
+          {% set local_options = settings_config.local_model_options or model_names or [settings_config.local_model] %}
+          {% for model in local_options %}
+          <option value="{{ model }}" {% if model == settings_config.local_model %}selected{% endif %}>{{ model }}</option>
+          {% endfor %}
+        </select>
       </label>
     </section>
 
@@ -50,7 +51,12 @@
       </label>
       <label class="field">
         <span>Model</span>
-        <input type="text" name="cloud_model" value="{{ settings_config.cloud_model }}" placeholder="gpt-4.1-mini">
+        <select name="cloud_model">
+          {% set cloud_options = settings_config.cloud_model_options or [settings_config.cloud_model] %}
+          {% for model in cloud_options %}
+          <option value="{{ model }}" {% if model == settings_config.cloud_model %}selected{% endif %}>{{ model }}</option>
+          {% endfor %}
+        </select>
       </label>
     </section>
   </div>

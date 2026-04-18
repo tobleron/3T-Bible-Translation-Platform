@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 
 import ttt_core.llm.llama_cpp as llama_cpp
 import ttt_workbench.commands.commit as commitmod
+from ttt_workbench.test_support import FakeLLM
 from ttt_core.data.repositories import LexicalRepository
 import ttt_webapp.app as appmod
 import ttt_webapp.controller as controllermod
@@ -32,6 +33,44 @@ def test_settings_fake_mode_avoids_model_probe(monkeypatch) -> None:
             assert "Qwen3.5-35B-A3B-Test" in response.text
         finally:
             response.close()
+    reset_controller()
+
+
+def test_settings_save_places_cached_openai_models_in_model_dropdown(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    monkeypatch.setattr(FakeLLM, "list_models", lambda self: ["gpt-5.4-nano", "gpt-5.4-mini"])
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/settings/save",
+            data={
+                "endpoint_provider": "cloud",
+                "local_base_url": "http://10.0.0.1:8080/v1",
+                "local_api_key": "",
+                "local_model": "local-test",
+                "cloud_base_url": "https://api.openai.com/v1",
+                "cloud_api_key": "sk-test",
+                "cloud_model": "gpt-5.4-nano",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert 'name="cloud_model"' in response.text
+            assert '<option value="gpt-5.4-nano" selected>gpt-5.4-nano</option>' in response.text
+            assert '<option value="gpt-5.4-mini"' in response.text
+            assert "Detected models:" not in response.text
+        finally:
+            response.close()
+
+        monkeypatch.setattr(FakeLLM, "list_models", lambda self: (_ for _ in ()).throw(AssertionError("cached models should render without refetch")))
+        cached_response = client.get("/settings")
+        try:
+            assert cached_response.status_code == 200
+            assert '<option value="gpt-5.4-nano" selected>gpt-5.4-nano</option>' in cached_response.text
+            assert '<option value="gpt-5.4-mini"' in cached_response.text
+        finally:
+            cached_response.close()
     reset_controller()
 
 

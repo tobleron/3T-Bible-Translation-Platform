@@ -236,6 +236,7 @@ class BrowserWorkbench(WorkbenchApp):
             "cloud_base_url": "https://api.openai.com/v1",
             "cloud_api_key": "",
             "cloud_model": "gpt-4.1-mini",
+            "model_cache": {"local": [], "cloud": []},
             "selected_sources": ["LSB", "ESV"],
         }
         if not self.settings_file.exists():
@@ -263,6 +264,7 @@ class BrowserWorkbench(WorkbenchApp):
             "cloud_base_url": cloud_base_url,
             "cloud_api_key": str(payload.get("cloud_api_key") or defaults["cloud_api_key"]),
             "cloud_model": str(payload.get("cloud_model") or defaults["cloud_model"]),
+            "model_cache": payload.get("model_cache", defaults["model_cache"]),
             "selected_sources": payload.get("selected_sources", defaults["selected_sources"]),
         }
         if (
@@ -331,6 +333,7 @@ class BrowserWorkbench(WorkbenchApp):
             "cloud_base_url": cloud_base_url,
             "cloud_api_key": str(payload.get("cloud_api_key", self.web_settings.get("cloud_api_key", ""))),
             "cloud_model": cloud_model,
+            "model_cache": self.web_settings.get("model_cache", {"local": [], "cloud": []}),
             "selected_sources": selected_sources,
         }
         self.settings_file.parent.mkdir(parents=True, exist_ok=True)
@@ -348,6 +351,8 @@ class BrowserWorkbench(WorkbenchApp):
             "cloud_base_url": self.web_settings.get("cloud_base_url", ""),
             "cloud_api_key": self.web_settings.get("cloud_api_key", ""),
             "cloud_model": self.web_settings.get("cloud_model", "gpt-4.1-mini"),
+            "local_model_options": self.cached_model_names("local"),
+            "cloud_model_options": self.cached_model_names("cloud"),
             "active_model": self.active_model_name(),
             "active_base_url": self.resolve_active_base_url(),
         }
@@ -1975,18 +1980,50 @@ Rules:
         return Path(sys.executable)
 
     def safe_list_models(self) -> list[str]:
+        return self.refresh_model_cache(force=True)
+
+    def cached_model_names(self, provider: str | None = None) -> list[str]:
+        provider_key = (provider or str(self.web_settings.get("endpoint_provider", "local"))).strip().lower()
+        if provider_key not in {"local", "cloud"}:
+            provider_key = "local"
+        cache = self.web_settings.get("model_cache", {})
+        if not isinstance(cache, dict):
+            cache = {}
+        values = cache.get(provider_key, [])
+        if not isinstance(values, list):
+            values = []
+        clean = [str(model).strip() for model in values if str(model).strip()]
+        current = str(
+            self.web_settings.get("cloud_model" if provider_key == "cloud" else "local_model", "")
+        ).strip()
+        if current and current not in clean:
+            clean.insert(0, current)
+        return clean
+
+    def refresh_model_cache(self, force: bool = False) -> list[str]:
+        provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
+        if provider not in {"local", "cloud"}:
+            provider = "local"
+        if not force:
+            cached = self.cached_model_names(provider)
+            if cached:
+                return cached
         self.refresh_active_endpoint()
         try:
             models = self.llm.list_models()
         except Exception as exc:
             self.print_error(f"Model discovery failed: {exc}")
-            return [self.model_name]
+            return self.cached_model_names(provider) or [self.model_name]
         clean = [str(model).strip() for model in models if str(model).strip()]
         if clean:
             active = self.active_model_name()
-            provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
             if provider == "cloud" and active and active not in clean:
                 clean.insert(0, active)
+            cache = self.web_settings.get("model_cache", {})
+            if not isinstance(cache, dict):
+                cache = {}
+            cache[provider] = clean
+            self.web_settings["model_cache"] = cache
             discovered = next((model for model in clean if model != "llama.cpp-model"), clean[0])
             if discovered:
                 self.model_name = (
@@ -1999,8 +2036,10 @@ Rules:
                     self.llm.model_name = self.model_name
                 if provider == "local" and discovered != "llama.cpp-model":
                     self.web_settings["local_model"] = discovered
+            self.settings_file.parent.mkdir(parents=True, exist_ok=True)
+            self.settings_file.write_text(json.dumps(self.web_settings, indent=2), encoding="utf-8")
             return clean
-        return [self.model_name]
+        return self.cached_model_names(provider) or [self.model_name]
 
     def commit_history_entries(self) -> list[dict[str, str | bool]]:
         entries: list[dict[str, str | bool]] = []

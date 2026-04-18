@@ -1355,7 +1355,7 @@ def settings_page(request: Request):
             "settings_config": wb.settings_payload(),
             "endpoint_url": wb.llm.base_url,
             "flash_messages": wb.flash_messages,
-            "model_names": wb.safe_list_models(),
+            "model_names": wb.cached_model_names(),
         },
     )
 
@@ -1376,6 +1376,7 @@ async def settings_save(request: Request):
                 "cloud_model": str(form.get("cloud_model", "")).strip(),
             }
         )
+        wb.refresh_model_cache(force=True)
         wb.notify("Settings saved.")
     except Exception as exc:
         wb.print_error(str(exc))
@@ -1387,7 +1388,7 @@ async def settings_save(request: Request):
                 "settings_config": wb.settings_payload(),
                 "endpoint_url": wb.llm.base_url,
                 "flash_messages": wb.flash_messages,
-                "model_names": wb.safe_list_models(),
+                "model_names": wb.cached_model_names(),
             },
         )
     return render_page(
@@ -1397,7 +1398,7 @@ async def settings_save(request: Request):
             "settings_config": wb.settings_payload(),
             "endpoint_url": wb.llm.base_url,
             "flash_messages": wb.flash_messages,
-            "model_names": wb.safe_list_models(),
+            "model_names": wb.cached_model_names(),
         },
     )
 
@@ -1406,7 +1407,7 @@ async def settings_save(request: Request):
 def settings_test_endpoint(request: Request):
     wb = controller()
     wb.refresh_active_endpoint()
-    models = wb.safe_list_models()
+    models = wb.refresh_model_cache(force=True)
     if models:
         wb.notify(f"Endpoint reachable. Models: {', '.join(models[:3])}")
     return render_page(
