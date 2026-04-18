@@ -29,7 +29,13 @@ from .app import WorkbenchApp
 from ttt_workbench.repositories import restore_backup_set
 
 from .chunk_catalog import ChunkCatalogRepository
-from .important_words import important_lemmas, load_spacy_model, verse_word_stats
+from .important_words import (
+    glossary_lemma_order,
+    important_lemma_positions,
+    important_lemmas,
+    load_spacy_model,
+    verse_word_stats,
+)
 
 
 ORIGINAL_LANGUAGE_SOURCES = frozenset({"SBLGNT", "WLC"})
@@ -1636,6 +1642,31 @@ Rules:
             )
         return blocks
 
+    def _primary_original_gloss_order(self, start_verse: int, end_verse: int, nlp: Any) -> dict[int, dict[str, int]]:
+        corpus = "hebrew_ot" if self.testament() == "old" else "greek_nt"
+        tokens_by_ref = self.lexical_repo.fetch_tokens(
+            corpus,
+            self.state.book or "",
+            self.state.chapter or 0,
+            start_verse,
+            end_verse,
+        )
+        strongs: set[str] = set()
+        for verse in range(start_verse, end_verse + 1):
+            for token in tokens_by_ref.get(self.lexical_ref(verse, corpus=corpus), []):
+                if token.get("strong_id"):
+                    strongs.update(self._strong_lookup_keys(token["strong_id"]))
+        lexicon = self.lexical_repo.fetch_lexicon_glosses(corpus, list(strongs))
+        order_by_verse: dict[int, dict[str, int]] = {}
+        for verse in range(start_verse, end_verse + 1):
+            glosses: list[str] = []
+            for token in tokens_by_ref.get(self.lexical_ref(verse, corpus=corpus), []):
+                gloss_token = self._literal_gloss_token(token, lexicon)
+                if gloss_token:
+                    glosses.append(gloss_token["gloss"])
+            order_by_verse[verse] = glossary_lemma_order(glosses, nlp)
+        return order_by_verse
+
     def chunk_translation_word_analysis(self) -> dict[str, Any]:
         if not self.has_open_chunk() or not self.state.book or not self.state.chapter:
             return {"available": False, "message": "Open a chunk to analyze translation word choices.", "verses": []}
@@ -1646,6 +1677,7 @@ Rules:
         start_verse = self.state.chunk_start or 1
         end_verse = self.state.chunk_end or start_verse
         aliases = self.selected_sources() or ["LSB"]
+        original_order_by_verse = self._primary_original_gloss_order(start_verse, end_verse, nlp)
         verses: list[dict[str, Any]] = []
         for verse in range(start_verse, end_verse + 1):
             translations: list[dict[str, Any]] = []
@@ -1658,9 +1690,10 @@ Rules:
                         "alias": alias,
                         "text": text,
                         "lemmas": important_lemmas(text, nlp),
+                        "lemma_positions": important_lemma_positions(text, nlp),
                     }
                 )
-            stats = verse_word_stats(translations, nlp)
+            stats = verse_word_stats(translations, nlp, original_order_by_verse.get(verse, {}))
             verses.append(
                 {
                     "verse": verse,
