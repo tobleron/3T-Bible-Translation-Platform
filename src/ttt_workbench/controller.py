@@ -29,6 +29,7 @@ from .app import WorkbenchApp
 from ttt_workbench.repositories import restore_backup_set
 
 from .chunk_catalog import ChunkCatalogRepository
+from .important_words import important_lemmas, load_spacy_model, verse_word_stats
 
 
 _ALLOWED_INLINE_TAGS = frozenset({"i", "em", "b", "strong", "sup", "sub", "br"})
@@ -1627,6 +1628,46 @@ Rules:
             )
         return blocks
 
+    def chunk_translation_word_analysis(self) -> dict[str, Any]:
+        if not self.has_open_chunk() or not self.state.book or not self.state.chapter:
+            return {"available": False, "message": "Open a chunk to analyze translation word choices.", "verses": []}
+        nlp, error = load_spacy_model()
+        if error or nlp is None:
+            return {"available": False, "message": error, "verses": []}
+
+        start_verse = self.state.chunk_start or 1
+        end_verse = self.state.chunk_end or start_verse
+        aliases = self.selected_sources() or ["LSB"]
+        verses: list[dict[str, Any]] = []
+        for verse in range(start_verse, end_verse + 1):
+            translations: list[dict[str, Any]] = []
+            for alias in aliases:
+                text = self.source_repo.verse_text(
+                    alias, self.state.book, self.state.chapter, verse
+                ).strip()
+                translations.append(
+                    {
+                        "alias": alias,
+                        "text": text,
+                        "lemmas": important_lemmas(text, nlp),
+                    }
+                )
+            stats = verse_word_stats(translations)
+            verses.append(
+                {
+                    "verse": verse,
+                    "translations": translations,
+                    "majority": stats["majority"],
+                    "unique": stats["unique"],
+                }
+            )
+        return {
+            "available": True,
+            "model": "en_core_web_sm",
+            "selected_count": len(aliases),
+            "verses": verses,
+        }
+
     def current_chunk_summary(self) -> dict[str, Any]:
         chunks = self.chapter_chunks(
             self.state.wizard_testament or self.testament() or "new",
@@ -2424,6 +2465,7 @@ Rules:
             "chunk_summary": self.current_chunk_summary(),
             "study_cards": self.build_study_cards() if chunk_open else [],
             "study_blocks": self.chunk_study_blocks() if chunk_open else [],
+            "translation_word_analysis": self.chunk_translation_word_analysis() if chunk_open else None,
             "draft_verses": self.display_draft_verses() if chunk_open else [],
             "source_preview": self.source_text_preview() if chunk_open else [],
             "study_provenance": self.study_provenance(),
@@ -2531,6 +2573,7 @@ Rules:
             {
                 "comparison_source_options": self.comparison_source_options(),
                 "study_blocks": self.chunk_study_blocks() if chunk_open else [],
+                "translation_word_analysis": self.chunk_translation_word_analysis() if chunk_open else None,
             }
         )
         return payload

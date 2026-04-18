@@ -255,18 +255,19 @@
               {% if state.justify_draft %}
               <button class="secondary-button" type="submit" name="action" value="cancel">Cancel</button>
               {% endif %}
-              <button class="primary-button" type="submit" name="action" value="stage">Stage</button>
+              <button class="primary-button" type="submit" name="action" value="stage">Save note</button>
             </div>
           </form>
         </details>
       </article>
 
       <article id="footnote-panel" class="workspace-card support-panel footnote-panel">
-        <details class="footnote-panel-collapse"{% if state.footnote_draft %} open{% endif %}>
-          <summary class="footnote-panel-summary">
+        <div class="footnote-panel-head">
+          <div class="footnote-panel-summary">
             <span class="eyebrow">Footnotes</span>
             <span class="inline-badge">{{ footnote_entries|length }} item{% if footnote_entries|length != 1 %}s{% endif %}</span>
-          </summary>
+          </div>
+        </div>
 
         {% if footnote_entries %}
         <div class="support-entry-list">
@@ -340,10 +341,9 @@
               {% if state.footnote_draft %}
               <button class="secondary-button" type="submit" name="action" value="cancel">Cancel</button>
               {% endif %}
-              <button class="primary-button" type="submit" name="action" value="stage">Stage</button>
+              <button class="primary-button" type="submit" name="action" value="stage">Save footnote</button>
             </div>
           </form>
-        </details>
         </details>
       </article>
     </section>

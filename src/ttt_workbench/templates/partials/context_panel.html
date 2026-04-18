@@ -9,13 +9,24 @@
     <form class="source-picks">
       {# Row 1: translation/source checkboxes #}
       <div class="source-chip-grid" role="group" aria-label="Comparison sources">
+        {% set source_rows = namespace(row=1) %}
+        <label class="source-chip source-chip-all">
+          <input type="checkbox" data-study-source-row-toggle data-source-row="1">
+          <span>All</span>
+        </label>
         {% for option in comparison_source_options %}
         {% if option.separator %}
         <div class="source-chip-separator" role="separator" aria-label="More sources"></div>
+        {% set source_rows.row = 2 %}
+        <label class="source-chip source-chip-all">
+          <input type="checkbox" data-study-source-row-toggle data-source-row="2">
+          <span>All</span>
+        </label>
         {% else %}
         <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
           <input type="checkbox" name="selected_sources" value="{{ option.alias }}" {% if option.selected %}checked{% endif %} {% if option.disabled %}disabled{% endif %}
             data-study-source-toggle
+            data-source-row="{{ source_rows.row }}"
             data-study-sources-url="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources">
           <span>{{ option.label }}</span>
         </label>
@@ -132,4 +143,5 @@
       {% include "partials/study_translation_blocks.html" %}
     </div>
   </section>
+  {% include "partials/study_word_analysis.html" %}
 </article>

@@ -513,11 +513,15 @@ async def study_sources(
             html = templates.env.get_template("partials/study_translation_blocks.html").render(
                 {"request": request, **payload}
             )
+            word_analysis_html = templates.env.get_template("partials/study_word_analysis.html").render(
+                {"request": request, **payload}
+            )
             return JSONResponse(
                 {
                     "ok": True,
                     "selected_sources": wb.selected_sources(),
                     "translation_blocks_html": html,
+                    "word_analysis_html": word_analysis_html,
                 }
             )
         return templates.TemplateResponse(

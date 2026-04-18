@@ -210,6 +210,7 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             assert sources_json["ok"] is True
             assert sources_json["selected_sources"] == ["LSB", "ESV", "KJV"]
             assert 'data-translation-alias="KJV"' in sources_json["translation_blocks_html"]
+            assert "word_analysis_html" in sources_json
             assert nlt_json_response.status_code == 200
             nlt_json = nlt_json_response.json()
             assert nlt_json["selected_sources"] == ["NLT"]

@@ -2306,16 +2306,13 @@ input[type="submit"].is-loading {
 .footnote-panel {
   padding: 0.45rem 0.65rem;
 }
-.footnote-panel-collapse > summary {
-  cursor: pointer;
-}
 .footnote-panel-summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.6rem;
 }
-.footnote-panel-collapse[open] .footnote-panel-summary {
+.footnote-panel-head {
   margin-bottom: 0.55rem;
 }
 .support-actions {
@@ -2383,6 +2380,12 @@ input[type="submit"].is-loading {
 .source-chip.is-selected span {
   font-weight: 500;
 }
+.source-chip-all {
+  color: var(--text);
+}
+.source-chip input:indeterminate {
+  accent-color: var(--accent);
+}
 .source-chip.is-disabled {
   opacity: 0.42;
 }
@@ -2403,6 +2406,73 @@ input[type="submit"].is-loading {
 }
 .source-chip-control select:focus {
   outline: none;
+}
+
+.study-word-analysis {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.word-analysis-list {
+  display: grid;
+  gap: 0.8rem;
+}
+.word-analysis-verse {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.025);
+}
+.word-analysis-head,
+.word-stat-row,
+.word-translation-row {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: start;
+}
+.word-stat-label,
+.word-translation-alias {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.word-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.word-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.16rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 0.78rem;
+}
+.word-chip small {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+.word-chip.is-unique {
+  background: rgba(255,255,255,0.02);
+}
+.word-translation-list {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.15rem;
+}
+.word-translation-lemmas {
+  color: var(--text);
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 .context-sheet {

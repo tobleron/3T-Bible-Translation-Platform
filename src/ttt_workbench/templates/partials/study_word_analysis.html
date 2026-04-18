@@ -1,0 +1,55 @@
+{% if translation_word_analysis %}
+<section class="study-word-analysis" id="study-word-analysis" aria-label="Important translation words">
+  <div class="chunk-block-head">
+    <div class="chunk-block-heading">
+      <span class="verse-tag">Important Words</span>
+      <span class="context-meta">spaCy lemma comparison</span>
+    </div>
+    {% if translation_word_analysis.available %}
+    <span class="inline-badge">{{ translation_word_analysis.selected_count }} source{% if translation_word_analysis.selected_count != 1 %}s{% endif %}</span>
+    {% endif %}
+  </div>
+  {% if not translation_word_analysis.available %}
+  <p class="support-empty">{{ translation_word_analysis.message }}</p>
+  {% else %}
+  <div class="word-analysis-list">
+    {% for verse in translation_word_analysis.verses %}
+    <article class="word-analysis-verse">
+      <div class="word-analysis-head">
+        <span class="translation-verse-num">{{ verse.verse }}</span>
+        <span class="context-meta">Verse {{ verse.verse }}</span>
+      </div>
+      <div class="word-stat-row">
+        <span class="word-stat-label">Majority</span>
+        <div class="word-chip-list">
+          {% for item in verse.majority %}
+          <span class="word-chip">{{ item.lemma }} <small>{{ item.percent }}%</small></span>
+          {% else %}
+          <span class="context-meta">No majority lemmas</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="word-stat-row">
+        <span class="word-stat-label">Unique</span>
+        <div class="word-chip-list">
+          {% for item in verse.unique %}
+          <span class="word-chip is-unique">{{ item.lemma }} <small>{{ item.alias }}</small></span>
+          {% else %}
+          <span class="context-meta">No unique lemmas</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="word-translation-list">
+        {% for row in verse.translations %}
+        <div class="word-translation-row">
+          <span class="word-translation-alias">{{ row.alias }}</span>
+          <span class="word-translation-lemmas">{{ row.lemmas|join(", ") if row.lemmas else "No kept lemmas" }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endif %}

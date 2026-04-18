@@ -103,6 +103,9 @@
           if (input) chip.classList.toggle('is-selected', input.checked);
         });
       }
+      if (elt.closest && elt.closest('.workspace-nav-form')) {
+        document.body.dataset.tttTopNavSwap = '1';
+      }
 
       if (activeRequests.has(elt)) {
         if (event.preventDefault) event.preventDefault();
@@ -161,6 +164,17 @@
 
     document.body.addEventListener('htmx:afterSettle', function (event) {
       var target = event.detail && event.detail.target;
+      if (target && target.id === 'workspace-shell' && document.body.dataset.tttTopNavSwap === '1') {
+        delete document.body.dataset.tttTopNavSwap;
+        window.requestAnimationFrame(function () {
+          var shell = document.getElementById('workspace-shell');
+          if (shell && shell.scrollIntoView) {
+            shell.scrollIntoView({ block: 'start' });
+          } else {
+            window.scrollTo(0, 0);
+          }
+        });
+      }
       if (!target || target.id !== 'study-blocks') return;
       var contextPanel = document.getElementById('context-panel');
       if (contextPanel) {
@@ -197,7 +211,26 @@
     if (!form) return;
     form.querySelectorAll('.source-chip').forEach(function (chip) {
       var input = chip.querySelector('input[type="checkbox"]');
-      if (input) chip.classList.toggle('is-selected', input.checked);
+      if (!input) return;
+      chip.classList.toggle('is-selected', input.checked || input.indeterminate);
+    });
+    syncSourceRowToggles(form);
+  }
+
+  function sourceRowControls(form, row) {
+    return Array.prototype.slice.call(form.querySelectorAll('[data-study-source-toggle][data-source-row="' + row + '"]'));
+  }
+
+  function syncSourceRowToggles(form) {
+    if (!form) return;
+    form.querySelectorAll('[data-study-source-row-toggle]').forEach(function (toggle) {
+      var row = toggle.getAttribute('data-source-row');
+      var controls = sourceRowControls(form, row).filter(function (control) { return !control.disabled; });
+      var checked = controls.filter(function (control) { return control.checked; }).length;
+      toggle.checked = controls.length > 0 && checked === controls.length;
+      toggle.indeterminate = checked > 0 && checked < controls.length;
+      var chip = toggle.closest('.source-chip');
+      if (chip) chip.classList.toggle('is-selected', toggle.checked || toggle.indeterminate);
     });
   }
 
@@ -239,60 +272,102 @@
     restoreStudyState();
   }
 
+  function replaceStudyWordAnalysis(html) {
+    var current = document.getElementById('study-word-analysis');
+    var template = document.createElement('template');
+    template.innerHTML = html || '';
+    var next = template.content.querySelector('#study-word-analysis');
+    if (current && next) {
+      current.replaceWith(next);
+    } else if (current) {
+      current.remove();
+    } else if (next) {
+      var studyArticle = document.querySelector('.study-article');
+      if (studyArticle) studyArticle.insertAdjacentElement('afterend', next);
+    }
+  }
+
+  function studySourcesUrl(form) {
+    var source = form && form.querySelector('[data-study-source-toggle]');
+    return source ? source.getAttribute('data-study-sources-url') : '';
+  }
+
+  function submitStudySourceForm(form) {
+    var url = studySourcesUrl(form);
+    if (!form || !url) return;
+    var contextPanel = document.getElementById('context-panel');
+    var controls = Array.prototype.slice.call(form.querySelectorAll('[data-study-source-toggle]'));
+    var rowControls = Array.prototype.slice.call(form.querySelectorAll('[data-study-source-row-toggle]'));
+    var busyControls = controls.concat(rowControls);
+    var previous = controls.map(function (control) { return control.checked; });
+    var previousDisabled = busyControls.map(function (control) { return control.disabled; });
+    var formData = new FormData(form);
+    syncSourceChipStates(form);
+    if (contextPanel) contextPanel.classList.add('is-updating-study');
+    busyControls.forEach(function (control) {
+      control.disabled = true;
+      control.setAttribute('aria-busy', 'true');
+    });
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'fetch'
+      }
+    })
+      .then(function (response) {
+        return response.json().then(function (payload) {
+          return { ok: response.ok, payload: payload };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.payload.ok) {
+          throw new Error(result.payload.message || 'Could not update study sources.');
+        }
+        replaceTranslationBlocks(result.payload.translation_blocks_html || '');
+        replaceStudyWordAnalysis(result.payload.word_analysis_html || '');
+      })
+      .catch(function (err) {
+        controls.forEach(function (control, index) {
+          control.checked = previous[index];
+        });
+        syncSourceChipStates(form);
+        toast(err.message || 'Could not update study sources.', 'error');
+      })
+      .finally(function () {
+        busyControls.forEach(function (control, index) {
+          control.disabled = previousDisabled[index];
+          control.removeAttribute('aria-busy');
+        });
+        syncSourceChipStates(form);
+        if (contextPanel) contextPanel.classList.remove('is-updating-study');
+      });
+  }
+
   function initStudySourceControls(root) {
     (root || document).querySelectorAll('[data-study-source-toggle]').forEach(function (input) {
       if (input.dataset.tttStudySourceBound === '1') return;
       input.dataset.tttStudySourceBound = '1';
       input.addEventListener('change', function () {
         var form = input.closest('.source-picks');
-        var url = input.getAttribute('data-study-sources-url');
-        if (!form || !url) return;
-        var contextPanel = document.getElementById('context-panel');
-        var controls = Array.prototype.slice.call(form.querySelectorAll('[data-study-source-toggle]'));
-        var previous = controls.map(function (control) { return control.checked; });
-        var previousDisabled = controls.map(function (control) { return control.disabled; });
-        var formData = new FormData(form);
-        syncSourceChipStates(form);
-        if (contextPanel) contextPanel.classList.add('is-updating-study');
-        controls.forEach(function (control) {
-          control.disabled = true;
-          control.setAttribute('aria-busy', 'true');
-        });
-        fetch(url, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'fetch'
-          }
-        })
-          .then(function (response) {
-            return response.json().then(function (payload) {
-              return { ok: response.ok, payload: payload };
-            });
-          })
-          .then(function (result) {
-            if (!result.ok || !result.payload.ok) {
-              throw new Error(result.payload.message || 'Could not update study sources.');
-            }
-            replaceTranslationBlocks(result.payload.translation_blocks_html || '');
-          })
-          .catch(function (err) {
-            controls.forEach(function (control, index) {
-              control.checked = previous[index];
-            });
-            syncSourceChipStates(form);
-            toast(err.message || 'Could not update study sources.', 'error');
-          })
-          .finally(function () {
-            controls.forEach(function (control, index) {
-              control.disabled = previousDisabled[index];
-              control.removeAttribute('aria-busy');
-            });
-            if (contextPanel) contextPanel.classList.remove('is-updating-study');
-          });
+        submitStudySourceForm(form);
       });
     });
+    (root || document).querySelectorAll('[data-study-source-row-toggle]').forEach(function (input) {
+      if (input.dataset.tttStudySourceRowBound === '1') return;
+      input.dataset.tttStudySourceRowBound = '1';
+      input.addEventListener('change', function () {
+        var form = input.closest('.source-picks');
+        if (!form) return;
+        sourceRowControls(form, input.getAttribute('data-source-row')).forEach(function (control) {
+          if (!control.disabled) control.checked = input.checked;
+        });
+        syncSourceChipStates(form);
+        submitStudySourceForm(form);
+      });
+    });
+    (root || document).querySelectorAll('.source-picks').forEach(syncSourceChipStates);
   }
 
   function init(root) {
