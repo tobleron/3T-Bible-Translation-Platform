@@ -2441,20 +2441,15 @@ input[type="submit"].is-loading {
   font-weight: 700;
   text-transform: uppercase;
 }
-.word-chip-list,
-.word-group-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-.word-group-list {
-  align-items: flex-start;
+.word-group-stack {
+  display: grid;
+  gap: 0.65rem;
 }
 .word-meaning-group {
-  display: inline-grid;
-  gap: 0.22rem;
+  display: grid;
+  gap: 0.26rem;
   align-content: start;
-  padding: 0.18rem;
+  padding: 0.3rem 0.45rem;
   border-left: 2px solid transparent;
 }
 .word-meaning-group.has-related {
@@ -2478,6 +2473,25 @@ input[type="submit"].is-loading {
 }
 .word-chip.is-unique {
   background: rgba(255,255,255,0.02);
+}
+.word-choice-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.42rem;
+  flex-wrap: wrap;
+  color: var(--text);
+  line-height: 1.35;
+}
+.word-choice-main {
+  font-weight: 650;
+}
+.word-choice-percent {
+  color: var(--accent);
+  font-weight: 700;
+}
+.word-choice-sources {
+  color: var(--muted);
+  font-size: 0.86em;
 }
 .context-sheet {
   display: grid;

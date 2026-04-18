@@ -40,7 +40,7 @@ def test_important_lemmas_keep_unique_content_lemmas_only() -> None:
     assert important_lemmas("ignored", FakeNlp()) == ["spirit", "hover", "dark", "water"]
 
 
-def test_verse_word_stats_splits_majority_and_unique_choices() -> None:
+def test_verse_word_stats_returns_percentages_and_source_aliases() -> None:
     stats = verse_word_stats(
         [
             {"alias": "A", "text": "x", "lemmas": ["create", "earth"]},
@@ -48,20 +48,31 @@ def test_verse_word_stats_splits_majority_and_unique_choices() -> None:
             {"alias": "C", "text": "x", "lemmas": ["create", "land"]},
         ]
     )
-    assert stats["majority"] == [{"lemma": "create", "count": 3, "percent": 100}]
-    assert {"lemma": "earth", "alias": "A"} in stats["unique"]
-    assert {"lemma": "world", "alias": "B"} in stats["unique"]
+    assert stats["word_choices"][0] == {
+        "lemma": "create",
+        "count": 3,
+        "percent": 100,
+        "aliases": ["A", "B", "C"],
+        "alias_label": "A, B, C",
+    }
+    assert {
+        "lemma": "earth",
+        "count": 1,
+        "percent": 33,
+        "aliases": ["A"],
+        "alias_label": "A",
+    } in stats["word_choices"]
 
 
 def test_semantic_groups_stack_related_lemmas() -> None:
     groups = semantic_groups(
         [
-            {"lemma": "genealogy", "alias": "A"},
-            {"lemma": "ancestry", "alias": "B"},
-            {"lemma": "earth", "alias": "C"},
+            {"lemma": "genealogy", "count": 1, "alias_label": "A"},
+            {"lemma": "ancestry", "count": 1, "alias_label": "B"},
+            {"lemma": "earth", "count": 1, "alias_label": "C"},
         ],
         SimilarityNlp(),
     )
     assert groups[0]["related"] is True
-    assert [entry["lemma"] for entry in groups[0]["entries"]] == ["genealogy", "ancestry"]
-    assert groups[1]["entries"] == [{"lemma": "earth", "alias": "C"}]
+    assert [entry["lemma"] for entry in groups[0]["entries"]] == ["ancestry", "genealogy"]
+    assert groups[1]["entries"] == [{"lemma": "earth", "count": 1, "alias_label": "C"}]

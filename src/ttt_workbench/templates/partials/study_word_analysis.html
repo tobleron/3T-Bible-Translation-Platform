@@ -13,39 +13,30 @@
   <p class="support-empty">{{ translation_word_analysis.message }}</p>
   {% else %}
   <div class="word-analysis-list">
+    {% set group_labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
     {% for verse in translation_word_analysis.verses %}
     <article class="word-analysis-verse" data-verse="{{ verse.verse }}">
       <div class="word-analysis-head">
         <span class="translation-verse-num">{{ verse.verse }}</span>
         <span class="context-meta">Verse {{ verse.verse }}</span>
       </div>
-      <div class="word-stat-row">
-        <span class="word-stat-label">Majority</span>
-        <div class="word-group-list">
-          {% for group in verse.majority_groups %}
+      <div class="word-group-stack">
+        {% for group in verse.word_groups %}
+        <div class="word-stat-row">
+          <span class="word-stat-label">Group {{ group_labels[loop.index0] if loop.index0 < group_labels|length else loop.index }}</span>
           <div class="word-meaning-group{% if group.related %} has-related{% endif %}">
-            {% for item in group.entries %}
-            <span class="word-chip">{{ item.lemma }} <small>{{ item.percent }}%</small></span>
-            {% endfor %}
-          </div>
-          {% else %}
-          <span class="context-meta">No majority lemmas</span>
+          {% for item in group.entries %}
+            <span class="word-choice-line">
+              <span class="word-choice-main">{{ item.lemma }}</span>
+              <span class="word-choice-percent">{{ item.percent }}%</span>
+              <span class="word-choice-sources">({{ item.alias_label }})</span>
+            </span>
           {% endfor %}
-        </div>
-      </div>
-      <div class="word-stat-row">
-        <span class="word-stat-label">Unique</span>
-        <div class="word-group-list">
-          {% for group in verse.unique_groups %}
-          <div class="word-meaning-group{% if group.related %} has-related{% endif %}">
-            {% for item in group.entries %}
-            <span class="word-chip is-unique">{{ item.lemma }} <small>{{ item.alias }}</small></span>
-            {% endfor %}
           </div>
-          {% else %}
-          <span class="context-meta">No unique lemmas</span>
-          {% endfor %}
         </div>
+        {% else %}
+        <span class="context-meta">No kept word choices</span>
+        {% endfor %}
       </div>
     </article>
     {% endfor %}

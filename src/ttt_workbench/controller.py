@@ -32,6 +32,7 @@ from .chunk_catalog import ChunkCatalogRepository
 from .important_words import important_lemmas, load_spacy_model, verse_word_stats
 
 
+ORIGINAL_LANGUAGE_SOURCES = frozenset({"SBLGNT", "WLC"})
 _ALLOWED_INLINE_TAGS = frozenset({"i", "em", "b", "strong", "sup", "sub", "br"})
 _BLOCKED_INLINE_TAGS = frozenset({"script", "style"})
 _LEGACY_BOLD_RE = re.compile(r"(?<!\*)\*\*([^*\n][^*]*?)\*\*(?!\*)")
@@ -628,7 +629,9 @@ class BrowserWorkbench(WorkbenchApp):
         selected = [
             str(item).upper()
             for item in values
-            if str(item).strip() and str(item).upper() in self.source_repo.catalog
+            if str(item).strip()
+            and str(item).upper() in self.source_repo.catalog
+            and str(item).upper() not in ORIGINAL_LANGUAGE_SOURCES
         ]
         if selected:
             return selected
@@ -644,7 +647,12 @@ class BrowserWorkbench(WorkbenchApp):
         return self.source_repo.list_sources()[:2]
 
     def set_selected_sources(self, aliases: list[str]) -> None:
-        clean = [alias.upper() for alias in aliases if alias.upper() in self.source_repo.catalog]
+        clean = [
+            alias.upper()
+            for alias in aliases
+            if alias.upper() in self.source_repo.catalog
+            and alias.upper() not in ORIGINAL_LANGUAGE_SOURCES
+        ]
         self.save_web_settings({"selected_sources": clean})
 
     def chat_context_sources(self) -> list[str]:
@@ -1357,7 +1365,7 @@ Rules:
             "LEB",
             "NJB",
         ]
-        available_aliases = [alias for alias in self.comparison_sources() if alias not in {"WLC"}]
+        available_aliases = [alias for alias in self.comparison_sources() if alias not in ORIGINAL_LANGUAGE_SOURCES]
         preferred = [alias for alias in preferred_order if alias in available_aliases]
         remaining = [alias for alias in available_aliases if alias not in preferred]
         ordered_aliases = preferred + (["__separator__"] if preferred and remaining else []) + remaining
@@ -1366,7 +1374,7 @@ Rules:
             if alias == "__separator__":
                 options.append({"alias": alias, "label": "", "support": "", "selected": False, "available_here": False, "disabled": True, "separator": True})
                 continue
-            if alias in {"WLC"}:
+            if alias in ORIGINAL_LANGUAGE_SOURCES:
                 continue
             available_here = self.source_available_for_chapter(alias, current_book, current_chapter)
             support = self.source_support_label(alias)
@@ -1657,10 +1665,8 @@ Rules:
                 {
                     "verse": verse,
                     "translations": translations,
-                    "majority": stats["majority"],
-                    "unique": stats["unique"],
-                    "majority_groups": stats["majority_groups"],
-                    "unique_groups": stats["unique_groups"],
+                    "word_choices": stats["word_choices"],
+                    "word_groups": stats["word_groups"],
                 }
             )
         return {
@@ -2013,7 +2019,7 @@ Rules:
         return [
             alias
             for alias in self.source_repo.list_sources()
-            if alias not in {"WLC"}
+            if alias not in ORIGINAL_LANGUAGE_SOURCES
         ]
 
     def preferred_python(self) -> Path:

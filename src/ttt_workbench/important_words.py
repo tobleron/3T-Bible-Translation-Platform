@@ -96,7 +96,12 @@ def semantic_groups(items: list[dict[str, Any]], nlp: Any | None) -> list[dict[s
             best_group["score"] = round(best_score, 2)
 
     for group in groups:
-        group["entries"].sort(key=lambda entry: (str(entry.get("alias", "")), str(entry.get("lemma", ""))))
+        group["entries"].sort(
+            key=lambda entry: (
+                -int(entry.get("count", 0)),
+                str(entry.get("lemma", "")),
+            )
+        )
     groups.sort(
         key=lambda group: (
             0 if group.get("related") else 1,
@@ -118,30 +123,20 @@ def verse_word_stats(translations: list[dict[str, Any]], nlp: Any | None = None)
             aliases_by_lemma[lemma].append(alias)
 
     if denominator < 1:
-        return {"majority": [], "unique": []}
+        return {"word_choices": [], "word_groups": []}
 
-    majority = [
+    word_choices = [
         {
             "lemma": lemma,
             "count": count,
             "percent": round((count / denominator) * 100),
+            "aliases": aliases_by_lemma[lemma],
+            "alias_label": ", ".join(aliases_by_lemma[lemma]),
         }
         for lemma, count in counts.items()
-        if count > denominator / 2
     ]
-    unique = [
-        {
-            "lemma": lemma,
-            "alias": aliases_by_lemma[lemma][0],
-        }
-        for lemma, count in counts.items()
-        if count == 1 and aliases_by_lemma[lemma]
-    ]
-    majority.sort(key=lambda item: (-int(item["count"]), str(item["lemma"])))
-    unique.sort(key=lambda item: (str(item["alias"]), str(item["lemma"])))
+    word_choices.sort(key=lambda item: (-int(item["count"]), str(item["lemma"])))
     return {
-        "majority": majority,
-        "unique": unique,
-        "majority_groups": semantic_groups(majority, nlp),
-        "unique_groups": semantic_groups(unique, nlp),
+        "word_choices": word_choices,
+        "word_groups": semantic_groups(word_choices, nlp),
     }
