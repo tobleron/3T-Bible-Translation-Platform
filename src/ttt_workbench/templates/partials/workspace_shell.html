@@ -102,6 +102,10 @@
                 <input type="checkbox" id="prompt-context-filtered" value="filtered" data-prompt-context>
                 <span>Filtered</span>
               </label>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-context-avd" value="avd" data-prompt-context>
+                <span>AVD</span>
+              </label>
               {% if selected_testament == 'old' %}
               <label class="compact-check">
                 <input type="checkbox" id="prompt-context-hebrew" value="hebrew" data-prompt-context>
@@ -124,7 +128,7 @@
 
             <label class="compact-field prompt-preview-field">
               <span>Combined prompt</span>
-              <textarea id="prompt-engineering-preview" rows="7" readonly data-auto-resize></textarea>
+              <textarea id="prompt-engineering-preview" rows="7" readonly data-auto-resize dir="auto"></textarea>
             </label>
 
             <div class="prompt-engineering-actions">
@@ -1671,6 +1675,7 @@ function promptEngineeringContextMeta() {
   return [
     { id: 'prompt-context-draft', key: 'draft', label: 'Draft' },
     { id: 'prompt-context-filtered', key: 'filtered', label: 'Filtered' },
+    { id: 'prompt-context-avd', key: 'avd', label: 'AVD' },
     { id: 'prompt-context-hebrew', key: 'hebrew', label: 'Hebrew' },
     { id: 'prompt-context-hebrew-en', key: 'hebrew-en', label: 'Hebrew Literal' },
     { id: 'prompt-context-greek', key: 'greek', label: 'Greek' },

@@ -1,5 +1,5 @@
 {% for block in study_blocks if block.kind == 'translation' %}
-<div class="chunk-block translation-block" data-translation-alias="{{ block.label }}">
+<div class="chunk-block translation-block{% if block.direction == 'rtl' %} translation-block-rtl{% endif %}" data-translation-alias="{{ block.label }}"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>
   <div class="chunk-block-head">
     <div class="chunk-block-heading">
       <span class="verse-tag">{{ block.label }}</span>
@@ -20,7 +20,7 @@
     {% set v = loop.index0 + (state.chunk_start or 1) %}
     <div class="translation-verse-row" data-verse="{{ v }}">
       <span class="translation-verse-num">{{ v }}</span>
-      <span class="translation-verse-text">{{ verse_text or "[no text]" }}</span>
+      <span class="translation-verse-text"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>{{ verse_text or "[no text]" }}</span>
       <button class="translation-copy-btn" type="button" onclick="copyTranslationVerse(this, '{{ verse_text.replace("'", "\\'")|e }}')" title="Copy verse {{ v }}">Copy</button>
     </div>
     {% endfor %}

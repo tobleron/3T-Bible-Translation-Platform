@@ -1264,10 +1264,12 @@ Rules:
                     {
                         "verse": verse,
                         "primary_label": "Hebrew",
-                        "primary_surface": " ".join(
-                            t.get("surface", "").strip()
-                            for t in heb_tokens
-                            if t.get("surface", "").strip()
+                        "primary_surface": self._join_original_surfaces(
+                            [
+                                surface
+                                for t in heb_tokens
+                                if (surface := self._clean_original_surface(t.get("surface", "")))
+                            ]
                         )
                         or "[missing]",
                         "literal": " / ".join(
@@ -1456,7 +1458,21 @@ Rules:
 
     @staticmethod
     def _clean_original_surface(value: str) -> str:
-        return str(value or "").strip().replace("\\׃", "׃")
+        text = str(value or "").strip()
+        if not re.search(r"[\u0590-\u05ff]", text):
+            return text
+        text = text.replace("/", "")
+        text = text.replace("\\׃", "׃").replace("\\־", "־").replace("\\׀", "׀")
+        text = text.replace("\\", "")
+        text = re.sub(r"\s+[פס]\s*$", "", text)
+        return re.sub(r"\s+", " ", text).strip()
+
+    @staticmethod
+    def _join_original_surfaces(surfaces: list[str]) -> str:
+        text = " ".join(surface for surface in surfaces if surface).strip()
+        if re.search(r"[\u0590-\u05ff]", text):
+            text = text.replace("־ ", "־")
+        return text
 
     def lexical_ref(self, verse: int, *, corpus: str = "") -> str:
         """Build a lexical reference key using corpus-specific book codes."""
@@ -1532,7 +1548,7 @@ Rules:
                 ]
                 if gloss_tokens:
                     heb_gloss_lines.append({"verse": verse, "tokens": gloss_tokens})
-                verse_text = " ".join(surfaces)
+                verse_text = self._join_original_surfaces(surfaces)
                 if not verse_text:
                     verse_text = self._fallback_verse_text(verse) or "[no data]"
                 if verse_text and verse_text != "[no data]":
@@ -1637,6 +1653,7 @@ Rules:
                     "label": f"{alias}",
                     "caption": "",
                     "verse_texts": verse_texts,
+                    "direction": "rtl" if alias == "AVD" else "ltr",
                     "kind": "translation",
                 }
             )

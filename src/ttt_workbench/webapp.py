@@ -747,6 +747,21 @@ async def get_chat_prompt_text(
             text = re.sub(r"\s*;\s*$", "", text)
             return re.sub(r"\s+", " ", text).strip()
 
+        def translation_prompt_text(alias: str) -> str:
+            lines = []
+            start_verse = wb.state.chunk_start or 1
+            end_verse = wb.state.chunk_end or start_verse
+            for verse in range(start_verse, end_verse + 1):
+                text = wb.source_repo.verse_text(
+                    alias,
+                    wb.state.book or "",
+                    wb.state.chapter or 0,
+                    verse,
+                ).strip()
+                if text:
+                    lines.append(f"{verse}. {text}")
+            return "\n".join(lines)
+
         for block in blocks:
             kind = str(block.get("kind", "")).lower()
             if kind in {"hebrew", "greek"}:
@@ -766,6 +781,10 @@ async def get_chat_prompt_text(
                         en_lines.append(f"{verse}. {' '.join(words)}")
                 if en_lines:
                     payload[f"{kind}-en"] = "\n".join(en_lines)
+
+        avd_text = translation_prompt_text("AVD")
+        if avd_text:
+            payload["avd"] = avd_text
 
         return JSONResponse(payload)
     except Exception as exc:

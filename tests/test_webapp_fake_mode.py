@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 import ttt_core.llm.llama_cpp as llama_cpp
 import ttt_workbench.commands.commit as commitmod
 from ttt_workbench.test_support import FakeLLM
+from ttt_workbench.controller import BrowserWorkbench
 from ttt_core.data.repositories import LexicalRepository
 import ttt_webapp.app as appmod
 import ttt_webapp.controller as controllermod
@@ -16,6 +17,13 @@ import ttt_webapp.controller as controllermod
 
 def reset_controller() -> None:
     appmod._CONTROLLER = None
+
+
+def test_hebrew_original_surface_is_cleaned_for_display() -> None:
+    assert BrowserWorkbench._clean_original_surface("בְּ/רֵאשִׁ֖ית") == "בְּרֵאשִׁ֖ית"
+    assert BrowserWorkbench._clean_original_surface("עַל\\־") == "עַל־"
+    assert BrowserWorkbench._clean_original_surface("אֶחָֽד׃\\ \\פ") == "אֶחָֽד׃"
+    assert BrowserWorkbench._join_original_surfaces(["עַל־", "פְּנֵ֣י"]) == "עַל־פְּנֵ֣י"
 
 
 def test_settings_fake_mode_avoids_model_probe(monkeypatch) -> None:
@@ -194,6 +202,11 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             data={"selected_sources": ["NLT"]},
             headers={"accept": "application/json"},
         )
+        avd_json_response = client.post(
+            "/workspace/old/genesis/1/1-5/study/sources",
+            data={"selected_sources": ["AVD"]},
+            headers={"accept": "application/json"},
+        )
         try:
             assert sources_response.status_code == 200
             assert "context-panel" in sources_response.text
@@ -218,10 +231,16 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             assert nlt_json["selected_sources"] == ["NLT"]
             assert 'data-translation-alias="NLT"' in nlt_json["translation_blocks_html"]
             assert "In the beginning God created the heavens and the earth" in nlt_json["translation_blocks_html"]
+            assert avd_json_response.status_code == 200
+            avd_json = avd_json_response.json()
+            assert avd_json["selected_sources"] == ["AVD"]
+            assert 'data-translation-alias="AVD" dir="rtl"' in avd_json["translation_blocks_html"]
+            assert '<span class="translation-verse-text" dir="rtl">' in avd_json["translation_blocks_html"]
         finally:
             sources_response.close()
             sources_json_response.close()
             nlt_json_response.close()
+            avd_json_response.close()
     reset_controller()
 
 def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypatch) -> None:

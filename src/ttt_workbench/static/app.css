@@ -1044,6 +1044,11 @@ button:active:not(:disabled) {
   line-height: 1.42;
   color: var(--muted);
 }
+.translation-block-rtl .translation-verse-text {
+  direction: rtl;
+  unicode-bidi: plaintext;
+  text-align: right;
+}
 .original-verse-text.hebrew {
   font-family: var(--hebrew);
   direction: rtl;
@@ -2081,6 +2086,7 @@ button:active:not(:disabled) {
   font-family: var(--mono-font, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 0.8rem;
   line-height: 1.45;
+  unicode-bidi: plaintext;
 }
 .prompt-engineering-actions {
   display: flex;
