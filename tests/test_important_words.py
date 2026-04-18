@@ -33,6 +33,14 @@ class WordNlp:
         ]
 
 
+class BeginningNlp:
+    def __call__(self, text: str):
+        del text
+        return [
+            SimpleNamespace(text="beginning", lemma_="begin", pos_="VERB", is_stop=False, is_alpha=True),
+        ]
+
+
 class SimilarityToken:
     has_vector = True
     vector_norm = 1.0
@@ -58,6 +66,10 @@ def test_important_lemmas_keep_unique_content_lemmas_only() -> None:
         "dark": 4,
         "water": 6,
     }
+
+
+def test_beginning_surface_is_not_reduced_to_begin() -> None:
+    assert important_lemmas("beginning", BeginningNlp()) == ["beginning"]
 
 
 def test_glossary_lemma_order_uses_original_gloss_sequence() -> None:

@@ -28,6 +28,8 @@ def _kept_token_lemma(token: Any) -> str:
     pos = getattr(token, "pos_", "")
     raw_text = str(getattr(token, "text", "") or "")
     lemma = str(getattr(token, "lemma_", "") or raw_text).strip().lower()
+    if raw_text.lower() == "beginning" and lemma == "begin":
+        lemma = "beginning"
     if not lemma:
         return ""
     if getattr(token, "is_stop", False):
