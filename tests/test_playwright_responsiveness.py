@@ -155,3 +155,30 @@ def test_study_source_checkbox_adds_translation_block(page: Page, live_server_ur
     expect(kjv_toggle).to_be_checked()
     expect(kjv_block).to_have_count(1)
     expect(kjv_block.locator(".translation-verse-row")).not_to_have_count(0)
+
+
+def test_new_study_translation_respects_active_verse_filter(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    kjv_toggle = page.locator('[data-study-source-toggle][value="KJV"]')
+    kjv_block = page.locator('#study-blocks .translation-block[data-translation-alias="KJV"]')
+
+    if kjv_toggle.is_checked():
+        kjv_toggle.uncheck()
+        expect(kjv_block).to_have_count(0)
+
+    page.locator("#study-verse-filter").fill("1-2")
+    page.locator("#study-verse-filter-apply").click()
+    kjv_toggle.check()
+    expect(kjv_block).to_have_count(1)
+
+    visibility = kjv_block.evaluate(
+        """
+        (block) => Array.from(block.querySelectorAll('.translation-verse-row[data-verse]')).map((row) => ({
+          verse: row.getAttribute('data-verse'),
+          visible: row.style.display !== 'none'
+        }))
+        """
+    )
+    assert visibility
+    assert {row["verse"] for row in visibility if row["visible"]} <= {"1", "2"}
+    assert any(row["verse"] == "3" and not row["visible"] for row in visibility)

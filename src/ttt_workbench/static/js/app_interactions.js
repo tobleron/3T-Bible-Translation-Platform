@@ -169,8 +169,8 @@
         contextPanel.classList.remove('is-updating-study');
         delete contextPanel.dataset.tttStudyScrollTop;
       }
-      if (typeof window.applySavedStudyPreferences === 'function') {
-        window.applySavedStudyPreferences();
+      if (typeof window.TTTInteractions !== 'undefined') {
+        window.TTTInteractions.applyCurrentStudyPreferences();
       }
       if (typeof window.syncPromptEngineeringDraftAvailability === 'function') {
         window.syncPromptEngineeringDraftAvailability();
@@ -201,10 +201,24 @@
     });
   }
 
-  function restoreStudyState() {
-    if (typeof window.applySavedStudyPreferences === 'function') {
-      window.applySavedStudyPreferences();
+  function applyCurrentStudyPreferences() {
+    var fontSize = localStorage.getItem('studyFontSize') || '16';
+    if (typeof window.applyStudyFontSize === 'function') {
+      window.applyStudyFontSize(fontSize);
     }
+    var sizeSelect = document.getElementById('study-font-size');
+    if (sizeSelect) sizeSelect.value = fontSize;
+
+    var verseFilterValue = localStorage.getItem('studyVerseFilter') || '';
+    var verseFilter = document.getElementById('study-verse-filter');
+    if (verseFilter) verseFilter.value = verseFilterValue;
+    if (verseFilterValue && typeof window.applyStudyVerseFilter === 'function') {
+      window.applyStudyVerseFilter();
+    }
+  }
+
+  function restoreStudyState() {
+    applyCurrentStudyPreferences();
     if (typeof window.syncPromptEngineeringDraftAvailability === 'function') {
       window.syncPromptEngineeringDraftAvailability();
     }
@@ -298,6 +312,7 @@
     setBusy: setBusy,
     restoreBusy: restoreBusy,
     replaceTranslationBlocks: replaceTranslationBlocks,
+    applyCurrentStudyPreferences: applyCurrentStudyPreferences,
     perfEnabled: function () { return perfEnabled; },
   };
 }());
