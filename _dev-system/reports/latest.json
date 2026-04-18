@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-17T23:29:37.132743+00:00",
+  "generated_at": "2026-04-18T04:04:51.344828+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
     "files_scanned": 139,
@@ -461,6 +461,21 @@
       "findings": []
     },
     {
+      "path": "src/ttt_workbench/chainlit_app.py",
+      "role": "browser-route",
+      "language": "python",
+      "loc": 145,
+      "risk": 7.88,
+      "preferred_loc": 760,
+      "hard_loc": 1300,
+      "branches": 36,
+      "max_nesting": 5,
+      "mutable_state": 39,
+      "imports": 4,
+      "callables": 8,
+      "findings": []
+    },
+    {
       "path": "src/ttt_workbench/commands/help.py",
       "role": "general-python",
       "language": "python",
@@ -473,21 +488,6 @@
       "mutable_state": 45,
       "imports": 5,
       "callables": 10,
-      "findings": []
-    },
-    {
-      "path": "src/ttt_workbench/chainlit_app.py",
-      "role": "browser-route",
-      "language": "python",
-      "loc": 134,
-      "risk": 7.54,
-      "preferred_loc": 760,
-      "hard_loc": 1300,
-      "branches": 34,
-      "max_nesting": 5,
-      "mutable_state": 34,
-      "imports": 4,
-      "callables": 6,
       "findings": []
     },
     {
@@ -1205,7 +1205,7 @@
       "path": "tests/test_chainlit_app.py",
       "role": "test",
       "language": "python",
-      "loc": 58,
+      "loc": 61,
       "risk": 2.13,
       "preferred_loc": 520,
       "hard_loc": 900,

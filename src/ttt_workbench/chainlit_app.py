@@ -24,6 +24,7 @@ def _reply_display_parts(text: str):
 async def _stream_model_reply(wb, messages):
     full_reply = []
     assistant_msg = None
+    thinking_msg = None
     error_occurred = False
     is_thinking = False
     thinking_tokens = []
@@ -34,6 +35,21 @@ async def _stream_model_reply(wb, messages):
             assistant_msg = cl.Message(content="")
             await assistant_msg.send()
         return assistant_msg
+
+    async def ensure_thinking_msg():
+        nonlocal thinking_msg
+        if thinking_msg is None:
+            thinking_msg = cl.Message(content="Thinking..")
+            await thinking_msg.send()
+        return thinking_msg
+
+    async def finalize_thinking_msg():
+        nonlocal thinking_msg
+        if thinking_msg is None:
+            return
+        thinking_msg.content = _thinking_block("".join(thinking_tokens))
+        await thinking_msg.update()
+        thinking_msg = None
 
     try:
         for raw_token in wb.llm.stream_generation(
@@ -55,12 +71,11 @@ async def _stream_model_reply(wb, messages):
                     before, marker, after = token.partition("</think>")
                     if before:
                         thinking_tokens.append(before)
+                        msg = await ensure_thinking_msg()
+                        await msg.stream_token(before)
                     if marker:
                         is_thinking = False
-                        await cl.Message(
-                            content=_thinking_block("".join(thinking_tokens)),
-                            author="Assistant",
-                        ).send()
+                        await finalize_thinking_msg()
                         thinking_tokens = []
                         token = after
                         continue
@@ -72,15 +87,13 @@ async def _stream_model_reply(wb, messages):
                     await msg.stream_token(before)
                 if marker:
                     is_thinking = True
+                    await ensure_thinking_msg()
                     token = after
                     continue
                 break
 
         if is_thinking and thinking_tokens:
-            await cl.Message(
-                content=_thinking_block("".join(thinking_tokens)),
-                author="Assistant",
-            ).send()
+            await finalize_thinking_msg()
 
     except Exception as exc:
         print(f"[CHAINLIT ERROR] {exc}", file=sys.stderr)

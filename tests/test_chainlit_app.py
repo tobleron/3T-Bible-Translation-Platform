@@ -63,13 +63,16 @@ def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
     assert error_occurred is False
     assert reply == "<think>checking source</think>```text\nVerse output.\n```"
     assert msg is not None
-    assert events[:2] == [
+    assert events[:4] == [
+        ("message.send", "Thinking.."),
+        ("message.token", "checking"),
+        ("message.token", " source"),
         (
-            "message.send",
+            "message.update",
             "<details><summary>Thinking..</summary>\n\nchecking source\n\n</details>",
         ),
-        ("message.send", ""),
     ]
-    assert events[2:] == [
+    assert events[4:] == [
+        ("message.send", ""),
         ("message.token", "```text\nVerse output.\n```"),
     ]
