@@ -548,7 +548,7 @@ function applyStudyFontSize(px) {
   var analysis = document.getElementById('study-word-analysis');
   if (analysis) {
     analysis.style.fontSize = px + 'px';
-    analysis.querySelectorAll('.word-choice-line, .word-stat-label, .word-analysis-head .context-meta').forEach(function(b) { b.style.fontSize = px + 'px'; });
+    analysis.querySelectorAll('.word-choice-line, .word-stat-label').forEach(function(b) { b.style.fontSize = px + 'px'; });
     analysis.querySelectorAll('.word-choice-sources').forEach(function(b) { b.style.fontSize = Math.max(10, Math.round(parseInt(px, 10) * 0.86)) + 'px'; });
   }
 }

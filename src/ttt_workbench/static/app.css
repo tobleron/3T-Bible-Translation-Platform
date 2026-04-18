@@ -2382,6 +2382,9 @@ input[type="submit"].is-loading {
 }
 .source-chip-all {
   color: var(--text);
+  padding-right: 0.25rem;
+  margin-right: 0.1rem;
+  font-weight: 500;
 }
 .source-chip input:indeterminate {
   accent-color: var(--accent);
@@ -2417,12 +2420,12 @@ input[type="submit"].is-loading {
 }
 .word-analysis-list {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.45rem;
 }
 .word-analysis-verse {
   display: grid;
-  gap: 0.65rem;
-  padding: 0.7rem 0.75rem;
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem;
   border: 1px solid rgba(255,255,255,0.07);
   background: rgba(255,255,255,0.025);
 }
@@ -2430,8 +2433,8 @@ input[type="submit"].is-loading {
 .word-stat-row,
 .word-translation-row {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 0.6rem;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 0.45rem;
   align-items: start;
 }
 .word-stat-label,
@@ -2443,18 +2446,17 @@ input[type="submit"].is-loading {
 }
 .word-group-stack {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.08rem;
 }
 .word-meaning-group {
   display: grid;
-  gap: 0.26rem;
+  gap: 0.08rem;
   align-content: start;
-  padding: 0.3rem 0.45rem;
-  border-left: 2px solid transparent;
+  padding: 0.06rem 0;
+  border-left: 0;
 }
 .word-meaning-group.has-related {
-  border-left-color: rgba(245, 196, 89, 0.55);
-  background: rgba(245, 196, 89, 0.045);
+  background: transparent;
 }
 .word-chip {
   display: inline-flex;
@@ -2477,17 +2479,17 @@ input[type="submit"].is-loading {
 .word-choice-line {
   display: flex;
   align-items: baseline;
-  gap: 0.42rem;
+  gap: 0.35rem;
   flex-wrap: wrap;
   color: var(--text);
   line-height: 1.35;
 }
 .word-choice-main {
-  font-weight: 650;
+  font-weight: 400;
 }
 .word-choice-percent {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 400;
 }
 .word-choice-sources {
   color: var(--muted);

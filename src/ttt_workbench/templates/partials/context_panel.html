@@ -12,7 +12,7 @@
         {% set source_rows = namespace(row=1) %}
         <label class="source-chip source-chip-all">
           <input type="checkbox" data-study-source-row-toggle data-source-row="1">
-          <span>All</span>
+          <span>Select all</span>
         </label>
         {% for option in comparison_source_options %}
         {% if option.separator %}
@@ -20,7 +20,7 @@
         {% set source_rows.row = 2 %}
         <label class="source-chip source-chip-all">
           <input type="checkbox" data-study-source-row-toggle data-source-row="2">
-          <span>All</span>
+          <span>Select all</span>
         </label>
         {% else %}
         <label class="source-chip {% if option.selected %}is-selected{% endif %} {% if option.disabled %}is-disabled{% endif %}">
