@@ -3,7 +3,7 @@
 
   var COPY_BUTTON_CLASS = 'ttt-chainlit-copy-button';
   var COPIED_CLASS = 'ttt-chainlit-copy-copied';
-  var COPY_ICON = '\u2398';
+  var COPY_ICON = '\u29c9';
   var COPIED_ICON = '\u2713';
 
   function writeClipboardText(text) {
@@ -52,6 +52,13 @@
     if (!text || text.length < 2) return;
     container.dataset.tttCopyBound = '1';
     container.classList.add('ttt-chainlit-copy-host');
+    var messageFrame = container.closest('[data-step-type]');
+    if (messageFrame) {
+      messageFrame.classList.add('ttt-chainlit-message-frame');
+      if (messageFrame.getAttribute('data-step-type') === 'user_message') {
+        container.classList.add('ttt-chainlit-user-prompt');
+      }
+    }
 
     var button = document.createElement('button');
     button.type = 'button';
