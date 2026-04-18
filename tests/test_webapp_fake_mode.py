@@ -150,9 +150,16 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             data={"selected_sources": ["LSB", "ESV", "KJV"]},
             headers={"accept": "application/json"},
         )
+        nlt_json_response = client.post(
+            "/workspace/old/genesis/1/1-5/study/sources",
+            data={"selected_sources": ["NLT"]},
+            headers={"accept": "application/json"},
+        )
         try:
             assert sources_response.status_code == 200
             assert "context-panel" in sources_response.text
+            assert 'value="NLT"' in sources_response.text
+            assert sources_response.text.index('value="NLT"') < sources_response.text.index('role="separator"')
             assert "LSB" in sources_response.text
             assert 'value="LSB" checked' in sources_response.text
             assert 'value="ESV" checked' in sources_response.text
@@ -162,9 +169,15 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             assert sources_json["ok"] is True
             assert sources_json["selected_sources"] == ["LSB", "ESV", "KJV"]
             assert 'data-translation-alias="KJV"' in sources_json["translation_blocks_html"]
+            assert nlt_json_response.status_code == 200
+            nlt_json = nlt_json_response.json()
+            assert nlt_json["selected_sources"] == ["NLT"]
+            assert 'data-translation-alias="NLT"' in nlt_json["translation_blocks_html"]
+            assert "In the beginning God created the heavens and the earth" in nlt_json["translation_blocks_html"]
         finally:
             sources_response.close()
             sources_json_response.close()
+            nlt_json_response.close()
     reset_controller()
 
 def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypatch) -> None:
