@@ -106,6 +106,13 @@
   }
 
   function messageBodyHost(node) {
+    var frame = node.matches('[data-step-type]') ? node : node.closest('[data-step-type]');
+    if (frame && frame.getAttribute('data-step-type') === 'user_message') {
+      var userBubble = frame.querySelector('.bg-accent.rounded-3xl')
+        || frame.querySelector('[class*="bg-accent"][class*="rounded-"]');
+      if (userBubble && messageText(userBubble).length >= 2) return userBubble;
+    }
+
     var bodySelectors = [
       '.markdown-body',
       '[class*="markdown"]',

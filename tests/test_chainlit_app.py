@@ -104,4 +104,5 @@ def test_chainlit_copy_button_asset_is_configured() -> None:
     assert "ttt-chainlit-copy-button" in script_text
     assert "COPY_ICON = '\\u29c9'" in script_text
     assert "ttt-chainlit-user-prompt" in script_text
+    assert ".bg-accent.rounded-3xl" in script_text
     assert "writeClipboardText(messageText(container))" in script_text
