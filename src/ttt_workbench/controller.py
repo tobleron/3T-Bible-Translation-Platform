@@ -30,9 +30,9 @@ from ttt_workbench.repositories import restore_backup_set
 
 from .chunk_catalog import ChunkCatalogRepository
 from .important_words import (
-    glossary_lemma_order,
-    important_lemma_positions,
-    important_lemmas,
+    glossary_word_order,
+    important_word_positions,
+    important_words,
     load_spacy_model,
     verse_word_stats,
 )
@@ -1664,7 +1664,7 @@ Rules:
                 gloss_token = self._literal_gloss_token(token, lexicon)
                 if gloss_token:
                     glosses.append(gloss_token["gloss"])
-            order_by_verse[verse] = glossary_lemma_order(glosses, nlp)
+            order_by_verse[verse] = glossary_word_order(glosses, nlp)
         return order_by_verse
 
     def chunk_translation_word_analysis(self) -> dict[str, Any]:
@@ -1689,8 +1689,8 @@ Rules:
                     {
                         "alias": alias,
                         "text": text,
-                        "lemmas": important_lemmas(text, nlp),
-                        "lemma_positions": important_lemma_positions(text, nlp),
+                        "words": important_words(text, nlp),
+                        "word_positions": important_word_positions(text, nlp),
                     }
                 )
             stats = verse_word_stats(translations, nlp, original_order_by_verse.get(verse, {}))

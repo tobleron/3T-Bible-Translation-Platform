@@ -24,13 +24,11 @@ def load_spacy_model() -> tuple[Any | None, str]:
         return None, "spaCy model en_core_web_sm is not installed. Reinstall the workbench requirements to enable important-word analysis."
 
 
-def _kept_token_lemma(token: Any) -> str:
+def _kept_token_word(token: Any) -> str:
     pos = getattr(token, "pos_", "")
     raw_text = str(getattr(token, "text", "") or "")
-    lemma = str(getattr(token, "lemma_", "") or raw_text).strip().lower()
-    if raw_text.lower() == "beginning" and lemma == "begin":
-        lemma = "beginning"
-    if not lemma:
+    word = raw_text.strip().lower()
+    if not word:
         return ""
     if getattr(token, "is_stop", False):
         return ""
@@ -38,61 +36,77 @@ def _kept_token_lemma(token: Any) -> str:
         return ""
     if not getattr(token, "is_alpha", raw_text.isalpha()):
         return ""
-    return lemma
+    return word
 
 
-def important_lemma_positions(text: str, nlp: Any) -> dict[str, int]:
+def important_word_positions(text: str, nlp: Any) -> dict[str, int]:
     if not text.strip():
         return {}
     positions: dict[str, int] = {}
     for index, token in enumerate(nlp(text)):
-        lemma = _kept_token_lemma(token)
-        if lemma and lemma not in positions:
-            positions[lemma] = index
+        word = _kept_token_word(token)
+        if word and word not in positions:
+            positions[word] = index
     return positions
 
 
-def important_lemmas(text: str, nlp: Any) -> list[str]:
-    return list(important_lemma_positions(text, nlp).keys())
+def important_words(text: str, nlp: Any) -> list[str]:
+    return list(important_word_positions(text, nlp).keys())
 
 
-def glossary_lemma_order(glosses: list[str], nlp: Any) -> dict[str, int]:
+def glossary_word_order(glosses: list[str], nlp: Any) -> dict[str, int]:
     order: dict[str, int] = {}
     ordinal = 0
     for gloss in glosses:
         clean_gloss = str(gloss or "").replace(";", " ")
-        lemmas = important_lemmas(clean_gloss, nlp)
-        for lemma in lemmas:
-            if lemma not in order:
-                order[lemma] = ordinal
+        words = important_words(clean_gloss, nlp)
+        for word in words:
+            if word not in order:
+                order[word] = ordinal
         for raw_word in re.findall(r"[A-Za-z]+", clean_gloss.lower()):
-            if raw_word not in order and lemmas:
+            if raw_word not in order and words:
                 order[raw_word] = ordinal
-        if lemmas:
+        if words:
             ordinal += 1
     return order
 
 
-def translation_lemma_order(translations: list[dict[str, Any]]) -> dict[str, int]:
+def translation_word_order(translations: list[dict[str, Any]]) -> dict[str, int]:
     order: dict[str, int] = {}
     for row in translations:
-        positions = row.get("lemma_positions", {})
+        positions = row.get("word_positions", {})
         if not isinstance(positions, dict):
             continue
-        for lemma, position in positions.items():
+        for word, position in positions.items():
             try:
                 offset = int(position)
             except (TypeError, ValueError):
                 continue
-            if lemma not in order or offset < order[lemma]:
-                order[str(lemma)] = offset
+            if word not in order or offset < order[word]:
+                order[str(word)] = offset
     return order
+
+
+def original_order_for_word(word: str, original_order: dict[str, int], nlp: Any | None) -> int | None:
+    if word in original_order:
+        return original_order[word]
+    if nlp is None:
+        return None
+    try:
+        doc = nlp(word)
+    except Exception:
+        return None
+    for token in doc:
+        lemma = str(getattr(token, "lemma_", "") or "").strip().lower()
+        if lemma in original_order:
+            return original_order[lemma]
+    return None
 
 
 SIMILARITY_THRESHOLD = 0.72
 
 
-def _lemma_similarity(left: str, right: str, nlp: Any) -> float:
+def _word_similarity(left: str, right: str, nlp: Any) -> float:
     try:
         left_doc = nlp(left)
         right_doc = nlp(right)
@@ -119,12 +133,12 @@ def semantic_groups(items: list[dict[str, Any]], nlp: Any | None) -> list[dict[s
         return [{"entries": [item], "related": False, "order": int(item.get("order", 1_000_000))} for item in items]
 
     for item in items:
-        lemma = str(item.get("lemma", ""))
+        word = str(item.get("word", ""))
         best_group: dict[str, Any] | None = None
         best_score = 0.0
         for group in groups:
             score = max(
-                _lemma_similarity(lemma, str(entry.get("lemma", "")), nlp)
+                _word_similarity(word, str(entry.get("word", "")), nlp)
                 for entry in group["entries"]
             )
             if score >= SIMILARITY_THRESHOLD and score > best_score:
@@ -146,13 +160,13 @@ def semantic_groups(items: list[dict[str, Any]], nlp: Any | None) -> list[dict[s
             key=lambda entry: (
                 int(entry.get("order", 1_000_000)),
                 -int(entry.get("count", 0)),
-                str(entry.get("lemma", "")),
+                str(entry.get("word", "")),
             )
         )
     groups.sort(
         key=lambda group: (
             int(group.get("order", 1_000_000)),
-            str(group["entries"][0].get("lemma", "")),
+            str(group["entries"][0].get("word", "")),
         )
     )
     return groups
@@ -165,30 +179,32 @@ def verse_word_stats(
 ) -> dict[str, Any]:
     denominator = sum(1 for row in translations if str(row.get("text", "")).strip())
     counts: Counter[str] = Counter()
-    aliases_by_lemma: dict[str, list[str]] = defaultdict(list)
-    fallback_order = translation_lemma_order(translations)
+    aliases_by_word: dict[str, list[str]] = defaultdict(list)
+    fallback_order = translation_word_order(translations)
     original_order = original_order or {}
     for row in translations:
         alias = str(row.get("alias", ""))
-        for lemma in set(row.get("lemmas", [])):
-            counts[lemma] += 1
-            aliases_by_lemma[lemma].append(alias)
+        for word in set(row.get("words", [])):
+            counts[word] += 1
+            aliases_by_word[word].append(alias)
 
     if denominator < 1:
         return {"word_choices": [], "word_groups": []}
 
-    word_choices = [
-        {
-            "lemma": lemma,
-            "count": count,
-            "percent": round((count / denominator) * 100),
-            "aliases": aliases_by_lemma[lemma],
-            "alias_label": ", ".join(aliases_by_lemma[lemma]),
-            "order": original_order[lemma] if lemma in original_order else 10_000 + fallback_order.get(lemma, 1_000_000),
-        }
-        for lemma, count in counts.items()
-    ]
-    word_choices.sort(key=lambda item: (int(item["order"]), -int(item["count"]), str(item["lemma"])))
+    word_choices = []
+    for word, count in counts.items():
+        source_order = original_order_for_word(word, original_order, nlp)
+        word_choices.append(
+            {
+                "word": word,
+                "count": count,
+                "percent": round((count / denominator) * 100),
+                "aliases": aliases_by_word[word],
+                "alias_label": ", ".join(aliases_by_word[word]),
+                "order": source_order if source_order is not None else 10_000 + fallback_order.get(word, 1_000_000),
+            }
+        )
+    word_choices.sort(key=lambda item: (int(item["order"]), -int(item["count"]), str(item["word"])))
     return {
         "word_choices": word_choices,
         "word_groups": semantic_groups(word_choices, nlp),

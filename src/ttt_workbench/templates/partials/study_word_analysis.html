@@ -3,7 +3,7 @@
   <div class="chunk-block-head">
     <div class="chunk-block-heading">
       <span class="verse-tag">Important Words</span>
-      <span class="context-meta">spaCy lemma comparison</span>
+      <span class="context-meta">spaCy word comparison</span>
     </div>
     {% if translation_word_analysis.available %}
     <span class="inline-badge">{{ translation_word_analysis.selected_count }} source{% if translation_word_analysis.selected_count != 1 %}s{% endif %}</span>
@@ -22,7 +22,7 @@
           <div class="word-meaning-group{% if group.related %} has-related{% endif %}">
           {% for item in group.entries %}
             <span class="word-choice-line">
-              <span class="word-choice-main">{{ item.lemma }}</span>
+              <span class="word-choice-main">{{ item.word }}</span>
               <span class="word-choice-percent">{{ item.percent }}%</span>
               <span class="word-choice-sources">({{ item.alias_label }})</span>
             </span>

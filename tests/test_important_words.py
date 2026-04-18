@@ -3,9 +3,9 @@ from __future__ import annotations
 from types import SimpleNamespace
 
 from ttt_workbench.important_words import (
-    glossary_lemma_order,
-    important_lemma_positions,
-    important_lemmas,
+    glossary_word_order,
+    important_word_positions,
+    important_words,
     semantic_groups,
     verse_word_stats,
 )
@@ -33,14 +33,6 @@ class WordNlp:
         ]
 
 
-class BeginningNlp:
-    def __call__(self, text: str):
-        del text
-        return [
-            SimpleNamespace(text="beginning", lemma_="begin", pos_="VERB", is_stop=False, is_alpha=True),
-        ]
-
-
 class SimilarityToken:
     has_vector = True
     vector_norm = 1.0
@@ -58,22 +50,18 @@ class SimilarityNlp:
         return [SimilarityToken(text)]
 
 
-def test_important_lemmas_keep_unique_content_lemmas_only() -> None:
-    assert important_lemmas("ignored", FakeNlp()) == ["spirit", "hover", "dark", "water"]
-    assert important_lemma_positions("ignored", FakeNlp()) == {
+def test_important_words_keep_unique_content_words_only() -> None:
+    assert important_words("ignored", FakeNlp()) == ["spirit", "hovered", "dark", "water"]
+    assert important_word_positions("ignored", FakeNlp()) == {
         "spirit": 1,
-        "hover": 2,
+        "hovered": 2,
         "dark": 4,
         "water": 6,
     }
 
 
-def test_beginning_surface_is_not_reduced_to_begin() -> None:
-    assert important_lemmas("beginning", BeginningNlp()) == ["beginning"]
-
-
-def test_glossary_lemma_order_uses_original_gloss_sequence() -> None:
-    assert glossary_lemma_order(["dark water", "spirit hover"], WordNlp()) == {
+def test_glossary_word_order_uses_original_gloss_sequence() -> None:
+    assert glossary_word_order(["dark water", "spirit hover"], WordNlp()) == {
         "dark": 0,
         "water": 0,
         "spirit": 1,
@@ -84,39 +72,39 @@ def test_glossary_lemma_order_uses_original_gloss_sequence() -> None:
 def test_verse_word_stats_returns_percentages_and_source_aliases() -> None:
     stats = verse_word_stats(
         [
-            {"alias": "A", "text": "x", "lemmas": ["create", "earth"]},
-            {"alias": "B", "text": "x", "lemmas": ["create", "world"]},
-            {"alias": "C", "text": "x", "lemmas": ["create", "land"]},
+            {"alias": "D", "text": "x", "words": ["created", "earth"]},
+            {"alias": "E", "text": "x", "words": ["created", "world"]},
+            {"alias": "F", "text": "x", "words": ["created", "land"]},
         ],
-        original_order={"earth": 0, "create": 1},
+        original_order={"earth": 0, "created": 1},
     )
     assert stats["word_choices"][0] == {
-        "lemma": "earth",
+        "word": "earth",
         "count": 1,
         "percent": 33,
-        "aliases": ["A"],
-        "alias_label": "A",
+        "aliases": ["D"],
+        "alias_label": "D",
         "order": 0,
     }
     assert stats["word_choices"][1] == {
-        "lemma": "create",
+        "word": "created",
         "count": 3,
         "percent": 100,
-        "aliases": ["A", "B", "C"],
-        "alias_label": "A, B, C",
+        "aliases": ["D", "E", "F"],
+        "alias_label": "D, E, F",
         "order": 1,
     }
 
 
-def test_semantic_groups_stack_related_lemmas() -> None:
+def test_semantic_groups_stack_related_words() -> None:
     groups = semantic_groups(
         [
-            {"lemma": "genealogy", "count": 1, "alias_label": "A", "order": 2},
-            {"lemma": "ancestry", "count": 1, "alias_label": "B", "order": 1},
-            {"lemma": "earth", "count": 1, "alias_label": "C", "order": 0},
+            {"word": "genealogy", "count": 1, "alias_label": "A", "order": 2},
+            {"word": "ancestry", "count": 1, "alias_label": "B", "order": 1},
+            {"word": "earth", "count": 1, "alias_label": "C", "order": 0},
         ],
         SimilarityNlp(),
     )
-    assert groups[0]["entries"] == [{"lemma": "earth", "count": 1, "alias_label": "C", "order": 0}]
+    assert groups[0]["entries"] == [{"word": "earth", "count": 1, "alias_label": "C", "order": 0}]
     assert groups[1]["related"] is True
-    assert [entry["lemma"] for entry in groups[1]["entries"]] == ["ancestry", "genealogy"]
+    assert [entry["word"] for entry in groups[1]["entries"]] == ["ancestry", "genealogy"]
