@@ -5,21 +5,24 @@
 
 .ttt-chainlit-copy-host {
   position: relative;
+  padding-right: 2rem;
 }
 
 .ttt-chainlit-copy-button {
   position: absolute;
-  right: 0.35rem;
-  bottom: 0.25rem;
+  right: 0.25rem;
+  top: 0.25rem;
   z-index: 2;
   border: 1px solid rgba(160, 160, 160, 0.35);
   border-radius: 6px;
   background: rgba(24, 24, 24, 0.82);
   color: #f4f4f4;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1;
-  padding: 0.3rem 0.45rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  padding: 0;
   opacity: 0;
   transition: opacity 120ms ease, border-color 120ms ease, background-color 120ms ease;
 }

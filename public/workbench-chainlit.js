@@ -3,6 +3,8 @@
 
   var COPY_BUTTON_CLASS = 'ttt-chainlit-copy-button';
   var COPIED_CLASS = 'ttt-chainlit-copy-copied';
+  var COPY_ICON = '\u2398';
+  var COPIED_ICON = '\u2713';
 
   function writeClipboardText(text) {
     var value = String(text || '');
@@ -54,23 +56,23 @@
     var button = document.createElement('button');
     button.type = 'button';
     button.className = COPY_BUTTON_CLASS;
-    button.textContent = 'Copy';
+    button.textContent = COPY_ICON;
     button.title = 'Copy message';
     button.setAttribute('aria-label', 'Copy message');
     button.addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
       writeClipboardText(messageText(container)).then(function () {
-        button.textContent = 'Copied';
+        button.textContent = COPIED_ICON;
         button.classList.add(COPIED_CLASS);
         setTimeout(function () {
-          button.textContent = 'Copy';
+          button.textContent = COPY_ICON;
           button.classList.remove(COPIED_CLASS);
         }, 1400);
       }, function () {
-        button.textContent = 'Failed';
+        button.textContent = '!';
         setTimeout(function () {
-          button.textContent = 'Copy';
+          button.textContent = COPY_ICON;
         }, 1800);
       });
     });
@@ -80,20 +82,37 @@
   function candidateMessages() {
     var selectors = [
       '[data-step-type]',
-      '[data-test*="message"]',
-      '[class*="message"]'
+      '[data-test*="message"]'
     ];
     var nodes = Array.prototype.slice.call(document.querySelectorAll(selectors.join(',')));
-    return nodes.filter(function (node) {
+    nodes = nodes.map(function (node) {
+      return messageBodyHost(node);
+    }).filter(Boolean);
+    return Array.from(new Set(nodes)).filter(function (node) {
       if (!(node instanceof HTMLElement)) return false;
       if (node.closest('form, nav, header, footer')) return false;
       if (node.querySelector('.' + COPY_BUTTON_CLASS)) return false;
       var text = messageText(node);
       if (!text || text.length < 2) return false;
-      return !nodes.some(function (other) {
-        return other !== node && other.contains(node) && messageText(other).length <= text.length + 80;
-      });
+      return true;
     });
+  }
+
+  function messageBodyHost(node) {
+    var bodySelectors = [
+      '.markdown-body',
+      '[class*="markdown"]',
+      '[data-testid*="content"]',
+      '[data-test*="content"]'
+    ];
+    for (var i = 0; i < bodySelectors.length; i += 1) {
+      var body = node.querySelector(bodySelectors[i]);
+      if (body && messageText(body).length >= 2) return body;
+    }
+    if (node.children.length === 1 && messageText(node.firstElementChild).length >= 2) {
+      return node.firstElementChild;
+    }
+    return node;
   }
 
   function enhanceMessages() {

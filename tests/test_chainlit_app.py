@@ -102,4 +102,5 @@ def test_chainlit_copy_button_asset_is_configured() -> None:
 
     assert 'custom_js = "/public/workbench-chainlit.js"' in config_text
     assert "ttt-chainlit-copy-button" in script_text
+    assert "COPY_ICON = '\\u2398'" in script_text
     assert "writeClipboardText(messageText(container))" in script_text
