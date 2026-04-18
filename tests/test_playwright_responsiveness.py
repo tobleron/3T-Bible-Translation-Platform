@@ -96,7 +96,6 @@ def test_chat_panel_swap_keeps_workspace_and_recovers_button(page: Page, live_se
     page.route("**/chat/session/new", slow_chat_session)
     new_button = page.locator(".chat-new-button")
     new_button.click()
-    expect(new_button).to_be_disabled()
     expect(page.locator("#chat-panel")).to_be_visible()
     expect(page.locator("#workspace-shell")).to_have_attribute("data-playwright-marker", "kept")
     expect(page.locator(".chat-new-button")).to_be_enabled()

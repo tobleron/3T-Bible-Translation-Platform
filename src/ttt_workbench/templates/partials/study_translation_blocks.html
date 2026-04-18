@@ -1,0 +1,30 @@
+{% for block in study_blocks if block.kind == 'translation' %}
+<div class="chunk-block translation-block" data-translation-alias="{{ block.label }}">
+  <div class="chunk-block-head">
+    <div class="chunk-block-heading">
+      <span class="verse-tag">{{ block.label }}</span>
+      {% if block.caption %}
+      <span class="context-meta">{{ block.caption }}</span>
+      {% endif %}
+    </div>
+    <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label }}" onclick="applyStudyTranslationToDraft(this)" title="Load {{ block.label }} into the draft verses">
+      Use In Draft
+    </button>
+  </div>
+  {% if block.text %}
+  <div class="chunk-block-body context-script translation">{{ block.text }}</div>
+  {% endif %}
+  {% if block.verse_texts %}
+  <div class="translation-verses">
+    {% for verse_text in block.verse_texts %}
+    {% set v = loop.index0 + (state.chunk_start or 1) %}
+    <div class="translation-verse-row" data-verse="{{ v }}">
+      <span class="translation-verse-num">{{ v }}</span>
+      <span class="translation-verse-text">{{ verse_text or "[no text]" }}</span>
+      <button class="translation-copy-btn" type="button" onclick="copyTranslationVerse(this, '{{ verse_text.replace("'", "\\'")|e }}')" title="Copy verse {{ v }}">Copy</button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endfor %}

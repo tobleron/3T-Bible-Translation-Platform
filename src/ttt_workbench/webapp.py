@@ -509,6 +509,17 @@ async def study_sources(
         wb.activate_tab("study")
         wb.save_state()
         payload = wb.context_panel_payload()
+        if "application/json" in request.headers.get("accept", ""):
+            html = templates.env.get_template("partials/study_translation_blocks.html").render(
+                {"request": request, **payload}
+            )
+            return JSONResponse(
+                {
+                    "ok": True,
+                    "selected_sources": wb.selected_sources(),
+                    "translation_blocks_html": html,
+                }
+            )
         return templates.TemplateResponse(
             request,
             "partials/context_panel.html",

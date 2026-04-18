@@ -145,6 +145,11 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             "/workspace/old/genesis/1/1-5/study/sources",
             data={"selected_sources": ["LSB", "ESV"]},
         )
+        sources_json_response = client.post(
+            "/workspace/old/genesis/1/1-5/study/sources",
+            data={"selected_sources": ["LSB", "ESV", "KJV"]},
+            headers={"accept": "application/json"},
+        )
         try:
             assert sources_response.status_code == 200
             assert "context-panel" in sources_response.text
@@ -152,8 +157,14 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             assert 'value="LSB" checked' in sources_response.text
             assert 'value="ESV" checked' in sources_response.text
             assert "Apply sources" not in sources_response.text
+            assert sources_json_response.status_code == 200
+            sources_json = sources_json_response.json()
+            assert sources_json["ok"] is True
+            assert sources_json["selected_sources"] == ["LSB", "ESV", "KJV"]
+            assert 'data-translation-alias="KJV"' in sources_json["translation_blocks_html"]
         finally:
             sources_response.close()
+            sources_json_response.close()
     reset_controller()
 
 def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypatch) -> None:

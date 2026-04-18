@@ -193,9 +193,97 @@
     });
   }
 
+  function syncSourceChipStates(form) {
+    if (!form) return;
+    form.querySelectorAll('.source-chip').forEach(function (chip) {
+      var input = chip.querySelector('input[type="checkbox"]');
+      if (input) chip.classList.toggle('is-selected', input.checked);
+    });
+  }
+
+  function restoreStudyState() {
+    if (typeof window.applySavedStudyPreferences === 'function') {
+      window.applySavedStudyPreferences();
+    }
+    if (typeof window.syncPromptEngineeringDraftAvailability === 'function') {
+      window.syncPromptEngineeringDraftAvailability();
+    }
+    if (typeof window.updatePromptEngineeringPreview === 'function') {
+      window.updatePromptEngineeringPreview();
+    }
+  }
+
+  function replaceTranslationBlocks(html) {
+    var sheet = document.getElementById('study-blocks');
+    if (!sheet) return;
+    sheet.querySelectorAll('.translation-block').forEach(function (block) {
+      block.remove();
+    });
+    var template = document.createElement('template');
+    template.innerHTML = html || '';
+    sheet.appendChild(template.content);
+    restoreStudyState();
+  }
+
+  function initStudySourceControls(root) {
+    (root || document).querySelectorAll('[data-study-source-toggle]').forEach(function (input) {
+      if (input.dataset.tttStudySourceBound === '1') return;
+      input.dataset.tttStudySourceBound = '1';
+      input.addEventListener('change', function () {
+        var form = input.closest('.source-picks');
+        var url = input.getAttribute('data-study-sources-url');
+        if (!form || !url) return;
+        var contextPanel = document.getElementById('context-panel');
+        var controls = Array.prototype.slice.call(form.querySelectorAll('[data-study-source-toggle]'));
+        var previous = controls.map(function (control) { return control.checked; });
+        var previousDisabled = controls.map(function (control) { return control.disabled; });
+        syncSourceChipStates(form);
+        if (contextPanel) contextPanel.classList.add('is-updating-study');
+        controls.forEach(function (control) {
+          control.disabled = true;
+          control.setAttribute('aria-busy', 'true');
+        });
+        fetch(url, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'fetch'
+          }
+        })
+          .then(function (response) {
+            return response.json().then(function (payload) {
+              return { ok: response.ok, payload: payload };
+            });
+          })
+          .then(function (result) {
+            if (!result.ok || !result.payload.ok) {
+              throw new Error(result.payload.message || 'Could not update study sources.');
+            }
+            replaceTranslationBlocks(result.payload.translation_blocks_html || '');
+          })
+          .catch(function (err) {
+            controls.forEach(function (control, index) {
+              control.checked = previous[index];
+            });
+            syncSourceChipStates(form);
+            toast(err.message || 'Could not update study sources.', 'error');
+          })
+          .finally(function () {
+            controls.forEach(function (control, index) {
+              control.disabled = previousDisabled[index];
+              control.removeAttribute('aria-busy');
+            });
+            if (contextPanel) contextPanel.classList.remove('is-updating-study');
+          });
+      });
+    });
+  }
+
   function init(root) {
     initHtmxFeedback();
     initSubmitGuards(root || document);
+    initStudySourceControls(root || document);
   }
 
   document.addEventListener('DOMContentLoaded', function () { init(document); });
@@ -208,6 +296,7 @@
     toast: toast,
     setBusy: setBusy,
     restoreBusy: restoreBusy,
+    replaceTranslationBlocks: replaceTranslationBlocks,
     perfEnabled: function () { return perfEnabled; },
   };
 }());
