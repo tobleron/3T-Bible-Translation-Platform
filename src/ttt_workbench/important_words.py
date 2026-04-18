@@ -19,7 +19,7 @@ def load_spacy_model() -> tuple[Any | None, str]:
     try:
         return spacy.load("en_core_web_sm"), ""
     except Exception:
-        return None, "spaCy model en_core_web_sm is not installed. Run: python -m spacy download en_core_web_sm"
+        return None, "spaCy model en_core_web_sm is not installed. Reinstall the workbench requirements to enable important-word analysis."
 
 
 def important_lemmas(text: str, nlp: Any) -> list[str]:
