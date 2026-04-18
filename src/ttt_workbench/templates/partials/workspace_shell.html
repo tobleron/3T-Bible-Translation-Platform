@@ -713,12 +713,12 @@ function positionGlossTooltip(el) {
   glossTipEl.style.top = y + 'px';
 }
 function copyGlossWord(btn, text) {
-  navigator.clipboard.writeText(text).then(function() {
+  writeClipboardText(text).then(function() {
     btn.textContent = '✓';
     sessionStorage.setItem('lastGlossCopied', text);
-    showGlossCopiedIndicator(text);
+    try { showGlossCopiedIndicator(text); } catch (err) { console.warn('Copied indicator failed', err); }
     setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
-  }).catch(function() {
+  }, function() {
     btn.textContent = 'Failed';
   });
 }
@@ -1740,7 +1740,20 @@ function filterPromptContextByStudyVerses(text) {
 }
 function currentStudySelectedTranslationsPromptText() {
   var allowed = promptEngineeringAllowedVerseSet();
-  var blocks = document.querySelectorAll('#study-blocks .translation-block[data-translation-alias]');
+  var sourceOrder = {};
+  document.querySelectorAll('[data-study-source-toggle]').forEach(function(input, index) {
+    var alias = (input.value || '').trim();
+    if (alias) sourceOrder[alias] = index;
+  });
+  var blocks = Array.from(document.querySelectorAll('#study-blocks .translation-block[data-translation-alias]'));
+  blocks.sort(function(a, b) {
+    var aAlias = (a.getAttribute('data-translation-alias') || '').trim();
+    var bAlias = (b.getAttribute('data-translation-alias') || '').trim();
+    var aOrder = Object.prototype.hasOwnProperty.call(sourceOrder, aAlias) ? sourceOrder[aAlias] : 9999;
+    var bOrder = Object.prototype.hasOwnProperty.call(sourceOrder, bAlias) ? sourceOrder[bAlias] : 9999;
+    if (aOrder !== bOrder) return aOrder - bOrder;
+    return aAlias.localeCompare(bAlias);
+  });
   var sections = [];
   blocks.forEach(function(block) {
     var alias = (block.getAttribute('data-translation-alias') || '').trim();
@@ -1954,9 +1967,39 @@ function showCopySuccess(btn) {
     btn.classList.remove('copied');
   }, 1400);
 }
+function writeClipboardText(text) {
+  var value = String(text || '');
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+    return navigator.clipboard.writeText(value).catch(function() {
+      return fallbackWriteClipboardText(value);
+    });
+  }
+  return fallbackWriteClipboardText(value);
+}
+function fallbackWriteClipboardText(text) {
+  return new Promise(function(resolve, reject) {
+    var textarea = document.createElement('textarea');
+    textarea.value = String(text || '');
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    textarea.style.top = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      var ok = document.execCommand('copy');
+      textarea.remove();
+      ok ? resolve() : reject(new Error('Copy command failed.'));
+    } catch (err) {
+      textarea.remove();
+      reject(err);
+    }
+  });
+}
 function copyPromptEngineeringCombined(btn) {
   buildPromptEngineeringText().then(function(text) {
-    return navigator.clipboard.writeText(text || '').then(function() {
+    return writeClipboardText(text || '').then(function() {
       showCopySuccess(btn);
       showWorkspaceIndicator('Combined prompt copied.');
     });
@@ -1992,15 +2035,15 @@ function injectPromptEngineeringIntoChat() {
   });
 }
 function copyTranslationVerse(btn, text) {
-  navigator.clipboard.writeText(text).then(function() {
+  writeClipboardText(text).then(function() {
     btn.textContent = '✓';
     btn.classList.add('copied');
-    showGlossCopiedIndicator(text);
+    try { showGlossCopiedIndicator(text); } catch (err) { console.warn('Copied indicator failed', err); }
     setTimeout(function() {
       btn.textContent = 'Copy';
       btn.classList.remove('copied');
     }, 1500);
-  }).catch(function() {
+  }, function() {
     btn.textContent = 'Failed';
   });
 }

@@ -182,3 +182,61 @@ def test_new_study_translation_respects_active_verse_filter(page: Page, live_ser
     assert visibility
     assert {row["verse"] for row in visibility if row["visible"]} <= {"1", "2"}
     assert any(row["verse"] == "3" and not row["visible"] for row in visibility)
+
+
+def test_filtered_prompt_uses_study_checkbox_order(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    filtered_text = page.evaluate(
+        """
+        () => {
+          const sheet = document.querySelector('#study-blocks');
+          sheet.querySelectorAll('.translation-block').forEach((block) => block.remove());
+          ['NLT', 'NKJV', 'NET'].forEach((alias) => {
+            const block = document.createElement('div');
+            block.className = 'chunk-block translation-block';
+            block.setAttribute('data-translation-alias', alias);
+            block.innerHTML = `
+              <div class="translation-verse-row" data-verse="1">
+                <span class="translation-verse-text">${alias} text</span>
+              </div>
+            `;
+            sheet.appendChild(block);
+          });
+          return window.currentStudySelectedTranslationsPromptText();
+        }
+        """
+    )
+
+    assert filtered_text.index("NKJV:") < filtered_text.index("NLT:")
+    assert filtered_text.index("NLT:") < filtered_text.index("NET:")
+
+
+def test_copy_translation_uses_fallback_when_clipboard_api_fails(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    result = page.evaluate(
+        """
+        async () => {
+          const button = document.createElement('button');
+          button.textContent = 'Copy';
+          document.body.appendChild(button);
+          let copied = '';
+          Object.defineProperty(navigator, 'clipboard', {
+            configurable: true,
+            value: { writeText: () => Promise.reject(new Error('blocked')) }
+          });
+          const originalExecCommand = document.execCommand;
+          document.execCommand = (command) => {
+            if (command !== 'copy') return false;
+            copied = document.activeElement.value;
+            return true;
+          };
+          window.copyTranslationVerse(button, 'fallback copy text');
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          document.execCommand = originalExecCommand;
+          return { copied, label: button.textContent };
+        }
+        """
+    )
+
+    assert result["copied"] == "fallback copy text"
+    assert result["label"] == "\u2713"
