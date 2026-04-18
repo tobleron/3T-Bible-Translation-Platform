@@ -2,3 +2,35 @@
 #new-chat-dialog {
   display: none !important;
 }
+
+.ttt-chainlit-copy-host {
+  position: relative;
+}
+
+.ttt-chainlit-copy-button {
+  position: absolute;
+  right: 0.35rem;
+  bottom: 0.25rem;
+  z-index: 2;
+  border: 1px solid rgba(160, 160, 160, 0.35);
+  border-radius: 6px;
+  background: rgba(24, 24, 24, 0.82);
+  color: #f4f4f4;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0.3rem 0.45rem;
+  opacity: 0;
+  transition: opacity 120ms ease, border-color 120ms ease, background-color 120ms ease;
+}
+
+.ttt-chainlit-copy-host:hover > .ttt-chainlit-copy-button,
+.ttt-chainlit-copy-button:focus-visible,
+.ttt-chainlit-copy-button.ttt-chainlit-copy-copied {
+  opacity: 1;
+}
+
+.ttt-chainlit-copy-button:hover {
+  border-color: rgba(220, 220, 220, 0.75);
+  background: rgba(40, 40, 40, 0.95);
+}

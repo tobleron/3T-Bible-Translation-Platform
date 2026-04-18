@@ -184,6 +184,23 @@ def test_new_study_translation_respects_active_verse_filter(page: Page, live_ser
     assert any(row["verse"] == "3" and not row["visible"] for row in visibility)
 
 
+def test_study_verse_filter_applies_on_enter(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    page.locator("#study-verse-filter").fill("1-2")
+    page.locator("#study-verse-filter").press("Enter")
+
+    visible_verses = page.locator("#study-blocks .translation-block").first.evaluate(
+        """
+        (block) => Array.from(block.querySelectorAll('.translation-verse-row[data-verse]'))
+          .filter((row) => row.style.display !== 'none')
+          .map((row) => row.getAttribute('data-verse'))
+        """
+    )
+
+    assert visible_verses
+    assert set(visible_verses) <= {"1", "2"}
+
+
 def test_filtered_prompt_uses_study_checkbox_order(page: Page, live_server_url: str) -> None:
     open_workspace(page, live_server_url)
     filtered_text = page.evaluate(

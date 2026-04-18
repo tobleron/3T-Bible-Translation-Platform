@@ -639,6 +639,10 @@ function clearStudyVerseFilter() {
 
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideJsonPreview(); hideGlossTooltip(); }
+  if (e.key === 'Enter' && e.target && e.target.id === 'study-verse-filter') {
+    e.preventDefault();
+    applyStudyVerseFilter();
+  }
 });
 
 // Gloss tooltip + copy

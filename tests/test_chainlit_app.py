@@ -2,8 +2,12 @@ from __future__ import annotations
 
 import asyncio
 from types import SimpleNamespace
+from pathlib import Path
 
 from ttt_workbench import chainlit_app
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_reply_display_parts_puts_answer_after_thinking() -> None:
@@ -90,3 +94,12 @@ def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
         ("message.send", ""),
         ("message.token", "```text\nVerse output.\n```"),
     ]
+
+
+def test_chainlit_copy_button_asset_is_configured() -> None:
+    config_text = (ROOT / ".chainlit" / "config.toml").read_text(encoding="utf-8")
+    script_text = (ROOT / "public" / "workbench-chainlit.js").read_text(encoding="utf-8")
+
+    assert 'custom_js = "/public/workbench-chainlit.js"' in config_text
+    assert "ttt-chainlit-copy-button" in script_text
+    assert "writeClipboardText(messageText(container))" in script_text
