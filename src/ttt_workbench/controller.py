@@ -1337,12 +1337,12 @@ Rules:
         current_chapter = self.state.chapter or 0
         selected = set(self.selected_sources())
         preferred_order = [
-            "NLT",
             "NIV",
             "ESV",
             "LSB",
             "CSB",
             "NKJV",
+            "NLT",
             "NET",
             "TLV",
             "KJV",

@@ -160,6 +160,8 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             assert "context-panel" in sources_response.text
             assert 'value="NLT"' in sources_response.text
             assert sources_response.text.index('value="NLT"') < sources_response.text.index('role="separator"')
+            assert sources_response.text.index('value="NKJV"') < sources_response.text.index('value="NLT"')
+            assert sources_response.text.index('value="NLT"') < sources_response.text.index('value="NET"')
             assert "LSB" in sources_response.text
             assert 'value="LSB" checked' in sources_response.text
             assert 'value="ESV" checked' in sources_response.text
