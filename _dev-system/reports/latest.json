@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-18T04:29:51.097878+00:00",
+  "generated_at": "2026-04-18T04:50:13.772615+00:00",
   "project": "3T-Bible-Translation-Platform",
   "summary": {
     "files_scanned": 139,
@@ -131,8 +131,8 @@
       "path": "src/ttt_workbench/static/app.css",
       "role": "style",
       "language": "css",
-      "loc": 2484,
-      "risk": 2.76,
+      "loc": 2489,
+      "risk": 2.77,
       "preferred_loc": 900,
       "hard_loc": 1400,
       "branches": 0,
@@ -144,13 +144,13 @@
         {
           "severity": "medium",
           "kind": "size",
-          "message": "2484 LOC exceeds preferred 900 LOC for role `style`.",
+          "message": "2489 LOC exceeds preferred 900 LOC for role `style`.",
           "line": null
         },
         {
           "severity": "high",
           "kind": "size",
-          "message": "2484 LOC exceeds hard ceiling 1400 LOC for role `style`.",
+          "message": "2489 LOC exceeds hard ceiling 1400 LOC for role `style`.",
           "line": null
         }
       ]
@@ -1955,7 +1955,7 @@
       "path": "src/ttt_workbench/static/js/app_interactions.js",
       "role": "general-python",
       "language": "text",
-      "loc": 156,
+      "loc": 188,
       "risk": 1.0,
       "preferred_loc": 430,
       "hard_loc": 760,
@@ -2075,7 +2075,7 @@
       "path": "src/ttt_workbench/templates/partials/context_panel.html",
       "role": "template",
       "language": "template",
-      "loc": 135,
+      "loc": 136,
       "risk": 1.0,
       "preferred_loc": 260,
       "hard_loc": 420,

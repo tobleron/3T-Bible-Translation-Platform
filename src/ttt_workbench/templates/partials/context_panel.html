@@ -17,7 +17,8 @@
           <input type="checkbox" name="selected_sources" value="{{ option.alias }}" {% if option.selected %}checked{% endif %} {% if option.disabled %}disabled{% endif %}
             hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/study/sources"
             hx-trigger="change"
-            hx-target="#context-panel"
+            hx-target="#study-blocks"
+            hx-select="#study-blocks"
             hx-swap="outerHTML"
             hx-include="closest form"
             hx-sync="closest form:replace">

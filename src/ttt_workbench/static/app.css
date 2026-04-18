@@ -1346,6 +1346,9 @@ button:active:not(:disabled) {
   display: grid;
   gap: 1rem;
 }
+.context-panel.is-updating-study #study-blocks {
+  opacity: 0.82;
+}
 .study-toolbar {
   display: grid;
   gap: 0.65rem;
@@ -1375,6 +1378,9 @@ button:active:not(:disabled) {
   display: grid;
   gap: 0.95rem;
   padding-top: 0.35rem;
+}
+#study-blocks {
+  transition: opacity 140ms ease;
 }
 
 .compact-editor-form,

@@ -91,6 +91,19 @@
       var elt = event.detail && event.detail.elt;
       if (!elt) return;
 
+      var sourcePicks = elt.closest && elt.closest('.source-picks');
+      if (sourcePicks) {
+        var contextPanel = document.getElementById('context-panel');
+        if (contextPanel) {
+          contextPanel.dataset.tttStudyScrollTop = String(contextPanel.scrollTop || 0);
+          contextPanel.classList.add('is-updating-study');
+        }
+        sourcePicks.querySelectorAll('.source-chip').forEach(function (chip) {
+          var input = chip.querySelector('input[type="checkbox"]');
+          if (input) chip.classList.toggle('is-selected', input.checked);
+        });
+      }
+
       if (activeRequests.has(elt)) {
         if (event.preventDefault) event.preventDefault();
         return;
@@ -144,6 +157,27 @@
         if (state) restoreBusy(state.button);
         toast(name === 'htmx:timeout' ? 'Action timed out.' : 'Action failed.', 'error');
       });
+    });
+
+    document.body.addEventListener('htmx:afterSettle', function (event) {
+      var target = event.detail && event.detail.target;
+      if (!target || target.id !== 'study-blocks') return;
+      var contextPanel = document.getElementById('context-panel');
+      if (contextPanel) {
+        var scrollTop = parseInt(contextPanel.dataset.tttStudyScrollTop || '0', 10);
+        if (!Number.isNaN(scrollTop)) contextPanel.scrollTop = scrollTop;
+        contextPanel.classList.remove('is-updating-study');
+        delete contextPanel.dataset.tttStudyScrollTop;
+      }
+      if (typeof window.applySavedStudyPreferences === 'function') {
+        window.applySavedStudyPreferences();
+      }
+      if (typeof window.syncPromptEngineeringDraftAvailability === 'function') {
+        window.syncPromptEngineeringDraftAvailability();
+      }
+      if (typeof window.updatePromptEngineeringPreview === 'function') {
+        window.updatePromptEngineeringPreview();
+      }
     });
   }
 
