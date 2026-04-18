@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from functools import lru_cache
 from typing import Any
+import warnings
 
 
 KEEP_POS = frozenset({"NOUN", "PROPN", "VERB", "ADJ"})
@@ -46,7 +47,67 @@ def important_lemmas(text: str, nlp: Any) -> list[str]:
     return lemmas
 
 
-def verse_word_stats(translations: list[dict[str, Any]]) -> dict[str, Any]:
+SIMILARITY_THRESHOLD = 0.72
+
+
+def _lemma_similarity(left: str, right: str, nlp: Any) -> float:
+    try:
+        left_doc = nlp(left)
+        right_doc = nlp(right)
+        if not left_doc or not right_doc:
+            return 0.0
+        left_token = left_doc[0]
+        right_token = right_doc[0]
+        if not getattr(left_token, "has_vector", False) or not getattr(right_token, "has_vector", False):
+            return 0.0
+        if not getattr(left_token, "vector_norm", 0.0) or not getattr(right_token, "vector_norm", 0.0):
+            return 0.0
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", UserWarning)
+            return float(left_token.similarity(right_token))
+    except Exception:
+        return 0.0
+
+
+def semantic_groups(items: list[dict[str, Any]], nlp: Any | None) -> list[dict[str, Any]]:
+    groups: list[dict[str, Any]] = []
+    if not items:
+        return groups
+    if nlp is None:
+        return [{"entries": [item], "related": False} for item in items]
+
+    for item in items:
+        lemma = str(item.get("lemma", ""))
+        best_group: dict[str, Any] | None = None
+        best_score = 0.0
+        for group in groups:
+            score = max(
+                _lemma_similarity(lemma, str(entry.get("lemma", "")), nlp)
+                for entry in group["entries"]
+            )
+            if score >= SIMILARITY_THRESHOLD and score > best_score:
+                best_group = group
+                best_score = score
+        if best_group is None:
+            groups.append({"entries": [item], "related": False})
+        else:
+            best_group["entries"].append(item)
+            best_group["related"] = True
+            best_group["score"] = round(best_score, 2)
+
+    for group in groups:
+        group["entries"].sort(key=lambda entry: (str(entry.get("alias", "")), str(entry.get("lemma", ""))))
+    groups.sort(
+        key=lambda group: (
+            0 if group.get("related") else 1,
+            -len(group["entries"]),
+            str(group["entries"][0].get("lemma", "")),
+        )
+    )
+    return groups
+
+
+def verse_word_stats(translations: list[dict[str, Any]], nlp: Any | None = None) -> dict[str, Any]:
     denominator = sum(1 for row in translations if str(row.get("text", "")).strip())
     counts: Counter[str] = Counter()
     aliases_by_lemma: dict[str, list[str]] = defaultdict(list)
@@ -78,4 +139,9 @@ def verse_word_stats(translations: list[dict[str, Any]]) -> dict[str, Any]:
     ]
     majority.sort(key=lambda item: (-int(item["count"]), str(item["lemma"])))
     unique.sort(key=lambda item: (str(item["alias"]), str(item["lemma"])))
-    return {"majority": majority, "unique": unique}
+    return {
+        "majority": majority,
+        "unique": unique,
+        "majority_groups": semantic_groups(majority, nlp),
+        "unique_groups": semantic_groups(unique, nlp),
+    }

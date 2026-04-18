@@ -1652,13 +1652,15 @@ Rules:
                         "lemmas": important_lemmas(text, nlp),
                     }
                 )
-            stats = verse_word_stats(translations)
+            stats = verse_word_stats(translations, nlp)
             verses.append(
                 {
                     "verse": verse,
                     "translations": translations,
                     "majority": stats["majority"],
                     "unique": stats["unique"],
+                    "majority_groups": stats["majority_groups"],
+                    "unique_groups": stats["unique_groups"],
                 }
             )
         return {

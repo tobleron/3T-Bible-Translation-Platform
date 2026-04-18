@@ -541,9 +541,16 @@ document.addEventListener('change', function(e) {
 });
 function applyStudyFontSize(px) {
   var el = document.getElementById('study-blocks');
-  if (!el) return;
-  el.style.fontSize = px + 'px';
-  el.querySelectorAll('.chunk-block-body, .chunk-block-gloss, .translation-verse-text, .translation-verse-num, .lexical-summary').forEach(function(b) { b.style.fontSize = px + 'px'; });
+  if (el) {
+    el.style.fontSize = px + 'px';
+    el.querySelectorAll('.chunk-block-body, .chunk-block-gloss, .translation-verse-text, .translation-verse-num, .lexical-summary').forEach(function(b) { b.style.fontSize = px + 'px'; });
+  }
+  var analysis = document.getElementById('study-word-analysis');
+  if (analysis) {
+    analysis.style.fontSize = px + 'px';
+    analysis.querySelectorAll('.word-chip, .word-stat-label, .word-analysis-head .context-meta').forEach(function(b) { b.style.fontSize = px + 'px'; });
+    analysis.querySelectorAll('.word-chip small').forEach(function(b) { b.style.fontSize = Math.max(10, Math.round(parseInt(px, 10) * 0.78)) + 'px'; });
+  }
 }
 
 /* ── Study verse filter ── */
@@ -615,6 +622,10 @@ function applyStudyVerseFilter() {
       block.style.display = showBlock ? '' : 'none';
     }
   }
+  document.querySelectorAll('#study-word-analysis .word-analysis-verse[data-verse]').forEach(function(verseBlock) {
+    var vNum = parseInt(verseBlock.getAttribute('data-verse') || '0', 10);
+    verseBlock.style.display = (vNum in allowedSet) ? '' : 'none';
+  });
   syncPromptEngineeringDraftAvailability();
   updatePromptEngineeringPreview();
 }
@@ -633,6 +644,9 @@ function clearStudyVerseFilter() {
       verseRows[j].style.display = '';
     }
   }
+  document.querySelectorAll('#study-word-analysis .word-analysis-verse[data-verse]').forEach(function(verseBlock) {
+    verseBlock.style.display = '';
+  });
   syncPromptEngineeringDraftAvailability();
   updatePromptEngineeringPreview();
 }

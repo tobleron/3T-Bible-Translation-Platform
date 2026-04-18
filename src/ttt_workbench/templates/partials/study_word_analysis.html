@@ -14,16 +14,20 @@
   {% else %}
   <div class="word-analysis-list">
     {% for verse in translation_word_analysis.verses %}
-    <article class="word-analysis-verse">
+    <article class="word-analysis-verse" data-verse="{{ verse.verse }}">
       <div class="word-analysis-head">
         <span class="translation-verse-num">{{ verse.verse }}</span>
         <span class="context-meta">Verse {{ verse.verse }}</span>
       </div>
       <div class="word-stat-row">
         <span class="word-stat-label">Majority</span>
-        <div class="word-chip-list">
-          {% for item in verse.majority %}
-          <span class="word-chip">{{ item.lemma }} <small>{{ item.percent }}%</small></span>
+        <div class="word-group-list">
+          {% for group in verse.majority_groups %}
+          <div class="word-meaning-group{% if group.related %} has-related{% endif %}">
+            {% for item in group.entries %}
+            <span class="word-chip">{{ item.lemma }} <small>{{ item.percent }}%</small></span>
+            {% endfor %}
+          </div>
           {% else %}
           <span class="context-meta">No majority lemmas</span>
           {% endfor %}
@@ -31,21 +35,17 @@
       </div>
       <div class="word-stat-row">
         <span class="word-stat-label">Unique</span>
-        <div class="word-chip-list">
-          {% for item in verse.unique %}
-          <span class="word-chip is-unique">{{ item.lemma }} <small>{{ item.alias }}</small></span>
+        <div class="word-group-list">
+          {% for group in verse.unique_groups %}
+          <div class="word-meaning-group{% if group.related %} has-related{% endif %}">
+            {% for item in group.entries %}
+            <span class="word-chip is-unique">{{ item.lemma }} <small>{{ item.alias }}</small></span>
+            {% endfor %}
+          </div>
           {% else %}
           <span class="context-meta">No unique lemmas</span>
           {% endfor %}
         </div>
-      </div>
-      <div class="word-translation-list">
-        {% for row in verse.translations %}
-        <div class="word-translation-row">
-          <span class="word-translation-alias">{{ row.alias }}</span>
-          <span class="word-translation-lemmas">{{ row.lemmas|join(", ") if row.lemmas else "No kept lemmas" }}</span>
-        </div>
-        {% endfor %}
       </div>
     </article>
     {% endfor %}

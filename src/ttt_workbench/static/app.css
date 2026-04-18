@@ -2441,10 +2441,25 @@ input[type="submit"].is-loading {
   font-weight: 700;
   text-transform: uppercase;
 }
-.word-chip-list {
+.word-chip-list,
+.word-group-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+}
+.word-group-list {
+  align-items: flex-start;
+}
+.word-meaning-group {
+  display: inline-grid;
+  gap: 0.22rem;
+  align-content: start;
+  padding: 0.18rem;
+  border-left: 2px solid transparent;
+}
+.word-meaning-group.has-related {
+  border-left-color: rgba(245, 196, 89, 0.55);
+  background: rgba(245, 196, 89, 0.045);
 }
 .word-chip {
   display: inline-flex;
@@ -2464,17 +2479,6 @@ input[type="submit"].is-loading {
 .word-chip.is-unique {
   background: rgba(255,255,255,0.02);
 }
-.word-translation-list {
-  display: grid;
-  gap: 0.35rem;
-  padding-top: 0.15rem;
-}
-.word-translation-lemmas {
-  color: var(--text);
-  font-size: 0.86rem;
-  line-height: 1.45;
-}
-
 .context-sheet {
   display: grid;
   gap: 0.55rem;

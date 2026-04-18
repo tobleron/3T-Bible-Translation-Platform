@@ -327,6 +327,7 @@
         }
         replaceTranslationBlocks(result.payload.translation_blocks_html || '');
         replaceStudyWordAnalysis(result.payload.word_analysis_html || '');
+        restoreStudyState();
       })
       .catch(function (err) {
         controls.forEach(function (control, index) {
