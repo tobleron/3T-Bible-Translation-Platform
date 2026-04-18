@@ -237,6 +237,7 @@
         var controls = Array.prototype.slice.call(form.querySelectorAll('[data-study-source-toggle]'));
         var previous = controls.map(function (control) { return control.checked; });
         var previousDisabled = controls.map(function (control) { return control.disabled; });
+        var formData = new FormData(form);
         syncSourceChipStates(form);
         if (contextPanel) contextPanel.classList.add('is-updating-study');
         controls.forEach(function (control) {
@@ -245,7 +246,7 @@
         });
         fetch(url, {
           method: 'POST',
-          body: new FormData(form),
+          body: formData,
           headers: {
             'Accept': 'application/json',
             'X-Requested-With': 'fetch'

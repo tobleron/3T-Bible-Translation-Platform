@@ -140,3 +140,18 @@ def test_stream_controller_recovers_send_and_stop_controls(page: Page, live_serv
         "stopDisplay": "none",
         "stopAnimating": False,
     }
+
+
+def test_study_source_checkbox_adds_translation_block(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    kjv_toggle = page.locator('[data-study-source-toggle][value="KJV"]')
+    kjv_block = page.locator('#study-blocks .translation-block[data-translation-alias="KJV"]')
+
+    expect(kjv_toggle).not_to_be_checked()
+    expect(kjv_block).to_have_count(0)
+
+    kjv_toggle.check()
+
+    expect(kjv_toggle).to_be_checked()
+    expect(kjv_block).to_have_count(1)
+    expect(kjv_block.locator(".translation-verse-row")).not_to_have_count(0)
