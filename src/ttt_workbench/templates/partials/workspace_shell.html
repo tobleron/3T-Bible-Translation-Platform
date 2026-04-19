@@ -1014,9 +1014,9 @@ function initChatInput() {
       if (total >= 60) {
         var minutes = Math.floor(total / 60);
         var seconds = total % 60;
-        return minutes + ':' + String(seconds).padStart(2, '0');
+        return minutes + ' ' + (minutes === 1 ? 'minute' : 'minutes') + ' ' + seconds + ' ' + (seconds === 1 ? 'second' : 'seconds');
       }
-      return total + 's';
+      return total + ' ' + (total === 1 ? 'second' : 'seconds');
     }
 
     function thinkingSummaryHtml(streaming, durationMs) {
@@ -1571,9 +1571,9 @@ function formatStaticThinkingDuration(ms) {
   if (total >= 60) {
     var minutes = Math.floor(total / 60);
     var seconds = total % 60;
-    return minutes + ':' + String(seconds).padStart(2, '0');
+    return minutes + ' ' + (minutes === 1 ? 'minute' : 'minutes') + ' ' + seconds + ' ' + (seconds === 1 ? 'second' : 'seconds');
   }
-  return total + 's';
+  return total + ' ' + (total === 1 ? 'second' : 'seconds');
 }
 
 function renderMarkdownWithCollapsedThinking(rawText) {

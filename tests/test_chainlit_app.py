@@ -27,11 +27,12 @@ def test_reply_display_parts_puts_answer_after_thinking() -> None:
 
 def test_thinking_block_label_is_not_chainlit_used_step() -> None:
     assert chainlit_app._thinking_block("check source") == (
-        '<details class="ttt-thinking-block"><summary class="ttt-thinking-summary"><span class="ttt-thinking-pipe">|</span><span> Thought for 0s</span></summary>\n\n'
+        '<details class="ttt-thinking-block"><summary class="ttt-thinking-summary"><span class="ttt-thinking-pipe">|</span><span> Thought for 0 seconds</span></summary>\n\n'
         "check source\n\n"
         "</details>"
     )
-    assert "Thought for 1:05" in chainlit_app._thinking_block("check source", 65)
+    assert "Thought for 1 minute 5 seconds" in chainlit_app._thinking_block("check source", 65)
+    assert "Thought for 2 minutes 11 seconds" in chainlit_app._thinking_block("check source", 131)
 
 
 def test_streaming_thinking_block_is_collapsed_details() -> None:
@@ -98,7 +99,7 @@ def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
         ),
         (
             "message.update",
-            '<details class="ttt-thinking-block"><summary class="ttt-thinking-summary"><span class="ttt-thinking-pipe">|</span><span> Thought for 0s</span></summary>\n\nchecking source\n\n</details>',
+            '<details class="ttt-thinking-block"><summary class="ttt-thinking-summary"><span class="ttt-thinking-pipe">|</span><span> Thought for 0 seconds</span></summary>\n\nchecking source\n\n</details>',
         ),
     ]
     assert events[4:] == [

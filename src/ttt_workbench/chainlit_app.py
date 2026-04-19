@@ -8,8 +8,11 @@ def _format_thinking_duration(seconds: float | int | None) -> str:
     total = max(0, int(round(float(seconds or 0))))
     if total >= 60:
         minutes, secs = divmod(total, 60)
-        return f"{minutes}:{secs:02d}"
-    return f"{total}s"
+        minute_label = "minute" if minutes == 1 else "minutes"
+        second_label = "second" if secs == 1 else "seconds"
+        return f"{minutes} {minute_label} {secs} {second_label}"
+    second_label = "second" if total == 1 else "seconds"
+    return f"{total} {second_label}"
 
 
 def _thinking_summary_html(streaming: bool = False, duration_seconds: float | int | None = None) -> str:
