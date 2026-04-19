@@ -1,26 +1,68 @@
 import chainlit as cl
 import sys
+import time
+import re
 
 
-def _thinking_block(content: str) -> str:
-    return f"<details><summary>Thinking..</summary>\n\n{content.strip()}\n\n</details>"
+def _format_thinking_duration(seconds: float | int | None) -> str:
+    total = max(0, int(round(float(seconds or 0))))
+    if total >= 60:
+        minutes, secs = divmod(total, 60)
+        return f"{minutes}:{secs:02d}"
+    return f"{total}s"
+
+
+def _thinking_summary_html(streaming: bool = False, duration_seconds: float | int | None = None) -> str:
+    classes = ' class="ttt-thinking-summary is-streaming"' if streaming else ' class="ttt-thinking-summary"'
+    if streaming:
+        return f"<summary{classes}><span class=\"ttt-thinking-pipe\">|</span><span> Thinking</span><span class=\"ttt-thinking-dots\">...</span></summary>"
+    duration = _format_thinking_duration(duration_seconds or 0)
+    return f"<summary{classes}><span class=\"ttt-thinking-pipe\">|</span><span> Thought for {duration}</span></summary>"
+
+
+def _thinking_block(content: str, duration_seconds: float | int | None = None) -> str:
+    return f"<details class=\"ttt-thinking-block\">{_thinking_summary_html(duration_seconds=duration_seconds)}\n\n{content.strip()}\n\n</details>"
 
 
 def _streaming_thinking_block(content: str) -> str:
-    return _thinking_block(content)
+    return f"<details class=\"ttt-thinking-block\">{_thinking_summary_html(streaming=True)}\n\n{content.strip()}\n\n</details>"
+
+
+_THINK_OPEN_RE = re.compile(r"<think(?:\s+duration=\"(?P<duration>[0-9.]+)\")?>")
+
+
+def _annotate_thinking_durations(text: str, durations: list[float]) -> str:
+    index = 0
+
+    def replace(match: re.Match[str]) -> str:
+        nonlocal index
+        if match.group("duration") is not None:
+            return match.group(0)
+        if index >= len(durations):
+            return match.group(0)
+        duration = max(0.0, float(durations[index]))
+        index += 1
+        return f'<think duration="{duration:.3f}">'
+
+    return _THINK_OPEN_RE.sub(replace, text or "")
 
 
 def _reply_display_parts(text: str):
     token = text or ""
     while token:
-        before, marker, after = token.partition("<think>")
+        match = _THINK_OPEN_RE.search(token)
+        if not match:
+            if token:
+                yield "answer", token
+            break
+        before = token[: match.start()]
         if before:
             yield "answer", before
-        if not marker:
-            break
+        duration = float(match.group("duration")) if match.group("duration") is not None else None
+        after = token[match.end():]
         thinking, end_marker, token = after.partition("</think>")
         if thinking:
-            yield "thinking", thinking
+            yield "thinking", thinking, duration
         if not end_marker:
             break
 
@@ -32,6 +74,8 @@ async def _stream_model_reply(wb, messages):
     error_occurred = False
     is_thinking = False
     thinking_tokens = []
+    thinking_started_at = None
+    thinking_durations: list[float] = []
 
     async def ensure_assistant_msg():
         nonlocal assistant_msg
@@ -41,8 +85,9 @@ async def _stream_model_reply(wb, messages):
         return assistant_msg
 
     async def ensure_thinking_msg():
-        nonlocal thinking_msg
+        nonlocal thinking_msg, thinking_started_at
         if thinking_msg is None:
+            thinking_started_at = time.monotonic()
             thinking_msg = cl.Message(content=_streaming_thinking_block(""))
             await thinking_msg.send()
         return thinking_msg
@@ -53,12 +98,16 @@ async def _stream_model_reply(wb, messages):
         await msg.update()
 
     async def finalize_thinking_msg():
-        nonlocal thinking_msg
+        nonlocal thinking_msg, thinking_started_at
         if thinking_msg is None:
             return
-        thinking_msg.content = _thinking_block("".join(thinking_tokens))
+        duration = time.monotonic() - thinking_started_at if thinking_started_at is not None else None
+        if duration is not None:
+            thinking_durations.append(duration)
+        thinking_msg.content = _thinking_block("".join(thinking_tokens), duration)
         await thinking_msg.update()
         thinking_msg = None
+        thinking_started_at = None
 
     try:
         for raw_token in wb.llm.stream_generation(
@@ -108,7 +157,7 @@ async def _stream_model_reply(wb, messages):
         full_reply.append(f"\n[ERROR] {exc}")
         error_occurred = True
 
-    return "".join(full_reply).strip(), error_occurred, assistant_msg
+    return _annotate_thinking_durations("".join(full_reply).strip(), thinking_durations), error_occurred, assistant_msg
 
 
 @cl.on_chat_start
@@ -127,12 +176,15 @@ async def on_chat_start():
         for msg in wb.state.chat_messages:
             author = "User" if msg["role"] == "user" else "Assistant"
             content = msg["content"]
-            if msg["role"] != "assistant" or "<think>" not in content:
-                await cl.Message(content=content, author=author).send()
+            if msg["role"] != "assistant" or "<think" not in content:
+                msg_type = "user_message" if msg["role"] == "user" else "assistant_message"
+                await cl.Message(content=content, author=author, type=msg_type).send()
                 continue
-            for part_type, part_content in _reply_display_parts(content):
+            for part in _reply_display_parts(content):
+                part_type, part_content, *meta = part
                 if part_type == "thinking":
-                    await cl.Message(content=_thinking_block(part_content), author=author).send()
+                    duration = meta[0] if meta else None
+                    await cl.Message(content=_thinking_block(part_content, duration), author=author).send()
                 elif part_content.strip():
                     await cl.Message(content=part_content.strip(), author=author).send()
 

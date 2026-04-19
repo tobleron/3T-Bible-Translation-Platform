@@ -90,6 +90,10 @@
                 <input type="checkbox" id="prompt-mode-copyable" value="copyable" data-prompt-mode>
                 <span>Verse-Copy</span>
               </label>
+              <label class="compact-check">
+                <input type="checkbox" id="prompt-option-hide-labels" data-prompt-option>
+                <span>No Labels</span>
+              </label>
             </div>
 
             <div class="prompt-context-picker">
@@ -1005,13 +1009,39 @@ function initChatInput() {
       }
     }
 
+    function formatThinkingDuration(ms) {
+      var total = Math.max(0, Math.round((ms || 0) / 1000));
+      if (total >= 60) {
+        var minutes = Math.floor(total / 60);
+        var seconds = total % 60;
+        return minutes + ':' + String(seconds).padStart(2, '0');
+      }
+      return total + 's';
+    }
+
+    function thinkingSummaryHtml(streaming, durationMs) {
+      if (streaming) {
+        return '<span class="thinking-pipe">|</span><span> Thinking</span><span class="thinking-dots">...</span>';
+      }
+      return '<span class="thinking-pipe">|</span><span> Thought for ' + formatThinkingDuration(durationMs) + '</span>';
+    }
+
+    function finalizeThinkingSummary() {
+      if (!streamState.thinkingEl) return;
+      var summary = streamState.thinkingEl.querySelector('summary');
+      if (!summary) return;
+      var start = streamState.thinkingStartTime || Date.now();
+      var end = streamState.thinkingEndTime || Date.now();
+      summary.innerHTML = thinkingSummaryHtml(false, end - start);
+    }
+
     // Create thinking block elements
     function ensureThinking() {
       if (streamState.thinkingEl) return;
       var details = document.createElement('details');
       details.className = 'thinking-block is-streaming';
       var summary = document.createElement('summary');
-      summary.textContent = 'Thinking Stream';
+      summary.innerHTML = thinkingSummaryHtml(true);
       summary.addEventListener('click', function() {
         // Toggle user preference — next token won't override
         setTimeout(function() {
@@ -1205,6 +1235,7 @@ function initChatInput() {
                     appendStreamingText(remaining.substring(0, thinkStartIdx));
                   }
                   streamState.thinkingStarted = true;
+                  streamState.thinkingStartTime = Date.now();
                   ensureThinking();
                   _mon.thinkingStart();
                   remaining = remaining.substring(thinkStartIdx + 8);
@@ -1228,6 +1259,8 @@ function initChatInput() {
                   _mon.contentStart();
                   if (streamState.thinkingEl) {
                     streamState.thinkingEl.classList.remove('is-streaming');
+                    streamState.thinkingEndTime = Date.now();
+                    finalizeThinkingSummary();
                     streamState.thinkingEl.removeAttribute('open');
                   }
                 } else {
@@ -1300,6 +1333,7 @@ function initChatInput() {
                     if (thinkStartIdx !== -1) {
                       if (thinkStartIdx > 0) appendStreamingText(remaining.substring(0, thinkStartIdx));
                       streamState.thinkingStarted = true;
+                      streamState.thinkingStartTime = Date.now();
                       ensureThinking();
                       _mon.thinkingStart();
                       remaining = remaining.substring(thinkStartIdx + 8);
@@ -1318,6 +1352,8 @@ function initChatInput() {
                       _mon.contentStart();
                       if (streamState.thinkingEl) {
                         streamState.thinkingEl.classList.remove('is-streaming');
+                        streamState.thinkingEndTime = Date.now();
+                        finalizeThinkingSummary();
                         streamState.thinkingEl.removeAttribute('open');
                       }
                     } else {
@@ -1376,7 +1412,9 @@ function initChatInput() {
           if (!streamState.thinkingDone) {
             _mon._log('Thinking block force-closed in finally');
             streamState.thinkingDone = true;
+            streamState.thinkingEndTime = Date.now();
           }
+          finalizeThinkingSummary();
           if (!streamState.userOpenedThinking) {
             streamState.thinkingEl.open = false;
           }
@@ -1528,6 +1566,16 @@ function renderMarkdownLite(text) {
   return html;
 }
 
+function formatStaticThinkingDuration(ms) {
+  var total = Math.max(0, Math.round((ms || 0) / 1000));
+  if (total >= 60) {
+    var minutes = Math.floor(total / 60);
+    var seconds = total % 60;
+    return minutes + ':' + String(seconds).padStart(2, '0');
+  }
+  return total + 's';
+}
+
 function renderMarkdownWithCollapsedThinking(rawText) {
   // Pipeline: extract thinking blocks → escape text → light markdown on output text only
   if (!rawText) return '';
@@ -1537,8 +1585,11 @@ function renderMarkdownWithCollapsedThinking(rawText) {
 
   // Extract all thinking blocks (closed and unclosed)
   while (true) {
-    var idx = remaining.indexOf('<think>');
-    if (idx === -1) break; // no more thinking
+    var match = remaining.match(/<think(?:\s+duration="([0-9.]+)")?>/);
+    if (!match) break; // no more thinking
+    var idx = match.index;
+    var openTagLength = match[0].length;
+    var durationMs = match[1] ? parseFloat(match[1]) * 1000 : 0;
 
     var closeTag = '</think>';
     var closeIdx = remaining.indexOf(closeTag, idx);
@@ -1550,8 +1601,8 @@ function renderMarkdownWithCollapsedThinking(rawText) {
       // Keep open while streaming so user can see progress
       parts.push(
         '<details class="thinking-block is-streaming" open>' +
-        '<summary>Thinking Stream</summary>' +
-        '<div class="thinking-content">' + escapeHtml(remaining.substring(idx)) + '</div>' +
+        '<summary><span class="thinking-pipe">|</span><span> Thinking</span><span class="thinking-dots">...</span></summary>' +
+        '<div class="thinking-content">' + escapeHtml(remaining.substring(idx + openTagLength)) + '</div>' +
         '</details>'
       );
       remaining = '';
@@ -1562,10 +1613,10 @@ function renderMarkdownWithCollapsedThinking(rawText) {
     if (idx > 0) {
       parts.push(escapeHtml(remaining.substring(0, idx)));
     }
-    var content = remaining.substring(idx + 8, closeIdx);
+    var content = remaining.substring(idx + openTagLength, closeIdx);
     parts.push(
       '<details class="thinking-block">' +
-      '<summary>Thinking Stream</summary>' +
+      '<summary><span class="thinking-pipe">|</span><span> Thought for ' + formatStaticThinkingDuration(durationMs) + '</span></summary>' +
       '<div class="thinking-content">' + escapeHtml(content) + '</div>' +
       '</details>'
     );
@@ -1695,6 +1746,13 @@ function selectedPromptEngineeringModes() {
     };
   });
 }
+function promptEngineeringHideLabels() {
+  var cb = document.getElementById('prompt-option-hide-labels');
+  return !!(cb && cb.checked);
+}
+function promptEngineeringPartSeparator(hideLabels) {
+  return hideLabels ? '\n\n---\n\n' : '\n\n';
+}
 function currentStudyVerseFilterSpec() {
   return (localStorage.getItem('studyVerseFilter') || '').trim();
 }
@@ -1761,7 +1819,7 @@ function filterPromptContextByStudyVerses(text) {
     return match && allowed[parseInt(match[1], 10)];
   }).join('\n');
 }
-function currentStudySelectedTranslationsPromptText() {
+function currentStudySelectedTranslationsPromptText(hideLabels) {
   var allowed = promptEngineeringAllowedVerseSet();
   var sourceOrder = {};
   document.querySelectorAll('[data-study-source-toggle]').forEach(function(input, index) {
@@ -1791,10 +1849,10 @@ function currentStudySelectedTranslationsPromptText() {
       lines.push(verse + '. ' + text);
     });
     if (lines.length) {
-      sections.push(alias + ':\n' + lines.join('\n'));
+      sections.push(hideLabels ? lines.join('\n') : alias + ':\n' + lines.join('\n'));
     }
   });
-  return sections.join('\n\n');
+  return sections.join(promptEngineeringPartSeparator(hideLabels));
 }
 function currentDraftPromptText() {
   var verses = filteredDraftVerseNumbers();
@@ -1832,6 +1890,7 @@ async function buildPromptEngineeringText() {
   var parts = [];
   var prompts = currentEditorialPromptValues();
   var copyableText = '';
+  var hideLabels = promptEngineeringHideLabels();
 
   selectedPromptEngineeringModes().forEach(function(mode) {
     if (mode.key === 'copyable') {
@@ -1849,14 +1908,14 @@ async function buildPromptEngineeringText() {
     if (meta.key === 'draft') {
       text = currentDraftPromptText();
     } else if (meta.key === 'filtered') {
-      text = currentStudySelectedTranslationsPromptText();
+      text = currentStudySelectedTranslationsPromptText(hideLabels);
     } else {
       text = (window.tttPromptEngineeringContexts || {})[meta.key] || '';
       text = filterPromptContextByStudyVerses(text);
     }
     text = (text || '').trim();
     if (text) {
-      if (meta.key === 'filtered') {
+      if (meta.key === 'filtered' || hideLabels) {
         parts.push(text);
       } else {
         parts.push(meta.label + ':\n' + text);
@@ -1868,7 +1927,7 @@ async function buildPromptEngineeringText() {
     parts.push(copyableText);
   }
 
-  return parts.join('\n\n');
+  return parts.join(promptEngineeringPartSeparator(hideLabels));
 }
 function updatePromptEngineeringPreview() {
   var preview = document.getElementById('prompt-engineering-preview');
@@ -1889,7 +1948,7 @@ function initPromptEngineering() {
     return;
   }
   panel.dataset.promptEngineeringBound = '1';
-  panel.querySelectorAll('[data-prompt-context], [data-prompt-mode], #editorial-prompt-grammar, #editorial-prompt-concise, #editorial-prompt-scholarly, #editorial-prompt-copyable').forEach(function(el) {
+  panel.querySelectorAll('[data-prompt-context], [data-prompt-mode], [data-prompt-option], #editorial-prompt-grammar, #editorial-prompt-concise, #editorial-prompt-scholarly, #editorial-prompt-copyable').forEach(function(el) {
     el.addEventListener('input', updatePromptEngineeringPreview);
     el.addEventListener('change', updatePromptEngineeringPreview);
   });
@@ -1902,7 +1961,7 @@ function initPromptEngineering() {
   updatePromptEngineeringPreview();
 }
 function clearPromptEngineeringCombined() {
-  document.querySelectorAll('[data-prompt-context], [data-prompt-mode]').forEach(function(cb) {
+  document.querySelectorAll('[data-prompt-context], [data-prompt-mode], [data-prompt-option]').forEach(function(cb) {
     cb.checked = false;
   });
   var preview = document.getElementById('prompt-engineering-preview');

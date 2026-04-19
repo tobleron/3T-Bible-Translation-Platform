@@ -41,3 +41,4 @@ def test_static_interaction_layer_is_served() -> None:
         css_response = client.get("/static/app.css")
         assert css_response.status_code == 200
         assert ".workspace-toast.is-info" in css_response.text
+        assert ".thinking-dots" in css_response.text

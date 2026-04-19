@@ -22,6 +22,16 @@
           <option value="cloud" {% if settings_config.endpoint_provider == "cloud" %}selected{% endif %}>OpenAI</option>
         </select>
       </label>
+      <label class="compact-field chat-model-select">
+        <span>Model</span>
+        <select name="active_model" onchange="this.form.requestSubmit()"
+                onfocus="this.dataset.fetched || (this.dataset.fetched='true', this.form.requestSubmit())">
+          {% set options = (settings_config.local_model_options if settings_config.endpoint_provider == 'local' else settings_config.cloud_model_options) %}
+          {% for model in options %}
+          <option value="{{ model }}" {% if model == active_model_name %}selected{% endif %}>{{ model }}</option>
+          {% endfor %}
+        </select>
+      </label>
     </form>
 
     <div class="chat-session-form">

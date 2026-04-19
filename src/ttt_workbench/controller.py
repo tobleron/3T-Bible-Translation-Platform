@@ -7,6 +7,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
@@ -172,6 +173,8 @@ class BrowserWorkbench(WorkbenchApp):
         self.chunk_sessions_file = self.runtime_state_dir / "chunk_sessions.json"
         self.chunk_sessions = self._load_chunk_sessions()
         self.web_settings = self._load_web_settings()
+        self._last_model_refresh = 0
+        self._model_refresh_interval = 300  # 5 minutes
         self._source_support_cache: dict[str, str] = {}
         self._source_availability_cache: dict[tuple[str, str, int], bool] = {}
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
@@ -2079,7 +2082,10 @@ Rules:
         return Path(sys.executable)
 
     def safe_list_models(self) -> list[str]:
-        return self.refresh_model_cache(force=True)
+        if (time.time() - self._last_model_refresh) > self._model_refresh_interval:
+            self._last_model_refresh = time.time()
+            return self.refresh_model_cache(force=True)
+        return self.cached_model_names()
 
     def cached_model_names(self, provider: str | None = None) -> list[str]:
         provider_key = (provider or str(self.web_settings.get("endpoint_provider", "local"))).strip().lower()
@@ -2593,6 +2599,7 @@ Rules:
     def chat_panel_payload(self) -> dict[str, Any]:
         payload = self._panel_base_payload(active_tab="draft")
         chunk_open = self.has_open_chunk()
+        self.safe_list_models()
         payload.update(
             {
                 "active_provider_label": self.active_provider_label(),

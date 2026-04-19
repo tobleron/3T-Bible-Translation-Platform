@@ -43,22 +43,97 @@
     clone.querySelectorAll('.' + COPY_BUTTON_CLASS + ', button, textarea, input, select').forEach(function (el) {
       el.remove();
     });
-    return (clone.innerText || clone.textContent || '').trim();
+    return normalizeCopiedText(domText(clone, { orderedStack: [] }));
+  }
+
+  function normalizeCopiedText(text) {
+    return String(text || '')
+      .replace(/\r\n/g, '\n')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n[ \t]+/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
+  function domText(node, state) {
+    state = state || { orderedStack: [] };
+    if (!node) return '';
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.nodeValue || '';
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE && node.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+      return '';
+    }
+
+    var tag = node.nodeType === Node.ELEMENT_NODE ? node.tagName.toLowerCase() : '';
+    if (tag === 'br') return '\n';
+    if (tag === 'script' || tag === 'style' || tag === 'svg') return '';
+    if (tag === 'pre') return '\n' + (node.innerText || node.textContent || '') + '\n';
+    if (tag === 'code' && node.closest && node.closest('pre')) {
+      return node.textContent || '';
+    }
+    if (tag === 'ol') {
+      state.orderedStack.push(1);
+      var ordered = childrenText(node, state);
+      state.orderedStack.pop();
+      return blockText(ordered);
+    }
+    if (tag === 'ul') {
+      state.orderedStack.push(null);
+      var unordered = childrenText(node, state);
+      state.orderedStack.pop();
+      return blockText(unordered);
+    }
+    if (tag === 'li') {
+      var marker = '- ';
+      var top = state.orderedStack.length ? state.orderedStack[state.orderedStack.length - 1] : null;
+      if (typeof top === 'number') {
+        marker = top + '. ';
+        state.orderedStack[state.orderedStack.length - 1] = top + 1;
+      }
+      return marker + normalizeLineText(childrenText(node, state)) + '\n';
+    }
+
+    var text = childrenText(node, state);
+    if (isBlockElement(tag)) return blockText(text);
+    return text;
+  }
+
+  function childrenText(node, state) {
+    return Array.prototype.map.call(node.childNodes || [], function (child) {
+      if (child.nodeType === Node.TEXT_NODE && !String(child.nodeValue || '').trim() && node.children && node.children.length) {
+        return '';
+      }
+      return domText(child, state);
+    }).join('');
+  }
+
+  function normalizeLineText(text) {
+    return String(text || '').replace(/\s*\n\s*/g, ' ').replace(/[ \t]{2,}/g, ' ').trim();
+  }
+
+  function blockText(text) {
+    text = String(text || '').trim();
+    return text ? text + '\n\n' : '';
+  }
+
+  function isBlockElement(tag) {
+    return [
+      'address', 'article', 'aside', 'blockquote', 'div', 'dl', 'fieldset', 'figcaption',
+      'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hr',
+      'main', 'nav', 'p', 'section', 'table'
+    ].indexOf(tag) !== -1;
   }
 
   function addCopyButton(container) {
-    if (!container || container.dataset.tttCopyBound === '1') return;
+    if (!container) return;
+    applyUserPromptClass(container);
+    if (container.dataset.tttCopyBound === '1') return;
     var text = messageText(container);
     if (!text || text.length < 2) return;
     container.dataset.tttCopyBound = '1';
     container.classList.add('ttt-chainlit-copy-host');
-    var messageFrame = container.closest('[data-step-type]');
-    if (messageFrame) {
-      messageFrame.classList.add('ttt-chainlit-message-frame');
-      if (messageFrame.getAttribute('data-step-type') === 'user_message') {
-        container.classList.add('ttt-chainlit-user-prompt');
-      }
-    }
+    applyUserPromptClass(container);
 
     var button = document.createElement('button');
     button.type = 'button';
@@ -84,6 +159,16 @@
       });
     });
     container.appendChild(button);
+  }
+
+  function applyUserPromptClass(container) {
+    var messageFrame = container.closest('[data-step-type]');
+    if (messageFrame) {
+      messageFrame.classList.add('ttt-chainlit-message-frame');
+      if (messageFrame.getAttribute('data-step-type') === 'user_message') {
+        container.classList.add('ttt-chainlit-user-prompt');
+      }
+    }
   }
 
   function candidateMessages() {
@@ -146,4 +231,8 @@
   } else {
     start();
   }
+
+  window.TTTChainlitCopy = {
+    messageText: messageText
+  };
 }());

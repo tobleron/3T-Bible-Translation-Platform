@@ -228,6 +228,72 @@ def test_filtered_prompt_uses_study_checkbox_order(page: Page, live_server_url: 
     assert filtered_text.index("NLT:") < filtered_text.index("NET:")
 
 
+def test_prompt_engineering_can_hide_context_labels(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    prompt_text = page.evaluate(
+        """
+        async () => {
+          const sheet = document.querySelector('#study-blocks');
+          sheet.querySelectorAll('.translation-block').forEach((block) => block.remove());
+          ['ESV', 'NET'].forEach((alias) => {
+            const block = document.createElement('div');
+            block.className = 'chunk-block translation-block';
+            block.setAttribute('data-translation-alias', alias);
+            block.innerHTML = `
+              <div class="translation-verse-row" data-verse="1">
+                <span class="translation-verse-text">${alias} verse one</span>
+              </div>
+            `;
+            sheet.appendChild(block);
+          });
+          document.querySelectorAll('[data-prompt-context], [data-prompt-mode], [data-prompt-option]').forEach((cb) => {
+            cb.checked = false;
+          });
+          document.getElementById('prompt-context-filtered').checked = true;
+          document.getElementById('prompt-option-hide-labels').checked = true;
+          return await window.buildPromptEngineeringText();
+        }
+        """
+    )
+
+    assert prompt_text == "1. ESV verse one\n\n---\n\n1. NET verse one"
+    assert "ESV:" not in prompt_text
+    assert "NET:" not in prompt_text
+
+
+def test_chainlit_copy_preserves_rendered_list_markers(page: Page) -> None:
+    page.set_content(
+        """
+        <main>
+          <div id="message">
+            <p>Prompt heading</p>
+            <ol>
+              <li>First numbered item</li>
+              <li>Second numbered item</li>
+            </ol>
+            <ul>
+              <li>Bullet item</li>
+            </ul>
+          </div>
+        </main>
+        """
+    )
+    page.add_script_tag(path=str(ROOT / "public" / "workbench-chainlit.js"))
+
+    copied_text = page.evaluate(
+        """
+        () => window.TTTChainlitCopy.messageText(document.getElementById('message'))
+        """
+    )
+
+    assert copied_text == (
+        "Prompt heading\n\n"
+        "1. First numbered item\n"
+        "2. Second numbered item\n\n"
+        "- Bullet item"
+    )
+
+
 def test_copy_translation_uses_fallback_when_clipboard_api_fails(page: Page, live_server_url: str) -> None:
     open_workspace(page, live_server_url)
     result = page.evaluate(
