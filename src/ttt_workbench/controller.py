@@ -254,7 +254,7 @@ class BrowserWorkbench(WorkbenchApp):
             return defaults
         try:
             payload = json.loads(self.settings_file.read_text(encoding="utf-8"))
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             return defaults
         if not isinstance(payload, dict):
             return defaults
@@ -373,7 +373,7 @@ class BrowserWorkbench(WorkbenchApp):
             return {}
         try:
             payload = json.loads(self.chunk_sessions_file.read_text(encoding="utf-8"))
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             return {}
         if not isinstance(payload, dict):
             return {}
@@ -988,7 +988,7 @@ Rules:
                 if not chapters:
                     try:
                         chapters = self.bible_repo.chapters_for_book(testament, book)
-                    except Exception:
+                    except (json.JSONDecodeError, OSError):
                         chapters = []
                 chunk_counts = self.chunk_catalog_repo.chunk_status_map(testament, book)
                 payload[testament].append(
@@ -1018,7 +1018,7 @@ Rules:
                 if not chapters:
                     try:
                         chapters = self.bible_repo.chapters_for_book(testament, book)
-                    except Exception:
+                    except (json.JSONDecodeError, OSError):
                         chapters = []
                 
                 total_chapters += len(chapters)
@@ -1036,7 +1036,7 @@ Rules:
                             # but for a dashboard summary it might be okay once.
                             # BibleRepository already builds an index.
                             translated_chapters += 1
-                        except Exception:
+                        except (json.JSONDecodeError, OSError):
                             continue
 
         sources = []
@@ -1142,7 +1142,7 @@ Rules:
                 self.state.chunk_start or 1,
                 self.state.chunk_end or 1,
             )
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             return ""
         return str(
             chapter_doc.get("sections", [{}])[section_index].get("headline", "")
@@ -1491,7 +1491,7 @@ Rules:
             chapter_doc = self.bible_repo.load_chapter(self.state.book, self.state.chapter).doc
             verse_map = self.bible_repo.verse_map(chapter_doc)
             return verse_map.get(verse, "")
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             return ""
 
     def chunk_study_blocks(self) -> list[dict[str, Any]]:
@@ -2271,7 +2271,7 @@ Rules:
         for verse in payload.get("verses", []):
             try:
                 self.state.draft_chunk[str(int(verse["verse"]))] = verse["text"].strip()
-            except Exception:
+            except (json.JSONDecodeError, OSError):
                 continue
         self.state.draft_title = payload.get("title", "").strip()
         self.state.title_alternatives = [

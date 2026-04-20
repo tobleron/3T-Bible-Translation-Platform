@@ -15,12 +15,12 @@ DROP_POS = frozenset({"DET", "ADP", "CCONJ", "SCONJ", "AUX", "PRON"})
 def load_spacy_model() -> tuple[Any | None, str]:
     try:
         import spacy
-    except Exception:
+    except ImportError:
         return None, "spaCy is not installed. Install spaCy and the en_core_web_sm model to enable important-word analysis."
 
     try:
         return spacy.load("en_core_web_sm"), ""
-    except Exception:
+    except ImportError:
         return None, "spaCy model en_core_web_sm is not installed. Reinstall the workbench requirements to enable important-word analysis."
 
 
@@ -94,7 +94,7 @@ def original_order_for_word(word: str, original_order: dict[str, int], nlp: Any 
         return None
     try:
         doc = nlp(word)
-    except Exception:
+    except ImportError:
         return None
     for token in doc:
         lemma = str(getattr(token, "lemma_", "") or "").strip().lower()
@@ -121,7 +121,7 @@ def _word_similarity(left: str, right: str, nlp: Any) -> float:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", UserWarning)
             return float(left_token.similarity(right_token))
-    except Exception:
+    except ImportError:
         return 0.0
 
 

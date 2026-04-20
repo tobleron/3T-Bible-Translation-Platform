@@ -1,5 +1,5 @@
 from pathlib import Path
-import json, re, sys
+import json, logging, re, sys
 from collections import defaultdict, OrderedDict
 
 from ebooklib import epub
@@ -8,6 +8,9 @@ import markdown
 from utils import smart_q, html_id, apply_glossary_links
 from config_loader import load_config
 from validator import validate_all_json_files
+
+logger = logging.getLogger(__name__)
+
 
 def build_bible_epub(
     root: Path,
@@ -20,27 +23,27 @@ def build_bible_epub(
     if not holy_dir.exists():
         raise SystemExit(f"✗ `_HOLY_BIBLE` folder not found at {holy_dir}")
 
-    CFG      = load_config(root)
-    TITLE    = CFG["meta"]["epub_title"]
-    VERSION  = CFG["meta"]["version_number"]
-    PUBDATE  = CFG["meta"]["publication_date"]
-    EDITION  = CFG["meta"].get("bible_edition", "")
-    EPUB_NAME= f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.epub"
-    MD_NAME  = f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.md"
+    CFG = load_config(root)
+    TITLE = CFG["meta"]["epub_title"]
+    VERSION = CFG["meta"]["version_number"]
+    PUBDATE = CFG["meta"]["publication_date"]
+    EDITION = CFG["meta"].get("bible_edition", "")
+    EPUB_NAME = f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.epub"
+    MD_NAME = f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.md"
     TXT_NAME = f"{TITLE.replace(' ', '_')}_{VERSION}_{PUBDATE}.txt"
 
     if output_dir:
         epub_path = output_dir / EPUB_NAME
-        md_path   = output_dir / MD_NAME
-        txt_path  = output_dir / TXT_NAME
+        md_path = output_dir / MD_NAME
+        txt_path = output_dir / TXT_NAME
     else:
         epub_path = Path(EPUB_NAME)
-        md_path   = Path(MD_NAME)
-        txt_path  = Path(TXT_NAME)
+        md_path = Path(MD_NAME)
+        txt_path = Path(TXT_NAME)
 
-    FMT      = CFG["formatting"]
-    FOOT     = CFG.get("footnotes", {})
-    SMART_Q  = FMT.get("convert_smart_quotes", False)
+    FMT = CFG["formatting"]
+    FOOT = CFG.get("footnotes", {})
+    SMART_Q = FMT.get("convert_smart_quotes", False)
 
     # Load glossary
     gloss_path = holy_dir / "Glossary.json"
@@ -74,43 +77,44 @@ def build_bible_epub(
     )
 
     epub.write_epub(epub_path, book)
-    print("✓ EPUB created:", epub_path)
+    logger.info("EPUB created: %s", epub_path)
     _maybe_write_markdown(generate_md, md_lines, CFG, chap_map, md_path)
     _maybe_write_txt(generate_txt, txt_lines, txt_path)
 
 
 def _collect_intro_pages(holy_dir: Path):
     intro_pages = []
-    intro_dir   = holy_dir / "_0_Intro"
+    intro_dir = holy_dir / "_0_Intro"
     if intro_dir.exists():
         for p in sorted(intro_dir.iterdir()):
             if p.suffix.lower() not in (".json", ".md"):
                 continue
             if p.suffix.lower() == ".json":
-                data      = json.loads(p.read_text(encoding="utf-8"))
-                title     = data.get("title") or p.stem
-                raw_md    = data.get("markdown") or data.get("content", "")
-                raw_html  = data.get("html") or markdown.markdown(raw_md)
+                data = json.loads(p.read_text(encoding="utf-8"))
+                title = data.get("title") or p.stem
+                raw_md = data.get("markdown") or data.get("content", "")
+                raw_html = data.get("html") or markdown.markdown(raw_md)
                 order_val = data.get("order")
             else:
-                md_text   = p.read_text(encoding="utf-8")
-                m         = re.search(r"^#\s*(.+)", md_text, flags=re.MULTILINE)
-                title     = m.group(1).strip() if m else p.stem.replace("_", " ").title()
-                raw_html  = markdown.markdown(md_text)
+                md_text = p.read_text(encoding="utf-8")
+                m = re.search(r"^#\s*(.+)", md_text, flags=re.MULTILINE)
+                title = m.group(1).strip() if m else p.stem.replace("_", " ").title()
+                raw_html = markdown.markdown(md_text)
                 order_val = None
             if order_val is None:
-                m         = re.match(r"(\d+)_", p.stem)
+                m = re.match(r"(\d+)_", p.stem)
                 order_val = int(m.group(1)) if m else 0
             intro_pages.append(
                 {
                     "order": order_val,
                     "title": title,
-                    "html":  raw_html,
+                    "html": raw_html,
                     "file_name": p.stem + ".xhtml",
                 }
             )
         intro_pages.sort(key=lambda d: d["order"])
     return intro_pages, intro_dir
+
 
 def _collect_bible_books(holy_dir: Path, intro_dir: Path):
     books = OrderedDict()
@@ -121,7 +125,7 @@ def _collect_bible_books(holy_dir: Path, intro_dir: Path):
         if "book" not in data or "chapter" not in data:
             # Skip files like preface, glossary, or malformed JSONs
             continue
-        key  = (data.get("testament", "ZZ"), data["book"])
+        key = (data.get("testament", "ZZ"), data["book"])
         books.setdefault(key, []).append(data)
     for lst in books.values():
         lst.sort(key=lambda d: d["chapter"])
@@ -132,6 +136,7 @@ def _collect_bible_books(holy_dir: Path, intro_dir: Path):
         )
     )
     return books
+
 
 def _assemble_epub(
     books,
@@ -176,10 +181,10 @@ def _assemble_epub(
         f"sup{{vertical-align:super;font-size:{fmt['superscript_font_size']};}}"
         f".title-wrapper{{display:flex;flex-direction:column;justify-content:center;"
         f"align-items:center;min-height:100vh;}}"
-        f".edition-info{{font-size:{fmt.get('edition_info_font_size','1em')};text-align:center;"
+        f".edition-info{{font-size:{fmt.get('edition_info_font_size', '1em')};text-align:center;"
         f"margin-top:1em;}}"
-        f"div.footnotes p{{margin:.25em 0;font-size:{foot_cfg.get('footnote_font_size','0.8em')}}}"
-        f"div.footnotes p strong{{font-size:{foot_cfg.get('footnotes_title_font_size','1em')}}}"
+        f"div.footnotes p{{margin:.25em 0;font-size:{foot_cfg.get('footnote_font_size', '0.8em')}}}"
+        f"div.footnotes p strong{{font-size:{foot_cfg.get('footnotes_title_font_size', '1em')}}}"
         f"a.glossary-word{{color:inherit;font-style:italic;text-decoration:none;}}"
     )
 
@@ -205,9 +210,7 @@ def _assemble_epub(
 
     toc_links_intro = []
     for pg in intro_pages:
-        doc = epub.EpubHtml(
-            title=pg["title"], file_name=pg["file_name"], lang="en"
-        )
+        doc = epub.EpubHtml(title=pg["title"], file_name=pg["file_name"], lang="en")
         doc.content = f"<h1 class='chapter-title'>{pg['title']}</h1>{pg['html']}"
         doc.add_item(nav_css)
         book.add_item(doc)
@@ -218,7 +221,11 @@ def _assemble_epub(
 
     if generate_txt:
         txt_lines.extend(
-            [title.upper(), f"Edition: {edition} | Version: {version} | Date: {pubdate}", ""]
+            [
+                title.upper(),
+                f"Edition: {edition} | Version: {version} | Date: {pubdate}",
+                "",
+            ]
         )
     if generate_md:
         md_lines.extend(
@@ -274,10 +281,7 @@ def _assemble_epub(
     if glossary:
         gloss_html = "<h1 class='chapter-title'>Glossary</h1><dl>"
         for term, defi in sorted(glossary.items(), key=lambda t: t[0].lower()):
-            gloss_html += (
-                f'<dt id="{term.lower()}"><b>{term}</b></dt>'
-                f'<dd>{defi}</dd>'
-            )
+            gloss_html += f'<dt id="{term.lower()}"><b>{term}</b></dt><dd>{defi}</dd>'
         gloss_html += "</dl>"
         gloss_doc = epub.EpubHtml(
             title="Glossary", file_name="glossary.xhtml", lang="en"
@@ -288,13 +292,14 @@ def _assemble_epub(
         spine.append(gloss_doc)
         nav_items.append(epub.Link("glossary.xhtml", "Glossary", "glossary"))
 
-    book.toc   = tuple(nav_items)
+    book.toc = tuple(nav_items)
     book.spine = spine
 
     book.add_item(epub.EpubNav())
     book.add_item(epub.EpubNcx())
 
     return book, chap_map, txt_lines, md_lines
+
 
 def _render_chapter(
     chapter_data,
@@ -309,7 +314,7 @@ def _render_chapter(
     glossary,
 ):
     c_num = chapter_data["chapter"]
-    html  = ""
+    html = ""
 
     if c_num == 1:
         html += f"<h1 class='book-title'>{book_name}</h1>"
@@ -328,9 +333,9 @@ def _render_chapter(
         content = fn.get("content", "").strip()
         if not content or content.lower() == "nan":
             continue
-        verse  = fn["verse"]
+        verse = fn["verse"]
         letter = fn.get("letter") or chr(ord("a") + idx)
-        idx   += 1
+        idx += 1
         fn["ltr"] = letter
         fn_map[verse].append(fn)
 
@@ -347,22 +352,21 @@ def _render_chapter(
         verse_run = ""
         for v in sec["verses"]:
             number = v["verse"]
-            txt    = smart_q(v["text"], smart_quotes_on)
+            txt = smart_q(v["text"], smart_quotes_on)
             txt = apply_glossary_links(txt, glossary)
             if number in fn_map:
                 for fn in fn_map[number]:
                     aid = html_id(f"{book_name}-{c_num}-{number}-{fn['ltr']}")
                     txt += f"&#8239;<sup><a href='#{aid}'>{fn['ltr']}</a></sup>"
-            #verse_run += (
+            # verse_run += (
             #    f"<a id='v-{book_name}-{c_num}-{number}'></a>{txt}&#8239;"
             #    f"<b><sup>{number}</sup></b> "
-            #)
+            # )
             verse_run += (
                 f"<a id='v-{book_name}-{c_num}-{number}'></a><b><sup>{number}</sup></b>&#8239;"
                 f"{txt} "
             )
 
-            
             if generate_txt:
                 txt_lines.append(f"{number}. {v['text']}")
             if generate_md:
@@ -378,7 +382,7 @@ def _render_chapter(
             md_lines.append("\n#### Translation Notes\n")
         for vn in sorted(fn_map):
             for fn in fn_map[vn]:
-                aid  = html_id(f"{book_name}-{c_num}-{vn}-{fn['ltr']}")
+                aid = html_id(f"{book_name}-{c_num}-{vn}-{fn['ltr']}")
                 back = f"v-{book_name}-{c_num}-{vn}"
                 html += (
                     f"<p id='{aid}'><b>{book_name} {c_num}:{vn}</b> - "
@@ -396,6 +400,7 @@ def _render_chapter(
 
     return html
 
+
 def _build_epub_toc(toc_links_intro, chap_map, nav_css):
     toc_html = (
         "<h1 class='chapter-title' style='text-align:center'>Table of Contents</h1>"
@@ -406,18 +411,16 @@ def _build_epub_toc(toc_links_intro, chap_map, nav_css):
             f"<br><a href='{pg.file_name}'>{lbl}</a>" for lbl, pg in toc_links_intro
         )
     for bk, lst in chap_map.items():
-        toc_html += (
-            f"<br><b>{bk}</b> "
-            + " ".join(f"<a href='{doc.file_name}'>{num}</a>" for num, doc in lst)
+        toc_html += f"<br><b>{bk}</b> " + " ".join(
+            f"<a href='{doc.file_name}'>{num}</a>" for num, doc in lst
         )
     toc_html += "</td></tr></table>"
 
-    toc_doc = epub.EpubHtml(
-        title="Table of Contents", file_name="toc.xhtml", lang="en"
-    )
+    toc_doc = epub.EpubHtml(title="Table of Contents", file_name="toc.xhtml", lang="en")
     toc_doc.content = toc_html
     toc_doc.add_item(nav_css)
     return toc_doc
+
 
 def _maybe_write_markdown(generate_md, md_lines, cfg, chap_map, md_name):
     if not generate_md:
@@ -426,10 +429,10 @@ def _maybe_write_markdown(generate_md, md_lines, cfg, chap_map, md_name):
         for line in md_lines:
             f.write(line.rstrip() + "\n")
 
+
 def _maybe_write_txt(generate_txt, txt_lines, txt_name):
     if not generate_txt:
         return
     with open(txt_name, "w", encoding="utf-8") as f:
         for line in txt_lines:
             f.write(line.rstrip() + "\n")
-            

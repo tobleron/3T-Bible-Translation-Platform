@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import urllib.error
 import urllib.request
 from typing import Generator
@@ -11,6 +12,8 @@ import requests
 
 from ttt_core.config import DEFAULT_LLAMA_CPP_BASE_URL, load_config
 from ttt_core.utils.common import extract_json_payload
+
+logger = logging.getLogger(__name__)
 
 
 class LlamaCppClient:
@@ -40,6 +43,7 @@ class LlamaCppClient:
 
         # Stream timeout: config > env > default 1800s (30 min)
         import os
+
         env_timeout = os.environ.get("TTT_LLAMA_CPP_STREAM_TIMEOUT")
         if env_timeout is not None:
             try:
@@ -64,7 +68,7 @@ class LlamaCppClient:
             url = f"{self.base_url}/models"
         else:
             url = f"{self.base_url}/v1/models"
-            
+
         try:
             request = urllib.request.Request(url, headers=self._get_headers())
             with urllib.request.urlopen(request, timeout=5) as response:
@@ -73,7 +77,7 @@ class LlamaCppClient:
                     item.get("id", "llama.cpp-model")
                     for item in payload.get("data", [])
                 ] or ["llama.cpp-model"]
-        except Exception:
+        except (urllib.error.URLError, json.JSONDecodeError, TimeoutError):
             return ["llama.cpp-model"]
 
     # ------------------------------------------------------------------
@@ -99,7 +103,7 @@ class LlamaCppClient:
             payload["n_predict"] = max_tokens
         # We should avoid hardcoding num_ctx if we want to use server defaults,
         # but if we must, 32768 is a decent modern default.
-        # payload["num_ctx"] = 32768 
+        # payload["num_ctx"] = 32768
         if stop:
             payload["stop"] = stop
         data = json.dumps(payload).encode("utf-8")
@@ -123,7 +127,9 @@ class LlamaCppClient:
             detail = exc.read().decode("utf-8", errors="replace")
             # /v1/completions may not exist — fall back to chat endpoint
             if exc.code == 404 and "/v1" in self.base_url:
-                return self._complete_via_chat(prompt, temperature, max_tokens, stop, timeout_seconds)
+                return self._complete_via_chat(
+                    prompt, temperature, max_tokens, stop, timeout_seconds
+                )
             return f"[ERROR] llama.cpp HTTP {exc.code}: {detail}"
         except TimeoutError:
             return f"[ERROR] llama.cpp request timed out after {timeout_seconds}s"
@@ -213,7 +219,8 @@ class LlamaCppClient:
                     # OpenAI-compatible endpoint: /v1/chat/completions
                     selected_model = (
                         model_name
-                        if model_name and model_name not in {"stream", "llama.cpp-model"}
+                        if model_name
+                        and model_name not in {"stream", "llama.cpp-model"}
                         else getattr(self, "model_name", "")
                     )
                     chat_payload = {
@@ -227,7 +234,13 @@ class LlamaCppClient:
                         chat_payload["max_tokens"] = max_tokens
                     url = f"{self.base_url}/chat/completions"
                     _in_thinking = False  # Track whether we're inside a reasoning block
-                    with requests.post(url, json=chat_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
+                    with requests.post(
+                        url,
+                        json=chat_payload,
+                        headers=self._get_headers(),
+                        stream=True,
+                        timeout=timeout,
+                    ) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
                             if should_stop():
@@ -285,7 +298,13 @@ class LlamaCppClient:
                     }
                     if max_tokens is not None:
                         native_payload["n_predict"] = max_tokens
-                    with requests.post(url, json=native_payload, headers=self._get_headers(), stream=True, timeout=timeout) as resp:
+                    with requests.post(
+                        url,
+                        json=native_payload,
+                        headers=self._get_headers(),
+                        stream=True,
+                        timeout=timeout,
+                    ) as resp:
                         resp.raise_for_status()
                         for line in resp.iter_lines():
                             if should_stop():
@@ -304,8 +323,12 @@ class LlamaCppClient:
                                     yield data["content"]
                                 if data.get("stop"):
                                     stats = {
-                                        "tokens_predicted": data.get("tokens_predicted"),
-                                        "generation_settings": data.get("generation_settings"),
+                                        "tokens_predicted": data.get(
+                                            "tokens_predicted"
+                                        ),
+                                        "generation_settings": data.get(
+                                            "generation_settings"
+                                        ),
                                     }
                                     yield f"__STATS_BLOCK__{json.dumps(stats)}__END_STATS__"
                 # Success — exit the retry loop
@@ -379,9 +402,7 @@ class LlamaCppClient:
                 missing = [key for key in required_keys if key not in payload]
                 if missing:
                     if leaked_reasoning:
-                        repair_reason = (
-                            "Visible reasoning leaked and the JSON schema was incomplete"
-                        )
+                        repair_reason = "Visible reasoning leaked and the JSON schema was incomplete"
                         continue
                     repair_reason = "Missing required keys: " + ", ".join(missing)
                     continue

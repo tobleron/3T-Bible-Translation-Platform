@@ -126,7 +126,7 @@ class BibleRepository:
         for path in self.paths.bible_dir.rglob("*.json"):
             try:
                 payload = json.loads(path.read_text(encoding="utf-8"))
-            except Exception:
+            except (json.JSONDecodeError, OSError):
                 continue
             if not isinstance(payload, dict):
                 continue
@@ -731,7 +731,7 @@ class SourceRepository:
         for item in payload:
             try:
                 key = (normalize_book_key(item["book"]), int(item["chapter"]), int(item["verse"]))
-            except Exception:
+            except (json.JSONDecodeError, OSError):
                 continue
             mapping[key] = item.get("text", "")
         self._cache[alias] = mapping
@@ -908,7 +908,7 @@ class LexicalRepository:
         for (ref,) in rows:
             try:
                 verses.append(int(str(ref).rsplit(".", 1)[-1]))
-            except Exception:
+            except (json.JSONDecodeError, OSError):
                 continue
         return sorted(set(verses))
 
@@ -937,7 +937,7 @@ class LexicalRepository:
                 continue
             try:
                 chapters.append(int(parts[1]))
-            except Exception:
+            except (json.JSONDecodeError, OSError):
                 continue
         return sorted(set(chapters))
 
