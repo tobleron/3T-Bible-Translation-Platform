@@ -50,6 +50,7 @@ from .background_jobs import Job, JobRunner
 from .models import SessionState, BusyState, CommandHistoryEntry
 from .repositories import BibleRepository, JustificationRepository, SourceRepository, LexicalRepository, ProjectPaths
 from .utils import find_close_command, parse_range, parse_reference
+from ttt_core.utils import write_json_atomic
 from .llm import LlamaCppClient
 
 
@@ -206,7 +207,7 @@ class WorkbenchApp(
         return getattr(self.llm, "base_url", "")
 
     def save_state(self) -> None:
-        self.paths.state_file.write_text(json.dumps(self.state.to_json(), indent=2), encoding="utf-8")
+        write_json_atomic(self.paths.state_file, self.state.to_json())
         self._save_line_history()
 
     def _init_line_editing(self) -> None:

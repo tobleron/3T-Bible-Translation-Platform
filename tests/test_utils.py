@@ -17,6 +17,7 @@ from ttt_core.utils.common import (
     repair_linewise_json_strings,
     utc_now,
 )
+from ttt_core.utils.json_io import write_json_atomic
 
 
 class TestBookCodes:
@@ -125,3 +126,22 @@ class TestUtcNow:
         result = utc_now()
         assert result.endswith("Z")
         assert "T" in result
+
+
+class TestAtomicJson:
+    def test_write_json_atomic_writes_pretty_json_with_newline(self, tmp_path: Path):
+        path = tmp_path / "state" / "session.json"
+
+        write_json_atomic(path, {"b": 2, "a": [1]})
+
+        assert path.read_text(encoding="utf-8").endswith("\n")
+        assert json.loads(path.read_text(encoding="utf-8")) == {"b": 2, "a": [1]}
+        assert not list(path.parent.glob("*.tmp"))
+
+    def test_write_json_atomic_replaces_existing_file(self, tmp_path: Path):
+        path = tmp_path / "settings.json"
+        path.write_text('{"old": true}\n', encoding="utf-8")
+
+        write_json_atomic(path, {"new": True})
+
+        assert json.loads(path.read_text(encoding="utf-8")) == {"new": True}

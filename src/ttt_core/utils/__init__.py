@@ -19,6 +19,7 @@ from ttt_core.utils.backup import (
     restore_backup_set,
     write_backup_set,
 )
+from ttt_core.utils.json_io import write_json_atomic
 
 __all__ = [
     "book_abbrev",
@@ -36,4 +37,5 @@ __all__ = [
     "utc_now",
     "restore_backup_set",
     "write_backup_set",
+    "write_json_atomic",
 ]

@@ -24,7 +24,7 @@ from ttt_core.models import (
     PendingVerseUpdate,
     SessionState,
 )
-from ttt_core.utils import normalize_book_key
+from ttt_core.utils import normalize_book_key, write_json_atomic
 
 from .app import WorkbenchApp
 from ttt_workbench.repositories import restore_backup_set
@@ -282,8 +282,7 @@ class BrowserWorkbench(WorkbenchApp):
         ):
             merged["base_url"] = defaults["base_url"]
         if merged != payload:
-            self.settings_file.parent.mkdir(parents=True, exist_ok=True)
-            self.settings_file.write_text(json.dumps(merged, indent=2), encoding="utf-8")
+            write_json_atomic(self.settings_file, merged)
         return merged
 
     @staticmethod
@@ -350,10 +349,7 @@ class BrowserWorkbench(WorkbenchApp):
             "model_discovery": self.web_settings.get("model_discovery", {"local": {"error": ""}, "cloud": {"error": ""}}),
             "selected_sources": selected_sources,
         }
-        self.settings_file.parent.mkdir(parents=True, exist_ok=True)
-        self.settings_file.write_text(
-            json.dumps(self.web_settings, indent=2), encoding="utf-8"
-        )
+        write_json_atomic(self.settings_file, self.web_settings)
         self.refresh_active_endpoint()
 
     def settings_payload(self) -> dict[str, Any]:
@@ -411,10 +407,7 @@ class BrowserWorkbench(WorkbenchApp):
         return clean
 
     def _save_chunk_sessions(self) -> None:
-        self.chunk_sessions_file.parent.mkdir(parents=True, exist_ok=True)
-        self.chunk_sessions_file.write_text(
-            json.dumps(self.chunk_sessions, indent=2), encoding="utf-8"
-        )
+        write_json_atomic(self.chunk_sessions_file, self.chunk_sessions)
 
     def chunk_session_key(
         self,
@@ -2178,8 +2171,7 @@ Rules:
                     self.llm.model_name = self.model_name
                 if provider == "local" and discovered != "llama.cpp-model":
                     self.web_settings["local_model"] = discovered
-            self.settings_file.parent.mkdir(parents=True, exist_ok=True)
-            self.settings_file.write_text(json.dumps(self.web_settings, indent=2), encoding="utf-8")
+            write_json_atomic(self.settings_file, self.web_settings)
             return clean
         return self.cached_model_names(provider) or [self.model_name]
 
