@@ -102,44 +102,10 @@ def test_chat_panel_swap_keeps_workspace_and_recovers_button(page: Page, live_se
     expect(page.locator("#chat-panel iframe")).to_be_visible()
 
 
-def test_stream_controller_recovers_send_and_stop_controls(page: Page, live_server_url: str) -> None:
+def test_chat_panel_uses_chainlit_iframe_not_legacy_sse_form(page: Page, live_server_url: str) -> None:
     open_workspace(page, live_server_url)
-    recovered = page.evaluate(
-        """
-        () => {
-          const host = document.createElement('div');
-          host.innerHTML = `
-            <form id="chat-stream-form">
-              <button class="send-button" data-original-label="Send">Streaming...</button>
-            </form>
-            <button id="chat-stop-button" class="is-animating" style="display:flex"></button>
-          `;
-          document.body.appendChild(host);
-          const state = window.TTTChatStreamController.state();
-          state.controller = new AbortController();
-          state.done = false;
-          const signal = state.controller.signal;
-          document.querySelector('.send-button').disabled = true;
-          window.TTTChatStreamController.restoreControls();
-          return {
-            done: state.done,
-            aborted: signal.aborted,
-            sendDisabled: document.querySelector('.send-button').disabled,
-            sendLabel: document.querySelector('.send-button').textContent,
-            stopDisplay: document.querySelector('#chat-stop-button').style.display,
-            stopAnimating: document.querySelector('#chat-stop-button').classList.contains('is-animating')
-          };
-        }
-        """
-    )
-    assert recovered == {
-        "done": True,
-        "aborted": True,
-        "sendDisabled": False,
-        "sendLabel": "Send",
-        "stopDisplay": "none",
-        "stopAnimating": False,
-    }
+    expect(page.locator("#chat-panel iframe")).to_be_visible()
+    expect(page.locator("#chat-stream-form")).to_have_count(0)
 
 
 def test_study_source_checkbox_adds_translation_block(page: Page, live_server_url: str) -> None:

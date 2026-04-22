@@ -64,7 +64,6 @@
     call('initSupportFormattingTools');
     call('initModelActionForms');
     call('initPromptEngineering');
-    call('initChatInput');
     call('initEditorAutosave');
     call('initTranslationCopyButtons');
     call('initTranslationApplyButtons');
