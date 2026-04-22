@@ -40,6 +40,7 @@ class LlamaCppClient:
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
         self.model_name = ""
+        self.last_model_discovery_error = ""
 
         # Stream timeout: config > env > default 1800s (30 min)
         import os
@@ -73,11 +74,13 @@ class LlamaCppClient:
             request = urllib.request.Request(url, headers=self._get_headers())
             with urllib.request.urlopen(request, timeout=5) as response:
                 payload = json.loads(response.read().decode("utf-8"))
+                self.last_model_discovery_error = ""
                 return [
                     item.get("id", "llama.cpp-model")
                     for item in payload.get("data", [])
                 ] or ["llama.cpp-model"]
-        except (urllib.error.URLError, json.JSONDecodeError, TimeoutError):
+        except (urllib.error.URLError, json.JSONDecodeError, TimeoutError) as exc:
+            self.last_model_discovery_error = f"Model discovery failed at {url}: {exc}"
             return ["llama.cpp-model"]
 
     # ------------------------------------------------------------------

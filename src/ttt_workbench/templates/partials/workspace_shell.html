@@ -706,12 +706,25 @@ function showGlossTooltip(el, e) {
   var isHeb = el.closest('.chunk-block-body')?.classList.contains('hebrew');
   glossTipEl = document.createElement('div');
   glossTipEl.className = 'gloss-tooltip';
-  glossTipEl.innerHTML =
-    '<div class="gloss-tooltip-surface' + (isHeb ? ' hebrew' : '') + '">' + surface + '</div>' +
-    '<div class="gloss-tooltip-meta">' +
-      '<span class="gloss-tooltip-gloss">' + gloss + '</span>' +
-      '<button class="gloss-tooltip-copy" onclick="copyGlossWord(this, \'' + surface.replace(/'/g, "\\'") + '\')">Copy</button>' +
-    '</div>';
+  var surfaceEl = document.createElement('div');
+  surfaceEl.className = 'gloss-tooltip-surface' + (isHeb ? ' hebrew' : '');
+  surfaceEl.textContent = surface;
+  var metaEl = document.createElement('div');
+  metaEl.className = 'gloss-tooltip-meta';
+  var glossEl = document.createElement('span');
+  glossEl.className = 'gloss-tooltip-gloss';
+  glossEl.textContent = gloss;
+  var copyBtn = document.createElement('button');
+  copyBtn.className = 'gloss-tooltip-copy';
+  copyBtn.type = 'button';
+  copyBtn.textContent = 'Copy';
+  copyBtn.addEventListener('click', function() {
+    copyGlossWord(copyBtn, surface);
+  });
+  metaEl.appendChild(glossEl);
+  metaEl.appendChild(copyBtn);
+  glossTipEl.appendChild(surfaceEl);
+  glossTipEl.appendChild(metaEl);
   // Keep alive while hovering tooltip itself
   glossTipEl.addEventListener('mouseenter', function() { clearTimeout(glossTipHideTimer); });
   glossTipEl.addEventListener('mouseleave', function() {
@@ -2127,6 +2140,15 @@ function copyTranslationVerse(btn, text) {
     }, 1500);
   }, function() {
     btn.textContent = 'Failed';
+  });
+}
+function initTranslationCopyButtons() {
+  if (document.body.dataset.translationCopyBound === '1') return;
+  document.body.dataset.translationCopyBound = '1';
+  document.body.addEventListener('click', function(event) {
+    var btn = event.target.closest('.translation-copy-btn[data-copy-text]');
+    if (!btn) return;
+    copyTranslationVerse(btn, btn.dataset.copyText || '');
   });
 }
 function applyStudyTranslationToDraft(btn) {

@@ -242,12 +242,11 @@ class BrowserWorkbench(WorkbenchApp):
             "base_url": self.llm.base_url,
             "endpoint_provider": "local",
             "local_base_url": self.llm.base_url,
-            "local_api_key": "",
             "local_model": getattr(self, "model_name", ""),
             "cloud_base_url": "https://api.openai.com/v1",
-            "cloud_api_key": "",
             "cloud_model": "gpt-4.1-mini",
             "model_cache": {"local": [], "cloud": []},
+            "model_discovery": {"local": {"error": ""}, "cloud": {"error": ""}},
             "selected_sources": ["LSB", "ESV"],
         }
         if not self.settings_file.exists():
@@ -270,12 +269,11 @@ class BrowserWorkbench(WorkbenchApp):
             "base_url": active_base_url,
             "endpoint_provider": endpoint_provider,
             "local_base_url": local_base_url,
-            "local_api_key": str(payload.get("local_api_key") or defaults["local_api_key"]),
             "local_model": str(payload.get("local_model") or defaults["local_model"]),
             "cloud_base_url": cloud_base_url,
-            "cloud_api_key": str(payload.get("cloud_api_key") or defaults["cloud_api_key"]),
             "cloud_model": str(payload.get("cloud_model") or defaults["cloud_model"]),
             "model_cache": payload.get("model_cache", defaults["model_cache"]),
+            "model_discovery": payload.get("model_discovery", defaults["model_discovery"]),
             "selected_sources": payload.get("selected_sources", defaults["selected_sources"]),
         }
         if (
@@ -298,12 +296,18 @@ class BrowserWorkbench(WorkbenchApp):
     def refresh_active_endpoint(self) -> str:
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
         provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
-        api_key = self.web_settings.get("cloud_api_key" if provider == "cloud" else "local_api_key", "")
+        api_key = self.active_api_key(provider)
         if hasattr(self.llm, "api_key"):
             self.llm.api_key = str(api_key or "")
         if hasattr(self.llm, "model_name"):
             self.llm.model_name = self.active_model_name()
         return self.llm.base_url
+
+    def active_api_key(self, provider: str | None = None) -> str:
+        provider_key = str(provider or self.web_settings.get("endpoint_provider", "local")).strip().lower()
+        if provider_key == "cloud":
+            return os.environ.get("TTT_OPENAI_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+        return os.environ.get("TTT_LLAMA_CPP_API_KEY", "")
 
     def active_model_name(self) -> str:
         provider = str(self.web_settings.get("endpoint_provider", "local")).strip().lower()
@@ -339,12 +343,11 @@ class BrowserWorkbench(WorkbenchApp):
             "base_url": active_base_url,
             "endpoint_provider": endpoint_provider,
             "local_base_url": local_base_url,
-            "local_api_key": str(payload.get("local_api_key", self.web_settings.get("local_api_key", ""))),
             "local_model": local_model,
             "cloud_base_url": cloud_base_url,
-            "cloud_api_key": str(payload.get("cloud_api_key", self.web_settings.get("cloud_api_key", ""))),
             "cloud_model": cloud_model,
             "model_cache": self.web_settings.get("model_cache", {"local": [], "cloud": []}),
+            "model_discovery": self.web_settings.get("model_discovery", {"local": {"error": ""}, "cloud": {"error": ""}}),
             "selected_sources": selected_sources,
         }
         self.settings_file.parent.mkdir(parents=True, exist_ok=True)
@@ -357,16 +360,40 @@ class BrowserWorkbench(WorkbenchApp):
         return {
             "endpoint_provider": self.web_settings.get("endpoint_provider", "local"),
             "local_base_url": self.web_settings.get("local_base_url", self.llm.base_url),
-            "local_api_key": self.web_settings.get("local_api_key", ""),
             "local_model": self.web_settings.get("local_model", self.model_name),
             "cloud_base_url": self.web_settings.get("cloud_base_url", ""),
-            "cloud_api_key": self.web_settings.get("cloud_api_key", ""),
             "cloud_model": self.web_settings.get("cloud_model", "gpt-4.1-mini"),
             "local_model_options": self.cached_model_names("local"),
             "cloud_model_options": self.cached_model_names("cloud"),
             "active_model": self.active_model_name(),
             "active_base_url": self.resolve_active_base_url(),
+            "model_discovery": self.web_settings.get("model_discovery", {}),
+            "model_discovery_error": self.model_discovery_error(),
         }
+
+    def model_discovery_error(self, provider: str | None = None) -> str:
+        provider_key = (provider or str(self.web_settings.get("endpoint_provider", "local"))).strip().lower()
+        if provider_key not in {"local", "cloud"}:
+            provider_key = "local"
+        discovery = self.web_settings.get("model_discovery", {})
+        if not isinstance(discovery, dict):
+            return ""
+        provider_status = discovery.get(provider_key, {})
+        if not isinstance(provider_status, dict):
+            return ""
+        return str(provider_status.get("error", "") or "").strip()
+
+    def set_model_discovery_error(self, provider: str, error: str) -> None:
+        provider_key = provider if provider in {"local", "cloud"} else "local"
+        discovery = self.web_settings.get("model_discovery", {})
+        if not isinstance(discovery, dict):
+            discovery = {}
+        provider_status = discovery.get(provider_key, {})
+        if not isinstance(provider_status, dict):
+            provider_status = {}
+        provider_status["error"] = error.strip()
+        discovery[provider_key] = provider_status
+        self.web_settings["model_discovery"] = discovery
 
     def _load_chunk_sessions(self) -> dict[str, dict[str, Any]]:
         if not self.chunk_sessions_file.exists():
@@ -2013,12 +2040,14 @@ Rules:
             return {start + offset: block for offset, block in enumerate(blocks)}
         if verse_count == 1:
             return {start: raw_text.strip()}
-        # If block count doesn't match, just assign everything to the first verse
-        return {start: raw_text.strip(), **{v: "" for v in range(start + 1, end + 1)}}
+        raise ValueError(
+            "Could not safely split the draft across multiple verses. "
+            "Use verse numbers or one blank-line-separated block per verse."
+        )
 
     def save_range_draft(self, title: str, start: int, end: int, raw_text: str) -> None:
-        self.state.draft_title = title.strip()
         parsed = self.parse_range_draft(start, end, raw_text)
+        self.state.draft_title = title.strip()
         for verse, text in parsed.items():
             self.state.draft_chunk[str(verse)] = text.strip()
         self.prepare_browser_commit_state()
@@ -2117,8 +2146,16 @@ Rules:
         try:
             models = self.llm.list_models()
         except Exception as exc:
-            self.print_error(f"Model discovery failed: {exc}")
+            message = f"Model discovery failed: {exc}"
+            self.set_model_discovery_error(provider, message)
+            self.print_error(message)
             return self.cached_model_names(provider) or [self.model_name]
+        llm_error = str(getattr(self.llm, "last_model_discovery_error", "") or "").strip()
+        if llm_error:
+            self.set_model_discovery_error(provider, llm_error)
+            self.print_error(llm_error)
+        else:
+            self.set_model_discovery_error(provider, "")
         clean = [str(model).strip() for model in models if str(model).strip()]
         if clean:
             active = self.active_model_name()

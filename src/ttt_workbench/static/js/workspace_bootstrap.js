@@ -66,6 +66,7 @@
     call('initPromptEngineering');
     call('initChatInput');
     call('initEditorAutosave');
+    call('initTranslationCopyButtons');
     restoreChatScroll();
     restoreGlossCopiedIndicator();
   }

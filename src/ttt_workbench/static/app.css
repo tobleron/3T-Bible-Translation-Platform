@@ -1236,6 +1236,12 @@ button:active:not(:disabled) {
   border-color: var(--danger);
 }
 
+.settings-warning {
+  margin: 0;
+  color: var(--warn);
+  font-size: 0.85rem;
+}
+
 .merge-bar {
   display: none;
   grid-template-columns: 92px 92px minmax(180px, 1.1fr) 120px minmax(220px, 1.4fr) auto;

@@ -933,10 +933,8 @@ async def update_chat_model(
             {
                 "endpoint_provider": next_provider,
                 "local_base_url": current.get("local_base_url", ""),
-                "local_api_key": current.get("local_api_key", ""),
                 "local_model": current.get("local_model", ""),
                 "cloud_base_url": current.get("cloud_base_url", "https://api.openai.com/v1"),
-                "cloud_api_key": current.get("cloud_api_key", ""),
                 "cloud_model": current.get("cloud_model", "gpt-4.1-mini"),
                 "active_model": active_model,
             }
@@ -1392,10 +1390,8 @@ async def settings_save(request: Request):
             {
                 "endpoint_provider": str(form.get("endpoint_provider", "local")).strip(),
                 "local_base_url": str(form.get("local_base_url", wb.llm.base_url)).strip(),
-                "local_api_key": str(form.get("local_api_key", "")).strip(),
                 "local_model": str(form.get("local_model", "")).strip(),
                 "cloud_base_url": str(form.get("cloud_base_url", "")).strip(),
-                "cloud_api_key": str(form.get("cloud_api_key", "")).strip(),
                 "cloud_model": str(form.get("cloud_model", "")).strip(),
             }
         )
@@ -1431,7 +1427,9 @@ def settings_test_endpoint(request: Request):
     wb = controller()
     wb.refresh_active_endpoint()
     models = wb.refresh_model_cache(force=True)
-    if models:
+    if wb.model_discovery_error():
+        wb.print_error(wb.model_discovery_error())
+    elif models:
         wb.notify(f"Endpoint reachable. Models: {', '.join(models[:3])}")
     return render_page(
         request,

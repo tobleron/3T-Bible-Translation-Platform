@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sqlite3
 import time
+import json
 from types import SimpleNamespace
 
 from fastapi.testclient import TestClient
@@ -24,6 +25,24 @@ def test_hebrew_original_surface_is_cleaned_for_display() -> None:
     assert BrowserWorkbench._clean_original_surface("עַל\\־") == "עַל־"
     assert BrowserWorkbench._clean_original_surface("אֶחָֽד׃\\ \\פ") == "אֶחָֽד׃"
     assert BrowserWorkbench._join_original_surfaces(["עַל־", "פְּנֵ֣י"]) == "עַל־פְּנֵ֣י"
+
+
+def test_range_draft_parser_rejects_ambiguous_multi_verse_text(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    wb = appmod.controller()
+    wb.open_or_select_chunk("old", "Genesis", 1, "1-5", announce=False)
+    wb.state.draft_chunk = {"1": "Existing 1", "2": "Existing 2"}
+    try:
+        try:
+            wb.parse_range_draft(1, 2, "One paragraph only for two verses.")
+        except ValueError as exc:
+            assert "Could not safely split" in str(exc)
+        else:
+            raise AssertionError("Expected ambiguous multi-verse draft to be rejected.")
+        assert wb.state.draft_chunk == {"1": "Existing 1", "2": "Existing 2"}
+    finally:
+        reset_controller()
 
 
 def test_settings_fake_mode_avoids_model_probe(monkeypatch) -> None:
@@ -77,8 +96,60 @@ def test_settings_save_places_cached_openai_models_in_model_dropdown(monkeypatch
             assert cached_response.status_code == 200
             assert '<option value="gpt-5.4-nano" selected>gpt-5.4-nano</option>' in cached_response.text
             assert '<option value="gpt-5.4-mini"' in cached_response.text
+            assert "sk-test" not in cached_response.text
         finally:
             cached_response.close()
+        settings_path = appmod.controller().settings_file
+        settings_payload = json.loads(settings_path.read_text(encoding="utf-8"))
+        assert "local_api_key" not in settings_payload
+        assert "cloud_api_key" not in settings_payload
+    reset_controller()
+
+
+def test_settings_load_drops_legacy_plaintext_api_keys(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    wb = appmod.controller()
+    wb.settings_file.parent.mkdir(parents=True, exist_ok=True)
+    wb.settings_file.write_text(
+        json.dumps(
+            {
+                "endpoint_provider": "cloud",
+                "local_base_url": "http://10.0.0.1:8080/v1",
+                "local_api_key": "local-secret",
+                "local_model": "local-test",
+                "cloud_base_url": "https://api.openai.com/v1",
+                "cloud_api_key": "cloud-secret",
+                "cloud_model": "gpt-5.4-mini",
+            }
+        ),
+        encoding="utf-8",
+    )
+    reset_controller()
+    wb = appmod.controller()
+    payload = json.loads(wb.settings_file.read_text(encoding="utf-8"))
+    assert "local_api_key" not in payload
+    assert "cloud_api_key" not in payload
+    assert wb.settings_payload()["cloud_model"] == "gpt-5.4-mini"
+    reset_controller()
+
+
+def test_model_discovery_warning_is_visible_when_endpoint_falls_back(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+
+    def fallback_models(self):
+        self.last_model_discovery_error = "Model discovery failed at http://fake-llm.local/v1/models: down"
+        return ["llama.cpp-model"]
+
+    monkeypatch.setattr(FakeLLM, "list_models", fallback_models)
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post("/settings/test-endpoint")
+        try:
+            assert response.status_code == 200
+            assert "Model discovery failed at http://fake-llm.local/v1/models: down" in response.text
+        finally:
+            response.close()
     reset_controller()
 
 
@@ -366,6 +437,8 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
         assert "gloss-verse-row" in chunk_text
         assert "gloss-verse-text" in chunk_text
         assert "data-gloss=\"ba.Ra" not in chunk_text
+        assert "onclick=\"copyTranslationVerse" not in chunk_text
+        assert "data-copy-text=" in chunk_text
         assert "Creation of Light and Day One" in chunk_text
         assert "data-editor-mode=\"draft\"" in revision_text
         assert '"ok":true' in draft_text.replace(" ", "")

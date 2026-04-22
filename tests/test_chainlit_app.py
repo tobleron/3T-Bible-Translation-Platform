@@ -121,3 +121,17 @@ def test_chainlit_copy_button_asset_is_configured() -> None:
     assert ".bg-accent.rounded-3xl" in script_text
     assert "writeClipboardText(messageText(container))" in script_text
     assert ".ttt-thinking-summary.is-streaming .ttt-thinking-dots" in css_text
+
+
+def test_chainlit_config_uses_safe_local_defaults() -> None:
+    config_text = (ROOT / ".chainlit" / "config.toml").read_text(encoding="utf-8")
+
+    assert 'allow_origins = ["*"]' not in config_text
+    assert 'allow_origins = ["http://127.0.0.1:8765", "http://localhost:8765"]' in config_text
+    assert "unsafe_allow_html = false" in config_text
+    assert "mask_user_env = true" in config_text
+    assert "enabled = false" in config_text
+    assert 'accept = []' in config_text
+    assert "max_files = 0" in config_text
+    assert "max_size_mb = 0" in config_text
+    assert 'cot = "hidden"' in config_text

@@ -132,7 +132,7 @@
           <div class="translation-verse-row" data-verse="{{ v }}">
             <span class="translation-verse-num">{{ v }}</span>
             <span class="translation-verse-text"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>{{ verse_text or "[no text]" }}</span>
-            <button class="translation-copy-btn" type="button" onclick="copyTranslationVerse(this, '{{ verse_text.replace("'", "\\'")|e }}')" title="Copy verse {{ v }}">Copy</button>
+            <button class="translation-copy-btn" type="button" data-copy-text="{{ verse_text }}" title="Copy verse {{ v }}">Copy</button>
           </div>
           {% endfor %}
         </div>
