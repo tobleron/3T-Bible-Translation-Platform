@@ -1670,6 +1670,12 @@ function initEditorAutosave() {
   var controller = null;
   var autosaveUrl = editorForm.getAttribute('data-autosave-url');
   if (!autosaveUrl) return;
+  function setDraftRevision(value) {
+    var revisionField = editorForm.querySelector('input[name="draft_revision"]');
+    if (!revisionField) return;
+    if (value === null || value === undefined) return;
+    revisionField.value = String(value);
+  }
   function autosave() {
     clearTimeout(timer);
     timer = null;
@@ -1683,14 +1689,29 @@ function initEditorAutosave() {
       headers: { 'X-Requested-With': 'fetch' }
     })
       .then(function(response) {
-        if (!response.ok) throw new Error('Autosave failed.');
-        return response.json();
+        return response.json().then(function(payload) {
+          if (!response.ok) {
+            var error = new Error((payload && payload.message) || 'Autosave failed.');
+            error.payload = payload || {};
+            error.status = response.status;
+            throw error;
+          }
+          return payload || {};
+        });
       })
-      .then(function() {
+      .then(function(payload) {
+        setDraftRevision(payload.draft_revision);
         setEditorSaveStatus('saved', 'Saved ✓');
       })
       .catch(function(err) {
         if (err.name === 'AbortError') return;
+        var payload = err.payload || {};
+        if (err.status === 409 || payload.code === 'stale_draft_revision') {
+          setDraftRevision(payload.draft_revision);
+          setEditorSaveStatus('error', 'Out of date');
+          showWorkspaceIndicator(payload.message || 'Draft changed in another request.', 'warning');
+          return;
+        }
         setEditorSaveStatus('error', 'Save failed');
         showWorkspaceIndicator(err.message || 'Autosave failed.', 'error');
       });

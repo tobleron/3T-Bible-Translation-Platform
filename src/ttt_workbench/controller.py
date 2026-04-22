@@ -651,6 +651,22 @@ class BrowserWorkbench(WorkbenchApp):
             self.persist_current_chunk_session()
         super().save_state()
 
+    def draft_revision(self) -> int:
+        raw = getattr(self.state, "draft_revision", 0)
+        try:
+            value = int(raw)
+        except (TypeError, ValueError):
+            value = 0
+        if value < 0:
+            value = 0
+        self.state.draft_revision = value
+        return value
+
+    def bump_draft_revision(self) -> int:
+        next_value = self.draft_revision() + 1
+        self.state.draft_revision = next_value
+        return next_value
+
     def selected_sources(self) -> list[str]:
         values = self.web_settings.get("selected_sources", [])
         if not isinstance(values, list):
@@ -1131,6 +1147,7 @@ Rules:
         self.state.focus_end = None
         self.state.browser_editor_mode = "draft"
         self.state.browser_editor_state = "editing"
+        self.state.draft_revision = 0
         self.state.chat_messages = []
         self.state.draft_chunk = {}
         self.state.draft_title = ""
@@ -2040,9 +2057,19 @@ Rules:
 
     def save_range_draft(self, title: str, start: int, end: int, raw_text: str) -> None:
         parsed = self.parse_range_draft(start, end, raw_text)
-        self.state.draft_title = title.strip()
+        changed = False
+        clean_title = title.strip()
+        if clean_title != self.state.draft_title:
+            self.state.draft_title = clean_title
+            changed = True
         for verse, text in parsed.items():
-            self.state.draft_chunk[str(verse)] = text.strip()
+            key = str(verse)
+            clean_text = text.strip()
+            if clean_text != self.state.draft_chunk.get(key, ""):
+                self.state.draft_chunk[key] = clean_text
+                changed = True
+        if changed:
+            self.bump_draft_revision()
         self.prepare_browser_commit_state()
         self.save_state()
 
@@ -2596,6 +2623,7 @@ Rules:
             "review_editor_verses": self.review_editor_verses() if chunk_open else [],
             "editor_mode": editor_mode,
             "editor_title": self.editor_title(editor_mode) if chunk_open else "",
+            "draft_revision": self.draft_revision() if chunk_open else 0,
             "committed_title": self.committed_chunk_title() if chunk_open else "",
             "has_draft_work": self.has_draft_work() if chunk_open else False,
             "has_committed_text": self.chunk_has_committed_text() if chunk_open else False,
@@ -2656,6 +2684,7 @@ Rules:
                 "review_editor_verses": self.review_editor_verses() if chunk_open else [],
                 "editor_mode": editor_mode,
                 "editor_title": self.editor_title(editor_mode) if chunk_open else "",
+                "draft_revision": self.draft_revision() if chunk_open else 0,
             }
         )
         return payload
@@ -2716,6 +2745,7 @@ Rules:
                 self.state.draft_chunk[key] = text.strip()
                 changed = True
         if changed:
+            self.bump_draft_revision()
             self.history_entries.append(
                 {"title": "Draft saved", "body": f"{verse_count} verse{'s' if verse_count != 1 else ''} saved for {self.state.book} {self.state.chapter}:{self.state.chunk_start}-{self.state.chunk_end}", "accent": "green"}
             )
@@ -2734,6 +2764,7 @@ Rules:
         for verse in range(start, end + 1):
             self.state.draft_chunk.pop(str(verse), None)
         self.state.draft_title = ""
+        self.state.draft_revision = 0
         self.state.browser_editor_state = "committed"
         self.state.browser_editor_mode = "review"
         self.prepare_browser_commit_state()

@@ -314,6 +314,77 @@ def test_chunk_routes_survive_lexical_db_open_failures(monkeypatch) -> None:
             avd_json_response.close()
     reset_controller()
 
+
+def test_draft_autosave_returns_incremented_revision(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/draft/autosave",
+            data={
+                "editor_mode": "draft",
+                "draft_revision": "0",
+                "draft_title": "Creation of Light and Day One",
+                "draft_range_start": "1",
+                "draft_range_end": "5",
+                "verse_1": "In the beginning.",
+                "verse_2": "The earth was formless.",
+            },
+        )
+        try:
+            assert response.status_code == 200
+            payload = response.json()
+            assert payload["ok"] is True
+            assert payload["draft_revision"] == 1
+            assert appmod.controller().draft_revision() == 1
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_draft_autosave_rejects_stale_revision(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        first = client.post(
+            "/workspace/old/genesis/1/1-5/draft/autosave",
+            data={
+                "editor_mode": "draft",
+                "draft_revision": "0",
+                "draft_title": "Creation of Light and Day One",
+                "draft_range_start": "1",
+                "draft_range_end": "5",
+                "verse_1": "In the beginning.",
+            },
+        )
+        try:
+            assert first.status_code == 200
+            assert first.json()["draft_revision"] == 1
+        finally:
+            first.close()
+
+        stale = client.post(
+            "/workspace/old/genesis/1/1-5/draft/autosave",
+            data={
+                "editor_mode": "draft",
+                "draft_revision": "0",
+                "draft_title": "Creation of Light and Day One",
+                "draft_range_start": "1",
+                "draft_range_end": "5",
+                "verse_1": "A stale write attempt.",
+            },
+        )
+        try:
+            assert stale.status_code == 409
+            payload = stale.json()
+            assert payload["ok"] is False
+            assert payload["code"] == "stale_draft_revision"
+            assert payload["draft_revision"] == 1
+        finally:
+            stale.close()
+    reset_controller()
+
+
 def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
 

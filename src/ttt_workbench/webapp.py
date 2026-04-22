@@ -151,9 +151,38 @@ def render_editor_panel(request: Request, wb: BrowserWorkbench):
     return response
 
 
-def apply_draft_form(wb: BrowserWorkbench, form) -> None:
+class DraftRevisionConflict(ValueError):
+    def __init__(self, current_revision: int):
+        self.current_revision = current_revision
+        super().__init__("Draft has changed since this autosave started.")
+
+
+def _parse_draft_revision(value: object) -> int | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    try:
+        revision = int(text)
+    except ValueError as exc:
+        raise ValueError("Invalid draft revision.") from exc
+    if revision < 0:
+        raise ValueError("Invalid draft revision.")
+    return revision
+
+
+def apply_draft_form(
+    wb: BrowserWorkbench,
+    form,
+    *,
+    expected_revision: int | None = None,
+    enforce_revision: bool = False,
+) -> None:
     if not form:
         return
+    if enforce_revision and expected_revision is not None and expected_revision != wb.draft_revision():
+        raise DraftRevisionConflict(wb.draft_revision())
     editor_mode = str(form.get("editor_mode", wb.editor_mode())).strip().lower() or wb.editor_mode()
     # Check for per-verse textarea fields (verse_N)
     verse_fields = {
@@ -567,9 +596,25 @@ async def autosave_draft(
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        apply_draft_form(wb, form)
+        expected_revision = _parse_draft_revision(form.get("draft_revision"))
+        apply_draft_form(
+            wb,
+            form,
+            expected_revision=expected_revision,
+            enforce_revision=expected_revision is not None,
+        )
         wb.activate_tab("draft")
-        return JSONResponse({"ok": True, "message": "Draft saved."})
+        return JSONResponse({"ok": True, "message": "Draft saved.", "draft_revision": wb.draft_revision()})
+    except DraftRevisionConflict as exc:
+        return JSONResponse(
+            {
+                "ok": False,
+                "message": "Your draft changed in another request. Refreshing to latest draft.",
+                "code": "stale_draft_revision",
+                "draft_revision": exc.current_revision,
+            },
+            status_code=409,
+        )
     except Exception as exc:
         return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
 

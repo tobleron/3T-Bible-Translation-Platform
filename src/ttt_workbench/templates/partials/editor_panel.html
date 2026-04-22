@@ -27,6 +27,7 @@
   <form id="editor-form" class="compact-editor-form"
     data-autosave-url="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/draft/autosave">
     <input type="hidden" name="editor_mode" value="{{ 'review' if is_committed else 'draft' }}">
+    <input type="hidden" name="draft_revision" value="{{ draft_revision }}">
     <input type="hidden" name="draft_range_start" value="{{ state.chunk_start or editor_range_start }}">
     <input type="hidden" name="draft_range_end" value="{{ state.chunk_end or editor_range_end }}">
     
