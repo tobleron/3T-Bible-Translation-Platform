@@ -153,6 +153,26 @@ def test_model_discovery_warning_is_visible_when_endpoint_falls_back(monkeypatch
     reset_controller()
 
 
+def test_model_discovery_warning_is_visible_in_chat_panel(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+
+    def fallback_models(self):
+        self.last_model_discovery_error = "Model discovery failed at http://fake-llm.local/v1/models: down"
+        return ["llama.cpp-model"]
+
+    monkeypatch.setattr(FakeLLM, "list_models", fallback_models)
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.get("/workspace/old/genesis/1/1-5")
+        try:
+            assert response.status_code == 200
+            assert '<article id="chat-panel"' in response.text
+            assert "Model discovery failed at http://fake-llm.local/v1/models: down" in response.text
+        finally:
+            response.close()
+    reset_controller()
+
+
 def test_home_page_does_not_emit_no_open_chunk_errors(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
     reset_controller()

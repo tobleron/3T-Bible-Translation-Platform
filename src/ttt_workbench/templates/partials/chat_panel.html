@@ -64,6 +64,10 @@
       hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="Deleting...">Delete</button>
   </div>
 
+  {% if settings_config.model_discovery_error %}
+  <p class="settings-warning">{{ settings_config.model_discovery_error }}</p>
+  {% endif %}
+
   <div class="chainlit-container">
     <iframe src="/chat?workbench_chat_session={{ active_chat_session_id }}"></iframe>
   </div>
