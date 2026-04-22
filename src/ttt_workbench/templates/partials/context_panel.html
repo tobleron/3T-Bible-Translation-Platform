@@ -85,7 +85,7 @@
             <span class="translation-verse-num">{{ line.verse }}</span>
             <span class="translation-verse-text gloss-verse-text">
               {% for gt in line.tokens %}
-              <span class="gloss-word" data-surface="{{ gt.surface }}" data-gloss="{{ gt.gloss }}">{{ gt.gloss }}</span>{% if not loop.last %}<span class="gloss-sep"> / </span>{% endif %}
+              <span class="gloss-word" data-surface="{{ gt.surface|e }}" data-gloss="{{ gt.gloss|e }}">{{ gt.gloss }}</span>{% if not loop.last %}<span class="gloss-sep"> / </span>{% endif %}
               {% endfor %}
             </span>
           </div>
@@ -103,7 +103,7 @@
             {% endif %}
           </div>
           {% if block.kind == 'translation' %}
-          <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label }}" onclick="applyStudyTranslationToDraft(this)" title="Load {{ block.label }} into the draft verses">
+          <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label|e }}" title="Load {{ block.label }} into the draft verses">
             Use In Draft
           </button>
           {% endif %}
@@ -118,7 +118,7 @@
             <span class="translation-verse-num">{{ line.verse }}</span>
             <span class="translation-verse-text gloss-verse-text">
               {% for gt in line.tokens %}
-              <span class="gloss-word" data-surface="{{ gt.surface }}" data-gloss="{{ gt.gloss }}">{{ gt.gloss }}</span>{% if not loop.last %}<span class="gloss-sep"> / </span>{% endif %}
+              <span class="gloss-word" data-surface="{{ gt.surface|e }}" data-gloss="{{ gt.gloss|e }}">{{ gt.gloss }}</span>{% if not loop.last %}<span class="gloss-sep"> / </span>{% endif %}
               {% endfor %}
             </span>
           </div>
@@ -132,7 +132,7 @@
           <div class="translation-verse-row" data-verse="{{ v }}">
             <span class="translation-verse-num">{{ v }}</span>
             <span class="translation-verse-text"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>{{ verse_text or "[no text]" }}</span>
-            <button class="translation-copy-btn" type="button" data-copy-text="{{ verse_text }}" title="Copy verse {{ v }}">Copy</button>
+            <button class="translation-copy-btn" type="button" data-copy-text="{{ verse_text|e }}" title="Copy verse {{ v }}">Copy</button>
           </div>
           {% endfor %}
         </div>

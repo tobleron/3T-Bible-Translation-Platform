@@ -1,5 +1,5 @@
 {% for block in study_blocks if block.kind == 'translation' %}
-<div class="chunk-block translation-block{% if block.direction == 'rtl' %} translation-block-rtl{% endif %}" data-translation-alias="{{ block.label }}"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>
+<div class="chunk-block translation-block{% if block.direction == 'rtl' %} translation-block-rtl{% endif %}" data-translation-alias="{{ block.label|e }}"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>
   <div class="chunk-block-head">
     <div class="chunk-block-heading">
       <span class="verse-tag">{{ block.label }}</span>
@@ -7,7 +7,7 @@
       <span class="context-meta">{{ block.caption }}</span>
       {% endif %}
     </div>
-    <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label }}" onclick="applyStudyTranslationToDraft(this)" title="Load {{ block.label }} into the draft verses">
+    <button class="translation-apply-btn" type="button" data-translation-alias="{{ block.label|e }}" title="Load {{ block.label }} into the draft verses">
       Use In Draft
     </button>
   </div>
@@ -21,7 +21,7 @@
     <div class="translation-verse-row" data-verse="{{ v }}">
       <span class="translation-verse-num">{{ v }}</span>
       <span class="translation-verse-text"{% if block.direction == 'rtl' %} dir="rtl"{% endif %}>{{ verse_text or "[no text]" }}</span>
-      <button class="translation-copy-btn" type="button" data-copy-text="{{ verse_text }}" title="Copy verse {{ v }}">Copy</button>
+      <button class="translation-copy-btn" type="button" data-copy-text="{{ verse_text|e }}" title="Copy verse {{ v }}">Copy</button>
     </div>
     {% endfor %}
   </div>

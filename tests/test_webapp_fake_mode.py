@@ -509,6 +509,7 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
         assert "gloss-verse-text" in chunk_text
         assert "data-gloss=\"ba.Ra" not in chunk_text
         assert "onclick=\"copyTranslationVerse" not in chunk_text
+        assert "onclick=\"applyStudyTranslationToDraft" not in chunk_text
         assert "data-copy-text=" in chunk_text
         assert "Creation of Light and Day One" in chunk_text
         assert "data-editor-mode=\"draft\"" in revision_text

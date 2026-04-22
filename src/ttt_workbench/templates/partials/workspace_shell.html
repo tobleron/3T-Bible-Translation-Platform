@@ -2172,6 +2172,15 @@ function initTranslationCopyButtons() {
     copyTranslationVerse(btn, btn.dataset.copyText || '');
   });
 }
+function initTranslationApplyButtons() {
+  if (document.body.dataset.translationApplyBound === '1') return;
+  document.body.dataset.translationApplyBound = '1';
+  document.body.addEventListener('click', function(event) {
+    var btn = event.target.closest('.translation-apply-btn[data-translation-alias]');
+    if (!btn) return;
+    applyStudyTranslationToDraft(btn);
+  });
+}
 function applyStudyTranslationToDraft(btn) {
   var alias = btn.dataset.translationAlias || '';
   var block = btn.closest('.translation-block');
