@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from ttt_core.models.state import (
     SessionState,
+    SESSION_STATE_SCHEMA_VERSION,
     ChunkSuggestion,
     JustificationDraft,
     TerminologyEntry,
@@ -46,6 +47,20 @@ class TestSessionState:
         state.busy_state = BusyState(label="test", message="working")
         data = state.to_json()
         assert "busy_state" not in data
+
+    def test_state_schema_version_is_persisted(self):
+        state = SessionState(session_id="abc")
+        data = state.to_json()
+        assert data["schema_version"] == SESSION_STATE_SCHEMA_VERSION
+
+    def test_state_from_json_accepts_legacy_without_schema_version(self):
+        payload = {
+            "session_id": "legacy-session",
+            "mode": "COMMAND",
+            "screen": "HOME",
+        }
+        restored = SessionState.from_json(payload)
+        assert restored.session_id == "legacy-session"
 
 
 class TestChunkSuggestion:

@@ -42,17 +42,10 @@ class LlamaCppClient:
         self.model_name = ""
         self.last_model_discovery_error = ""
 
-        # Stream timeout: config > env > default 1800s (30 min)
-        import os
-
-        env_timeout = os.environ.get("TTT_LLAMA_CPP_STREAM_TIMEOUT")
-        if env_timeout is not None:
-            try:
-                self.stream_timeout_seconds = int(env_timeout)
-            except ValueError:
-                self.stream_timeout_seconds = 1800
-        else:
-            self.stream_timeout_seconds = llm_cfg.get("stream_timeout_seconds", 1800)
+        # Stream timeout is resolved in ttt_core.config.
+        self.stream_timeout_seconds = int(
+            llm_cfg.get("stream_timeout_seconds", 1800)
+        )
 
     def _get_headers(self) -> dict[str, str]:
         headers = {"Content-Type": "application/json"}

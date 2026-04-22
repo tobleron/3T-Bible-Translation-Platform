@@ -4,6 +4,8 @@ import time
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
+SESSION_STATE_SCHEMA_VERSION = 1
+
 
 @dataclass
 class BusyState:
@@ -214,10 +216,13 @@ class SessionState:
         data = asdict(self)
         # Do not persist transient busy_state
         data.pop("busy_state", None)
+        data["schema_version"] = SESSION_STATE_SCHEMA_VERSION
         return data
 
     @classmethod
     def from_json(cls, data: dict[str, Any]) -> "SessionState":
+        # Forward-compatible migration hook for future schema bumps.
+        _schema_version = int(data.get("schema_version", 0) or 0)
         review = data.get("last_review")
         justify = data.get("justify_draft")
         footnote = data.get("footnote_draft")

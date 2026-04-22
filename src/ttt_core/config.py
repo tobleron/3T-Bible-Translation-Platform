@@ -1,8 +1,9 @@
 """Unified configuration loader.
 
-Reads the legacy root ``config.yaml`` when present, then overlays
-``config/default_config.yaml`` and finally environment variables
-prefixed with ``TTT_``.
+Reads defaults, then the legacy root ``config.yaml`` when present, then overlays
+``config/default_config.yaml``. Next, ``.env`` values are loaded (without
+overwriting already exported environment variables), and finally explicit
+environment overrides are applied.
 """
 
 from __future__ import annotations
@@ -26,10 +27,11 @@ def load_config(project_root: Path | None = None) -> dict[str, Any]:
     """Return a merged configuration dictionary.
 
     Priority (highest first):
-    1. ``TTT_`` environment variables
-    2. ``config/default_config.yaml`` at *project_root*
-    3. legacy ``config.yaml`` at *project_root*
-    4. Sensible defaults
+    1. Explicit environment variables (``TTT_*`` / selected standard keys)
+    2. ``.env`` at *project_root* (only when not already exported)
+    3. ``config/default_config.yaml`` at *project_root*
+    4. legacy ``config.yaml`` at *project_root*
+    5. Sensible defaults
     """
     if project_root is None:
         project_root = _detect_project_root()
@@ -147,8 +149,19 @@ def _apply_env_overrides(cfg: dict[str, Any]) -> dict[str, Any]:
         cfg.setdefault("llama_cpp", {})["base_url"] = os.environ["TTT_LLAMA_CPP_BASE_URL"]
     if os.environ.get("TTT_LLAMA_CPP_API_KEY"):
         cfg.setdefault("llama_cpp", {})["api_key"] = os.environ["TTT_LLAMA_CPP_API_KEY"]
+    if os.environ.get("TTT_LLAMA_CPP_STREAM_TIMEOUT") is not None:
+        raw = str(os.environ.get("TTT_LLAMA_CPP_STREAM_TIMEOUT", "")).strip()
+        try:
+            timeout = int(raw)
+            if timeout <= 0:
+                raise ValueError
+        except ValueError:
+            timeout = DEFAULT_LLAMA_CPP_STREAM_TIMEOUT_SECONDS
+        cfg.setdefault("llama_cpp", {})["stream_timeout_seconds"] = timeout
     if os.environ.get("TTT_OPENAI_API_KEY"):
         cfg.setdefault("openai", {})["api_key"] = os.environ["TTT_OPENAI_API_KEY"]
+    elif os.environ.get("OPENAI_API_KEY"):
+        cfg.setdefault("openai", {})["api_key"] = os.environ["OPENAI_API_KEY"]
     return cfg
 
 def _load_dotenv(path: Path) -> None:

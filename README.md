@@ -30,12 +30,12 @@ The launcher creates/updates `.venv` from `requirements-workbench.txt` and start
 
 ## LLM Endpoint
 
-Configuration is loaded from defaults, `config.yaml`, optional local config files, `.env`, then environment variables.
+Configuration precedence is: defaults, `config.yaml`, `config/default_config.yaml`, `.env` (only for keys not already exported), then explicit environment variables.
 
 For llama.cpp-compatible local inference, set:
 
 ```bash
-export TTT_LLAMA_CPP_BASE_URL="http://127.0.0.1:8080/v1"
+export TTT_LLAMA_CPP_BASE_URL="http://10.0.0.1:8080/v1"
 export TTT_LLAMA_CPP_API_KEY=""
 ```
 
