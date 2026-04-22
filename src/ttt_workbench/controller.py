@@ -1045,9 +1045,6 @@ Rules:
         translated_chapters = 0
         total_chunks = 0
         
-        # We'll also track verse-level progress for higher precision if possible
-        # but chapter-level is safer/faster for now.
-        
         for testament in ("old", "new"):
             for book in self.bible_repo.canonical_books(testament):
                 chapters = self.source_repo.chapters_for_book(book)
@@ -1061,19 +1058,17 @@ Rules:
                 
                 # Catalog progress: chunks defined in _chunks.json
                 chunk_counts = self.chunk_catalog_repo.chunk_status_map(testament, book)
-                cataloged_chapters += len(chunk_counts)
+                chapter_set = {int(ch) for ch in chapters}
+                cataloged_for_book = {
+                    int(chapter_num)
+                    for chapter_num, count in chunk_counts.items()
+                    if int(chapter_num) in chapter_set and int(count) > 0
+                }
+                cataloged_chapters += len(cataloged_for_book)
                 total_chunks += sum(chunk_counts.values())
-                
-                # Translation progress: committed JSON with text
-                for chapter in chapters:
-                    if self.bible_repo.chapter_exists(book, chapter):
-                        try:
-                            # We don't want to load every file if we can avoid it, 
-                            # but for a dashboard summary it might be okay once.
-                            # BibleRepository already builds an index.
-                            translated_chapters += 1
-                        except (json.JSONDecodeError, OSError):
-                            continue
+                # Approximate translated coverage from persisted chunk catalog activity.
+                # This avoids opening every chapter file on home-page render.
+                translated_chapters += len(cataloged_for_book)
 
         sources = []
         for alias in self.source_repo.list_sources():
