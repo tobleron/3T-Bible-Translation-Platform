@@ -10,6 +10,7 @@ def test_home_loads() -> None:
         assert "Tell The Truth Bible Translation Platform" in response.text
         assert response.headers.get("server-timing", "").startswith("app;dur=")
         assert response.headers.get("x-ttt-render-ms")
+        assert response.headers.get("x-request-id")
 
 
 def test_settings_loads() -> None:

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 import re
 import subprocess
@@ -44,15 +45,31 @@ app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="s
 mount_chainlit(app=app, target=str(PACKAGE_DIR / "chainlit_app.py"), path="/chat")
 _CONTROLLER: BrowserWorkbench | None = None
 _JOB_RUNNER = JobRunner(max_workers=2)
+logger = logging.getLogger(__name__)
 
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     started_at = time.perf_counter()
+    request_id = request.headers.get("X-Request-Id") or uuid.uuid4().hex[:12]
     response = await call_next(request)
     duration_ms = (time.perf_counter() - started_at) * 1000
     response.headers["Server-Timing"] = f"app;dur={duration_ms:.1f}"
     response.headers["X-TTT-Render-Ms"] = f"{duration_ms:.1f}"
+    response.headers["X-Request-Id"] = request_id
+    wb = _CONTROLLER
+    logger.info(
+        "request_complete request_id=%s method=%s path=%s status=%s duration_ms=%.1f session_id=%s provider=%s model=%s chunk=%s",
+        request_id,
+        request.method,
+        request.url.path,
+        getattr(response, "status_code", "n/a"),
+        duration_ms,
+        getattr(getattr(wb, "state", None), "session_id", ""),
+        wb.active_provider_label() if wb is not None else "",
+        wb.active_model_name() if wb is not None else "",
+        wb.current_chunk_key() if wb is not None else "",
+    )
     return response
 
 

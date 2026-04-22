@@ -5,10 +5,12 @@ import time
 import json
 from types import SimpleNamespace
 
+import pytest
 from fastapi.testclient import TestClient
 
 import ttt_core.llm.llama_cpp as llama_cpp
 import ttt_workbench.commands.commit as commitmod
+from ttt_workbench.errors import ProviderRequestError
 from ttt_workbench.test_support import FakeLLM
 from ttt_workbench.controller import BrowserWorkbench
 from ttt_core.data.repositories import LexicalRepository
@@ -41,6 +43,18 @@ def test_range_draft_parser_rejects_ambiguous_multi_verse_text(monkeypatch) -> N
         else:
             raise AssertionError("Expected ambiguous multi-verse draft to be rejected.")
         assert wb.state.draft_chunk == {"1": "Existing 1", "2": "Existing 2"}
+    finally:
+        reset_controller()
+
+
+def test_typed_provider_error_mapping_for_llm_error_strings(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    wb = appmod.controller()
+    try:
+        with pytest.raises(ProviderRequestError) as exc:
+            wb.require_llm_success("[ERROR] llama.cpp request timed out after 600s")
+        assert "timed out" in str(exc.value)
     finally:
         reset_controller()
 

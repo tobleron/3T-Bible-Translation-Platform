@@ -27,6 +27,7 @@ from ttt_core.models import (
 from ttt_core.utils import normalize_book_key, write_json_atomic
 
 from .app import WorkbenchApp
+from .errors import ModelDiscoveryError, ProviderRequestError
 from ttt_workbench.repositories import restore_backup_set
 
 from .chunk_catalog import ChunkCatalogRepository
@@ -862,7 +863,7 @@ Rules:
         )
         if not isinstance(payload, dict):
             if str(response).startswith("[ERROR]"):
-                raise ValueError(self.explain_llm_failure(str(response)))
+                raise self.provider_error_from_response(str(response))
             raise ValueError("The endpoint did not return a valid editorial enhancement response.")
         result = str(payload.get("text", "")).strip()
         if not result:
@@ -2161,14 +2162,15 @@ Rules:
         try:
             models = self.llm.list_models()
         except Exception as exc:
-            message = f"Model discovery failed: {exc}"
+            message = str(ModelDiscoveryError(f"Model discovery failed: {exc}"))
             self.set_model_discovery_error(provider, message)
             self.print_error(message)
             return self.cached_model_names(provider) or [self.model_name]
         llm_error = str(getattr(self.llm, "last_model_discovery_error", "") or "").strip()
         if llm_error:
-            self.set_model_discovery_error(provider, llm_error)
-            self.print_error(llm_error)
+            message = str(ModelDiscoveryError(llm_error))
+            self.set_model_discovery_error(provider, message)
+            self.print_error(message)
         else:
             self.set_model_discovery_error(provider, "")
         clean = [str(model).strip() for model in models if str(model).strip()]
@@ -2232,9 +2234,18 @@ Rules:
         if "timed out" in text:
             return (
                 f"Model request to `{self.llm.base_url}` timed out. "
-                "Check that the llama.cpp server is running and responsive."
-            )
+            "Check that the llama.cpp server is running and responsive."
+        )
         return f"Model request failed at `{self.llm.base_url}`. Check Settings and the llama.cpp server."
+
+    def provider_error_from_response(self, raw_error: str) -> ProviderRequestError:
+        return ProviderRequestError(self.explain_llm_failure(raw_error))
+
+    def require_llm_success(self, response: object) -> str:
+        text = str(response or "")
+        if text.startswith("[ERROR]"):
+            raise self.provider_error_from_response(text)
+        return text
 
     def session_context_snapshot(self) -> str:
         blocks = self.chunk_study_blocks()
@@ -2315,7 +2326,7 @@ Rules:
         )
         if not isinstance(payload, dict):
             if str(response).startswith("[ERROR]"):
-                self.print_error(self.explain_llm_failure(str(response)))
+                self.print_error(str(self.provider_error_from_response(str(response))))
             else:
                 self.print_error("The endpoint did not return a valid initial draft JSON response.")
             return False
@@ -2354,13 +2365,14 @@ Rules:
             max_tokens=None,
         )
         self.state.chat_messages.append({"role": "user", "content": user_message})
-        if str(response).startswith("[ERROR]"):
+        try:
+            reply = self.require_llm_success(response).strip()
+        except ProviderRequestError as exc:
             self.history_entries.append(
                 {"title": "Chat error", "body": str(response)[:160], "accent": "red"}
             )
-            self.print_error(self.explain_llm_failure(str(response)))
+            self.print_error(str(exc))
             return
-        reply = str(response).strip()
         if reply:
             self.state.chat_messages.append({"role": "assistant", "content": reply})
             self.history_entries.append(
