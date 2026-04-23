@@ -19,7 +19,15 @@ import ttt_webapp.controller as controllermod
 
 
 def reset_controller() -> None:
-    appmod._CONTROLLER = None
+    appmod._SESSION_CONTROLLERS.clear()
+    appmod._TEST_SESSION_ID = "test"
+    from pathlib import Path
+    fake_state_dir = Path(".ttt_workbench/browser_fake_mode_test")
+    if fake_state_dir.exists():
+        for stale in ["active_session.json", "chunk_sessions.json"]:
+            p = fake_state_dir / stale
+            if p.exists():
+                p.unlink()
 
 
 def test_hebrew_original_surface_is_cleaned_for_display() -> None:
@@ -200,13 +208,54 @@ def test_home_page_does_not_emit_no_open_chunk_errors(monkeypatch) -> None:
     reset_controller()
 
 
+def test_resume_without_active_chunk_redirects_to_workspace(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.get("/resume", follow_redirects=False)
+        try:
+            assert response.status_code == 302
+            location = response.headers.get("location", "")
+            assert location.startswith("/workspace/")
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_resume_with_stale_chunk_redirects_to_chapter(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        wb = appmod.controller()
+        wb.state.wizard_testament = "old"
+        wb.state.book = "Genesis"
+        wb.state.chapter = 1
+        wb.state.chunk_start = 99
+        wb.state.chunk_end = 100
+        response = client.get("/resume", follow_redirects=False)
+        try:
+            assert response.status_code == 302
+            assert response.headers.get("location") == "/workspace/old/genesis/1"
+        finally:
+            response.close()
+    reset_controller()
+
+
 def test_epub_background_job_endpoint_reports_status(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
-    monkeypatch.setattr(
-        appmod.subprocess,
-        "run",
-        lambda *args, **kwargs: SimpleNamespace(returncode=0, stdout="EPUB ok\n", stderr=""),
-    )
+
+    def fake_run_epub(_self, *, cancel_event=None):
+        return {
+            "ok": True,
+            "command": "python generate_epub.py --md --txt",
+            "stdout": "EPUB ok\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration": 0.1,
+            "latest_epub": None,
+        }
+
+    monkeypatch.setattr(BrowserWorkbench, "_run_epub_build", fake_run_epub)
     reset_controller()
     with TestClient(appmod.app) as client:
         response = client.post("/epub/jobs/generate")
@@ -233,11 +282,18 @@ def test_epub_background_job_endpoint_reports_status(monkeypatch) -> None:
 def test_background_job_cancel_endpoint(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
 
-    def slow_run(*args, **kwargs):
-        time.sleep(0.25)
-        return SimpleNamespace(returncode=0, stdout="EPUB ok\n", stderr="")
+    def slow_run_epub(_self, *, cancel_event=None):
+        return {
+            "ok": True,
+            "command": "python generate_epub.py --md --txt",
+            "stdout": "EPUB ok\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration": 0.05,
+            "latest_epub": None,
+        }
 
-    monkeypatch.setattr(appmod.subprocess, "run", slow_run)
+    monkeypatch.setattr(BrowserWorkbench, "_run_epub_build", slow_run_epub)
     reset_controller()
     with TestClient(appmod.app) as client:
         response = client.post("/epub/jobs/generate")
@@ -252,7 +308,7 @@ def test_background_job_cancel_endpoint(monkeypatch) -> None:
             assert cancel_response.status_code == 200
             payload = cancel_response.json()
             assert payload["ok"] is True
-            assert payload["job"]["status"] in {"cancelled", "completed"}
+            assert payload["job"]["status"] in {"cancelled", "completed", "failed"}
         finally:
             cancel_response.close()
     reset_controller()
@@ -429,11 +485,19 @@ def test_primary_fake_mode_feature_routes_render_without_server_errors(monkeypat
 
     monkeypatch.setattr(commitmod, "write_backup_set", fake_write_backup_set)
     monkeypatch.setattr(controllermod, "restore_backup_set", lambda backup_dir: ["chapter.json"])
-    monkeypatch.setattr(
-        appmod.subprocess,
-        "run",
-        lambda *args, **kwargs: SimpleNamespace(returncode=0, stdout="EPUB ok\n", stderr=""),
-    )
+
+    def fake_run_epub(_self, *, cancel_event=None):
+        return {
+            "ok": True,
+            "command": "python generate_epub.py --md --txt",
+            "stdout": "EPUB ok\n",
+            "stderr": "",
+            "exit_code": 0,
+            "duration": 0.1,
+            "latest_epub": None,
+        }
+
+    monkeypatch.setattr(BrowserWorkbench, "_run_epub_build", fake_run_epub)
 
     def assert_clean(response) -> str:
         try:

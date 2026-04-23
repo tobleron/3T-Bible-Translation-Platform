@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 import os
 import re
-import subprocess
 import time
 import uuid
 from pathlib import Path
@@ -24,18 +23,112 @@ from ttt_core.models import (
 )
 
 from .controller import BrowserWorkbench
-from .background_jobs import Job, JobRunner
+from .background_jobs import Job
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(PACKAGE_DIR / "templates"))
 
 
+import html
+from html.parser import HTMLParser
+
+_MARKDOWN_ALLOWED_TAGS = frozenset({
+    "p", "h1", "h2", "h3", "h4", "h5", "h6",
+    "ul", "ol", "li",
+    "blockquote",
+    "pre", "code",
+    "hr", "br",
+    "table", "thead", "tbody", "tr", "th", "td",
+    "em", "strong", "b", "i",
+    "a", "img",
+    "div", "span", "sup", "sub",
+})
+_MARKDOWN_BLOCKED_TAGS = frozenset({"script", "style", "iframe", "object", "embed", "form", "input", "textarea", "button"})
+
+
+class _MarkdownHtmlSanitizer(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.parts: list[str] = []
+        self.block_depth = 0
+
+    def _allowed_attrs(self, tag: str, attrs: list[tuple[str, str | None]]) -> list[tuple[str, str]]:
+        allowed: list[tuple[str, str]] = []
+        for name, value in attrs:
+            if value is None:
+                continue
+            key = name.lower()
+            val = value
+            if tag == "a" and key == "href":
+                allowed.append((key, val))
+            elif tag == "img" and key in {"src", "alt"}:
+                allowed.append((key, val))
+            elif tag in {"pre", "code", "div"} and key == "class":
+                allowed.append((key, val))
+        return allowed
+
+    def _format_tag(self, tag: str, attrs: list[tuple[str, str]]) -> str:
+        if not attrs:
+            return f"<{tag}>"
+        attr_str = " ".join(f'{k}="{html.escape(v, quote=True)}"' for k, v in attrs)
+        return f"<{tag} {attr_str}>"
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        clean = tag.lower()
+        if clean in _MARKDOWN_BLOCKED_TAGS:
+            self.block_depth += 1
+            return
+        if self.block_depth:
+            return
+        if clean == "br":
+            self.parts.append("<br>")
+            return
+        if clean in _MARKDOWN_ALLOWED_TAGS:
+            allowed = self._allowed_attrs(clean, attrs)
+            self.parts.append(self._format_tag(clean, allowed))
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+
+    def handle_endtag(self, tag: str) -> None:
+        clean = tag.lower()
+        if clean in _MARKDOWN_BLOCKED_TAGS:
+            if self.block_depth:
+                self.block_depth -= 1
+            return
+        if self.block_depth or clean == "br":
+            return
+        if clean in _MARKDOWN_ALLOWED_TAGS:
+            self.parts.append(f"</{clean}>")
+
+    def handle_data(self, data: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(html.escape(data))
+
+    def handle_entityref(self, name: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"&{name};")
+
+    def handle_charref(self, name: str) -> None:
+        if self.block_depth:
+            return
+        self.parts.append(f"&#{name};")
+
+    def sanitized_html(self) -> str:
+        return "".join(self.parts)
+
+
 def _render_markdown(text: str) -> str:
     """Convert markdown text to safe HTML."""
     if not text:
         return ""
-    return md_lib.markdown(text, extensions=["fenced_code", "tables", "nl2br"])
+    raw_html = md_lib.markdown(text, extensions=["fenced_code", "tables", "nl2br"])
+    sanitizer = _MarkdownHtmlSanitizer()
+    sanitizer.feed(raw_html)
+    return sanitizer.sanitized_html()
 
 
 templates.env.filters["markdown"] = _render_markdown
@@ -43,9 +136,46 @@ templates.env.filters["markdown"] = _render_markdown
 app = FastAPI(title="TTT Browser Workbench")
 app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
 mount_chainlit(app=app, target=str(PACKAGE_DIR / "chainlit_app.py"), path="/chat")
-_CONTROLLER: BrowserWorkbench | None = None
-_JOB_RUNNER = JobRunner(max_workers=2)
+_SESSION_CONTROLLERS: dict[str, BrowserWorkbench] = {}
+_SESSION_COOKIE_NAME = "ttt_session_id"
+_TEST_SESSION_ID: str | None = None
 logger = logging.getLogger(__name__)
+
+
+def _session_id_from_request(request: Request) -> str:
+    if _TEST_SESSION_ID is not None:
+        return _TEST_SESSION_ID
+    cookie = request.cookies.get(_SESSION_COOKIE_NAME)
+    if cookie:
+        return cookie
+    return uuid.uuid4().hex[:16]
+
+
+def _controller_for_session(session_id: str) -> BrowserWorkbench:
+    if session_id not in _SESSION_CONTROLLERS:
+        _SESSION_CONTROLLERS[session_id] = BrowserWorkbench(session_id=session_id)
+    return _SESSION_CONTROLLERS[session_id]
+
+
+def controller(request: Request | None = None, session_id: str | None = None) -> BrowserWorkbench:
+    if session_id is not None:
+        return _controller_for_session(session_id)
+    if request is not None:
+        sid = _session_id_from_request(request)
+        return _controller_for_session(sid)
+    if _TEST_SESSION_ID is not None:
+        return _controller_for_session(_TEST_SESSION_ID)
+    # Fallback for callers without a request (should be rare)
+    fallback = "default"
+    return _controller_for_session(fallback)
+
+
+@app.middleware("http")
+async def ensure_session_cookie(request: Request, call_next):
+    response = await call_next(request)
+    if _SESSION_COOKIE_NAME not in request.cookies:
+        response.set_cookie(_SESSION_COOKIE_NAME, uuid.uuid4().hex[:16], max_age=86400 * 30, httponly=True, samesite="lax")
+    return response
 
 
 @app.middleware("http")
@@ -57,7 +187,8 @@ async def add_process_time_header(request: Request, call_next):
     response.headers["Server-Timing"] = f"app;dur={duration_ms:.1f}"
     response.headers["X-TTT-Render-Ms"] = f"{duration_ms:.1f}"
     response.headers["X-Request-Id"] = request_id
-    wb = _CONTROLLER
+    session_id = _session_id_from_request(request)
+    wb = _controller_for_session(session_id)
     logger.info(
         "request_complete request_id=%s method=%s path=%s status=%s duration_ms=%.1f session_id=%s provider=%s model=%s chunk=%s",
         request_id,
@@ -65,19 +196,12 @@ async def add_process_time_header(request: Request, call_next):
         request.url.path,
         getattr(response, "status_code", "n/a"),
         duration_ms,
-        getattr(getattr(wb, "state", None), "session_id", ""),
-        wb.active_provider_label() if wb is not None else "",
-        wb.active_model_name() if wb is not None else "",
-        wb.current_chunk_key() if wb is not None else "",
+        session_id,
+        wb.active_provider_label(),
+        wb.active_model_name(),
+        wb.current_chunk_key(),
     )
     return response
-
-
-def controller() -> BrowserWorkbench:
-    global _CONTROLLER
-    if _CONTROLLER is None:
-        _CONTROLLER = BrowserWorkbench()
-    return _CONTROLLER
 
 
 def _job_payload(job: Job) -> dict:
@@ -99,6 +223,33 @@ def resolve_book_name(wb: BrowserWorkbench, testament: str, raw_book: str) -> st
         if normalize_book_key(book) == normalize_book_key(raw_book):
             return book
     return raw_book
+
+
+def first_workspace_target(wb: BrowserWorkbench) -> str | None:
+    catalog = wb.navigator_catalog()
+    for testament in ("old", "new"):
+        books = catalog.get(testament, [])
+        if not isinstance(books, list):
+            continue
+        for entry in books:
+            if not isinstance(entry, dict):
+                continue
+            book_name = str(entry.get("name", "")).strip()
+            if not book_name:
+                continue
+            chapter_value = entry.get("first_ready_chapter")
+            if chapter_value is None:
+                chapter_value = entry.get("first_chapter")
+            try:
+                chapter = int(chapter_value)
+            except (TypeError, ValueError):
+                continue
+            chunk_key = wb.first_chunk_key(testament, book_name, chapter)
+            book_key = normalize_book_key(book_name)
+            if chunk_key:
+                return f"/workspace/{testament}/{book_key}/{chapter}/{chunk_key}"
+            return f"/workspace/{testament}/{book_key}/{chapter}"
+    return None
 
 
 def book_json_tree_payload(wb: BrowserWorkbench, testament: str, book: str, chapter: int) -> dict:
@@ -139,7 +290,7 @@ def book_json_chapter_payload(wb: BrowserWorkbench, book: str, target_chapter: i
 
 def render_page(request: Request, template_name: str, context: dict, status_code: int = 200):
     if "settings_config" not in context:
-        context["settings_config"] = controller().settings_payload()
+        context["settings_config"] = controller(request).settings_payload()
     return templates.TemplateResponse(
         request,
         template_name,
@@ -356,7 +507,7 @@ async def workspace_navigate(request: Request):
         chapter = request.query_params.get("chapter", "")
         chunk = request.query_params.get("chunk", "")
 
-    wb = controller()
+    wb = controller(request)
     testament = "old" if testament == "old" else "new"
     book_items = [
         item
@@ -417,7 +568,7 @@ async def workspace_navigate(request: Request):
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
-    wb = controller()
+    wb = controller(request)
     # Allow explicit access to home page via ?home=1
     if request.query_params.get("home") == "1":
         recent_epubs = wb.recent_epubs()
@@ -476,7 +627,7 @@ def home(request: Request):
 
 @app.get("/workspace/{testament}/{book}/{chapter}", response_class=HTMLResponse)
 def workspace_chapter(request: Request, testament: str, book: str, chapter: int, tab: str = "study"):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     wb.select_chapter(testament, book, chapter)
     return render_workspace(request, wb, active_tab=tab)
@@ -484,23 +635,21 @@ def workspace_chapter(request: Request, testament: str, book: str, chapter: int,
 
 @app.get("/workspace/{testament}/{book}/{chapter}/json-book-tree", response_class=JSONResponse)
 def chapter_json_book_tree(request: Request, testament: str, book: str, chapter: int):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
-    wb.select_chapter(testament, book, chapter)
     return JSONResponse(book_json_tree_payload(wb, testament, book, chapter))
 
 
 @app.get("/workspace/{testament}/{book}/{chapter}/json-book-chapter/{target_chapter}", response_class=JSONResponse)
 def chapter_json_book_chapter(request: Request, testament: str, book: str, chapter: int, target_chapter: int):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
-    wb.select_chapter(testament, book, chapter)
     return book_json_chapter_payload(wb, book, target_chapter)
 
 
 @app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}", response_class=HTMLResponse)
 def workspace(request: Request, testament: str, book: str, chapter: int, chunk_key: str, tab: str = "study"):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     # Validate chunk_key against catalog
     valid_chunks = {
@@ -529,7 +678,7 @@ def workspace_tab(
     chunk_key: str,
     tab: str = Form(...),
 ):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
     wb.activate_tab(tab)
@@ -546,7 +695,7 @@ async def study_sources(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -588,7 +737,7 @@ async def save_draft(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -609,7 +758,7 @@ async def autosave_draft(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -645,7 +794,7 @@ async def set_draft_range(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -668,7 +817,7 @@ async def set_editor_mode(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -700,7 +849,7 @@ async def editor_lock(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     form = await request.form()
     try:
         book = resolve_book_name(wb, testament, book)
@@ -720,7 +869,7 @@ async def editor_unlock(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -738,7 +887,7 @@ async def editor_revise(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -756,7 +905,7 @@ async def merge_chapter_chunks(
     chapter: int,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         start_index = int(str(form.get("start_index", "0")))
@@ -788,7 +937,7 @@ async def get_chat_prompt_text(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -853,9 +1002,31 @@ async def get_chat_prompt_text(
         return JSONResponse({"error": str(exc)}, status_code=500)
 
 
+@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/context", response_class=JSONResponse)
+async def save_chat_context(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+):
+    wb = controller(request)
+    try:
+        book = resolve_book_name(wb, testament, book)
+        wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+        body = await request.json()
+        selections = body.get("selections", [])
+        modes = body.get("modes", [])
+        hide_labels = bool(body.get("hide_labels", False))
+        wb.save_chat_context_selections(selections, modes, hide_labels)
+        return JSONResponse({"ok": True})
+    except Exception as exc:
+        return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
+
+
 @app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/interactive-state", response_class=JSONResponse)
 def interactive_state(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
     chunk_open = wb.has_open_chunk()
@@ -887,7 +1058,7 @@ def interactive_state(request: Request, testament: str, book: str, chapter: int,
                 "selected_sources": wb.selected_sources(),
             },
             "jobs": {
-                "active": [_job_payload(job) for job in _JOB_RUNNER.active_jobs()],
+                "active": [_job_payload(job) for job in wb.job_runner.active_jobs()],
             },
         }
     )
@@ -902,7 +1073,7 @@ async def clear_chat_history(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -923,7 +1094,7 @@ async def new_chat_session(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -943,7 +1114,7 @@ async def switch_chat_session(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -963,7 +1134,7 @@ async def delete_chat_session(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -982,7 +1153,7 @@ async def update_chat_model(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1010,7 +1181,7 @@ async def update_chat_model(
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/finalize", response_class=HTMLResponse)
 def finalize_review(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1023,7 +1194,7 @@ def finalize_review(request: Request, testament: str, book: str, chapter: int, c
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/stage-text", response_class=HTMLResponse)
 def stage_text(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1036,7 +1207,7 @@ def stage_text(request: Request, testament: str, book: str, chapter: int, chunk_
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/title-refresh", response_class=HTMLResponse)
 def refresh_title(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1049,7 +1220,7 @@ def refresh_title(request: Request, testament: str, book: str, chapter: int, chu
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/title-stage", response_class=HTMLResponse)
 def stage_title(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1069,7 +1240,7 @@ async def justify_stage(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1136,7 +1307,7 @@ async def footnote_stage(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1227,7 +1398,7 @@ async def editorial_assistant(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1271,7 +1442,7 @@ async def enhance_field(
     chunk_key: str,
 ):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1302,7 +1473,7 @@ async def enhance_field(
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/validate", response_class=HTMLResponse)
 def validate_commit(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1321,7 +1492,7 @@ async def apply_commit(
     chapter: int,
     chunk_key: str,
 ):
-    wb = controller()
+    wb = controller(request)
     form = await request.form()
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1345,7 +1516,7 @@ async def apply_commit(
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/rollback", response_class=HTMLResponse)
 def rollback_commit(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1358,7 +1529,7 @@ def rollback_commit(request: Request, testament: str, book: str, chapter: int, c
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/session/clear", response_class=HTMLResponse)
 def clear_chunk_session(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1374,7 +1545,7 @@ def delete_chat_message(
     request: Request, testament: str, book: str, chapter: int, chunk_key: str, index: int
 ):
     """Delete a chat message and every later message in the same conversation."""
-    wb = controller()
+    wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1399,17 +1570,15 @@ def delete_chat_message(
 
 @app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-preview", response_class=JSONResponse)
 def json_preview(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
-    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-    return JSONResponse(wb.json_preview_payload())
+    return JSONResponse(wb.build_json_preview_payload(book, chapter, chunk_key))
 
 
 @app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-tree", response_class=JSONResponse)
 def json_book_tree(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
-    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
     return JSONResponse(book_json_tree_payload(wb, testament, book, chapter))
 
 
@@ -1422,15 +1591,14 @@ def json_book_chapter(
     chunk_key: str,
     target_chapter: int,
 ):
-    wb = controller()
+    wb = controller(request)
     book = resolve_book_name(wb, testament, book)
-    wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
     return book_json_chapter_payload(wb, book, target_chapter)
 
 
 @app.get("/settings", response_class=HTMLResponse)
 def settings_page(request: Request):
-    wb = controller()
+    wb = controller(request)
     return render_page(
         request,
         "settings.html",
@@ -1446,7 +1614,7 @@ def settings_page(request: Request):
 @app.post("/settings/save", response_class=HTMLResponse)
 async def settings_save(request: Request):
     form = await request.form()
-    wb = controller()
+    wb = controller(request)
     try:
         wb.save_web_settings(
             {
@@ -1486,7 +1654,7 @@ async def settings_save(request: Request):
 
 @app.post("/settings/test-endpoint", response_class=HTMLResponse)
 def settings_test_endpoint(request: Request):
-    wb = controller()
+    wb = controller(request)
     wb.refresh_active_endpoint()
     models = wb.refresh_model_cache(force=True)
     if wb.model_discovery_error():
@@ -1507,7 +1675,7 @@ def settings_test_endpoint(request: Request):
 
 @app.get("/epub", response_class=HTMLResponse)
 def epub_page(request: Request):
-    wb = controller()
+    wb = controller(request)
     return render_page(
         request,
         "epub.html",
@@ -1520,35 +1688,22 @@ def epub_page(request: Request):
 
 @app.post("/epub/generate", response_class=HTMLResponse)
 def epub_generate(request: Request):
-    wb = controller()
-    work_dir = wb.paths.repo_root
-    t0 = time.monotonic()
-    cmd = [
-        str(wb.preferred_python()),
-        str(wb.paths.repo_root / "src" / "ttt_epub" / "generate_epub.py"),
-        "--md",
-        "--txt",
-    ]
-    try:
-        result = subprocess.run(cmd, cwd=work_dir, capture_output=True, text=True, check=False)
-    except Exception as exc:
-        wb.print_error(f"EPUB generation failed to start: {exc}")
-        result = subprocess.CompletedProcess(cmd, 1, stdout="", stderr=str(exc))
-    duration = time.monotonic() - t0
-    if result.returncode == 0:
-        wb.notify(f"EPUB generated successfully in {duration:.1f}s.")
+    wb = controller(request)
+    result = wb._run_epub_build()
+    if result["ok"]:
+        wb.notify(f"EPUB generated successfully in {result['duration']:.1f}s.")
     else:
-        wb.print_error(f"EPUB generation failed with exit code {result.returncode}.")
+        wb.print_error(f"EPUB generation failed with exit code {result['exit_code']}.")
     return render_page(
         request,
         "epub.html",
         {
             "recent_epubs": wb.recent_epubs(),
             "flash_messages": wb.flash_messages,
-            "epub_command": " ".join(cmd),
-            "epub_stdout": (result.stdout or "").strip(),
-            "epub_stderr": (result.stderr or "").strip(),
-            "epub_exit_code": result.returncode,
+            "epub_command": result["command"],
+            "epub_stdout": result["stdout"].strip(),
+            "epub_stderr": result["stderr"].strip(),
+            "epub_exit_code": result["exit_code"],
         },
     )
 
@@ -1556,7 +1711,7 @@ def epub_generate(request: Request):
 @app.post("/epub/generate-download")
 def epub_generate_download(request: Request):
     """Generate EPUB and trigger a browser download of the latest file."""
-    wb = controller()
+    wb = controller(request)
     success, message, latest_path = wb.generate_epub_and_return_latest()
     if success and latest_path and latest_path.exists():
         wb.notify(message)
@@ -1572,59 +1727,42 @@ def epub_generate_download(request: Request):
 
 
 @app.post("/epub/jobs/generate", response_class=JSONResponse)
-def epub_generate_job():
+def epub_generate_job(request: Request):
     """Start EPUB generation as a background job for responsive UI clients."""
-    wb = controller()
-    work_dir = wb.paths.repo_root
-    cmd = [
-        str(wb.preferred_python()),
-        str(wb.paths.repo_root / "src" / "ttt_epub" / "generate_epub.py"),
-        "--md",
-        "--txt",
-    ]
+    wb = controller(request)
 
-    def target() -> dict:
-        started_at = time.monotonic()
-        result = subprocess.run(cmd, cwd=work_dir, capture_output=True, text=True, check=False)
-        recent = wb.recent_epubs()
-        latest = recent[0] if recent else None
-        return {
-            "ok": result.returncode == 0,
-            "command": " ".join(cmd),
-            "stdout": (result.stdout or "").strip(),
-            "stderr": (result.stderr or "").strip(),
-            "exit_code": result.returncode,
-            "duration": time.monotonic() - started_at,
-            "latest_epub": str(getattr(latest, "path", latest)) if latest else None,
-        }
+    def target(cancel_event=None) -> dict:
+        return wb._run_epub_build(cancel_event=cancel_event)
 
-    job = _JOB_RUNNER.submit(Job(job_id=uuid.uuid4().hex, label="epub-generate", target=target))
+    job = wb.job_runner.submit(Job(job_id=uuid.uuid4().hex, label="epub-generate", target=target))
     return JSONResponse({"ok": True, "job": _job_payload(job)}, status_code=202)
 
 
 @app.get("/jobs/{job_id}", response_class=JSONResponse)
-def job_status(job_id: str):
-    job = _JOB_RUNNER.get(job_id)
+def job_status(request: Request, job_id: str):
+    job = controller(request).job_runner.get(job_id)
     if job is None:
         return JSONResponse({"ok": False, "message": "Job not found."}, status_code=404)
     return JSONResponse({"ok": True, "job": _job_payload(job)})
 
 
 @app.post("/jobs/{job_id}/cancel", response_class=JSONResponse)
-def job_cancel(job_id: str):
-    cancelled = _JOB_RUNNER.cancel(job_id)
-    job = _JOB_RUNNER.get(job_id)
+def job_cancel(request: Request, job_id: str):
+    runner = controller(request).job_runner
+    cancelled = runner.cancel(job_id)
+    job = runner.get(job_id)
     if job is None:
         return JSONResponse({"ok": False, "message": "Job not found."}, status_code=404)
     return JSONResponse({"ok": True, "cancelled": cancelled, "job": _job_payload(job)})
 
 
 @app.get("/jobs", response_class=JSONResponse)
-def jobs_index():
+def jobs_index(request: Request):
+    runner = controller(request).job_runner
     return {
         "ok": True,
-        "active": [_job_payload(job) for job in _JOB_RUNNER.active_jobs()],
-        "recent": [_job_payload(job) for job in _JOB_RUNNER.recent_jobs()],
+        "active": [_job_payload(job) for job in runner.active_jobs()],
+        "recent": [_job_payload(job) for job in runner.recent_jobs()],
     }
 
 
@@ -1634,12 +1772,27 @@ def healthz():
 
 
 @app.get("/resume")
-def resume():
-    wb = controller()
+def resume(request: Request):
+    wb = controller(request)
     if wb.state.book and wb.state.chapter and wb.current_chunk_key():
         testament = wb.state.wizard_testament or wb.testament() or "new"
+        book = wb.state.book
+        chapter = wb.state.chapter
+        chunk_key = wb.current_chunk_key()
+        valid_chunks = {
+            f"{item.start_verse}-{item.end_verse}"
+            for item in wb.chapter_chunks(testament, book, chapter)
+        }
+        if valid_chunks and chunk_key in valid_chunks:
+            return RedirectResponse(
+                url=f"/workspace/{testament}/{normalize_book_key(book)}/{chapter}/{chunk_key}",
+                status_code=302,
+            )
         return RedirectResponse(
-            url=f"/workspace/{testament}/{normalize_book_key(wb.state.book)}/{wb.state.chapter}/{wb.current_chunk_key()}",
+            url=f"/workspace/{testament}/{normalize_book_key(book)}/{chapter}",
             status_code=302,
         )
-    return RedirectResponse(url="/", status_code=302)
+    target = first_workspace_target(wb)
+    if target:
+        return RedirectResponse(url=target, status_code=302)
+    return RedirectResponse(url="/?home=1", status_code=302)
