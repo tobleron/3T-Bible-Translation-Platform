@@ -1440,17 +1440,10 @@ async def editorial_assistant(
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         apply_draft_form(wb, form)
-        transient_prompt_entries: list[dict[str, object]] | None = None
         should_save_prompt_library = False
         known_ids = {str(item.get("id", "")).strip() for item in prompt_entries}
         if active_id and active_id not in known_ids:
             active_id = str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
-        # `prompt_active_id` (the select value) is authoritative.
-        # Keep hidden target only as compatibility fallback when active_id is absent.
-        enhance_target_id = wb.make_prompt_id(str(form.get("prompt_enhance_target_id", "")).strip())
-        if not active_id and enhance_target_id and enhance_target_id in known_ids:
-            active_id = enhance_target_id
-        instruction = str(form.get("prompt_enhance_instruction", "")).strip()
         if action == "add_prompt":
             new_label = str(form.get("new_prompt_label", "")).strip()
             new_text = str(form.get("new_prompt_text", "")).strip()
@@ -1485,26 +1478,6 @@ async def editorial_assistant(
             if active_id == delete_id:
                 active_id = str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
             should_save_prompt_library = True
-        elif action == "enhance_prompt":
-            if not active_id:
-                raise ValueError("Select a prompt to enhance.")
-            if not instruction:
-                raise ValueError("Add a one-line enhancement instruction first.")
-            target = next((item for item in prompt_entries if str(item.get("id", "")).strip() == active_id), None)
-            if target is None:
-                raise ValueError("Selected prompt was not found.")
-            source_text = str(target.get("text", "")).strip()
-            if not source_text:
-                raise ValueError("Active prompt text is empty. Add prompt text before enhancing.")
-            target["text"] = wb.run_editorial_enhancement(
-                source_text=source_text,
-                mode="custom",
-                context_label="prompt instruction text",
-                custom_prompt=instruction,
-                single_paragraph_plain_text=True,
-            )
-            transient_prompt_entries = prompt_entries
-            wb.notify("Prompt enhanced. Click Save Prompt to keep it.")
         elif action == "save_prompts":
             wb.notify("Prompts saved.")
             should_save_prompt_library = True
@@ -1521,8 +1494,7 @@ async def editorial_assistant(
         wb.state.editorial_output_label = ""
         wb.activate_tab("draft")
         wb.save_state()
-        context_overrides = {"prompt_library": transient_prompt_entries} if transient_prompt_entries else None
-        return render_workspace(request, wb, active_tab="draft", partial=True, context_overrides=context_overrides)
+        return render_workspace(request, wb, active_tab="draft", partial=True)
     except Exception as exc:
         wb.print_error(str(exc))
         wb.state.editorial_active_prompt_id = active_id

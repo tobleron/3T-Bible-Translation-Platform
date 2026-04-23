@@ -83,7 +83,6 @@
           {% set selected_prompt_modes = prompt_context_config.modes if prompt_context_config.modes is defined else [] %}
           {% set prompt_hide_labels = prompt_context_config.hide_labels if prompt_context_config.hide_labels is defined else False %}
           <input type="hidden" name="editorial_tab" id="editorial-tab-input" value="{{ editorial_active_tab }}">
-          <input type="hidden" name="prompt_enhance_target_id" id="prompt-enhance-target-id" value="{{ active_prompt_id }}">
           <div class="editorial-tab-bar">
             <button class="tab-button {% if editorial_active_tab == 'run' %}is-active{% endif %}" type="button" data-editorial-tab="run" onclick="switchEditorialTab(this, 'run')">Run</button>
             <button class="tab-button {% if editorial_active_tab == 'prompts' %}is-active{% endif %}" type="button" data-editorial-tab="prompts" onclick="switchEditorialTab(this, 'prompts')">Prompts</button>
@@ -169,11 +168,15 @@
                   {% endfor %}
                 </select>
               </label>
+              <div class="prompt-toolbar-actions">
+                <button class="secondary-button prompt-toolbar-button" type="button" onclick="togglePromptEdit(this)">Edit</button>
+                <button class="secondary-button tiny-danger-button prompt-toolbar-button" type="button" {% if selected_prompt.value and not selected_prompt.value.builtin %}onclick="setPromptDeleteId('{{ selected_prompt.value.id }}'); submitPromptAction(this, 'delete_prompt');"{% else %}disabled title="Built-in prompts cannot be deleted."{% endif %}>Delete</button>
+              </div>
             </div>
             <div class="prompt-library-list">
               {% if selected_prompt.value %}
               {% set prompt = selected_prompt.value %}
-              <article class="prompt-library-item" data-prompt-item data-prompt-id="{{ prompt.id }}">
+              <article class="prompt-library-item" data-prompt-item data-prompt-id="{{ prompt.id }}" data-prompt-editing="0">
                 <div class="prompt-library-item-head">
                   <textarea
                     name="prompt_label_{{ prompt.id }}"
@@ -182,11 +185,9 @@
                     data-prompt-label
                     data-prompt-id="{{ prompt.id }}"
                     data-auto-resize
+                    readonly
                     {% if prompt.builtin %}data-prompt-builtin="1"{% endif %}
                   >{{ prompt.label }}</textarea>
-                  {% if not prompt.builtin %}
-                  <button class="secondary-button tiny-danger-button" type="button" onclick="setPromptDeleteId('{{ prompt.id }}'); submitPromptAction(this, 'delete_prompt');">Delete</button>
-                  {% endif %}
                 </div>
                 <textarea
                   name="prompt_text_{{ prompt.id }}"
@@ -194,30 +195,23 @@
                   data-auto-resize
                   data-prompt-text
                   data-prompt-id="{{ prompt.id }}"
+                  readonly
                 >{{ prompt.text }}</textarea>
               </article>
               {% endif %}
             </div>
 
             <div class="prompt-library-add">
-              <label class="compact-field">
-                <span>New prompt name</span>
-                <textarea name="new_prompt_label" rows="1" data-auto-resize placeholder="Example: Tone Guard"></textarea>
-              </label>
+              <div class="prompt-library-add-head">
+                <label class="compact-field">
+                  <span>New prompt name</span>
+                  <textarea name="new_prompt_label" rows="1" data-auto-resize placeholder="Example: Tone Guard"></textarea>
+                </label>
+                <button class="secondary-button" type="button" onclick="submitPromptAction(this, 'add_prompt')">Add Prompt</button>
+              </div>
               <label class="compact-field">
                 <span>New prompt text</span>
                 <textarea name="new_prompt_text" rows="3" data-auto-resize placeholder="Enter prompt text"></textarea>
-              </label>
-              <button class="secondary-button" type="button" onclick="submitPromptAction(this, 'add_prompt')">Add Prompt</button>
-            </div>
-
-            <div class="prompt-library-enhance">
-              <label class="compact-field">
-                <span>Enhance selected prompt</span>
-                <div class="prompt-enhance-inline">
-                  <textarea name="prompt_enhance_instruction" rows="1" data-auto-resize placeholder="One-line enhancement instruction"></textarea>
-                  <button class="secondary-button" type="button" data-loading-label="Enhancing..." onclick="submitEnhancePrompt(this)">Enhance</button>
-                </div>
               </label>
             </div>
 

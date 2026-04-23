@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holy Bible Cover Layout</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #dcdcdc;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .top-group {
+      position: absolute;
+      top: 34mm;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .title {
+      margin: 0;
+      color: #000000;
+      font-family: "Goldman", sans-serif;
+      font-weight: 700;
+      font-size: 16.5mm;
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    svg {
+      width: 56mm;
+      height: auto;
+      display: block;
+      background: transparent;
+      margin-top: -0.8mm;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-group">
+      <h1 class="title">Holy Bible</h1>
+
+      <svg
+        viewBox="0 0 1447 2048"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Black T logo with thin white lines"
+        role="img"
+      >
+        <defs>
+          <mask id="tMask">
+            <rect width="1447" height="2048" fill="black" />
+            <path
+              fill="white"
+              d="
+                M 217 310
+                L 1027 310
+                L 1027 490
+                L 717 490
+                L 717 1240
+                L 537 1060
+                L 537 490
+                L 217 490
+                Z
+              "
+            />
+            <rect
+              x="426"
+              y="618"
+              width="111"
+              height="180"
+              fill="white"
+            />
+          </mask>
+        </defs>
+
+        <rect width="1447" height="2048" fill="#ffffff" />
+
+        <path
+          fill="#000000"
+          d="
+            M 217 310
+            L 1027 310
+            L 1027 490
+            L 717 490
+            L 717 1240
+            L 537 1060
+            L 537 490
+            L 217 490
+            Z
+          "
+        />
+
+        <rect
+          x="426"
+          y="618"
+          width="111"
+          height="180"
+          fill="#000000"
+        />
+
+        <g mask="url(#tMask)" stroke="#ffffff" stroke-width="18" stroke-linecap="square">
+          <line x1="217" y1="400" x2="1027" y2="400" />
+          <line x1="627" y1="400" x2="627" y2="1240" />
+          <line x1="426" y1="708" x2="627" y2="708" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

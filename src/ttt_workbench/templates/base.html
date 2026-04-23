@@ -13,9 +13,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="{{ url_for('static', path='/vendor/htmx.min.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/vendor/alpine.min.js') }}"></script>
   <link rel="stylesheet" href="{{ url_for('static', path='/app.css') }}">
+  <script defer src="{{ url_for('static', path='/js/workspace_toast.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/js/workspace_support_formatting.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/js/workspace_verse_filter.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/js/workspace_gloss_tooltip.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/js/workspace_autosave.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/js/workspace_prompt_engineering.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/js/workspace_workspace_actions.js') }}"></script>
   <script defer src="{{ url_for('static', path='/js/app_interactions.js') }}"></script>
   <script defer src="{{ url_for('static', path='/js/workspace_bootstrap.js') }}"></script>
   <script defer src="{{ url_for('static', path='/js/lazy_panels.js') }}"></script>

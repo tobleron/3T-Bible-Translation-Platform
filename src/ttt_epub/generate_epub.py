@@ -1,48 +1,36 @@
 #!/usr/bin/env python3
 """
-Wrapper script – run this file exactly the way you used to run
-*generate_epub_v13.7.py*.  All heavy-lifting now lives in epub_builder.py
-so it’s easier to maintain and test.
+TTT EPUB generator CLI wrapper.
+
+Run as a module from the project root:
+    python -m ttt_epub.generate_epub [--md] [--txt]
 """
+
+from __future__ import annotations
 
 import sys
 from pathlib import Path
 
-# Add project root and src to sys.path to allow importing ttt_core
-project_root = Path(__file__).parent.parent.parent.resolve()
-src_root = project_root / "src"
-if str(src_root) not in sys.path:
-    sys.path.insert(0, str(src_root))
-if str(project_root) not in sys.path:
-    sys.path.append(str(project_root))
+from ttt_core.config import load_config
+from ttt_core.data.repositories import ProjectPaths
+from ttt_epub.epub_builder import build_bible_epub
 
-try:
-    from ttt_core.config import load_config
-    from ttt_core.data.repositories import ProjectPaths
-    from epub_builder import build_bible_epub
-except ImportError as e:
-    print(f"ImportError: {e}")
-    # Fallback to local discovery if ttt_core is not available
-    from utils import root_paths
-    from epub_builder import build_bible_epub
-    ROOT, HOLY_DIR = root_paths(__file__)
-    OUTPUT_DIR = ROOT / "output" / "builds"
-else:
+
+def main(argv: list[str] | None = None) -> None:
+    argv = argv or sys.argv
+    project_root = Path.cwd()
     cfg = load_config(project_root)
     paths = ProjectPaths(repo_root=project_root)
-    ROOT = project_root
-    HOLY_DIR = paths.bible_dir
-    OUTPUT_DIR = paths.output_dir / "builds"
-
-def main():
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_dir = paths.output_dir / "builds"
+    output_dir.mkdir(parents=True, exist_ok=True)
     build_bible_epub(
-        root=ROOT,
-        holy_dir=HOLY_DIR,
-        output_dir=OUTPUT_DIR,
-        generate_md="--md" in sys.argv,
-        generate_txt="--txt" in sys.argv,
+        root=project_root,
+        holy_dir=paths.bible_dir,
+        output_dir=output_dir,
+        generate_md="--md" in argv,
+        generate_txt="--txt" in argv,
     )
+
 
 if __name__ == "__main__":
     main()

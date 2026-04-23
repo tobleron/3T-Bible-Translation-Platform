@@ -1,3 +1,4 @@
+import html
 from pathlib import Path
 import json, logging, re, sys
 from collections import defaultdict, OrderedDict
@@ -10,6 +11,11 @@ from config_loader import load_config
 from validator import validate_all_json_files
 
 logger = logging.getLogger(__name__)
+
+
+def _h(text: object) -> str:
+    """Escape text for safe HTML insertion."""
+    return html.escape(str(text))
 
 
 def build_bible_epub(
@@ -201,8 +207,8 @@ def _assemble_epub(
 
     title_pg = epub.EpubHtml(title="Title", file_name="title.xhtml", lang="en")
     title_pg.content = (
-        f"<div class='title-wrapper'><h1 class='title-page'>{title}</h1>"
-        f"<p class='edition-info'>{edition} — Version {version} — {pubdate}</p></div>"
+        f"<div class='title-wrapper'><h1 class='title-page'>{_h(title)}</h1>"
+        f"<p class='edition-info'>{_h(edition)} — Version {_h(version)} — {_h(pubdate)}</p></div>"
     )
     title_pg.add_item(nav_css)
     book.add_item(title_pg)
@@ -211,7 +217,7 @@ def _assemble_epub(
     toc_links_intro = []
     for pg in intro_pages:
         doc = epub.EpubHtml(title=pg["title"], file_name=pg["file_name"], lang="en")
-        doc.content = f"<h1 class='chapter-title'>{pg['title']}</h1>{pg['html']}"
+        doc.content = f"<h1 class='chapter-title'>{_h(pg['title'])}</h1>{pg['html']}"
         doc.add_item(nav_css)
         book.add_item(doc)
         spine.append(doc)
@@ -281,7 +287,7 @@ def _assemble_epub(
     if glossary:
         gloss_html = "<h1 class='chapter-title'>Glossary</h1><dl>"
         for term, defi in sorted(glossary.items(), key=lambda t: t[0].lower()):
-            gloss_html += f'<dt id="{term.lower()}"><b>{term}</b></dt><dd>{defi}</dd>'
+            gloss_html += f'<dt id="{html_id(term)}"><b>{_h(term)}</b></dt><dd>{_h(defi)}</dd>'
         gloss_html += "</dl>"
         gloss_doc = epub.EpubHtml(
             title="Glossary", file_name="glossary.xhtml", lang="en"
@@ -317,15 +323,15 @@ def _render_chapter(
     html = ""
 
     if c_num == 1:
-        html += f"<h1 class='book-title'>{book_name}</h1>"
+        html += f"<h1 class='book-title'>{_h(book_name)}</h1>"
         if generate_md:
-            md_lines.append(f"\n# {book_name}\n")
+            md_lines.append(f"\n# {_h(book_name)}\n")
 
-    html += f"<h1 class='chapter-title'>Chapter {c_num}</h1>"
+    html += f"<h1 class='chapter-title'>Chapter {_h(c_num)}</h1>"
     if generate_md:
-        md_lines.append(f"## Chapter {c_num}\n")
+        md_lines.append(f"## Chapter {_h(c_num)}\n")
     if generate_txt:
-        txt_lines.append(f"{book_name.upper()} Chapter {c_num}")
+        txt_lines.append(f"{_h(book_name).upper()} Chapter {_h(c_num)}")
 
     fn_map = defaultdict(list)
     idx = 0
@@ -342,9 +348,9 @@ def _render_chapter(
     for sec in chapter_data["sections"]:
         hl = sec.get("headline", "").strip()
         if hl:
-            html += f"<h2>{hl}</h2>"
+            html += f"<h2>{_h(hl)}</h2>"
             if generate_md:
-                md_lines.append(f"### {hl}\n")
+                md_lines.append(f"### {_h(hl)}\n")
             if generate_txt:
                 txt_lines.append("")
                 txt_lines.append(hl)
@@ -352,18 +358,15 @@ def _render_chapter(
         verse_run = ""
         for v in sec["verses"]:
             number = v["verse"]
-            txt = smart_q(v["text"], smart_quotes_on)
+            txt = smart_q(html.escape(v["text"]), smart_quotes_on)
             txt = apply_glossary_links(txt, glossary)
             if number in fn_map:
                 for fn in fn_map[number]:
                     aid = html_id(f"{book_name}-{c_num}-{number}-{fn['ltr']}")
-                    txt += f"&#8239;<sup><a href='#{aid}'>{fn['ltr']}</a></sup>"
-            # verse_run += (
-            #    f"<a id='v-{book_name}-{c_num}-{number}'></a>{txt}&#8239;"
-            #    f"<b><sup>{number}</sup></b> "
-            # )
+                    txt += f"&#8239;<sup><a href='#{aid}'>{_h(fn['ltr'])}</a></sup>"
             verse_run += (
-                f"<a id='v-{book_name}-{c_num}-{number}'></a><b><sup>{number}</sup></b>&#8239;"
+                f"<a id='v-{html_id(book_name)}-{html_id(str(c_num))}-{html_id(str(number))}'></a>"
+                f"<b><sup>{_h(number)}</sup></b>&#8239;"
                 f"{txt} "
             )
 
@@ -376,17 +379,17 @@ def _render_chapter(
     if fn_map:
         html += (
             f"<div class='footnotes'><p><strong>"
-            f"{foot_cfg.get('footnotes_title', 'Translation Notes')}:</strong></p>"
+            f"{_h(foot_cfg.get('footnotes_title', 'Translation Notes'))}:</strong></p>"
         )
         if generate_md:
             md_lines.append("\n#### Translation Notes\n")
         for vn in sorted(fn_map):
             for fn in fn_map[vn]:
                 aid = html_id(f"{book_name}-{c_num}-{vn}-{fn['ltr']}")
-                back = f"v-{book_name}-{c_num}-{vn}"
+                back = f"v-{html_id(book_name)}-{html_id(str(c_num))}-{html_id(str(vn))}"
                 html += (
-                    f"<p id='{aid}'><b>{book_name} {c_num}:{vn}</b> - "
-                    f"{fn['ltr']}. {fn['content']} "
+                    f"<p id='{aid}'><b>{_h(book_name)} {_h(c_num)}:{_h(vn)}</b> - "
+                    f"{_h(fn['ltr'])}. {_h(fn['content'])} "
                     f"<a href='#{back}'>[back]</a></p>"
                 )
                 if generate_md:

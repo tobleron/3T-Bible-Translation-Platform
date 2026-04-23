@@ -34,18 +34,32 @@
     }, 3000);
   }
 
-  function closestButton(elt) {
-    if (!elt) return null;
-    if (elt.matches && elt.matches('button, input[type="submit"]')) return elt;
-    if (elt.querySelector) return elt.querySelector('button[type="submit"], [data-loading-label]');
-    return null;
+  function eventControl(event, container) {
+    var triggeringEvent = event.detail
+      && event.detail.requestConfig
+      && event.detail.requestConfig.triggeringEvent;
+    var target = triggeringEvent && triggeringEvent.target;
+    if (!target || !target.closest) return null;
+    var control = target.closest('[data-loading-label], button, input[type="submit"], input[type="button"]');
+    if (!control) return null;
+    if (container && container.contains && !container.contains(control)) return null;
+    return control;
   }
 
-  function requestControl(elt) {
+  function requestControl(elt, event) {
     if (!elt) return null;
+    var triggeredControl = eventControl(event, elt);
+    if (triggeredControl) return triggeredControl;
+
     var explicit = elt.matches && elt.matches('[data-loading-label]') ? elt : null;
-    if (!explicit && elt.querySelector) explicit = elt.querySelector('[data-loading-label]');
-    return explicit || closestButton(elt);
+    if (explicit) return explicit;
+    if (elt.matches && elt.matches('button, input[type="submit"], input[type="button"]')) return elt;
+
+    if (elt.matches && elt.matches('form')) return null;
+    if (elt.querySelector) {
+      return elt.querySelector('button[type="submit"][data-loading-label], input[type="submit"][data-loading-label]');
+    }
+    return null;
   }
 
   function setBusy(button, label) {
@@ -113,7 +127,7 @@
       }
 
       var startedAt = now();
-      var button = requestControl(elt);
+      var button = requestControl(elt, event);
       var loadingLabel = button && button.getAttribute('data-loading-label');
       activeRequests.set(elt, { startedAt: startedAt, button: button });
       setBusy(button, loadingLabel || 'Working...');

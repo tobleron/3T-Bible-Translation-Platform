@@ -180,6 +180,8 @@ class SessionState:
     analysis_meta: dict[str, dict[str, Any]] = field(default_factory=dict)
     browser_chat_sources: list[str] = field(default_factory=lambda: ["draft"])
     editorial_prompts: dict[str, str] = field(default_factory=dict)
+    editorial_active_prompt_id: str = ""
+    editorial_active_tab: str = "run"
     editorial_input: str = ""
     editorial_output: str = ""
     editorial_output_label: str = ""
@@ -258,6 +260,8 @@ class SessionState:
             analysis_meta=data.get("analysis_meta", {}),
             browser_chat_sources=data.get("browser_chat_sources", ["draft"]),
             editorial_prompts=data.get("editorial_prompts", {}),
+            editorial_active_prompt_id=data.get("editorial_active_prompt_id", ""),
+            editorial_active_tab=data.get("editorial_active_tab", "run"),
             editorial_input=data.get("editorial_input", ""),
             editorial_output=data.get("editorial_output", ""),
             editorial_output_label=data.get("editorial_output_label", ""),

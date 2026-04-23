@@ -57,20 +57,47 @@ python_env() {
   printf '%s:%s%s' "$ROOT_DIR/src" "$ROOT_DIR" "${PYTHONPATH:+:$PYTHONPATH}"
 }
 
+PID_DIR="$ROOT_DIR/.ttt_workbench"
+mkdir -p "$PID_DIR"
+WEB_PID_FILE="$PID_DIR/ttt-web.pid"
+PREP_PID_FILE="$PID_DIR/ttt-prep-data.pid"
+EPUB_PID_FILE="$PID_DIR/ttt-epub.pid"
+
+_kill_by_pidfile() {
+  local pidfile="$1"
+  local name="$2"
+  if [[ -f "$pidfile" ]]; then
+    local old_pid
+    old_pid="$(cat "$pidfile" 2>/dev/null || true)"
+    if [[ -n "$old_pid" ]] && kill -0 "$old_pid" 2>/dev/null; then
+      echo "Stopping existing $name (PID $old_pid)..."
+      kill -TERM "$old_pid" 2>/dev/null || true
+      local waited=0
+      while kill -0 "$old_pid" 2>/dev/null && [[ $waited -lt 5 ]]; do
+        sleep 1
+        waited=$((waited + 1))
+      done
+      if kill -0 "$old_pid" 2>/dev/null; then
+        echo "Forcing $name termination..."
+        kill -KILL "$old_pid" 2>/dev/null || true
+      fi
+    fi
+    rm -f "$pidfile"
+  fi
+}
+
+_write_pidfile() {
+  printf '%s\n' "$$" > "$1"
+}
+
 run_web() {
   cd "$ROOT_DIR"
   ensure_workbench_env
   local host="${TTT_WEB_HOST:-127.0.0.1}"
   local port="${TTT_WEB_PORT:-8765}"
 
-  # Kill any existing processes on the target port
-  local pids
-  pids="$(lsof -ti :"$port" 2>/dev/null || true)"
-  if [[ -n "$pids" ]]; then
-    echo "Killing existing processes on port $port (PIDs: $pids)"
-    echo "$pids" | xargs kill -9 2>/dev/null || true
-    sleep 1
-  fi
+  _kill_by_pidfile "$WEB_PID_FILE" "web server"
+  _write_pidfile "$WEB_PID_FILE"
 
   echo "TTT Browser Workbench: http://$host:$port"
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" -m uvicorn ttt_webapp.app:app --host "$host" --port "$port"
@@ -81,7 +108,8 @@ run_prep_data() {
   ensure_workbench_env
   export PYTHONPATH="$(python_env)"
   chmod +x src/ttt_workbench/scripts/prepare_lexical_data.sh
-  pkill -f "prepare_lexical_data" 2>/dev/null || true
+  _kill_by_pidfile "$PREP_PID_FILE" "prep-data"
+  _write_pidfile "$PREP_PID_FILE"
   exec src/ttt_workbench/scripts/prepare_lexical_data.sh "${@:2}"
 }
 
@@ -103,7 +131,8 @@ run_test() {
 run_epub() {
   cd "$ROOT_DIR"
   ensure_workbench_env
-  pkill -f "generate_epub" 2>/dev/null || true
+  _kill_by_pidfile "$EPUB_PID_FILE" "epub generator"
+  _write_pidfile "$EPUB_PID_FILE"
   exec env PYTHONPATH="$(python_env)" "$VENV_PY" src/ttt_epub/generate_epub.py "${@:2}"
 }
 

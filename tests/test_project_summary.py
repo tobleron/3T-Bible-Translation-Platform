@@ -4,7 +4,8 @@ import ttt_webapp.app as appmod
 
 
 def reset_controller() -> None:
-    appmod._CONTROLLER = None
+    appmod._SESSION_CONTROLLERS.clear()
+    appmod._TEST_SESSION_ID = "test"
 
 
 def test_project_summary_counts_translated_from_cataloged_chunk_activity(monkeypatch) -> None:

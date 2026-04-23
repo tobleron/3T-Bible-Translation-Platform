@@ -161,7 +161,7 @@ class BrowserWorkbench(WorkbenchApp):
             "editorial tone suitable for translation footnotes and justification prose. Preserve the "
             "writer's intent and factual content. Do not introduce new claims."
         ),
-        "copyable": "Output verse(s) in plain text code block.",
+        "copyable": "Return your response in a plain text code block.",
     }
     _prompt_id_re = re.compile(r"[^a-z0-9]+")
 
@@ -613,7 +613,7 @@ class BrowserWorkbench(WorkbenchApp):
         for mode in modes:
             key = mode.strip().lower()
             if key == "copyable":
-                copyable_text = prompt_map.get("copyable", "Output verse(s) in plain text code block.").strip()
+                copyable_text = prompt_map.get("copyable", "Return your response in a plain text code block.").strip()
             else:
                 text = prompt_map.get(key, "").strip()
                 if text:
@@ -972,7 +972,7 @@ class BrowserWorkbench(WorkbenchApp):
         return [
             {
                 "id": key,
-                "label": "Verse-Copy" if key == "copyable" else key.title(),
+                "label": "Code block" if key == "copyable" else key.title(),
                 "text": value,
                 "builtin": True,
                 "disabled": False,
@@ -1036,7 +1036,7 @@ class BrowserWorkbench(WorkbenchApp):
             clean.append(
                 {
                     "id": builtin_id,
-                    "label": "Verse-Copy" if builtin_id == "copyable" else builtin_id.title(),
+                    "label": "Code block" if builtin_id == "copyable" else builtin_id.title(),
                     "text": builtin_text,
                     "builtin": True,
                     "disabled": False,

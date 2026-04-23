@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 import shutil
 import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger(__name__)
 
 from ttt_core.models.state import PendingJustificationUpdate
 from ttt_core.utils.common import (
@@ -81,6 +84,7 @@ class ProjectPaths:
         self.output_dir = Path(paths["output"])
         self.resources_dir = Path(paths["resources"])
 
+        self.final_data = Path(paths["final_data"])
         self.bible_dir = Path(paths["bible_dir"])
         self.justifications_dir = Path(paths["justifications_dir"])
         self.source_dirs = [
@@ -471,9 +475,14 @@ class JustificationRepository:
                             except json.JSONDecodeError:
                                 payload = None
             if not isinstance(payload, dict):
-                payload = self._empty_document(book, chapter)
-                notes.append(
-                    "Justification file was unreadable and has been reinitialized."
+                # Preserve corrupt file and require explicit repair instead of
+                # silently reinitializing.
+                corrupt_path = path.with_suffix(path.suffix + ".corrupt")
+                path.rename(corrupt_path)
+                raise ValueError(
+                    f"Justification file for {book} {chapter} is unreadable. "
+                    f"The original has been preserved at {corrupt_path}. "
+                    f"Review the file, delete or repair it, then retry."
                 )
         else:
             raw = ""
@@ -833,7 +842,8 @@ class LexicalRepository:
                             "lexical_id": lexical_id or "",
                         }
                     )
-        except sqlite3.Error:
+        except sqlite3.Error as exc:
+            logger.warning("LexicalRepository.fetch_tokens query failed: %s", exc)
             return {}
         return result
 
@@ -882,14 +892,14 @@ class LexicalRepository:
                         # Filter out grammatical artifacts (no real English meaning)
                         if clean and clean.lower() not in _SKIP_GLOSSES and sid not in result:
                             result[sid] = clean
-        except sqlite3.Error:
-            pass
+        except sqlite3.Error as exc:
+            logger.warning("LexicalRepository.fetch_lexicon_glosses query failed: %s", exc)
         return result
 
     def chapter_verse_numbers(self, corpus: str, book: str, chapter: int) -> list[int]:
         if not self.available():
             return []
-        code = book_ref_code(book)
+        code = lexical_book_code(book, corpus)
         pattern = f"{code}.{chapter}.%"
         try:
             with self._connect() as conn:
@@ -902,20 +912,21 @@ class LexicalRepository:
                     """,
                     (corpus, pattern),
                 ).fetchall()
-        except sqlite3.Error:
+        except sqlite3.Error as exc:
+            logger.warning("LexicalRepository.chapter_verse_numbers query failed: %s", exc)
             return []
         verses = []
         for (ref,) in rows:
             try:
                 verses.append(int(str(ref).rsplit(".", 1)[-1]))
-            except (json.JSONDecodeError, OSError):
+            except (ValueError, IndexError):
                 continue
         return sorted(set(verses))
 
     def chapters_for_book(self, corpus: str, book: str) -> list[int]:
         if not self.available():
             return []
-        code = book_ref_code(book)
+        code = lexical_book_code(book, corpus)
         pattern = f"{code}.%"
         try:
             with self._connect() as conn:
@@ -928,7 +939,8 @@ class LexicalRepository:
                     """,
                     (corpus, pattern),
                 ).fetchall()
-        except sqlite3.Error:
+        except sqlite3.Error as exc:
+            logger.warning("LexicalRepository.chapters_for_book query failed: %s", exc)
             return []
         chapters = []
         for (ref,) in rows:
@@ -937,7 +949,7 @@ class LexicalRepository:
                 continue
             try:
                 chapters.append(int(parts[1]))
-            except (json.JSONDecodeError, OSError):
+            except (ValueError, IndexError):
                 continue
         return sorted(set(chapters))
 
@@ -945,12 +957,28 @@ class LexicalRepository:
 def write_backup_set(
     backups_dir: Path, writes: list[tuple[Path, str, str]]
 ) -> Path:
-    """Write a backup set and apply new text to target paths atomically."""
+    """Write a backup set and apply new text to target paths atomically.
+
+    Stages backups and writes the manifest before applying any replacements.
+    If an error occurs during replacement, already-written files are rolled back.
+    """
     timestamp = utc_now().replace(":", "").replace("-", "")
     backup_dir = backups_dir / timestamp
     backup_dir.mkdir(parents=True, exist_ok=True)
+
+    # Validate all target paths are within the project.
+    # Infer project root as the parent of backups_dir (e.g. .ttt_workbench).
+    inferred_root = backups_dir.resolve().parent
+    for path, _old_text, _new_text in writes:
+        resolved = path.resolve()
+        try:
+            resolved.relative_to(inferred_root)
+        except ValueError:
+            raise ValueError(f"Path outside project root: {path}")
+
+    # Stage backups
     manifest = []
-    for path, old_text, new_text in writes:
+    for path, old_text, _new_text in writes:
         relative = path.as_posix().lstrip("/")
         backup_path = backup_dir / relative
         ensure_parent(backup_path)
@@ -965,13 +993,34 @@ def write_backup_set(
                 "had_original": path.exists(),
             }
         )
-        temp_path = path.with_suffix(path.suffix + ".tmp")
-        ensure_parent(temp_path)
-        temp_path.write_text(new_text, encoding="utf-8")
-        temp_path.replace(path)
-    (backup_dir / "manifest.json").write_text(
-        json.dumps(manifest, indent=2), encoding="utf-8"
-    )
+
+    # Write manifest before applying replacements
+    manifest_path = backup_dir / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    # Apply replacements atomically; roll back on failure
+    applied: list[Path] = []
+    try:
+        for path, _old_text, new_text in writes:
+            temp_path = path.with_suffix(path.suffix + ".tmp")
+            ensure_parent(temp_path)
+            temp_path.write_text(new_text, encoding="utf-8")
+            temp_path.replace(path)
+            applied.append(path)
+    except Exception:
+        # Roll back already-applied files
+        for item in manifest:
+            target = Path(item["path"])
+            if target not in applied:
+                continue
+            backup = Path(item["backup"])
+            if item.get("had_original"):
+                ensure_parent(target)
+                shutil.copyfile(backup, target)
+            elif target.exists():
+                target.unlink()
+        raise
+
     return backup_dir
 
 

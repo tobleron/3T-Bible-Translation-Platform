@@ -342,6 +342,7 @@ class LlamaCppClient:
                 yield f"\n[ERROR] llama.cpp generation failed: {exc}"
                 return
 
+
     # ------------------------------------------------------------------
     # JSON-mode completion with repair
     # ------------------------------------------------------------------
@@ -358,17 +359,15 @@ class LlamaCppClient:
         """Return ``(parsed_json, raw_response, attempts_used)``.
 
         Retries up to *max_attempts* times if the response is not valid JSON
-        or misses required keys.
+        or misses required keys.  Uses :class:`ModelProfile` to select an
+        appropriate system prefix instead of hard-coding Qwen hints.
         """
+        from ttt_core.llm.provider import _infer_profile
+
+        profile = _infer_profile(self.model_name)
+        base_prompt = profile.json_system_prefix + prompt
         last_response = ""
         repair_reason = ""
-        base_prompt = (
-            "/no_think\n"
-            "Model profile: qwen3.5 35B A3B thinking model.\n"
-            "Return valid JSON only.\n"
-            "The first non-whitespace character of your response must be { or [.\n"
-            "Do not include markdown fences, commentary, XML tags, <think> blocks, or visible reasoning.\n\n"
-        ) + prompt
         for attempt in range(1, max_attempts + 1):
             if attempt == 1:
                 current_prompt = base_prompt
@@ -387,7 +386,9 @@ class LlamaCppClient:
             )
             payload = extract_json_payload(last_response)
             lowered = last_response.lower()
-            leaked_reasoning = "<think>" in lowered or "thinking process" in lowered
+            leaked_reasoning = bool(profile.thinking_tag_start) and (
+                profile.thinking_tag_start in lowered or "thinking process" in lowered
+            )
             if payload is None:
                 if leaked_reasoning:
                     repair_reason = "Visible reasoning was emitted instead of JSON"

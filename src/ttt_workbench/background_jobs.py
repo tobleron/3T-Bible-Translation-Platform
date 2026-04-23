@@ -27,7 +27,7 @@ class Job:
     """Represents one background model operation."""
     job_id: str
     label: str            # e.g. "chunk-suggest", "analysis", "finalize"
-    target: Callable[[], Any]
+    target: Callable[..., Any]
     status: JobStatus = JobStatus.PENDING
     result: Any = None
     error: str | None = None
@@ -138,7 +138,7 @@ class JobRunner:
             if job.cancel_event.is_set():
                 job.status = JobStatus.CANCELLED
                 return
-            result = job.target()
+            result = job.target(cancel_event=job.cancel_event)
             if job.cancel_event.is_set():
                 job.status = JobStatus.CANCELLED
                 return

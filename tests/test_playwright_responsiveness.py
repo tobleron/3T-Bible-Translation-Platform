@@ -245,14 +245,15 @@ def test_prompt_engineering_uses_non_active_prompt_text(page: Page, live_server_
     assert "Do not omit content." in prompt_text
 
 
-def test_prompt_active_select_does_not_trigger_enhance_loading(page: Page, live_server_url: str) -> None:
+def test_prompt_active_select_stays_in_prompts_and_fields_require_edit_toggle(page: Page, live_server_url: str) -> None:
     open_workspace(page, live_server_url)
     panel = page.locator("#prompt-engineering-panel")
     panel.locator('[data-editorial-tab="prompts"]').click()
 
-    enhance_button = page.locator("#prompt-engineering-panel .prompt-library-enhance button")
-    expect(enhance_button).to_have_text("Enhance")
-    expect(enhance_button).to_be_enabled()
+    prompt_label = page.locator("#prompt-engineering-panel .prompt-library-item [data-prompt-label]").first
+    prompt_text = page.locator("#prompt-engineering-panel .prompt-library-item textarea[data-prompt-text]").first
+    assert prompt_label.evaluate("(el) => el.readOnly") is True
+    assert prompt_text.evaluate("(el) => el.readOnly") is True
 
     select = page.locator("#prompt-active-select")
     options = select.locator("option").evaluate_all("(items) => items.map((item) => item.value)")
@@ -266,14 +267,21 @@ def test_prompt_active_select_does_not_trigger_enhance_loading(page: Page, live_
     page.route("**/editorial", slow_editorial)
     try:
         select.select_option(target_value)
-        page.wait_for_timeout(100)
-        expect(enhance_button).to_have_text("Enhance")
-        expect(enhance_button).to_be_enabled()
-        assert enhance_button.get_attribute("aria-busy") != "true"
-
+        page.wait_for_timeout(450)
         expect(page.locator("#prompt-active-select")).to_have_value(target_value)
         expect(page.locator('#prompt-engineering-panel [data-editorial-panel="prompts"]')).to_be_visible()
-        expect(page.locator("#prompt-engineering-panel .prompt-library-enhance button")).to_have_text("Enhance")
+        assert page.locator("#prompt-engineering-panel .prompt-library-item [data-prompt-label]").first.evaluate("(el) => el.readOnly") is True
+        assert page.locator("#prompt-engineering-panel .prompt-library-item textarea[data-prompt-text]").first.evaluate("(el) => el.readOnly") is True
+
+        page.evaluate(
+            """
+            () => window.togglePromptEdit(
+              document.querySelector('#prompt-engineering-panel .prompt-toolbar-actions button')
+            )
+            """
+        )
+        assert page.locator("#prompt-engineering-panel .prompt-library-item [data-prompt-label]").first.evaluate("(el) => el.readOnly") is False
+        assert page.locator("#prompt-engineering-panel .prompt-library-item textarea[data-prompt-text]").first.evaluate("(el) => el.readOnly") is False
     finally:
         page.unroute("**/editorial", slow_editorial)
 

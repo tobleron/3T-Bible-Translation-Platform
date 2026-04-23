@@ -16,10 +16,10 @@ class ChunkCatalogRepository:
         self.paths = paths
         self.bible_repo = bible_repo
         self.chapter_dir = (
-            self.paths.repo_root / "data" / "final" / "chapter_chunk_catalog" / "chunks"
+            self.paths.final_data / "chapter_chunk_catalog" / "chunks"
         )
         self.book_dir = (
-            self.paths.repo_root / "data" / "final" / "chapter_chunk_catalog" / "books"
+            self.paths.final_data / "chapter_chunk_catalog" / "books"
         )
         self._committed_section_cache: dict[tuple[str, str, int], dict[str, Any] | None] = {}
         self._status_map_cache: dict[tuple[str, str], tuple[dict[int, int], float]] = {}
