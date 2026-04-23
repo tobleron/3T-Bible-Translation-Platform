@@ -26,6 +26,16 @@
   transition: opacity 120ms ease, border-color 120ms ease, background-color 120ms ease;
 }
 
+.ttt-chainlit-copy-button {
+  display: none;
+}
+
+.ttt-chainlit-user-prompt > .ttt-chainlit-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ttt-chainlit-user-prompt {
   margin-left: auto !important;
   max-width: min(70%, 760px) !important;

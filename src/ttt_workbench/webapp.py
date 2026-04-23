@@ -299,8 +299,16 @@ def render_page(request: Request, template_name: str, context: dict, status_code
     )
 
 
-def render_workspace(request: Request, wb: BrowserWorkbench, active_tab: str = "study", partial: bool = False):
+def render_workspace(
+    request: Request,
+    wb: BrowserWorkbench,
+    active_tab: str = "study",
+    partial: bool = False,
+    context_overrides: dict | None = None,
+):
     context = wb.workspace_payload(active_tab=active_tab)
+    if context_overrides:
+        context.update(context_overrides)
     template_name = "partials/workspace_root.html" if partial else "workspace.html"
     response = render_page(request, template_name, context)
     wb.clear_flash()
@@ -389,6 +397,27 @@ def apply_draft_form(
         if str(key).startswith("verse_"):
             verses[int(str(key).split("_", 1)[1])] = str(value)
     wb.save_draft(str(form.get("draft_title", "")), verses, editor_mode=editor_mode)
+
+
+def _prompt_library_updates_from_form(wb: BrowserWorkbench, form) -> list[dict[str, object]]:
+    updates: list[dict[str, object]] = []
+    for entry in wb.prompt_library_entries(include_disabled=True):
+        prompt_id = str(entry.get("id", "")).strip()
+        if not prompt_id:
+            continue
+        label = str(form.get(f"prompt_label_{prompt_id}", entry.get("label", ""))).strip()
+        text = str(form.get(f"prompt_text_{prompt_id}", entry.get("text", ""))).strip()
+        updates.append(
+            {
+                "id": prompt_id,
+                "label": label or str(entry.get("label", "")).strip() or prompt_id.title(),
+                "text": text,
+                "builtin": bool(entry.get("builtin", False)),
+                "disabled": bool(entry.get("disabled", False)),
+                "order": int(entry.get("order", 0) or 0),
+            }
+        )
+    return updates
 
 
 def render_workspace_error(
@@ -1399,38 +1428,112 @@ async def editorial_assistant(
 ):
     form = await request.form()
     wb = controller(request)
+    action = str(form.get("action", "")).strip().lower() or "switch_prompt"
+    editorial_tab = str(form.get("editorial_tab", wb.state.editorial_active_tab or "run")).strip().lower()
+    if editorial_tab not in {"run", "prompts"}:
+        editorial_tab = "run"
+    prompt_entries = _prompt_library_updates_from_form(wb, form)
+    active_id = wb.make_prompt_id(str(form.get("prompt_active_id", "")).strip())
+    if not active_id and prompt_entries:
+        active_id = str(prompt_entries[0].get("id", "")).strip()
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         apply_draft_form(wb, form)
-        wb.save_editorial_prompts(
-            {
-                "grammar": str(form.get("editorial_prompt_grammar", "")).strip(),
-                "concise": str(form.get("editorial_prompt_concise", "")).strip(),
-                "scholarly": str(form.get("editorial_prompt_scholarly", "")).strip(),
-                "copyable": str(form.get("editorial_prompt_copyable", "")).strip(),
-            }
-        )
-        wb.state.editorial_input = str(form.get("editorial_input", "")).strip()
-        action = str(form.get("action", "")).strip().lower()
-        if action == "clear":
-            wb.state.editorial_output = ""
-            wb.state.editorial_output_label = ""
-        else:
-            mode = action or "grammar"
-            wb.state.editorial_output = wb.run_editorial_enhancement(
-                source_text=wb.state.editorial_input,
-                mode=mode,
-                context_label="general editorial prose",
-                prompt_override=str(form.get(f"editorial_prompt_{mode}", "")).strip(),
+        transient_prompt_entries: list[dict[str, object]] | None = None
+        should_save_prompt_library = False
+        known_ids = {str(item.get("id", "")).strip() for item in prompt_entries}
+        if active_id and active_id not in known_ids:
+            active_id = str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
+        # `prompt_active_id` (the select value) is authoritative.
+        # Keep hidden target only as compatibility fallback when active_id is absent.
+        enhance_target_id = wb.make_prompt_id(str(form.get("prompt_enhance_target_id", "")).strip())
+        if not active_id and enhance_target_id and enhance_target_id in known_ids:
+            active_id = enhance_target_id
+        instruction = str(form.get("prompt_enhance_instruction", "")).strip()
+        if action == "add_prompt":
+            new_label = str(form.get("new_prompt_label", "")).strip()
+            new_text = str(form.get("new_prompt_text", "")).strip()
+            if not new_label or not new_text:
+                raise ValueError("Add both prompt name and prompt text.")
+            new_id = wb.unique_prompt_id(new_label)
+            next_order = len(prompt_entries) + 1
+            prompt_entries.append(
+                {
+                    "id": new_id,
+                    "label": new_label,
+                    "text": new_text,
+                    "builtin": False,
+                    "disabled": False,
+                    "order": next_order,
+                }
             )
-            wb.state.editorial_output_label = wb.editorial_mode_label(mode)
-            wb.notify(f"{wb.state.editorial_output_label} ready.")
+            wb.notify(f"Prompt '{new_label}' added.")
+            active_id = new_id
+            should_save_prompt_library = True
+        elif action == "delete_prompt":
+            delete_id = wb.make_prompt_id(str(form.get("prompt_delete_id", "")).strip())
+            if not delete_id:
+                raise ValueError("Select a prompt to delete.")
+            target = next((item for item in prompt_entries if str(item.get("id", "")).strip() == delete_id), None)
+            if not target:
+                raise ValueError("Prompt not found.")
+            if bool(target.get("builtin", False)):
+                raise ValueError("Built-in prompts cannot be deleted.")
+            prompt_entries = [item for item in prompt_entries if str(item.get("id", "")).strip() != delete_id]
+            wb.notify("Prompt deleted.")
+            if active_id == delete_id:
+                active_id = str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
+            should_save_prompt_library = True
+        elif action == "enhance_prompt":
+            if not active_id:
+                raise ValueError("Select a prompt to enhance.")
+            if not instruction:
+                raise ValueError("Add a one-line enhancement instruction first.")
+            target = next((item for item in prompt_entries if str(item.get("id", "")).strip() == active_id), None)
+            if target is None:
+                raise ValueError("Selected prompt was not found.")
+            source_text = str(target.get("text", "")).strip()
+            if not source_text:
+                raise ValueError("Active prompt text is empty. Add prompt text before enhancing.")
+            target["text"] = wb.run_editorial_enhancement(
+                source_text=source_text,
+                mode="custom",
+                context_label="prompt instruction text",
+                custom_prompt=instruction,
+                single_paragraph_plain_text=True,
+            )
+            transient_prompt_entries = prompt_entries
+            wb.notify("Prompt enhanced. Click Save Prompt to keep it.")
+        elif action == "save_prompts":
+            wb.notify("Prompts saved.")
+            should_save_prompt_library = True
+        elif action == "switch_prompt":
+            pass
+        else:
+            raise ValueError("Unsupported prompt action.")
+        if should_save_prompt_library:
+            wb.save_prompt_library_entries(prompt_entries)
+        wb.state.editorial_active_prompt_id = active_id
+        wb.state.editorial_active_tab = editorial_tab
+        wb.state.editorial_input = str(form.get("editorial_input", "")).strip()
+        wb.state.editorial_output = ""
+        wb.state.editorial_output_label = ""
         wb.activate_tab("draft")
         wb.save_state()
-        return render_workspace(request, wb, active_tab="draft", partial=True)
+        context_overrides = {"prompt_library": transient_prompt_entries} if transient_prompt_entries else None
+        return render_workspace(request, wb, active_tab="draft", partial=True, context_overrides=context_overrides)
     except Exception as exc:
-        return render_workspace_error(request, wb, exc, active_tab="draft")
+        wb.print_error(str(exc))
+        wb.state.editorial_active_prompt_id = active_id
+        wb.state.editorial_active_tab = editorial_tab
+        wb.save_state()
+        context_overrides: dict[str, object] = {
+            "prompt_library": prompt_entries,
+            "prompt_toast_message": str(exc),
+            "prompt_toast_tone": "error",
+        }
+        return render_workspace(request, wb, active_tab="draft", partial=True, context_overrides=context_overrides)
 
 
 @app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial/enhance-field", response_class=JSONResponse)
@@ -1446,17 +1549,12 @@ async def enhance_field(
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        prompt_updates = {
-            "grammar": str(form.get("editorial_prompt_grammar", "")).strip(),
-            "concise": str(form.get("editorial_prompt_concise", "")).strip(),
-            "scholarly": str(form.get("editorial_prompt_scholarly", "")).strip(),
-            "copyable": str(form.get("editorial_prompt_copyable", "")).strip(),
-        }
-        wb.save_editorial_prompts(prompt_updates)
         mode = str(form.get("mode", "")).strip().lower()
         custom_prompt = str(form.get("custom_prompt", "")).strip()
         context_label = str(form.get("context_label", "")).strip() or "editorial prose"
         prompt_override = str(form.get("prompt_override", "")).strip()
+        if not prompt_override and mode:
+            prompt_override = str(form.get(f"prompt_text_{wb.make_prompt_id(mode)}", "")).strip()
         source_text = str(form.get("text", "")).strip()
         result = wb.run_editorial_enhancement(
             source_text=source_text,

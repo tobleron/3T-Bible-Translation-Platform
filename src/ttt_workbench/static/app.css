@@ -2080,6 +2080,64 @@ button:active:not(:disabled) {
 .editorial-prompt-grid textarea {
   min-height: 5.5rem;
 }
+.prompt-library-list {
+  display: grid;
+  gap: 0.7rem;
+}
+.prompt-library-toolbar {
+  display: grid;
+  gap: 0.4rem;
+}
+.prompt-library-item {
+  display: grid;
+  gap: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.55rem;
+  background: rgba(255,255,255,0.01);
+}
+.prompt-library-item-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.45rem;
+}
+.prompt-library-label {
+  width: 100%;
+  min-height: 2.1rem;
+  resize: none;
+}
+.prompt-library-item textarea[data-prompt-text] {
+  min-height: 4.8rem;
+}
+.prompt-library-add {
+  display: grid;
+  gap: 0.55rem;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.6rem;
+}
+.prompt-library-enhance {
+  border-top: 1px dashed var(--line);
+  padding-top: 0.6rem;
+}
+.prompt-enhance-inline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+.prompt-enhance-inline textarea {
+  min-height: 2.1rem;
+  resize: none;
+}
+.prompt-library-add textarea[name="new_prompt_label"] {
+  min-height: 2.1rem;
+  resize: none;
+}
+.prompt-library-actions {
+  display: flex;
+  justify-content: flex-end;
+}
 .editorial-actions {
   display: flex;
   gap: 0.65rem;

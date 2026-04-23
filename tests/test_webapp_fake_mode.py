@@ -28,6 +28,9 @@ def reset_controller() -> None:
             p = fake_state_dir / stale
             if p.exists():
                 p.unlink()
+    prompt_library = Path(".ttt_workbench/prompt_library.json")
+    if prompt_library.exists():
+        prompt_library.unlink()
 
 
 def test_hebrew_original_surface_is_cleaned_for_display() -> None:
@@ -236,6 +239,339 @@ def test_resume_with_stale_chunk_redirects_to_chapter(monkeypatch) -> None:
         try:
             assert response.status_code == 302
             assert response.headers.get("location") == "/workspace/old/genesis/1"
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_prompt_library_add_save_and_render_mode_checkbox(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "add_prompt",
+                "new_prompt_label": "Tone Guard",
+                "new_prompt_text": "Keep tone cautious and precise.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert 'value="tone-guard"' in response.text
+            assert "Tone Guard" in response.text
+        finally:
+            response.close()
+
+        workspace = client.get("/workspace/old/genesis/1/1-5")
+        try:
+            assert workspace.status_code == 200
+            assert 'id="prompt-mode-tone-guard"' in workspace.text
+        finally:
+            workspace.close()
+    reset_controller()
+
+
+def test_chat_context_accepts_dynamic_prompt_modes(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        add_resp = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "add_prompt",
+                "new_prompt_label": "Style Guard",
+                "new_prompt_text": "Avoid over-interpretation.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        add_resp.close()
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/chat/context",
+            json={"selections": ["draft"], "modes": ["style-guard"], "hide_labels": False},
+        )
+        try:
+            assert response.status_code == 200
+            payload = response.json()
+            assert payload["ok"] is True
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_prompt_engineering_context_selections_render_checked(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/chat/context",
+            json={"selections": ["draft", "filtered"], "modes": ["concise"], "hide_labels": True},
+        )
+        response.close()
+
+        workspace = client.get("/workspace/old/genesis/1/1-5")
+        try:
+            assert workspace.status_code == 200
+            assert 'id="prompt-mode-concise" value="concise" data-prompt-mode checked' in workspace.text
+            assert 'id="prompt-context-draft" value="draft" data-prompt-context checked' in workspace.text
+            assert 'id="prompt-context-filtered" value="filtered" data-prompt-context checked' in workspace.text
+            assert 'id="prompt-option-hide-labels" data-prompt-option checked' in workspace.text
+        finally:
+            workspace.close()
+    reset_controller()
+
+
+def test_save_prompts_does_not_invoke_enhancement(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    called = {"count": 0}
+
+    def fake_enhance(self, **kwargs):
+        called["count"] += 1
+        return "should-not-run"
+
+    monkeypatch.setattr(BrowserWorkbench, "run_editorial_enhancement", fake_enhance)
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "save_prompts",
+                "prompt_active_id": "grammar",
+                "prompt_enhance_target_id": "grammar",
+                "prompt_enhance_instruction": "Make this prompt even more concise",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Original grammar prompt text.",
+                "prompt_label_concise": "Concise",
+                "prompt_text_concise": "Original concise prompt text.",
+                "prompt_label_scholarly": "Scholarly",
+                "prompt_text_scholarly": "Original scholarly prompt text.",
+                "prompt_label_copyable": "Verse-Copy",
+                "prompt_text_copyable": "Output verse(s) in plain text code block.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert called["count"] == 0
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_prompt_tab_shows_toast_error_and_preserves_unsaved_prompt_text(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    original = appmod.controller().prompt_library_map()["grammar"]
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "enhance_prompt",
+                "editorial_tab": "prompts",
+                "prompt_active_id": "grammar",
+                "prompt_enhance_target_id": "grammar",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Unsaved grammar text stays visible on failure.",
+                "prompt_enhance_instruction": "",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert "showWorkspaceIndicator(" in response.text
+            assert "Add a one-line enhancement instruction first." in response.text
+            assert "Unsaved grammar text stays visible on failure." in response.text
+            assert appmod.controller().prompt_library_map()["grammar"] == original
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_switch_prompt_does_not_persist_unsaved_prompt_edits(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        original = appmod.controller().prompt_library_map()["grammar"]
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "switch_prompt",
+                "editorial_tab": "prompts",
+                "prompt_active_id": "concise",
+                "prompt_enhance_target_id": "concise",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Unsaved grammar prompt edit.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert 'value="concise" selected' in response.text
+            assert appmod.controller().prompt_library_map()["grammar"] == original
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_save_prompts_persists_prompt_edits(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "save_prompts",
+                "editorial_tab": "prompts",
+                "prompt_active_id": "grammar",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Saved grammar prompt edit.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert appmod.controller().prompt_library_map()["grammar"] == "Saved grammar prompt edit."
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_enhance_prompt_returns_transient_edit_until_saved(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    captured = {}
+
+    def fake_enhance(self, **kwargs):
+        captured.update(kwargs)
+        return "Enhanced transient prompt text."
+
+    monkeypatch.setattr(BrowserWorkbench, "run_editorial_enhancement", fake_enhance)
+    with TestClient(appmod.app) as client:
+        original = appmod.controller().prompt_library_map()["grammar"]
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "enhance_prompt",
+                "editorial_tab": "prompts",
+                "prompt_active_id": "grammar",
+                "prompt_enhance_target_id": "grammar",
+                "prompt_enhance_instruction": "Make this clearer",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Temporary grammar prompt edit.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert "Enhanced transient prompt text." in response.text
+            assert captured["source_text"] == "Temporary grammar prompt edit."
+            assert captured["custom_prompt"] == "Make this clearer"
+            assert "plain text only" not in captured["custom_prompt"].lower()
+            assert appmod.controller().prompt_library_map()["grammar"] == original
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_enhance_prompt_uses_active_prompt_id_not_hidden_target(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    captured = {}
+
+    def fake_enhance(self, **kwargs):
+        captured.update(kwargs)
+        return "Enhanced from active prompt."
+
+    monkeypatch.setattr(BrowserWorkbench, "run_editorial_enhancement", fake_enhance)
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "enhance_prompt",
+                "editorial_tab": "prompts",
+                "prompt_active_id": "grammar",
+                "prompt_enhance_target_id": "concise",
+                "prompt_enhance_instruction": "Tighten this",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Grammar prompt text.",
+                "prompt_label_concise": "Concise",
+                "prompt_text_concise": "Concise prompt text.",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert captured["source_text"] == "Grammar prompt text."
+            assert "Enhanced from active prompt." in response.text
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_custom_enhance_falls_back_to_plain_text_when_json_fails(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+
+    def fake_complete_json(self, *args, **kwargs):
+        return None, "non-json text", 3
+
+    def fake_complete(self, prompt, **kwargs):
+        return "<think>I should reason here.</think>\nFallback rewritten prompt text."
+
+    monkeypatch.setattr(FakeLLM, "complete_json", fake_complete_json)
+    monkeypatch.setattr(FakeLLM, "complete", fake_complete)
+    with TestClient(appmod.app) as client:
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial",
+            data={
+                "action": "enhance_prompt",
+                "editorial_tab": "prompts",
+                "prompt_active_id": "grammar",
+                "prompt_enhance_target_id": "grammar",
+                "prompt_label_grammar": "Grammar",
+                "prompt_text_grammar": "Base prompt text.",
+                "prompt_enhance_instruction": "Make it tighter",
+            },
+            headers={"HX-Request": "true"},
+        )
+        try:
+            assert response.status_code == 200
+            assert "Fallback rewritten prompt text." in response.text
+            assert "<think>" not in response.text.lower()
+            assert "I should reason here." not in response.text
+            assert "valid editorial enhancement response" not in response.text
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_enhance_field_uses_prompt_override_without_persisting(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    captured = {}
+
+    def fake_enhance(self, **kwargs):
+        captured.update(kwargs)
+        return "Rewritten text."
+
+    monkeypatch.setattr(BrowserWorkbench, "run_editorial_enhancement", fake_enhance)
+    with TestClient(appmod.app) as client:
+        original = appmod.controller().prompt_library_map()["grammar"]
+        response = client.post(
+            "/workspace/old/genesis/1/1-5/editorial/enhance-field",
+            data={
+                "mode": "grammar",
+                "context_label": "Bible draft verse",
+                "text": "Source text.",
+                "prompt_text_grammar": "Temporary grammar prompt override.",
+            },
+        )
+        try:
+            assert response.status_code == 200
+            assert response.json()["text"] == "Rewritten text."
+            assert captured["prompt_override"] == "Temporary grammar prompt override."
+            assert appmod.controller().prompt_library_map()["grammar"] == original
         finally:
             response.close()
     reset_controller()

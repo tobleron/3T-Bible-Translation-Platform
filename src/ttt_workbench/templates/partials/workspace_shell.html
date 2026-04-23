@@ -63,35 +63,45 @@
           </div>
         </div>
 
-        <form class="editorial-form model-action-form"
+        <form class="editorial-form"
           hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/editorial"
           hx-target="#prompt-engineering-panel" hx-select="#prompt-engineering-panel" hx-swap="outerHTML" hx-include="#editor-form" hx-sync="this:drop">
+          {% set editorial_active_tab = state.editorial_active_tab if state.editorial_active_tab in ['run', 'prompts'] else 'run' %}
+          {% set active_prompt_id = state.editorial_active_prompt_id if state.editorial_active_prompt_id else (prompt_library[0].id if prompt_library else '') %}
+          {% set selected_prompt = namespace(value=None) %}
+          {% for prompt in prompt_library %}
+          {% if prompt.id == active_prompt_id %}
+          {% set selected_prompt.value = prompt %}
+          {% endif %}
+          {% endfor %}
+          {% if selected_prompt.value is none and prompt_library %}
+          {% set selected_prompt.value = prompt_library[0] %}
+          {% set active_prompt_id = prompt_library[0].id %}
+          {% endif %}
+          {% set prompt_context_config = prompt_engineering_context if prompt_engineering_context is defined else {'selections': [], 'modes': [], 'hide_labels': False} %}
+          {% set selected_prompt_contexts = prompt_context_config.selections if prompt_context_config.selections is defined else [] %}
+          {% set selected_prompt_modes = prompt_context_config.modes if prompt_context_config.modes is defined else [] %}
+          {% set prompt_hide_labels = prompt_context_config.hide_labels if prompt_context_config.hide_labels is defined else False %}
+          <input type="hidden" name="editorial_tab" id="editorial-tab-input" value="{{ editorial_active_tab }}">
+          <input type="hidden" name="prompt_enhance_target_id" id="prompt-enhance-target-id" value="{{ active_prompt_id }}">
           <div class="editorial-tab-bar">
-            <button class="tab-button is-active" type="button" data-editorial-tab="run" onclick="switchEditorialTab(this, 'run')">Run</button>
-            <button class="tab-button" type="button" data-editorial-tab="prompts" onclick="switchEditorialTab(this, 'prompts')">Prompts</button>
+            <button class="tab-button {% if editorial_active_tab == 'run' %}is-active{% endif %}" type="button" data-editorial-tab="run" onclick="switchEditorialTab(this, 'run')">Run</button>
+            <button class="tab-button {% if editorial_active_tab == 'prompts' %}is-active{% endif %}" type="button" data-editorial-tab="prompts" onclick="switchEditorialTab(this, 'prompts')">Prompts</button>
           </div>
 
-          <section class="editorial-tab-panel is-active" data-editorial-panel="run">
+          <section class="editorial-tab-panel {% if editorial_active_tab == 'run' %}is-active{% endif %}" data-editorial-panel="run" {% if editorial_active_tab != 'run' %}hidden{% endif %}>
             <div class="prompt-context-picker">
               <span class="chat-context-label">Prompts</span>
+              {% for prompt in prompt_library %}
+              {% if not prompt.disabled %}
               <label class="compact-check">
-                <input type="checkbox" id="prompt-mode-grammar" value="grammar" data-prompt-mode>
-                <span>Grammar Only</span>
+                <input type="checkbox" id="prompt-mode-{{ prompt.id }}" value="{{ prompt.id }}" data-prompt-mode {% if prompt.id in selected_prompt_modes %}checked{% endif %}>
+                <span>{{ prompt.label }}</span>
               </label>
+              {% endif %}
+              {% endfor %}
               <label class="compact-check">
-                <input type="checkbox" id="prompt-mode-concise" value="concise" data-prompt-mode>
-                <span>Concise</span>
-              </label>
-              <label class="compact-check">
-                <input type="checkbox" id="prompt-mode-scholarly" value="scholarly" data-prompt-mode>
-                <span>Scholarly</span>
-              </label>
-              <label class="compact-check">
-                <input type="checkbox" id="prompt-mode-copyable" value="copyable" data-prompt-mode>
-                <span>Verse-Copy</span>
-              </label>
-              <label class="compact-check">
-                <input type="checkbox" id="prompt-option-hide-labels" data-prompt-option>
+                <input type="checkbox" id="prompt-option-hide-labels" data-prompt-option {% if prompt_hide_labels %}checked{% endif %}>
                 <span>No Labels</span>
               </label>
             </div>
@@ -99,33 +109,33 @@
             <div class="prompt-context-picker">
               <span class="chat-context-label">Include</span>
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-draft" value="draft" data-prompt-context>
+                <input type="checkbox" id="prompt-context-draft" value="draft" data-prompt-context {% if 'draft' in selected_prompt_contexts %}checked{% endif %}>
                 <span>Draft</span>
               </label>
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-filtered" value="filtered" data-prompt-context>
+                <input type="checkbox" id="prompt-context-filtered" value="filtered" data-prompt-context {% if 'filtered' in selected_prompt_contexts %}checked{% endif %}>
                 <span>Filtered</span>
               </label>
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-avd" value="avd" data-prompt-context>
+                <input type="checkbox" id="prompt-context-avd" value="avd" data-prompt-context {% if 'avd' in selected_prompt_contexts %}checked{% endif %}>
                 <span>AVD</span>
               </label>
               {% if selected_testament == 'old' %}
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-hebrew" value="hebrew" data-prompt-context>
+                <input type="checkbox" id="prompt-context-hebrew" value="hebrew" data-prompt-context {% if 'hebrew' in selected_prompt_contexts %}checked{% endif %}>
                 <span>HEB</span>
               </label>
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-hebrew-en" value="hebrew-en" data-prompt-context>
+                <input type="checkbox" id="prompt-context-hebrew-en" value="hebrew-en" data-prompt-context {% if 'hebrew-en' in selected_prompt_contexts %}checked{% endif %}>
                 <span>HEB-EN</span>
               </label>
               {% endif %}
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-greek" value="greek" data-prompt-context>
+                <input type="checkbox" id="prompt-context-greek" value="greek" data-prompt-context {% if 'greek' in selected_prompt_contexts %}checked{% endif %}>
                 <span>GRK</span>
               </label>
               <label class="compact-check">
-                <input type="checkbox" id="prompt-context-greek-en" value="greek-en" data-prompt-context>
+                <input type="checkbox" id="prompt-context-greek-en" value="greek-en" data-prompt-context {% if 'greek-en' in selected_prompt_contexts %}checked{% endif %}>
                 <span>GRK-EN</span>
               </label>
             </div>
@@ -142,24 +152,77 @@
             </div>
           </section>
 
-          <section class="editorial-tab-panel" data-editorial-panel="prompts" hidden>
-            <div class="editorial-prompt-grid">
+          <section class="editorial-tab-panel {% if editorial_active_tab == 'prompts' %}is-active{% endif %}" data-editorial-panel="prompts" {% if editorial_active_tab != 'prompts' %}hidden{% endif %}>
+            <input type="hidden" name="prompt_delete_id" id="prompt-delete-id" value="">
+            {% for prompt in prompt_library %}
+            {% if prompt.id != active_prompt_id %}
+            <input type="hidden" name="prompt_label_{{ prompt.id }}" value="{{ prompt.label }}">
+            <input type="hidden" name="prompt_text_{{ prompt.id }}" value="{{ prompt.text }}" data-prompt-text data-prompt-id="{{ prompt.id }}">
+            {% endif %}
+            {% endfor %}
+            <div class="prompt-library-toolbar">
               <label class="compact-field">
-                <span>Grammar only</span>
-                <textarea id="editorial-prompt-grammar" name="editorial_prompt_grammar" rows="5" data-auto-resize>{{ editorial_prompts.grammar }}</textarea>
+                <span>Active prompt</span>
+                <select name="prompt_active_id" id="prompt-active-select" data-prompt-active-select onchange="switchActivePrompt(this)">
+                  {% for prompt in prompt_library %}
+                  <option value="{{ prompt.id }}" {% if prompt.id == active_prompt_id %}selected{% endif %}>{{ prompt.label }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+            </div>
+            <div class="prompt-library-list">
+              {% if selected_prompt.value %}
+              {% set prompt = selected_prompt.value %}
+              <article class="prompt-library-item" data-prompt-item data-prompt-id="{{ prompt.id }}">
+                <div class="prompt-library-item-head">
+                  <textarea
+                    name="prompt_label_{{ prompt.id }}"
+                    rows="1"
+                    class="prompt-library-label"
+                    data-prompt-label
+                    data-prompt-id="{{ prompt.id }}"
+                    data-auto-resize
+                    {% if prompt.builtin %}data-prompt-builtin="1"{% endif %}
+                  >{{ prompt.label }}</textarea>
+                  {% if not prompt.builtin %}
+                  <button class="secondary-button tiny-danger-button" type="button" onclick="setPromptDeleteId('{{ prompt.id }}'); submitPromptAction(this, 'delete_prompt');">Delete</button>
+                  {% endif %}
+                </div>
+                <textarea
+                  name="prompt_text_{{ prompt.id }}"
+                  rows="4"
+                  data-auto-resize
+                  data-prompt-text
+                  data-prompt-id="{{ prompt.id }}"
+                >{{ prompt.text }}</textarea>
+              </article>
+              {% endif %}
+            </div>
+
+            <div class="prompt-library-add">
+              <label class="compact-field">
+                <span>New prompt name</span>
+                <textarea name="new_prompt_label" rows="1" data-auto-resize placeholder="Example: Tone Guard"></textarea>
               </label>
               <label class="compact-field">
-                <span>Concise rewrite</span>
-                <textarea id="editorial-prompt-concise" name="editorial_prompt_concise" rows="5" data-auto-resize>{{ editorial_prompts.concise }}</textarea>
+                <span>New prompt text</span>
+                <textarea name="new_prompt_text" rows="3" data-auto-resize placeholder="Enter prompt text"></textarea>
               </label>
+              <button class="secondary-button" type="button" onclick="submitPromptAction(this, 'add_prompt')">Add Prompt</button>
+            </div>
+
+            <div class="prompt-library-enhance">
               <label class="compact-field">
-                <span>Scholarly rewrite</span>
-                <textarea id="editorial-prompt-scholarly" name="editorial_prompt_scholarly" rows="5" data-auto-resize>{{ editorial_prompts.scholarly }}</textarea>
+                <span>Enhance selected prompt</span>
+                <div class="prompt-enhance-inline">
+                  <textarea name="prompt_enhance_instruction" rows="1" data-auto-resize placeholder="One-line enhancement instruction"></textarea>
+                  <button class="secondary-button" type="button" data-loading-label="Enhancing..." onclick="submitEnhancePrompt(this)">Enhance</button>
+                </div>
               </label>
-              <label class="compact-field">
-                <span>Verse-Copy</span>
-                <textarea id="editorial-prompt-copyable" name="editorial_prompt_copyable" rows="5" data-auto-resize>{{ editorial_prompts.copyable }}</textarea>
-              </label>
+            </div>
+
+            <div class="prompt-library-actions">
+              <button class="primary-button" type="button" onclick="submitPromptAction(this, 'save_prompts')">Save Prompts</button>
             </div>
           </section>
         </form>
@@ -364,1080 +427,15 @@
 </div>
 
 <div class="workspace-toast" id="workspaceToast" role="status" aria-live="polite"></div>
+{% if prompt_toast_message is defined and prompt_toast_message %}
+<script>
+if (typeof window.showWorkspaceIndicator === 'function') {
+  window.showWorkspaceIndicator({{ prompt_toast_message|tojson }}, {{ (prompt_toast_tone if prompt_toast_tone is defined else 'error')|tojson }});
+}
+</script>
+{% endif %}
 
 <script>
-function autoResize(el) {
-  if (!el || el.tagName.toLowerCase() !== 'textarea') return;
-  if (!el.matches('.verse-editor-textarea, [data-inline-format-field], [data-auto-resize]')) return;
-
-  var setHeight = function(target) {
-    target.style.height = 'auto';
-    target.style.height = target.scrollHeight + 'px';
-  };
-
-  // Initial set
-  setHeight(el);
-
-  if (el.dataset.autoResizeBound) return;
-  el.dataset.autoResizeBound = '1';
-
-  el.addEventListener('input', function() {
-    var scrollLeft = window.scrollX || window.pageXOffset;
-    var scrollTop = window.scrollY || window.pageYOffset;
-    setHeight(this);
-    window.scrollTo(scrollLeft, scrollTop);
-  });
-}
-
-function findSupportFormatField(trigger) {
-  var form = trigger.closest('form');
-  if (!form) return null;
-  var active = document.activeElement;
-  if (active && form.contains(active) && active.matches('[data-inline-format-field]')) {
-    return active;
-  }
-  return form.querySelector('[data-inline-format-default]') || form.querySelector('[data-inline-format-field]');
-}
-function applySupportFormat(trigger, kind) {
-  var field = findSupportFormatField(trigger);
-  if (!field || typeof field.value !== 'string') return;
-
-  var wrapOpen = '';
-  var wrapClose = '';
-  var placeholder = '';
-  var insertText = '';
-
-  if (kind === 'italic') {
-    wrapOpen = '<i>';
-    wrapClose = '</i>';
-    placeholder = 'text';
-  } else if (kind === 'bold') {
-    wrapOpen = '<strong>';
-    wrapClose = '</strong>';
-    placeholder = 'text';
-  } else {
-    return;
-  }
-
-  var start = typeof field.selectionStart === 'number' ? field.selectionStart : field.value.length;
-  var end = typeof field.selectionEnd === 'number' ? field.selectionEnd : field.value.length;
-  var before = field.value.slice(0, start);
-  var selected = field.value.slice(start, end);
-  var after = field.value.slice(end);
-  var replacement = insertText;
-  var selectionStart = start;
-  var selectionEnd = start;
-
-  if (!insertText) {
-    var body = selected || placeholder;
-    replacement = wrapOpen + body + wrapClose;
-    if (selected) {
-      selectionStart = start + replacement.length;
-      selectionEnd = selectionStart;
-    } else {
-      selectionStart = start + wrapOpen.length;
-      selectionEnd = selectionStart + body.length;
-    }
-  } else {
-    selectionStart = start + replacement.length;
-    selectionEnd = selectionStart;
-  }
-
-  field.value = before + replacement + after;
-  field.focus();
-  if (typeof field.setSelectionRange === 'function') {
-    field.setSelectionRange(selectionStart, selectionEnd);
-  }
-  field.dispatchEvent(new Event('input', { bubbles: true }));
-}
-function escapeSupportHtml(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-function normalizeSupportInlineMarkup(text) {
-  return String(text || '')
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n')
-    .replace(/(?<!\*)\*\*([^*\n][^*]*?)\*\*(?!\*)/g, '<strong>$1</strong>')
-    .replace(/(?<!\*)\*([^*\n][^*]*?)\*(?!\*)/g, '<em>$1</em>')
-    .replace(/\n/g, '<br>');
-}
-function sanitizeSupportInlineMarkup(text) {
-  var normalized = normalizeSupportInlineMarkup(text);
-  var doc = new DOMParser().parseFromString('<div>' + normalized + '</div>', 'text/html');
-  var allowed = { i: true, em: true, b: true, strong: true, sup: true, sub: true, br: true };
-  var blocked = { script: true, style: true };
-
-  function renderNode(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      return escapeSupportHtml(node.textContent || '');
-    }
-    if (node.nodeType !== Node.ELEMENT_NODE) {
-      return '';
-    }
-    var tag = node.tagName.toLowerCase();
-    if (blocked[tag]) {
-      return '';
-    }
-    if (tag === 'br' && allowed[tag]) {
-      return '<br>';
-    }
-    var inner = '';
-    Array.prototype.forEach.call(node.childNodes, function(child) {
-      inner += renderNode(child);
-    });
-    if (!allowed[tag]) {
-      return inner;
-    }
-    return '<' + tag + '>' + inner + '</' + tag + '>';
-  }
-
-  var root = doc.body.firstElementChild;
-  if (!root) return '';
-  var html = '';
-  Array.prototype.forEach.call(root.childNodes, function(child) {
-    html += renderNode(child);
-  });
-  return html;
-}
-function plainSupportInlineMarkup(text) {
-  var container = document.createElement('div');
-  container.innerHTML = sanitizeSupportInlineMarkup(text);
-  return (container.textContent || '').replace(/\s+/g, ' ').trim();
-}
-function syncSupportComposerPreview(form) {
-  if (!form) return;
-  form.querySelectorAll('[data-inline-preview-panel]').forEach(function(panel) {
-    var sourceName = panel.getAttribute('data-preview-source');
-    var source = sourceName ? form.querySelector('[name="' + sourceName + '"]') : null;
-    var htmlTarget = panel.querySelector('[data-inline-preview-html]');
-    if (!source || !htmlTarget) return;
-    var previewHtml = sanitizeSupportInlineMarkup(source.value || '');
-    if (!plainSupportInlineMarkup(source.value || '')) {
-      panel.hidden = true;
-      htmlTarget.innerHTML = '';
-      return;
-    }
-    htmlTarget.innerHTML = previewHtml;
-    panel.hidden = false;
-  });
-}
-function initSupportFormattingTools() {
-  document.querySelectorAll('.support-form').forEach(function(form) {
-    if (form.dataset.inlinePreviewBound === '1') {
-      syncSupportComposerPreview(form);
-      return;
-    }
-    form.dataset.inlinePreviewBound = '1';
-    form.querySelectorAll('[data-inline-format-field]').forEach(function(field) {
-      field.addEventListener('input', function() {
-        syncSupportComposerPreview(form);
-      });
-    });
-    syncSupportComposerPreview(form);
-  });
-}
-document.addEventListener('change', function(e) {
-  if (e.target.id === 'study-font-size') {
-    localStorage.setItem('studyFontSize', e.target.value);
-    applyStudyFontSize(e.target.value);
-  }
-});
-function applyStudyFontSize(px) {
-  var el = document.getElementById('study-blocks');
-  if (el) {
-    el.style.fontSize = px + 'px';
-    el.querySelectorAll('.chunk-block-body, .chunk-block-gloss, .translation-verse-text, .translation-verse-num, .lexical-summary').forEach(function(b) { b.style.fontSize = px + 'px'; });
-  }
-  var analysis = document.getElementById('study-word-analysis');
-  if (analysis) {
-    analysis.style.fontSize = px + 'px';
-    analysis.querySelectorAll('.word-choice-line, .word-stat-label').forEach(function(b) { b.style.fontSize = px + 'px'; });
-    analysis.querySelectorAll('.word-choice-sources').forEach(function(b) { b.style.fontSize = Math.max(10, Math.round(parseInt(px, 10) * 0.86)) + 'px'; });
-  }
-}
-
-/* ── Study verse filter ── */
-function parseVerseSpec(spec) {
-  var verses = [];
-  var parts = spec.split(',');
-  for (var i = 0; i < parts.length; i++) {
-    var part = parts[i].trim();
-    if (!part) continue;
-    if (part.indexOf('-') !== -1) {
-      var dashIdx = part.indexOf('-');
-      var start = parseInt(part.substring(0, dashIdx).trim(), 10);
-      var end = parseInt(part.substring(dashIdx + 1).trim(), 10);
-      if (!isNaN(start) && !isNaN(end) && start > 0 && end > 0) {
-        var lo = Math.min(start, end), hi = Math.max(start, end);
-        for (var v = lo; v <= hi; v++) verses.push(v);
-      }
-    } else {
-      var v = parseInt(part, 10);
-      if (!isNaN(v) && v > 0) verses.push(v);
-    }
-  }
-  return verses;
-}
-
-function applyStudyVerseFilter() {
-  var input = document.getElementById('study-verse-filter');
-  if (!input) return;
-  var spec = input.value.trim();
-  if (!spec) { clearStudyVerseFilter(); return; }
-  localStorage.setItem('studyVerseFilter', spec);
-  var allowed = parseVerseSpec(spec);
-  if (allowed.length === 0) return;
-  var allowedSet = {};
-  for (var i = 0; i < allowed.length; i++) allowedSet[allowed[i]] = true;
-
-  var sheet = document.getElementById('study-blocks');
-  if (!sheet) return;
-  var chunkStart = parseInt(sheet.getAttribute('data-chunk-start') || '0', 10);
-  var chunkEnd = parseInt(sheet.getAttribute('data-chunk-end') || '0', 10);
-
-  var blocks = sheet.querySelectorAll('.chunk-block');
-  for (var i = 0; i < blocks.length; i++) {
-    var block = blocks[i];
-    // Translation blocks: check individual verse rows
-    if (block.classList.contains('translation-block')) {
-      var verseRows = block.querySelectorAll('.translation-verse-row');
-      var anyVisible = false;
-      for (var j = 0; j < verseRows.length; j++) {
-        var vr = verseRows[j];
-        var vNum = parseInt(vr.getAttribute('data-verse') || '0', 10);
-        var show = (vNum in allowedSet);
-        vr.style.display = show ? '' : 'none';
-        if (show) anyVisible = true;
-      }
-      // Also show the block header if any verse is visible
-      block.style.display = anyVisible ? '' : 'none';
-    } else {
-      // Original language blocks: show matching verse rows, hide the rest.
-      var verseRows = block.querySelectorAll('.translation-verse-row[data-verse]');
-      var showBlock = false;
-      for (var j = 0; j < verseRows.length; j++) {
-        var vr = verseRows[j];
-        var vNum = parseInt(vr.getAttribute('data-verse') || '0', 10);
-        var show = (vNum in allowedSet);
-        vr.style.display = show ? '' : 'none';
-        if (show) showBlock = true;
-      }
-      block.style.display = showBlock ? '' : 'none';
-    }
-  }
-  document.querySelectorAll('#study-word-analysis .word-analysis-verse[data-verse]').forEach(function(verseBlock) {
-    var vNum = parseInt(verseBlock.getAttribute('data-verse') || '0', 10);
-    verseBlock.style.display = (vNum in allowedSet) ? '' : 'none';
-  });
-  syncPromptEngineeringDraftAvailability();
-  updatePromptEngineeringPreview();
-}
-
-function clearStudyVerseFilter() {
-  var input = document.getElementById('study-verse-filter');
-  if (input) input.value = '';
-  localStorage.removeItem('studyVerseFilter');
-  var sheet = document.getElementById('study-blocks');
-  if (!sheet) return;
-  var blocks = sheet.querySelectorAll('.chunk-block');
-  for (var i = 0; i < blocks.length; i++) {
-    blocks[i].style.display = '';
-    var verseRows = blocks[i].querySelectorAll('.translation-verse-row');
-    for (var j = 0; j < verseRows.length; j++) {
-      verseRows[j].style.display = '';
-    }
-  }
-  document.querySelectorAll('#study-word-analysis .word-analysis-verse[data-verse]').forEach(function(verseBlock) {
-    verseBlock.style.display = '';
-  });
-  syncPromptEngineeringDraftAvailability();
-  updatePromptEngineeringPreview();
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { hideJsonPreview(); hideGlossTooltip(); }
-  if (e.key === 'Enter' && e.target && e.target.id === 'study-verse-filter') {
-    e.preventDefault();
-    applyStudyVerseFilter();
-  }
-});
-
-// Gloss tooltip + copy
-var glossTipEl = null;
-var glossTipTimer = null;
-var glossTipHideTimer = null;
-
-function initGlossTooltips() {
-  document.querySelectorAll('.gloss-word').forEach(function(el) {
-    el.removeEventListener('mouseenter', onGlossEnter);
-    el.removeEventListener('mouseleave', onGlossLeave);
-    el.addEventListener('mouseenter', onGlossEnter);
-    el.addEventListener('mouseleave', onGlossLeave);
-  });
-}
-
-function onGlossEnter(e) {
-  clearTimeout(glossTipHideTimer);
-  if (glossTipTimer) return; // already showing
-  var el = e.target.closest('.gloss-word');
-  if (!el) return;
-  glossTipTimer = setTimeout(function() {
-    glossTipTimer = null;
-    showGlossTooltip(el, e);
-  }, 350); // 350ms delay before appearing
-}
-
-function onGlossLeave() {
-  clearTimeout(glossTipTimer);
-  glossTipTimer = null;
-  // Grace period before hiding so user can move mouse to tooltip
-  glossTipHideTimer = setTimeout(hideGlossTooltip, 600);
-}
-
-function showGlossTooltip(el, e) {
-  hideGlossTooltip();
-  var surface = el.dataset.surface || '';
-  var gloss = el.dataset.gloss || '';
-  var isHeb = el.closest('.chunk-block-body')?.classList.contains('hebrew');
-  glossTipEl = document.createElement('div');
-  glossTipEl.className = 'gloss-tooltip';
-  var surfaceEl = document.createElement('div');
-  surfaceEl.className = 'gloss-tooltip-surface' + (isHeb ? ' hebrew' : '');
-  surfaceEl.textContent = surface;
-  var metaEl = document.createElement('div');
-  metaEl.className = 'gloss-tooltip-meta';
-  var glossEl = document.createElement('span');
-  glossEl.className = 'gloss-tooltip-gloss';
-  glossEl.textContent = gloss;
-  var copyBtn = document.createElement('button');
-  copyBtn.className = 'gloss-tooltip-copy';
-  copyBtn.type = 'button';
-  copyBtn.textContent = 'Copy';
-  copyBtn.addEventListener('click', function() {
-    copyGlossWord(copyBtn, surface);
-  });
-  metaEl.appendChild(glossEl);
-  metaEl.appendChild(copyBtn);
-  glossTipEl.appendChild(surfaceEl);
-  glossTipEl.appendChild(metaEl);
-  // Keep alive while hovering tooltip itself
-  glossTipEl.addEventListener('mouseenter', function() { clearTimeout(glossTipHideTimer); });
-  glossTipEl.addEventListener('mouseleave', function() {
-    glossTipHideTimer = setTimeout(hideGlossTooltip, 300);
-  });
-  document.body.appendChild(glossTipEl);
-  positionGlossTooltip(el);
-}
-
-function hideGlossTooltip() {
-  clearTimeout(glossTipHideTimer);
-  if (glossTipEl) { glossTipEl.remove(); glossTipEl = null; }
-}
-
-function positionGlossTooltip(el) {
-  if (!glossTipEl) return;
-  var rect = el.getBoundingClientRect();
-  var tipRect = glossTipEl.getBoundingClientRect();
-  var x = rect.left;
-  var y = rect.bottom + 6;
-  if (x + tipRect.width > window.innerWidth - 10) x = window.innerWidth - tipRect.width - 10;
-  if (y + tipRect.height > window.innerHeight - 10) y = rect.top - tipRect.height - 6;
-  if (y < 10) y = 10;
-  glossTipEl.style.left = x + 'px';
-  glossTipEl.style.top = y + 'px';
-}
-function copyGlossWord(btn, text) {
-  writeClipboardText(text).then(function() {
-    btn.textContent = '✓';
-    sessionStorage.setItem('lastGlossCopied', text);
-    try { showGlossCopiedIndicator(text); } catch (err) { console.warn('Copied indicator failed', err); }
-    setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
-  }, function() {
-    btn.textContent = 'Failed';
-  });
-}
-function showGlossCopiedIndicator(text) {
-  showWorkspaceIndicator('Copied: ' + text.substring(0, 30) + (text.length > 30 ? '…' : ''));
-}
-function showWorkspaceIndicator(message, tone) {
-  if (window.TTTInteractions && window.TTTInteractions.toast) {
-    window.TTTInteractions.toast(message, tone || 'info');
-    return;
-  }
-  var indicator = document.getElementById('workspaceToast');
-  if (!indicator) return;
-  indicator.className = 'workspace-toast is-visible is-' + (tone || 'info');
-  indicator.textContent = message;
-  clearTimeout(showWorkspaceIndicator._timer);
-  showWorkspaceIndicator._timer = setTimeout(function() {
-    indicator.classList.remove('is-visible');
-  }, 3000);
-}
-function setModelButtonBusy(button, loadingLabel) {
-  if (!button) return null;
-  if (!button.dataset.originalLabel) {
-    button.dataset.originalLabel = button.textContent;
-  }
-  button.disabled = true;
-  button.setAttribute('aria-busy', 'true');
-  button.classList.add('is-loading');
-  button.textContent = loadingLabel || 'Working...';
-  return {
-    restore: function() {
-      button.disabled = false;
-      button.removeAttribute('aria-busy');
-      button.classList.remove('is-loading');
-      button.textContent = button.dataset.originalLabel || button.textContent;
-    }
-  };
-}
-function initModelActionForms() {
-  document.querySelectorAll('.model-action-form').forEach(function(form) {
-    if (form.dataset.modelActionBound === '1') return;
-    form.dataset.modelActionBound = '1';
-    form.addEventListener('submit', function(event) {
-      var submitter = event.submitter;
-      if (!submitter) return;
-      var label = submitter.getAttribute('data-loading-label');
-      if (!label) return;
-      setModelButtonBusy(submitter, label);
-    });
-  });
-}
-
-// Legacy SSE chat was removed; browser chat runs through Chainlit iframe.
-
-function setEditorSaveStatus(state, label) {
-  var status = document.getElementById('editor-save-status');
-  if (!status) return;
-  status.dataset.state = state;
-  status.textContent = label;
-}
-function initEditorAutosave() {
-  var editorForm = document.getElementById('editor-form');
-  if (!editorForm) return;
-  if (editorForm.dataset.autosaveBound === '1') return;
-  editorForm.dataset.autosaveBound = '1';
-  var timer = null;
-  var controller = null;
-  var autosaveUrl = editorForm.getAttribute('data-autosave-url');
-  if (!autosaveUrl) return;
-  function setDraftRevision(value) {
-    var revisionField = editorForm.querySelector('input[name="draft_revision"]');
-    if (!revisionField) return;
-    if (value === null || value === undefined) return;
-    revisionField.value = String(value);
-  }
-  function autosave() {
-    clearTimeout(timer);
-    timer = null;
-    if (controller) controller.abort();
-    controller = new AbortController();
-    setEditorSaveStatus('saving', 'Saving...');
-    fetch(autosaveUrl, {
-      method: 'POST',
-      body: new FormData(editorForm),
-      signal: controller.signal,
-      headers: { 'X-Requested-With': 'fetch' }
-    })
-      .then(function(response) {
-        return response.json().then(function(payload) {
-          if (!response.ok) {
-            var error = new Error((payload && payload.message) || 'Autosave failed.');
-            error.payload = payload || {};
-            error.status = response.status;
-            throw error;
-          }
-          return payload || {};
-        });
-      })
-      .then(function(payload) {
-        setDraftRevision(payload.draft_revision);
-        setEditorSaveStatus('saved', 'Saved ✓');
-      })
-      .catch(function(err) {
-        if (err.name === 'AbortError') return;
-        var payload = err.payload || {};
-        if (err.status === 409 || payload.code === 'stale_draft_revision') {
-          setDraftRevision(payload.draft_revision);
-          setEditorSaveStatus('error', 'Out of date');
-          showWorkspaceIndicator(payload.message || 'Draft changed in another request.', 'warning');
-          return;
-        }
-        setEditorSaveStatus('error', 'Save failed');
-        showWorkspaceIndicator(err.message || 'Autosave failed.', 'error');
-      });
-  }
-  function scheduleAutosave() {
-    setEditorSaveStatus('dirty', 'Unsaved');
-    clearTimeout(timer);
-    timer = setTimeout(autosave, 900);
-  }
-  editorForm.querySelectorAll('textarea').forEach(function(field) {
-    field.addEventListener('input', scheduleAutosave);
-    field.addEventListener('blur', function() {
-      if (timer) autosave();
-    });
-  });
-}
-function switchEditorialTab(button, tabName) {
-  var form = button.closest('.editorial-form');
-  if (!form) return;
-  form.querySelectorAll('[data-editorial-tab]').forEach(function(tabButton) {
-    tabButton.classList.toggle('is-active', tabButton === button);
-  });
-  form.querySelectorAll('[data-editorial-panel]').forEach(function(panel) {
-    var active = panel.getAttribute('data-editorial-panel') === tabName;
-    panel.hidden = !active;
-    panel.classList.toggle('is-active', active);
-  });
-  requestAnimationFrame(function() {
-    form.querySelectorAll('textarea[data-auto-resize]').forEach(function(field) {
-      autoResize(field);
-    });
-  });
-}
-function currentEditorialPromptValues() {
-  return {
-    grammar: (document.getElementById('editorial-prompt-grammar') || {}).value || '',
-    concise: (document.getElementById('editorial-prompt-concise') || {}).value || '',
-    scholarly: (document.getElementById('editorial-prompt-scholarly') || {}).value || '',
-    copyable: (document.getElementById('editorial-prompt-copyable') || {}).value || ''
-  };
-}
-window.tttPromptEngineeringContexts = window.tttPromptEngineeringContexts || {};
-window.tttPromptEngineeringContextsFetched = false;
-window.tttPromptEngineeringPreviewSeq = 0;
-function promptEngineeringContextMeta() {
-  return [
-    { id: 'prompt-context-draft', key: 'draft', label: 'Draft' },
-    { id: 'prompt-context-filtered', key: 'filtered', label: 'Filtered' },
-    { id: 'prompt-context-avd', key: 'avd', label: 'AVD' },
-    { id: 'prompt-context-hebrew', key: 'hebrew', label: 'Hebrew' },
-    { id: 'prompt-context-hebrew-en', key: 'hebrew-en', label: 'Hebrew Literal' },
-    { id: 'prompt-context-greek', key: 'greek', label: 'Greek' },
-    { id: 'prompt-context-greek-en', key: 'greek-en', label: 'Greek Literal' }
-  ];
-}
-function selectedPromptEngineeringContexts() {
-  return promptEngineeringContextMeta().filter(function(meta) {
-    var cb = document.getElementById(meta.id);
-    return cb && cb.checked;
-  });
-}
-function selectedPromptEngineeringModes() {
-  return Array.from(document.querySelectorAll('[data-prompt-mode]:checked')).map(function(cb) {
-    return {
-      key: cb.value
-    };
-  });
-}
-function promptEngineeringHideLabels() {
-  var cb = document.getElementById('prompt-option-hide-labels');
-  return !!(cb && cb.checked);
-}
-function promptEngineeringPartSeparator(hideLabels) {
-  return hideLabels ? '\n\n---\n\n' : '\n\n';
-}
-function currentStudyVerseFilterSpec() {
-  return (localStorage.getItem('studyVerseFilter') || '').trim();
-}
-function filteredDraftVerseNumbers() {
-  var spec = currentStudyVerseFilterSpec();
-  var parsed = spec ? parseVerseSpec(spec) : [];
-  var seen = {};
-  var verses = [];
-  if (parsed.length) {
-    parsed.forEach(function(v) {
-      if (seen[v]) return;
-      var field = document.querySelector('.verse-editor-textarea[name="verse_' + v + '"]');
-      if (field) {
-        seen[v] = true;
-        verses.push(v);
-      }
-    });
-    return verses;
-  }
-  document.querySelectorAll('.verse-editor-textarea[name^="verse_"]').forEach(function(field) {
-    var match = (field.getAttribute('name') || '').match(/^verse_(\d+)$/);
-    if (!match) return;
-    var v = parseInt(match[1], 10);
-    if (seen[v]) return;
-    if (field) {
-      seen[v] = true;
-      verses.push(v);
-    }
-  });
-  return verses.sort(function(a, b) { return a - b; });
-}
-function syncPromptEngineeringDraftAvailability() {
-  var draftCheck = document.getElementById('prompt-context-draft');
-  if (draftCheck) {
-    var verses = filteredDraftVerseNumbers();
-    var enabled = verses.length > 0;
-    draftCheck.disabled = !enabled;
-    draftCheck.title = enabled ? 'Use draft verses: ' + verses.join(', ') : 'No draft verses are available.';
-    if (!enabled) draftCheck.checked = false;
-  }
-  var filteredCheck = document.getElementById('prompt-context-filtered');
-  if (filteredCheck) {
-    var hasTranslations = !!document.querySelector('#study-blocks .translation-block[data-translation-alias]');
-    filteredCheck.disabled = !hasTranslations;
-    filteredCheck.title = hasTranslations
-      ? 'Use selected Study translations; respects the active verse filter.'
-      : 'Select at least one Study translation first.';
-    if (!hasTranslations) filteredCheck.checked = false;
-  }
-}
-function promptEngineeringAllowedVerseSet() {
-  var spec = currentStudyVerseFilterSpec();
-  var parsed = spec ? parseVerseSpec(spec) : [];
-  if (!parsed.length) return null;
-  var allowed = {};
-  parsed.forEach(function(v) { allowed[v] = true; });
-  return allowed;
-}
-function filterPromptContextByStudyVerses(text) {
-  var allowed = promptEngineeringAllowedVerseSet();
-  if (!allowed) return text;
-  return String(text || '').split(/\r?\n/).filter(function(line) {
-    var match = line.match(/^\s*(\d+)\.\s+/);
-    return match && allowed[parseInt(match[1], 10)];
-  }).join('\n');
-}
-function currentStudySelectedTranslationsPromptText(hideLabels) {
-  var allowed = promptEngineeringAllowedVerseSet();
-  var sourceOrder = {};
-  document.querySelectorAll('[data-study-source-toggle]').forEach(function(input, index) {
-    var alias = (input.value || '').trim();
-    if (alias) sourceOrder[alias] = index;
-  });
-  var blocks = Array.from(document.querySelectorAll('#study-blocks .translation-block[data-translation-alias]'));
-  blocks.sort(function(a, b) {
-    var aAlias = (a.getAttribute('data-translation-alias') || '').trim();
-    var bAlias = (b.getAttribute('data-translation-alias') || '').trim();
-    var aOrder = Object.prototype.hasOwnProperty.call(sourceOrder, aAlias) ? sourceOrder[aAlias] : 9999;
-    var bOrder = Object.prototype.hasOwnProperty.call(sourceOrder, bAlias) ? sourceOrder[bAlias] : 9999;
-    if (aOrder !== bOrder) return aOrder - bOrder;
-    return aAlias.localeCompare(bAlias);
-  });
-  var sections = [];
-  blocks.forEach(function(block) {
-    var alias = (block.getAttribute('data-translation-alias') || '').trim();
-    if (!alias) return;
-    var lines = [];
-    block.querySelectorAll('.translation-verse-row[data-verse]').forEach(function(row) {
-      var verse = parseInt(row.getAttribute('data-verse') || '0', 10);
-      if (!verse || (allowed && !allowed[verse])) return;
-      var textEl = row.querySelector('.translation-verse-text');
-      var text = textEl ? (textEl.textContent || '').trim() : '';
-      if (!text || text === '[no text]') return;
-      lines.push(verse + '. ' + text);
-    });
-    if (lines.length) {
-      sections.push(hideLabels ? lines.join('\n') : alias + ':\n' + lines.join('\n'));
-    }
-  });
-  return sections.join(promptEngineeringPartSeparator(hideLabels));
-}
-function currentDraftPromptText() {
-  var verses = filteredDraftVerseNumbers();
-  if (!verses.length) return '';
-  var lines = [];
-  verses.forEach(function(v) {
-    var field = document.querySelector('.verse-editor-textarea[name="verse_' + v + '"]');
-    if (field && (field.value || '').trim()) {
-      lines.push(v + '. ' + field.value.trim());
-    }
-  });
-  return lines.join('\n');
-}
-function promptEngineeringNeedsFetchedContexts() {
-  return selectedPromptEngineeringContexts().some(function(meta) {
-    return meta.key !== 'draft' && meta.key !== 'filtered';
-  });
-}
-async function ensurePromptEngineeringContexts() {
-  if (window.tttPromptEngineeringContextsFetched || !promptEngineeringNeedsFetchedContexts()) return;
-  var endpoint = window.tttPromptEngineeringEndpoint;
-  if (!endpoint) return;
-  try {
-    var res = await fetch(endpoint);
-    if (res.ok) {
-      window.tttPromptEngineeringContexts = await res.json();
-      window.tttPromptEngineeringContextsFetched = true;
-    }
-  } catch (e) {
-    console.error('Failed to fetch prompt engineering context', e);
-  }
-}
-async function buildPromptEngineeringText() {
-  await ensurePromptEngineeringContexts();
-  var parts = [];
-  var prompts = currentEditorialPromptValues();
-  var copyableText = '';
-  var hideLabels = promptEngineeringHideLabels();
-
-  selectedPromptEngineeringModes().forEach(function(mode) {
-    if (mode.key === 'copyable') {
-      copyableText = (prompts.copyable || 'Output verse(s) in plain text code block.').trim();
-    } else {
-      var text = (prompts[mode.key] || '').trim();
-      if (text) {
-        parts.push(text);
-      }
-    }
-  });
-
-  selectedPromptEngineeringContexts().forEach(function(meta) {
-    var text = '';
-    if (meta.key === 'draft') {
-      text = currentDraftPromptText();
-    } else if (meta.key === 'filtered') {
-      text = currentStudySelectedTranslationsPromptText(hideLabels);
-    } else {
-      text = (window.tttPromptEngineeringContexts || {})[meta.key] || '';
-      text = filterPromptContextByStudyVerses(text);
-    }
-    text = (text || '').trim();
-    if (text) {
-      if (meta.key === 'filtered' || hideLabels) {
-        parts.push(text);
-      } else {
-        parts.push(meta.label + ':\n' + text);
-      }
-    }
-  });
-
-  if (copyableText) {
-    parts.push(copyableText);
-  }
-
-  return parts.join(promptEngineeringPartSeparator(hideLabels));
-}
-function updatePromptEngineeringPreview() {
-  var preview = document.getElementById('prompt-engineering-preview');
-  if (!preview) return;
-  var seq = ++window.tttPromptEngineeringPreviewSeq;
-  buildPromptEngineeringText().then(function(text) {
-    if (seq !== window.tttPromptEngineeringPreviewSeq) return;
-    preview.value = text;
-    preview.dispatchEvent(new Event('input', { bubbles: true }));
-  });
-}
-function initPromptEngineering() {
-  var panel = document.querySelector('.prompt-engineering-panel');
-  if (!panel) return;
-  syncPromptEngineeringDraftAvailability();
-  if (panel.dataset.promptEngineeringBound === '1') {
-    updatePromptEngineeringPreview();
-    return;
-  }
-  panel.dataset.promptEngineeringBound = '1';
-  panel.querySelectorAll('[data-prompt-context], [data-prompt-mode], [data-prompt-option], #editorial-prompt-grammar, #editorial-prompt-concise, #editorial-prompt-scholarly, #editorial-prompt-copyable').forEach(function(el) {
-    el.addEventListener('input', updatePromptEngineeringPreview);
-    el.addEventListener('change', updatePromptEngineeringPreview);
-  });
-  document.querySelectorAll('.verse-editor-textarea').forEach(function(el) {
-    el.addEventListener('input', function() {
-      var draftCheck = document.getElementById('prompt-context-draft');
-      if (draftCheck && draftCheck.checked) updatePromptEngineeringPreview();
-    });
-  });
-  updatePromptEngineeringPreview();
-}
-function clearPromptEngineeringCombined() {
-  document.querySelectorAll('[data-prompt-context], [data-prompt-mode], [data-prompt-option]').forEach(function(cb) {
-    cb.checked = false;
-  });
-  var preview = document.getElementById('prompt-engineering-preview');
-  if (preview) {
-    preview.value = '';
-    preview.dispatchEvent(new Event('input', { bubbles: true }));
-  }
-  syncPromptEngineeringDraftAvailability();
-  showWorkspaceIndicator('Combined prompt cleared.');
-}
-function chunkEditorialEndpoint() {
-  return window.location.pathname.replace(/\/$/, '') + '/editorial/enhance-field';
-}
-function runEnhancementRequest(payload) {
-  var body = new FormData();
-  Object.keys(payload).forEach(function(key) {
-    body.append(key, payload[key]);
-  });
-  var prompts = currentEditorialPromptValues();
-  body.append('editorial_prompt_grammar', prompts.grammar);
-  body.append('editorial_prompt_concise', prompts.concise);
-  body.append('editorial_prompt_scholarly', prompts.scholarly);
-  return fetch(chunkEditorialEndpoint(), { method: 'POST', body: body })
-    .then(function(response) { return response.json().then(function(data) { return { status: response.status, data: data }; }); })
-    .then(function(result) {
-      if (!result.data || !result.data.ok) {
-        throw new Error((result.data && result.data.message) || 'Enhancement failed.');
-      }
-      return result.data;
-    });
-}
-function enhanceEditorVerse(btn, mode) {
-  var row = btn.closest('.verse-editor-row');
-  var field = row ? row.querySelector('.verse-editor-textarea') : null;
-  if (!field) return;
-  var busy = setModelButtonBusy(btn, '...');
-  runEnhancementRequest({
-    mode: mode,
-    context_label: 'Bible draft verse',
-    text: field.value || ''
-  }).then(function(data) {
-    field.value = data.text || '';
-    field.dispatchEvent(new Event('input', { bubbles: true }));
-    showWorkspaceIndicator((data.label || 'Rewrite') + ' applied.');
-  }).catch(function(err) {
-    showWorkspaceIndicator(err.message || 'Enhancement failed.');
-  }).finally(function() {
-    if (busy) busy.restore();
-  });
-}
-function enhanceSupportField(trigger, mode) {
-  var field = findSupportFormatField(trigger);
-  if (!field) return;
-  var form = trigger.closest('form');
-  if (!form) return;
-  var customPromptField = form.querySelector('[name="justify_custom_prompt"], [name="footnote_custom_prompt"]');
-  var contextLabel = form.querySelector('[name="reason"]')
-    ? 'translation justification prose'
-    : 'translation footnote prose';
-  var busy = setModelButtonBusy(trigger, trigger.getAttribute('data-loading-label') || 'Working...');
-  runEnhancementRequest({
-    mode: mode,
-    context_label: contextLabel,
-    text: field.value || '',
-    custom_prompt: customPromptField ? customPromptField.value || '' : ''
-  }).then(function(data) {
-    field.value = data.text || '';
-    field.dispatchEvent(new Event('input', { bubbles: true }));
-    showWorkspaceIndicator((data.label || 'Rewrite') + ' applied.');
-  }).catch(function(err) {
-    showWorkspaceIndicator(err.message || 'Enhancement failed.');
-  }).finally(function() {
-    if (busy) busy.restore();
-  });
-}
-function showCopySuccess(btn) {
-  if (!btn) return;
-  if (!btn.dataset.originalLabel) {
-    btn.dataset.originalLabel = btn.textContent;
-  }
-  btn.textContent = '✓';
-  btn.classList.add('copied');
-  setTimeout(function() {
-    btn.textContent = btn.dataset.originalLabel || '⧉';
-    btn.classList.remove('copied');
-  }, 1400);
-}
-function writeClipboardText(text) {
-  var value = String(text || '');
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-    return navigator.clipboard.writeText(value).catch(function() {
-      return fallbackWriteClipboardText(value);
-    });
-  }
-  return fallbackWriteClipboardText(value);
-}
-function fallbackWriteClipboardText(text) {
-  return new Promise(function(resolve, reject) {
-    var textarea = document.createElement('textarea');
-    textarea.value = String(text || '');
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.left = '-9999px';
-    textarea.style.top = '0';
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-    try {
-      var ok = document.execCommand('copy');
-      textarea.remove();
-      ok ? resolve() : reject(new Error('Copy command failed.'));
-    } catch (err) {
-      textarea.remove();
-      reject(err);
-    }
-  });
-}
-function copyPromptEngineeringCombined(btn) {
-  buildPromptEngineeringText().then(function(text) {
-    return writeClipboardText(text || '').then(function() {
-      showCopySuccess(btn);
-      showWorkspaceIndicator('Combined prompt copied.');
-    });
-  }).catch(function() {
-    showWorkspaceIndicator('Copy failed.');
-  });
-}
-function injectPromptEngineeringIntoChat() {
-  buildPromptEngineeringText().then(function(text) {
-    if (!text.trim()) {
-      showWorkspaceIndicator('Add input or select context before injecting.');
-      return;
-    }
-    var iframe = document.querySelector('.chainlit-container iframe');
-    if (!iframe) {
-      showWorkspaceIndicator('Open the chat panel before injecting.');
-      return;
-    }
-    var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
-    var textarea = innerDoc ? innerDoc.querySelector('#chat-input') : null;
-    if (!textarea) {
-      showWorkspaceIndicator('Chat input is still loading.');
-      return;
-    }
-    var ownerWindow = textarea.ownerDocument && textarea.ownerDocument.defaultView ? textarea.ownerDocument.defaultView : window;
-    var nativeSetter = Object.getOwnPropertyDescriptor(ownerWindow.HTMLTextAreaElement.prototype, 'value').set;
-    nativeSetter.call(textarea, text);
-    textarea.dispatchEvent(new Event('input', { bubbles: true }));
-    textarea.focus();
-    showWorkspaceIndicator('Combined prompt injected into chat.');
-  }).catch(function() {
-    showWorkspaceIndicator('Inject failed.');
-  });
-}
-function copyTranslationVerse(btn, text) {
-  writeClipboardText(text).then(function() {
-    btn.textContent = '✓';
-    btn.classList.add('copied');
-    try { showGlossCopiedIndicator(text); } catch (err) { console.warn('Copied indicator failed', err); }
-    setTimeout(function() {
-      btn.textContent = 'Copy';
-      btn.classList.remove('copied');
-    }, 1500);
-  }, function() {
-    btn.textContent = 'Failed';
-  });
-}
-function initTranslationCopyButtons() {
-  if (document.body.dataset.translationCopyBound === '1') return;
-  document.body.dataset.translationCopyBound = '1';
-  document.body.addEventListener('click', function(event) {
-    var btn = event.target.closest('.translation-copy-btn[data-copy-text]');
-    if (!btn) return;
-    copyTranslationVerse(btn, btn.dataset.copyText || '');
-  });
-}
-function initTranslationApplyButtons() {
-  if (document.body.dataset.translationApplyBound === '1') return;
-  document.body.dataset.translationApplyBound = '1';
-  document.body.addEventListener('click', function(event) {
-    var btn = event.target.closest('.translation-apply-btn[data-translation-alias]');
-    if (!btn) return;
-    applyStudyTranslationToDraft(btn);
-  });
-}
-function applyStudyTranslationToDraft(btn) {
-  var alias = btn.dataset.translationAlias || '';
-  var block = btn.closest('.translation-block');
-  var form = document.getElementById('editor-form');
-  var editorMode = form ? form.querySelector('input[name="editor_mode"]') : null;
-  if (!alias || !block || !form) return;
-  if (!editorMode || editorMode.value !== 'draft') {
-    showWorkspaceIndicator('Switch to Draft before loading a translation into the draft buffer.');
-    return;
-  }
-  var rows = block.querySelectorAll('.translation-verse-row[data-verse]');
-  if (!rows.length) return;
-
-  var scrollLeft = window.scrollX || window.pageXOffset;
-  var scrollTop = window.scrollY || window.pageYOffset;
-  var applied = 0;
-
-  rows.forEach(function(row) {
-    var verse = row.dataset.verse || '';
-    if (!verse) return;
-    var target = form.querySelector('textarea[name="verse_' + verse + '"]');
-    if (!target) return;
-    var textEl = row.querySelector('.translation-verse-text');
-    var nextText = textEl ? textEl.textContent : '';
-    if (nextText === '[no text]') nextText = '';
-    target.value = nextText;
-    target.dispatchEvent(new Event('input', { bubbles: true }));
-    applied += 1;
-  });
-
-  window.scrollTo(scrollLeft, scrollTop);
-  if (!applied) return;
-
-  btn.textContent = 'Applied';
-  btn.classList.add('applied');
-  showWorkspaceIndicator('Loaded ' + alias + ' into ' + applied + ' draft verse' + (applied === 1 ? '' : 's') + '.');
-  setTimeout(function() {
-    btn.textContent = 'Use In Draft';
-    btn.classList.remove('applied');
-  }, 1600);
-}
-
-function generateEpubDownload(btn) {
-  if (!btn || btn.disabled) return;
-  var originalLabel = btn.dataset.label || btn.textContent;
-  btn.dataset.label = originalLabel;
-  btn.disabled = true;
-  btn.setAttribute('aria-busy', 'true');
-  btn.classList.add('is-loading');
-  btn.textContent = 'Generating...';
-  showWorkspaceIndicator('Generating EPUB...', 'info');
-
-  fetch('/epub/generate-download', {
-    method: 'POST',
-    headers: {
-      'X-Requested-With': 'fetch'
-    }
-  })
-    .then(function(response) {
-      var contentType = response.headers.get('content-type') || '';
-      if (!response.ok || contentType.indexOf('application/epub+zip') === -1) {
-        if (contentType.indexOf('application/json') !== -1) {
-          return response.json().then(function(payload) {
-            throw new Error(payload.message || 'EPUB generation failed.');
-          });
-        }
-        throw new Error('EPUB generation failed.');
-      }
-      return Promise.all([Promise.resolve(response), response.blob()]);
-    })
-    .then(function(parts) {
-      var response = parts[0];
-      var blob = parts[1];
-      var disposition = response.headers.get('content-disposition') || '';
-      var match = disposition.match(/filename="?([^";]+)"?/i);
-      var filename = match ? match[1] : 'translation.epub';
-      var url = window.URL.createObjectURL(blob);
-      var link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(function() {
-        window.URL.revokeObjectURL(url);
-      }, 1000);
-      showWorkspaceIndicator('Downloaded ' + filename + '.', 'success');
-    })
-    .catch(function(err) {
-      showWorkspaceIndicator(err.message || 'EPUB generation failed.', 'error');
-    })
-    .finally(function() {
-      btn.disabled = false;
-      btn.removeAttribute('aria-busy');
-      btn.classList.remove('is-loading');
-      btn.textContent = originalLabel;
-    });
-}
-
-// Activity toast auto-hide with hover pause
 (function() {
   var toast = document.querySelector('.activity-ribbon');
   if (!toast) return;

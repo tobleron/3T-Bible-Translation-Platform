@@ -128,6 +128,7 @@
   function addCopyButton(container) {
     if (!container) return;
     applyUserPromptClass(container);
+    if (!container.classList.contains('ttt-chainlit-user-prompt')) return;
     if (container.dataset.tttCopyBound === '1') return;
     var text = messageText(container);
     if (!text || text.length < 2) return;
@@ -161,6 +162,14 @@
     container.appendChild(button);
   }
 
+  function removeNonUserCopyButtons() {
+    document.querySelectorAll('.' + COPY_BUTTON_CLASS).forEach(function (button) {
+      if (!button.closest('.ttt-chainlit-user-prompt')) {
+        button.remove();
+      }
+    });
+  }
+
   function applyUserPromptClass(container) {
     var messageFrame = container.closest('[data-step-type]');
     if (messageFrame) {
@@ -172,11 +181,7 @@
   }
 
   function candidateMessages() {
-    var selectors = [
-      '[data-step-type]',
-      '[data-test*="message"]'
-    ];
-    var nodes = Array.prototype.slice.call(document.querySelectorAll(selectors.join(',')));
+    var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-step-type="user_message"]'));
     nodes = nodes.map(function (node) {
       return messageBodyHost(node);
     }).filter(Boolean);
@@ -196,25 +201,13 @@
       var userBubble = frame.querySelector('.bg-accent.rounded-3xl')
         || frame.querySelector('[class*="bg-accent"][class*="rounded-"]');
       if (userBubble && messageText(userBubble).length >= 2) return userBubble;
+      return null;
     }
-
-    var bodySelectors = [
-      '.markdown-body',
-      '[class*="markdown"]',
-      '[data-testid*="content"]',
-      '[data-test*="content"]'
-    ];
-    for (var i = 0; i < bodySelectors.length; i += 1) {
-      var body = node.querySelector(bodySelectors[i]);
-      if (body && messageText(body).length >= 2) return body;
-    }
-    if (node.children.length === 1 && messageText(node.firstElementChild).length >= 2) {
-      return node.firstElementChild;
-    }
-    return node;
+    return null;
   }
 
   function enhanceMessages() {
+    removeNonUserCopyButtons();
     candidateMessages().forEach(addCopyButton);
   }
 

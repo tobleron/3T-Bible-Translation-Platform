@@ -28,6 +28,7 @@ from ttt_core.utils import normalize_book_key, write_json_atomic
 
 from .app import WorkbenchApp
 from .errors import ModelDiscoveryError, ProviderRequestError
+from .services.epub_service import EpubService
 from ttt_workbench.repositories import restore_backup_set
 
 from .chunk_catalog import ChunkCatalogRepository
@@ -162,8 +163,10 @@ class BrowserWorkbench(WorkbenchApp):
         ),
         "copyable": "Output verse(s) in plain text code block.",
     }
+    _prompt_id_re = re.compile(r"[^a-z0-9]+")
 
-    def __init__(self) -> None:
+    def __init__(self, *, session_id: str | None = None) -> None:
+        self._browser_session_id = session_id
         llm_override, fake_mode = self._build_llm_override()
         self.fake_llm_mode = fake_mode
         super().__init__(llm_override=llm_override)
@@ -172,14 +175,43 @@ class BrowserWorkbench(WorkbenchApp):
         self.chunk_catalog_repo = ChunkCatalogRepository(self.paths, self.bible_repo)
         self.settings_file = self.runtime_state_dir / "web_settings.json"
         self.chunk_sessions_file = self.runtime_state_dir / "chunk_sessions.json"
+        self.prompt_library_file = self.paths.state_dir / "prompt_library.json"
         self.chunk_sessions = self._load_chunk_sessions()
         self.web_settings = self._load_web_settings()
+        self.prompt_library = self._load_prompt_library()
         self._last_model_refresh = 0
         self._model_refresh_interval = 300  # 5 minutes
         self._source_support_cache: dict[str, str] = {}
         self._source_availability_cache: dict[tuple[str, str, int], bool] = {}
         self.llm.base_url = self.resolve_active_base_url(refresh=True)
         self._sanitize_browser_state()
+        self.epub_service = EpubService(
+            repo_root=self.paths.repo_root,
+            output_dir=self.paths.output_dir,
+            preferred_python=None,
+        )
+        # Navigator / summary caches invalidated by directory mtimes
+        self._navigator_catalog_cache: tuple[float, dict[str, Any]] | None = None
+        self._project_summary_cache: tuple[float, dict[str, Any]] | None = None
+
+    def _catalog_cache_key(self) -> float:
+        """Return a cache-busting timestamp based on data directory mtimes."""
+        try:
+            bible_mtime = self.paths.bible_dir.stat().st_mtime
+        except OSError:
+            bible_mtime = 0.0
+        try:
+            chunk_mtime = self.chunk_catalog_repo.chapter_dir.stat().st_mtime
+        except OSError:
+            chunk_mtime = 0.0
+        try:
+            source_mtime = max(
+                (p.stat().st_mtime for p in self.paths.source_dirs if p.exists()),
+                default=0.0,
+            )
+        except OSError:
+            source_mtime = 0.0
+        return max(bible_mtime, chunk_mtime, source_mtime)
 
     @staticmethod
     def _build_llm_override() -> tuple[object | None, bool]:
@@ -193,10 +225,15 @@ class BrowserWorkbench(WorkbenchApp):
 
     def _configure_runtime_storage(self) -> None:
         self.runtime_state_dir = self.paths.state_dir
-        if not self.fake_llm_mode:
-            return
-        self.runtime_state_dir = self.paths.state_dir / "browser_fake_mode"
-        self.runtime_state_dir.mkdir(parents=True, exist_ok=True)
+        if self._browser_session_id:
+            self.runtime_state_dir = self.paths.state_dir / "sessions" / self._browser_session_id
+            self.runtime_state_dir.mkdir(parents=True, exist_ok=True)
+        if self.fake_llm_mode:
+            suffix = "browser_fake_mode"
+            if self._browser_session_id:
+                suffix = f"browser_fake_mode_{self._browser_session_id}"
+            self.runtime_state_dir = self.paths.state_dir / suffix
+            self.runtime_state_dir.mkdir(parents=True, exist_ok=True)
         fake_backups = self.runtime_state_dir / "backups"
         fake_backups.mkdir(parents=True, exist_ok=True)
         self.paths.backups_dir = fake_backups
@@ -523,6 +560,138 @@ class BrowserWorkbench(WorkbenchApp):
         session["focus_end"] = self.state.focus_end
         self._save_chunk_sessions()
 
+    def _chat_context_selections(self) -> dict[str, Any]:
+        """Return persisted chat context selections for the current chunk session."""
+        session = self.current_chunk_session()
+        return {
+            "selections": list(session.get("chat_context_selections", [])),
+            "modes": list(session.get("chat_context_modes", [])),
+            "hide_labels": bool(session.get("chat_context_hide_labels", False)),
+        }
+
+    def chat_context_selection_payload(self) -> dict[str, Any]:
+        """Return persisted prompt-engineering context choices for template rendering."""
+        return self._chat_context_selections()
+
+    def save_chat_context_selections(
+        self, selections: list[str], modes: list[str], hide_labels: bool
+    ) -> None:
+        """Persist chat context selections to the current chunk session."""
+        session = self.current_chunk_session()
+        clean_selections = [
+            s for s in selections
+            if isinstance(s, str) and s.strip().lower() in {
+                "draft", "filtered", "avd", "hebrew", "hebrew-en", "greek", "greek-en"
+            }
+        ]
+        known_prompt_ids = {
+            str(item.get("id", "")).strip().lower()
+            for item in self.prompt_library_entries(include_disabled=False)
+        }
+        clean_modes = [
+            m for m in modes
+            if isinstance(m, str) and m.strip().lower() in known_prompt_ids
+        ]
+        session["chat_context_selections"] = clean_selections
+        session["chat_context_modes"] = clean_modes
+        session["chat_context_hide_labels"] = bool(hide_labels)
+        self._save_chunk_sessions()
+
+    def build_chat_context_prompt(self) -> str:
+        """Assemble the chat context prompt from persisted selections and current state."""
+        cfg = self._chat_context_selections()
+        selections = cfg["selections"]
+        modes = cfg["modes"]
+        hide_labels = cfg["hide_labels"]
+        if not selections and not modes:
+            return ""
+
+        prompt_map = self.prompt_library_map(include_disabled=False)
+        parts: list[str] = []
+        copyable_text = ""
+
+        for mode in modes:
+            key = mode.strip().lower()
+            if key == "copyable":
+                copyable_text = prompt_map.get("copyable", "Output verse(s) in plain text code block.").strip()
+            else:
+                text = prompt_map.get(key, "").strip()
+                if text:
+                    parts.append(text)
+
+        start_verse = self.state.chunk_start or 1
+        end_verse = self.state.chunk_end or start_verse
+
+        for sel in selections:
+            key = sel.strip().lower()
+            text = ""
+            label = key.capitalize()
+            if key == "draft":
+                lines = []
+                for verse in range(start_verse, end_verse + 1):
+                    draft = self.state.draft_chunk.get(str(verse), "").strip()
+                    if draft:
+                        lines.append(f"{verse}. {draft}")
+                text = "\n".join(lines)
+            elif key == "filtered":
+                # Build from selected sources in study panel
+                lines = []
+                for source in self.selected_sources():
+                    source_lines = []
+                    for verse in range(start_verse, end_verse + 1):
+                        vtext = self.source_repo.verse_text(source, self.state.book or "", self.state.chapter or 0, verse).strip()
+                        if vtext:
+                            source_lines.append(f"{verse}. {vtext}")
+                    if source_lines:
+                        lines.append(f"{source}:\n" + "\n".join(source_lines))
+                text = "\n\n".join(lines)
+            elif key in {"hebrew", "greek"}:
+                blocks = self.chunk_study_blocks()
+                for block in blocks:
+                    if str(block.get("kind", "")).strip().lower() == key:
+                        text = str(block.get("text", "")).strip()
+                        label = str(block.get("label", key)).strip() or label
+                        break
+            elif key == "avd":
+                lines = []
+                for verse in range(start_verse, end_verse + 1):
+                    vtext = self.source_repo.verse_text("AVD", self.state.book or "", self.state.chapter or 0, verse).strip()
+                    if vtext:
+                        lines.append(f"{verse}. {vtext}")
+                text = "\n".join(lines)
+            elif key in {"hebrew-en", "greek-en"}:
+                source_kind = key.replace("-en", "")
+                blocks = self.chunk_study_blocks()
+                for block in blocks:
+                    if str(block.get("kind", "")).strip().lower() == source_kind:
+                        gloss_lines = block.get("gloss_lines") or []
+                        en_lines = []
+                        for gloss_line in gloss_lines:
+                            verse = gloss_line.get("verse")
+                            words = [
+                                str(t.get("gloss", "")).strip()
+                                for t in gloss_line.get("tokens", [])
+                                if str(t.get("gloss", "")).strip()
+                            ]
+                            if words and verse:
+                                en_lines.append(f"{verse}. {' '.join(words)}")
+                        text = "\n".join(en_lines)
+                        label = str(block.get("label", source_kind)).strip() or label
+                        break
+
+            text = text.strip()
+            if text:
+                if key == "filtered" or hide_labels:
+                    parts.append(text)
+                else:
+                    parts.append(f"{label}:\n{text}")
+
+        if copyable_text:
+            parts.append(copyable_text)
+
+        separator = "\n\n---\n\n" if hide_labels else "\n\n"
+        return separator.join(parts)
+
     def clear_current_chunk_session(self) -> None:
         key = self.chunk_session_key()
         if key:
@@ -778,20 +947,146 @@ class BrowserWorkbench(WorkbenchApp):
 
     def editorial_prompts(self) -> dict[str, str]:
         prompts = dict(self._editorial_prompt_defaults)
-        stored = getattr(self.state, "editorial_prompts", {}) or {}
-        if isinstance(stored, dict):
-            for key in ("grammar", "concise", "scholarly"):
-                value = stored.get(key)
-                if isinstance(value, str) and value.strip():
-                    prompts[key] = value.strip()
+        prompt_map = self.prompt_library_map(include_disabled=True)
+        for key in ("grammar", "concise", "scholarly", "copyable"):
+            value = prompt_map.get(key)
+            if isinstance(value, str) and value.strip():
+                prompts[key] = value.strip()
         return prompts
 
     def save_editorial_prompts(self, updates: dict[str, str]) -> None:
-        prompts = self.editorial_prompts()
+        entries = self.prompt_library_entries(include_disabled=True)
+        by_id = {str(item.get("id", "")).strip().lower(): item for item in entries}
         for key, value in updates.items():
-            if key in prompts and isinstance(value, str) and value.strip():
-                prompts[key] = value.strip()
-        self.state.editorial_prompts = prompts
+            clean_key = str(key).strip().lower()
+            clean_value = str(value or "").strip()
+            if clean_key in by_id and clean_value:
+                by_id[clean_key]["text"] = clean_value
+                if not by_id[clean_key].get("label"):
+                    by_id[clean_key]["label"] = clean_key.title()
+        self.save_prompt_library_entries(list(by_id.values()))
+        self.state.editorial_prompts = self.editorial_prompts()
+
+    @staticmethod
+    def _default_prompt_library_entries() -> list[dict[str, Any]]:
+        return [
+            {
+                "id": key,
+                "label": "Verse-Copy" if key == "copyable" else key.title(),
+                "text": value,
+                "builtin": True,
+                "disabled": False,
+                "order": index,
+            }
+            for index, (key, value) in enumerate(BrowserWorkbench._editorial_prompt_defaults.items(), start=1)
+        ]
+
+    def _load_prompt_library(self) -> list[dict[str, Any]]:
+        defaults = self._default_prompt_library_entries()
+        if not self.prompt_library_file.exists():
+            legacy = getattr(self.state, "editorial_prompts", {}) or {}
+            if isinstance(legacy, dict):
+                for item in defaults:
+                    key = str(item.get("id", "")).strip().lower()
+                    legacy_value = str(legacy.get(key, "")).strip()
+                    if legacy_value:
+                        item["text"] = legacy_value
+            self.save_prompt_library_entries(defaults)
+            return defaults
+        try:
+            payload = json.loads(self.prompt_library_file.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            self.save_prompt_library_entries(defaults)
+            return defaults
+        if not isinstance(payload, list):
+            self.save_prompt_library_entries(defaults)
+            return defaults
+        normalized = self._normalize_prompt_library(payload)
+        self.save_prompt_library_entries(normalized)
+        return normalized
+
+    def _normalize_prompt_library(self, raw_entries: list[Any]) -> list[dict[str, Any]]:
+        clean: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        order = 1
+        for raw in raw_entries:
+            if not isinstance(raw, dict):
+                continue
+            item_id = self.make_prompt_id(str(raw.get("id", "")).strip())
+            if not item_id or item_id in seen:
+                continue
+            text = str(raw.get("text", "")).strip()
+            label = str(raw.get("label", "")).strip() or item_id.title()
+            builtin = item_id in self._editorial_prompt_defaults or bool(raw.get("builtin"))
+            clean.append(
+                {
+                    "id": item_id,
+                    "label": label,
+                    "text": text,
+                    "builtin": builtin,
+                    "disabled": bool(raw.get("disabled", False)),
+                    "order": int(raw.get("order", order) or order),
+                }
+            )
+            seen.add(item_id)
+            order += 1
+        for builtin_id, builtin_text in self._editorial_prompt_defaults.items():
+            if builtin_id in seen:
+                continue
+            clean.append(
+                {
+                    "id": builtin_id,
+                    "label": "Verse-Copy" if builtin_id == "copyable" else builtin_id.title(),
+                    "text": builtin_text,
+                    "builtin": True,
+                    "disabled": False,
+                    "order": order,
+                }
+            )
+            seen.add(builtin_id)
+            order += 1
+        clean.sort(key=lambda item: (int(item.get("order", 0) or 0), str(item.get("label", "")).lower()))
+        for index, item in enumerate(clean, start=1):
+            item["order"] = index
+        return clean
+
+    def save_prompt_library_entries(self, entries: list[dict[str, Any]]) -> None:
+        normalized = self._normalize_prompt_library(entries)
+        self.prompt_library = normalized
+        write_json_atomic(self.prompt_library_file, normalized)
+
+    def prompt_library_entries(self, *, include_disabled: bool = True) -> list[dict[str, Any]]:
+        entries = list(getattr(self, "prompt_library", []) or [])
+        if include_disabled:
+            return [dict(item) for item in entries]
+        return [dict(item) for item in entries if not bool(item.get("disabled", False))]
+
+    def prompt_library_map(self, *, include_disabled: bool = True) -> dict[str, str]:
+        result: dict[str, str] = {}
+        for item in self.prompt_library_entries(include_disabled=include_disabled):
+            item_id = str(item.get("id", "")).strip().lower()
+            if not item_id:
+                continue
+            result[item_id] = str(item.get("text", "")).strip()
+        return result
+
+    def make_prompt_id(self, raw: str, *, fallback: str = "prompt") -> str:
+        value = self._prompt_id_re.sub("-", str(raw or "").strip().lower()).strip("-")
+        if not value:
+            value = fallback
+        return value[:48]
+
+    def unique_prompt_id(self, preferred: str) -> str:
+        base = self.make_prompt_id(preferred)
+        taken = {str(item.get("id", "")).strip().lower() for item in self.prompt_library_entries(include_disabled=True)}
+        if base not in taken:
+            return base
+        suffix = 2
+        while True:
+            candidate = f"{base}-{suffix}"
+            if candidate not in taken:
+                return candidate
+            suffix += 1
 
     @staticmethod
     def editorial_mode_label(mode: str) -> str:
@@ -835,7 +1130,20 @@ Rules:
         context_label: str,
         prompt_override: str = "",
         custom_prompt: str = "",
+        single_paragraph_plain_text: bool = False,
     ) -> str:
+        def normalize_result(raw: str) -> str:
+            text = str(raw or "").strip()
+            # Drop model reasoning blocks when the backend leaks <think> tags.
+            text = re.sub(r"<think>.*?</think>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+            text = re.sub(r"</?think>", " ", text, flags=re.IGNORECASE)
+            text = text.strip()
+            if single_paragraph_plain_text:
+                text = re.sub(r"\s+", " ", text).strip()
+                text = text.replace("**", "").replace("__", "").replace("`", "")
+                text = re.sub(r"^[#>\-\*\d\.\)\s]+", "", text).strip()
+            return text
+
         clean_mode = str(mode).strip().lower()
         text = str(source_text or "").strip()
         if not text:
@@ -850,22 +1158,36 @@ Rules:
             if clean_mode not in prompts:
                 raise ValueError("Choose a valid editorial enhancement mode.")
         self.refresh_active_endpoint()
+        enhancement_prompt = self.build_editorial_enhancement_prompt(
+            source_text=text,
+            instruction=instruction,
+            context_label=context_label,
+        )
         payload, response, _attempts = self.llm.complete_json(
-            self.build_editorial_enhancement_prompt(
-                source_text=text,
-                instruction=instruction,
-                context_label=context_label,
-            ),
+            enhancement_prompt,
             required_keys=["text"],
             temperature=0.7,
             max_tokens=900,
             max_attempts=3,
         )
         if not isinstance(payload, dict):
+            if clean_mode == "custom":
+                fallback_response = self.llm.complete(
+                    (
+                        f"{instruction}\n\n"
+                        f"Source text:\n{text}\n\n"
+                        "Return only the revised text. Do not include thinking, analysis, or <think> tags."
+                    ),
+                    temperature=0.7,
+                    max_tokens=900,
+                )
+                fallback_result = normalize_result(self.require_llm_success(fallback_response))
+                if fallback_result:
+                    return fallback_result
             if str(response).startswith("[ERROR]"):
                 raise self.provider_error_from_response(str(response))
             raise ValueError("The endpoint did not return a valid editorial enhancement response.")
-        result = str(payload.get("text", "")).strip()
+        result = normalize_result(payload.get("text", ""))
         if not result:
             raise ValueError("The model returned an empty editorial enhancement response.")
         return result
@@ -1018,6 +1340,11 @@ Rules:
         return f"chunk-{hashlib.sha1(basis.encode('utf-8')).hexdigest()[:12]}"
 
     def navigator_catalog(self) -> dict[str, Any]:
+        cache_key = self._catalog_cache_key()
+        if self._navigator_catalog_cache is not None:
+            cached_key, cached_value = self._navigator_catalog_cache
+            if cached_key == cache_key:
+                return cached_value
         payload: dict[str, Any] = {"old": [], "new": []}
         for testament in ("old", "new"):
             for book in self.bible_repo.canonical_books(testament):
@@ -1037,10 +1364,16 @@ Rules:
                         "first_ready_chapter": min(chunk_counts) if chunk_counts else None,
                     }
                 )
+        self._navigator_catalog_cache = (cache_key, payload)
         return payload
 
     def project_summary(self) -> dict[str, Any]:
         """Calculate granular project progress and source stats."""
+        cache_key = self._catalog_cache_key()
+        if self._project_summary_cache is not None:
+            cached_key, cached_value = self._project_summary_cache
+            if cached_key == cache_key:
+                return cached_value
         total_chapters = 0
         cataloged_chapters = 0
         translated_chapters = 0
@@ -1083,7 +1416,7 @@ Rules:
         catalog_percent = (cataloged_chapters / total_chapters * 100) if total_chapters > 0 else 0
         translation_percent = (translated_chapters / total_chapters * 100) if total_chapters > 0 else 0
         
-        return {
+        result = {
             "total_chapters": total_chapters,
             "cataloged_chapters": cataloged_chapters,
             "translated_chapters": translated_chapters,
@@ -1092,6 +1425,8 @@ Rules:
             "translation_percent": round(translation_percent, 1),
             "sources": sources,
         }
+        self._project_summary_cache = (cache_key, result)
+        return result
 
     def load_workspace(self, testament: str, book: str, chapter: int, chunk_key: str) -> None:
         start_verse, end_verse = [int(part) for part in chunk_key.split("-", 1)]
@@ -2474,30 +2809,21 @@ Rules:
         raise ValueError("No rollback snapshot is available yet.")
 
     def recent_epubs(self) -> list[Path]:
-        return sorted(
-            (self.paths.output_dir / "builds").glob("*.epub"),
-            key=lambda path: path.stat().st_mtime,
-            reverse=True,
-        )[:5]
+        return self.epub_service.recent_epubs()
+
+    def _build_epub_command(self) -> list[str]:
+        """Return the EPUB generation subprocess command."""
+        return self.epub_service.build_command(python_path=str(self.preferred_python()))
+
+    def _run_epub_build(
+        self, *, cancel_event: threading.Event | None = None
+    ) -> dict[str, Any]:
+        """Run EPUB generation with optional cancellation support."""
+        return self.epub_service.run_build(cancel_event=cancel_event, python_path=str(self.preferred_python()))
 
     def generate_epub_and_return_latest(self) -> tuple[bool, str, Path | None]:
         """Generate EPUB and return (success, message, latest_epub_path)."""
-        work_dir = self.paths.repo_root
-        cmd = [
-            str(self.preferred_python()),
-            str(self.paths.repo_root / "src" / "ttt_epub" / "generate_epub.py"),
-            "--md",
-            "--txt",
-        ]
-        try:
-            result = subprocess.run(cmd, cwd=work_dir, capture_output=True, text=True, check=False)
-        except Exception as exc:
-            return False, f"EPUB generation failed to start: {exc}", None
-        if result.returncode == 0:
-            latest = self.recent_epubs()
-            latest_path = latest[0] if latest else None
-            return True, "EPUB generated successfully.", latest_path
-        return False, f"EPUB generation failed with exit code {result.returncode}.\n{result.stderr}", None
+        return self.epub_service.generate_and_return_latest()
 
     def chunk_session_list(self) -> list[dict[str, Any]]:
         """Return a list of all saved chunk sessions with metadata."""
@@ -2617,6 +2943,11 @@ Rules:
             "comparison_source_options": self.comparison_source_options(),
             "selected_sources": self.selected_sources(),
             "chat_context_sources": self.chat_context_sources(),
+            "prompt_engineering_context": self.chat_context_selection_payload() if chunk_open else {
+                "selections": [],
+                "modes": [],
+                "hide_labels": False,
+            },
             "commit_history": self.commit_history_entries(),
             "model_label": self.model_label,
             "active_provider_label": self.active_provider_label(),
@@ -2640,6 +2971,7 @@ Rules:
             "justification_entries": self.chunk_justification_entries() if chunk_open else [],
             "footnote_entries": self.chunk_footnote_entries() if chunk_open else [],
             "editorial_prompts": self.editorial_prompts(),
+            "prompt_library": self.prompt_library_entries(include_disabled=True),
             "editorial_input": self.state.editorial_input,
             "editorial_output": self.state.editorial_output,
             "editorial_output_label": self.state.editorial_output_label,
@@ -2729,6 +3061,36 @@ Rules:
             "chapter": chapter,
             "chunk": f"{start}-{end}",
             "title": self.state.draft_title or self.committed_chunk_title(),
+            "verses": verses,
+        }
+
+    def build_json_preview_payload(self, book: str, chapter: int, chunk_key: str) -> dict[str, Any]:
+        """Return committed JSON preview for a specific chunk without mutating session state."""
+        try:
+            start, end = [int(part) for part in chunk_key.split("-", 1)]
+        except ValueError:
+            return {"error": "Invalid chunk key"}
+        try:
+            chapter_doc = self.bible_repo.load_chapter(book, chapter).doc
+            chapter_map = self.bible_repo.verse_map(chapter_doc)
+        except Exception as exc:
+            return {"error": str(exc)}
+        verses = {}
+        for verse in range(start, end + 1):
+            verses[str(verse)] = chapter_map.get(verse, "")
+        title = ""
+        try:
+            section_index = self.bible_repo.title_section_index(chapter_doc, start, end)
+            title = str(chapter_doc.get("sections", [{}])[section_index].get("headline", "")).strip()
+        except (json.JSONDecodeError, OSError, ValueError):
+            pass
+        if not title:
+            title = self._chunk_catalog_title(book, chapter, chunk_key)
+        return {
+            "book": book,
+            "chapter": chapter,
+            "chunk": chunk_key,
+            "title": title,
             "verses": verses,
         }
 

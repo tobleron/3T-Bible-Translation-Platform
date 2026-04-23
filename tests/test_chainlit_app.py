@@ -113,8 +113,8 @@ def test_chainlit_copy_button_asset_is_configured() -> None:
     script_text = (ROOT / "public" / "workbench-chainlit.js").read_text(encoding="utf-8")
     css_text = (ROOT / "public" / "workbench-chainlit.css").read_text(encoding="utf-8")
 
-    assert 'custom_js = "/public/workbench-chainlit.js"' in config_text
-    assert 'custom_css = "/public/workbench-chainlit.css"' in config_text
+    assert 'custom_js = "/public/workbench-chainlit.js?v=2"' in config_text
+    assert 'custom_css = "/public/workbench-chainlit.css?v=2"' in config_text
     assert "ttt-chainlit-copy-button" in script_text
     assert "COPY_ICON = '\\u29c9'" in script_text
     assert "ttt-chainlit-user-prompt" in script_text

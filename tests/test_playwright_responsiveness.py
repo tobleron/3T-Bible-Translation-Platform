@@ -227,6 +227,57 @@ def test_prompt_engineering_can_hide_context_labels(page: Page, live_server_url:
     assert "NET:" not in prompt_text
 
 
+def test_prompt_engineering_uses_non_active_prompt_text(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    prompt_text = page.evaluate(
+        """
+        async () => {
+          document.querySelectorAll('[data-prompt-context], [data-prompt-mode], [data-prompt-option]').forEach((cb) => {
+            cb.checked = false;
+          });
+          document.getElementById('prompt-mode-concise').checked = true;
+          return await window.buildPromptEngineeringText();
+        }
+        """
+    )
+
+    assert "You are an editorial compressor." in prompt_text
+    assert "Do not omit content." in prompt_text
+
+
+def test_prompt_active_select_does_not_trigger_enhance_loading(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+    panel = page.locator("#prompt-engineering-panel")
+    panel.locator('[data-editorial-tab="prompts"]').click()
+
+    enhance_button = page.locator("#prompt-engineering-panel .prompt-library-enhance button")
+    expect(enhance_button).to_have_text("Enhance")
+    expect(enhance_button).to_be_enabled()
+
+    select = page.locator("#prompt-active-select")
+    options = select.locator("option").evaluate_all("(items) => items.map((item) => item.value)")
+    current_value = select.input_value()
+    target_value = next(value for value in options if value != current_value)
+
+    def slow_editorial(route):
+        time.sleep(0.35)
+        route.continue_()
+
+    page.route("**/editorial", slow_editorial)
+    try:
+        select.select_option(target_value)
+        page.wait_for_timeout(100)
+        expect(enhance_button).to_have_text("Enhance")
+        expect(enhance_button).to_be_enabled()
+        assert enhance_button.get_attribute("aria-busy") != "true"
+
+        expect(page.locator("#prompt-active-select")).to_have_value(target_value)
+        expect(page.locator('#prompt-engineering-panel [data-editorial-panel="prompts"]')).to_be_visible()
+        expect(page.locator("#prompt-engineering-panel .prompt-library-enhance button")).to_have_text("Enhance")
+    finally:
+        page.unroute("**/editorial", slow_editorial)
+
+
 def test_chainlit_copy_preserves_rendered_list_markers(page: Page) -> None:
     page.set_content(
         """
@@ -258,6 +309,31 @@ def test_chainlit_copy_preserves_rendered_list_markers(page: Page) -> None:
         "2. Second numbered item\n\n"
         "- Bullet item"
     )
+
+
+def test_chainlit_custom_copy_does_not_duplicate_code_block_copy(page: Page) -> None:
+    page.set_content(
+        """
+        <main>
+          <div data-step-type="assistant_message">
+            <div class="markdown-body">
+              <pre><code>1+1 = 2</code></pre>
+              <button class="ttt-chainlit-copy-button" type="button" aria-label="Old custom copy">⧉</button>
+              <button class="chainlit-native-copy" type="button" aria-label="Copy code">copy</button>
+            </div>
+          </div>
+          <div data-step-type="user_message">
+            <div class="bg-accent rounded-3xl">Return the response in a code block</div>
+          </div>
+        </main>
+        """
+    )
+    page.add_script_tag(path=str(ROOT / "public" / "workbench-chainlit.js"))
+    page.wait_for_function("document.querySelectorAll('.ttt-chainlit-copy-button').length === 1")
+
+    assert page.locator('[data-step-type="assistant_message"] .ttt-chainlit-copy-button').count() == 0
+    assert page.locator('[data-step-type="assistant_message"] button').count() == 1
+    expect(page.locator('[data-step-type="user_message"] .ttt-chainlit-copy-button')).to_have_text("⧉")
 
 
 def test_copy_translation_uses_fallback_when_clipboard_api_fails(page: Page, live_server_url: str) -> None:
