@@ -3,6 +3,66 @@ import sys
 import time
 import re
 
+from ttt_core.llm.token_budget import estimate_tokens, pack_messages
+
+
+def _ensure_active_chunk(wb) -> bool:
+    if wb.require_open_chunk():
+        return True
+
+    try:
+        testament = wb.state.wizard_testament or wb.testament() or "new"
+        book = wb.state.book or ""
+        chapter = wb.state.chapter or 0
+        chunk_key = wb.current_chunk_key()
+        if book and chapter:
+            valid_chunks = {
+                f"{item.start_verse}-{item.end_verse}"
+                for item in wb.chapter_chunks(testament, book, chapter)
+            }
+            if chunk_key and (not valid_chunks or chunk_key in valid_chunks):
+                wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
+                wb.save_state()
+                return wb.require_open_chunk()
+            first_chunk = wb.first_chunk_key(testament, book, chapter)
+            if first_chunk:
+                wb.open_or_select_chunk(testament, book, chapter, first_chunk, announce=False)
+                wb.save_state()
+                return wb.require_open_chunk()
+            wb.select_chapter(testament, book, chapter)
+            wb.save_state()
+            return wb.require_open_chunk()
+
+        catalog = wb.navigator_catalog()
+        for nav_testament in ("old", "new"):
+            books = catalog.get(nav_testament, [])
+            if not isinstance(books, list):
+                continue
+            for entry in books:
+                if not isinstance(entry, dict):
+                    continue
+                nav_book = str(entry.get("name", "")).strip()
+                if not nav_book:
+                    continue
+                chapter_value = entry.get("first_ready_chapter")
+                if chapter_value is None:
+                    chapter_value = entry.get("first_chapter")
+                try:
+                    nav_chapter = int(chapter_value)
+                except (TypeError, ValueError):
+                    continue
+                nav_chunk = wb.first_chunk_key(nav_testament, nav_book, nav_chapter)
+                if nav_chunk:
+                    wb.open_or_select_chunk(nav_testament, nav_book, nav_chapter, nav_chunk, announce=False)
+                else:
+                    wb.select_chapter(nav_testament, nav_book, nav_chapter)
+                wb.save_state()
+                return wb.require_open_chunk()
+    except Exception:
+        return False
+
+    return wb.require_open_chunk()
+
 
 def _format_thinking_duration(seconds: float | int | None) -> str:
     total = max(0, int(round(float(seconds or 0))))
@@ -166,9 +226,9 @@ async def _stream_model_reply(wb, messages):
 @cl.on_chat_start
 async def on_chat_start():
     from ttt_workbench.webapp import controller
-    # Retrieve the state from global app controller
-    wb = controller()
     chainlit_session_id = cl.user_session.get("id")
+    # Use a dedicated controller per Chainlit session so chat state is isolated
+    wb = controller(session_id=chainlit_session_id)
     current = wb.current_chunk_session()
     current["chainlit_session_id"] = chainlit_session_id
     wb.persist_current_chunk_session()
@@ -194,23 +254,38 @@ async def on_chat_start():
 @cl.on_message
 async def on_message(message: cl.Message):
     from ttt_workbench.webapp import controller
-    # Retrieve the state from global app controller
-    wb = controller()
-    
-    if not wb.require_open_chunk():
+    chainlit_session_id = cl.user_session.get("id")
+    wb = controller(session_id=chainlit_session_id)
+
+    if not _ensure_active_chunk(wb):
         await cl.Message(content="Error: No active chunk is open in the workbench.").send()
         return
 
-    # Send only the visible chat session history plus the user's current message.
-    # Translation context belongs in the user-authored prompt, usually via Prompt Engineering injection.
+    # Assemble server-side chat context from persisted selections on the first message.
+    session = wb.current_chunk_session()
+    user_content = message.content
+    if not session.get("context_loaded"):
+        context_prompt = wb.build_chat_context_prompt()
+        if context_prompt:
+            user_content = context_prompt + "\n\n" + user_content
+
     prior_messages = [
         {"role": item["role"], "content": item["content"]}
         for item in wb.state.chat_messages
         if item.get("role") in {"user", "assistant"} and item.get("content")
     ]
-    messages = prior_messages[-20:] + [{"role": "user", "content": message.content}]
+    current_msg = {"role": "user", "content": user_content}
+    from ttt_core.llm.provider import _infer_profile
+    model_profile = _infer_profile(wb.llm.model_name)
+    context_overhead = estimate_tokens(context_prompt) if (not session.get("context_loaded") and context_prompt) else 0
+    messages = pack_messages(
+        prior_messages,
+        current_msg,
+        context_window=model_profile.context_window,
+        system_overhead=context_overhead,
+    )
 
-    wb.state.chat_messages.append({"role": "user", "content": message.content})
+    wb.state.chat_messages.append({"role": "user", "content": user_content})
     wb.save_state()
     wb.refresh_active_endpoint()
 
@@ -228,8 +303,7 @@ async def on_message(message: cl.Message):
         wb.history_entries.append({"title": "Chat", "body": reply[:160], "accent": "blue"})
 
     wb.save_state()
-    
-    session = wb.current_chunk_session()
+
     session["context_loaded"] = True
     if not session.get("context_snapshot"):
         session["context_snapshot"] = wb.session_context_snapshot()

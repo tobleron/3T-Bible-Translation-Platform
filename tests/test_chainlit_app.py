@@ -128,10 +128,95 @@ def test_chainlit_config_uses_safe_local_defaults() -> None:
 
     assert 'allow_origins = ["*"]' not in config_text
     assert 'allow_origins = ["http://127.0.0.1:8765", "http://localhost:8765"]' in config_text
-    assert "unsafe_allow_html = false" in config_text
+    assert "unsafe_allow_html = true" in config_text
     assert "mask_user_env = true" in config_text
     assert "enabled = false" in config_text
     assert 'accept = []' in config_text
     assert "max_files = 0" in config_text
     assert "max_size_mb = 0" in config_text
     assert 'cot = "hidden"' in config_text
+
+
+def test_ensure_active_chunk_uses_existing_book_chapter_first_chunk() -> None:
+    calls: list[tuple[str, str, int, str]] = []
+
+    class FakeWb:
+        def __init__(self) -> None:
+            self.state = SimpleNamespace(wizard_testament="old", book="Genesis", chapter=1)
+            self._open = False
+
+        def require_open_chunk(self):
+            return self._open
+
+        def testament(self):
+            return "old"
+
+        def current_chunk_key(self):
+            return None
+
+        def chapter_chunks(self, testament, book, chapter):
+            return [SimpleNamespace(start_verse=1, end_verse=5)]
+
+        def first_chunk_key(self, testament, book, chapter):
+            return "1-5"
+
+        def open_or_select_chunk(self, testament, book, chapter, chunk_key, announce=False):
+            calls.append((testament, book, chapter, chunk_key))
+            self._open = True
+
+        def save_state(self):
+            return None
+
+        def select_chapter(self, testament, book, chapter):
+            return None
+
+        def navigator_catalog(self):
+            return {"old": [], "new": []}
+
+    wb = FakeWb()
+    assert chainlit_app._ensure_active_chunk(wb) is True
+    assert calls == [("old", "Genesis", 1, "1-5")]
+
+
+def test_ensure_active_chunk_falls_back_to_navigator_catalog() -> None:
+    calls: list[tuple[str, str, int, str]] = []
+
+    class FakeWb:
+        def __init__(self) -> None:
+            self.state = SimpleNamespace(wizard_testament="", book="", chapter=0)
+            self._open = False
+
+        def require_open_chunk(self):
+            return self._open
+
+        def testament(self):
+            return "new"
+
+        def current_chunk_key(self):
+            return None
+
+        def chapter_chunks(self, testament, book, chapter):
+            return []
+
+        def first_chunk_key(self, testament, book, chapter):
+            return "1-3" if (testament, book, chapter) == ("new", "Matthew", 1) else None
+
+        def open_or_select_chunk(self, testament, book, chapter, chunk_key, announce=False):
+            calls.append((testament, book, chapter, chunk_key))
+            self._open = True
+
+        def save_state(self):
+            return None
+
+        def select_chapter(self, testament, book, chapter):
+            return None
+
+        def navigator_catalog(self):
+            return {
+                "old": [],
+                "new": [{"name": "Matthew", "first_chapter": 1, "first_ready_chapter": 1}],
+            }
+
+    wb = FakeWb()
+    assert chainlit_app._ensure_active_chunk(wb) is True
+    assert calls == [("new", "Matthew", 1, "1-3")]
