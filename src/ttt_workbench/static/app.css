@@ -1944,47 +1944,69 @@ button:active:not(:disabled) {
   align-items: center;
   flex-wrap: wrap;
 }
-.chat-toolbar {
-  display: flex;
-  gap: 0.55rem;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-  padding: 0.55rem 0.65rem;
-  border: 1px solid rgba(255,255,255,0.07);
+.chat-panel-summary {
+  position: relative;
+}
+.chat-menu-toggle {
+  position: relative;
+  z-index: 10;
+}
+.chat-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  display: none;
+  z-index: 20;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
-  background: rgba(255,255,255,0.025);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  min-width: 280px;
 }
-.chat-model-form,
-.chat-session-form {
+.chat-menu.open {
+  display: block;
+}
+.chat-menu-content {
+  padding: 0.75rem;
   display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.chat-menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.chat-menu-section:not(:last-child) {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.75rem;
+}
+.chat-menu-actions {
+  display: flex;
+  gap: 0.5rem;
+  border: none;
+  padding: 0;
+}
+.chat-menu .chat-new-button {
+  flex: 1;
+  min-height: 2rem;
+  border-color: var(--line-strong);
+}
+.chat-menu .compact-danger-button {
+  flex: 1;
+  min-height: 2rem;
+}
+.chat-menu .chat-model-form {
+  display: flex;
+  flex-direction: column;
   gap: 0.55rem;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-  min-width: 0;
 }
-.chat-model-form {
-  flex: 0 0 7rem;
-}
-.chat-endpoint-select {
-  width: 7rem;
-}
-.chat-session-form {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.chat-session-select {
-  width: 100%;
-  min-width: 0;
-}
-.chat-toolbar select {
+.chat-menu .chat-endpoint-select,
+.chat-menu .chat-session-select {
   width: 100%;
 }
-.chat-toolbar .compact-danger-button {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-.chat-toolbar .icon-button {
-  align-self: flex-end;
+.chat-menu .chat-model-select {
+  width: 100%;
 }
 .icon-button {
   display: inline-grid;
