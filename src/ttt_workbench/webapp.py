@@ -9,7 +9,13 @@ from pathlib import Path
 
 import markdown as md_lib
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import (
+    HTMLResponse,
+    RedirectResponse,
+    FileResponse,
+    JSONResponse,
+    StreamingResponse,
+)
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from chainlit.utils import mount_chainlit
@@ -33,18 +39,54 @@ templates = Jinja2Templates(directory=str(PACKAGE_DIR / "templates"))
 import html
 from html.parser import HTMLParser
 
-_MARKDOWN_ALLOWED_TAGS = frozenset({
-    "p", "h1", "h2", "h3", "h4", "h5", "h6",
-    "ul", "ol", "li",
-    "blockquote",
-    "pre", "code",
-    "hr", "br",
-    "table", "thead", "tbody", "tr", "th", "td",
-    "em", "strong", "b", "i",
-    "a", "img",
-    "div", "span", "sup", "sub",
-})
-_MARKDOWN_BLOCKED_TAGS = frozenset({"script", "style", "iframe", "object", "embed", "form", "input", "textarea", "button"})
+_MARKDOWN_ALLOWED_TAGS = frozenset(
+    {
+        "p",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "ul",
+        "ol",
+        "li",
+        "blockquote",
+        "pre",
+        "code",
+        "hr",
+        "br",
+        "table",
+        "thead",
+        "tbody",
+        "tr",
+        "th",
+        "td",
+        "em",
+        "strong",
+        "b",
+        "i",
+        "a",
+        "img",
+        "div",
+        "span",
+        "sup",
+        "sub",
+    }
+)
+_MARKDOWN_BLOCKED_TAGS = frozenset(
+    {
+        "script",
+        "style",
+        "iframe",
+        "object",
+        "embed",
+        "form",
+        "input",
+        "textarea",
+        "button",
+    }
+)
 
 
 class _MarkdownHtmlSanitizer(HTMLParser):
@@ -53,7 +95,9 @@ class _MarkdownHtmlSanitizer(HTMLParser):
         self.parts: list[str] = []
         self.block_depth = 0
 
-    def _allowed_attrs(self, tag: str, attrs: list[tuple[str, str | None]]) -> list[tuple[str, str]]:
+    def _allowed_attrs(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> list[tuple[str, str]]:
         allowed: list[tuple[str, str]] = []
         for name, value in attrs:
             if value is None:
@@ -134,7 +178,17 @@ def _render_markdown(text: str) -> str:
 templates.env.filters["markdown"] = _render_markdown
 
 app = FastAPI(title="TTT Browser Workbench")
-app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
+
+# Mount static files if directory exists
+static_dir = PACKAGE_DIR / "static"
+if static_dir.exists():
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+
+# Mount public files if directory exists
+public_dir = PACKAGE_DIR.parent.parent / "public"
+if public_dir.exists():
+    app.mount("/public", StaticFiles(directory=str(public_dir)), name="public")
+
 mount_chainlit(app=app, target=str(PACKAGE_DIR / "chainlit_app.py"), path="/chat")
 _SESSION_CONTROLLERS: dict[str, BrowserWorkbench] = {}
 _SESSION_COOKIE_NAME = "ttt_session_id"
@@ -157,7 +211,9 @@ def _controller_for_session(session_id: str) -> BrowserWorkbench:
     return _SESSION_CONTROLLERS[session_id]
 
 
-def controller(request: Request | None = None, session_id: str | None = None) -> BrowserWorkbench:
+def controller(
+    request: Request | None = None, session_id: str | None = None
+) -> BrowserWorkbench:
     if session_id is not None:
         return _controller_for_session(session_id)
     if request is not None:
@@ -174,7 +230,13 @@ def controller(request: Request | None = None, session_id: str | None = None) ->
 async def ensure_session_cookie(request: Request, call_next):
     response = await call_next(request)
     if _SESSION_COOKIE_NAME not in request.cookies:
-        response.set_cookie(_SESSION_COOKIE_NAME, uuid.uuid4().hex[:16], max_age=86400 * 30, httponly=True, samesite="lax")
+        response.set_cookie(
+            _SESSION_COOKIE_NAME,
+            uuid.uuid4().hex[:16],
+            max_age=86400 * 30,
+            httponly=True,
+            samesite="lax",
+        )
     return response
 
 
@@ -252,7 +314,9 @@ def first_workspace_target(wb: BrowserWorkbench) -> str | None:
     return None
 
 
-def book_json_tree_payload(wb: BrowserWorkbench, testament: str, book: str, chapter: int) -> dict:
+def book_json_tree_payload(
+    wb: BrowserWorkbench, testament: str, book: str, chapter: int
+) -> dict:
     chapters = []
     wb.bible_repo._build_index()
     book_key = normalize_book_key(book)
@@ -272,9 +336,13 @@ def book_json_tree_payload(wb: BrowserWorkbench, testament: str, book: str, chap
     return {"ok": True, "testament": testament, "book": book, "chapters": chapters}
 
 
-def book_json_chapter_payload(wb: BrowserWorkbench, book: str, target_chapter: int) -> JSONResponse:
+def book_json_chapter_payload(
+    wb: BrowserWorkbench, book: str, target_chapter: int
+) -> JSONResponse:
     try:
-        chapter_file = wb.bible_repo.load_chapter(book, target_chapter, allow_scaffold=False)
+        chapter_file = wb.bible_repo.load_chapter(
+            book, target_chapter, allow_scaffold=False
+        )
     except Exception as exc:
         return JSONResponse({"ok": False, "message": str(exc)}, status_code=404)
     return JSONResponse(
@@ -288,7 +356,9 @@ def book_json_chapter_payload(wb: BrowserWorkbench, book: str, target_chapter: i
     )
 
 
-def render_page(request: Request, template_name: str, context: dict, status_code: int = 200):
+def render_page(
+    request: Request, template_name: str, context: dict, status_code: int = 200
+):
     if "settings_config" not in context:
         context["settings_config"] = controller(request).settings_payload()
     return templates.TemplateResponse(
@@ -322,7 +392,9 @@ def render_chat_panel(request: Request, wb: BrowserWorkbench):
 
 
 def render_editor_panel(request: Request, wb: BrowserWorkbench):
-    response = render_page(request, "partials/editor_panel.html", wb.editor_panel_payload())
+    response = render_page(
+        request, "partials/editor_panel.html", wb.editor_panel_payload()
+    )
     wb.clear_flash()
     return response
 
@@ -357,14 +429,19 @@ def apply_draft_form(
 ) -> None:
     if not form:
         return
-    if enforce_revision and expected_revision is not None and expected_revision != wb.draft_revision():
+    if (
+        enforce_revision
+        and expected_revision is not None
+        and expected_revision != wb.draft_revision()
+    ):
         raise DraftRevisionConflict(wb.draft_revision())
-    editor_mode = str(form.get("editor_mode", wb.editor_mode())).strip().lower() or wb.editor_mode()
+    editor_mode = (
+        str(form.get("editor_mode", wb.editor_mode())).strip().lower()
+        or wb.editor_mode()
+    )
     # Check for per-verse textarea fields (verse_N)
     verse_fields = {
-        key: str(value)
-        for key, value in form.items()
-        if str(key).startswith("verse_")
+        key: str(value) for key, value in form.items() if str(key).startswith("verse_")
     }
     if verse_fields:
         start = int(str(form.get("draft_range_start", wb.current_editor_range()[0])))
@@ -389,7 +466,9 @@ def apply_draft_form(
             str(form.get("draft_range_text", "")),
         )
         return
-    has_draft_payload = "draft_title" in form or any(str(key).startswith("verse_") for key in form.keys())
+    has_draft_payload = "draft_title" in form or any(
+        str(key).startswith("verse_") for key in form.keys()
+    )
     if not has_draft_payload:
         return
     verses = {}
@@ -399,18 +478,24 @@ def apply_draft_form(
     wb.save_draft(str(form.get("draft_title", "")), verses, editor_mode=editor_mode)
 
 
-def _prompt_library_updates_from_form(wb: BrowserWorkbench, form) -> list[dict[str, object]]:
+def _prompt_library_updates_from_form(
+    wb: BrowserWorkbench, form
+) -> list[dict[str, object]]:
     updates: list[dict[str, object]] = []
     for entry in wb.prompt_library_entries(include_disabled=True):
         prompt_id = str(entry.get("id", "")).strip()
         if not prompt_id:
             continue
-        label = str(form.get(f"prompt_label_{prompt_id}", entry.get("label", ""))).strip()
+        label = str(
+            form.get(f"prompt_label_{prompt_id}", entry.get("label", ""))
+        ).strip()
         text = str(form.get(f"prompt_text_{prompt_id}", entry.get("text", ""))).strip()
         updates.append(
             {
                 "id": prompt_id,
-                "label": label or str(entry.get("label", "")).strip() or prompt_id.title(),
+                "label": label
+                or str(entry.get("label", "")).strip()
+                or prompt_id.title(),
                 "text": text,
                 "builtin": bool(entry.get("builtin", False)),
                 "disabled": bool(entry.get("disabled", False)),
@@ -442,7 +527,9 @@ def _parse_verse_selection(raw_value: str, fallback_chunk_key: str) -> list[int]
             start = int(left.strip())
             end = int(right.strip())
             if start > end:
-                raise ValueError("Invalid verse selection. Start verse cannot be greater than end verse.")
+                raise ValueError(
+                    "Invalid verse selection. Start verse cannot be greater than end verse."
+                )
             verses.extend(range(start, end + 1))
         else:
             verses.append(int(part))
@@ -479,7 +566,9 @@ def _build_justification_draft(
     )
 
 
-def _queue_justification_delete(wb: BrowserWorkbench, book: str, chapter: int, entry_id: str) -> None:
+def _queue_justification_delete(
+    wb: BrowserWorkbench, book: str, chapter: int, entry_id: str
+) -> None:
     wb.state.pending_justification_updates = [
         item
         for item in wb.state.pending_justification_updates
@@ -531,7 +620,12 @@ async def workspace_navigate(request: Request):
         chapter = str(form.get("chapter", ""))
         chunk = str(form.get("chunk", ""))
     else:
-        testament = "old" if "testament" in request.query_params and request.query_params.get("testament") == "old" else "new"
+        testament = (
+            "old"
+            if "testament" in request.query_params
+            and request.query_params.get("testament") == "old"
+            else "new"
+        )
         book = request.query_params.get("book", "")
         chapter = request.query_params.get("chapter", "")
         chunk = request.query_params.get("chunk", "")
@@ -554,8 +648,14 @@ async def workspace_navigate(request: Request):
         ),
         book_items[0],
     )
-    selected_book = str(selected_item.get("name", "")).strip() or str(book_items[0]["name"])
-    chapter_options = [int(value) for value in selected_item.get("chapters", []) if isinstance(value, int)]
+    selected_book = str(selected_item.get("name", "")).strip() or str(
+        book_items[0]["name"]
+    )
+    chapter_options = [
+        int(value)
+        for value in selected_item.get("chapters", [])
+        if isinstance(value, int)
+    ]
     first_ready_chapter = selected_item.get("first_ready_chapter")
     if not chapter_options and isinstance(first_ready_chapter, int):
         chapter_options = [first_ready_chapter]
@@ -569,7 +669,8 @@ async def workspace_navigate(request: Request):
     if selected_chapter not in chapter_options:
         selected_chapter = (
             int(first_ready_chapter)
-            if isinstance(first_ready_chapter, int) and first_ready_chapter in chapter_options
+            if isinstance(first_ready_chapter, int)
+            and first_ready_chapter in chapter_options
             else chapter_options[0]
         )
 
@@ -587,7 +688,9 @@ async def workspace_navigate(request: Request):
 
     # Auto-select first chunk when none specified
     if first_chunk_key:
-        wb.open_or_select_chunk(testament, selected_book, selected_chapter, first_chunk_key)
+        wb.open_or_select_chunk(
+            testament, selected_book, selected_chapter, first_chunk_key
+        )
         wb.save_state()
         return render_workspace(request, wb, active_tab="study", partial=True)
 
@@ -655,29 +758,48 @@ def home(request: Request):
 
 
 @app.get("/workspace/{testament}/{book}/{chapter}", response_class=HTMLResponse)
-def workspace_chapter(request: Request, testament: str, book: str, chapter: int, tab: str = "study"):
+def workspace_chapter(
+    request: Request, testament: str, book: str, chapter: int, tab: str = "study"
+):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     wb.select_chapter(testament, book, chapter)
     return render_workspace(request, wb, active_tab=tab)
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/json-book-tree", response_class=JSONResponse)
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/json-book-tree",
+    response_class=JSONResponse,
+)
 def chapter_json_book_tree(request: Request, testament: str, book: str, chapter: int):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     return JSONResponse(book_json_tree_payload(wb, testament, book, chapter))
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/json-book-chapter/{target_chapter}", response_class=JSONResponse)
-def chapter_json_book_chapter(request: Request, testament: str, book: str, chapter: int, target_chapter: int):
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/json-book-chapter/{target_chapter}",
+    response_class=JSONResponse,
+)
+def chapter_json_book_chapter(
+    request: Request, testament: str, book: str, chapter: int, target_chapter: int
+):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     return book_json_chapter_payload(wb, book, target_chapter)
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}", response_class=HTMLResponse)
-def workspace(request: Request, testament: str, book: str, chapter: int, chunk_key: str, tab: str = "study"):
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}", response_class=HTMLResponse
+)
+def workspace(
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+    tab: str = "study",
+):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     # Validate chunk_key against catalog
@@ -698,7 +820,10 @@ def workspace(request: Request, testament: str, book: str, chapter: int, chunk_k
     return render_workspace(request, wb, active_tab=tab)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/tab", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/tab",
+    response_class=HTMLResponse,
+)
 def workspace_tab(
     request: Request,
     testament: str,
@@ -715,7 +840,10 @@ def workspace_tab(
     return render_workspace(request, wb, active_tab=tab, partial=True)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/study/sources", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/study/sources",
+    response_class=HTMLResponse,
+)
 async def study_sources(
     request: Request,
     testament: str,
@@ -734,12 +862,12 @@ async def study_sources(
         wb.save_state()
         payload = wb.context_panel_payload()
         if "application/json" in request.headers.get("accept", ""):
-            html = templates.env.get_template("partials/study_translation_blocks.html").render(
-                {"request": request, **payload}
-            )
-            word_analysis_html = templates.env.get_template("partials/study_word_analysis.html").render(
-                {"request": request, **payload}
-            )
+            html = templates.env.get_template(
+                "partials/study_translation_blocks.html"
+            ).render({"request": request, **payload})
+            word_analysis_html = templates.env.get_template(
+                "partials/study_word_analysis.html"
+            ).render({"request": request, **payload})
             return JSONResponse(
                 {
                     "ok": True,
@@ -757,7 +885,10 @@ async def study_sources(
         return render_workspace_error(request, wb, exc, active_tab="study")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/save", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/save",
+    response_class=HTMLResponse,
+)
 async def save_draft(
     request: Request,
     testament: str,
@@ -778,7 +909,10 @@ async def save_draft(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/autosave", response_class=JSONResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/autosave",
+    response_class=JSONResponse,
+)
 async def autosave_draft(
     request: Request,
     testament: str,
@@ -799,7 +933,13 @@ async def autosave_draft(
             enforce_revision=expected_revision is not None,
         )
         wb.activate_tab("draft")
-        return JSONResponse({"ok": True, "message": "Draft saved.", "draft_revision": wb.draft_revision()})
+        return JSONResponse(
+            {
+                "ok": True,
+                "message": "Draft saved.",
+                "draft_revision": wb.draft_revision(),
+            }
+        )
     except DraftRevisionConflict as exc:
         return JSONResponse(
             {
@@ -814,7 +954,10 @@ async def autosave_draft(
         return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/range", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/draft/range",
+    response_class=HTMLResponse,
+)
 async def set_draft_range(
     request: Request,
     testament: str,
@@ -828,8 +971,12 @@ async def set_draft_range(
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         apply_draft_form(wb, form)
-        target_start = int(str(form.get("editor_target_start", wb.current_editor_range()[0])))
-        target_end = int(str(form.get("editor_target_end", wb.current_editor_range()[1])))
+        target_start = int(
+            str(form.get("editor_target_start", wb.current_editor_range()[0]))
+        )
+        target_end = int(
+            str(form.get("editor_target_end", wb.current_editor_range()[1]))
+        )
         wb.set_editor_range(target_start, target_end)
         wb.activate_tab("draft")
         return render_editor_panel(request, wb)
@@ -837,7 +984,10 @@ async def set_draft_range(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/mode", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/mode",
+    response_class=HTMLResponse,
+)
 async def set_editor_mode(
     request: Request,
     testament: str,
@@ -856,12 +1006,20 @@ async def set_editor_mode(
         if action == "seed-draft":
             wb.seed_draft_from_committed()
             wb.history_entries.append(
-                {"title": "Draft", "body": f"Committed text loaded as draft for {book} {chapter}:{chunk_key}.", "accent": "blue"}
+                {
+                    "title": "Draft",
+                    "body": f"Committed text loaded as draft for {book} {chapter}:{chunk_key}.",
+                    "accent": "blue",
+                }
             )
         elif action in ("draft", "review"):
             wb.set_editor_mode(action)
             wb.history_entries.append(
-                {"title": "Editor", "body": f"Switched to {action.title()} mode for {book} {chapter}:{chunk_key}.", "accent": "blue"}
+                {
+                    "title": "Editor",
+                    "body": f"Switched to {action.title()} mode for {book} {chapter}:{chunk_key}.",
+                    "accent": "blue",
+                }
             )
         wb.activate_tab("draft")
         wb.save_state()
@@ -870,7 +1028,10 @@ async def set_editor_mode(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/lock", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/lock",
+    response_class=HTMLResponse,
+)
 async def editor_lock(
     request: Request,
     testament: str,
@@ -890,7 +1051,10 @@ async def editor_lock(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/unlock", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/unlock",
+    response_class=HTMLResponse,
+)
 async def editor_unlock(
     request: Request,
     testament: str,
@@ -908,7 +1072,10 @@ async def editor_unlock(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/revise", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/editor/revise",
+    response_class=HTMLResponse,
+)
 async def editor_revise(
     request: Request,
     testament: str,
@@ -926,7 +1093,9 @@ async def editor_revise(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/chunks/merge", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/chunks/merge", response_class=HTMLResponse
+)
 async def merge_chapter_chunks(
     request: Request,
     testament: str,
@@ -958,7 +1127,12 @@ async def merge_chapter_chunks(
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
     return render_workspace(request, wb, active_tab="study", partial=True)
-@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/prompt-text", response_class=JSONResponse)
+
+
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/prompt-text",
+    response_class=JSONResponse,
+)
 async def get_chat_prompt_text(
     request: Request,
     testament: str,
@@ -970,9 +1144,10 @@ async def get_chat_prompt_text(
     try:
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
-        
+
         blocks = wb.chunk_study_blocks()
         payload = {}
+
         def verse_line_text(lines: list[dict]) -> str:
             formatted = []
             for line in lines:
@@ -1006,8 +1181,10 @@ async def get_chat_prompt_text(
             kind = str(block.get("kind", "")).lower()
             if kind in {"hebrew", "greek"}:
                 verse_lines = block.get("verse_lines") or []
-                payload[kind] = verse_line_text(verse_lines) or str(block.get("text", "")).strip()
-                
+                payload[kind] = (
+                    verse_line_text(verse_lines) or str(block.get("text", "")).strip()
+                )
+
                 gloss_lines = block.get("gloss_lines") or []
                 en_lines = []
                 for gloss_line in gloss_lines:
@@ -1031,7 +1208,10 @@ async def get_chat_prompt_text(
         return JSONResponse({"error": str(exc)}, status_code=500)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/context", response_class=JSONResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/context",
+    response_class=JSONResponse,
+)
 async def save_chat_context(
     request: Request,
     testament: str,
@@ -1053,8 +1233,13 @@ async def save_chat_context(
         return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/interactive-state", response_class=JSONResponse)
-def interactive_state(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/interactive-state",
+    response_class=JSONResponse,
+)
+def interactive_state(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
@@ -1076,11 +1261,15 @@ def interactive_state(request: Request, testament: str, book: str, chapter: int,
                 "range_start": wb.state.chunk_start or 0,
                 "range_end": wb.state.chunk_end or 0,
                 "has_draft_work": wb.has_draft_work() if chunk_open else False,
-                "has_committed_text": wb.chunk_has_committed_text() if chunk_open else False,
+                "has_committed_text": wb.chunk_has_committed_text()
+                if chunk_open
+                else False,
             },
             "chat": {
                 "active_session_id": wb.active_chat_session_id() if chunk_open else "",
-                "session_count": len(wb.current_chunk_chat_sessions()) if chunk_open else 0,
+                "session_count": len(wb.current_chunk_chat_sessions())
+                if chunk_open
+                else 0,
                 "context_sources": wb.chat_context_sources(),
             },
             "study": {
@@ -1093,8 +1282,10 @@ def interactive_state(request: Request, testament: str, book: str, chapter: int,
     )
 
 
-
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/clear", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/clear",
+    response_class=HTMLResponse,
+)
 async def clear_chat_history(
     request: Request,
     testament: str,
@@ -1108,14 +1299,19 @@ async def clear_chat_history(
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         wb.clear_current_chunk_session()
         wb.save_state()
-        
+
         # Return the updated panel summary via HTMX or just a success message
-        return HTMLResponse(content='<span class="inline-badge">History Cleared</span> <script>window.location.reload();</script>')
+        return HTMLResponse(
+            content='<span class="inline-badge">History Cleared</span> <script>window.location.reload();</script>'
+        )
     except Exception as exc:
         return HTMLResponse(content=f"Error: {exc}", status_code=500)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/new", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/new",
+    response_class=HTMLResponse,
+)
 async def new_chat_session(
     request: Request,
     testament: str,
@@ -1134,7 +1330,10 @@ async def new_chat_session(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/switch", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/switch",
+    response_class=HTMLResponse,
+)
 async def switch_chat_session(
     request: Request,
     testament: str,
@@ -1155,7 +1354,10 @@ async def switch_chat_session(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/delete", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/session/delete",
+    response_class=HTMLResponse,
+)
 async def delete_chat_session(
     request: Request,
     testament: str,
@@ -1173,7 +1375,10 @@ async def delete_chat_session(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/model", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/model",
+    response_class=HTMLResponse,
+)
 async def update_chat_model(
     request: Request,
     testament: str,
@@ -1187,8 +1392,12 @@ async def update_chat_model(
         book = resolve_book_name(wb, testament, book)
         wb.open_or_select_chunk(testament, book, chapter, chunk_key, announce=False)
         current = wb.settings_payload()
-        next_provider = str(form.get("endpoint_provider", current.get("endpoint_provider", "local"))).strip()
-        active_model = str(form.get("active_model", current.get("active_model", ""))).strip()
+        next_provider = str(
+            form.get("endpoint_provider", current.get("endpoint_provider", "local"))
+        ).strip()
+        active_model = str(
+            form.get("active_model", current.get("active_model", ""))
+        ).strip()
         if next_provider != str(current.get("endpoint_provider", "local")):
             active_model = ""
         wb.save_web_settings(
@@ -1196,20 +1405,29 @@ async def update_chat_model(
                 "endpoint_provider": next_provider,
                 "local_base_url": current.get("local_base_url", ""),
                 "local_model": current.get("local_model", ""),
-                "cloud_base_url": current.get("cloud_base_url", "https://api.openai.com/v1"),
+                "cloud_base_url": current.get(
+                    "cloud_base_url", "https://api.openai.com/v1"
+                ),
                 "cloud_model": current.get("cloud_model", "gpt-4.1-mini"),
                 "active_model": active_model,
             }
         )
         wb.safe_list_models()
-        wb.notify(f"Chat endpoint set to {wb.active_provider_label()} / {wb.active_model_name()}.")
+        wb.notify(
+            f"Chat endpoint set to {wb.active_provider_label()} / {wb.active_model_name()}."
+        )
         return render_chat_panel(request, wb)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/finalize", response_class=HTMLResponse)
-def finalize_review(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/finalize",
+    response_class=HTMLResponse,
+)
+def finalize_review(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1221,8 +1439,13 @@ def finalize_review(request: Request, testament: str, book: str, chapter: int, c
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/stage-text", response_class=HTMLResponse)
-def stage_text(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/stage-text",
+    response_class=HTMLResponse,
+)
+def stage_text(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1234,8 +1457,13 @@ def stage_text(request: Request, testament: str, book: str, chapter: int, chunk_
         return render_workspace_error(request, wb, exc, active_tab="commit")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/title-refresh", response_class=HTMLResponse)
-def refresh_title(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/title-refresh",
+    response_class=HTMLResponse,
+)
+def refresh_title(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1247,8 +1475,13 @@ def refresh_title(request: Request, testament: str, book: str, chapter: int, chu
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/title-stage", response_class=HTMLResponse)
-def stage_title(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/review/title-stage",
+    response_class=HTMLResponse,
+)
+def stage_title(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1260,7 +1493,10 @@ def stage_title(request: Request, testament: str, book: str, chapter: int, chunk
         return render_workspace_error(request, wb, exc, active_tab="commit")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/justify", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/justify",
+    response_class=HTMLResponse,
+)
 async def justify_stage(
     request: Request,
     testament: str,
@@ -1327,7 +1563,10 @@ async def justify_stage(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/footnotes", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/footnotes",
+    response_class=HTMLResponse,
+)
 async def footnote_stage(
     request: Request,
     testament: str,
@@ -1418,7 +1657,10 @@ async def footnote_stage(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial",
+    response_class=HTMLResponse,
+)
 async def editorial_assistant(
     request: Request,
     testament: str,
@@ -1429,7 +1671,11 @@ async def editorial_assistant(
     form = await request.form()
     wb = controller(request)
     action = str(form.get("action", "")).strip().lower() or "switch_prompt"
-    editorial_tab = str(form.get("editorial_tab", wb.state.editorial_active_tab or "run")).strip().lower()
+    editorial_tab = (
+        str(form.get("editorial_tab", wb.state.editorial_active_tab or "run"))
+        .strip()
+        .lower()
+    )
     if editorial_tab not in {"run", "prompts"}:
         editorial_tab = "run"
     prompt_entries = _prompt_library_updates_from_form(wb, form)
@@ -1443,7 +1689,9 @@ async def editorial_assistant(
         should_save_prompt_library = False
         known_ids = {str(item.get("id", "")).strip() for item in prompt_entries}
         if active_id and active_id not in known_ids:
-            active_id = str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
+            active_id = (
+                str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
+            )
         if action == "add_prompt":
             new_label = str(form.get("new_prompt_label", "")).strip()
             new_text = str(form.get("new_prompt_text", "")).strip()
@@ -1468,15 +1716,30 @@ async def editorial_assistant(
             delete_id = wb.make_prompt_id(str(form.get("prompt_delete_id", "")).strip())
             if not delete_id:
                 raise ValueError("Select a prompt to delete.")
-            target = next((item for item in prompt_entries if str(item.get("id", "")).strip() == delete_id), None)
+            target = next(
+                (
+                    item
+                    for item in prompt_entries
+                    if str(item.get("id", "")).strip() == delete_id
+                ),
+                None,
+            )
             if not target:
                 raise ValueError("Prompt not found.")
             if bool(target.get("builtin", False)):
                 raise ValueError("Built-in prompts cannot be deleted.")
-            prompt_entries = [item for item in prompt_entries if str(item.get("id", "")).strip() != delete_id]
+            prompt_entries = [
+                item
+                for item in prompt_entries
+                if str(item.get("id", "")).strip() != delete_id
+            ]
             wb.notify("Prompt deleted.")
             if active_id == delete_id:
-                active_id = str(prompt_entries[0].get("id", "")).strip() if prompt_entries else ""
+                active_id = (
+                    str(prompt_entries[0].get("id", "")).strip()
+                    if prompt_entries
+                    else ""
+                )
             should_save_prompt_library = True
         elif action == "save_prompts":
             wb.notify("Prompts saved.")
@@ -1505,10 +1768,19 @@ async def editorial_assistant(
             "prompt_toast_message": str(exc),
             "prompt_toast_tone": "error",
         }
-        return render_workspace(request, wb, active_tab="draft", partial=True, context_overrides=context_overrides)
+        return render_workspace(
+            request,
+            wb,
+            active_tab="draft",
+            partial=True,
+            context_overrides=context_overrides,
+        )
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial/enhance-field", response_class=JSONResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/editorial/enhance-field",
+    response_class=JSONResponse,
+)
 async def enhance_field(
     request: Request,
     testament: str,
@@ -1526,7 +1798,9 @@ async def enhance_field(
         context_label = str(form.get("context_label", "")).strip() or "editorial prose"
         prompt_override = str(form.get("prompt_override", "")).strip()
         if not prompt_override and mode:
-            prompt_override = str(form.get(f"prompt_text_{wb.make_prompt_id(mode)}", "")).strip()
+            prompt_override = str(
+                form.get(f"prompt_text_{wb.make_prompt_id(mode)}", "")
+            ).strip()
         source_text = str(form.get("text", "")).strip()
         result = wb.run_editorial_enhancement(
             source_text=source_text,
@@ -1536,13 +1810,20 @@ async def enhance_field(
             custom_prompt=custom_prompt,
         )
         wb.save_state()
-        return JSONResponse({"ok": True, "text": result, "label": wb.editorial_mode_label(mode)})
+        return JSONResponse(
+            {"ok": True, "text": result, "label": wb.editorial_mode_label(mode)}
+        )
     except Exception as exc:
         return JSONResponse({"ok": False, "message": str(exc)}, status_code=400)
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/validate", response_class=HTMLResponse)
-def validate_commit(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/validate",
+    response_class=HTMLResponse,
+)
+def validate_commit(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1554,7 +1835,10 @@ def validate_commit(request: Request, testament: str, book: str, chapter: int, c
         return render_workspace_error(request, wb, exc, active_tab="commit")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/apply", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/apply",
+    response_class=HTMLResponse,
+)
 async def apply_commit(
     request: Request,
     testament: str,
@@ -1570,22 +1854,27 @@ async def apply_commit(
         apply_draft_form(wb, form)
         had_writes = bool(wb.build_commit_plan())
         wb.cmd_commit([])
-        
+
         # After cmd_commit, we clear the draft which sets the state to 'committed'
         wb.clear_current_draft_after_commit()
-        
+
         # Double check it is indeed committed
         wb.state.browser_editor_state = "committed"
         wb.state.browser_editor_mode = "review"
-        
+
         wb.save_state()
         return render_editor_panel(request, wb)
     except Exception as exc:
         return render_workspace_error(request, wb, exc, active_tab="commit")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/rollback", response_class=HTMLResponse)
-def rollback_commit(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/commit/rollback",
+    response_class=HTMLResponse,
+)
+def rollback_commit(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1597,8 +1886,13 @@ def rollback_commit(request: Request, testament: str, book: str, chapter: int, c
         return render_workspace_error(request, wb, exc, active_tab="commit")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/session/clear", response_class=HTMLResponse)
-def clear_chunk_session(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/session/clear",
+    response_class=HTMLResponse,
+)
+def clear_chunk_session(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     try:
         book = resolve_book_name(wb, testament, book)
@@ -1610,9 +1904,17 @@ def clear_chunk_session(request: Request, testament: str, book: str, chapter: in
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.post("/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/delete/{index}", response_class=HTMLResponse)
+@app.post(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/chat/delete/{index}",
+    response_class=HTMLResponse,
+)
 def delete_chat_message(
-    request: Request, testament: str, book: str, chapter: int, chunk_key: str, index: int
+    request: Request,
+    testament: str,
+    book: str,
+    chapter: int,
+    chunk_key: str,
+    index: int,
 ):
     """Delete a chat message and every later message in the same conversation."""
     wb = controller(request)
@@ -1638,21 +1940,34 @@ def delete_chat_message(
         return render_workspace_error(request, wb, exc, active_tab="draft")
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-preview", response_class=JSONResponse)
-def json_preview(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-preview",
+    response_class=JSONResponse,
+)
+def json_preview(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     return JSONResponse(wb.build_json_preview_payload(book, chapter, chunk_key))
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-tree", response_class=JSONResponse)
-def json_book_tree(request: Request, testament: str, book: str, chapter: int, chunk_key: str):
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-tree",
+    response_class=JSONResponse,
+)
+def json_book_tree(
+    request: Request, testament: str, book: str, chapter: int, chunk_key: str
+):
     wb = controller(request)
     book = resolve_book_name(wb, testament, book)
     return JSONResponse(book_json_tree_payload(wb, testament, book, chapter))
 
 
-@app.get("/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-chapter/{target_chapter}", response_class=JSONResponse)
+@app.get(
+    "/workspace/{testament}/{book}/{chapter}/{chunk_key}/json-book-chapter/{target_chapter}",
+    response_class=JSONResponse,
+)
 def json_book_chapter(
     request: Request,
     testament: str,
@@ -1688,8 +2003,12 @@ async def settings_save(request: Request):
     try:
         wb.save_web_settings(
             {
-                "endpoint_provider": str(form.get("endpoint_provider", "local")).strip(),
-                "local_base_url": str(form.get("local_base_url", wb.llm.base_url)).strip(),
+                "endpoint_provider": str(
+                    form.get("endpoint_provider", "local")
+                ).strip(),
+                "local_base_url": str(
+                    form.get("local_base_url", wb.llm.base_url)
+                ).strip(),
                 "local_model": str(form.get("local_model", "")).strip(),
                 "cloud_base_url": str(form.get("cloud_base_url", "")).strip(),
                 "cloud_model": str(form.get("cloud_model", "")).strip(),
@@ -1804,7 +2123,9 @@ def epub_generate_job(request: Request):
     def target(cancel_event=None) -> dict:
         return wb._run_epub_build(cancel_event=cancel_event)
 
-    job = wb.job_runner.submit(Job(job_id=uuid.uuid4().hex, label="epub-generate", target=target))
+    job = wb.job_runner.submit(
+        Job(job_id=uuid.uuid4().hex, label="epub-generate", target=target)
+    )
     return JSONResponse({"ok": True, "job": _job_payload(job)}, status_code=202)
 
 

@@ -102,3 +102,36 @@
   50% { width: 0.8em; }
   75%, 100% { width: 1.2em; }
 }
+
+/* Ensure Chainlit header is flexbox for proper hamburger positioning */
+.cl-header, [data-testid="cl-header"], nav, header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Hamburger menu button in Chainlit header (left side, matches theme toggle) */
+.ttt-hamburger-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  margin-left: 4px;
+  margin-right: 8px;
+  order: -1; /* Ensure it appears first in flexbox */
+}
+
+.ttt-hamburger-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ttt-hamburger-btn svg {
+  width: 20px;
+  height: 20px;
+}

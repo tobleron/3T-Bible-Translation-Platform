@@ -18,7 +18,9 @@ def test_reply_display_parts_puts_answer_after_thinking() -> None:
         ("answer", "```text\nVerse output.\n```"),
     ]
 
-    persisted = '<think duration="65.200">check source</think>```text\nVerse output.\n```'
+    persisted = (
+        '<think duration="65.200">check source</think>```text\nVerse output.\n```'
+    )
     assert list(chainlit_app._reply_display_parts(persisted)) == [
         ("thinking", "check source", 65.2),
         ("answer", "```text\nVerse output.\n```"),
@@ -31,8 +33,12 @@ def test_thinking_block_label_is_not_chainlit_used_step() -> None:
         "check source\n\n"
         "</details>"
     )
-    assert "Thought for 1 minute 5 seconds" in chainlit_app._thinking_block("check source", 65)
-    assert "Thought for 2 minutes 11 seconds" in chainlit_app._thinking_block("check source", 131)
+    assert "Thought for 1 minute 5 seconds" in chainlit_app._thinking_block(
+        "check source", 65
+    )
+    assert "Thought for 2 minutes 11 seconds" in chainlit_app._thinking_block(
+        "check source", 131
+    )
 
 
 def test_streaming_thinking_block_is_collapsed_details() -> None:
@@ -82,7 +88,7 @@ def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
 
     assert error_occurred is False
     assert reply.startswith('<think duration="')
-    assert reply.endswith('>checking source</think>```text\nVerse output.\n```')
+    assert reply.endswith(">checking source</think>```text\nVerse output.\n```")
     assert msg is not None
     assert events[:4] == [
         (
@@ -110,11 +116,13 @@ def test_chainlit_thinking_message_precedes_final_message(monkeypatch) -> None:
 
 def test_chainlit_copy_button_asset_is_configured() -> None:
     config_text = (ROOT / ".chainlit" / "config.toml").read_text(encoding="utf-8")
-    script_text = (ROOT / "public" / "workbench-chainlit.js").read_text(encoding="utf-8")
+    script_text = (ROOT / "public" / "workbench-chainlit.js").read_text(
+        encoding="utf-8"
+    )
     css_text = (ROOT / "public" / "workbench-chainlit.css").read_text(encoding="utf-8")
 
-    assert 'custom_js = "/public/workbench-chainlit.js?v=2"' in config_text
-    assert 'custom_css = "/public/workbench-chainlit.css?v=2"' in config_text
+    assert 'custom_js = "/public/workbench-chainlit.js?v=4"' in config_text
+    assert 'custom_css = "/public/workbench-chainlit.css?v=4"' in config_text
     assert "ttt-chainlit-copy-button" in script_text
     assert "COPY_ICON = '\\u29c9'" in script_text
     assert "ttt-chainlit-user-prompt" in script_text
@@ -127,11 +135,14 @@ def test_chainlit_config_uses_safe_local_defaults() -> None:
     config_text = (ROOT / ".chainlit" / "config.toml").read_text(encoding="utf-8")
 
     assert 'allow_origins = ["*"]' not in config_text
-    assert 'allow_origins = ["http://127.0.0.1:8765", "http://localhost:8765"]' in config_text
+    assert (
+        'allow_origins = ["http://127.0.0.1:8765", "http://localhost:8765"]'
+        in config_text
+    )
     assert "unsafe_allow_html = true" in config_text
     assert "mask_user_env = true" in config_text
     assert "enabled = false" in config_text
-    assert 'accept = []' in config_text
+    assert "accept = []" in config_text
     assert "max_files = 0" in config_text
     assert "max_size_mb = 0" in config_text
     assert 'cot = "hidden"' in config_text
@@ -142,7 +153,9 @@ def test_ensure_active_chunk_uses_existing_book_chapter_first_chunk() -> None:
 
     class FakeWb:
         def __init__(self) -> None:
-            self.state = SimpleNamespace(wizard_testament="old", book="Genesis", chapter=1)
+            self.state = SimpleNamespace(
+                wizard_testament="old", book="Genesis", chapter=1
+            )
             self._open = False
 
         def require_open_chunk(self):
@@ -160,7 +173,9 @@ def test_ensure_active_chunk_uses_existing_book_chapter_first_chunk() -> None:
         def first_chunk_key(self, testament, book, chapter):
             return "1-5"
 
-        def open_or_select_chunk(self, testament, book, chapter, chunk_key, announce=False):
+        def open_or_select_chunk(
+            self, testament, book, chapter, chunk_key, announce=False
+        ):
             calls.append((testament, book, chapter, chunk_key))
             self._open = True
 
@@ -199,9 +214,13 @@ def test_ensure_active_chunk_falls_back_to_navigator_catalog() -> None:
             return []
 
         def first_chunk_key(self, testament, book, chapter):
-            return "1-3" if (testament, book, chapter) == ("new", "Matthew", 1) else None
+            return (
+                "1-3" if (testament, book, chapter) == ("new", "Matthew", 1) else None
+            )
 
-        def open_or_select_chunk(self, testament, book, chapter, chunk_key, announce=False):
+        def open_or_select_chunk(
+            self, testament, book, chapter, chunk_key, announce=False
+        ):
             calls.append((testament, book, chapter, chunk_key))
             self._open = True
 
@@ -214,7 +233,9 @@ def test_ensure_active_chunk_falls_back_to_navigator_catalog() -> None:
         def navigator_catalog(self):
             return {
                 "old": [],
-                "new": [{"name": "Matthew", "first_chapter": 1, "first_ready_chapter": 1}],
+                "new": [
+                    {"name": "Matthew", "first_chapter": 1, "first_ready_chapter": 1}
+                ],
             }
 
     wb = FakeWb()

@@ -198,6 +198,35 @@ def test_model_discovery_warning_is_visible_in_chat_panel(monkeypatch) -> None:
     reset_controller()
 
 
+def test_chat_panel_menu_markup_keeps_session_actions_inline(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.get("/workspace/old/genesis/1/1-5")
+        try:
+            assert response.status_code == 200
+            assert 'class="secondary-button chat-menu-action-button chat-new-button"' in response.text
+            assert ">New Session</span>" in response.text
+            assert 'class="tiny-danger-button compact-danger-button chat-menu-action-button"' in response.text
+        finally:
+            response.close()
+    reset_controller()
+
+
+def test_chat_panel_model_select_does_not_submit_on_focus(monkeypatch) -> None:
+    monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
+    reset_controller()
+    with TestClient(appmod.app) as client:
+        response = client.get("/workspace/old/genesis/1/1-5")
+        try:
+            assert response.status_code == 200
+            assert 'select name="active_model" onchange="this.form.requestSubmit()"' in response.text
+            assert "this.dataset.fetched" not in response.text
+        finally:
+            response.close()
+    reset_controller()
+
+
 def test_home_page_does_not_emit_no_open_chunk_errors(monkeypatch) -> None:
     monkeypatch.setenv("TTT_WEBAPP_FAKE_LLM", "1")
     reset_controller()

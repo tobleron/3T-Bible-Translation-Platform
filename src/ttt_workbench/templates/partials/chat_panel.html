@@ -1,108 +1,131 @@
 <article id="chat-panel" class="workspace-card chat-panel">
   <div class="panel-head">
-    <div>
+    <div class="chat-panel-title-block">
       <p class="eyebrow">Chat</p>
-    </div>
-    <div class="panel-summary chat-panel-summary">
-      <span class="inline-badge">{{ active_provider_label }} · {{ active_model_name }}</span>
-      <button class="chat-menu-toggle icon-button" type="button" title="Chat menu" aria-label="Chat menu" onclick="window.chatMenuToggle(this)">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M3 6h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z"/>
-        </svg>
-      </button>
+      <div class="panel-summary chat-panel-summary">
+        <span class="inline-badge">{{ active_provider_label }} · {{ active_model_name }}</span>
+      </div>
     </div>
   </div>
 
   <script>
   window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
-  
-  window.chatMenuToggle = function(btn) {
-    const menu = document.getElementById('chat-menu');
-    if (menu) {
-      menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', menu.classList.contains('open'));
-    }
-  };
-  
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.chat-menu-toggle') && !e.target.closest('#chat-menu')) {
-      const menu = document.getElementById('chat-menu');
+
+  window.chatMenuCloseAll = function() {
+    document.querySelectorAll('[data-chat-menu-shell]').forEach(function(shell) {
+      const menu = shell.querySelector('[data-chat-menu]');
+      const toggle = shell.querySelector('.chat-menu-toggle');
       if (menu) {
         menu.classList.remove('open');
-        const toggle = document.querySelector('.chat-menu-toggle');
-        if (toggle) {
-          toggle.setAttribute('aria-expanded', 'false');
-        }
       }
-    }
-  });
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  };
+
+  window.chatMenuToggle = function(btn) {
+    const shell = btn.closest('[data-chat-menu-shell]');
+    const menu = shell ? shell.querySelector('[data-chat-menu]') : null;
+    if (!menu) return;
+
+    const willOpen = !menu.classList.contains('open');
+    window.chatMenuCloseAll();
+    menu.classList.toggle('open', willOpen);
+    btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  };
+
+  if (!window.__tttChatMenuHandlersBound) {
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('[data-chat-menu-shell]')) {
+        window.chatMenuCloseAll();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        window.chatMenuCloseAll();
+      }
+    });
+
+    window.__tttChatMenuHandlersBound = true;
+  }
   </script>
-
-  <div id="chat-menu" class="chat-menu">
-    <div class="chat-menu-content">
-      <div class="chat-menu-section">
-        <label class="compact-field chat-session-select">
-          <span>Session</span>
-          <select name="chat_session_id"
-            hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/switch"
-            hx-trigger="change"
-            hx-target="#chat-panel"
-            hx-swap="outerHTML" hx-sync="this:replace">
-            {% for session in current_chat_sessions %}
-            <option value="{{ session.id }}" {% if session.is_active %}selected{% endif %}>{{ session.title }} · {{ session.message_count }}</option>
-            {% endfor %}
-          </select>
-        </label>
-      </div>
-
-      <div class="chat-menu-section">
-        <form class="chat-model-form"
-          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/model"
-          hx-target="#chat-panel" hx-swap="outerHTML" hx-sync="this:replace">
-          <label class="compact-field chat-endpoint-select">
-            <span>Endpoint</span>
-            <select name="endpoint_provider" onchange="this.form.requestSubmit()">
-              <option value="local" {% if settings_config.endpoint_provider == "local" %}selected{% endif %}>Local</option>
-              <option value="cloud" {% if settings_config.endpoint_provider == "cloud" %}selected{% endif %}>OpenAI</option>
-            </select>
-          </label>
-          <label class="compact-field chat-model-select">
-            <span>Model</span>
-            <select name="active_model" onchange="this.form.requestSubmit()"
-                    onfocus="this.dataset.fetched || (this.dataset.fetched='true', this.form.requestSubmit())">
-              {% set options = (settings_config.local_model_options if settings_config.endpoint_provider == 'local' else settings_config.cloud_model_options) %}
-              {% for model in options %}
-              <option value="{{ model }}" {% if model == active_model_name %}selected{% endif %}>{{ model }}</option>
-              {% endfor %}
-            </select>
-          </label>
-        </form>
-      </div>
-
-      <div class="chat-menu-section chat-menu-actions">
-        <button class="icon-button chat-new-button" type="button"
-          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/new"
-          hx-target="#chat-panel" hx-swap="outerHTML"
-          hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="New"
-          title="New chat session" aria-label="New chat session">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M5 3.5h9.25a1 1 0 1 1 0 2H6.5v12h12v-7.75a1 1 0 1 1 2 0V18.5a1 1 0 0 1-1 1h-14a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z"/>
-            <path d="M17.9 3.35a1.2 1.2 0 0 1 1.7 0l1.05 1.05a1.2 1.2 0 0 1 0 1.7l-8.2 8.2a1 1 0 0 1-.44.25l-3.05.84a.75.75 0 0 1-.92-.92l.84-3.05a1 1 0 0 1 .25-.44l8.77-7.63Z"/>
-          </svg>
-        </button>
-        <button class="tiny-danger-button compact-danger-button" type="button"
-          hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/delete"
-          hx-target="#chat-panel" hx-swap="outerHTML"
-          hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="Deleting...">Delete</button>
-      </div>
-    </div>
-  </div>
 
   {% if settings_config.model_discovery_error %}
   <p class="settings-warning">{{ settings_config.model_discovery_error }}</p>
   {% endif %}
 
-  <div class="chainlit-container">
-    <iframe src="/chat?workbench_chat_session={{ active_chat_session_id }}"></iframe>
+  <div class="chainlit-shell">
+    <div class="chat-menu-shell" data-chat-menu-shell>
+      <button class="chat-menu-toggle icon-button" type="button" title="Chat menu" aria-label="Chat menu" aria-expanded="false" onclick="window.chatMenuToggle(this)">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 6h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z"/>
+        </svg>
+      </button>
+      <div id="chat-menu" class="chat-menu" data-chat-menu>
+        <div class="chat-menu-content">
+          <div class="chat-menu-section">
+            <label class="compact-field chat-session-select">
+              <span>Session</span>
+              <select name="chat_session_id"
+                hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/switch"
+                hx-trigger="change"
+                hx-target="#chat-panel"
+                hx-swap="outerHTML" hx-sync="this:replace">
+                {% for session in current_chat_sessions %}
+                <option value="{{ session.id }}" {% if session.is_active %}selected{% endif %}>{{ session.title }} · {{ session.message_count }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          </div>
+
+          <div class="chat-menu-section">
+            <form class="chat-model-form"
+              hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/model"
+              hx-target="#chat-panel" hx-swap="outerHTML" hx-sync="this:replace">
+              <label class="compact-field chat-endpoint-select">
+                <span>Endpoint</span>
+                <select name="endpoint_provider" onchange="this.form.requestSubmit()">
+                  <option value="local" {% if settings_config.endpoint_provider == "local" %}selected{% endif %}>Local</option>
+                  <option value="cloud" {% if settings_config.endpoint_provider == "cloud" %}selected{% endif %}>OpenAI</option>
+                </select>
+              </label>
+              <label class="compact-field chat-model-select">
+                <span>Model</span>
+                <select name="active_model" onchange="this.form.requestSubmit()">
+                  {% set options = (settings_config.local_model_options if settings_config.endpoint_provider == 'local' else settings_config.cloud_model_options) %}
+                  {% for model in options %}
+                  <option value="{{ model }}" {% if model == active_model_name %}selected{% endif %}>{{ model }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+            </form>
+          </div>
+
+          <div class="chat-menu-section chat-menu-actions">
+            <button class="secondary-button chat-menu-action-button chat-new-button" type="button"
+              hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/new"
+              hx-target="#chat-panel" hx-swap="outerHTML"
+              hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="New"
+              title="New chat session" aria-label="New chat session">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M5 3.5h9.25a1 1 0 1 1 0 2H6.5v12h12v-7.75a1 1 0 1 1 2 0V18.5a1 1 0 0 1-1 1h-14a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z"/>
+                <path d="M17.9 3.35a1.2 1.2 0 0 1 1.7 0l1.05 1.05a1.2 1.2 0 0 1 0 1.7l-8.2 8.2a1 1 0 0 1-.44.25l-3.05.84a.75.75 0 0 1-.92-.92l.84-3.05a1 1 0 0 1 .25-.44l8.77-7.63Z"/>
+              </svg>
+              <span>New Session</span>
+            </button>
+            <button class="tiny-danger-button compact-danger-button chat-menu-action-button" type="button"
+              hx-post="/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/session/delete"
+              hx-target="#chat-panel" hx-swap="outerHTML"
+              hx-sync="this:drop" hx-disabled-elt="this" data-loading-label="Deleting...">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chainlit-container">
+      <iframe src="/chat?workbench_chat_session={{ active_chat_session_id }}"></iframe>
+    </div>
   </div>
 </article>

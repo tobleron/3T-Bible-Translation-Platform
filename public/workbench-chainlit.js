@@ -180,6 +180,90 @@
     }
   }
 
+   function addHamburgerMenu() {
+     if (document.getElementById('ttt-hamburger-menu')) return;
+
+     // Find Chainlit header - try multiple selectors
+     var header = document.querySelector('.cl-header') ||
+                  document.querySelector('[data-testid="cl-header"]') ||
+                  document.querySelector('nav') ||
+                  document.querySelector('header') ||
+                  document.querySelector('[role="banner"]');
+
+     if (!header) {
+       // Debug: log available header-like elements
+       console.log('TTT: Available headers:', document.querySelectorAll('header, nav, [role="banner"], [data-testid*="header"], .header'));
+       console.log('TTT: All top-level elements:', document.querySelectorAll('body > *'));
+       return;
+     }
+
+     console.log('TTT: Found header:', header);
+     console.log('TTT: Header class:', header.className);
+     console.log('TTT: Header children:', header.children);
+
+     // Look for existing theme/settings controls to position our hamburger menu similarly
+     var themeControl = document.querySelector('[aria-label*="theme"], [aria-label*="Theme"], [data-testid*="theme"], .cl-theme-select, .cl-settings-toggle');
+     var settingsControl = document.querySelector('[aria-label*="settings"], [aria-label*="Settings"], [data-testid*="settings"]');
+
+     // Create hamburger button
+     var hamburgerBtn = document.createElement('button');
+     hamburgerBtn.id = 'ttt-hamburger-menu';
+     hamburgerBtn.type = 'button';
+     hamburgerBtn.className = 'ttt-hamburger-btn';
+     hamburgerBtn.title = 'Toggle sidebar';
+     hamburgerBtn.setAttribute('aria-label', 'Toggle sidebar');
+     hamburgerBtn.setAttribute('aria-expanded', 'false');
+
+     hamburgerBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+
+     // Position the hamburger menu to appear at the same level as theme/settings controls
+     // Try to insert it before the first theme or settings control we find, or at the beginning
+     var insertBefore = themeControl || settingsControl || header.firstChild;
+     
+     if (insertBefore && insertBefore.parentNode === header) {
+       header.insertBefore(hamburgerBtn, insertBefore);
+     } else {
+       // Fallback: insert at the beginning
+       header.insertBefore(hamburgerBtn, header.firstChild);
+     }
+
+     hamburgerBtn.addEventListener('click', function(e) {
+       e.preventDefault();
+       e.stopPropagation();
+
+       // Try multiple selectors for Chainlit sidebar
+       var sidebar = document.querySelector('.cl-sidebar') ||
+                    document.querySelector('[data-testid="sidebar"]') ||
+                    document.querySelector('[data-sidebar]') ||
+                    document.querySelector('.sidebar') ||
+                    document.querySelector('#sidebar');
+
+       if (sidebar) {
+         // Check if sidebar has a toggle method or class-based toggle
+         if (typeof sidebar.toggle === 'function') {
+           sidebar.toggle();
+         } else {
+           sidebar.classList.toggle('open');
+           sidebar.classList.toggle('closed');
+         }
+         var isOpen = sidebar.classList.contains('open') || !sidebar.classList.contains('closed');
+         hamburgerBtn.setAttribute('aria-expanded', isOpen);
+       } else if (typeof window.toggleSidebar === 'function') {
+         window.toggleSidebar();
+       } else {
+         // Fallback: try clicking any existing hamburger menu
+         var existingMenu = document.querySelector('button[aria-label*="sidebar"], button[aria-label*="menu"]');
+         if (existingMenu) {
+           existingMenu.click();
+         } else {
+           console.warn('TTT: Could not find Chainlit sidebar to toggle.');
+         }
+       }
+     });
+
+      console.log('TTT: Hamburger menu added successfully');
+    }
+
   function candidateMessages() {
     var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-step-type="user_message"]'));
     nodes = nodes.map(function (node) {
@@ -213,8 +297,13 @@
 
   function start() {
     enhanceMessages();
+    addHamburgerMenu();
+
     var observer = new MutationObserver(function () {
-      window.requestAnimationFrame(enhanceMessages);
+      window.requestAnimationFrame(function() {
+        enhanceMessages();
+        addHamburgerMenu();
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }

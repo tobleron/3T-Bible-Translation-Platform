@@ -105,13 +105,13 @@ name = "Assistant"
 
 # layout = "wide"
 
-# default_sidebar_state = "open"  # Options: "open", "closed", "hidden"
+default_sidebar_state = "open"  # Options: "open", "closed", "hidden"
 
 # Chat settings display location: "message_composer" (default) or "sidebar" (header)
-# chat_settings_location = "message_composer"
+chat_settings_location = "sidebar"
 
 # Default state of chat settings sidebar when location is "sidebar"
-# default_chat_settings_open = false
+default_chat_settings_open = false
 
 # Whether to prompt user confirmation on clicking 'New Chat'
 confirm_new_chat = true
@@ -124,14 +124,11 @@ cot = "hidden"
 
 # Specify a CSS file that can be used to customize the user interface.
 # The CSS file can be served from the public directory or via an external link.
-custom_css = "/public/workbench-chainlit.css?v=2"
-
-# Specify additional attributes for a custom CSS file
-# custom_css_attributes = "media=\"print\""
+custom_css = "/public/workbench-chainlit.css?v=4"
 
 # Specify a JavaScript file that can be used to customize the user interface.
 # The JavaScript file can be served from the public directory.
-custom_js = "/public/workbench-chainlit.js?v=2"
+custom_js = "/public/workbench-chainlit.js?v=4"
 
 # The style of alert boxes. Can be "classic" or "modern".
 alert_style = "classic"

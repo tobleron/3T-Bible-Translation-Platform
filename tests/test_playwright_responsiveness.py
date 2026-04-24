@@ -108,6 +108,33 @@ def test_chat_panel_uses_chainlit_iframe_not_legacy_sse_form(page: Page, live_se
     expect(page.locator("#chat-stream-form")).to_have_count(0)
 
 
+def test_chat_menu_toggle_opens_as_frame_overlay(page: Page, live_server_url: str) -> None:
+    open_workspace(page, live_server_url)
+
+    toggle = page.locator(".chat-menu-toggle")
+    menu = page.locator("#chat-menu")
+    iframe = page.locator("#chat-panel iframe")
+
+    expect(toggle).to_be_visible()
+    expect(menu).to_be_hidden()
+
+    toggle_box = toggle.bounding_box()
+    iframe_box = iframe.bounding_box()
+    assert toggle_box is not None
+    assert iframe_box is not None
+    assert toggle_box["top"] >= iframe_box["top"]
+    assert toggle_box["top"] <= iframe_box["top"] + 48
+    assert toggle_box["x"] <= iframe_box["x"] + 48
+
+    toggle.click()
+    expect(menu).to_be_visible()
+    expect(toggle).to_have_attribute("aria-expanded", "true")
+
+    page.keyboard.press("Escape")
+    expect(menu).to_be_hidden()
+    expect(toggle).to_have_attribute("aria-expanded", "false")
+
+
 def test_study_source_checkbox_adds_translation_block(page: Page, live_server_url: str) -> None:
     open_workspace(page, live_server_url)
     kjv_toggle = page.locator('[data-study-source-toggle][value="KJV"]')
