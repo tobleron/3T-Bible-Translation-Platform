@@ -5,7 +5,7 @@
     </div>
     <div class="panel-summary chat-panel-summary">
       <span class="inline-badge">{{ active_provider_label }} · {{ active_model_name }}</span>
-      <button class="chat-menu-toggle icon-button" type="button" title="Chat menu" aria-label="Chat menu" aria-expanded="false" aria-controls="chat-menu">
+      <button class="chat-menu-toggle icon-button" type="button" title="Chat menu" aria-label="Chat menu" onclick="window.chatMenuToggle(this)">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M3 6h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 5h18a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z"/>
         </svg>
@@ -16,20 +16,24 @@
   <script>
   window.tttPromptEngineeringEndpoint = "/workspace/{{ selected_testament }}/{{ selected_book|lower|replace(' ', '') }}/{{ selected_chapter }}/{{ current_chunk_key }}/chat/prompt-text";
   
-  document.addEventListener('DOMContentLoaded', function() {
-    const toggle = document.querySelector('.chat-menu-toggle');
+  window.chatMenuToggle = function(btn) {
     const menu = document.getElementById('chat-menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', function() {
-        const isOpen = menu.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', isOpen);
-      });
-      document.addEventListener('click', function(e) {
-        if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-          menu.classList.remove('open');
+    if (menu) {
+      menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', menu.classList.contains('open'));
+    }
+  };
+  
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.chat-menu-toggle') && !e.target.closest('#chat-menu')) {
+      const menu = document.getElementById('chat-menu');
+      if (menu) {
+        menu.classList.remove('open');
+        const toggle = document.querySelector('.chat-menu-toggle');
+        if (toggle) {
           toggle.setAttribute('aria-expanded', 'false');
         }
-      });
+      }
     }
   });
   </script>
